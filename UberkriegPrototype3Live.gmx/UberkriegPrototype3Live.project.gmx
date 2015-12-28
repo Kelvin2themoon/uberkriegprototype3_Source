@@ -5,9 +5,33 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
-  <backgrounds name="background"/>
+  <sprites name="sprites">
+    <sprites name="Terrain">
+      <sprites name="Clear">
+        <sprite>sprites\spr_Road_clear</sprite>
+        <sprite>sprites\spr_plains_clear</sprite>
+      </sprites>
+    </sprites>
+    <sprites name="UI">
+      <sprites name="Basic">
+        <sprite>sprites\spr_basicCursor</sprite>
+      </sprites>
+    </sprites>
+  </sprites>
+  <backgrounds name="background">
+    <backgrounds name="Holders">
+      <background>background\background0</background>
+    </backgrounds>
+  </backgrounds>
   <paths name="paths"/>
+  <objects name="objects">
+    <objects name="MapEditor">
+      <object>objects\obj_MouseCursor</object>
+    </objects>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\rm_mapEditor</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
