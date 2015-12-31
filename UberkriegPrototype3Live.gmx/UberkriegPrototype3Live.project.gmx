@@ -8,7 +8,7 @@
   <sprites name="sprites">
     <sprites name="Terrain">
       <sprites name="Clear">
-        <sprite>sprites\spr_Road_clear</sprite>
+        <sprite>sprites\spr_road_clear</sprite>
         <sprite>sprites\spr_plains_clear</sprite>
       </sprites>
     </sprites>
@@ -27,11 +27,20 @@
   <objects name="objects">
     <objects name="MapEditor">
       <object>objects\obj_MouseCursor</object>
+      <object>objects\obj_map</object>
+    </objects>
+    <objects name="Terrain">
+      <object>objects\obj_terrainPlains</object>
+      <object>objects\obj_terrainRoad</object>
     </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_mapEditor</room>
   </rooms>
+  <constants number="2">
+    <constant name="TILE_HEIGHT">24</constant>
+    <constant name="TILE_WIDTH">24</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>
