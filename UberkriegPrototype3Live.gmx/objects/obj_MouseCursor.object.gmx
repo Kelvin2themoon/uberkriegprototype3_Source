@@ -154,12 +154,14 @@ y=(mouse_y div 24)*24;
 
 
 
-with(global.terrainMap[0 ,0])instance_destroy();
 
-var xx =  mouse_x div 24*24;
-var yy =  mouse_y div 24*24;
 
-global.terrainMap[0,0] = instance_create( 0 , 0 , obj_terrainRoad );
+var xx =  mouse_x div 24;
+var yy =  mouse_y div 24;
+
+with(obj_map.terrains[xx,yy])instance_destroy();
+
+obj_map.terrains[xx,yy] = instance_create( xx*24 ,yy*24 ,obj_terrain_Road );
 </string>
           </argument>
         </arguments>

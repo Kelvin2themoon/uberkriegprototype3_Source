@@ -30,8 +30,8 @@
       <object>objects\obj_map</object>
     </objects>
     <objects name="Terrain">
-      <object>objects\obj_terrainPlains</object>
-      <object>objects\obj_terrainRoad</object>
+      <object>objects\obj_terrain_Plains</object>
+      <object>objects\obj_terrain_Road</object>
     </objects>
   </objects>
   <rooms name="rooms">
