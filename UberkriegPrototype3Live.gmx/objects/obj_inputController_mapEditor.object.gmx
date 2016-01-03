@@ -25,46 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialize
+            <string>///Description
 
-global.mapW = 45; // map height in terms of tiles
-global.mapH = 45;// map width in terms of tiles
+/*
+this object controls variable inputs:
 
-global.bufferX = 48; // Graphic Buffer X in px
-global.bufferY = 48; //Graphic Buffer Y in px
+    - Press Space to click and Drag Map View
 
-//adjust the buffer to center map if too small
-
- if (global.mapH &lt; 14)
-    {
-    global.bufferY = 12*(14 - global.mapH)+48;
-    }
-    
- if (global.mapW &lt; 14)
-    {
-    global.bufferX = 12*(28 - global.mapW)+48;
-    }
-
- 
-
-//place terrain objects in terrainMap 2Darray
-
-
-for( i = 0 ; i &lt; global.mapW ; i += 1 )         // i is to X
-    {
-    for( j = 0 ; j &lt; global.mapH; j += 1 )      // j is to Y
-        {
-        
-        terrains[i,j] = instance_create( i*24+global.bufferX , j*24+global.bufferY , obj_terrain_Plains ) ;
-        }
-    }
-    
-//this code places a road at 2,2
-    
-with (terrains[2,2]) instance_destroy();
-terrains[2,2] = instance_create( 2*24+global.bufferX  , 2*24+global.bufferY , obj_terrain_Road ) ;
-
-
+*/
 </string>
           </argument>
         </arguments>
