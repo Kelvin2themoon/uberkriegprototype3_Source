@@ -81,26 +81,24 @@ depth = -100000;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///scrolling
+            <string>///keep in bounds
 
-if(mouse_check_button_pressed(mb_left))
+if  ( view_xview &lt; -48 )
     {
-    image_index = 1;
-    xs = window_mouse_get_x();
-    ys = window_mouse_get_y();
+    view_xview = -48  ;
     }
-if(mouse_check_button(mb_left))
+
+if  ( view_yview &lt; -48 )
     {
-    xe= window_mouse_get_x();
-    ye= window_mouse_get_y();
-    view_xview[0] += xs-xe;
-    view_yview[0] += ys-ye;
-    xs = xe;
-    ys = ye;
+    view_yview = -48  ;
     }
-if (mouse_check_button_released(mb_left))
-    {
-    image_index = 0;
+    
+if  (view_xview &gt; global.mapW*24 - 720){
+    view_xview =   global.mapW*24 - 720;
+    }
+    
+if  (view_yview &gt; global.mapH*24 - 384){
+    view_yview =   global.mapH*24 - 384;
     }
 </string>
           </argument>
@@ -130,6 +128,50 @@ x = mouse_x ;
 y = mouse_y;
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///scrolling
+
+if(mouse_check_button_pressed(mb_left))
+    {
+    image_index = 1;
+    xs = window_mouse_get_x();
+    ys = window_mouse_get_y();
+    }
+    
+    
+if(mouse_check_button(mb_left))
+        {
+        xe= window_mouse_get_x();
+        ye= window_mouse_get_y();
+        view_xview[0] += xs-xe;
+        view_yview[0] += ys-ye;
+        xs = xe;
+        ys = ye;
+        }
+    
+if (mouse_check_button_released(mb_left))
+    {
+    image_index = 0;
+    }
 </string>
           </argument>
         </arguments>
