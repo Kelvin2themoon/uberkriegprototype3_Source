@@ -27,8 +27,13 @@
             <kind>1</kind>
             <string>///Initialize
 
-global.mapW = 45; // map height in terms of tiles
-global.mapH = 45;// map width in terms of tiles
+global.mapW = 90; // map height in terms of tiles
+global.mapH = 90;// map width in terms of tiles
+
+//global variables for allowing scrolling for both mapeditor and in-game
+global.canScroll_x = true;
+global.canScroll_y = true;
+
 
 
 
@@ -37,11 +42,14 @@ global.mapH = 45;// map width in terms of tiles
  if (global.mapH &lt;18 )
     {
     view_yview[0] = (-1)*12*(18-global.mapH);
+    global.canScroll_y = false;
+    
     }
     
  if (global.mapW &lt; 32)
     {
     view_xview[0] = (-1)*12*(32-global.mapW);
+    global.canScroll_x = false;
     }
 
  

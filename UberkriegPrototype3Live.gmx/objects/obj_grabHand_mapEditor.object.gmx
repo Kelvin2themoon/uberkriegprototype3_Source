@@ -59,6 +59,7 @@ it replaces mad edit cursor when space bar is pressed
 image_speed = 0;
 depth = -100000;
 
+
 </string>
           </argument>
         </arguments>
@@ -83,21 +84,21 @@ depth = -100000;
             <kind>1</kind>
             <string>///keep in bounds
 
-if  ( view_xview &lt; -48 )
+if  ( view_xview &lt; -48 &amp;&amp; global.canScroll_x)
     {
     view_xview = -48  ;
     }
 
-if  ( view_yview &lt; -48 )
+if  ( view_yview &lt; -48 &amp;&amp; global.canScroll_y)
     {
     view_yview = -48  ;
     }
     
-if  (view_xview &gt; global.mapW*24 - 720){
+if  (view_xview &gt; global.mapW*24 - 720 &amp;&amp; global.canScroll_x){
     view_xview =   global.mapW*24 - 720;
     }
     
-if  (view_yview &gt; global.mapH*24 - 384){
+if  (view_yview &gt; global.mapH*24 - 384 &amp;&amp; global.canScroll_y){
     view_yview =   global.mapH*24 - 384;
     }
 </string>
@@ -159,13 +160,22 @@ if(mouse_check_button_pressed(mb_left))
     
     
 if(mouse_check_button(mb_left))
+    {
+
+        
+    if (global.canScroll_x)
         {
         xe= window_mouse_get_x();
-        ye= window_mouse_get_y();
         view_xview[0] += xs-xe;
-        view_yview[0] += ys-ye;
         xs = xe;
-        ys = ye;
+        }
+            
+        if (global.canScroll_y)
+            {
+            ye= window_mouse_get_y();
+            view_yview[0] += ys-ye;
+            ys = ye;
+            }
         }
     
 if (mouse_check_button_released(mb_left))
