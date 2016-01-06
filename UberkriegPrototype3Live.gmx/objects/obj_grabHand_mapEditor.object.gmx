@@ -58,6 +58,11 @@ it replaces mad edit cursor when space bar is pressed
 
 image_speed = 0;
 depth = -100000;
+isDragging= false;
+
+
+
+
 
 
 </string>
@@ -151,18 +156,19 @@ y = mouse_y;
             <kind>1</kind>
             <string>///scrolling
 
+   
+    
 if(mouse_check_button_pressed(mb_left))
     {
-    image_index = 1;
     xs = window_mouse_get_x();
-    ys = window_mouse_get_y();
+    ys = window_mouse_get_y(); 
+    image_index = 1;
+    isDragging = true;
     }
     
-    
-if(mouse_check_button(mb_left))
+ if (mouse_check_button(mb_left) &amp;&amp; isDragging)
     {
-
-        
+    
     if (global.canScroll_x)
         {
         xe= window_mouse_get_x();
@@ -170,17 +176,20 @@ if(mouse_check_button(mb_left))
         xs = xe;
         }
             
-        if (global.canScroll_y)
-            {
-            ye= window_mouse_get_y();
-            view_yview[0] += ys-ye;
-            ys = ye;
-            }
+    if (global.canScroll_y)
+        {
+        ye= window_mouse_get_y();
+        view_yview[0] += ys-ye;
+        ys = ye;
         }
+    }
+       
+
     
 if (mouse_check_button_released(mb_left))
     {
     image_index = 0;
+    isDragging=false;
     }
 </string>
           </argument>
