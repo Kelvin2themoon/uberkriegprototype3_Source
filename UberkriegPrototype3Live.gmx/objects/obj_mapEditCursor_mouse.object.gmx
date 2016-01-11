@@ -32,7 +32,7 @@
 This Cursor is used for the map editor, it will have the following functions:
 
 - Place Terrain and unit in a map
-- 
+- display xy co-ordinates and tile item selected 
 
 */
 
@@ -57,20 +57,22 @@ This Cursor is used for the map editor, it will have the following functions:
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Setup
+            <string>///Initialize
  
-//Stop Animation
-image_speed = 0;
-depth = -100000
-
-
-//initiate cursor state for animation
-cursorState = 1;
-alarm[0] = 2 ;
+//Set up graphics
+image_speed = 0;    //stop animation
+depth = -100000;    //Depth to UI-Cursor level
+cursorState = 1;    //initiate state variable for animation
+alarm[0] = 2 ;      //initiate animation alarm for animation delay (variable framerate)
 
 //create mouse press and release Variable
 
 isLeftPressed = false ;
+
+//Create Selection Variable ( unit or terrain to place )
+
+global.selection = obj_terrain_Road;
+global.selection_name = "Road";
 
 
 
@@ -215,10 +217,39 @@ if (isLeftPressed){
         // destroy terrain
         with(obj_map.terrains[posX,posY])instance_destroy();
         //place new terrain
-        obj_map.terrains[posX,posY] = instance_create( x ,y ,obj_terrain_Road );
+        obj_map.terrains[posX,posY] = instance_create( x ,y ,global.selection );
         } //do nothinh!
     
      }
+     
+     
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Left click to sample terrain
+
+if mouse_check_button_pressed(mb_right){
+    global.selection = obj_map.terrains[posX,posY].object_index;
+    global.selection_name = global.selection.name;
+    }
 </string>
           </argument>
         </arguments>
@@ -252,11 +283,14 @@ draw_set_halign(fa_left);
 posX_readout = "X=" + string(posX);
 posY_readout = "Y=" + string(posY);
 
-draw_text(12,12,posX_readout);
-draw_text(12,24,posY_readout);
 
 
- //switch to sprites tomolo
+draw_text(0,0,global.selection_name);
+draw_text(0,12,posX_readout);
+draw_text(0,24,posY_readout);
+
+
+
 </string>
           </argument>
         </arguments>

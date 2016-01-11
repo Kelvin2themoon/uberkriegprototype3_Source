@@ -56,9 +56,10 @@ it replaces mad edit cursor when space bar is pressed
             <kind>1</kind>
             <string>///initialize
 
-image_speed = 0;
-depth = -100000;
-isDragging= false;
+image_speed = 0;        //stop animation
+depth = -100000;        //raise depth to top (UI level)
+isDragging= false;      //variable for dragging in step event
+
 
 
 

@@ -31,15 +31,18 @@
     <font>fonts\ft_AuroraEx</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_map</object>
     <objects name="MapEditor">
       <object>objects\obj_mapEditCursor_mouse</object>
       <object>objects\obj_grabHand_mapEditor</object>
-      <object>objects\obj_posDisplay</object>
+      <object>objects\obj_map</object>
     </objects>
     <objects name="Terrain">
       <object>objects\obj_terrain_Plains</object>
       <object>objects\obj_terrain_Road</object>
+      <objects name="Parents">
+        <object>objects\obj_terrrain</object>
+        <object>objects\obj_property</object>
+      </objects>
     </objects>
   </objects>
   <rooms name="rooms">
