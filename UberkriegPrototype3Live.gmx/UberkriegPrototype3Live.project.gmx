@@ -44,6 +44,9 @@
         <object>objects\obj_property</object>
       </objects>
     </objects>
+    <objects name="Controllers">
+      <object>objects\FullScreen</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_mapEditor</room>
