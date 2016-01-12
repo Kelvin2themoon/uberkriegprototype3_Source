@@ -247,12 +247,15 @@ if (isLeftPressed){
             <string>///Left click to sample terrain
 
 if mouse_check_button_pressed(mb_right){
-    if (posX &gt;= 0 &amp;&amp; posY &gt;= 0)
+    if (posX &lt; 0 || posX &gt;= global.mapW || posY &lt; 0 || posY &gt;= global.mapH) 
         {
+         //do nothing
+        }
+
+  else{
         global.selection = obj_map.terrains[posX,posY].object_index;
         global.selection_name = global.selection.name;
-        }
-    else{} // do nothong
+        } 
     }
 </string>
           </argument>
