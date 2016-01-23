@@ -34,6 +34,8 @@ graphic_index = 0 ;     //used to save &amp; draw appropriate tile image, use in
 Cover = 0;              //for defence coverage
 inFog = true;           //for fog of war
 
+
+
 // Move Costs
 
 mtype_boots         = 0;

@@ -74,6 +74,9 @@ isLeftPressed = false ;
 global.selection = obj_terrain_Road;
 global.selection_name = "Road";
 
+//keeps UI display Scalled to Full Screen
+display_set_gui_size(view_wview[0], view_hview[0]);
+
 
 
 </string>
@@ -218,6 +221,7 @@ if (isLeftPressed){
         with(obj_map.terrains[posX,posY])instance_destroy();
         //place new terrain
         obj_map.terrains[posX,posY] = instance_create( x ,y ,global.selection );
+        scr_setGraphics_Road();
         } //do nothinh!
     
      }

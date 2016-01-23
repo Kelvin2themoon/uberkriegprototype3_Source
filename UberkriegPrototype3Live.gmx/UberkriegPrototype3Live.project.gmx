@@ -27,6 +27,10 @@
     </backgrounds>
   </backgrounds>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\scr_terrain_check_adj.gml</script>
+    <script>scripts\scr_setGraphics_Road.gml</script>
+  </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>
   </fonts>
