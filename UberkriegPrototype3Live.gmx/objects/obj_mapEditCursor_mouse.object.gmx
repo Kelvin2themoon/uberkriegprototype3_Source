@@ -213,6 +213,17 @@ if mouse_check_button_released(mb_left){
     }
     
 if (isLeftPressed){
+    if scr_inBound(posX,posY)
+        {
+        // destroy terrain
+        with(obj_map.terrains[posX,posY])instance_destroy();
+        //place new terrain
+        obj_map.terrains[posX,posY] = instance_create( x ,y ,global.selection );
+        scr_setGraphics_Road();
+        }
+     }
+
+/*
     if (posX &lt; 0 || posX &gt;= global.mapW || posY &lt; 0 || posY &gt;= global.mapH) {}
         //do nothing
 
@@ -226,7 +237,7 @@ if (isLeftPressed){
     
      }
      
-     
+*/     
 
 </string>
           </argument>
@@ -251,16 +262,13 @@ if (isLeftPressed){
             <string>///Left click to sample terrain
 
 if mouse_check_button_pressed(mb_right){
-    if (posX &lt; 0 || posX &gt;= global.mapW || posY &lt; 0 || posY &gt;= global.mapH) 
+    if scr_inBound(posX,posY)
         {
-         //do nothing
-        }
-
-  else{
         global.selection = obj_map.terrains[posX,posY].object_index;
         global.selection_name = global.selection.name;
-        } 
-    }
+        }
+    } 
+
 </string>
           </argument>
         </arguments>

@@ -61,8 +61,8 @@ the Tile item selected
             <kind>1</kind>
             <string>///Initialize
 
-global.mapW = 90; // map height in terms of tiles
-global.mapH = 90;// map width in terms of tiles
+global.mapW = 11; // map height in terms of tiles
+global.mapH = 11;// map width in terms of tiles
 
 //global variables for allowing scrolling for both mapeditor and in-game
 global.canScroll_x = true;

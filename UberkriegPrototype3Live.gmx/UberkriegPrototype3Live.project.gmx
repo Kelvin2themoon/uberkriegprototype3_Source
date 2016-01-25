@@ -28,8 +28,9 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\scr_terrain_check_adj.gml</script>
+    <script>scripts\scr_check_adjacent_terrain.gml</script>
     <script>scripts\scr_setGraphics_Road.gml</script>
+    <script>scripts\scr_inBound.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>
