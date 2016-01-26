@@ -10,6 +10,8 @@
       <sprites name="Clear">
         <sprite>sprites\spr_road_clear</sprite>
         <sprite>sprites\spr_plains_clear</sprite>
+        <sprite>sprites\spr_mountain_clear</sprite>
+        <sprite>sprites\spr_woods_clear</sprite>
       </sprites>
     </sprites>
     <sprites name="UI">
@@ -31,6 +33,7 @@
     <script>scripts\scr_check_adjacent_terrain.gml</script>
     <script>scripts\scr_setGraphics_Road.gml</script>
     <script>scripts\scr_inBound.gml</script>
+    <script>scripts\scr_setTerrain.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>
@@ -43,6 +46,8 @@
     </objects>
     <objects name="Terrain">
       <object>objects\obj_terrain_Plains</object>
+      <object>objects\obj_terrain_Mountain</object>
+      <object>objects\obj_terrain_Woods</object>
       <object>objects\obj_terrain_Road</object>
       <objects name="Parents">
         <object>objects\obj_terrrain</object>
