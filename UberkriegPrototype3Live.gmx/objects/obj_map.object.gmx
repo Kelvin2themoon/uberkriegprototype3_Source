@@ -31,11 +31,13 @@
 this object keeps track of  all presistant variables in map editor including
 
 the MAP!!!
--terrain 2D array
--unit 2D array
+- Terrains: 2D array
+- Units   : 2d array (not implimented yet)*
+- Tile Selection used (by the cursor)
+- some variables used to control the view-port
 
-the Tile item selected
 
+I'm not sure if i will use this object for the actual game
 
 
 */
@@ -61,14 +63,17 @@ the Tile item selected
             <kind>1</kind>
             <string>///Initialize
 
-global.mapW = 11; // map height in terms of tiles
-global.mapH = 11;// map width in terms of tiles
+global.mapW = 50; // map height in terms of tiles
+global.mapH = 50;// map width in terms of tiles
 
-//global variables for allowing scrolling for both mapeditor and in-game
+//global variables for allowing scrolling for both map editor and in-game, false if the map is too small
 global.canScroll_x = true;
 global.canScroll_y = true;
 
 
+//global variable of selected terrain and its name
+global.selection = obj_terrain_Road;
+global.selection_name = "road" ;
 
 
 //adjust the boarder to center map if too small
@@ -88,7 +93,8 @@ global.canScroll_y = true;
 
  
 
-//place terrain objects in terrainMap 2Darray
+//place plain objects in terrainMap 2Darray.
+//when the time comes this will be where a map file can be read and converted
 
 
 for( i = 0 ; i &lt; global.mapW ; i += 1 )         // i is to X

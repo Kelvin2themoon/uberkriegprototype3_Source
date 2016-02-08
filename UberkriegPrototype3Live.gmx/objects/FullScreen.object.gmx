@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>window_set_fullscreen(!window_get_fullscreen());
+            <string>///male full screen!
+window_set_fullscreen(!window_get_fullscreen());
 </string>
           </argument>
         </arguments>

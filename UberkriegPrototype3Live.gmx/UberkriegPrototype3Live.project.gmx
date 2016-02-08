@@ -30,10 +30,20 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\scr_check_adjacent_terrain.gml</script>
-    <script>scripts\scr_setGraphics_Road.gml</script>
     <script>scripts\scr_inBound.gml</script>
-    <script>scripts\scr_setTerrain.gml</script>
+    <scripts name="MapEditor">
+      <scripts name="TerainGraphicHandlers">
+        <script>scripts\scr_check_adjacent_terrain_sides.gml</script>
+        <script>scripts\scr_check_adjacent_terrain.gml</script>
+        <script>scripts\scr_setTerrain.gml</script>
+        <script>scripts\scr_switchTerrainGraphics.gml</script>
+        <scripts name="GraphicSetters">
+          <script>scripts\scr_setGraphics_Mountain.gml</script>
+          <script>scripts\scr_setGraphics_Woods.gml</script>
+          <script>scripts\scr_setGraphics_Road.gml</script>
+        </scripts>
+      </scripts>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>
@@ -61,7 +71,8 @@
   <rooms name="rooms">
     <room>rooms\rm_mapEditor</room>
   </rooms>
-  <constants number="3">
+  <constants number="4">
+    <constant name="UI_DEPTH_CURSOR">-66000</constant>
     <constant name="BOARD_BUFFER">48</constant>
     <constant name="TILE_HEIGHT">24</constant>
     <constant name="TILE_WIDTH">24</constant>

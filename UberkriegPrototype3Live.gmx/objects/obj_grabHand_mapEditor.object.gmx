@@ -29,9 +29,8 @@
 
 /* 
 
-this object is used to scroll larg maps
-
-it replaces mad edit cursor when space bar is pressed
+Grab Hand, this object is used to move the view-port in map editor.
+it is created by the cursor object when spacebar is pressed and destroyed when spacebar is released
 
 */
 </string>
@@ -56,9 +55,9 @@ it replaces mad edit cursor when space bar is pressed
             <kind>1</kind>
             <string>///initialize
 
-image_speed = 0;        //stop animation
-depth = -100000;        //raise depth to top (UI level)
-isDragging= false;      //variable for dragging in step event
+image_speed = 0;                //stop animation
+depth = -UI_DEPTH_CURSOR;       //raise depth to top (UI level)
+isDragging= false;              //variable for dragging in step event
 
 
 
@@ -89,6 +88,8 @@ isDragging= false;      //variable for dragging in step event
           <argument>
             <kind>1</kind>
             <string>///keep in bounds
+//this code stops the view port from goin off into the abyss
+//not to self: use a switch next time
 
 if  ( view_xview &lt; -48 &amp;&amp; global.canScroll_x)
     {
@@ -130,6 +131,7 @@ if  (view_yview &gt; global.mapH*24 - 384 &amp;&amp; global.canScroll_y){
           <argument>
             <kind>1</kind>
             <string>///follow mouse
+// this object's origin follows the mouse
 
 x = mouse_x ;
 y = mouse_y;
@@ -155,8 +157,7 @@ y = mouse_y;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///scrolling
-
+            <string>///Scrolling
    
     
 if(mouse_check_button_pressed(mb_left))
@@ -216,7 +217,9 @@ if (mouse_check_button_released(mb_left))
             <kind>1</kind>
             <string>///change back to mapedit cursor
 
+//Re-activate the Curosr object
 instance_activate_object(obj_mapEditCursor_mouse);
+//destroy self
 instance_destroy();
 
 
