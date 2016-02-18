@@ -12,6 +12,32 @@
         <sprite>sprites\spr_plains_clear</sprite>
         <sprite>sprites\spr_mountain_clear</sprite>
         <sprite>sprites\spr_woods_clear</sprite>
+        <sprites name="Sea">
+          <sprite>sprites\spr_sea_clear</sprite>
+          <sprites name="Edges">
+            <sprite>sprites\spr_edge_clear__1</sprite>
+            <sprite>sprites\spr_edge_clear__2</sprite>
+            <sprite>sprites\spr_edge_clear__3</sprite>
+            <sprite>sprites\spr_edge_clear__4</sprite>
+            <sprite>sprites\spr_edge_clear__5</sprite>
+            <sprite>sprites\spr_edge_clear__6</sprite>
+            <sprite>sprites\spr_edge_clear__7</sprite>
+            <sprite>sprites\spr_edge_clear__8</sprite>
+            <sprite>sprites\spr_edge_clear__9</sprite>
+            <sprite>sprites\spr_edge_clear__10</sprite>
+            <sprite>sprites\spr_edge_clear__11</sprite>
+            <sprite>sprites\spr_edge_clear__12</sprite>
+            <sprite>sprites\spr_edge_clear__13</sprite>
+            <sprite>sprites\spr_edge_clear__14</sprite>
+            <sprite>sprites\spr_edge_clear__15</sprite>
+          </sprites>
+          <sprites name="Corners">
+            <sprite>sprites\spr_corner_clear_sw</sprite>
+            <sprite>sprites\spr_corner_clear_nw</sprite>
+            <sprite>sprites\spr_corner_clear_se</sprite>
+            <sprite>sprites\spr_corner_clear_ne</sprite>
+          </sprites>
+        </sprites>
       </sprites>
     </sprites>
     <sprites name="UI">
