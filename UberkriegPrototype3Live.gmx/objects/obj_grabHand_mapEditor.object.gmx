@@ -56,7 +56,7 @@ it is created by the cursor object when spacebar is pressed and destroyed when s
             <string>///initialize
 
 image_speed = 0;                //stop animation
-depth = -UI_DEPTH_CURSOR;       //raise depth to top (UI level)
+depth = UI_DEPTH_CURSOR;       //raise depth to top (UI level)
 isDragging= false;              //variable for dragging in step event
 
 

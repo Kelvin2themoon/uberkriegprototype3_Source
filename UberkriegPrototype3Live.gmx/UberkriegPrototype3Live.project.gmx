@@ -38,6 +38,32 @@
             <sprite>sprites\spr_corner_clear_ne</sprite>
           </sprites>
         </sprites>
+        <sprites name="River">
+          <sprites name="body">
+            <sprite>sprites\spr_river_clear_15</sprite>
+            <sprite>sprites\spr_river_clear_14</sprite>
+            <sprite>sprites\spr_river_clear_13</sprite>
+            <sprite>sprites\spr_river_clear_12</sprite>
+            <sprite>sprites\spr_river_clear_11</sprite>
+            <sprite>sprites\spr_river_clear_10</sprite>
+            <sprite>sprites\spr_river_clear_9</sprite>
+            <sprite>sprites\spr_river_clear_8</sprite>
+            <sprite>sprites\spr_river_clear_7</sprite>
+            <sprite>sprites\spr_river_clear_6</sprite>
+            <sprite>sprites\spr_river_clear_5</sprite>
+            <sprite>sprites\spr_river_clear_4</sprite>
+            <sprite>sprites\spr_river_clear_3</sprite>
+            <sprite>sprites\spr_river_clear_2</sprite>
+            <sprite>sprites\spr_river_clear_1</sprite>
+            <sprite>sprites\spr_river_clear_0</sprite>
+          </sprites>
+          <sprites name="River Edges">
+            <sprite>sprites\spr_riveredge_clear_n</sprite>
+            <sprite>sprites\spr_riveredge_clear_e</sprite>
+            <sprite>sprites\spr_riveredge_clear_s</sprite>
+            <sprite>sprites\spr_riveredge_clear_w</sprite>
+          </sprites>
+        </sprites>
       </sprites>
     </sprites>
     <sprites name="UI">
