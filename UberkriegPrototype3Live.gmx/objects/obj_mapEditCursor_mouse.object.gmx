@@ -260,6 +260,64 @@ if mouse_check_button_pressed(mb_right){
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Terrain Select
+
+
+
+switch (keyboard_key)
+    {
+            
+    case ord("0"):
+        global.selection = obj_terrain_Sea;
+        global.selection_name = "Sea";
+        break;
+    
+    case ord("1"):
+        global.selection = obj_terrain_Plains;
+        global.selection_name = "Plains";
+        break;
+    
+    case ord("2"):
+        global.selection = obj_terrain_Road;
+        global.selection_name = "Road";
+        break;
+    
+    case ord("3"):
+        global.selection = obj_terrain_Mountain;
+        global.selection_name = "Mountain";
+        break;
+    
+    case ord("4"):
+        global.selection = obj_terrain_Woods;
+        global.selection_name = "Woods";
+        break;
+
+    
+    }
+
+
+   
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
