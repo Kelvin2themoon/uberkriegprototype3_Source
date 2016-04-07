@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>obj_terrrain</parentName>
+  <parentName>obj_terrain</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -40,6 +40,9 @@ isCommander     = false;
 canRepair_g     = true;
 canResupply_g   = true;
 canHide         = true;     //overide obj_terrain
+
+//attributes for graphic detection
+isLand = true;
 
 
 

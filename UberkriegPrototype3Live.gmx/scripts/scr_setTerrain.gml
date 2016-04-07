@@ -33,5 +33,10 @@ if scr_inBound(set_terrain_x,set_terrain_y)
         scr_switchTerrainGraphics(set_terrain_x   , set_terrain_y+1 ); //south
         scr_switchTerrainGraphics(set_terrain_x-1 , set_terrain_y   ); //west
         
+        scr_switchTerrainGraphics(set_terrain_x-1 , set_terrain_y-1 ); //north-west
+        scr_switchTerrainGraphics(set_terrain_x+1 , set_terrain_y-1 ); //north-east
+        scr_switchTerrainGraphics(set_terrain_x+1  , set_terrain_y+1 ); //south-east
+        scr_switchTerrainGraphics(set_terrain_x-1 , set_terrain_y +1); //south-west
+        
         }    
      

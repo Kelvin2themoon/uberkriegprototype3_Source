@@ -72,7 +72,7 @@ global.canScroll_y = true;
 
 
 //global variable of selected terrain and its name
-global.selection = obj_terrain_Road;
+global.selection = obj_terrain_Sea;
 global.selection_name = "road" ;
 
 

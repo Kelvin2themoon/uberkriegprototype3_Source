@@ -26,6 +26,10 @@ if scr_inBound(set_terrainGraphics_x,set_terrainGraphics_y) // check within map 
             case obj_terrain_Mountain :
             scr_setGraphics_Mountain(set_terrainGraphics_x,set_terrainGraphics_y);
             break; 
+            
+            case obj_terrain_Sea :
+            scr_setGraphics_Sea(set_terrainGraphics_x,set_terrainGraphics_y);
+            break; 
           
             }
         }    

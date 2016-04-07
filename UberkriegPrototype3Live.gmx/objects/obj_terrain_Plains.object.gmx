@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>obj_terrrain</parentName>
+  <parentName>obj_terrain</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -27,9 +27,9 @@
             <kind>1</kind>
             <string>///initialize
 event_inherited();
-depth = 0;
 
 name = "Plains";
+isLand = true;
 </string>
           </argument>
         </arguments>

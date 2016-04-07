@@ -14,29 +14,36 @@
         <sprite>sprites\spr_woods_clear</sprite>
         <sprites name="Sea">
           <sprite>sprites\spr_sea_clear</sprite>
-          <sprites name="Edges">
-            <sprite>sprites\spr_edge_clear__1</sprite>
-            <sprite>sprites\spr_edge_clear__2</sprite>
-            <sprite>sprites\spr_edge_clear__3</sprite>
-            <sprite>sprites\spr_edge_clear__4</sprite>
-            <sprite>sprites\spr_edge_clear__5</sprite>
-            <sprite>sprites\spr_edge_clear__6</sprite>
-            <sprite>sprites\spr_edge_clear__7</sprite>
-            <sprite>sprites\spr_edge_clear__8</sprite>
-            <sprite>sprites\spr_edge_clear__9</sprite>
-            <sprite>sprites\spr_edge_clear__10</sprite>
-            <sprite>sprites\spr_edge_clear__11</sprite>
-            <sprite>sprites\spr_edge_clear__12</sprite>
-            <sprite>sprites\spr_edge_clear__13</sprite>
-            <sprite>sprites\spr_edge_clear__14</sprite>
-            <sprite>sprites\spr_edge_clear__15</sprite>
+          <sprite>sprites\spr_edges_clear</sprite>
+          <sprites name="obsolete">
+            <sprites name="Corners">
+              <sprite>sprites\spr_corner_clear_sw</sprite>
+              <sprite>sprites\spr_corner_clear_nw</sprite>
+              <sprite>sprites\spr_corner_clear_se</sprite>
+              <sprite>sprites\spr_corner_clear_ne</sprite>
+            </sprites>
+            <sprites name="Edges">
+              <sprites name="Edge Animated">
+                <sprite>sprites\spr_edge_clear__1</sprite>
+                <sprite>sprites\spr_edge_clear__15</sprite>
+                <sprite>sprites\spr_edge_clear__14</sprite>
+                <sprite>sprites\spr_edge_clear__13</sprite>
+                <sprite>sprites\spr_edge_clear__12</sprite>
+                <sprite>sprites\spr_edge_clear__11</sprite>
+                <sprite>sprites\spr_edge_clear__10</sprite>
+                <sprite>sprites\spr_edge_clear__9</sprite>
+                <sprite>sprites\spr_edge_clear__7</sprite>
+                <sprite>sprites\spr_edge_clear__8</sprite>
+                <sprite>sprites\spr_edge_clear__6</sprite>
+                <sprite>sprites\spr_edge_clear__5</sprite>
+                <sprite>sprites\spr_edge_clear__4</sprite>
+                <sprite>sprites\spr_edge_clear__3</sprite>
+                <sprite>sprites\spr_edge_clear__2</sprite>
+              </sprites>
+            </sprites>
           </sprites>
-          <sprites name="Corners">
-            <sprite>sprites\spr_corner_clear_sw</sprite>
-            <sprite>sprites\spr_corner_clear_nw</sprite>
-            <sprite>sprites\spr_corner_clear_se</sprite>
-            <sprite>sprites\spr_corner_clear_ne</sprite>
-          </sprites>
+          <sprite>sprites\spr_corners_clear</sprite>
+          <sprite>sprites\spr_riveredge_clear</sprite>
         </sprites>
         <sprites name="River">
           <sprites name="body">
@@ -58,10 +65,12 @@
             <sprite>sprites\spr_river_clear_0</sprite>
           </sprites>
           <sprites name="River Edges">
-            <sprite>sprites\spr_riveredge_clear_n</sprite>
-            <sprite>sprites\spr_riveredge_clear_e</sprite>
-            <sprite>sprites\spr_riveredge_clear_s</sprite>
-            <sprite>sprites\spr_riveredge_clear_w</sprite>
+            <sprite>sprites\spr_riveredge_clear_1</sprite>
+            <sprite>sprites\spr_riveredge_clear_2</sprite>
+            <sprite>sprites\spr_riveredge_clear_4</sprite>
+            <sprite>sprites\spr_riveredge_clear_8</sprite>
+            <sprite>sprites\spr_riveredge_clear_5</sprite>
+            <sprite>sprites\spr_riveredge_clear_10</sprite>
           </sprites>
         </sprites>
       </sprites>
@@ -87,12 +96,15 @@
       <scripts name="TerainGraphicHandlers">
         <script>scripts\scr_check_adjacent_terrain_sides.gml</script>
         <script>scripts\scr_check_adjacent_terrain.gml</script>
+        <script>scripts\scr_check_land_terrain.gml</script>
+        <script>scripts\scr_check_corner_terrain.gml</script>
         <script>scripts\scr_setTerrain.gml</script>
         <script>scripts\scr_switchTerrainGraphics.gml</script>
         <scripts name="GraphicSetters">
           <script>scripts\scr_setGraphics_Mountain.gml</script>
           <script>scripts\scr_setGraphics_Woods.gml</script>
           <script>scripts\scr_setGraphics_Road.gml</script>
+          <script>scripts\scr_setGraphics_Sea.gml</script>
         </scripts>
       </scripts>
     </scripts>
@@ -112,9 +124,10 @@
       <object>objects\obj_terrain_Woods</object>
       <object>objects\obj_terrain_Road</object>
       <objects name="Parents">
-        <object>objects\obj_terrrain</object>
+        <object>objects\obj_terrain</object>
         <object>objects\obj_property</object>
       </objects>
+      <object>objects\obj_terrain_Sea</object>
     </objects>
     <objects name="Controllers">
       <object>objects\FullScreen</object>
