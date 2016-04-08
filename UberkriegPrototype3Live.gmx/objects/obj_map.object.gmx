@@ -30,7 +30,7 @@
 /*
 this object keeps track of  all presistant variables in map editor including
 
-the MAP!!!
+the MAP!!!!
 - Terrains: 2D array
 - Units   : 2d array (not implimented yet)*
 - Tile Selection used (by the cursor)
