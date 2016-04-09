@@ -307,6 +307,12 @@ switch (keyboard_key)
         global.selection = obj_terrain_Woods;
         global.selection_name = "Woods";
         break;
+        
+    case ord("6"):
+        global.selection = obj_terrain_River;
+        global.selection_name = "River";
+        break;
+        
 
     
     }

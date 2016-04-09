@@ -38,5 +38,8 @@ if scr_inBound(set_terrain_x,set_terrain_y)
         scr_switchTerrainGraphics(set_terrain_x+1  , set_terrain_y+1 ); //south-east
         scr_switchTerrainGraphics(set_terrain_x-1 , set_terrain_y +1); //south-west
         
+        //adjust graphic according to terrain
+        scr_switchTerrainGraphics(set_terrain_x,set_terrain_y);
+        
         }    
      

@@ -97,6 +97,7 @@
         <script>scripts\scr_check_adjacent_terrain_sides.gml</script>
         <script>scripts\scr_check_adjacent_terrain.gml</script>
         <script>scripts\scr_check_land_terrain.gml</script>
+        <script>scripts\scr_check_wet_terrain.gml</script>
         <script>scripts\scr_check_corner_terrain.gml</script>
         <script>scripts\scr_setTerrain.gml</script>
         <script>scripts\scr_switchTerrainGraphics.gml</script>
@@ -105,6 +106,7 @@
           <script>scripts\scr_setGraphics_Woods.gml</script>
           <script>scripts\scr_setGraphics_Road.gml</script>
           <script>scripts\scr_setGraphics_Sea.gml</script>
+          <script>scripts\scr_setGraphics_River.gml</script>
         </scripts>
       </scripts>
     </scripts>
@@ -128,6 +130,7 @@
         <object>objects\obj_property</object>
       </objects>
       <object>objects\obj_terrain_Sea</object>
+      <object>objects\obj_terrain_River</object>
     </objects>
     <objects name="Controllers">
       <object>objects\FullScreen</object>
