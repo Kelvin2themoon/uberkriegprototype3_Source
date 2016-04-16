@@ -32,6 +32,7 @@ event_inherited();
 name = "River";
 isLand = true;
 isWet = true;
+isSolid = false;
 </string>
           </argument>
         </arguments>

@@ -73,11 +73,21 @@
             <sprite>sprites\spr_riveredge_clear_10</sprite>
           </sprites>
         </sprites>
+        <sprites name="Bridges">
+          <sprite>sprites\spr_bridgeRiver_clear</sprite>
+          <sprite>sprites\spr_bridgeRiver_Clear_top</sprite>
+          <sprite>sprites\spr_bridgeSea_clear</sprite>
+          <sprite>sprites\spr_bridgeSea_clear_top</sprite>
+          <sprite>sprites\spr_bridgeSea_clear_shadow</sprite>
+        </sprites>
       </sprites>
     </sprites>
     <sprites name="UI">
       <sprites name="Basic">
-        <sprite>sprites\spr_basicCursor</sprite>
+        <sprites name="Cursors">
+          <sprite>sprites\spr_basicCursor</sprite>
+          <sprite>sprites\spr_basicCursor_Icons</sprite>
+        </sprites>
       </sprites>
       <sprites name="MapEditor">
         <sprite>sprites\spr_grabHand</sprite>
@@ -97,6 +107,7 @@
         <script>scripts\scr_check_adjacent_terrain_sides.gml</script>
         <script>scripts\scr_check_adjacent_terrain.gml</script>
         <script>scripts\scr_check_land_terrain.gml</script>
+        <script>scripts\scr_check_solid_terrain.gml</script>
         <script>scripts\scr_check_wet_terrain.gml</script>
         <script>scripts\scr_check_corner_terrain.gml</script>
         <script>scripts\scr_setTerrain.gml</script>
@@ -107,6 +118,8 @@
           <script>scripts\scr_setGraphics_Road.gml</script>
           <script>scripts\scr_setGraphics_Sea.gml</script>
           <script>scripts\scr_setGraphics_River.gml</script>
+          <script>scripts\scr_setGraphics_SeaBridge.gml</script>
+          <script>scripts\scr_setGraphics_RiverBridge.gml</script>
         </scripts>
       </scripts>
     </scripts>
@@ -131,6 +144,9 @@
       </objects>
       <object>objects\obj_terrain_Sea</object>
       <object>objects\obj_terrain_River</object>
+      <object>objects\obj_terrain_SeaBridge</object>
+      <object>objects\obj_terrain_RiverBridge</object>
+      <object>objects\obj_terrain_Bridge</object>
     </objects>
     <objects name="Controllers">
       <object>objects\FullScreen</object>

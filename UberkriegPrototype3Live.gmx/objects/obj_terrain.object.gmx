@@ -56,8 +56,9 @@ canHideSmall = false;       //hids small units
 isTall = false;             // increase fadio and vision range
 
 //graphic Defaults
-isLand = true;
-isWet = false;
+isLand  = true;     //used for land edges and corners
+isWet   = false;    //used for river graphics
+isSolid = true;     //used for bridge graphics
 
 
  

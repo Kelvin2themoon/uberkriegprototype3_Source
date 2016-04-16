@@ -86,6 +86,9 @@ display_set_gui_size(view_wview[0], view_hview[0]);
 
 
 
+
+
+
 </string>
           </argument>
         </arguments>
@@ -172,7 +175,7 @@ switch  (cursorState)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///snapping
+            <string>///snapping &amp; keyboard Controls
 
 //this code snaps the mouse cursor to a 24x24 grid
 
@@ -218,14 +221,51 @@ if mouse_check_button_released(mb_left){
     isLeftPressed = false;
     }
     
-if (isLeftPressed)
+if (isLeftPressed &amp;&amp; scr_inBound(posX,posY))
     {
-    //set Terrain at the cursor position
-    scr_setTerrain(global.selection, posX, posY); //cursor position
+    if global.selection == obj_terrain_Bridge
+        {
+        if obj_map.terrains[posX,posY].name == "Sea"
+            {
+            scr_setTerrain(obj_terrain_SeaBridge, posX, posY)
+            }
+        if obj_map.terrains[posX,posY].name == "River"
+            {
+            scr_setTerrain(obj_terrain_RiverBridge, posX, posY)
+            }
+        else
+            {
+            //do nothing
+            }
+        }
+    else
+        {
+        scr_setTerrain(global.selection, posX, posY)
+        }
     
     }
+    
+    
+ /*   
+    
+    if (global.selection == obj_terrain_Bridge &amp;&amp; obj_map.terrains[posX,posY].name == "Sea")
+    // set Sea Bridge
+        {
+        scr_setTerrain(obj_terrain_SeaBridge, posX, posY)
+        }
+    else if (global.selection == obj_terrain_Bridge &amp;&amp; obj_map.terrains[posX,posY].name == "River" )
+    // set river bridge
+        {
+         scr_setTerrain(obj_terrain_RiverBridge, posX, posY)
+        }
+    else
+        {
+        //set terrain for all other senerios
+        scr_setTerrain(global.selection, posX, posY); //cursor position
+        }
+    }
 
-
+*/
 </string>
           </argument>
         </arguments>
@@ -251,8 +291,16 @@ if (isLeftPressed)
 if mouse_check_button_pressed(mb_right){
     if scr_inBound(posX,posY)
         {
-        global.selection = obj_map.terrains[posX,posY].object_index;
-        global.selection_name = global.selection.name;
+        if (obj_map.terrains[posX,posY].name=="Sea Bridge" || obj_map.terrains[posX,posY].name=="River Bridge")
+            {
+            global.selection = obj_terrain_Bridge;
+            global.selection_name = "Bridge"
+            }
+        else
+            {
+            global.selection = obj_map.terrains[posX,posY].object_index;
+            global.selection_name = global.selection.name;
+            }
         }
     } 
 
@@ -276,7 +324,7 @@ if mouse_check_button_pressed(mb_right){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Terrain Select
+            <string>/// Terrain Selection by keyboard
 
 
 
@@ -307,12 +355,26 @@ switch (keyboard_key)
         global.selection = obj_terrain_Woods;
         global.selection_name = "Woods";
         break;
+    
+    case ord("5"):
+        global.selection = obj_terrain_SeaBridge;
+        global.selection_name = "Sea Bridge";
+        break;
         
     case ord("6"):
         global.selection = obj_terrain_River;
         global.selection_name = "River";
         break;
         
+    case ord("7"):
+        global.selection = obj_terrain_RiverBridge;
+        global.selection_name = "RiverBridge";
+        break;
+        
+    case ord("8"):
+        global.selection = obj_terrain_Bridge;
+        global.selection_name = "Bridge";
+        break;
 
     
     }
@@ -358,6 +420,53 @@ posY_readout = "Y=" + string(posY);
 draw_text(0,0,global.selection_name);
 draw_text(0,12,posX_readout);
 draw_text(0,24,posY_readout);
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Draw "X" if selection is Bridge and terrain is not wet
+if(scr_inBound(posX,posY))
+    {
+    if (global.selection == obj_terrain_Bridge )
+        {
+        
+        if (obj_map.terrains[posX,posY].object_index == obj_terrain_Sea         || 
+            obj_map.terrains[posX,posY].object_index == obj_terrain_River       ||
+            obj_map.terrains[posX,posY].object_index == obj_terrain_SeaBridge   ||
+            obj_map.terrains[posX,posY].object_index == obj_terrain_RiverBridge
+            )
+            {
+            //do nothing
+            }
+        else
+            {
+              if (cursorState == 2 || cursorState == 1)
+                {
+                draw_sprite(spr_basicCursor_Icons,7,x,y);
+                }
+            }
+
+        }
+    }
 
 
 

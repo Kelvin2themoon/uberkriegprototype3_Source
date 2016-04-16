@@ -31,6 +31,14 @@ if scr_inBound(set_terrainGraphics_x,set_terrainGraphics_y) // check within map 
             scr_setGraphics_Sea(set_terrainGraphics_x,set_terrainGraphics_y);
             break; 
             
+            case obj_terrain_SeaBridge:
+            scr_setGraphics_SeaBridge(set_terrainGraphics_x,set_terrainGraphics_y);
+            break; 
+            
+            case obj_terrain_RiverBridge:
+            scr_setGraphics_RiverBridge(set_terrainGraphics_x,set_terrainGraphics_y);
+            break; 
+          
             case obj_terrain_River :
             scr_setGraphics_River(set_terrainGraphics_x,set_terrainGraphics_y);
             break; 

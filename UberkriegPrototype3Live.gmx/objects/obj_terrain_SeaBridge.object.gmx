@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>obj_terrain</parentName>
+  <parentName>obj_terrain_Sea</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,23 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialize
-///initialize
+            <string>///initiate
 event_inherited();
-
-name = "Sea";
-isLand = false;
-isWet = true;
-isSolid = false;
-
-//Graphic variables (Print in order arranged over object in draw event)
-
-bridge_shadow=0;
-land_corner = 0;
-land_edge= 0;
-river_edge=0;
-
-
+name = "Sea Bridge"; 
+isSolid = true;
 </string>
           </argument>
         </arguments>
@@ -64,18 +51,11 @@ river_edge=0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw corner and edges
-
-/**
-In this order:
-Draw Self
-Bridge Shadow
-Corners
-Edges
-RiverEdges
-**/
-
+            <string>///DrawBridge
 draw_self();
+//draw shadow
+draw_sprite(spr_bridgeSea_clear_shadow,crossing,x,y);
+//draw corners
 draw_sprite(spr_corners_clear,land_corner,x,y);
 draw_sprite(spr_edges_clear,land_edge,x,y);
 
@@ -83,8 +63,8 @@ if ( river_edge != 0 &amp;&amp; instance_exists(obj_terrain_River) &amp;&amp; sp
     {
     draw_sprite(asset_get_index("spr_riveredge_clear_"+string(river_edge)),0,x,y);
     }
-    
-
+//draw bridge
+draw_sprite(spr_bridgeSea_clear,crossing,x,y);
 </string>
           </argument>
         </arguments>
