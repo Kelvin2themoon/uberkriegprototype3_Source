@@ -355,28 +355,18 @@ switch (keyboard_key)
         global.selection = obj_terrain_Woods;
         global.selection_name = "Woods";
         break;
-    
+            
     case ord("5"):
-        global.selection = obj_terrain_SeaBridge;
-        global.selection_name = "Sea Bridge";
+        global.selection = obj_terrain_Bridge;
+        global.selection_name = "Bridge";
         break;
+    
         
     case ord("6"):
         global.selection = obj_terrain_River;
         global.selection_name = "River";
         break;
         
-    case ord("7"):
-        global.selection = obj_terrain_RiverBridge;
-        global.selection_name = "RiverBridge";
-        break;
-        
-    case ord("8"):
-        global.selection = obj_terrain_Bridge;
-        global.selection_name = "Bridge";
-        break;
-
-    
     }
 
 

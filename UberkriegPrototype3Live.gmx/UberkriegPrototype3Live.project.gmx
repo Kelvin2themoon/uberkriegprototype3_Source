@@ -80,6 +80,11 @@
           <sprite>sprites\spr_bridgeSea_clear_top</sprite>
           <sprite>sprites\spr_bridgeSea_clear_shadow</sprite>
         </sprites>
+        <sprite>sprites\spr_HQ_clear</sprite>
+        <sprite>sprites\spr_city_clear</sprite>
+        <sprite>sprites\spr_base_clear</sprite>
+        <sprite>sprites\spr_radiotower_clear</sprite>
+        <sprite>sprites\spr_commandpost_clear</sprite>
       </sprites>
     </sprites>
     <sprites name="UI">
@@ -106,6 +111,7 @@
       <scripts name="TerainGraphicHandlers">
         <script>scripts\scr_check_adjacent_terrain_sides.gml</script>
         <script>scripts\scr_check_adjacent_terrain.gml</script>
+        <script>scripts\scr_check_adjacent_ourofbounds.gml</script>
         <script>scripts\scr_check_land_terrain.gml</script>
         <script>scripts\scr_check_solid_terrain.gml</script>
         <script>scripts\scr_check_wet_terrain.gml</script>
