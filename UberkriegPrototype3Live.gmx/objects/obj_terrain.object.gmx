@@ -33,6 +33,7 @@ graphic_set = "Basic";  //anticipating different terrain sets suc has desert or 
 graphic_index = 0 ;     //used to save &amp; draw appropriate tile image, use int becasue some will use math
 Cover = 0;              //for defence coverage
 inFog = true;           //for fog of war
+isProperty = false; 
 
 //stop animation
 image_speed = 0;

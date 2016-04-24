@@ -153,6 +153,11 @@
       <object>objects\obj_terrain_SeaBridge</object>
       <object>objects\obj_terrain_RiverBridge</object>
       <object>objects\obj_terrain_Bridge</object>
+      <object>objects\obj_terrain_HQ</object>
+      <object>objects\obj_terrain_City</object>
+      <object>objects\obj_terrain_CommandPost</object>
+      <object>objects\obj_terrain_RadioTower</object>
+      <object>objects\obj_terrain_Base</object>
     </objects>
     <objects name="Controllers">
       <object>objects\FullScreen</object>

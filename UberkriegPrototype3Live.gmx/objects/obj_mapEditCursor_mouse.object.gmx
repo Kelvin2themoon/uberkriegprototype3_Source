@@ -367,6 +367,30 @@ switch (keyboard_key)
         global.selection_name = "River";
         break;
         
+    case ord("Q"):
+        global.selection = obj_terrain_HQ;
+        global.selection_name = "HQ";
+        break;
+    
+    case ord("W"):
+        global.selection = obj_terrain_Base;
+        global.selection_name = "Base";
+        break;
+    
+    case ord("E"):
+        global.selection = obj_terrain_City;
+        global.selection_name = "City";
+        break;
+    
+    case ord("R"):
+        global.selection = obj_terrain_RadioTower;
+        global.selection_name = "Radio Tower";
+        break;
+      
+    case ord("T"):
+        global.selection = obj_terrain_CommandPost;
+        global.selection_name = "Command Post";
+        break;      
     }
 
 
