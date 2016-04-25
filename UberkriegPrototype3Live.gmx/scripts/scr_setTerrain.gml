@@ -10,7 +10,23 @@ set_terrain_type    =  argument0; // new terrain type, no id required
 set_terrain_x       =  argument1;
 set_terrain_y       =  argument2;
 
+//Highlander code for HQs
 
+if object_exists(obj_terrain_HQ)
+    {
+    with (obj_terrain_HQ) 
+        {
+        if (ownership == obj_mapEditCursor_mouse.player_set) 
+            {
+            //replace with plains
+             obj_map.terrains[x div 24,y div 24] = instance_create(x ,y ,obj_terrain_Plains);
+            //destroy HQ
+            instance_destroy();
+            } 
+        }
+    }       
+else{}
+//Set Terrain
 if scr_inBound(set_terrain_x,set_terrain_y) 
         {
         // destroy exsisting terrain
@@ -41,5 +57,13 @@ if scr_inBound(set_terrain_x,set_terrain_y)
         //adjust graphic according to terrain
         scr_switchTerrainGraphics(set_terrain_x,set_terrain_y);
         
-        }    
-     
+        }
+        
+//set property operations
+if object_is_ancestor(obj_map.terrains[set_terrain_x,set_terrain_y].object_index, obj_property)
+   {
+   obj_map.terrains[set_terrain_x,set_terrain_y].ownership = obj_mapEditCursor_mouse.player_set;
+   obj_map.terrains[set_terrain_x,set_terrain_y].image_index = obj_mapEditCursor_mouse.player_set;
+   }
+   
+

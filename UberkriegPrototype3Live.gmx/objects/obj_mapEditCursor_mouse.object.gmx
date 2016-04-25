@@ -67,6 +67,8 @@ but we'll get to it after we have a playable version of this prototype.
 image_speed = 0;    //stop animation
 depth = UI_DEPTH_CURSOR;     //Depth to UI-Cursor level
 
+player_set = 0//ownership variable for placing Properties
+
 //The Cursor has an uneven frame rate where each frame. 
 //The following variables control the frame delay of each individual image in the sprite
 
@@ -83,6 +85,8 @@ isLeftPressed = false ;
 
 //keeps UI display Scalled to Full Screen
 display_set_gui_size(view_wview[0], view_hview[0]);
+
+
 
 
 
@@ -324,7 +328,7 @@ if mouse_check_button_pressed(mb_right){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Terrain Selection by keyboard
+            <string>/// Terrain &amp; ownership Selection by keyboard
 
 
 
@@ -390,7 +394,27 @@ switch (keyboard_key)
     case ord("T"):
         global.selection = obj_terrain_CommandPost;
         global.selection_name = "Command Post";
-        break;      
+        break;
+        
+    case ord("A"):
+        player_set = 1 ;
+        break;
+       
+    case ord("S"):
+        player_set = 2 ;
+        break;     
+        
+        case ord("D"):
+        player_set = 3 ;
+        break;
+        
+        case ord("F"):
+        player_set = 4 ;
+        break;     
+        
+    case ord("G"):
+        player_set= 0 ;
+        break;
     }
 
 
