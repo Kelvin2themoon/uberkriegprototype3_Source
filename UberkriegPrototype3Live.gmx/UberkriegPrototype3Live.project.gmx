@@ -170,13 +170,6 @@
     <script>scripts\scr_inBound.gml</script>
     <scripts name="MapEditor">
       <scripts name="TerainGraphicHandlers">
-        <script>scripts\scr_check_adjacent_terrain_sides.gml</script>
-        <script>scripts\scr_check_adjacent_terrain.gml</script>
-        <script>scripts\scr_check_adjacent_ourofbounds.gml</script>
-        <script>scripts\scr_check_land_terrain.gml</script>
-        <script>scripts\scr_check_solid_terrain.gml</script>
-        <script>scripts\scr_check_wet_terrain.gml</script>
-        <script>scripts\scr_check_corner_terrain.gml</script>
         <script>scripts\scr_setTerrain.gml</script>
         <script>scripts\scr_switchTerrainGraphics.gml</script>
         <scripts name="GraphicSetters">
@@ -187,6 +180,15 @@
           <script>scripts\scr_setGraphics_River.gml</script>
           <script>scripts\scr_setGraphics_SeaBridge.gml</script>
           <script>scripts\scr_setGraphics_RiverBridge.gml</script>
+        </scripts>
+        <scripts name="adjacent tile checkers">
+          <script>scripts\scr_check_adjacent_terrain_sides.gml</script>
+          <script>scripts\scr_check_adjacent_ourofbounds.gml</script>
+          <script>scripts\scr_check_adjacent_terrain.gml</script>
+          <script>scripts\scr_check_corner_terrain.gml</script>
+          <script>scripts\scr_check_wet_terrain.gml</script>
+          <script>scripts\scr_check_solid_terrain.gml</script>
+          <script>scripts\scr_check_land_terrain.gml</script>
         </scripts>
       </scripts>
     </scripts>
@@ -223,7 +225,6 @@
     <objects name="Controllers">
       <object>objects\FullScreen</object>
     </objects>
-    <objects name="Units"/>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_mapEditor</room>

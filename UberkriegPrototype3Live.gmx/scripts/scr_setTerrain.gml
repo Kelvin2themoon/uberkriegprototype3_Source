@@ -12,7 +12,7 @@ set_terrain_y       =  argument2;
 
 //Highlander code for HQs
 
-if object_exists(obj_terrain_HQ)
+if ( set_terrain_type == obj_terrain_HQ   && object_exists(obj_terrain_HQ))
     {
     with (obj_terrain_HQ) 
         {

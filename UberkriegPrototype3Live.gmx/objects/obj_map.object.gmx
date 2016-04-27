@@ -71,9 +71,7 @@ global.canScroll_x = true;
 global.canScroll_y = true;
 
 
-//global variable of selected terrain and its name
-global.selection = obj_terrain_Sea;
-global.selection_name = "road" ;
+
 
 
 //adjust the boarder to center map if too small

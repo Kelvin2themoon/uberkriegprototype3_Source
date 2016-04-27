@@ -86,6 +86,10 @@ isLeftPressed = false ;
 //keeps UI display Scalled to Full Screen
 display_set_gui_size(view_wview[0], view_hview[0]);
 
+//global variable of selected terrain and its name
+global.selection = obj_terrain_Sea;
+global.selection_name = "Sea" ;
+
 
 
 
@@ -304,6 +308,12 @@ if mouse_check_button_pressed(mb_right){
             {
             global.selection = obj_map.terrains[posX,posY].object_index;
             global.selection_name = global.selection.name;
+            //check if isProperty and set player_set
+            if object_is_ancestor(obj_map.terrains[posX,posY].object_index, obj_property)
+                {
+                player_set = obj_map.terrains[posX,posY].ownership;
+                }
+            
             }
         }
     } 
@@ -452,12 +462,14 @@ draw_set_halign(fa_left);
 
 posX_readout = "X=" + string(posX);
 posY_readout = "Y=" + string(posY);
+playerSet_readout = "Player " + string(player_set);
 
 
 
 draw_text(0,0,global.selection_name);
-draw_text(0,12,posX_readout);
-draw_text(0,24,posY_readout);
+draw_text(0,12,playerSet_readout);
+draw_text(0,24,posX_readout);
+draw_text(0,36,posY_readout);
 
 
 
