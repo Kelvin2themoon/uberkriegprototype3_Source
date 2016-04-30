@@ -219,7 +219,7 @@ posY = (y) div 24 ;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// place terrain when mouse left button is pressed
+            <string>/// place terrain or units when mouse left button is pressed
 
 if mouse_check_button_pressed(mb_left){
     isLeftPressed = true;
@@ -235,11 +235,11 @@ if (isLeftPressed &amp;&amp; scr_inBound(posX,posY) &amp;&amp; object_is_ancesto
         {
         if obj_map.terrains[posX,posY].name == "Sea"
             {
-            scr_setTerrain(obj_terrain_SeaBridge, posX, posY)
+            scr_setTerrain(obj_terrain_SeaBridge, posX, posY);
             }
         if obj_map.terrains[posX,posY].name == "River"
             {
-            scr_setTerrain(obj_terrain_RiverBridge, posX, posY)
+            scr_setTerrain(obj_terrain_RiverBridge, posX, posY);
             }
         else
             {
@@ -248,14 +248,27 @@ if (isLeftPressed &amp;&amp; scr_inBound(posX,posY) &amp;&amp; object_is_ancesto
         }
     else
         {
-        scr_setTerrain(global.selection, posX, posY)
+        scr_setTerrain(global.selection, posX, posY);
         }  
     }
     
 //place units
 else if (isLeftPressed &amp;&amp; scr_inBound(posX,posY) &amp;&amp; object_is_ancestor(global.selection,obj_unit))
     {
-    scr_setUnit(global.selection,posX,posY)
+    if (player_set = 0 &amp;&amp; obj_map.units[posX,posY] != 0)
+        {
+        with (obj_map.units[posX,posY]) instance_destroy();//destroy unit
+        obj_map.units[posX,posY] = 0; // place emptyness
+        }
+    else if (player_set = 0)
+        {
+        //do nothing
+        }    
+    
+    else
+        {
+        scr_setUnit(global.selection,posX,posY,player_set); //place units normally
+        }
     }
     
     
@@ -299,16 +312,26 @@ else if (isLeftPressed &amp;&amp; scr_inBound(posX,posY) &amp;&amp; object_is_an
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Left click to sample terrain
+            <string>///Left click to sample terrain or unit
 
 if mouse_check_button_pressed(mb_right){
     if scr_inBound(posX,posY)
         {
-        if (obj_map.terrains[posX,posY].name=="Sea Bridge" || obj_map.terrains[posX,posY].name=="River Bridge")
+        //check for unit
+        if(obj_map.units[posX,posY] != 0)
+            {    
+            global.selection = obj_map.units[posX,posY].object_index;
+            global.selection_name = global.selection.name;
+            player_set = obj_map.units[posX,posY].ownership ;
+            }
+        
+        //check for bridge
+        else if (obj_map.terrains[posX,posY].name=="Sea Bridge" || obj_map.terrains[posX,posY].name=="River Bridge")
             {
             global.selection = obj_terrain_Bridge;
             global.selection_name = "Bridge"
             }
+            //every thing else (regular terrain)
         else
             {
             global.selection = obj_map.terrains[posX,posY].object_index;
@@ -343,7 +366,7 @@ if mouse_check_button_pressed(mb_right){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Terrain &amp; ownership Selection by keyboard
+            <string>/// Terrain, units, &amp; ownership Selection by keyboard
 
 
 
@@ -410,6 +433,18 @@ switch (keyboard_key)
         global.selection = obj_terrain_CommandPost;
         global.selection_name = "Command Post";
         break;
+        
+// units
+    case ord("P"):
+        global.selection = obj_unit_APC;
+        global.selection_name = "Armoured Personel Carrier";
+        break;
+    case ord("O"):
+        global.selection = obj_unit_LightTank;
+        global.selection_name = "Light Tank";
+        break;
+        
+//change player set (colours)
         
     case ord("A"):
         player_set = 1 ;

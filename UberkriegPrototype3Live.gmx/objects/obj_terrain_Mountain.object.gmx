@@ -28,7 +28,24 @@
             <string>///initialize
 event_inherited();
 name = "Mountain";
+
+//graphic utility Variables
 isLand = true;
+
+//required fields
+cover               = 3; //1~5
+// Move Costs
+mtype_boots         = 4;
+mtype_heavyBoots    = 2;
+mtype_tires         = 99;
+mtype_heayTires     = 99;
+mtype_specialTires  = 4;
+mtype_tracks        = 99;
+mtype_heavyTracks   = 99;
+
+//special fields
+isTall          = true;       // increase radio and vision range
+
 </string>
           </argument>
         </arguments>

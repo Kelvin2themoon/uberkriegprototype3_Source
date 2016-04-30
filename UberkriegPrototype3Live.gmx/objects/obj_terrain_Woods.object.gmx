@@ -28,7 +28,25 @@
             <string>///initialize
 event_inherited();
 name = "Woods";
+
+//graphic utility Variables
 isLand = true;
+
+//required fields
+cover               = 2; //1~5
+// Move Costs
+mtype_boots         = 3;
+mtype_heavyBoots    = 1;
+mtype_tires         = 3;
+mtype_heayTires     = 2;
+mtype_specialTires  = 2;
+mtype_tracks        = 2;
+mtype_heavyTracks   = 3;
+
+//special fields
+canHide         = true;       //hides for forest and protperties, etc.
+canHideSmall    = true;       //hids small units
+
 </string>
           </argument>
         </arguments>

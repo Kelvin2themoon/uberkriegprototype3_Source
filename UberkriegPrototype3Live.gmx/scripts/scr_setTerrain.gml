@@ -57,6 +57,18 @@ if scr_inBound(set_terrain_x,set_terrain_y)
         //adjust graphic according to terrain
         scr_switchTerrainGraphics(set_terrain_x,set_terrain_y);
         
+        //remove unit if it cannot occupy new terrain
+        if (obj_map.units[set_terrain_x,set_terrain_y] !=0)
+            {
+            if ( scr_check_move_cost( obj_map.units[set_terrain_x,set_terrain_y], obj_map.terrains[set_terrain_x,set_terrain_y] ) == 99 )
+                {
+                with (obj_map.units[set_terrain_x,set_terrain_y]) 
+                { instance_destroy(); }
+                obj_map.units[set_terrain_x,set_terrain_y] = 0 ;
+                
+                }
+            }
+
         }
         
 //set property operations
@@ -65,5 +77,19 @@ if object_is_ancestor(obj_map.terrains[set_terrain_x,set_terrain_y].object_index
    obj_map.terrains[set_terrain_x,set_terrain_y].ownership = obj_mapEditCursor_mouse.player_set;
    obj_map.terrains[set_terrain_x,set_terrain_y].image_index = obj_mapEditCursor_mouse.player_set;
    }
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
    
 

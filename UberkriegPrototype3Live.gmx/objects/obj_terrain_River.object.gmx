@@ -33,6 +33,19 @@ name = "River";
 isLand = true;
 isWet = true;
 isSolid = false;
+
+//required fields
+cover               = 0; //1~5
+// Move Costs
+mtype_boots         = 5;
+mtype_heavyBoots    = 3;
+mtype_tires         = 99;
+mtype_heayTires     = 99;
+mtype_specialTires  = 6;
+mtype_tracks        = 99;
+mtype_heavyTracks   = 99;
+
+
 </string>
           </argument>
         </arguments>

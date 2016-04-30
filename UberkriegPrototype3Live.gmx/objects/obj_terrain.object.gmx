@@ -41,7 +41,6 @@ image_speed = 0;
 
 
 // Move Costs
-
 mtype_boots         = 0;
 mtype_heavyBoots    = 0;
 mtype_tires         = 0;
@@ -54,7 +53,7 @@ mtype_heavyTracks   = 0;
 
 canHide = false;            //hides for forest and protperties, etc.
 canHideSmall = false;       //hids small units
-isTall = false;             // increase fadio and vision range
+isTall = false;             // increase radio and vision range
 
 //graphic Defaults
 isLand  = true;     //used for land edges and corners

@@ -102,7 +102,7 @@ for( i = 0 ; i &lt; global.mapW ; i += 1 )         // i is to X
     {
     for( j = 0 ; j &lt; global.mapH; j += 1 )      // j is to Y
         {        
-        units[i,j] = -1 ;
+        units[i,j] = 0 ;
         }
     }
 

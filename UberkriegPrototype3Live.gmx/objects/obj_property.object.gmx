@@ -39,9 +39,10 @@ radio       = 0;
 resistance  = 20;           //used to resist capture
 income      = 1000;         // added to funds each turn to owner
 isCommander     = false;
-canRepair_g     = true;
-canResupply_g   = true;
+canRepair_g     = true; //can repair ground
+canResupply_g   = true; //can supply ground
 canHide         = true;     //overide obj_terrain
+canHidesmall    = true;
 
 //attributes for graphic detection
 isLand = true;               

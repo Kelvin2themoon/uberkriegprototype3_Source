@@ -30,6 +30,18 @@
 event_inherited();
 name = "Road" ;
 isLand = true;
+
+//required fields
+cover               = 0; //1~5
+// Move Costs
+mtype_boots         = 1;
+mtype_heavyBoots    = 1;
+mtype_tires         = 1;
+mtype_heayTires     = 1;
+mtype_specialTires  = 1;
+mtype_tracks        = 1;
+mtype_heavyTracks   = 2;
+
 </string>
           </argument>
         </arguments>

@@ -29,6 +29,23 @@
 event_inherited();//inherite parent object "properties"
 name = "Command Post";
 
+//required fields
+cover               = 3; //1~5
+// Move Costs
+mtype_boots         = 1;
+mtype_heavyBoots    = 1;
+mtype_tires         = 1;
+mtype_heayTires     = 1;
+mtype_specialTires  = 1;
+mtype_tracks        = 1;
+mtype_heavyTracks   = 2;
+
+
+//property only fields
+vision          = 2;
+radio           = 3;
+income          = 1000;         // added to funds each turn to owner
+isCommander     = true;
 </string>
           </argument>
         </arguments>

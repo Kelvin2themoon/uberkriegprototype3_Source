@@ -39,7 +39,7 @@ isDisrupted = false; //true when hit by Covert.Op disrupter
 
 //unit static variables
 cost        = 6000;
-move_type   = "tread"
+move_type   = "Tracks"; // camps and space please
 move_points = 9;
 vision      = 2;
 radio       = 3;

@@ -41,6 +41,19 @@ land_corner = 0;
 land_edge= 0;
 river_edge=0;
 
+//required fields
+cover               = 0; //1~5
+// Move Costs
+mtype_boots         = 99;
+mtype_heavyBoots    = 99;
+mtype_tires         = 99;
+mtype_heayTires     = 99;
+mtype_specialTires  = 99;
+mtype_tracks        = 99;
+mtype_heavyTracks   = 99;
+
+
+
 
 </string>
           </argument>

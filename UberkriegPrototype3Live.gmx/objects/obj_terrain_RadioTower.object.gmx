@@ -29,6 +29,26 @@
 event_inherited();//inherite parent object "properties"
 name = "Radio Tower";
 
+//required fields
+cover               = 3; //1~5
+// Move Costs
+mtype_boots         = 1;
+mtype_heavyBoots    = 1;
+mtype_tires         = 1;
+mtype_heayTires     = 1;
+mtype_specialTires  = 1;
+mtype_tracks        = 1;
+mtype_heavyTracks   = 2;
+
+
+//property only fields
+vision          = 3;
+radio           = 5;
+income          = 0;         // added to funds each turn to owner
+isCommander     = false;
+
+//exceptions
+canRepair_g     = false;
 </string>
           </argument>
         </arguments>

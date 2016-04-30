@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited(); //from parent "unit"
+            <string>///initiate
+event_inherited(); //from parent "unit"
 
 ///Initialize defaults
 
@@ -34,14 +35,14 @@ state = "idle" //describe stat of animation
 
 //Unit stats
 hp      = 10;
-fuel    = 0;
-ammo    = 0;
+fuel    = 90;
+ammo    = 5;
 isDisrupted = false; //true when hit by Covert.Op disrupter 
 
 //unit static variables
-cost        = 0;
-move_type   = "free";
-move_points = 0;
+cost        = 6000;
+move_type   = "Tracks";
+move_points = 9;
 vision      = 2;
 radio       = 3;
 
