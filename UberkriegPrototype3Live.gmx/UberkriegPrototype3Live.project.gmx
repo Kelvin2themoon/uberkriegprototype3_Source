@@ -192,6 +192,11 @@
         </scripts>
       </scripts>
     </scripts>
+    <script>scripts\scr_animate_object.gml</script>
+    <scripts name="UnitHandlers">
+      <script>scripts\scr_unit_destroy.gml</script>
+      <script>scripts\scr_setUnit.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>
@@ -224,6 +229,10 @@
     </objects>
     <objects name="Controllers">
       <object>objects\FullScreen</object>
+    </objects>
+    <objects name="Units">
+      <object>objects\obj_unit</object>
+      <object>objects\obj_unit_LightTank</object>
     </objects>
   </objects>
   <rooms name="rooms">

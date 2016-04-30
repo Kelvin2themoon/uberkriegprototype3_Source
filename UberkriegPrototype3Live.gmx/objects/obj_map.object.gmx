@@ -70,10 +70,6 @@ global.mapH = 50;// map width in terms of tiles
 global.canScroll_x = true;
 global.canScroll_y = true;
 
-
-
-
-
 //adjust the boarder to center map if too small
 
  if (global.mapH &lt;18 )
@@ -91,20 +87,24 @@ global.canScroll_y = true;
 
  
 
-//place plain objects in terrainMap 2Darray.
+// create &amp; place Plains objects in terrainMap 2Darray.
 //when the time comes this will be where a map file can be read and converted
-
-
 for( i = 0 ; i &lt; global.mapW ; i += 1 )         // i is to X
     {
     for( j = 0 ; j &lt; global.mapH; j += 1 )      // j is to Y
-        {
-        
+        {        
         terrains[i,j] = instance_create( i*24 , j*24 , obj_terrain_Plains ) ;
         }
     }
-    
 
+//Create empty array "units" &amp; fill it with "-1"s
+for( i = 0 ; i &lt; global.mapW ; i += 1 )         // i is to X
+    {
+    for( j = 0 ; j &lt; global.mapH; j += 1 )      // j is to Y
+        {        
+        units[i,j] = -1 ;
+        }
+    }
 
 
 </string>

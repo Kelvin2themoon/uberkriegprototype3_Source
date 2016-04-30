@@ -87,8 +87,8 @@ isLeftPressed = false ;
 display_set_gui_size(view_wview[0], view_hview[0]);
 
 //global variable of selected terrain and its name
-global.selection = obj_terrain_Sea;
-global.selection_name = "Sea" ;
+global.selection = obj_unit_LightTank;
+global.selection_name = "Light Tank" ;
 
 
 
@@ -228,8 +228,8 @@ if mouse_check_button_pressed(mb_left){
 if mouse_check_button_released(mb_left){
     isLeftPressed = false;
     }
-    
-if (isLeftPressed &amp;&amp; scr_inBound(posX,posY))
+//place terrain
+if (isLeftPressed &amp;&amp; scr_inBound(posX,posY) &amp;&amp; object_is_ancestor(global.selection,obj_terrain))
     {
     if global.selection == obj_terrain_Bridge
         {
@@ -249,8 +249,13 @@ if (isLeftPressed &amp;&amp; scr_inBound(posX,posY))
     else
         {
         scr_setTerrain(global.selection, posX, posY)
-        }
+        }  
+    }
     
+//place units
+else if (isLeftPressed &amp;&amp; scr_inBound(posX,posY) &amp;&amp; object_is_ancestor(global.selection,obj_unit))
+    {
+    scr_setUnit(global.selection,posX,posY)
     }
     
     
