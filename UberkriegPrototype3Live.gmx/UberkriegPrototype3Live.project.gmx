@@ -75,7 +75,7 @@
         </sprites>
         <sprites name="Bridges">
           <sprite>sprites\spr_bridgeRiver_clear</sprite>
-          <sprite>sprites\spr_bridgeRiver_Clear_top</sprite>
+          <sprite>sprites\spr_bridgeRiver_clear_top</sprite>
           <sprite>sprites\spr_bridgeSea_clear</sprite>
           <sprite>sprites\spr_bridgeSea_clear_top</sprite>
           <sprite>sprites\spr_bridgeSea_clear_shadow</sprite>
@@ -196,8 +196,8 @@
     </scripts>
     <scripts name="UnitHandlers">
       <script>scripts\scr_unit_destroy.gml</script>
+      <script>scripts\scr_unit_change_sprite.gml</script>
     </scripts>
-    <script>scripts\scr_unit_change_sprite.gml</script>
     <script>scripts\scr_check_move_cost.gml</script>
   </scripts>
   <fonts name="fonts">
@@ -234,8 +234,19 @@
     </objects>
     <objects name="Units">
       <object>objects\obj_unit</object>
-      <object>objects\obj_unit_LightTank</object>
+      <object>objects\obj_unit_LightInfantry</object>
+      <object>objects\obj_unit_HeavyInfantry</object>
+      <object>objects\obj_unit_LongGun</object>
+      <object>objects\obj_unit_Officer</object>
+      <object>objects\obj_unit_Recon</object>
       <object>objects\obj_unit_APC</object>
+      <object>objects\obj_unit_LightTank</object>
+      <object>objects\obj_unit_Artillery</object>
+      <object>objects\obj_unit_AA</object>
+      <object>objects\obj_unit_CovertOp</object>
+      <object>objects\obj_unit_HeavyTank</object>
+      <object>objects\obj_unit_Rocket</object>
+      <object>objects\obj_unit_LandCruiser</object>
     </objects>
   </objects>
   <rooms name="rooms">

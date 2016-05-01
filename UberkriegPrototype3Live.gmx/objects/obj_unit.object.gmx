@@ -29,7 +29,7 @@
 name = "Unit"
 state = "idle" //describe stat of animation
 image_speed = 0; //stops image
-image_index = 3; //first frame of Idle
+image_index = 2; //first frame of Idle
 //Unit stats
 ownership   =  1;
 hp          = 10;
@@ -44,18 +44,105 @@ move_points = 9;
 vision      = 2;
 radio       = 3;
 
+havePrimaryWeapon   = true;
+haveSecondaryWeapon = true;
+
+min_range = 1;
+max_range = 1;
+
 
 //spceial abilities
 canCapture      = false;
 isCommander     = false;
 canAttach       = false; //officers only
 canSupply       = false; //APC, uses ammo
-canLoadInfantry = false; //APC, spacific to infantry in case naval and sea units mak it
+canLoadInfantry = 0; //APC, spacific to infantry in case naval and sea units mak it
 canHide         = false;
 canDisrupt      = false;
 
+//co-ordinates
+
+unitPosX = x div 24;
+unitPosY = y div 24;
+
+//set alarm 0 for animation
+alarm[0] = 1;
 
 
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///animation switch
+
+scr_animate_object(2,4,15);
+
+//the rest when we move 'em!!
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Draw Brindge Forground
+
+draw_self();
+
+if(instance_exists(obj_terrain_SeaBridge))
+{
+
+    if ( obj_map.terrains[unitPosX, unitPosY].object_index == obj_terrain_SeaBridge.object_index)
+        {
+        draw_sprite(spr_bridgeSea_clear_top,obj_map.terrains[unitPosX, unitPosY].crossing,x,y);
+        }
+}
+
+
+
+if(instance_exists(obj_terrain_RiverBridge))
+    {
+    if ( obj_map.terrains[unitPosX, unitPosY].object_index == obj_terrain_RiverBridge.object_index)
+        {
+        draw_sprite(spr_bridgeRiver_clear_top,obj_map.terrains[unitPosX, unitPosY].crossing,x,y);
+        }
+    }
 </string>
           </argument>
         </arguments>
