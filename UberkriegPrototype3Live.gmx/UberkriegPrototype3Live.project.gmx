@@ -154,7 +154,7 @@
         <sprite>sprites\spr_LightTank_P4</sprite>
         <sprite>sprites\spr_Artillery_P4</sprite>
         <sprite>sprites\spr_CovertOp_P4</sprite>
-        <sprite>sprites\spr_Heavytank_P4</sprite>
+        <sprite>sprites\spr_HeavyTank_P4</sprite>
         <sprite>sprites\spr_Rocket_P4</sprite>
         <sprite>sprites\spr_LandCruiser_P4</sprite>
       </sprites>
@@ -230,7 +230,7 @@
       <object>objects\obj_terrain_Base</object>
     </objects>
     <objects name="Controllers">
-      <object>objects\FullScreen</object>
+      <object>objects\obj_MastertControls</object>
     </objects>
     <objects name="Units">
       <object>objects\obj_unit</object>

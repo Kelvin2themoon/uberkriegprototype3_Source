@@ -53,7 +53,7 @@
   <instances>
     <instance objName="obj_mapEditCursor_mouse" x="72" y="24" name="inst_AEDFE1B0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_map" x="24" y="24" name="inst_5E91F77E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="FullScreen" x="24" y="48" name="inst_1FA5313F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_MastertControls" x="24" y="48" name="inst_1FA5313F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
