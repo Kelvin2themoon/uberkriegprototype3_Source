@@ -6,9 +6,10 @@ then adjusts andy graphics relevent to the action
 
 set_terrain_type    =  argument0; // new terrain type, no id required
 
-
 set_terrain_x       =  argument1;
 set_terrain_y       =  argument2;
+
+global.set_terrain_owner   =  argument3;
 
 //Highlander code for HQs
 
@@ -16,7 +17,7 @@ if ( set_terrain_type == obj_terrain_HQ   && object_exists(obj_terrain_HQ))
     {
     with (obj_terrain_HQ) 
         {
-        if (ownership == obj_mapEditCursor_mouse.player_set) 
+        if (ownership == global.set_terrain_owner)
             {
             //replace with plains
              obj_map.terrains[x div 24,y div 24] = instance_create(x ,y ,obj_terrain_Plains);
@@ -71,11 +72,11 @@ if scr_inBound(set_terrain_x,set_terrain_y)
 
         }
         
-//set property operations
+//set property operations (change owner
 if object_is_ancestor(obj_map.terrains[set_terrain_x,set_terrain_y].object_index, obj_property)
    {
-   obj_map.terrains[set_terrain_x,set_terrain_y].ownership = obj_mapEditCursor_mouse.player_set;
-   obj_map.terrains[set_terrain_x,set_terrain_y].image_index = obj_mapEditCursor_mouse.player_set;
+   obj_map.terrains[set_terrain_x,set_terrain_y].ownership = global.set_terrain_owner;
+   obj_map.terrains[set_terrain_x,set_terrain_y].image_index = global.set_terrain_owner;
    }
    
 

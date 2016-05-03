@@ -63,8 +63,8 @@ I'm not sure if i will use this object for the actual game
             <kind>1</kind>
             <string>///Initialize
 
-global.mapW = 50; // map height in terms of tiles
-global.mapH = 50;// map width in terms of tiles
+global.mapW = 5; // map height in terms of tiles
+global.mapH = 5;// map width in terms of tiles
 
 //global variables for allowing scrolling for both map editor and in-game, false if the map is too small
 global.canScroll_x = true;

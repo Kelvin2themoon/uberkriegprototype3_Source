@@ -131,7 +131,7 @@
       </sprites>
       <sprites name="P3">
         <sprite>sprites\spr_LightInfantry_P3</sprite>
-        <sprite>sprites\spr_Heavy_Infantry_P3</sprite>
+        <sprite>sprites\spr_HeavyInfantry_P3</sprite>
         <sprite>sprites\spr_LongGun_P3</sprite>
         <sprite>sprites\spr_Officer_P3</sprite>
         <sprite>sprites\spr_Recon_P3</sprite>
@@ -152,6 +152,7 @@
         <sprite>sprites\spr_Recon_P4</sprite>
         <sprite>sprites\spr_APC_P4</sprite>
         <sprite>sprites\spr_LightTank_P4</sprite>
+        <sprite>sprites\spr_AA_P4</sprite>
         <sprite>sprites\spr_Artillery_P4</sprite>
         <sprite>sprites\spr_CovertOp_P4</sprite>
         <sprite>sprites\spr_HeavyTank_P4</sprite>
@@ -199,15 +200,16 @@
       <script>scripts\scr_unit_change_sprite.gml</script>
     </scripts>
     <script>scripts\scr_check_move_cost.gml</script>
+    <script>scripts\scr_ubermap_load.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>
   </fonts>
   <objects name="objects">
+    <object>objects\obj_map</object>
     <objects name="MapEditor">
       <object>objects\obj_mapEditCursor_mouse</object>
       <object>objects\obj_grabHand_mapEditor</object>
-      <object>objects\obj_map</object>
     </objects>
     <objects name="Terrain">
       <object>objects\obj_terrain_Plains</object>
