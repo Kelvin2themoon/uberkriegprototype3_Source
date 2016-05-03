@@ -160,6 +160,9 @@
         <sprite>sprites\spr_LandCruiser_P4</sprite>
       </sprites>
     </sprites>
+    <sprites name="Debug">
+      <sprite>sprites\spr_DebugStart</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Holders">
@@ -253,9 +256,18 @@
       <object>objects\obj_unit_Rocket</object>
       <object>objects\obj_unit_LandCruiser</object>
     </objects>
+    <objects name="Temp">
+      <object>objects\obj_temp_MainMenu</object>
+    </objects>
+    <objects name="Basic Battle ">
+      <object>objects\obj_battleController_basic</object>
+      <object>objects\obj_battleCursor</object>
+    </objects>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_mapEditor</room>
+    <room>rooms\rm_debugStart</room>
+    <room>rooms\rm_MapEditor</room>
+    <room>rooms\rm_game_Basic</room>
   </rooms>
   <constants number="4">
     <constant name="UI_DEPTH_CURSOR">-66000</constant>
