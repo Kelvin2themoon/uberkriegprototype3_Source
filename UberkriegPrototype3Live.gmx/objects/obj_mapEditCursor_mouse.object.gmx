@@ -686,38 +686,9 @@ if(scr_inBound(posX,posY))
             <kind>1</kind>
             <string>///Temp Save
 
-if (file_exists("protoland.ubm")) file_delete("protoland.ubm");  //delete exsisting save
-ini_open("protoland.ubm"); //create and open protoland
-
-//write to meta section [ map name and size ]
-ini_write_string("Meta","name","protoland"); //save name as protoland
-ini_write_real( "Meta", "Width", global.mapW);
-ini_write_real( "Meta", "Height", global.mapH);
+scr_ubermap_save("protoland.ubm");
 
 
-//start loop to all positions in map
-for( i = 0 ; i &lt; global.mapW ; i += 1 )         // i is to X
-    {
-    for( j = 0 ; j &lt; global.mapH; j += 1 )      // j is to Y
-        {
-        //save terrain   
-        posKey = string(i)+ "X" + string(j) + "Y";       
-        ini_write_real("Terrains", posKey, obj_map.terrains[i,j].object_index);
-        //save property ownership
-        if ( obj_map.terrains[i,j].isProperty )
-            {
-            ini_write_real("Terrains", posKey+"P", obj_map.terrains[i,j].ownership);
-            }
-        //save units
-        if (obj_map.units[i,j] != 0)
-            {
-            ini_write_real("Units", posKey , obj_map.units[i,j].object_index);
-            //save unit ownership
-            ini_write_real("Units", posKey+"P" , obj_map.units[i,j].ownership);
-            }
-        }
-    }
-ini_close();
 </string>
           </argument>
         </arguments>
@@ -742,7 +713,9 @@ ini_close();
             <kind>1</kind>
             <string>///Temp Load
 
+scr_ubermap_load("protoland.ubm");
 
+/*
 
 if (file_exists("protoland.ubm"))
     {

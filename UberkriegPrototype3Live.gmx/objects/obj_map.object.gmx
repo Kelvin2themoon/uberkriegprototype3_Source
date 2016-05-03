@@ -63,6 +63,7 @@ I'm not sure if i will use this object for the actual game
             <kind>1</kind>
             <string>///Initialize
 
+name = "Protoland";
 global.mapW = 5; // map height in terms of tiles
 global.mapH = 5;// map width in terms of tiles
 

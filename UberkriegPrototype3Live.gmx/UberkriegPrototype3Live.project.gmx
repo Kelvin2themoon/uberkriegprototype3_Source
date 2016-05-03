@@ -200,7 +200,10 @@
       <script>scripts\scr_unit_change_sprite.gml</script>
     </scripts>
     <script>scripts\scr_check_move_cost.gml</script>
-    <script>scripts\scr_ubermap_load.gml</script>
+    <scripts name="FileHandlers">
+      <script>scripts\scr_ubermap_load.gml</script>
+      <script>scripts\scr_ubermap_save.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>
