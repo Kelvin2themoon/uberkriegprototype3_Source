@@ -163,6 +163,40 @@
     <sprites name="Debug">
       <sprite>sprites\spr_DebugStart</sprite>
     </sprites>
+    <sprites name="HUD">
+      <sprites name="Mini_win">
+        <sprite>sprites\spr_miniwin_halfsize</sprite>
+        <sprite>sprites\spr_miniwin_capturewin</sprite>
+        <sprite>sprites\spr_miniwin_standard</sprite>
+        <sprites name="Units">
+          <sprite>sprites\scr_miniwin_LightInfantry</sprite>
+          <sprite>sprites\scr_miniwin_HeavyInfantry</sprite>
+          <sprite>sprites\scr_miniwin_LongGun</sprite>
+          <sprite>sprites\scr_miniwin_Officer</sprite>
+          <sprite>sprites\scr_miniwin_Recon</sprite>
+          <sprite>sprites\scr_miniwin_ACP</sprite>
+          <sprite>sprites\scr_miniwin_LightTank</sprite>
+          <sprite>sprites\scr_miniwin_Artillery</sprite>
+          <sprite>sprites\scr_miniwin_AA</sprite>
+          <sprite>sprites\scr_miniwin_CovertOp</sprite>
+          <sprite>sprites\scr_miniwin_HeavyTank</sprite>
+          <sprite>sprites\scr_miniwin_Rocket</sprite>
+          <sprite>sprites\scr_miniwin_LandCruiser</sprite>
+        </sprites>
+        <sprites name="Terrain">
+          <sprite>sprites\scr_miniwin_HQ</sprite>
+          <sprite>sprites\scr_miniwin_City</sprite>
+          <sprite>sprites\scr_miniwin_Base</sprite>
+          <sprite>sprites\scr_miniwin_RadioTower</sprite>
+          <sprite>sprites\scr_miniwin_CommandPost</sprite>
+          <sprite>sprites\scr_miniwin_NaturalTerrain</sprite>
+        </sprites>
+        <sprite>sprites\spr_miniwin_load_R</sprite>
+        <sprite>sprites\spr_miniwin_load_L</sprite>
+        <sprite>sprites\spr_topwin</sprite>
+        <sprite>sprites\spr_suxwin</sprite>
+      </sprites>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Holders">

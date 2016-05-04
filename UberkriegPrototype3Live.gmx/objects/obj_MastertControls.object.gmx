@@ -39,6 +39,10 @@ Global cursor animation
 global.cursorFrame = 1;
 global.cursorFrameIndex = 1;
 alarm[0] = 2 ;
+
+
+
+
 </string>
           </argument>
         </arguments>
