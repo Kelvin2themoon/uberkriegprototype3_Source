@@ -29,7 +29,7 @@
 
 /*
 this object keeps track of  all presistant variables in map editor including
-
+2
 the MAP!!!
 - Terrains: 2D array
 - Units   : 2d array (not implimented yet)*
