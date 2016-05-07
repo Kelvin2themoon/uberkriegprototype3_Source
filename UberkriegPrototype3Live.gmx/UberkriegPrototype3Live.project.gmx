@@ -4,7 +4,9 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\sfx_TypeWritterKey_1</sound>
+  </sounds>
   <sprites name="sprites">
     <sprites name="Terrain">
       <sprites name="Clear">
@@ -241,6 +243,7 @@
       <script>scripts\scr_ubermap_load.gml</script>
       <script>scripts\scr_ubermap_save.gml</script>
     </scripts>
+    <script>scripts\scr_cursorKey_juice.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>

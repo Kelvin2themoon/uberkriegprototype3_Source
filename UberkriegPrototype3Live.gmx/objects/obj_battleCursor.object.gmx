@@ -36,7 +36,7 @@ global.posY = y div 24 ;
 
 //set alarm to Cursor move speed
 alarm[1] = 0;
-key_delay = 5;
+
 </string>
           </argument>
         </arguments>
@@ -114,35 +114,57 @@ posY = y div 24 ;
             <kind>1</kind>
             <string>/// Navigation by arrow keys
 
+
+
+if (    keyboard_check_pressed(vk_up   ) ||
+        keyboard_check_pressed(vk_down ) ||
+        keyboard_check_pressed(vk_left ) ||
+        keyboard_check_pressed(vk_right) )
+        {
+        global.curosrkey_delay = global.cursorKey_startspeed ;
+        }
+        
+if (    keyboard_check_released(vk_up   ) ||
+        keyboard_check_released(vk_down ) ||
+        keyboard_check_released(vk_left ) ||
+        keyboard_check_released(vk_right) )
+        {
+        alarm[1] = 0;
+        }
+        
 if (alarm[1] = -1 )
     {
     switch(keyboard_key)
         {
         case(vk_nokey):
             alarm[1] = 0;
+            global.cursorkey_delay = global.cursorKey_startspeed ;
             break;
         
         case vk_up :
             if ( posY &gt; 0 ) y = y  - 24 ;
-            alarm[1] =key_delay;
+            scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
         case vk_down :
             if ( posY &lt; global.mapH - 1 ) y = y  + 24 ;
-            alarm[1] =key_delay;
+            scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
         case vk_left :
             if ( posX &gt; 0 ) x = x  - 24 ;
-            alarm[1] =key_delay;
-            break;      
+            scr_cursorKey_juice(1,global.cursorKey_sfx);
+            break;  
                     
         case vk_right :
             if ( posX &lt; global.mapW - 1 ) x = x  + 24 ;
-            alarm[1] =key_delay;
-            break;      
+            scr_cursorKey_juice(1,global.cursorKey_sfx);
+            break;    
           
+    
+
         }
+        
     }
 </string>
           </argument>

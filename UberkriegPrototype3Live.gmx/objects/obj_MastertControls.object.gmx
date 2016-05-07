@@ -40,6 +40,15 @@ global.cursorFrame = 1;
 global.cursorFrameIndex = 1;
 alarm[0] = 2 ;
 
+//Key juice variables
+global.cursorKey_startspeed   = 10;
+global.cursorKey_delay        = 10;
+global.cursorKey_accel        =  1;
+global.cursorKey_topspeed     =  4;
+global.cursorKey_popFrame     =  6;
+global.cursorKey_sfx = sfx_TypeWritterKey_1 ;
+
+
 
 
 
@@ -127,7 +136,7 @@ switch  (global.cursorFrame)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///male full screen!
+            <string>///mak full screen!
 window_set_fullscreen(!window_get_fullscreen());
 </string>
           </argument>
