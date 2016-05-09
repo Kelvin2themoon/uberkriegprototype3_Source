@@ -25,12 +25,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Create and Load Map
+            <string>/// Initiate and create nessesary objects
+
+//Create and Load Map
 instance_create(0,0,obj_map);
 scr_ubermap_load("protoland.ubm");
 
 //create Cursor
 instance_create(24,24,obj_battleCursor);
+
+//create miniwin
+instance_create(24,24,obj_miniwin);
 </string>
           </argument>
         </arguments>

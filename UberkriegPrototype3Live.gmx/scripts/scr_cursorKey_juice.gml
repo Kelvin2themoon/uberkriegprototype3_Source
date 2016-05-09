@@ -28,6 +28,8 @@ cusorKeyJuice_sfx   = argument1;    //assign sfx
 global.cursorFrame = global.cursorKey_popFrame;
 audio_play_sound(cusorKeyJuice_sfx, 1, 0);
 alarm[cusorKeyJuice_alarm] = global.cursorKey_delay;
+obj_MastertControls.alarm[0] = 1;
+image_index = 0;
 
 while ( global.cursorKey_delay > global.cursorKey_topspeed ){
 global.cursorKey_delay = global.cursorKey_delay - global.cursorKey_accel;

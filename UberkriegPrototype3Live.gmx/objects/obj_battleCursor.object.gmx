@@ -25,10 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//initiate
+            <string>///initiate
 
 //depth
-depth = UI_DEPTH_CURSOR
+depth = UI_DEPTH_CURSOR;
 
 //set position
 global.posX = x div 24 ;
@@ -36,6 +36,17 @@ global.posY = y div 24 ;
 
 //set alarm to Cursor move speed
 alarm[1] = 0;
+//view control speed - should be divisable by 24
+view_speep = 8;
+
+
+
+
+
+
+
+
+
 
 </string>
           </argument>
@@ -91,7 +102,7 @@ image_index = global.cursorFrameIndex ;
 posX = x div 24 ;
 posY = y div 24 ;
 
-
+view_border = 48;
 </string>
           </argument>
         </arguments>
@@ -121,7 +132,7 @@ if (    keyboard_check_pressed(vk_up   ) ||
         keyboard_check_pressed(vk_left ) ||
         keyboard_check_pressed(vk_right) )
         {
-        global.curosrkey_delay = global.cursorKey_startspeed ;
+        global.cursorKey_delay = global.cursorKey_startspeed ;
         }
         
 if (    keyboard_check_released(vk_up   ) ||
@@ -130,6 +141,7 @@ if (    keyboard_check_released(vk_up   ) ||
         keyboard_check_released(vk_right) )
         {
         alarm[1] = 0;
+        global.cursorKey_delay = global.cursorKey_startspeed ;
         }
         
 if (alarm[1] = -1 )
@@ -170,6 +182,37 @@ if (alarm[1] = -1 )
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// view control
+
+
+if ( view_xview[0] &gt; x - 48) view_xview[0] -= view_speep;
+
+if ( view_xview[0] + view_wport[0] &lt; x + 72) view_xview[0] += view_speep;
+
+if ( view_yview[0] &gt; y - 48) view_yview[0] -= view_speep;
+
+if ( view_yview[0] + view_hport[0] &lt; y + 72) view_yview[0] += view_speep;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -188,13 +231,17 @@ if (alarm[1] = -1 )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>c_uiWhite = make_colour_rgb(250,250,250);
+            <string>
+
+c_uiWhite = make_colour_rgb(250,250,250);
 
 draw_set_font(ft_AuroraEx);
 draw_set_colour(c_uiWhite);
 draw_set_halign(fa_left);
 
-draw_text(0,0, string(alarm[1]));
+//draw_text(0,0, string(obj_map.terrains[posX,posY].depth ));
+
+draw_text(0,0, "X:" + string(view_xview-x) +" Y:" + string(view_yview - y));
 </string>
           </argument>
         </arguments>

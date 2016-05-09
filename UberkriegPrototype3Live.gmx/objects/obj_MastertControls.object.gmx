@@ -41,10 +41,10 @@ global.cursorFrameIndex = 1;
 alarm[0] = 2 ;
 
 //Key juice variables
-global.cursorKey_startspeed   = 10;
-global.cursorKey_delay        = 10;
+global.cursorKey_startspeed   = 15;
+global.cursorKey_delay        = 15;
 global.cursorKey_accel        =  1;
-global.cursorKey_topspeed     =  4;
+global.cursorKey_topspeed     =  3;
 global.cursorKey_popFrame     =  6;
 global.cursorKey_sfx = sfx_TypeWritterKey_1 ;
 
