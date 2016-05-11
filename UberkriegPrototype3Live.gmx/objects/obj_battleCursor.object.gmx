@@ -99,8 +99,8 @@ image_index = global.cursorFrameIndex ;
 
 
 //co-ordinat variables
-posX = x div 24 ;
-posY = y div 24 ;
+global.posX = x div 24 ;
+global.posY = y div 24 ;
 
 view_border = 48;
 </string>
@@ -154,22 +154,22 @@ if (alarm[1] = -1 )
             break;
         
         case vk_up :
-            if ( posY &gt; 0 ) y = y  - 24 ;
+            if ( global.posY &gt; 0 ) y = y  - 24 ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
         case vk_down :
-            if ( posY &lt; global.mapH - 1 ) y = y  + 24 ;
+            if ( global.posY &lt; global.mapH - 1 ) y = y  + 24 ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
         case vk_left :
-            if ( posX &gt; 0 ) x = x  - 24 ;
+            if ( global.posX &gt; 0 ) x = x  - 24 ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;  
                     
         case vk_right :
-            if ( posX &lt; global.mapW - 1 ) x = x  + 24 ;
+            if ( global.posX &lt; global.mapW - 1 ) x = x  + 24 ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;    
           
@@ -239,9 +239,11 @@ draw_set_font(ft_AuroraEx);
 draw_set_colour(c_uiWhite);
 draw_set_halign(fa_left);
 
-//draw_text(0,0, string(obj_map.terrains[posX,posY].depth ));
+//draw_text(0,0, obj_map.terrains[posX,posY].name );
+draw_text(0,24, string_letters(obj_map.terrains[global.posX,global.posY].name));
 
-draw_text(0,0, "X:" + string(view_xview-x) +" Y:" + string(view_yview - y));
+
+//draw_text(0,0, "X:" + string(view_xview-x) +" Y:" + string(view_yview - y));
 </string>
           </argument>
         </arguments>

@@ -2,7 +2,7 @@
 <sprite>
   <type>0</type>
   <xorig>0</xorig>
-  <yorigin>-42</yorigin>
+  <yorigin>0</yorigin>
   <colkind>1</colkind>
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
@@ -10,7 +10,7 @@
   <bbox_left>0</bbox_left>
   <bbox_right>167</bbox_right>
   <bbox_top>0</bbox_top>
-  <bbox_bottom>59</bbox_bottom>
+  <bbox_bottom>47</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
@@ -18,11 +18,11 @@
   </TextureGroups>
   <For3D>0</For3D>
   <width>168</width>
-  <height>60</height>
+  <height>48</height>
   <frames>
-    <frame index="0">images\spr_miniwin_halfsize_0.png</frame>
-    <frame index="1">images\spr_miniwin_halfsize_1.png</frame>
-    <frame index="2">images\spr_miniwin_halfsize_2.png</frame>
-    <frame index="3">images\spr_miniwin_halfsize_3.png</frame>
+    <frame index="0">images\spr_miniwin_AA_0.png</frame>
+    <frame index="1">images\spr_miniwin_AA_1.png</frame>
+    <frame index="2">images\spr_miniwin_AA_2.png</frame>
+    <frame index="3">images\spr_miniwin_AA_3.png</frame>
   </frames>
 </sprite>

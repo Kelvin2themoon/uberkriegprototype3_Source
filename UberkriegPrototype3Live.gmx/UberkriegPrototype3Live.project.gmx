@@ -171,27 +171,37 @@
         <sprite>sprites\spr_miniwin_capturewin</sprite>
         <sprite>sprites\spr_miniwin_standard</sprite>
         <sprites name="Units">
-          <sprite>sprites\scr_miniwin_LightInfantry</sprite>
-          <sprite>sprites\scr_miniwin_HeavyInfantry</sprite>
-          <sprite>sprites\scr_miniwin_LongGun</sprite>
-          <sprite>sprites\scr_miniwin_Officer</sprite>
-          <sprite>sprites\scr_miniwin_Recon</sprite>
-          <sprite>sprites\scr_miniwin_ACP</sprite>
-          <sprite>sprites\scr_miniwin_LightTank</sprite>
-          <sprite>sprites\scr_miniwin_Artillery</sprite>
-          <sprite>sprites\scr_miniwin_AA</sprite>
-          <sprite>sprites\scr_miniwin_CovertOp</sprite>
-          <sprite>sprites\scr_miniwin_HeavyTank</sprite>
-          <sprite>sprites\scr_miniwin_Rocket</sprite>
-          <sprite>sprites\scr_miniwin_LandCruiser</sprite>
+          <sprite>sprites\spr_miniwin_LightInfantry</sprite>
+          <sprite>sprites\spr_miniwin_HeavyInfantry</sprite>
+          <sprite>sprites\spr_miniwin_LongGun</sprite>
+          <sprite>sprites\spr_miniwin_Officer</sprite>
+          <sprite>sprites\spr_miniwin_Recon</sprite>
+          <sprite>sprites\spr_miniwin_ACP</sprite>
+          <sprite>sprites\spr_miniwin_LightTank</sprite>
+          <sprite>sprites\spr_miniwin_Artillery</sprite>
+          <sprite>sprites\spr_miniwin_AA</sprite>
+          <sprite>sprites\spr_miniwin_CovertOp</sprite>
+          <sprite>sprites\spr_miniwin_HeavyTank</sprite>
+          <sprite>sprites\spr_miniwin_Rocket</sprite>
+          <sprite>sprites\spr_miniwin_LandCruiser</sprite>
         </sprites>
         <sprites name="Terrain">
-          <sprite>sprites\scr_miniwin_HQ</sprite>
-          <sprite>sprites\scr_miniwin_City</sprite>
-          <sprite>sprites\scr_miniwin_Base</sprite>
-          <sprite>sprites\scr_miniwin_RadioTower</sprite>
-          <sprite>sprites\scr_miniwin_CommandPost</sprite>
-          <sprite>sprites\scr_miniwin_NaturalTerrain</sprite>
+          <sprite>sprites\spr_miniwin_HQ</sprite>
+          <sprite>sprites\spr_miniwin_City</sprite>
+          <sprite>sprites\spr_miniwin_Base</sprite>
+          <sprite>sprites\spr_miniwin_RadioTower</sprite>
+          <sprite>sprites\spr_miniwin_CommandPost</sprite>
+          <sprite>sprites\spr_miniwin_NaturalTerrain</sprite>
+          <sprite>sprites\spr_miniwin_BrickWall</sprite>
+          <sprite>sprites\spr_miniwin_Grass</sprite>
+          <sprite>sprites\spr_miniwin_River</sprite>
+          <sprite>sprites\spr_miniwin_RiverBridge</sprite>
+          <sprite>sprites\spr_miniwin_SeaBridge</sprite>
+          <sprite>sprites\spr_miniwin_Woods</sprite>
+          <sprite>sprites\spr_miniwin_Road</sprite>
+          <sprite>sprites\spr_miniwin_Mountain</sprite>
+          <sprite>sprites\spr_miniwin_Plains</sprite>
+          <sprite>sprites\spr_miniwin_Sea</sprite>
         </sprites>
         <sprite>sprites\spr_miniwin_load_R</sprite>
         <sprite>sprites\spr_miniwin_load_L</sprite>

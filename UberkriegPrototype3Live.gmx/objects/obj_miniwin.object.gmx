@@ -34,6 +34,9 @@ image_speed = 0;
 // position variable
 isLeft = true ;
 
+//window type
+miniwin_type = "standard";
+
 
 
 
@@ -62,13 +65,13 @@ isLeft = true ;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Location
+            <string>///Location: Left or Right
 
 //x =  view_xview[0] +  12;
 //y =  view_yview[0] + 324;
 
 if (view_xview - obj_battleCursor.x &gt; - 228 and view_yview - obj_battleCursor.y &lt; - 240 ){
-    x =  view_xview[0] + 576;
+    x =  view_xview[0] + 588;
     y =  view_yview[0] + 324;
     isLeft = false;
     }
@@ -85,10 +88,88 @@ else if isLeft{
     }
 
 else{
-    x =  view_xview[0] + 576;
+    x =  view_xview[0] + 588;
     y =  view_yview[0] + 324;
     }
     
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Window Type change: standard, halfsize, load L or R
+
+
+if ( obj_map.units[global.posX,global.posY] = 0){
+    sprite_index = asset_get_index("spr_miniwin_halfsize");
+    }   
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Retrieve Intel from battle curosr
+
+miniwin_terrain = asset_get_index("spr_miniwin_" + string_letters(obj_map.terrains[global.posX,global.posY].name));
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+
+//draw Terrain
+draw_sprite(miniwin_terrain,0,x,y);
+
+draw_self();
 </string>
           </argument>
         </arguments>
