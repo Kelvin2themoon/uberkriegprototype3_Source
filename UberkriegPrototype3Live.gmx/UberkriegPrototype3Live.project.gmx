@@ -99,6 +99,10 @@
       <sprites name="MapEditor">
         <sprite>sprites\spr_grabHand</sprite>
       </sprites>
+      <sprites name="Deploy">
+        <sprite>sprites\spr_DeployWin</sprite>
+        <sprite>sprites\spr_DeplayWin_curosr</sprite>
+      </sprites>
     </sprites>
     <sprites name="Units">
       <sprites name="P1">
@@ -191,7 +195,6 @@
           <sprite>sprites\spr_miniwin_Base</sprite>
           <sprite>sprites\spr_miniwin_RadioTower</sprite>
           <sprite>sprites\spr_miniwin_CommandPost</sprite>
-          <sprite>sprites\spr_miniwin_NaturalTerrain</sprite>
           <sprite>sprites\spr_miniwin_BrickWall</sprite>
           <sprite>sprites\spr_miniwin_Grass</sprite>
           <sprite>sprites\spr_miniwin_River</sprite>

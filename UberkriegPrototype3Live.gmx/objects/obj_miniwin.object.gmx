@@ -36,6 +36,7 @@ isLeft = true ;
 
 //window type
 miniwin_type = "standard";
+miniwin_terrain_ownership = 0;
 
 
 
@@ -140,8 +141,13 @@ if ( obj_map.units[global.posX,global.posY] = 0){
             <kind>1</kind>
             <string>///Retrieve Intel from battle curosr
 
+//retrive terrain object index
 miniwin_terrain = asset_get_index("spr_miniwin_" + string_letters(obj_map.terrains[global.posX,global.posY].name));
 
+// retrive terrain ownership if property
+if  (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,obj_property)){ 
+    miniwin_terrain_ownership = obj_map.terrains[global.posX,global.posY].ownership;
+    }
 </string>
           </argument>
         </arguments>
@@ -165,11 +171,11 @@ miniwin_terrain = asset_get_index("spr_miniwin_" + string_letters(obj_map.terrai
           <argument>
             <kind>1</kind>
             <string>
-
-//draw Terrain
-draw_sprite(miniwin_terrain,0,x,y);
-
 draw_self();
+//draw Terrain
+draw_sprite(miniwin_terrain,miniwin_terrain_ownership,x,y);
+
+
 </string>
           </argument>
         </arguments>
