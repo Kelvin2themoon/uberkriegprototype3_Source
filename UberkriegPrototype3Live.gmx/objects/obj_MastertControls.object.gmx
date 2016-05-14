@@ -48,6 +48,8 @@ global.cursorKey_topspeed     =  3;
 global.cursorKey_popFrame     =  6;
 global.cursorKey_sfx = sfx_TypeWritterKey_1 ;
 
+///
+global.c_uiWhite = make_colour_rgb(250,250,250);
 
 
 

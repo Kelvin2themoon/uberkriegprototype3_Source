@@ -315,6 +315,7 @@
       <object>objects\obj_battleController_basic</object>
       <object>objects\obj_battleCursor</object>
       <object>objects\obj_miniwin</object>
+      <object>objects\obj_UI_deploy</object>
     </objects>
   </objects>
   <rooms name="rooms">

@@ -36,6 +36,8 @@ instance_create(24,24,obj_battleCursor);
 
 //create miniwin
 instance_create(24,24,obj_miniwin);
+
+
 </string>
           </argument>
         </arguments>
