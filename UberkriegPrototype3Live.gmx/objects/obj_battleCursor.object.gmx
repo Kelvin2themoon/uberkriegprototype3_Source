@@ -233,25 +233,22 @@ if ( view_yview[0] + view_hport[0] &lt; y + 72) view_yview[0] += view_speep;
             <kind>1</kind>
             <string>///check for deploy
  
- if ( obj_map.terrains[global.posX,global.posY].object_index == obj_terrain_Base.object_index){
+ if (obj_map.terrains[global.posX,global.posY].object_index == obj_terrain_Base.object_index &amp;&amp; obj_map.units[global.posX,global.posY] == 0){
  
     //assign variable 
     if (global.cursorFrame == 2 || global.cursorFrame == 1){
         cursor_icon = 5; 
         }
-    //set cursor icon to nothing
     else{
-    cursor_icon = -1;
+        cursor_icon = -1;
         }
-    //press CONFIRM    
-    if (keyboard_check_pressed(ord("Z") )){
+    //press CONFIRM and no unit is present
+    if (keyboard_check_pressed(ord("Z")) and obj_map.units[global.posX,global.posY] =0){
+        cursor_icon = -1;
         instance_create(0,0,obj_UI_deploy);
         instance_deactivate_object(obj_battleCursor);
         instance_deactivate_object(obj_miniwin);
         }
-    
-    
-    
 
  }
 </string>
@@ -316,7 +313,7 @@ draw_text(0,24, string_letters(obj_map.terrains[global.posX,global.posY].name));
             <kind>1</kind>
             <string>draw_self();
 
-if (cursor_icon == 5){
+if (cursor_icon == 5 ){
     draw_sprite(spr_basicCursor_Icons,5,x,y);
     }
 </string>

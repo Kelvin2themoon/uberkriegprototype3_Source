@@ -95,7 +95,7 @@ y = start_y;
             <kind>1</kind>
             <string>///press "B"
 
-if  (keyboard_check_pressed(ord("X")))
+if  (keyboard_check_pressed(global.keyCANCEL))
     {
     instance_activate_object(obj_battleCursor);
     instance_activate_object(obj_miniwin);
@@ -149,18 +149,18 @@ image_index = global.cursorFrameIndex ;
 
 
 
-if (    keyboard_check_pressed(vk_up   ) ||
-        keyboard_check_pressed(vk_down ) ||
-        keyboard_check_pressed(vk_left ) ||
-        keyboard_check_pressed(vk_right) )
+if (    keyboard_check_pressed(global.keyUP     ) ||
+        keyboard_check_pressed(global.keyDOWN   ) ||
+        keyboard_check_pressed(global.keyLEFT   ) ||
+        keyboard_check_pressed(global.keyDOWN   ) )
         {
         global.cursorKey_delay = global.cursorKey_startspeed ;
         }
         
-if (    keyboard_check_released(vk_up   ) ||
-        keyboard_check_released(vk_down ) ||
-        keyboard_check_released(vk_left ) ||
-        keyboard_check_released(vk_right) )
+if (    keyboard_check_released(global.keyUP    ) ||
+        keyboard_check_released(global.keyDOWN  ) ||
+        keyboard_check_released(global.keyLEFT  ) ||
+        keyboard_check_released(global.keyRIGHT ) )
         {
         alarm[1] = 0;
         global.cursorKey_delay = global.cursorKey_startspeed ;
@@ -175,7 +175,7 @@ if (alarm[1] = -1 )
             global.cursorkey_delay = global.cursorKey_startspeed ;
             break;
         
-        case vk_up :
+        case global.keyUP : //up
             if ( row =0) {
                 row = 6; 
                 y = start_y + (row*row_size);    
@@ -188,7 +188,7 @@ if (alarm[1] = -1 )
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
-        case vk_down :
+        case global.keyDOWN : //down
             if ( row &lt; 6) {
                 row += 1; //row +1
                 y = start_y + (row*row_size);    
@@ -201,7 +201,7 @@ if (alarm[1] = -1 )
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
-        case vk_left :
+        case global.keyLEFT : //left
             if (col == 0){
                 col = 1; //change col
                 x = start_x + col_size; //change location
@@ -214,7 +214,7 @@ if (alarm[1] = -1 )
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;  
                     
-        case vk_right :
+        case global.keyRIGHT : //right
                 if (col == 0){
                     col = 1; //change col
                     x = start_x+ col_size; //change location
@@ -235,6 +235,46 @@ if (alarm[1] = -1 )
         }
         
     
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Deploy Action
+
+//check for key
+if keyboard_check_pressed(global.keyCONFIRM){
+    //check col
+    if col == 0{
+        //check row
+        switch row
+            {
+
+            case 0: //Light Infantry
+            scr_setUnit(obj_unit_LightInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+            }
+        
+        //Close deploy Window
+        instance_activate_object(obj_battleCursor);
+        instance_activate_object(obj_miniwin);
+        instance_destroy(); 
+        }
+    }
 </string>
           </argument>
         </arguments>
@@ -263,7 +303,7 @@ draw_set_font(ft_AuroraEx);
 draw_set_colour(global.c_uiWhite);
 draw_set_halign(fa_left);
 
-draw_text(0,0,string(alarm[1]) + " X: " + string(x) + "  Y: " + string(y));
+draw_text(0,0,string(alarm[1]) + " X: " + string(col) + "  Y: " + string(row));
 
 </string>
           </argument>

@@ -37,6 +37,8 @@ isLeft = true ;
 //window type
 miniwin_type = "standard";
 miniwin_terrain_ownership = 0;
+miniwin_unit = spr_miniwin_LightTank;
+miniwin_unit_ownership = 0;
 
 
 
@@ -118,7 +120,13 @@ else{
 
 if ( obj_map.units[global.posX,global.posY] = 0){
     sprite_index = asset_get_index("spr_miniwin_halfsize");
-    }   
+    }
+    
+if ( obj_map.units[global.posX,global.posY] != 0){
+    sprite_index = asset_get_index("spr_miniwin_standard");
+    }
+    
+
 </string>
           </argument>
         </arguments>
@@ -148,6 +156,15 @@ miniwin_terrain = asset_get_index("spr_miniwin_" + string_letters(obj_map.terrai
 if  (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,obj_property)){ 
     miniwin_terrain_ownership = obj_map.terrains[global.posX,global.posY].ownership;
     }
+    
+// retrieve unit ingomation
+
+if (obj_map.units[global.posX,global.posY] != 0){
+    //get unit sprite index
+    miniwin_unit = asset_get_index("spr_miniwin_" + string_letters(obj_map.units[global.posX,global.posY].name));
+    //get unit ownership, and interpet image index
+    miniwin_unit_ownership = obj_map.units[global.posX,global.posY].ownership - 1;
+    }
 </string>
           </argument>
         </arguments>
@@ -172,8 +189,13 @@ if  (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,o
             <kind>1</kind>
             <string>
 draw_self();
-//draw Terrain
+//draw Terrain intel
 draw_sprite(miniwin_terrain,miniwin_terrain_ownership,x,y);
+//draw Unit intel
+if (obj_map.units[global.posX,global.posY] != 0){
+    draw_sprite(miniwin_unit,miniwin_unit_ownership,x,y);
+    
+    }
 
 
 </string>

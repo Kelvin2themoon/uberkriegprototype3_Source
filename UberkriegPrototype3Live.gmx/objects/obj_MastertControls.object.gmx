@@ -48,8 +48,20 @@ global.cursorKey_topspeed     =  3;
 global.cursorKey_popFrame     =  6;
 global.cursorKey_sfx = sfx_TypeWritterKey_1 ;
 
-///
+// Key colours
 global.c_uiWhite = make_colour_rgb(250,250,250);
+
+//Button config
+global.keyCONFIRM   = ord("Z");
+global.keyCANCEL    = ord("X");
+
+global.keyRADIO     = vk_space;
+global.keyAUX       =ord("C");
+
+global.keyUP        = vk_up;
+global.keyDOWN      = vk_down;
+global.keyLEFT      = vk_left;
+global.keyRIGHT     = vk_right;
 
 
 
