@@ -36,6 +36,7 @@ isLeft = true ;
 
 //window type
 miniwin_type = "standard";
+miniwin_terrain = spr_miniwin_Plains;
 miniwin_terrain_ownership = 0;
 miniwin_unit = spr_miniwin_LightTank;
 miniwin_unit_ownership = 0;
@@ -194,7 +195,6 @@ draw_sprite(miniwin_terrain,miniwin_terrain_ownership,x,y);
 //draw Unit intel
 if (obj_map.units[global.posX,global.posY] != 0){
     draw_sprite(miniwin_unit,miniwin_unit_ownership,x,y);
-    
     }
 
 

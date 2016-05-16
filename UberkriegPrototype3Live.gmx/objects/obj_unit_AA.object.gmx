@@ -30,7 +30,7 @@ event_inherited(); //from parent "unit"
 
 ///Initialize defaults
 
-name = "Anti-Air";
+name = "AA";
 state = "idle" //describe stat of animation
 
 //Unit stats

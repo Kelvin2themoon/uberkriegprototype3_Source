@@ -285,7 +285,6 @@ if  (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,o
     draw_text(0,0, obj_map.terrains[global.posX,global.posY].ownership);
     }
 
-draw_text(0,24, string_letters(obj_map.terrains[global.posX,global.posY].name));
 
 
 //draw_text(0,0, "X:" + string(view_xview-x) +" Y:" + string(view_yview - y));

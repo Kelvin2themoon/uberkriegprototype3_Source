@@ -30,7 +30,7 @@ event_inherited(); //from parent "unit"
 
 ///Initialize defaults
 
-name = "Covert Operative";
+name = "Covert Op.";
 state = "idle" //describe stat of animation
 
 //Unit stats

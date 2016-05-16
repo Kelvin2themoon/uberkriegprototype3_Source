@@ -103,6 +103,126 @@
         <sprite>sprites\spr_DeployWin</sprite>
         <sprite>sprites\spr_DeplayWin_curosr</sprite>
       </sprites>
+      <sprites name="HUD">
+        <sprites name="Mini_win">
+          <sprite>sprites\spr_miniwin_halfsize</sprite>
+          <sprite>sprites\spr_miniwin_capturewin</sprite>
+          <sprite>sprites\spr_miniwin_standard</sprite>
+          <sprites name="Units">
+            <sprite>sprites\spr_miniwin_LightInfantry</sprite>
+            <sprite>sprites\spr_miniwin_HeavyInfantry</sprite>
+            <sprite>sprites\spr_miniwin_LongGun</sprite>
+            <sprite>sprites\spr_miniwin_Officer</sprite>
+            <sprite>sprites\spr_miniwin_Recon</sprite>
+            <sprite>sprites\spr_miniwin_APC</sprite>
+            <sprite>sprites\spr_miniwin_LightTank</sprite>
+            <sprite>sprites\spr_miniwin_Artillery</sprite>
+            <sprite>sprites\spr_miniwin_AA</sprite>
+            <sprite>sprites\spr_miniwin_CovertOp</sprite>
+            <sprite>sprites\spr_miniwin_HeavyTank</sprite>
+            <sprite>sprites\spr_miniwin_Rocket</sprite>
+            <sprite>sprites\spr_miniwin_LandCruiser</sprite>
+          </sprites>
+          <sprites name="Terrain">
+            <sprite>sprites\spr_miniwin_HQ</sprite>
+            <sprite>sprites\spr_miniwin_City</sprite>
+            <sprite>sprites\spr_miniwin_Base</sprite>
+            <sprite>sprites\spr_miniwin_RadioTower</sprite>
+            <sprite>sprites\spr_miniwin_CommandPost</sprite>
+            <sprite>sprites\spr_miniwin_BrickWall</sprite>
+            <sprite>sprites\spr_miniwin_Grass</sprite>
+            <sprite>sprites\spr_miniwin_River</sprite>
+            <sprite>sprites\spr_miniwin_RiverBridge</sprite>
+            <sprite>sprites\spr_miniwin_SeaBridge</sprite>
+            <sprite>sprites\spr_miniwin_Woods</sprite>
+            <sprite>sprites\spr_miniwin_Road</sprite>
+            <sprite>sprites\spr_miniwin_Mountain</sprite>
+            <sprite>sprites\spr_miniwin_Plains</sprite>
+            <sprite>sprites\spr_miniwin_Sea</sprite>
+          </sprites>
+          <sprite>sprites\spr_miniwin_load_R</sprite>
+          <sprite>sprites\spr_miniwin_load_L</sprite>
+        </sprites>
+        <sprites name="Top Win">
+          <sprite>sprites\spr_auxwin</sprite>
+          <sprite>sprites\spr_topwin</sprite>
+        </sprites>
+        <sprite>sprites\spr_black</sprite>
+      </sprites>
+      <sprites name="SysComMenu">
+        <sprite>sprites\spr_syscom_cap</sprite>
+        <sprite>sprites\spr_syscom_base</sprite>
+        <sprites name="System">
+          <sprites name="UP">
+            <sprite>sprites\spr_syscom_audio_up</sprite>
+            <sprite>sprites\spr_syscom_controls_up</sprite>
+            <sprite>sprites\spr_syscom_delete_up</sprite>
+            <sprite>sprites\spr_syscom_endturn_up</sprite>
+            <sprite>sprites\spr_syscom_exit_up</sprite>
+            <sprite>sprites\spr_syscom_graphics_up</sprite>
+            <sprite>sprites\spr_syscom_guide_up</sprite>
+            <sprite>sprites\spr_syscom_history_up</sprite>
+            <sprite>sprites\spr_syscom_intel_up</sprite>
+            <sprite>sprites\spr_syscom_message_up</sprite>
+            <sprite>sprites\spr_syscom_options_up</sprite>
+            <sprite>sprites\spr_syscom_profiles_up</sprite>
+            <sprite>sprites\spr_syscom_save_up</sprite>
+            <sprite>sprites\spr_syscom_surender_up</sprite>
+            <sprite>sprites\spr_syscom_terms_up</sprite>
+            <sprite>sprites\spr_syscom_terrain_up</sprite>
+            <sprite>sprites\spr_syscom_units_up</sprite>
+          </sprites>
+          <sprites name="DOWN">
+            <sprite>sprites\spr_syscom_audio_down</sprite>
+            <sprite>sprites\spr_syscom_controls_down</sprite>
+            <sprite>sprites\spr_syscom_delete_down</sprite>
+            <sprite>sprites\spr_syscom_endturn_down</sprite>
+            <sprite>sprites\spr_syscom_exit_down</sprite>
+            <sprite>sprites\spr_syscom_graphics_down</sprite>
+            <sprite>sprites\spr_syscom_guide_down</sprite>
+            <sprite>sprites\spr_syscom_history_down</sprite>
+            <sprite>sprites\spr_syscom_intel_down</sprite>
+            <sprite>sprites\spr_syscom_message_down</sprite>
+            <sprite>sprites\spr_syscom_options_down</sprite>
+            <sprite>sprites\spr_syscom_profiles_down</sprite>
+            <sprite>sprites\spr_syscom_save_down</sprite>
+            <sprite>sprites\spr_syscom_surender_down</sprite>
+            <sprite>sprites\spr_syscom_terms_down</sprite>
+            <sprite>sprites\spr_syscom_terrain_down</sprite>
+            <sprite>sprites\spr_syscom_units_down</sprite>
+          </sprites>
+        </sprites>
+        <sprites name="Command">
+          <sprites name="UP">
+            <sprite>sprites\spr_syscom_appear_up</sprite>
+            <sprite>sprites\spr_syscom_attach_up</sprite>
+            <sprite>sprites\spr_syscom_capture_up</sprite>
+            <sprite>sprites\spr_syscom_disrupt_up</sprite>
+            <sprite>sprites\spr_syscom_drop_up</sprite>
+            <sprite>sprites\spr_syscom_engage_up</sprite>
+            <sprite>sprites\spr_syscom_hide_up</sprite>
+            <sprite>sprites\spr_syscom_infiltrate_up</sprite>
+            <sprite>sprites\spr_syscom_join_up</sprite>
+            <sprite>sprites\spr_syscom_load_up</sprite>
+            <sprite>sprites\spr_syscom_supply_up</sprite>
+            <sprite>sprites\spr_syscom_wait_up</sprite>
+          </sprites>
+          <sprites name="DOWN">
+            <sprite>sprites\spr_syscom_appear_down</sprite>
+            <sprite>sprites\spr_syscom_attach_down</sprite>
+            <sprite>sprites\spr_syscom_capture_down</sprite>
+            <sprite>sprites\spr_syscom_disrupt_down</sprite>
+            <sprite>sprites\spr_syscom_drop_down</sprite>
+            <sprite>sprites\spr_syscom_engage_down</sprite>
+            <sprite>sprites\spr_syscom_hide_down</sprite>
+            <sprite>sprites\spr_syscom_infiltrate_down</sprite>
+            <sprite>sprites\spr_syscom_join_down</sprite>
+            <sprite>sprites\spr_syscom_load_down</sprite>
+            <sprite>sprites\spr_syscom_supply_down</sprite>
+            <sprite>sprites\spr_syscom_wait_down</sprite>
+          </sprites>
+        </sprites>
+      </sprites>
     </sprites>
     <sprites name="Units">
       <sprites name="P1">
@@ -168,51 +288,6 @@
     </sprites>
     <sprites name="Debug">
       <sprite>sprites\spr_DebugStart</sprite>
-    </sprites>
-    <sprites name="HUD">
-      <sprites name="Mini_win">
-        <sprite>sprites\spr_miniwin_halfsize</sprite>
-        <sprite>sprites\spr_miniwin_capturewin</sprite>
-        <sprite>sprites\spr_miniwin_standard</sprite>
-        <sprites name="Units">
-          <sprite>sprites\spr_miniwin_LightInfantry</sprite>
-          <sprite>sprites\spr_miniwin_HeavyInfantry</sprite>
-          <sprite>sprites\spr_miniwin_LongGun</sprite>
-          <sprite>sprites\spr_miniwin_Officer</sprite>
-          <sprite>sprites\spr_miniwin_Recon</sprite>
-          <sprite>sprites\spr_miniwin_ACP</sprite>
-          <sprite>sprites\spr_miniwin_LightTank</sprite>
-          <sprite>sprites\spr_miniwin_Artillery</sprite>
-          <sprite>sprites\spr_miniwin_AA</sprite>
-          <sprite>sprites\spr_miniwin_CovertOp</sprite>
-          <sprite>sprites\spr_miniwin_HeavyTank</sprite>
-          <sprite>sprites\spr_miniwin_Rocket</sprite>
-          <sprite>sprites\spr_miniwin_LandCruiser</sprite>
-        </sprites>
-        <sprites name="Terrain">
-          <sprite>sprites\spr_miniwin_HQ</sprite>
-          <sprite>sprites\spr_miniwin_City</sprite>
-          <sprite>sprites\spr_miniwin_Base</sprite>
-          <sprite>sprites\spr_miniwin_RadioTower</sprite>
-          <sprite>sprites\spr_miniwin_CommandPost</sprite>
-          <sprite>sprites\spr_miniwin_BrickWall</sprite>
-          <sprite>sprites\spr_miniwin_Grass</sprite>
-          <sprite>sprites\spr_miniwin_River</sprite>
-          <sprite>sprites\spr_miniwin_RiverBridge</sprite>
-          <sprite>sprites\spr_miniwin_SeaBridge</sprite>
-          <sprite>sprites\spr_miniwin_Woods</sprite>
-          <sprite>sprites\spr_miniwin_Road</sprite>
-          <sprite>sprites\spr_miniwin_Mountain</sprite>
-          <sprite>sprites\spr_miniwin_Plains</sprite>
-          <sprite>sprites\spr_miniwin_Sea</sprite>
-        </sprites>
-        <sprite>sprites\spr_miniwin_load_R</sprite>
-        <sprite>sprites\spr_miniwin_load_L</sprite>
-      </sprites>
-      <sprites name="Top Win">
-        <sprite>sprites\spr_auxwin</sprite>
-        <sprite>sprites\spr_topwin</sprite>
-      </sprites>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -316,6 +391,8 @@
       <object>objects\obj_battleCursor</object>
       <object>objects\obj_miniwin</object>
       <object>objects\obj_UI_deploy</object>
+      <object>objects\obj_player</object>
+      <object>objects\obj_starting</object>
     </objects>
   </objects>
   <rooms name="rooms">

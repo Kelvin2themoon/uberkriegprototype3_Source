@@ -30,7 +30,7 @@ event_inherited(); //from parent "unit"
 
 ///Initialize defaults
 
-name = "Heavy Infantry";
+name = "Long Gun";
 state = "idle" //describe stat of animation
 
 //Unit stats

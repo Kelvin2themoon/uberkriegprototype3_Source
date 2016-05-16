@@ -264,17 +264,74 @@ if keyboard_check_pressed(global.keyCONFIRM){
         //check row
         switch row
             {
-
             case 0: //Light Infantry
             scr_setUnit(obj_unit_LightInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+            break;
+            
+            case 1: //Heavy Infantry (mechanized Infnatry)
+            scr_setUnit(obj_unit_HeavyInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+            break;
+            
+            case 2: //Long Gun
+            scr_setUnit(obj_unit_LongGun ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+            break;
+            
+            case 3: //Field Officer (commander)
+            scr_setUnit(obj_unit_Officer,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+            break; 
+            
+            case 4: //Recon
+            scr_setUnit(obj_unit_Recon,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+            break;
+            
+            case 5: //APC
+            scr_setUnit(obj_unit_APC,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+            break;
+            
+            case 6: //cancel
+            break;
             }
+        }            
+    if col == 1{
+        //check row
+           switch row
+                {
+           case 0: //Light Tank
+           scr_setUnit(obj_unit_LightTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+           break;
+                
+           case 1: //Artillery
+           scr_setUnit(obj_unit_Artillery,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+           break;
+                
+           case 2: //IFV (AA)
+           scr_setUnit(obj_unit_AA ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+           break;
+                
+           case 3: //Covert Op.
+           scr_setUnit(obj_unit_CovertOp,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+           break; 
+                
+           case 4: //Heavy Tank
+           scr_setUnit(obj_unit_HeavyTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+           break;
+                
+           case 5: //Rocket
+           scr_setUnit(obj_unit_Rocket,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+           break;
+                
+           case 6: //Land Cruiser
+           scr_setUnit(obj_unit_LandCruiser,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+           break;
+                }
+        }
         
         //Close deploy Window
         instance_activate_object(obj_battleCursor);
         instance_activate_object(obj_miniwin);
         instance_destroy(); 
         }
-    }
+    
 </string>
           </argument>
         </arguments>

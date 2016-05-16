@@ -27,17 +27,94 @@
             <kind>1</kind>
             <string>/// Initiate and create nessesary objects
 
+global.posX = 0;
+global.posY = 0;
+
 //Create and Load Map
 instance_create(0,0,obj_map);
 scr_ubermap_load("protoland.ubm");
 
 //create Cursor
 instance_create(24,24,obj_battleCursor);
+//deactivate, to reactivate when main phaze start
+instance_deactivate_object(obj_battleCursor);
 
 //create miniwin
 instance_create(24,24,obj_miniwin);
+instance_deactivate_object(obj_miniwin);
+
+//player Queue
+
+global.player_q = ds_queue_create(); 
+
+//creat player objects for each Exsisting HQ
+with (obj_terrain_HQ){
+    switch (ownership){
+        case 0 :
+        break;
+        
+        case 1: // create player 1
+        global.P1 = instance_create(0,0,obj_player); 
+        global.P1.number = 1;
+        ds_queue_enqueue(global.player_q,global.P1);
+        
+        case 2: // create player 2
+        global.P2 = instance_create(0,0,obj_player);
+        global.P2.number = 2;
+        ds_queue_enqueue(global.player_q,global.P2); 
+        
+        case 3: // create player 3
+        global.P3 = instance_create(0,0,obj_player);
+        global.P3.number = 3;
+        ds_queue_enqueue(global.player_q,global.P3);
+        
+        case 4: // create player 4
+        global.P4 = instance_create(0,0,obj_player);
+        global.P4.number = 4;  
+        ds_queue_enqueue(global.player_q,global.P4);
+        
+        }
+    }
+    
 
 
+//turn phaze
+global.Phaze = "starting" //  starting -&gt; upkeep -&gt; main -&gt; end
+//player turn
+global.P_Turn = ds_queue_head(global.player_q);
+
+//create fadein
+ instance_create(0,0,obj_starting);
+ obj_starting.state = "waiting"; 
+ 
+ 
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_text(0,12, string_letters(obj_map.terrains[global.posX,global.posY].name));
+draw_text(0,24, global.Phaze + string(global.P_Turn.number));
 </string>
           </argument>
         </arguments>
