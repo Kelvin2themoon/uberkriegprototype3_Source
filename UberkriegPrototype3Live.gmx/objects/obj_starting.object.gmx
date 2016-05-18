@@ -27,6 +27,9 @@
             <kind>1</kind>
             <string>///Initiate
 
+
+
+
 state = "fade in" //  *create -&gt; fade in -&gt; waiting -&gt; fade out -&gt; *destroy
 image_alpha = 0; //alpha value
 
@@ -53,7 +56,8 @@ image_alpha = 0; //alpha value
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// fading
+            <string>/// fading and key check
+
 
 
 
@@ -63,6 +67,17 @@ switch state {
     case "fade in" :
         if (image_alpha &gt; 1) {
             state = "waiting"
+            //change Day
+            if global.P_Turn.number == global.last_player {
+                global.Day +=1;
+                }
+            //change player
+            changeplayer = ds_queue_dequeue(global.player_q);
+            ds_queue_enqueue(global.player_q,changeplayer);
+            //update P _turn 
+            global.P_Turn = ds_queue_head(global.player_q) ;
+            //chang phase
+            global.Phaze = "waiting P";
             }
         else{
             image_alpha += 0.1 ;
@@ -72,22 +87,29 @@ switch state {
     case "waiting" :
         image_alpha = 1;
         if keyboard_check_pressed(global.keyCONFIRM){
-        instance_activate_object(obj_battleCursor);
+            //activate HUD
+            instance_activate_object(obj_battleCursor);
             instance_activate_object(obj_miniwin);
+            //switch to "fad out"
             state = "fade out"
+            //change phasze to "main"
+            global.Phaze = "Main P"; 
+            
             }
         break;
     case "fade out" :
         if image_alpha &lt; 0 {
-            //activate HUD
+            
+        instance_destroy();
 
-            instance_destroy();
             }
         else{
             image_alpha -= 0.1 ;
             }
         break;
     }
+    
+
     
 
 
@@ -116,7 +138,7 @@ switch state {
             <string>///trouble shoot
 
 draw_self();
-draw_text (48,48, state);
+draw_text (0,0, state);
 </string>
           </argument>
         </arguments>

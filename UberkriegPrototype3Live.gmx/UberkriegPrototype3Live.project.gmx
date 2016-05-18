@@ -95,6 +95,10 @@
           <sprite>sprites\spr_basicCursor</sprite>
           <sprite>sprites\spr_basicCursor_Icons</sprite>
         </sprites>
+        <sprites name="checks">
+          <sprite>sprites\spr_rangcheck_red</sprite>
+          <sprite>sprites\spr_rangecheck_violet</sprite>
+        </sprites>
       </sprites>
       <sprites name="MapEditor">
         <sprite>sprites\spr_grabHand</sprite>
@@ -301,7 +305,9 @@
     <script>scripts\scr_animate_object.gml</script>
     <script>scripts\scr_inBound.gml</script>
     <script>scripts\scr_setTerrain.gml</script>
+    <script>scripts\scr_cursorKey_juice.gml</script>
     <script>scripts\scr_setUnit.gml</script>
+    <script>scripts\scr_check_move_cost.gml</script>
     <scripts name="MapEditor">
       <scripts name="TerainGraphicHandlers">
         <script>scripts\scr_switchTerrainGraphics.gml</script>
@@ -329,12 +335,14 @@
       <script>scripts\scr_unit_destroy.gml</script>
       <script>scripts\scr_unit_change_sprite.gml</script>
     </scripts>
-    <script>scripts\scr_check_move_cost.gml</script>
     <scripts name="FileHandlers">
       <script>scripts\scr_ubermap_load.gml</script>
       <script>scripts\scr_ubermap_save.gml</script>
     </scripts>
-    <script>scripts\scr_cursorKey_juice.gml</script>
+    <scripts name="Syscom">
+      <script>scripts\scr_syscom_execute.gml</script>
+      <script>scripts\scr_syscom_endturn.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>

@@ -266,6 +266,7 @@ if (alarm[1] = -1 )
             //juice then break
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
+            
         }
             
               
@@ -275,6 +276,31 @@ if (alarm[1] = -1 )
         }
         
     
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///press "A" : execute
+
+if ( keyboard_check_pressed( global.keyCONFIRM) ){
+    scr_syscom_execute(ds_list_find_value(menu_content,row));
+    }
 </string>
           </argument>
         </arguments>
@@ -323,8 +349,8 @@ draw_text(0,0, ds_list_find_value(menu_content,row));
           <argument>
             <kind>1</kind>
             <string>// draw cap and base
-draw_sprite(spr_syscom_cap , global.P_Turn,start_x,start_y-24);
-draw_sprite(spr_syscom_base, global.P_Turn,start_x,start_y +(ds_list_size(menu_content))*24);
+draw_sprite(spr_syscom_cap , global.P_Turn.number-1,start_x,start_y-24);
+draw_sprite(spr_syscom_base, global.P_Turn.number-1,start_x,start_y +(ds_list_size(menu_content))*24);
 
 //initiate variable for loop
 i = 0 ;
@@ -333,7 +359,7 @@ i = 0 ;
 
 for ( i=0 ; i&lt;ds_list_size(menu_content) ; i+=1){
     item = ds_list_find_value(menu_content, i);
-    draw_sprite( asset_get_index("spr_syscom_"+item+"_up"),global.P_Turn,start_x,start_y+(i*24)); 
+    draw_sprite( asset_get_index("spr_syscom_"+item+"_up"),global.P_Turn.number-1,start_x,start_y+(i*24)); 
     }
 
 draw_self();

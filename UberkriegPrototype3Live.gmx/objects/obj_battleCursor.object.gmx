@@ -337,7 +337,7 @@ c_uiWhite = make_colour_rgb(250,250,250);
 draw_set_font(ft_AuroraEx);
 draw_set_colour(c_uiWhite);
 draw_set_halign(fa_left);
-
+/*
 draw_text(0,0,"X:"+string(global.posX) + " Y:"+string(global.posY));
 
 if  (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,obj_property)){ 

@@ -44,44 +44,74 @@ instance_create(24,24,obj_miniwin);
 instance_deactivate_object(obj_miniwin);
 
 //player Queue
+global.player_q = ds_queue_create();
+//create priority q to organize player order 
+global.temp_pq = ds_priority_create();
 
-global.player_q = ds_queue_create(); 
+global.HQnum = 0;
+
 
 //creat player objects for each Exsisting HQ
 with (obj_terrain_HQ){
+//global.HQnum +=1;
+
     switch (ownership){
         case 0 :
         break;
         
         case 1: // create player 1
+        global.HQnum +=1;
         global.P1 = instance_create(0,0,obj_player); 
         global.P1.number = 1;
-        ds_queue_enqueue(global.player_q,global.P1);
+        ds_priority_add(global.temp_pq, global.P1 ,1);
+        //ds_queue_enqueue(global.player_q,global.P1); old thing, delete later
+        break;
         
         case 2: // create player 2
+        global.HQnum +=1;
         global.P2 = instance_create(0,0,obj_player);
         global.P2.number = 2;
-        ds_queue_enqueue(global.player_q,global.P2); 
+        ds_priority_add(global.temp_pq, global.P2 ,2);
+        break; 
         
         case 3: // create player 3
+        global.HQnum +=1;
         global.P3 = instance_create(0,0,obj_player);
         global.P3.number = 3;
-        ds_queue_enqueue(global.player_q,global.P3);
+        ds_priority_add(global.temp_pq, global.P3 ,3);
+        break;
         
         case 4: // create player 4
+        global.HQnum +=1;
         global.P4 = instance_create(0,0,obj_player);
         global.P4.number = 4;  
-        ds_queue_enqueue(global.player_q,global.P4);
-        
+        ds_priority_add(global.temp_pq, global.P4 ,4);
+        break;
+    
         }
     }
     
+//find last player
+
+global.last_player = ds_priority_find_max(global.temp_pq).number;
+
+    
+//convert priority q to regular q
+i = 0;
+for( i=0 ; i&lt;ds_priority_size(global.temp_pq)+1 ; i+=1){
+    p_priority = ds_priority_delete_min(global.temp_pq);
+    ds_queue_enqueue(global.player_q,p_priority);
+    }
+//delete temp Q
+ds_priority_destroy(global.temp_pq);    
 
 
 //turn phaze
 global.Phaze = "starting" //  starting -&gt; upkeep -&gt; main -&gt; end
 //player turn
 global.P_Turn = ds_queue_head(global.player_q);
+//global Day
+global.Day = 1;
 
 //create fadein
  instance_create(0,0,obj_starting);
@@ -115,6 +145,10 @@ global.P_Turn = ds_queue_head(global.player_q);
             <kind>1</kind>
             <string>draw_text(0,12, string_letters(obj_map.terrains[global.posX,global.posY].name));
 draw_text(0,24, global.Phaze + string(global.P_Turn.number));
+draw_text(0,36, "playernum:"+string(ds_queue_size(global.player_q)));
+draw_text(0,48, "HQ count: " + string(global.HQnum));
+draw_text(0,60, "DAY: " + string(global.Day));
+draw_text(0,72, "Last Player: : " + string(global.last_player));
 </string>
           </argument>
         </arguments>
