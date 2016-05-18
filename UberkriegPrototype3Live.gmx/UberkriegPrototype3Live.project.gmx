@@ -152,6 +152,7 @@
       <sprites name="SysComMenu">
         <sprite>sprites\spr_syscom_cap</sprite>
         <sprite>sprites\spr_syscom_base</sprite>
+        <sprite>sprites\spr_syscom_cursor</sprite>
         <sprites name="System">
           <sprites name="UP">
             <sprite>sprites\spr_syscom_audio_up</sprite>
@@ -393,6 +394,10 @@
       <object>objects\obj_UI_deploy</object>
       <object>objects\obj_player</object>
       <object>objects\obj_starting</object>
+      <objects name="Syscom">
+        <object>objects\par_syscom_menu</object>
+        <object>objects\obj_syscom_system</object>
+      </objects>
     </objects>
   </objects>
   <rooms name="rooms">

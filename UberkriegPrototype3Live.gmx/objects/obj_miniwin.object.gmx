@@ -74,28 +74,30 @@ miniwin_unit_ownership = 0;
 //x =  view_xview[0] +  12;
 //y =  view_yview[0] + 324;
 
-if (view_xview - obj_battleCursor.x &gt; - 228 and view_yview - obj_battleCursor.y &lt; - 240 ){
-    x =  view_xview[0] + 588;
-    y =  view_yview[0] + 324;
-    isLeft = false;
-    }
-    
-else if (view_xview - obj_battleCursor.x &lt; - 456 and view_yview - obj_battleCursor.y &lt; - 240 ){
-    x =  view_xview[0] + 12;
-    y =  view_yview[0] + 324;
-     isLeft = true;
-    }
+if instance_exists( obj_battleCursor ){
 
-else if isLeft{
-    x =  view_xview[0] + 12;
-    y =  view_yview[0] + 324;
-    }
-
-else{
-    x =  view_xview[0] + 588;
-    y =  view_yview[0] + 324;
-    }
+    if (view_xview - obj_battleCursor.x &gt; - 300 and view_yview - obj_battleCursor.y &lt; - 240 ){
+        x =  view_xview[0] + 588;
+        y =  view_yview[0] + 324;
+        isLeft = false;
+        }
+        
+    else if (view_xview - obj_battleCursor.x &lt; - 384 and view_yview - obj_battleCursor.y &lt; - 240 ){
+        x =  view_xview[0] + 12;
+        y =  view_yview[0] + 324;
+         isLeft = true;
+        }
     
+    else if isLeft{
+        x =  view_xview[0] + 12;
+        y =  view_yview[0] + 324;
+        }
+    
+    else{
+        x =  view_xview[0] + 588;
+        y =  view_yview[0] + 324;
+        }
+    }    
 </string>
           </argument>
         </arguments>
