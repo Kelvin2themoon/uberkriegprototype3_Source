@@ -87,22 +87,20 @@ switch state {
     case "waiting" :
         image_alpha = 1;
         if keyboard_check_pressed(global.keyCONFIRM){
-            //activate HUD
-            instance_activate_object(obj_battleCursor);
-            instance_activate_object(obj_miniwin);
             //switch to "fad out"
             state = "fade out"
             //change phasze to "main"
-            global.Phaze = "Main P"; 
+            global.Phaze = "Upkeep P"; 
             
             }
         break;
     case "fade out" :
+    
         if image_alpha &lt; 0 {
-            
+        instance_create(0,0,obj_upkeep);
         instance_destroy();
-
             }
+            
         else{
             image_alpha -= 0.1 ;
             }

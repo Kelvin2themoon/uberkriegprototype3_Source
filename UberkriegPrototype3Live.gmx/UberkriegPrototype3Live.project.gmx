@@ -343,6 +343,7 @@
       <script>scripts\scr_syscom_execute.gml</script>
       <script>scripts\scr_syscom_endturn.gml</script>
     </scripts>
+    <script>scripts\scr_calc_revenue.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>
@@ -406,6 +407,7 @@
         <object>objects\par_syscom_menu</object>
         <object>objects\obj_syscom_system</object>
       </objects>
+      <object>objects\obj_upkeep</object>
     </objects>
   </objects>
   <rooms name="rooms">

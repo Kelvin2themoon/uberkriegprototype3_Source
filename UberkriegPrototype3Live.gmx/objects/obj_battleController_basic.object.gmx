@@ -149,6 +149,10 @@ draw_text(0,36, "playernum:"+string(ds_queue_size(global.player_q)));
 draw_text(0,48, "HQ count: " + string(global.HQnum));
 draw_text(0,60, "DAY: " + string(global.Day));
 draw_text(0,72, "Last Player: : " + string(global.last_player));
+current_player = ds_queue_head(global.player_q);
+draw_text(0,96, "Funds: " + string(current_player.funds ));
+
+
 </string>
           </argument>
         </arguments>
