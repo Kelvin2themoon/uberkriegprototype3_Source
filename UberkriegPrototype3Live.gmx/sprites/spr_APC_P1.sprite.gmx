@@ -38,5 +38,9 @@
     <frame index="15">images\spr_APC_P1_15.png</frame>
     <frame index="16">images\spr_APC_P1_16.png</frame>
     <frame index="17">images\spr_APC_P1_17.png</frame>
+    <frame index="18">images\spr_APC_P1_18.png</frame>
+    <frame index="19">images\spr_APC_P1_19.png</frame>
+    <frame index="20">images\spr_APC_P1_20.png</frame>
+    <frame index="21">images\spr_APC_P1_21.png</frame>
   </frames>
 </sprite>

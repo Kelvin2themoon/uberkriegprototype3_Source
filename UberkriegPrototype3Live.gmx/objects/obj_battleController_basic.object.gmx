@@ -154,6 +154,10 @@ draw_text(0,12, global.Phaze + "P" + string(global.P_Turn.number));
 //funds
 current_player = ds_queue_head(global.player_q);
 draw_text(0,24, "Funds: " + string(current_player.funds ));
+//depth
+draw_text(0,36,"DEPTH: " + string( obj_map.units[global.posX,global.posY].depth));
+
+
 
 
 

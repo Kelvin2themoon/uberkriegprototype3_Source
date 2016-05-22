@@ -349,6 +349,7 @@
       <script>scripts\scr_updateLocalVision.gml</script>
       <script>scripts\scr_updateGlobalVision.gml</script>
     </scripts>
+    <script>scripts\scr_setUnitDepth.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>
@@ -403,6 +404,7 @@
     </objects>
     <objects name="Basic Battle ">
       <object>objects\obj_battleController_basic</object>
+      <object>objects\template_sandboxCursor</object>
       <object>objects\obj_battleCursor</object>
       <object>objects\obj_miniwin</object>
       <object>objects\obj_UI_deploy</object>
@@ -415,6 +417,9 @@
         <object>objects\par_syscom_menu</object>
         <object>objects\obj_syscom_system</object>
       </objects>
+      <objects name="UnitMove">
+        <object>objects\obj_moveCurosr</object>
+      </objects>
     </objects>
   </objects>
   <rooms name="rooms">
@@ -422,8 +427,9 @@
     <room>rooms\rm_MapEditor</room>
     <room>rooms\rm_game_Basic</room>
   </rooms>
-  <constants number="3">
+  <constants number="4">
     <constant name="UI_DEPTH_WIN">-65000</constant>
+    <constant name="ACTIVE_UNIT">-65100</constant>
     <constant name="UI_DEPTH_CURSOR">-66000</constant>
     <constant name="TRANS">-67000</constant>
   </constants>

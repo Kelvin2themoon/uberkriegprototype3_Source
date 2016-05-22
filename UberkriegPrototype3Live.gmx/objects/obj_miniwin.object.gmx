@@ -70,19 +70,16 @@ miniwin_unit_ownership = 0;
           <argument>
             <kind>1</kind>
             <string>///Location: Left or Right
+miniwinLRcheckX = 24*global.posX;
+miniwinLRcheckY = 24*global.posY;
 
-//x =  view_xview[0] +  12;
-//y =  view_yview[0] + 324;
-
-if instance_exists( obj_battleCursor ){
-
-    if (view_xview - obj_battleCursor.x &gt; - 300 and view_yview - obj_battleCursor.y &lt; - 240 ){
+    if (view_xview - miniwinLRcheckX &gt; - 300 and view_yview - miniwinLRcheckY &lt; - 240 ){
         x =  view_xview[0] + 588;
         y =  view_yview[0] + 324;
         isLeft = false;
         }
         
-    else if (view_xview - obj_battleCursor.x &lt; - 384 and view_yview - obj_battleCursor.y &lt; - 240 ){
+    else if (view_xview - miniwinLRcheckX &lt; - 384 and view_yview - miniwinLRcheckY &lt; - 240 ){
         x =  view_xview[0] + 12;
         y =  view_yview[0] + 324;
          isLeft = true;
@@ -97,7 +94,7 @@ if instance_exists( obj_battleCursor ){
         x =  view_xview[0] + 588;
         y =  view_yview[0] + 324;
         }
-    }    
+
 </string>
           </argument>
         </arguments>

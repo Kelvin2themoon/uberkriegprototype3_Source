@@ -71,6 +71,7 @@ switch state {
             if global.P_Turn.number == global.last_player {
                 global.Day +=1;
                 }
+        //UPKEEP PREP
             //change player
             changeplayer = ds_queue_dequeue(global.player_q);
             ds_queue_enqueue(global.player_q,changeplayer);
@@ -81,6 +82,10 @@ switch state {
             //reset visivility af all positions
             scr_globalVisionReset();
             scr_updateGlobalVision();
+            //reset units
+            with(obj_unit){
+                self.state = "idle";
+                }
             
             }
         else{
