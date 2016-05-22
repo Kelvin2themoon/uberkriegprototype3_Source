@@ -344,6 +344,11 @@
       <script>scripts\scr_syscom_endturn.gml</script>
     </scripts>
     <script>scripts\scr_calc_revenue.gml</script>
+    <scripts name="RangeChecks">
+      <script>scripts\scr_globalVisionReset.gml</script>
+      <script>scripts\scr_updateLocalVision.gml</script>
+      <script>scripts\scr_updateGlobalVision.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>
@@ -402,12 +407,14 @@
       <object>objects\obj_miniwin</object>
       <object>objects\obj_UI_deploy</object>
       <object>objects\obj_player</object>
-      <object>objects\obj_starting</object>
+      <objects name="Event Objects">
+        <object>objects\obj_starting</object>
+        <object>objects\obj_upkeep</object>
+      </objects>
       <objects name="Syscom">
         <object>objects\par_syscom_menu</object>
         <object>objects\obj_syscom_system</object>
       </objects>
-      <object>objects\obj_upkeep</object>
     </objects>
   </objects>
   <rooms name="rooms">
@@ -415,9 +422,10 @@
     <room>rooms\rm_MapEditor</room>
     <room>rooms\rm_game_Basic</room>
   </rooms>
-  <constants number="2">
+  <constants number="3">
     <constant name="UI_DEPTH_WIN">-65000</constant>
     <constant name="UI_DEPTH_CURSOR">-66000</constant>
+    <constant name="TRANS">-67000</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

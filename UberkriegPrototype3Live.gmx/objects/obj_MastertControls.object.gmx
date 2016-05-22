@@ -63,11 +63,11 @@ global.keyDOWN      = vk_down;
 global.keyLEFT      = vk_left;
 global.keyRIGHT     = vk_right;
 
-//Dynamic Text
-c_uiWhite = make_colour_rgb(250,250,250);
+//Dynamic Text: set colour, font, &amp; align
+global.c_uiWhite = make_colour_rgb(250,250,250);
 
 draw_set_font(ft_AuroraEx);
-draw_set_colour(c_uiWhite);
+draw_set_colour(global.c_uiWhite);
 draw_set_halign(fa_left);
 
 

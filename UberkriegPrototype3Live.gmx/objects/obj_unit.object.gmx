@@ -35,7 +35,11 @@ ownership   =  1;
 hp          = 10;
 fuel        = 90;
 ammo        =  5;
-isDisrupted = false; //true when hit by Covert.Op disrupter 
+isDisrupted = false; //true when hit by Covert.Op disrupter
+isVisible   = true;
+isHidden    = false;
+
+ 
 
 //unit static variables
 cost        = 6000;
@@ -143,6 +147,30 @@ if(instance_exists(obj_terrain_RiverBridge))
         draw_sprite(spr_bridgeRiver_clear_top,obj_map.terrains[unitPosX, unitPosY].crossing,x,y);
         }
     }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Visibility
+
+if isVisible    image_alpha = 1;
+else            image_alpha = 0;
 </string>
           </argument>
         </arguments>

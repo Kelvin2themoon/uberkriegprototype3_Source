@@ -325,7 +325,7 @@ if ( keyboard_check_pressed( global.keyCONFIRM) ){
             <kind>1</kind>
             <string>///trouble shoot
 
-draw_text(0,0, ds_list_find_value(menu_content,row));
+//draw_text(0,0, ds_list_find_value(menu_content,row));
 </string>
           </argument>
         </arguments>

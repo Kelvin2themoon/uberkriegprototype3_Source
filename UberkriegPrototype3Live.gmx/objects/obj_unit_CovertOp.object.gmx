@@ -53,6 +53,7 @@ haveSecondaryWeapon = true;
 //spceial abilities
 canCapture      = false;
 isCommander     = true;
+isHidden        = false;
 canAttach       = false; //officers only
 canSupply       = false; //APC, uses ammo
 canLoadInfantry = false; //APC, spacific to infantry in case naval and sea units mak it

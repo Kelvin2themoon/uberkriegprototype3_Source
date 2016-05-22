@@ -41,7 +41,7 @@ global.P_Turn.funds += scr_calc_revenue(global.P_Turn.number);
 instance_activate_object(obj_battleCursor);
 instance_activate_object(obj_miniwin);
 //change phaze
-global.Phaze = "Main P"
+global.Phaze = "Main"
 
 //destroy self
 instance_destroy();

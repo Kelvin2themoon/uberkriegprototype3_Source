@@ -46,6 +46,9 @@ vision          = 2;
 radio           = 3;
 income          = 1000;         // added to funds each turn to owner
 isCommander     = true;
+
+
+
 </string>
           </argument>
         </arguments>
