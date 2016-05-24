@@ -98,6 +98,10 @@
         <sprites name="checks">
           <sprite>sprites\spr_rangcheck_red</sprite>
           <sprite>sprites\spr_rangecheck_violet</sprite>
+          <sprite>sprites\scr_rangecheck_bluedk</sprite>
+          <sprite>sprites\scr_rangecheck_clear</sprite>
+          <sprite>sprites\scr_rangecheck_gold</sprite>
+          <sprite>sprites\scr_rangecheck_bluelt</sprite>
         </sprites>
       </sprites>
       <sprites name="MapEditor">
@@ -427,11 +431,13 @@
     <room>rooms\rm_MapEditor</room>
     <room>rooms\rm_game_Basic</room>
   </rooms>
-  <constants number="4">
+  <constants number="6">
     <constant name="UI_DEPTH_WIN">-65000</constant>
     <constant name="ACTIVE_UNIT">-65100</constant>
     <constant name="UI_DEPTH_CURSOR">-66000</constant>
     <constant name="TRANS">-67000</constant>
+    <constant name="CHECK_LAYRE">-1</constant>
+    <constant name="UNIT_LAYRE">-2</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

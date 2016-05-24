@@ -23,8 +23,7 @@ if scr_inBound(set_unit_x,set_unit_y)
             scr_unit_change_sprite(obj_map.units[set_unit_x,set_unit_y],set_unit_owner);
             
             //set Depth so graphics cascade ledt to right, top to bottom
-            var deepness = ((set_unit_y*1000) + (set_unit_x*10))*(-1)-1
-            obj_map.units[set_unit_x,set_unit_y].depth = deepness;
+            scr_setUnitDepth(obj_map.units[set_unit_x,set_unit_y]);
             }
             
             //if unit cannot occupy terrain, remove it
