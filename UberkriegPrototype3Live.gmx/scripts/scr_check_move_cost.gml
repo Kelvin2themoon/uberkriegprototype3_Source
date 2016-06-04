@@ -24,7 +24,7 @@ check_move_cost_movetype = "free";
             check_move_cost_output = check_move_cost_terrain.mtype_tires;
             break;
         case "Heavy Tires":
-            check_move_cost_output = check_move_cost_terrain.mtype_tires;
+            check_move_cost_output = check_move_cost_terrain.mtype_heavyTires;
             break;
         case "Special Tires":
             check_move_cost_output = check_move_cost_terrain.mtype_specialTires;

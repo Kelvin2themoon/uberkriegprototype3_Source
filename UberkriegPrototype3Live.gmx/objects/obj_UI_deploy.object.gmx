@@ -325,11 +325,14 @@ if keyboard_check_pressed(global.keyCONFIRM){
            break;
                 }
         }
-        //update vision for depoyed unit
-        scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
-        //exshaust deployed unit
-        obj_map.units[global.posX,global.posY].state = "exhuast" ;
         
+        if obj_map.units[global.posX,global.posY] !=0{
+            //update vision for depoyed unit
+            scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
+            //exshaust deployed unit
+            obj_map.units[global.posX,global.posY].state = "exhuast" ;
+            }
+            
         //Close deploy Window
         instance_activate_object(obj_battleCursor);
         instance_activate_object(obj_miniwin);

@@ -96,11 +96,11 @@
           <sprite>sprites\spr_basicCursor_Icons</sprite>
         </sprites>
         <sprites name="checks">
-          <sprite>sprites\spr_rangcheck_red</sprite>
+          <sprite>sprites\spr_rangecheck_red</sprite>
           <sprite>sprites\spr_rangecheck_violet</sprite>
-          <sprite>sprites\scr_rangecheck_bluedk</sprite>
-          <sprite>sprites\scr_rangecheck_clear</sprite>
-          <sprite>sprites\scr_rangecheck_gold</sprite>
+          <sprite>sprites\spr_rangecheck_bluedk</sprite>
+          <sprite>sprites\spr_rangecheck_clear</sprite>
+          <sprite>sprites\spr_rangecheck_gold</sprite>
           <sprite>sprites\scr_rangecheck_bluelt</sprite>
         </sprites>
       </sprites>
@@ -311,7 +311,6 @@
     <script>scripts\scr_setTerrain.gml</script>
     <script>scripts\scr_cursorKey_juice.gml</script>
     <script>scripts\scr_setUnit.gml</script>
-    <script>scripts\scr_check_move_cost.gml</script>
     <scripts name="MapEditor">
       <scripts name="TerainGraphicHandlers">
         <script>scripts\scr_switchTerrainGraphics.gml</script>
@@ -347,12 +346,16 @@
       <script>scripts\scr_syscom_execute.gml</script>
       <script>scripts\scr_syscom_endturn.gml</script>
     </scripts>
-    <script>scripts\scr_calc_revenue.gml</script>
     <scripts name="RangeChecks">
       <script>scripts\scr_globalVisionReset.gml</script>
       <script>scripts\scr_updateLocalVision.gml</script>
+      <script>scripts\scr_updateLocalRadio.gml</script>
       <script>scripts\scr_updateGlobalVision.gml</script>
+      <script>scripts\scr_check_move_cost.gml</script>
+      <script>scripts\scr_updateLocalMove.gml</script>
+      <script>scripts\RangeCheck_reset.gml</script>
     </scripts>
+    <script>scripts\scr_calc_revenue.gml</script>
     <script>scripts\scr_setUnitDepth.gml</script>
   </scripts>
   <fonts name="fonts">
@@ -422,8 +425,9 @@
         <object>objects\obj_syscom_system</object>
       </objects>
       <objects name="UnitMove">
-        <object>objects\obj_moveCurosr</object>
+        <object>objects\obj_moveCursor</object>
       </objects>
+      <object>objects\obj_checker_tile</object>
     </objects>
   </objects>
   <rooms name="rooms">
@@ -432,11 +436,11 @@
     <room>rooms\rm_game_Basic</room>
   </rooms>
   <constants number="6">
+    <constant name="CHECK_LAYRE">-64100</constant>
+    <constant name="ACTIVE_UNIT">-64200</constant>
     <constant name="UI_DEPTH_WIN">-65000</constant>
-    <constant name="ACTIVE_UNIT">-65100</constant>
     <constant name="UI_DEPTH_CURSOR">-66000</constant>
     <constant name="TRANS">-67000</constant>
-    <constant name="CHECK_LAYRE">-1</constant>
     <constant name="UNIT_LAYRE">-2</constant>
   </constants>
   <help>

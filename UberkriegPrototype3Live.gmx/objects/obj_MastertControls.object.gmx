@@ -56,7 +56,7 @@ global.keyCONFIRM   = ord("Z");
 global.keyCANCEL    = ord("X");
 
 global.keyRADIO     = vk_space;
-global.keyAUX       =ord("C");
+global.keyAUX       = ord("C");
 
 global.keyUP        = vk_up;
 global.keyDOWN      = vk_down;
