@@ -102,7 +102,9 @@
           <sprite>sprites\spr_rangecheck_clear</sprite>
           <sprite>sprites\spr_rangecheck_gold</sprite>
           <sprite>sprites\scr_rangecheck_bluelt</sprite>
+          <sprite>sprites\sprite220</sprite>
         </sprites>
+        <sprite>sprites\sprite221</sprite>
       </sprites>
       <sprites name="MapEditor">
         <sprite>sprites\spr_grabHand</sprite>
