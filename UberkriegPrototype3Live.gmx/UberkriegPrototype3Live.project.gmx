@@ -355,7 +355,8 @@
       <script>scripts\scr_updateGlobalVision.gml</script>
       <script>scripts\scr_check_move_cost.gml</script>
       <script>scripts\scr_updateLocalMove.gml</script>
-      <script>scripts\RangeCheck_reset.gml</script>
+      <script>scripts\scr_rangeCheck_reset.gml</script>
+      <script>scripts\scr_find_path.gml</script>
     </scripts>
     <script>scripts\scr_calc_revenue.gml</script>
     <script>scripts\scr_setUnitDepth.gml</script>
@@ -428,6 +429,7 @@
       </objects>
       <objects name="UnitMove">
         <object>objects\obj_moveCursor</object>
+        <object>objects\obj_path_node</object>
       </objects>
       <object>objects\obj_checker_tile</object>
     </objects>
@@ -437,9 +439,10 @@
     <room>rooms\rm_MapEditor</room>
     <room>rooms\rm_game_Basic</room>
   </rooms>
-  <constants number="6">
+  <constants number="7">
     <constant name="CHECK_LAYRE">-64100</constant>
-    <constant name="ACTIVE_UNIT">-64200</constant>
+    <constant name="PATH">-64200</constant>
+    <constant name="ACTIVE_UNIT">-64300</constant>
     <constant name="UI_DEPTH_WIN">-65000</constant>
     <constant name="UI_DEPTH_CURSOR">-66000</constant>
     <constant name="TRANS">-67000</constant>

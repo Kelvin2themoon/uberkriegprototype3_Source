@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///initiate
-
+loop = 0;
 //deactivate battle cursor
 instance_deactivate_object(obj_battleCursor);
 
@@ -51,6 +51,8 @@ view_border = 4*24;
 moveOriginX = global.posX ;
 moveOriginY = global.posY ;
 
+acting_unit = obj_map.units[moveOriginX,moveOriginY];
+
 //change unit stat to "active"
 obj_map.units[global.posX,global.posY].state = "active";
 //change 
@@ -59,7 +61,10 @@ obj_map.units[global.posX,global.posY].depth = ACTIVE_UNIT;
 with(obj_checker_tile){ sprite_index = -1;
        }
 move_state_left=0;
-scr_updateLocalMove(obj_map.units[global.posX,global.posY]);
+scr_updateLocalMove(acting_unit);
+
+//total path move cost variable used to trigger path re-calc
+path_total = 0;
 
 
 
@@ -173,24 +178,83 @@ if (alarm[1] = -1 )
             break;
         
         case vk_up :
-            if ( global.posY &gt; 0 ) y = y  - 24 ;
+            if ( global.posY &gt; 0 ){ 
+                y = y  - 24 ; 
+                newpos_x = global.posX +0;
+                newpos_y = global.posY -1;
+                path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
+                //if in move range, set new path node
+                if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
+                    global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
+                    if( path_total &gt; acting_unit.move_points){
+                        with(obj_checker_tile) pathority = -1;
+                        //creat new path
+                        scr_find_path( global.rangeCheck[newpos_x,newpos_y]);
+                        }
+                    }
+                }
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
         case vk_down :
-            if ( global.posY &lt; global.mapH - 1 ) y = y  + 24 ;
+            if ( global.posY &lt; global.mapH - 1 ){
+                y = y  + 24 ;
+                newpos_x = global.posX +0;
+                newpos_y = global.posY +1;
+                path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
+                //if in move range, set new path node
+                if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
+                    global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
+                    if( path_total &gt; acting_unit.move_points){
+                        with(obj_checker_tile) pathority = -1;
+                        //creat new path
+                        scr_find_path( global.rangeCheck[newpos_x,newpos_y]);
+                        }
+                    }
+                }
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
+
         
         case vk_left :
-            if ( global.posX &gt; 0 ) x = x  - 24 ;
+            if ( global.posX &gt; 0 ){
+                x = x  - 24 ;
+                newpos_x = global.posX -1;
+                newpos_y = global.posY +0;
+                path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
+                //if in move range, set new path node
+                if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
+                    global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
+                    if( path_total &gt; acting_unit.move_points){
+                        with(obj_checker_tile) pathority = -1;
+                        //creat new path
+                        scr_find_path( global.rangeCheck[newpos_x,newpos_y]);
+                        }
+                    }
+                }
             scr_cursorKey_juice(1,global.cursorKey_sfx);
-            break;  
+            break;
+       
                     
         case vk_right :
-            if ( global.posX &lt; global.mapW - 1 ) x = x  + 24 ;
+            if ( global.posX &lt; global.mapW - 1 ){
+                x = x  + 24 ;
+                newpos_x = global.posX +1;
+                newpos_y = global.posY +0;
+                path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
+                //if in move range, set new path node
+                if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
+                    global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
+                    if( path_total &gt; acting_unit.move_points){
+                        with(obj_checker_tile) pathority = -1;
+                        //creat new path
+                        scr_find_path( global.rangeCheck[newpos_x,newpos_y]);
+                        }
+                    }
+                }
             scr_cursorKey_juice(1,global.cursorKey_sfx);
-            break;    
+            break;
+            
           
     
 
@@ -253,7 +317,7 @@ if ( view_yview[0] + view_hport[0] &lt; y + view_border+24) view_yview[0] += vie
 
 if  (keyboard_check_pressed(global.keyCANCEL))
     {
-    RangeCheck_reset();
+    scr_rangeCheck_reset();
     
     obj_map.units[moveOriginX,moveOriginY].state = "idle";
     scr_setUnitDepth(obj_map.units[moveOriginX,moveOriginY]);
@@ -311,8 +375,9 @@ if  (keyboard_check_pressed(global.keyCANCEL))
 draw_text(0,48,obj_map.units[moveOriginX,moveOriginY].state);
 
 //draw_text(0,72,string(still_to_check));
-draw_text(0,96,string(global.rangeCheck[global.posX,global.posY].move_cost));
-
+draw_text(0,84,"Move:"+string(global.rangeCheck[global.posX,global.posY].move_cost));
+draw_text(0,96,"Path:"+string(path_total));
+draw_text(0,108,"Loop:"+string(loop));
 </string>
           </argument>
         </arguments>

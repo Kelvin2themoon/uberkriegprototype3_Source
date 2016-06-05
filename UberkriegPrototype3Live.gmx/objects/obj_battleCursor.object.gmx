@@ -190,7 +190,7 @@ if (alarm[1] = -1 )
             scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
             //global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_gold;
             }
-        else if (isOnGlobalRadioCheck = false) RangeCheck_reset();
+        else if (isOnGlobalRadioCheck = false) scr_rangeCheck_reset();
     }
     
 
@@ -333,7 +333,7 @@ if ( keyboard_check_pressed( global.keyCONFIRM) ){
             <string>///property and global radio test
 
 if keyboard_check_pressed(vk_space){
-    RangeCheck_reset();
+    scr_rangeCheck_reset();
     //global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_red;
     //check for property
     if object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index, obj_property){

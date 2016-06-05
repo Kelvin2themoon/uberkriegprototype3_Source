@@ -25,72 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Initiate variables
+            <string>///set Depth
 
-//move variables
-move_cost = -1;
-pathority = -1; //path priority (-1 = no path)
-
-
-
-//stop animation
-image_speed = 0;
-image_alpha = 0.7;
-
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///animate using global counter
-
-image_index = global.rangeCheckerFramIndex;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///draw Order
-
-if (sprite_index != -1) draw_self();
-
-if (pathority != -1) draw_sprite(spr_rangecheck_red,image_index,x,y);//draw red tile temp
+depth = PATH;
 </string>
           </argument>
         </arguments>

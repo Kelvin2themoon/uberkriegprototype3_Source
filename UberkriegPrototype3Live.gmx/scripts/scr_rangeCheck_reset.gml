@@ -1,4 +1,5 @@
 with(obj_checker_tile){
     sprite_index = -1;
     move_cost = -1;
+    pathority = -1;
     }
