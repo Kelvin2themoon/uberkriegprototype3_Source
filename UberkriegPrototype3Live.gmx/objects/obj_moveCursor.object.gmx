@@ -67,8 +67,8 @@ scr_updateLocalMove(acting_unit);
 path_total = 0;
 
 //set origin pathority
-
-global.rangeCheck[global.posX,global.posY].pathority = 0; 
+global.rangeCheck[global.posX,global.posY].pathority = 0;
+ds_priority_add(global.move_order,global.rangeCheck[global.posX,global.posY],0)
 
 
 
@@ -79,26 +79,6 @@ global.rangeCheck[global.posX,global.posY].pathority = 0;
 
 
 </string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string></string>
           </argument>
         </arguments>
       </action>
@@ -181,7 +161,6 @@ if (    keyboard_check_pressed(vk_up   ) ||
         keyboard_check_pressed(vk_right) )
         {
         global.cursorKey_delay = global.cursorKey_startspeed ;
-        with (obj_checker_tile) if pathority != (-1) scr_setPathGraphics_local(x div 24,y div 24);
         }
 //      reset key delay on release
 if (    keyboard_check_released(vk_up   ) ||
@@ -208,22 +187,20 @@ if (alarm[1] = -1 )
                 newpos_x = global.posX +0;
                 newpos_y = global.posY -1;
                 path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
-                //add new checkertile to move order
-                ds_priority_add(global.move_order,global.rangeCheck[newpos_x,newpos_y],global.rangeCheck[newpos_x,newpos_y].pathority);
-                //if in move range, set new path node
+                //add new node to move order
+                
+                //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
                     global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
-                    //scr_setPathGraphics_adj(newpos_x,newpos_y);
+                    //if max range reached
                     if( path_total &gt; acting_unit.move_points){
+                        //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
                         scr_find_path( global.rangeCheck[newpos_x,newpos_y]);
                         }
                     }
                 }
-            //with (obj_checker_tile) if pathority != (-1) scr_setPathGraphics_local(x div 24,y div 24);    
-            //draw_path
-            scr_draw_path();
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
@@ -233,22 +210,20 @@ if (alarm[1] = -1 )
                 newpos_x = global.posX +0;
                 newpos_y = global.posY +1;
                 path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
-                //add new checkertile to move order
-                ds_priority_add(global.move_order,global.rangeCheck[newpos_x,newpos_y],global.rangeCheck[newpos_x,newpos_y].pathority);
-                //if in move range, set new path node
+                //add new node to move order
+                
+                //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
                     global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
-                    //scr_setPathGraphics_adj(newpos_x,newpos_y);
+                    //if max range reached
                     if( path_total &gt; acting_unit.move_points){
+                        //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
                         scr_find_path( global.rangeCheck[newpos_x,newpos_y]);
                         }
                     }
                 }
-            //with (obj_checker_tile) if pathority != (-1) scr_setPathGraphics_local(x div 24,y div 24);
-            //draw_path
-            scr_draw_path();
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
 
@@ -259,22 +234,20 @@ if (alarm[1] = -1 )
                 newpos_x = global.posX -1;
                 newpos_y = global.posY +0;
                 path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
-                //add new checkertile to move order
-                ds_priority_add(global.move_order,global.rangeCheck[newpos_x,newpos_y],global.rangeCheck[newpos_x,newpos_y].pathority);
-                //if in move range, set new path node
+                //add new node to move order
+                
+                //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
                     global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
-                    //scr_setPathGraphics_adj(newpos_x,newpos_y);
+                    //if max range reached
                     if( path_total &gt; acting_unit.move_points){
+                        //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
                         scr_find_path( global.rangeCheck[newpos_x,newpos_y]);
                         }
                     }
                 }
-            //with (obj_checker_tile) if pathority != (-1) scr_setPathGraphics_local(x div 24,y div 24);
-            //draw_path
-            scr_draw_path();
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
        
@@ -285,22 +258,20 @@ if (alarm[1] = -1 )
                 newpos_x = global.posX +1;
                 newpos_y = global.posY +0;
                 path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
-                //add new checkertile to move order
-                ds_priority_add(global.move_order,global.rangeCheck[newpos_x,newpos_y],global.rangeCheck[newpos_x,newpos_y].pathority);
-                //if in move range, set new path node
+                //add new node to move order
+                
+                //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
                     global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
-                    //scr_setPathGraphics_adj(newpos_x,newpos_y);
+                    //if max range reached
                     if( path_total &gt; acting_unit.move_points){
+                        //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
                         scr_find_path( global.rangeCheck[newpos_x,newpos_y]);
                         }
                     }
                 }
-            //with (obj_checker_tile) if pathority != (-1) scr_setPathGraphics_local(x div 24,y div 24);
-            //draw_path
-            scr_draw_path();
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
             
@@ -429,21 +400,61 @@ draw_text(0,84,"Move:"+string(global.rangeCheck[global.posX,global.posY].move_co
 draw_text(0,96,"Path:"+string(path_total));
 draw_text(0,108,"Loop:"+string(loop));
 
+/*
 if ( ds_priority_size(global.move_order) &gt;0){
 temp_path_final = ds_priority_find_max(global.move_order);
-draw_text(0,120, string(temp_path_final.pathority));
+draw_text(0,120,"Move Order Max:" + string(temp_path_final.pathority));
 }
 
+draw_text(0,142,"Move Order Legnth" + string(ds_priority_size(global.move_order)));
+
 //print path
+
 MOQ = ds_priority_create();
 ds_priority_copy(MOQ,global.move_order);
 
-while (MOQ &lt; 0){
+while (ds_priority_size(MOQ) &gt; 0){
     tempQ = ds_priority_delete_min(MOQ);
     MOQcol = ds_priority_size(MOQ);
-    draw_text(0,120 +(12*MOQcol),string(tempQ.pathority)); 
+    draw_text(0,120 +(12*MOQcol),string(tempQ.pathority));
+    
+    draw_text(tempQ.x,tempQ.y,string(tempQ.pathority));
     }
 ds_priority_destroy(MOQ); 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw pathority
+/*
+MOQ = ds_priority_create();
+ds_priority_copy(MOQ,global.move_order);
+
+while (ds_priority_size(MOQ) &gt; 0){
+    tempQ = ds_priority_delete_min(MOQ);
+    draw_text(tempQ.x,tempQ.y,string(tempQ.pathority));
+    }
+ds_priority_destroy(MOQ);
+*/
+draw_self(); 
 </string>
           </argument>
         </arguments>
