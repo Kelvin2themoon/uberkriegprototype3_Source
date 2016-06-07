@@ -30,7 +30,12 @@
 //move variables
 move_cost = -1;
 pathority = -1; //path priority (-1 = no path)
-
+arrow_index = 0;
+//Drawing Variables (connections)
+north    = false;
+east     = false;
+south    = false;
+west     = false;
 
 
 //stop animation
@@ -90,7 +95,7 @@ image_index = global.rangeCheckerFramIndex;
 
 if (sprite_index != -1) draw_self();
 
-if (pathority != -1) draw_sprite(spr_rangecheck_red,image_index,x,y);//draw red tile temp
+if (pathority != -1) draw_sprite(spr_movePath,arrow_index,x,y);//draw red tile temp
 </string>
           </argument>
         </arguments>

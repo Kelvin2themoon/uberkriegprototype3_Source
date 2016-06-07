@@ -17,6 +17,10 @@ checkingY = checking.y div 24;
 
 loop = 0 ;//loop count
 
+//clear move orders
+
+ds_priority_clear(global.move_order);
+
 adjQ = ds_priority_create();
 while( move_left > 0){    
     //feed adjecent tiles into priority Q
@@ -41,12 +45,16 @@ while( move_left > 0){
     checking.pathority = checking.move_cost;
     checkingX = checking.x div 24;
     checkingY = checking.y div 24;
-    
+    //add to move_order
+    ds_priority_add(global.move_order,checking,checking.move_cost);
     //clear Q
     ds_priority_clear(adjQ);
     loop +=1;
     }
     
 ds_priority_destroy(adjQ);
+
+//draw_path
+scr_draw_path();
 
 
