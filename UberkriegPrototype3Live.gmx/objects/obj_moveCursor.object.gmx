@@ -339,6 +339,7 @@ if  (keyboard_check_pressed(global.keyCANCEL))
     {
     scr_rangeCheck_reset();
     ds_priority_clear(global.move_order);
+    with(obj_path_node) instance_destroy();
     
     obj_map.units[moveOriginX,moveOriginY].state = "idle";
     scr_setUnitDepth(obj_map.units[moveOriginX,moveOriginY]);

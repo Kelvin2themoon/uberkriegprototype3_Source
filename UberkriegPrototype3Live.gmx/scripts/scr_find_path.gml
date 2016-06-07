@@ -18,8 +18,10 @@ checkingY = checking.y div 24;
 loop = 0 ;//loop count
 
 //clear move orders
-
 ds_priority_clear(global.move_order);
+with (obj_path_node) instance_destroy();
+//add destination to move orders
+ds_priority_add(global.move_order,instance_create(checking.x,checking.y,obj_path_node),checking.move_cost);
 
 adjQ = ds_priority_create();
 while( move_left > 0){    
@@ -46,7 +48,7 @@ while( move_left > 0){
     checkingX = checking.x div 24;
     checkingY = checking.y div 24;
     //add to move_order
-    ds_priority_add(global.move_order,checking,checking.move_cost);
+    ds_priority_add(global.move_order,instance_create(checking.x,checking.y,obj_path_node),checking.move_cost);
     //clear Q
     ds_priority_clear(adjQ);
     loop +=1;
@@ -54,7 +56,10 @@ while( move_left > 0){
     
 ds_priority_destroy(adjQ);
 
-//draw_path
-scr_draw_path();
+//arrange graphics
+
+
+
+
 
 
