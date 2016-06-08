@@ -21,7 +21,9 @@ loop = 0 ;//loop count
 ds_priority_clear(global.move_order);
 with (obj_path_node) instance_destroy();
 //add destination to move orders
-ds_priority_add(global.move_order,instance_create(checking.x,checking.y,obj_path_node),checking.move_cost);
+new_path_node =instance_create(checking.x,checking.y,obj_path_node);
+new_path_node.pathority_index = checking.pathority;
+ds_priority_add(global.move_order,new_path_node,checking.move_cost);
 
 adjQ = ds_priority_create();
 while( move_left > 0){    
@@ -48,7 +50,9 @@ while( move_left > 0){
     checkingX = checking.x div 24;
     checkingY = checking.y div 24;
     //add to move_order
-    ds_priority_add(global.move_order,instance_create(checking.x,checking.y,obj_path_node),checking.move_cost);
+    new_path_node =instance_create(checking.x,checking.y,obj_path_node);
+    new_path_node.pathority_index = checking.pathority;
+    ds_priority_add(global.move_order,new_path_node,checking.move_cost);
     //clear Q
     ds_priority_clear(adjQ);
     loop +=1;

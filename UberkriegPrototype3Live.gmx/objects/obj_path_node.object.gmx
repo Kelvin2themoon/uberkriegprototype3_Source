@@ -28,8 +28,9 @@
             <string>///initiate
 
 image_speed = 0;
+pathority_index = 0;
 //set Depth
-depth = PATH + global.rangeCheck[x div 24, y div 24].pathority;
+depth = PATH - global.rangeCheck[x div 24, y div 24].pathority;
 </string>
           </argument>
         </arguments>
@@ -55,7 +56,7 @@ depth = PATH + global.rangeCheck[x div 24, y div 24].pathority;
             <string>///Draw order
 draw_sprite(spr_rangecheck_red,global.rangeCheckerFramIndex,x,y);
 draw_self();
-draw_text(x,y,string(global.rangeCheck[x div 24, y div 24].pathority));
+draw_text(x,y,string(pathority_index));
 </string>
           </argument>
         </arguments>

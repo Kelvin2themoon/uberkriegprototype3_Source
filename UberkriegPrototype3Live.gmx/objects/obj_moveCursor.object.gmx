@@ -68,7 +68,29 @@ path_total = 0;
 
 //set origin pathority
 global.rangeCheck[global.posX,global.posY].pathority = 0;
-ds_priority_add(global.move_order,global.rangeCheck[global.posX,global.posY],0)
+//add new node to move order
+new_path_node = instance_create(x,y,obj_path_node);
+new_path_node.pathority_index = path_total;
+ds_priority_add(global.move_order,new_path_node,path_total);
+
+
+
+
+
+
+
+
+
+//ds_priority_add(global.move_order,global.rangeCheck[global.posX,global.posY],0)
+
+//create origin node add to global.move_order priority Q
+//ds_priority_add(global.move_order,instance_create(x,y,obj
+
+//AAdd origin path node
+
+
+
+
 
 
 
@@ -187,11 +209,15 @@ if (alarm[1] = -1 )
                 newpos_x = global.posX +0;
                 newpos_y = global.posY -1;
                 path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
-                //add new node to move order
                 
                 //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
                     global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
+                    //add new node to move order
+                    new_path_node = instance_create(newpos_x*24,newpos_y*24,obj_path_node);
+                    new_path_node.pathority_index = path_total;
+                    ds_priority_add(global.move_order,new_path_node,path_total);
+                
                     //if max range reached
                     if( path_total &gt; acting_unit.move_points){
                         //destroy all nodes
@@ -210,11 +236,15 @@ if (alarm[1] = -1 )
                 newpos_x = global.posX +0;
                 newpos_y = global.posY +1;
                 path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
-                //add new node to move order
-                
-                //if within max-range
+               
+               //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
                     global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
+                    //add new node to move order
+                    new_path_node = instance_create(newpos_x*24,newpos_y*24,obj_path_node);
+                    new_path_node.pathority_index = path_total;
+                    ds_priority_add(global.move_order,new_path_node,path_total);
+                
                     //if max range reached
                     if( path_total &gt; acting_unit.move_points){
                         //destroy all nodes
@@ -234,11 +264,15 @@ if (alarm[1] = -1 )
                 newpos_x = global.posX -1;
                 newpos_y = global.posY +0;
                 path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
-                //add new node to move order
                 
                 //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
                     global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
+                    //add new node to move order
+                    new_path_node = instance_create(newpos_x*24,newpos_y*24,obj_path_node);
+                    new_path_node.pathority_index = path_total;
+                    ds_priority_add(global.move_order,new_path_node,path_total);
+                
                     //if max range reached
                     if( path_total &gt; acting_unit.move_points){
                         //destroy all nodes
@@ -258,11 +292,15 @@ if (alarm[1] = -1 )
                 newpos_x = global.posX +1;
                 newpos_y = global.posY +0;
                 path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
-                //add new node to move order
                 
                 //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
                     global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
+                    //add new node to move order
+                    new_path_node = instance_create(newpos_x*24,newpos_y*24,obj_path_node);
+                    new_path_node.pathority_index = path_total;
+                    ds_priority_add(global.move_order,new_path_node,path_total);
+                
                     //if max range reached
                     if( path_total &gt; acting_unit.move_points){
                         //destroy all nodes
