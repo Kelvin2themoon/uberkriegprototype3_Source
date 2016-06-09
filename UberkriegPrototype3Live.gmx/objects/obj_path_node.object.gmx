@@ -54,9 +54,9 @@ depth = PATH - global.rangeCheck[x div 24, y div 24].pathority;
           <argument>
             <kind>1</kind>
             <string>///Draw order
-draw_sprite(spr_rangecheck_red,global.rangeCheckerFramIndex,x,y);
+//draw_sprite(spr_rangecheck_red,global.rangeCheckerFramIndex,x,y);
 draw_self();
-draw_text(x,y,string(pathority_index));
+//draw_text(x,y,string(pathority_index));
 </string>
           </argument>
         </arguments>

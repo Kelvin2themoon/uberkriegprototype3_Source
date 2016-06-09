@@ -217,6 +217,7 @@ if (alarm[1] = -1 )
                     new_path_node = instance_create(newpos_x*24,newpos_y*24,obj_path_node);
                     new_path_node.pathority_index = path_total;
                     ds_priority_add(global.move_order,new_path_node,path_total);
+                    scr_draw_move_path();
                 
                     //if max range reached
                     if( path_total &gt; acting_unit.move_points){
@@ -244,6 +245,7 @@ if (alarm[1] = -1 )
                     new_path_node = instance_create(newpos_x*24,newpos_y*24,obj_path_node);
                     new_path_node.pathority_index = path_total;
                     ds_priority_add(global.move_order,new_path_node,path_total);
+                    scr_draw_move_path();
                 
                     //if max range reached
                     if( path_total &gt; acting_unit.move_points){
@@ -272,6 +274,7 @@ if (alarm[1] = -1 )
                     new_path_node = instance_create(newpos_x*24,newpos_y*24,obj_path_node);
                     new_path_node.pathority_index = path_total;
                     ds_priority_add(global.move_order,new_path_node,path_total);
+                    scr_draw_move_path();
                 
                     //if max range reached
                     if( path_total &gt; acting_unit.move_points){
@@ -300,6 +303,7 @@ if (alarm[1] = -1 )
                     new_path_node = instance_create(newpos_x*24,newpos_y*24,obj_path_node);
                     new_path_node.pathority_index = path_total;
                     ds_priority_add(global.move_order,new_path_node,path_total);
+                    scr_draw_move_path();
                 
                     //if max range reached
                     if( path_total &gt; acting_unit.move_points){

@@ -61,6 +61,9 @@ while( move_left > 0){
 ds_priority_destroy(adjQ);
 
 //arrange graphics
+scr_draw_move_path();
+
+
 
 
 

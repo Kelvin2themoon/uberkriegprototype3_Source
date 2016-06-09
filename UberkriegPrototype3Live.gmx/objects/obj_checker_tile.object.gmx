@@ -119,7 +119,7 @@ else on_path = false;
             <string>///draw Order
 
 if (sprite_index != -1) draw_self();
-
+/*
 if (on_path){ 
     draw_sprite(spr_rangecheck_bluedk,image_index,x,y);
     draw_text(x,y,string(pathority));

@@ -359,7 +359,7 @@
       <script>scripts\scr_find_path.gml</script>
       <script>scripts\scr_setPathGraphics_local.gml</script>
       <script>scripts\scr_setPathGraphics_adj.gml</script>
-      <script>scripts\scr_draw_path.gml</script>
+      <script>scripts\scr_draw_move_path.gml</script>
     </scripts>
     <script>scripts\scr_calc_revenue.gml</script>
     <script>scripts\scr_setUnitDepth.gml</script>
