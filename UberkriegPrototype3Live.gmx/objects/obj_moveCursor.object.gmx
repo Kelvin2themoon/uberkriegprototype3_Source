@@ -316,10 +316,6 @@ if (alarm[1] = -1 )
                 }
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
-            
-          
-    
-
         }
         
     }
@@ -409,8 +405,19 @@ if  (keyboard_check_pressed(global.keyCANCEL))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Manage move path
+            <string>///confirm to open command menu
 
+//check: key press confirm
+if ( keyboard_check_pressed( global.keyCONFIRM) ){
+    
+    //change checker graphics
+    with(obj_checker_tile) sprite_index = -1;
+    global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
+        
+        
+    instance_create(x+24,y,obj_syscom_command);
+    instance_deactivate_object(obj_moveCursor);
+    }
 
 </string>
           </argument>

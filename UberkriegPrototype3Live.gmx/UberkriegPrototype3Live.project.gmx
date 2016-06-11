@@ -429,10 +429,12 @@
       <objects name="Syscom">
         <object>objects\par_syscom_menu</object>
         <object>objects\obj_syscom_system</object>
+        <object>objects\obj_syscom_command</object>
       </objects>
       <objects name="UnitMove">
         <object>objects\obj_moveCursor</object>
         <object>objects\obj_path_node</object>
+        <object>objects\obj_execute_unit_orders</object>
       </objects>
       <object>objects\obj_checker_tile</object>
     </objects>
