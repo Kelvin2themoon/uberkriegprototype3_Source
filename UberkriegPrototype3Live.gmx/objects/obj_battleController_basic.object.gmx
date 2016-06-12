@@ -358,8 +358,11 @@ global.rangeCheckerFramIndex = 0;
             <string>///Unit control variables
 
 //clear after each order
+global.acting_unit  = -1;
+global.target_unit = -1;
+ 
 global.move_order   = ds_priority_create();
-global.action_order = "wait" //default to wait
+global.action_order = "wait" ;//default to wait
 </string>
           </argument>
         </arguments>

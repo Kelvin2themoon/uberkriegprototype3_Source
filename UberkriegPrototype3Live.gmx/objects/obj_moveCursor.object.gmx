@@ -52,6 +52,7 @@ moveOriginX = global.posX ;
 moveOriginY = global.posY ;
 
 acting_unit = obj_map.units[moveOriginX,moveOriginY];
+global.acting_unit = acting_unit;
 
 //change unit stat to "active"
 obj_map.units[global.posX,global.posY].state = "active";
@@ -375,9 +376,14 @@ if ( view_yview[0] + view_hport[0] &lt; y + view_border+24) view_yview[0] += vie
 
 if  (keyboard_check_pressed(global.keyCANCEL))
     {
+    //clear move datea
     scr_rangeCheck_reset();
     ds_priority_clear(global.move_order);
     with(obj_path_node) instance_destroy();
+    global.acting_unit  = -1;
+    global.target_unit  = -1;
+    global.action_order = "wait"; //default to wait
+    
     
     obj_map.units[moveOriginX,moveOriginY].state = "idle";
     scr_setUnitDepth(obj_map.units[moveOriginX,moveOriginY]);

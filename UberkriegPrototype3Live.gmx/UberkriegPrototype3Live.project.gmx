@@ -347,6 +347,7 @@
     <scripts name="Syscom">
       <script>scripts\scr_syscom_execute.gml</script>
       <script>scripts\scr_syscom_endturn.gml</script>
+      <script>scripts\script39.gml</script>
     </scripts>
     <scripts name="RangeChecks">
       <script>scripts\scr_globalVisionReset.gml</script>
@@ -363,6 +364,9 @@
     </scripts>
     <script>scripts\scr_calc_revenue.gml</script>
     <script>scripts\scr_setUnitDepth.gml</script>
+    <scripts name="Unit Commands">
+      <script>scripts\scr_execute_command.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>

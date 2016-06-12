@@ -372,6 +372,11 @@ if keyboard_check_released(vk_space){
 if obj_map.units[global.posX,global.posY] !=0
 draw_text(0,48,obj_map.units[global.posX,global.posY].state);
 
+draw_text(0,72, "posX: " + string(global.posX));
+draw_text(0,84, "posY: " + string(global.posY));
+
+if(obj_map.units[global.posX,global.posY] != -1)
+draw_text(0,108, "alarm: " + string(  obj_map.units[global.posX,global.posY].alarm[0]));
 
 </string>
           </argument>
