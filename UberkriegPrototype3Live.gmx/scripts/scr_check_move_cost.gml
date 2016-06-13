@@ -10,7 +10,17 @@ check_move_cost_terrain = argument1
 check_move_cost_output = 1;
 check_move_cost_movetype = "free";
 
+//if target lovation is occupied by visible enemy unit
+//check if unit exsist at target terrain location
+if( obj_map.units[check_move_cost_terrain.x div 24, check_move_cost_terrain.y div 24] != 0){
+    //check ownership and visibility
+    if  (obj_map.units[check_move_cost_terrain.x div 24, check_move_cost_terrain.y div 24].ownership != check_move_cost_unit.ownership and 
+        obj_map.units[check_move_cost_terrain.x div 24, check_move_cost_terrain.y div 24].isVisible = true){
+            check_move_cost_output = 99;
+            }
+    }
 
+else{
     switch (check_move_cost_unit.move_type)
         {
     
@@ -36,6 +46,8 @@ check_move_cost_movetype = "free";
             check_move_cost_output = check_move_cost_terrain.mtype_heavyTracks;        
             break;
         }
+    }
+
 
     
 return check_move_cost_output;

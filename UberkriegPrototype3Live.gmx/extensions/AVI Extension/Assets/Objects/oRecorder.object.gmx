@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>-1</persistent>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,53 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initiate
+            <string>/// Initialise 
+InitRecorder(true);         // grab the whole window (Last frame - will include GUI etc)
+//InitRecorder(false);      // grab using the surface. Slower due to DX readback
 
-/*
-this object coltrols global stuff:
 
-F12: full screen
-Global cursor animation
 
-*/
 
-//this variable is used to animate cursors 
-global.cursorFrame = 1;
-global.cursorFrameIndex = 1;
-alarm[0] = 2 ;
-
-//Key juice variables
-global.cursorKey_startspeed   = 15;
-global.cursorKey_delay        = 15;
-global.cursorKey_accel        =  1;
-global.cursorKey_topspeed     =  3;
-global.cursorKey_popFrame     =  6;
-global.cursorKey_sfx = sfx_TypeWritterKey_1 ;
-
-// Key colours
-global.c_uiWhite = make_colour_rgb(250,250,250);
-
-//Button config
-global.keyCONFIRM   = ord("Z");
-global.keyCANCEL    = ord("X");
-
-global.keyRADIO     = vk_space;
-global.keyAUX       = ord("C");
-
-global.keyUP        = vk_up;
-global.keyDOWN      = vk_down;
-global.keyLEFT      = vk_left;
-global.keyRIGHT     = vk_right;
-
-//Dynamic Text: set colour, font, &amp; align
-global.c_uiWhite = make_colour_rgb(250,250,250);
-
-draw_set_font(ft_AuroraEx);
-draw_set_colour(global.c_uiWhite);
-draw_set_halign(fa_left);
-
-//create AVI recorder
-instance_create(0,0,oRecorder);
 
 
 
@@ -80,7 +40,7 @@ instance_create(0,0,oRecorder);
         </arguments>
       </action>
     </event>
-    <event eventtype="2" enumb="0">
+    <event eventtype="8" enumb="77">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -97,52 +57,16 @@ instance_create(0,0,oRecorder);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Alarm 0 used to animate cursors
-
-///animation controller
-//this is a switch the check the cursors animation state and sets an alarm for the next frame frame delay (out of 60 fps) 
-
-//Variable set up in create evemt
-
-switch  (global.cursorFrame)    
-    {
-    case 1: global.cursorFrameIndex = 1;
-            alarm[0] = 24;
-            global.cursorFrame = 2;
-            break;
-            
-    case 2: global.cursorFrameIndex = 2;
-            alarm[0] = 4;
-            global.cursorFrame = 3;
-            break;
-    
-    case 3: global.cursorFrameIndex = 3;
-            alarm[0] = 8;
-            global.cursorFrame = 4;
-            break;
-
-    case 4: global.cursorFrameIndex = 2;
-            alarm[0] = 2;
-            global.cursorFrame = 5;
-            break;
-                
-    case 5: global.cursorFrameIndex = 1;
-            alarm[0] = 2;
-            global.cursorFrame = 6;
-            break;
-            
-    case 6: global.cursorFrameIndex = 0;
-            alarm[0] = 2;
-            global.cursorFrame = 1;
-            break;        
-    }
-
+            <string>/// Add frame
+if(!fast_mode){
+    AddFrame();
+}
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="123">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -159,8 +83,42 @@ switch  (global.cursorFrame)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///mak full screen!
-window_set_fullscreen(!window_get_fullscreen());
+            <string>if( fast_mode ){
+    AddFrame();
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="112">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Start/Stop recording
+if( AVI==0 ){
+    StartRecording();
+}else {
+    EndRecording();
+}
+
+// We need to clear IO as when we start recording, the process tabs away 
+// and loses focus, thereby losing the KEY UP
+io_clear();
+
 </string>
           </argument>
         </arguments>
