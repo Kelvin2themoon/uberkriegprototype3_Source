@@ -303,6 +303,14 @@
       <sprite>sprites\spr_DebugStart</sprite>
     </sprites>
     <sprite>sprites\sprite2</sprite>
+    <sprites name="Unit Event">
+      <sprite>sprites\spr_UnitEvent_Disrupt</sprite>
+      <sprite>sprites\spr_unitEvent_Lost</sprite>
+      <sprite>sprites\spr_UnitEvent_Link</sprite>
+      <sprite>sprites\spr_UnitEvent_Trap</sprite>
+      <sprite>sprites\spr_UnitEvent_Supply</sprite>
+      <sprite>sprites\spr_UnitEvent_Repair</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Holders">
