@@ -42,7 +42,7 @@ while( move_left > 0){
     ds_priority_add(adjQ,global.rangeCheck[checkingX+0,checkingY-1].id,global.rangeCheck[checkingX+0,checkingY-1].move_cost);
     
     //minus move_cost
-    move_left -= scr_check_move_cost(acting_unit,obj_map.terrains[checkingX,checkingY]);
+    move_left -= scr_check_move_cost(global.acting_unit,obj_map.terrains[checkingX,checkingY]);
     
     //set new check
     checking = ds_priority_find_min(adjQ);

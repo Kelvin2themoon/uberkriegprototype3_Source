@@ -25,8 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///initiate
-loop = 0;
+            <string>///Initiate
+
 //deactivate battle cursor
 instance_deactivate_object(obj_battleCursor);
 
@@ -36,8 +36,8 @@ depth = UI_DEPTH_CURSOR;
 //stop animation
 image_speed = 0
 //set position
-global.posX = x div 24 ;
-global.posY = y div 24 ;
+//global.posX = x div 24 ;
+//global.posY = y div 24 ;
 
 
 //set alarm to Cursor move speed
@@ -51,28 +51,40 @@ view_border = 4*24;
 moveOriginX = global.posX ;
 moveOriginY = global.posY ;
 
-acting_unit = obj_map.units[moveOriginX,moveOriginY];
-global.acting_unit = acting_unit;
+///clear global_acting unit variable (redundent?)
+global.acting_unit = 0; 
+//set acting unit
+global.acting_unit = obj_map.units[moveOriginX,moveOriginY];
 
 //change unit stat to "active"
-obj_map.units[global.posX,global.posY].state = "active";
-//change 
-obj_map.units[global.posX,global.posY].depth = ACTIVE_UNIT;
+global.acting_unit.state = "active";
+//change unit depth
+global.acting_unit.depth = ACTIVE_UNIT;
 
-with(obj_checker_tile){ sprite_index = -1;
-       }
-move_state_left=0;
-scr_updateLocalMove(acting_unit);
+//reset checker tiles
+scr_rangeCheck_reset();
+//with(obj_checker_tile){ sprite_index = -1;}
+
+//initiate movewstate variable
+//move_state_left=0;  (dont remember what this is for
+scr_updateLocalMove(global.acting_unit);
 
 //total path move cost variable used to trigger path re-calc
 path_total = 0;
 
 //set origin pathority
 global.rangeCheck[global.posX,global.posY].pathority = 0;
-//add new node to move order
+
+//clear //clear move order Q
+ds_priority_clear(global.move_order);
+
+//create new node to move order
 new_path_node = instance_create(x,y,obj_path_node);
 new_path_node.pathority_index = path_total;
 ds_priority_add(global.move_order,new_path_node,path_total);
+
+//remove acting unit from map array
+obj_map.units[moveOriginX,moveOriginY] = 0;
 
 
 
@@ -209,7 +221,7 @@ if (alarm[1] = -1 )
                 y = y  - 24 ; 
                 newpos_x = global.posX +0;
                 newpos_y = global.posY -1;
-                path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
+                path_total += scr_check_move_cost(global.acting_unit,obj_map.terrains[newpos_x,newpos_y]);
                 
                 //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
@@ -221,7 +233,7 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached
-                    if( path_total &gt; acting_unit.move_points){
+                    if( path_total &gt; global.acting_unit.move_points){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
@@ -237,7 +249,7 @@ if (alarm[1] = -1 )
                 y = y  + 24 ;
                 newpos_x = global.posX +0;
                 newpos_y = global.posY +1;
-                path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
+                path_total += scr_check_move_cost(global.acting_unit,obj_map.terrains[newpos_x,newpos_y]);
                
                //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
@@ -249,7 +261,7 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached
-                    if( path_total &gt; acting_unit.move_points){
+                    if( path_total &gt; global.acting_unit.move_points){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
@@ -266,7 +278,7 @@ if (alarm[1] = -1 )
                 x = x  - 24 ;
                 newpos_x = global.posX -1;
                 newpos_y = global.posY +0;
-                path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
+                path_total += scr_check_move_cost(global.acting_unit,obj_map.terrains[newpos_x,newpos_y]);
                 
                 //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
@@ -278,7 +290,7 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached
-                    if( path_total &gt; acting_unit.move_points){
+                    if( path_total &gt; global.acting_unit.move_points){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
@@ -295,7 +307,7 @@ if (alarm[1] = -1 )
                 x = x  + 24 ;
                 newpos_x = global.posX +1;
                 newpos_y = global.posY +0;
-                path_total += scr_check_move_cost(acting_unit,obj_map.terrains[newpos_x,newpos_y]);
+                path_total += scr_check_move_cost(global.acting_unit,obj_map.terrains[newpos_x,newpos_y]);
                 
                 //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
@@ -307,7 +319,7 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached
-                    if( path_total &gt; acting_unit.move_points){
+                    if( path_total &gt; global.acting_unit.move_points){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
@@ -378,18 +390,38 @@ if  (keyboard_check_pressed(global.keyCANCEL))
     {
     //clear move datea
     scr_rangeCheck_reset();
+    //clear move order array
     ds_priority_clear(global.move_order);
+    //destroy path nodes
     with(obj_path_node) instance_destroy();
-    global.acting_unit  = -1;
-    global.target_unit  = -1;
-    global.action_order = "wait"; //default to wait
-    
-    
+   
+    //place active unit back in array
+    obj_map.units[moveOriginX,moveOriginY] = global.acting_unit
     obj_map.units[moveOriginX,moveOriginY].state = "idle";
     scr_setUnitDepth(obj_map.units[moveOriginX,moveOriginY]);
+    
+     
+    global.acting_unit  = 0;
+    global.target_unit  = 0;
+    global.action_order = "wait"; //default to wait
+    
+    //reset path Q
+    ds_priority_clear(global.move_order);
+    
+    //place acting unit back into array
+ 
+    //reset global vunit command variables to default
+    global.acting_unit  = 0;    //empty
+    global.target_unit  = 0;    //empty
+    global.action_order = "wait"; //default to wait
+    
+    //reactivate main phaze YI
     instance_activate_object(obj_battleCursor);
     instance_activate_object(obj_miniwin);
-    instance_destroy();
+    //destroy move cursor
+    with (obj_moveCursor){instance_destroy();}
+    
+    
     }
 </string>
           </argument>
@@ -415,14 +447,40 @@ if  (keyboard_check_pressed(global.keyCANCEL))
 
 //check: key press confirm
 if ( keyboard_check_pressed( global.keyCONFIRM) ){
-    
-    //change checker graphics
-    with(obj_checker_tile) sprite_index = -1;
-    global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
-        
-        
-    instance_create(x+24,y,obj_syscom_command);
-    instance_deactivate_object(obj_moveCursor);
+    //if target location is out of move range: pathority not calculated)
+    if (global.rangeCheck[global.posX,global.posY].move_cost = -1){
+        //do nothin (invalide move position)
+        }
+    //if a unit [ally] occupies target location, destination is invalid    
+    else if (obj_map.units[global.posX,global.posY] != 0){
+        //if target unit is an ally
+        if (obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number){
+        //do nothin (invalide move position)
+        }
+        else{
+        //clear all checker graphics ( no sprite)
+        with(obj_checker_tile) sprite_index = -1;
+        //change sprite back at destination
+        global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
+            
+        //create command menu    
+        instance_create(x+24,y,obj_syscom_command);
+        //deactivate move cursor object
+        instance_deactivate_object(obj_moveCursor);
+        }
+        }
+    //else target is in range &amp; no unit visibly occupies the location    
+    else{
+        //clear all checker graphics ( no sprite)
+        with(obj_checker_tile) sprite_index = -1;
+        //change sprite back at destination
+        global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
+            
+        //create command menu    
+        instance_create(x+24,y,obj_syscom_command);
+        //deactivate move cursor object
+        instance_deactivate_object(obj_moveCursor);
+        }
     }
 
 </string>
@@ -449,68 +507,23 @@ if ( keyboard_check_pressed( global.keyCONFIRM) ){
             <kind>1</kind>
             <string>///troubleshoot readout
 
-draw_text(0,48,obj_map.units[moveOriginX,moveOriginY].state);
+/*
+
+draw_text(0,48,global.acting_unit.state);
 
 //draw_text(0,72,string(still_to_check));
 draw_text(0,84,"Move:"+string(global.rangeCheck[global.posX,global.posY].move_cost));
 draw_text(0,96,"Path:"+string(path_total));
 draw_text(0,108,"Loop:"+string(loop));
 
-/*
-if ( ds_priority_size(global.move_order) &gt;0){
-temp_path_final = ds_priority_find_max(global.move_order);
-draw_text(0,120,"Move Order Max:" + string(temp_path_final.pathority));
-}
+numberofmovecursors =0;
+with (obj_moveCursor) numberofmovecursors +=1;
+draw_text(0,120,"cursors = " + string(numberofmovecursors));
 
-draw_text(0,142,"Move Order Legnth" + string(ds_priority_size(global.move_order)));
+draw_text(0,130,"X = " + string(global.acting_unit.x div 24));
+draw_text(0,142,"Y = " + string(global.acting_unit.y div 24));  
 
-//print path
 
-MOQ = ds_priority_create();
-ds_priority_copy(MOQ,global.move_order);
-
-while (ds_priority_size(MOQ) &gt; 0){
-    tempQ = ds_priority_delete_min(MOQ);
-    MOQcol = ds_priority_size(MOQ);
-    draw_text(0,120 +(12*MOQcol),string(tempQ.pathority));
-    
-    draw_text(tempQ.x,tempQ.y,string(tempQ.pathority));
-    }
-ds_priority_destroy(MOQ); 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///draw pathority
-/*
-MOQ = ds_priority_create();
-ds_priority_copy(MOQ,global.move_order);
-
-while (ds_priority_size(MOQ) &gt; 0){
-    tempQ = ds_priority_delete_min(MOQ);
-    draw_text(tempQ.x,tempQ.y,string(tempQ.pathority));
-    }
-ds_priority_destroy(MOQ);
-*/
-draw_self(); 
 </string>
           </argument>
         </arguments>

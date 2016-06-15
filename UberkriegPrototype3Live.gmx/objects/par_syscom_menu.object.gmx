@@ -49,7 +49,7 @@ item_height = 24 ;
 
 menu_content = ds_list_create();
 
-instance_deactivate_object(obj_battleCursor);
+//instance_deactivate_object(obj_battleCursor);
 
 
 //left side

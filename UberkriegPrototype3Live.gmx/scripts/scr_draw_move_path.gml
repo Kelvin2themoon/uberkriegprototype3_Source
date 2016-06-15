@@ -47,9 +47,11 @@ ds_priority_destroy(draw_path_copy);
 
 
 //final node ->
+if (global.posX != moveOriginX  and global.posY != moveOriginY){
 switch (to_node.image_index){
     case 1: to_node.image_index = 16; break;
     case 2: to_node.image_index = 17; break;
     case 4: to_node.image_index = 18; break;
     case 8: to_node.image_index = 19; break;
+        }
     }
