@@ -1,9 +1,14 @@
 //clear  image index values
 with(obj_path_node) image_index = 0;
 
+
+
 //copy move order
 draw_path_copy = ds_priority_create(); 
 ds_priority_copy(draw_path_copy, global.move_order);
+//check path total size
+path_size = ds_priority_size(draw_path_copy);
+
 
 //initiate path at origin
 from_node = ds_priority_delete_min(draw_path_copy);
@@ -47,7 +52,7 @@ ds_priority_destroy(draw_path_copy);
 
 
 //final node ->
-if (global.posX != moveOriginX  and global.posY != moveOriginY){
+if (path_size > 1){
 switch (to_node.image_index){
     case 1: to_node.image_index = 16; break;
     case 2: to_node.image_index = 17; break;

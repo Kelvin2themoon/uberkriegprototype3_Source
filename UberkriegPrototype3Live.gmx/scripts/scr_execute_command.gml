@@ -9,6 +9,10 @@ switch (global.action_order){
                      // reactivate main phaze UI
                     instance_activate_object(obj_miniwin);
                     instance_activate_object(obj_battleCursor);
+                    with obj_battleCursor{
+                        x = global.posX*24;
+                        y = global.posY*24;
+                        }
                     
                     global.acting_unit.state =  "exhuast";
                     global.acting_unit.alarm[0] =  1;
