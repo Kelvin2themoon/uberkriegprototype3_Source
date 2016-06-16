@@ -456,6 +456,7 @@
         <object>objects\obj_moveCursor</object>
         <object>objects\obj_path_node</object>
         <object>objects\obj_execute_unit_orders</object>
+        <object>objects\obj_event_trap</object>
       </objects>
       <object>objects\obj_checker_tile</object>
     </objects>
