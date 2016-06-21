@@ -311,6 +311,14 @@
       <sprite>sprites\spr_UnitEvent_Supply</sprite>
       <sprite>sprites\spr_UnitEvent_Repair</sprite>
     </sprites>
+    <sprites name="Unit Stats">
+      <sprite>sprites\spr_unitStats_HP</sprite>
+      <sprite>sprites\spr_unitStats_Radio</sprite>
+      <sprite>sprites\spr_unitStats_Supply</sprite>
+      <sprite>sprites\spr_unitStats_Vet</sprite>
+      <sprite>sprites\spr_unitStats_Cap</sprite>
+      <sprite>sprites\spr_unitStats_Load</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Holders">
