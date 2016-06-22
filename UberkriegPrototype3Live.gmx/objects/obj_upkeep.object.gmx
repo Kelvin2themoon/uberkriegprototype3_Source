@@ -32,8 +32,17 @@
 //income added to funds
 
 
-global.P_Turn.funds += scr_calc_revenue(global.P_Turn.number); 
+global.P_Turn.funds += scr_calc_revenue(global.P_Turn.number);
+//turn off certain units
 
+/*
+with (obj_unit){ 
+    if(isStanding  = false and ownership = global.P_Turn.number){
+        state = "exhaust";
+        image_index =  21;
+        }
+    } 
+*/
 
 
 

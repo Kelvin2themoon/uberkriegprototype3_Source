@@ -385,6 +385,7 @@
       <scripts name="Radio">
         <script>scripts\scr_globalVisionReset.gml</script>
         <script>scripts\scr_updateLocalRadio.gml</script>
+        <script>scripts\Scr_updateStanding.gml</script>
       </scripts>
     </scripts>
     <script>scripts\scr_calc_revenue.gml</script>

@@ -72,6 +72,7 @@ switch state {
                 global.Day +=1;
                 }
         //UPKEEP PREP
+            show_debug_message("NEW TURN");
             //change player
             changeplayer = ds_queue_dequeue(global.player_q);
             ds_queue_enqueue(global.player_q,changeplayer);
@@ -82,10 +83,17 @@ switch state {
             //reset visivility af all positions
             scr_globalVisionReset();
             scr_updateGlobalVision();
-            //reset units
+            //reset units and propeties
             with(obj_unit){
-                self.state = "idle";
+                state = "exhause";
+                image_index = 21;
+                isStanding = false ;
                 }
+            with (obj_property) isStanding = false;
+            //set is standing
+            Scr_updateStanding(global.P_Turn);
+            
+              
             
             }
         else{
@@ -100,7 +108,6 @@ switch state {
             state = "fade out"
             //change phasze to "main"
             global.Phaze = "Upkeep"; 
-            
             }
         break;
     case "fade out" :
