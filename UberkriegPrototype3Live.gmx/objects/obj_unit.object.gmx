@@ -72,6 +72,9 @@ canDisrupt      = false;
 //set alarm 0 for animation
 alarm[0] = 1;
 
+//radio checking
+isStanding = false;
+
 
 
 </string>
@@ -183,6 +186,8 @@ if(instance_exists(obj_terrain_RiverBridge))
         draw_sprite(spr_bridgeRiver_clear_top,obj_map.terrains[unitPosX, unitPosY].crossing,x,y);
         }
     }
+    
+if (isCommander and isVisible) draw_sprite(spr_unitStats_Radio,0,x,y);
 </string>
           </argument>
         </arguments>

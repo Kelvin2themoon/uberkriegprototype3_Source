@@ -162,26 +162,31 @@ if (alarm[1] = -1 )
         case(vk_nokey):
             alarm[1] = 0;
             global.cursorkey_delay = global.cursorKey_startspeed ;
+            scr_rangeCheck_reset();
             break;
         
         case vk_up :
             if ( global.posY &gt; 0 ) y = y  - 24 ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
+            scr_rangeCheck_reset();
             break;
         
         case vk_down :
             if ( global.posY &lt; global.mapH - 1 ) y = y  + 24 ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
+            scr_rangeCheck_reset();
             break;
         
         case vk_left :
             if ( global.posX &gt; 0 ) x = x  - 24 ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
+            scr_rangeCheck_reset();
             break;  
                     
         case vk_right :
             if ( global.posX &lt; global.mapW - 1 ) x = x  + 24 ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
+            scr_rangeCheck_reset();
             break;
         }
         // change unit radio check array each time the curosr moves

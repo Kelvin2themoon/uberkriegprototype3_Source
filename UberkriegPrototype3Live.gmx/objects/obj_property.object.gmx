@@ -47,6 +47,8 @@ canHidesmall    = true;
 //attributes for graphic detection
 isLand = true;               
 
+//radio checking
+isStanding = false;
 
 
 

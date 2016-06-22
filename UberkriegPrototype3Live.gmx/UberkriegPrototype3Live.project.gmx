@@ -369,17 +369,23 @@
       <script>scripts\script39.gml</script>
     </scripts>
     <scripts name="RangeChecks">
-      <script>scripts\scr_globalVisionReset.gml</script>
-      <script>scripts\scr_updateLocalVision.gml</script>
-      <script>scripts\scr_updateLocalRadio.gml</script>
-      <script>scripts\scr_updateGlobalVision.gml</script>
-      <script>scripts\scr_check_move_cost.gml</script>
-      <script>scripts\scr_updateLocalMove.gml</script>
       <script>scripts\scr_rangeCheck_reset.gml</script>
-      <script>scripts\scr_find_path.gml</script>
-      <script>scripts\scr_setPathGraphics_local.gml</script>
-      <script>scripts\scr_setPathGraphics_adj.gml</script>
-      <script>scripts\scr_draw_move_path.gml</script>
+      <scripts name="Move">
+        <script>scripts\scr_draw_move_path.gml</script>
+        <script>scripts\scr_setPathGraphics_adj.gml</script>
+        <script>scripts\scr_find_path.gml</script>
+        <script>scripts\scr_setPathGraphics_local.gml</script>
+        <script>scripts\scr_check_move_cost.gml</script>
+        <script>scripts\scr_updateLocalMove.gml</script>
+      </scripts>
+      <scripts name="Vision">
+        <script>scripts\scr_updateGlobalVision.gml</script>
+        <script>scripts\scr_updateLocalVision.gml</script>
+      </scripts>
+      <scripts name="Radio">
+        <script>scripts\scr_globalVisionReset.gml</script>
+        <script>scripts\scr_updateLocalRadio.gml</script>
+      </scripts>
     </scripts>
     <script>scripts\scr_calc_revenue.gml</script>
     <script>scripts\scr_setUnitDepth.gml</script>
