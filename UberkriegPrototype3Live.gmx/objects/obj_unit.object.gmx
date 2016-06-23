@@ -171,9 +171,9 @@ draw_self();
 if(instance_exists(obj_terrain_SeaBridge))
 {
 
-    if ( obj_map.terrains[unitPosX, unitPosY].object_index == obj_terrain_SeaBridge.object_index)
+    if ( obj_map.terrains[x div 24, y div 24].object_index == obj_terrain_SeaBridge.object_index)
         {
-        draw_sprite(spr_bridgeSea_clear_top,obj_map.terrains[unitPosX, unitPosY].crossing,x,y);
+        draw_sprite(spr_bridgeSea_clear_top,obj_map.terrains[x div 24, y div 24].crossing,x,y);
         }
 }
 
@@ -181,9 +181,10 @@ if(instance_exists(obj_terrain_SeaBridge))
 
 if(instance_exists(obj_terrain_RiverBridge))
     {
-    if ( obj_map.terrains[unitPosX, unitPosY].object_index == obj_terrain_RiverBridge.object_index)
-        {
-        draw_sprite(spr_bridgeRiver_clear_top,obj_map.terrains[unitPosX, unitPosY].crossing,x,y);
+    if ( obj_map.terrains[x div 24, y div 24].object_index == obj_terrain_RiverBridge.object_index and isVisible){
+        if (state = "exhuast"){
+            draw_sprite(spr_bridgeRiver_clear_top,obj_map.terrains[x div 24, y div 24].crossing,x,y);
+            }
         }
     }
     

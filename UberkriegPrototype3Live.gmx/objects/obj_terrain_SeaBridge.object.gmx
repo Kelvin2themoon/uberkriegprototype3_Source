@@ -67,17 +67,17 @@ mtype_heavyTracks   = 2;
             <string>///DrawBridge
 draw_self();
 //draw shadow
-draw_sprite(spr_bridgeSea_clear_shadow,crossing,x,y);
+draw_sprite_ext(spr_bridgeSea_clear_shadow,crossing,x,y,1,1,1,image_blend,1);
 //draw corners
-draw_sprite(spr_corners_clear,land_corner,x,y);
-draw_sprite(spr_edges_clear,land_edge,x,y);
+draw_sprite_ext(spr_corners_clear,land_corner,x,y,1,1,1,image_blend,1);
+draw_sprite_ext(spr_edges_clear,land_edge,x,y,1,1,1,image_blend,1);
 
 if ( river_edge != 0 &amp;&amp; instance_exists(obj_terrain_River) &amp;&amp; sprite_exists(asset_get_index("spr_riveredge_clear_"+string(river_edge))  ))
     {
-    draw_sprite(asset_get_index("spr_riveredge_clear_"+string(river_edge)),0,x,y);
+    draw_sprite_ext(asset_get_index("spr_riveredge_clear_"+string(river_edge)),0,x,y,1,1,1,image_blend,1);
     }
 //draw bridge
-draw_sprite(spr_bridgeSea_clear,crossing,x,y);
+draw_sprite_ext(spr_bridgeSea_clear,crossing,x,y,1,1,1,image_blend,1);
 </string>
           </argument>
         </arguments>

@@ -383,8 +383,8 @@ draw_text(0,60,string(obj_map.units[global.posX,global.posY].isStanding));
 draw_text(0,72, "posX: " + string(global.posX));
 draw_text(0,84, "posY: " + string(global.posY));
 
-if(obj_map.units[global.posX,global.posY] != -1)
-draw_text(0,108, "alarm: " + string(  obj_map.units[global.posX,global.posY].alarm[0]));
+
+draw_text(0,108, "Player Q size: " + string(  (ds_queue_size(global.player_q)) ) );
 
 </string>
           </argument>

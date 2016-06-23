@@ -687,7 +687,7 @@ if(scr_inBound(posX,posY))
             <string>///Temp Save
 
 //disabled
-//scr_ubermap_save("protoland.ubm");
+scr_ubermap_save("protoland.ubm");
 
 
 </string>

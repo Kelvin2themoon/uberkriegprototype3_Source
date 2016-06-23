@@ -31,7 +31,7 @@
 this is an emplty object used to consolodate  River-Bridge and Sea-Bridge as a single terrain selection
 */
 
-
+event_inherited();
 name = "Bridge" ;
 
 

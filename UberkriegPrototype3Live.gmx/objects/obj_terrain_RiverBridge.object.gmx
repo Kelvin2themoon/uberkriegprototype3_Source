@@ -68,7 +68,7 @@ mtype_heavyTracks   = 2;
           <argument>
             <kind>1</kind>
             <string>draw_self();
-draw_sprite(spr_bridgeRiver_clear,crossing,x,y);
+draw_sprite_ext(spr_bridgeRiver_clear,crossing,x,y,1,1,1,image_blend,1);
 </string>
           </argument>
         </arguments>
