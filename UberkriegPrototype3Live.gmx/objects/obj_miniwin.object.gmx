@@ -123,7 +123,8 @@ if ( obj_map.units[global.posX,global.posY] = 0){
     }
     
 if ( obj_map.units[global.posX,global.posY] != 0){
-    sprite_index = asset_get_index("spr_miniwin_standard");
+     if (obj_map.units[global.posX,global.posY].isVisible)
+        sprite_index = asset_get_index("spr_miniwin_standard");
     }
     
 
@@ -157,13 +158,15 @@ if  (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,o
     miniwin_terrain_ownership = obj_map.terrains[global.posX,global.posY].ownership;
     }
     
-// retrieve unit ingomation
+// retrieve unit info
 
 if (obj_map.units[global.posX,global.posY] != 0){
-    //get unit sprite index
-    miniwin_unit = asset_get_index("spr_miniwin_" + string_letters(obj_map.units[global.posX,global.posY].name));
-    //get unit ownership, and interpet image index
-    miniwin_unit_ownership = obj_map.units[global.posX,global.posY].ownership - 1;
+    if (obj_map.units[global.posX,global.posY].isVisible){
+        //get unit sprite index
+        miniwin_unit = asset_get_index("spr_miniwin_" + string_letters(obj_map.units[global.posX,global.posY].name));
+        //get unit ownership, and interpet image index
+        miniwin_unit_ownership = obj_map.units[global.posX,global.posY].ownership - 1;
+        }
     }
 </string>
           </argument>
@@ -214,7 +217,9 @@ draw_self();
 draw_sprite(miniwin_terrain,miniwin_terrain_ownership,x,y);
 //draw Unit intel
 if (obj_map.units[global.posX,global.posY] != 0){
-    draw_sprite(miniwin_unit,miniwin_unit_ownership,x,y);
+    if (obj_map.units[global.posX,global.posY].isVisible){
+        draw_sprite(miniwin_unit,miniwin_unit_ownership,x,y);
+        }
     }
 
 

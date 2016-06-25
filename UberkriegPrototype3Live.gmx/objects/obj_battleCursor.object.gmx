@@ -162,7 +162,10 @@ if (alarm[1] = -1 )
         case(vk_nokey):
             alarm[1] = 0;
             global.cursorkey_delay = global.cursorKey_startspeed ;
+            //update standing
+            scr_updateStanding_global();
             scr_rangeCheck_reset();
+            
             break;
         
         case vk_up :
@@ -253,22 +256,23 @@ if ( view_yview[0] + view_hport[0] &lt; y + view_border+24) view_yview[0] += vie
             <kind>1</kind>
             <string>///check for deploy
  //check if target is BASE and no unit is present
-if (obj_map.terrains[global.posX,global.posY].object_index == obj_terrain_Base.object_index &amp;&amp; obj_map.units[global.posX,global.posY] == 0){
+if (obj_map.terrains[global.posX,global.posY].object_index == obj_terrain_Base.object_index and obj_map.units[global.posX,global.posY] == 0){
+    //check if is ally base
+    if (obj_map.terrains[global.posX,global.posY].ownership = global.P_Turn.number){
  
     //set Deploy Icon to variable called in DRAW 
-    if (global.cursorFrame == 2 || global.cursorFrame == 1){
-        cursor_icon = 5; 
-        }
-    else{
-        cursor_icon = -1;
-        }
-    //Open Deploy menu!
-    if (keyboard_check_pressed(ord("Z")) and obj_map.units[global.posX,global.posY] =0){
-        cursor_icon = -1;
-        instance_create(0,0,obj_UI_deploy);
-        instance_deactivate_object(obj_miniwin);
-        instance_deactivate_object(obj_battleCursor);
-        
+        if (global.cursorFrame == 2 || global.cursorFrame == 1){
+            cursor_icon = 5; 
+            }
+        else{
+            cursor_icon = -1;
+            }
+        //Open Deploy menu!
+        if (keyboard_check_pressed(global.keyCONFIRM) and obj_map.units[global.posX,global.posY] =0){
+            cursor_icon = -1;
+
+
+            }
         }
 
  }
@@ -292,15 +296,60 @@ if (obj_map.terrains[global.posX,global.posY].object_index == obj_terrain_Base.o
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Open System Menu
+            <string>///Open System or Menu
 
+
+if ( keyboard_check_pressed( global.keyCONFIRM) ){
+    //check if terrain is open
+    if ( obj_map.units[global.posX,global.posY] = 0){
+        //if terrain is base owned by player
+        if( obj_map.terrains[global.posX,global.posY].name = "Base" and 
+            obj_map.terrains[global.posX,global.posY].ownership = global.P_Turn.number){
+            //Open Deploy menu!
+            instance_create(0,0,obj_UI_deploy);
+            instance_deactivate_object(obj_miniwin);
+            instance_deactivate_object(obj_battleCursor);
+            }
+        //if terrain is anything else
+        else {
+            //open system menu
+            instance_create(x+24,y,obj_syscom_system);
+            instance_deactivate_object(obj_battleCursor);
+            }
+        }
+    //else unit exsist
+    else {
+        //if unit is visible
+        if (obj_map.units[global.posX,global.posY].isVisible){ 
+            //ally unit
+            if (obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number ){
+            //start unit command
+            instance_create(x,y,obj_moveCursor);
+            instance_deactivate_object(obj_battleCursor);
+            }
+            //enemy unit
+            else{
+                //switch to enemy move range check cursor
+                } 
+            }
+        //unit is not visible
+        else{
+            //open system menu
+             instance_create(x+24,y,obj_syscom_system);
+            instance_deactivate_object(obj_battleCursor);
+            }
+        }
+    }
+
+
+/*
 //check: key press confirm
 if ( keyboard_check_pressed( global.keyCONFIRM) ){
 
     //system menu
     if( obj_map.terrains[global.posX,global.posY].name != "Base" 
         and
-        obj_map.units[global.posX,global.posY] == 0
+        obj_map.units[global.posX,global.posY] = 0
         ){
         
         instance_create(x+24,y,obj_syscom_system);

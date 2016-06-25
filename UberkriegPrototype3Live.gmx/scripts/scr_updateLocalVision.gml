@@ -11,9 +11,13 @@ tempV_X = 0;
 if target.ownership = global.P_Turn.number
 target.isVisible = true;
 
-for ( tempV_X= (-1)*target.vision ; tempV_X<= target.vision ; tempV_X+=1 ){ //for each possible value of X in range
-    for ( tempV_Y= (-1)*target.vision ; tempV_Y<= target.vision ; tempV_Y+=1 ){ //for each possible value of Y in range
-        if ( (abs(tempV_X) + abs(tempV_Y))<= target.vision){ //if x + y is less than max range
+vision_range = target.vision
+
+if ( obj_map.terrains[originV_X,originV_Y].object_index = obj_terrain_Mountain) vision_range += (target.vision div 2);
+
+for ( tempV_X= (-1)*vision_range ; tempV_X<= vision_range ; tempV_X+=1 ){ //for each possible value of X in range
+    for ( tempV_Y= (-1)*vision_range ; tempV_Y<= vision_range ; tempV_Y+=1 ){ //for each possible value of Y in range
+        if ( (abs(tempV_X) + abs(tempV_Y))<= vision_range){ //if x + y is less than max range
             if (target.ownership = global.P_Turn.number){
             
                 if scr_inBound(originV_X+tempV_X,originV_Y+tempV_Y){
@@ -24,12 +28,19 @@ for ( tempV_X= (-1)*target.vision ; tempV_X<= target.vision ; tempV_X+=1 ){ //fo
                             obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;     
                             }
                         //regular vision for terrain
-                        if  obj_map.terrains[originV_X+tempV_X,originV_Y+tempV_Y].canHide = false
-                            obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
-                        //regular vision for terrain excluding hidden units: subs and spys
-                        if obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] !=0
-                        if  obj_map.units[originV_X+tempV_X,originV_Y+tempV_Y].isHidden = false
-                            obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
+                        else if  obj_map.terrains[originV_X+tempV_X,originV_Y+tempV_Y].canHide = false {
+                             obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
+                            }
+                        //check unit visibility
+                        if (obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] != 0){
+                            //check terrain
+                            
+                            //stay hidden is isHiding
+                            if obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isHidden {}; 
+                            //visible is terrrtain is also visible
+                            else if (obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isVisible) {obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;}
+                            }
+
                     }     
             }
         }    

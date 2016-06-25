@@ -85,13 +85,15 @@ switch state {
             scr_updateGlobalVision();
             //reset units and propeties
             with(obj_unit){
-                state = "exhause";
+                state = "idle";
+                if ownership = global.P_Turn.number state = "exhaust";
                 image_index = 21;
                 isStanding = false ;
                 }
             with (obj_property) isStanding = false;
-            //set is standing
-            Scr_updateStanding(global.P_Turn);
+            //set is standing for all players
+            //scr_updateStanding(global.P_Turn);
+            scr_updateStanding_global();
             
               
             

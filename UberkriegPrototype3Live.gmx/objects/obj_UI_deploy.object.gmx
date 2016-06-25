@@ -330,9 +330,11 @@ if keyboard_check_pressed(global.keyCONFIRM){
             //update vision for depoyed unit
             scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
             //exshaust deployed unit
-            obj_map.units[global.posX,global.posY].state = "exhuast" ;
+            obj_map.units[global.posX,global.posY].state = "exhaust" ;
             }
             
+        //update standing
+        scr_updateStanding_global();
         //Close deploy Window
         instance_activate_object(obj_battleCursor);
         instance_activate_object(obj_miniwin);

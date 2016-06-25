@@ -17,10 +17,6 @@ while (ds_queue_size(standing_Q) != 0 ){
     //get new check
     checkStandTarget = ds_queue_dequeue(standing_Q);
     checkStandTarget.isStanding = true;
-    if (object_is_ancestor(checkStandTarget.object_index,obj_unit)){
-        checkStandTarget.state = "idle";
-        checkStandTarget.alarm[0] = 1 ; 
-        }
     
     //ADD VALID UNITS AND PROPERTIES TO Q
     
@@ -30,12 +26,16 @@ while (ds_queue_size(standing_Q) != 0 ){
     // range value's to check
     cst_temp_x = 0;
     cst_temp_y = 0;
+    //increase range if over mountain
+    
+    broadcast_range = checkStandTarget.radio;
+    if ( obj_map.terrains[cst_origin_x,cst_origin_y].object_index = obj_terrain_Mountain and checkStandTarget.radio != 0) broadcast_range +=2;
     
     //check all co-ordinates in range of origin
     
-    for ( cst_temp_x = (-1)*checkStandTarget.radio ; cst_temp_x <= checkStandTarget.radio ; cst_temp_x+=1){
-        for ( cst_temp_y = (-1)*checkStandTarget.radio ; cst_temp_y <= checkStandTarget.radio ; cst_temp_y+=1){
-            if ( abs(cst_temp_x) + abs(cst_temp_y) <= checkStandTarget.radio){
+    for ( cst_temp_x = (-1)*broadcast_range ; cst_temp_x <= broadcast_range ; cst_temp_x+=1){
+        for ( cst_temp_y = (-1)*broadcast_range ; cst_temp_y <= broadcast_range ; cst_temp_y+=1){
+            if ( abs(cst_temp_x) + abs(cst_temp_y) <= broadcast_range){
                 
             //check if a unit is present (must be ally and not already a commander asnd not standing)
                 if ( obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ] != 0){

@@ -380,12 +380,13 @@
       </scripts>
       <scripts name="Vision">
         <script>scripts\scr_updateGlobalVision.gml</script>
+        <script>scripts\scr_globalVisionReset.gml</script>
         <script>scripts\scr_updateLocalVision.gml</script>
       </scripts>
       <scripts name="Radio">
-        <script>scripts\scr_globalVisionReset.gml</script>
         <script>scripts\scr_updateLocalRadio.gml</script>
-        <script>scripts\Scr_updateStanding.gml</script>
+        <script>scripts\scr_updateStanding.gml</script>
+        <script>scripts\scr_updateStanding_global.gml</script>
       </scripts>
     </scripts>
     <script>scripts\scr_calc_revenue.gml</script>

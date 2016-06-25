@@ -14,10 +14,12 @@ switch (global.action_order){
                         y = global.posY*24;
                         }
                     
-                    global.acting_unit.state =  "exhuast";
+                    global.acting_unit.state =  "exhaust";
                     global.acting_unit.alarm[0] =  1;
                     //reset depth
                     scr_setUnitDepth(global.acting_unit);
+                    //set is standing for radio range check
+                    scr_updateStanding_global();
                     break;
         }
         
