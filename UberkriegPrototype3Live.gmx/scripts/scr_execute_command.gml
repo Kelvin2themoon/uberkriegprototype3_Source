@@ -18,8 +18,8 @@ switch (global.action_order){
                     global.acting_unit.alarm[0] =  1;
                     //reset depth
                     scr_setUnitDepth(global.acting_unit);
+                    
                     //set is standing for radio range check
-                    scr_updateStanding_global();
                     break;
         }
         
@@ -29,3 +29,7 @@ global.acting_unit  = 0;
 global.target_unit  = 0;
 //global.move_order   = ds_priority_create();
 global.action_order = "wait" ;//default to wait
+
+//update radio status
+scr_updateStanding_global();
+

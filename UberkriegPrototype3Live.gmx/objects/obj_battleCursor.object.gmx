@@ -162,8 +162,6 @@ if (alarm[1] = -1 )
         case(vk_nokey):
             alarm[1] = 0;
             global.cursorkey_delay = global.cursorKey_startspeed ;
-            //update standing
-            scr_updateStanding_global();
             //scr_rangeCheck_reset();
             break;
         
@@ -408,6 +406,7 @@ if keyboard_check_pressed(vk_space){
     
 if keyboard_check_released(vk_space){
     isOnGlobalRadioCheck = false;
+    scr_rangeCheck_reset();
     }
 </string>
           </argument>
@@ -435,10 +434,14 @@ if keyboard_check_released(vk_space){
 //unit state
 if obj_map.units[global.posX,global.posY] !=0 {
 draw_text(0,48,obj_map.units[global.posX,global.posY].state);
-draw_text(0,60,string(obj_map.units[global.posX,global.posY].isStanding));
+draw_text(0,60,"unit standning : " + string(obj_map.units[global.posX,global.posY].isStanding));
 }
-draw_text(0,72, "posX: " + string(global.posX));
-draw_text(0,84, "posY: " + string(global.posY));
+
+if object_is_ancestor( obj_map.terrains[global.posX,global.posY].object_index, obj_property)
+draw_text(0,72, "terrain standing: " + string(obj_map.terrains[global.posX,global.posY].isStanding));
+ 
+draw_text(0,84, "posX: " + string(global.posX));
+draw_text(0,94, "posY: " + string(global.posY));
 
 
 draw_text(0,108, "Player Q size: " + string(  (ds_queue_size(global.player_q)) ) );

@@ -38,6 +38,7 @@ global.P_Turn.funds += scr_calc_revenue(global.P_Turn.number);
 with obj_unit if isStanding state = "idle";
 
 
+
 //activate HUD
 instance_activate_object(obj_battleCursor);
 instance_activate_object(obj_miniwin);

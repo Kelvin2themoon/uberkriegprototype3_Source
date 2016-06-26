@@ -16,11 +16,15 @@ check_move_cost = 0
 //initiate seed tile at origin
 global.rangeCheck[origin_x,origin_y].move_cost = 0;
 
-
+//perform global radio check 
+scr_globalRadioCheck();
+//with obj_checker_tile if sprite_index = spr_rangecheck_bluedk sprite_index = -1;
 
 for (check_move_cost = 0; check_move_cost < move_check_target.move_points; check_move_cost += 1){
     with (obj_checker_tile){
-    
+        //remove dark blue tiles
+        //if sprite_index = spr_rangecheck_bluedk sprite_index =-1;
+        
 //check north ( if enouph move points are left )
         newpos_x = (x div 24)+0;
         newpos_y = (y div 24)-1 ; 
@@ -36,8 +40,9 @@ for (check_move_cost = 0; check_move_cost < move_check_target.move_points; check
                 global.rangeCheck[newpos_x,newpos_y].move_cost = 
                 move_cost 
                 + scr_check_move_cost(other.move_check_target,obj_map.terrains[newpos_x,newpos_y]);
-                //change graphics (turn this sile on)
-                global.rangeCheck[newpos_x,newpos_y].sprite_index = other.move_tile_graphic;
+                //change graphics (turn this tile on), check radio also
+                if (global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_gold ) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_violet;
+                else if (global.rangeCheck[newpos_x,newpos_y].sprite_index = -1 or global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk;
                 }
             }
             
@@ -57,7 +62,9 @@ for (check_move_cost = 0; check_move_cost < move_check_target.move_points; check
                 move_cost 
                 + scr_check_move_cost(other.move_check_target,obj_map.terrains[newpos_x,newpos_y]);
                 //change graphics (turn this sile on)
-                global.rangeCheck[newpos_x,newpos_y].sprite_index = other.move_tile_graphic;
+                //change graphics (turn this tile on), check radio also
+                if (global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_gold ) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_violet;
+                else if (global.rangeCheck[newpos_x,newpos_y].sprite_index = -1 or global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk;
                 }
             }
             
@@ -77,7 +84,9 @@ for (check_move_cost = 0; check_move_cost < move_check_target.move_points; check
                 move_cost 
                 + scr_check_move_cost(other.move_check_target,obj_map.terrains[newpos_x,newpos_y]);
                 //change graphics (turn this sile on)
-                global.rangeCheck[newpos_x,newpos_y].sprite_index = other.move_tile_graphic;
+                //change graphics (turn this tile on), check radio also
+                 if (global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_gold ) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_violet;
+                else if (global.rangeCheck[newpos_x,newpos_y].sprite_index = -1 or global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk;
                 }
             }
             
@@ -97,13 +106,16 @@ for (check_move_cost = 0; check_move_cost < move_check_target.move_points; check
                 move_cost 
                 + scr_check_move_cost(other.move_check_target,obj_map.terrains[newpos_x,newpos_y]);
                 //change graphics (turn this sile on)
-                global.rangeCheck[newpos_x,newpos_y].sprite_index = other.move_tile_graphic;
+                //change graphics (turn this tile on), check radio also
+                if (global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_gold ) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_violet;
+                else if (global.rangeCheck[newpos_x,newpos_y].sprite_index = -1 or global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk;
                 }
-            }
-            
-                        
+            }        
         }
     }
+
+
+
 
 
 

@@ -2,6 +2,7 @@
 
 // reset all units
 with obj_unit isStanding = false ;
+with obj_property isStanding = false ;
 
 // create and duplicate player Q
 if is_undefined(global.P1) = false scr_updateStanding(global.P1);

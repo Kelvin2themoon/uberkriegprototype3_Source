@@ -1,6 +1,6 @@
 //units recieving radio transmissions from commanders are standing ( I'm sleepy)
 
-show_debug_message("Rund Receiving script");
+show_debug_message("Run update standing script");
 standingPlayer = argument0;
 
 //create Q for checking
