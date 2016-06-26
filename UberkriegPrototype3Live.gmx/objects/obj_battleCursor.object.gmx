@@ -164,37 +164,37 @@ if (alarm[1] = -1 )
             global.cursorkey_delay = global.cursorKey_startspeed ;
             //update standing
             scr_updateStanding_global();
-            scr_rangeCheck_reset();
-            
+            //scr_rangeCheck_reset();
             break;
         
         case vk_up :
             if ( global.posY &gt; 0 ) y = y  - 24 ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
-            scr_rangeCheck_reset();
+            //scr_rangeCheck_reset();
             break;
         
         case vk_down :
             if ( global.posY &lt; global.mapH - 1 ) y = y  + 24 ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
-            scr_rangeCheck_reset();
+            //scr_rangeCheck_reset();
             break;
         
         case vk_left :
             if ( global.posX &gt; 0 ) x = x  - 24 ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
-            scr_rangeCheck_reset();
+            //scr_rangeCheck_reset();
             break;  
                     
         case vk_right :
             if ( global.posX &lt; global.mapW - 1 ) x = x  + 24 ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
-            scr_rangeCheck_reset();
+            //scr_rangeCheck_reset();
             break;
         }
         // change unit radio check array each time the curosr moves
+        if (isOnGlobalRadioCheck ) {}
           
-        if (obj_map.units[global.posX,global.posY] != 0 and isOnGlobalRadioCheck = false ){
+        else if (obj_map.units[global.posX,global.posY] != 0 and isOnGlobalRadioCheck = false ){
             scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
             //global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_gold;
             }
@@ -296,7 +296,7 @@ if (obj_map.terrains[global.posX,global.posY].object_index == obj_terrain_Base.o
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Open System or Menu
+            <string>///Open System, deploy menu,  start unit command
 
 
 if ( keyboard_check_pressed( global.keyCONFIRM) ){
@@ -322,7 +322,9 @@ if ( keyboard_check_pressed( global.keyCONFIRM) ){
         //if unit is visible
         if (obj_map.units[global.posX,global.posY].isVisible){ 
             //ally unit
-            if (obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number ){
+            if (obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number and
+                obj_map.units[global.posX,global.posY].state = "idle"
+                ){
             //start unit command
             instance_create(x,y,obj_moveCursor);
             instance_deactivate_object(obj_battleCursor);
@@ -396,6 +398,12 @@ if keyboard_check_pressed(vk_space){
         scr_updateLocalRadio(obj_map.terrains[global.posX,global.posY]);
         isOnGlobalRadioCheck = true;
         }
+    // else if no units exsist    
+    else{
+        scr_globalRadioCheck();
+        isOnGlobalRadioCheck = true;
+         
+        } 
     }
     
 if keyboard_check_released(vk_space){
@@ -457,7 +465,8 @@ draw_text(0,108, "Player Q size: " + string(  (ds_queue_size(global.player_q)) )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>// draw order and animation 
+draw_self();
 
 if (cursor_icon == 5 ){
     draw_sprite(spr_basicCursor_Icons,5,x,y);

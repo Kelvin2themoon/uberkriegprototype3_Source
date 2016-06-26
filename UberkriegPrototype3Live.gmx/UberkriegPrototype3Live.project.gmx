@@ -387,6 +387,7 @@
         <script>scripts\scr_updateLocalRadio.gml</script>
         <script>scripts\scr_updateStanding.gml</script>
         <script>scripts\scr_updateStanding_global.gml</script>
+        <script>scripts\scr_globalRadioCheck.gml</script>
       </scripts>
     </scripts>
     <script>scripts\scr_calc_revenue.gml</script>

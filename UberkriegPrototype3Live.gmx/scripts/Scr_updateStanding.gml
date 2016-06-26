@@ -41,7 +41,9 @@ while (ds_queue_size(standing_Q) != 0 ){
                 if ( obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ] != 0){
                     //check unit properties
                     if ( obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].isCommander = false 
-                         and obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].isStanding = false){
+                         and obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].isStanding = false
+                         and obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].ownership = standingPlayer.number
+                         ){
                             //add unit to Q
                             ds_queue_enqueue(standing_Q,obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ]);
                             }
@@ -50,7 +52,9 @@ while (ds_queue_size(standing_Q) != 0 ){
                 if( object_is_ancestor(obj_map.terrains[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].object_index, obj_property)){
                     //check if property is valid target ( not commander already, not standing-not been checked )
                     if ( obj_map.terrains[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].isCommander = false and
-                         obj_map.terrains[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].isStanding  = false){
+                         obj_map.terrains[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].isStanding  = false and
+                         obj_map.terrains[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].ownership   = standingPlayer.number
+                         ){
                             //add property to Q
                             ds_queue_enqueue(standing_Q,obj_map.terrains[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ]);
                             }
