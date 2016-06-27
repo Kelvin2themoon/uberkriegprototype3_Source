@@ -3,6 +3,7 @@ with(obj_checker_tile){
     move_cost = -1;
     pathority = -1;
     arrow_index = 0;
+    isOnRadio = false;
     connet_north    = false;
     connet_east     = false;
     connet_south    = false;

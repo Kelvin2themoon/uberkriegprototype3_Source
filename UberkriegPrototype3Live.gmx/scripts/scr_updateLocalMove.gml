@@ -9,6 +9,7 @@ move_check_target = argument0; // target is unit instance that exsist in map
 origin_x = move_check_target.x div 24;
 origin_y = move_check_target.y div 24;
 
+
 //graphic
 move_tile_graphic = spr_rangecheck_clear;
 check_move_cost = 0
@@ -18,7 +19,13 @@ global.rangeCheck[origin_x,origin_y].move_cost = 0;
 
 //perform global radio check 
 scr_globalRadioCheck();
-//with obj_checker_tile if sprite_index = spr_rangecheck_bluedk sprite_index = -1;
+//use radio info to set isOnRadioVariable
+with (obj_checker_tile){
+    if sprite_index = spr_rangecheck_gold isOnRadio = true;
+    else isOnRadio = false;
+    sprite_index = -1;
+    }
+
 
 for (check_move_cost = 0; check_move_cost < move_check_target.move_points; check_move_cost += 1){
     with (obj_checker_tile){
@@ -41,8 +48,8 @@ for (check_move_cost = 0; check_move_cost < move_check_target.move_points; check
                 move_cost 
                 + scr_check_move_cost(other.move_check_target,obj_map.terrains[newpos_x,newpos_y]);
                 //change graphics (turn this tile on), check radio also
-                if (global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_gold ) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_violet;
-                else if (global.rangeCheck[newpos_x,newpos_y].sprite_index = -1 or global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk;
+                if (global.rangeCheck[newpos_x,newpos_y].isOnRadio = true ) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_clear;
+                else  global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk;
                 }
             }
             
@@ -63,8 +70,8 @@ for (check_move_cost = 0; check_move_cost < move_check_target.move_points; check
                 + scr_check_move_cost(other.move_check_target,obj_map.terrains[newpos_x,newpos_y]);
                 //change graphics (turn this sile on)
                 //change graphics (turn this tile on), check radio also
-                if (global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_gold ) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_violet;
-                else if (global.rangeCheck[newpos_x,newpos_y].sprite_index = -1 or global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk;
+               if (global.rangeCheck[newpos_x,newpos_y].isOnRadio = true ) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_clear;
+                else  global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk;
                 }
             }
             
@@ -85,8 +92,8 @@ for (check_move_cost = 0; check_move_cost < move_check_target.move_points; check
                 + scr_check_move_cost(other.move_check_target,obj_map.terrains[newpos_x,newpos_y]);
                 //change graphics (turn this sile on)
                 //change graphics (turn this tile on), check radio also
-                 if (global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_gold ) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_violet;
-                else if (global.rangeCheck[newpos_x,newpos_y].sprite_index = -1 or global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk;
+                 if (global.rangeCheck[newpos_x,newpos_y].isOnRadio = true ) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_clear;
+                else  global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk;
                 }
             }
             
@@ -107,12 +114,18 @@ for (check_move_cost = 0; check_move_cost < move_check_target.move_points; check
                 + scr_check_move_cost(other.move_check_target,obj_map.terrains[newpos_x,newpos_y]);
                 //change graphics (turn this sile on)
                 //change graphics (turn this tile on), check radio also
-                if (global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_gold ) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_violet;
-                else if (global.rangeCheck[newpos_x,newpos_y].sprite_index = -1 or global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk;
+                if (global.rangeCheck[newpos_x,newpos_y].isOnRadio = true ) global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_clear;
+                else  global.rangeCheck[newpos_x,newpos_y].sprite_index = spr_rangecheck_bluedk;
                 }
             }        
         }
     }
+    
+if (move_check_target.isCommander) {
+    with (obj_checker_tile) if (sprite_index != -1) sprite_index = spr_rangecheck_clear;     
+
+    }
+
 
 
 
