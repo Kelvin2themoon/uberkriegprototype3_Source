@@ -53,17 +53,26 @@ moveOriginY = global.posY ;
 
 ///clear global_acting unit variable (redundent?)
 global.acting_unit = 0; 
-//set acting unit
-global.acting_unit = obj_map.units[moveOriginX,moveOriginY];
+//SET ACTIONABLE UNITS AND TERRAIN ***************************************************
 
+//acting unit
+global.acting_unit = obj_map.units[moveOriginX,moveOriginY];
 //change unit stat to "active"
 global.acting_unit.state = "active";
 //change unit depth
 global.acting_unit.depth = ACTIVE_UNIT;
+//origin
+global.origin =obj_map.terrains[moveOriginX,moveOriginY];
+//initiate tartget and destination
+global.target_unit = noone;
+ 
+
+//NOTE: set target unit and destination when appropriate
 
 //reset checker tiles
 scr_rangeCheck_reset();
 //with(obj_checker_tile){ sprite_index = -1;}
+
 
 //initiate movewstate variable
 //move_state_left=0;  (dont remember what this is for
@@ -86,6 +95,9 @@ ds_priority_add(global.move_order,new_path_node,path_total);
 //remove acting unit from map array
 obj_map.units[moveOriginX,moveOriginY] = 0;
 
+//initiate cando variable
+
+isActionable = false ;
 
 
 
@@ -445,17 +457,45 @@ if  (keyboard_check_pressed(global.keyCANCEL))
             <kind>1</kind>
             <string>///confirm to open command menu
 
+
+
+global.target_unit  = obj_map.units[global.posX,global.posY];
+global.destination  = obj_map.terrains[global.posX,global.posY];
+
 //check: key press confirm
 if ( keyboard_check_pressed( global.keyCONFIRM) ){
+//reset actionable variables (just in case)
+global.capture      = false;
+global.engage       = false;
+global.join         = false;
+global.attach       = false;
+global.supply       = false;
+global.load         = false;
+global.drop         = false;
+global.infiltrate   = false; 
+global.hide         = false;
+global.appear       = false;
+global.disrupt      = false;
+
+
     //if target location is out of move range: pathority not calculated)
     if (global.rangeCheck[global.posX,global.posY].move_cost = -1){
         //do nothin (invalide move position)
         }
     //if a unit [ally] occupies target location, destination is invalid    
-    else if (obj_map.units[global.posX,global.posY] != 0){
+    else if (global.target_unit != 0){
         //if target unit is an ally
-        if (obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number){
-        //do nothin (invalide move position)
+        if (global.target_unit.ownership = global.P_Turn.number){
+        //if acting is officer and target is not commander
+        if ( global.acting_unit.object_index = obj_unit_Officer and global.target_unit.isCommander = false){
+            //add attach command
+            global.attach = true;
+            //create command menu    
+            instance_create(x+24,y,obj_syscom_command);
+            //deactivate move cursor object
+            instance_deactivate_object(obj_moveCursor);
+            }
+            
         }
         else{
         //clear all checker graphics ( no sprite)
@@ -475,13 +515,17 @@ if ( keyboard_check_pressed( global.keyCONFIRM) ){
         with(obj_checker_tile) sprite_index = -1;
         //change sprite back at destination
         global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
-            
+        
+        //add wait command
+        global.wait = true;
         //create command menu    
         instance_create(x+24,y,obj_syscom_command);
         //deactivate move cursor object
         instance_deactivate_object(obj_moveCursor);
+            
+            
+            } 
         }
-    }
 
 </string>
           </argument>

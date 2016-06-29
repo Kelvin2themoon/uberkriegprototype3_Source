@@ -30,11 +30,36 @@ event_inherited();
 
 //populate list "menu_content"
 
-ds_list_add(menu_content,"wait");
+if global.capture      ds_list_add(menu_content,"capture");
+if global.engage       ds_list_add(menu_content,"engage");
+if global.join         ds_list_add(menu_content,"join");
+if global.attach       ds_list_add(menu_content,"attach");
+if global.supply       ds_list_add(menu_content,"supply");
+if global.load         ds_list_add(menu_content,"load");
+if global.drop         ds_list_add(menu_content,"drop");
+if global.infiltrate   ds_list_add(menu_content,"infiltrate");
+if global.hide         ds_list_add(menu_content,"hide");
+if global.appear       ds_list_add(menu_content,"appear");
+if global.disrupt      ds_list_add(menu_content,"disrupt");
+if global.wait         ds_list_add(menu_content,"wait");
 
 row_max = ds_list_size(menu_content) - 1 ; 
 
 
+
+
+/*
+
+ds_list_add(menu_content,"engage");
+ds_list_add(menu_content,"appear");
+ds_list_add(menu_content,"capture");
+ds_list_add(menu_content,"disrupt");
+ds_list_add(menu_content,"drop");
+ds_list_add(menu_content,"hide");
+ds_list_add(menu_content,"infiltrate");
+ds_list_add(menu_content,"join");
+ds_list_add(menu_content,"load");
+ds_list_add(menu_content,"supply");
 
 
 

@@ -394,6 +394,8 @@
     <script>scripts\scr_setUnitDepth.gml</script>
     <scripts name="Unit Commands">
       <script>scripts\scr_execute_command.gml</script>
+      <script>scripts\scr_exe_wait.gml</script>
+      <script>scripts\scr_exe_attach.gml</script>
     </scripts>
     <scripts name="AVIRecording">
       <script>scripts\InitRecorder.gml</script>
