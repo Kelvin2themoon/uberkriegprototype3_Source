@@ -6,7 +6,7 @@ if  (   scr_inBound(unit_destroy_x,unit_destroy_y)
     )
     {
     with(obj_map.units[unit_destroy_x,unit_destroy_y]) instance_destroy();
-    obj_map.units[unit_destroy_x,unit_destroy_y] = -1 ; 
+    obj_map.units[unit_destroy_x,unit_destroy_y] = 0 ; 
     }
     
 else{}//do nothing

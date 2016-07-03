@@ -30,6 +30,7 @@ name = "Unit"
 state = "idle" //describe stat of animation
 image_speed = 0; //stops image
 image_index = 2; //first frame of Idle
+
 //Unit stats
 ownership   =  1;
 hp          = 10;

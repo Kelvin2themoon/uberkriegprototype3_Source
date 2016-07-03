@@ -362,6 +362,9 @@ global.rangeCheckerFramIndex = 0;
 global.acting_unit  = 0;
 global.target_unit = 0;
 
+//create list for multiple possible target unit selections ( ie for enage, disrupt, ect.)
+global.targetables = ds_list_create();
+
 global.origin = -1;
 global.destination = -1;
  

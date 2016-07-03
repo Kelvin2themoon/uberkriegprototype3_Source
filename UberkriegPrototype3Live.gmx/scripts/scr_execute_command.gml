@@ -1,5 +1,6 @@
 
 switch (global.action_order){
+    case "engage"   :   
     case "attach"   :   scr_exe_attach(); break;
     case "wait"     :   scr_exe_wait(); break;     
         }

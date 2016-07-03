@@ -96,6 +96,8 @@
         <sprites name="Cursors">
           <sprite>sprites\spr_basicCursor</sprite>
           <sprite>sprites\spr_basicCursor_Icons</sprite>
+          <sprite>sprites\spr_greenCursor</sprite>
+          <sprite>sprites\spr_redCursor</sprite>
         </sprites>
         <sprites name="checks">
           <sprite>sprites\spr_rangecheck_red</sprite>
@@ -366,7 +368,6 @@
     <scripts name="Syscom">
       <script>scripts\scr_syscom_execute.gml</script>
       <script>scripts\scr_syscom_endturn.gml</script>
-      <script>scripts\script39.gml</script>
     </scripts>
     <scripts name="RangeChecks">
       <script>scripts\scr_rangeCheck_reset.gml</script>
@@ -396,6 +397,7 @@
       <script>scripts\scr_execute_command.gml</script>
       <script>scripts\scr_exe_wait.gml</script>
       <script>scripts\scr_exe_attach.gml</script>
+      <script>scripts\scr_check_units_in_range.gml</script>
     </scripts>
     <scripts name="AVIRecording">
       <script>scripts\InitRecorder.gml</script>
@@ -456,12 +458,15 @@
       <object>objects\obj_temp_MainMenu</object>
     </objects>
     <objects name="Basic Battle ">
-      <object>objects\obj_battleController_basic</object>
       <object>objects\template_sandboxCursor</object>
-      <object>objects\obj_battleCursor</object>
-      <object>objects\obj_miniwin</object>
-      <object>objects\obj_UI_deploy</object>
-      <object>objects\obj_player</object>
+      <objects name="BasicObjects">
+        <object>objects\obj_checker_tile</object>
+        <object>objects\obj_UI_deploy</object>
+        <object>objects\obj_miniwin</object>
+        <object>objects\obj_player</object>
+        <object>objects\obj_battleCursor</object>
+        <object>objects\obj_battleController_basic</object>
+      </objects>
       <objects name="Event Objects">
         <object>objects\obj_starting</object>
         <object>objects\obj_upkeep</object>
@@ -477,7 +482,9 @@
         <object>objects\obj_execute_unit_orders</object>
         <object>objects\obj_event_trap</object>
       </objects>
-      <object>objects\obj_checker_tile</object>
+      <objects name="Engage">
+        <object>objects\obj_engageCursor</object>
+      </objects>
     </objects>
     <objects name="AVIRecording">
       <object>objects\oRecorder</object>
