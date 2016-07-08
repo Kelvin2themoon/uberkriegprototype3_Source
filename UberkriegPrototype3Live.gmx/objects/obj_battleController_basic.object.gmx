@@ -385,6 +385,63 @@ global.appear       = false;
 global.disrupt      = false;
 global.wait         = false;
 
+global.engage_type  = 1; //default to primary
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Damage charts
+
+//Primary def/attacker
+
+//  01. L_Inf         02. H_Inf         03. L.Gun         04. Officer       05. Recon         06. APC           07. L_Tank        08. Artillery     09. Anti-air      10. Covert_Op     11. H_Tank        12. Rocket        13. Land_Cruiser / X by Y
+    DMG_P[01,01]= -1; DMG_P[02,01]= -1; DMG_P[03,01]= -1; DMG_P[04,01]= -1; DMG_P[05,01]= -1; DMG_P[06,01]= -1; DMG_P[07,01]= -1; DMG_P[08,01]= 70; DMG_P[09,01]= -1; DMG_P[10,01]= -1; DMG_P[11,01]= -1; DMG_P[12,01]= -1; DMG_P[13,01]= -1; // 01. L_Inf      
+    DMG_P[01,02]= -1; DMG_P[02,02]= -1; DMG_P[03,02]= -1; DMG_P[04,02]= -1; DMG_P[05,02]= 85; DMG_P[06,02]= 75; DMG_P[07,02]= 55; DMG_P[08,02]= 25; DMG_P[09,02]= 55; DMG_P[10,02]= 85; DMG_P[11,02]= 15; DMG_P[12,02]= 85; DMG_P[13,02]=  5; // 02. H_Inf    
+    DMG_P[01,03]= 65; DMG_P[02,03]= 45; DMG_P[03,03]= 55; DMG_P[04,03]= 45; DMG_P[05,03]= 25; DMG_P[06,03]= 35; DMG_P[07,03]= 15; DMG_P[08,03]= -1; DMG_P[09,03]= 15; DMG_P[10,03]= 25; DMG_P[11,03]=  5; DMG_P[12,03]= 25; DMG_P[13,03]=  3; // 03. L.Gun  
+    DMG_P[01,04]= -1; DMG_P[02,04]= -1; DMG_P[03,04]= -1; DMG_P[04,04]= -1; DMG_P[05,04]= -1; DMG_P[06,04]= -1; DMG_P[07,04]= -1; DMG_P[08,04]= -1; DMG_P[09,04]= -1; DMG_P[10,04]= -1; DMG_P[11,04]= -1; DMG_P[12,04]= -1; DMG_P[13,04]= -1; // 04. Officer 
+    DMG_P[01,05]= -1; DMG_P[02,05]= -1; DMG_P[03,05]= -1; DMG_P[04,05]= -1; DMG_P[05,05]= -1; DMG_P[06,05]= -1; DMG_P[07,05]= -1; DMG_P[08,05]= -1; DMG_P[09,05]= -1; DMG_P[10,05]= -1; DMG_P[11,05]= -1; DMG_P[12,05]= -1; DMG_P[13,05]= -1; // 05. Recon
+    DMG_P[01,06]= -1; DMG_P[02,06]= -1; DMG_P[03,06]= -1; DMG_P[04,06]= -1; DMG_P[05,06]= -1; DMG_P[06,06]= -1; DMG_P[07,06]= -1; DMG_P[08,06]= -1; DMG_P[09,06]= -1; DMG_P[10,06]= -1; DMG_P[11,06]= -1; DMG_P[12,06]= -1; DMG_P[13,06]= -1; // 06. APC
+    DMG_P[01,07]= -1; DMG_P[02,07]= -1; DMG_P[03,07]= -1; DMG_P[04,07]= -1; DMG_P[05,07]= 85; DMG_P[06,07]= 75; DMG_P[07,07]= 55; DMG_P[08,07]= 70; DMG_P[09,07]= 75; DMG_P[10,07]= 85; DMG_P[11,07]= 15; DMG_P[12,07]= 85; DMG_P[13,07]=  5; // 07. L_Tank
+    DMG_P[01,08]= 90; DMG_P[02,08]= 85; DMG_P[03,08]= 95; DMG_P[04,08]= 85; DMG_P[05,08]= 80; DMG_P[06,08]= 70; DMG_P[07,08]= 60; DMG_P[08,08]= 70; DMG_P[09,08]= 65; DMG_P[10,08]= 80; DMG_P[11,08]= 25; DMG_P[12,08]= 80; DMG_P[13,08]= 15; // 08. Artillery
+    DMG_P[01,09]=105; DMG_P[02,09]=105; DMG_P[03,09]=105; DMG_P[04,09]=105; DMG_P[05,09]= 60; DMG_P[06,09]= 50; DMG_P[07,09]= 15; DMG_P[08,09]= 50; DMG_P[09,09]= 45; DMG_P[10,09]= 60; DMG_P[11,09]=  5; DMG_P[12,09]= 55; DMG_P[13,09]=  1; // 09. Anti-Air
+    DMG_P[01,10]= -1; DMG_P[02,10]= -1; DMG_P[03,10]= -1; DMG_P[04,10]= -1; DMG_P[05,10]= -1; DMG_P[06,10]= -1; DMG_P[07,10]= -1; DMG_P[08,10]= -1; DMG_P[09,10]= -1; DMG_P[10,10]= -1; DMG_P[11,10]= -1; DMG_P[12,10]= -1; DMG_P[13,10]= -1; // 10. Covert_op
+    DMG_P[01,11]= -1; DMG_P[02,11]= -1; DMG_P[03,11]= -1; DMG_P[04,11]= -1; DMG_P[05,11]=105; DMG_P[06,11]=105; DMG_P[07,11]= 85; DMG_P[08,11]=105; DMG_P[09,11]=105; DMG_P[10,11]=105; DMG_P[11,11]= 35; DMG_P[12,11]=105; DMG_P[13,11]= 15; // 11. H_tank
+    DMG_P[01,12]= 90; DMG_P[02,12]= 85; DMG_P[03,12]= 95; DMG_P[04,12]= 90; DMG_P[05,12]= 80; DMG_P[06,12]= 70; DMG_P[07,12]= 60; DMG_P[08,12]= 70; DMG_P[09,12]= 65; DMG_P[10,12]= 80; DMG_P[11,12]= 25; DMG_P[12,12]= 80; DMG_P[13,12]= 15; // 12. Rocket
+    DMG_P[01,13]=300; DMG_P[02,13]= -1; DMG_P[03,13]= -1; DMG_P[04,13]= -1; DMG_P[05,13]=340; DMG_P[06,13]=300; DMG_P[07,13]=220; DMG_P[08,13]=280; DMG_P[09,13]=300; DMG_P[10,13]=340; DMG_P[11,13]= 95; DMG_P[12,13]=340; DMG_P[13,13]= 35; // 13. Lancruiser
+    
+//Secondary
+
+//  01. L_Inf         02. H_Inf         03. L.Gun         04. Officer       05. Recon         06. APC           07. L_Tank        08. Artillery     09. Anti-air      10. Covert_Op     11. H_Tank        12. Rocket        13. Land_Cruiser / X by Y
+    DMG_S[01,01]= 55; DMG_S[02,01]= 45; DMG_S[03,01]= 55; DMG_S[04,01]= 45; DMG_S[05,01]= 12; DMG_S[06,01]= 14; DMG_S[07,01]=  5; DMG_S[08,01]= 10; DMG_S[09,01]=  3; DMG_S[10,01]= 12; DMG_S[11,01]=  1; DMG_S[12,01]= 20; DMG_S[13,01]=  0; // 01. L_Inf      
+    DMG_S[01,02]= 65; DMG_S[02,02]= 55; DMG_S[03,02]= 65; DMG_S[04,02]= 55; DMG_S[05,02]= 18; DMG_S[06,02]= 20; DMG_S[07,02]=  8; DMG_S[08,02]= 15; DMG_S[09,02]=  5; DMG_S[10,02]= 18; DMG_S[11,02]=  1; DMG_S[12,02]= 35; DMG_S[13,02]=  0; // 02. H_Inf    
+    DMG_S[01,03]= -1; DMG_S[02,03]= -1; DMG_S[03,03]= -1; DMG_S[04,03]= -1; DMG_S[05,03]= -1; DMG_S[06,03]= -1; DMG_S[07,03]= -1; DMG_S[08,03]= -1; DMG_S[09,03]= -1; DMG_S[10,03]= -1; DMG_S[11,03]= -1; DMG_S[12,03]= -1; DMG_S[13,03]= -1; // 03. L.Gun  
+    DMG_S[01,04]= 75; DMG_S[02,04]= 65; DMG_S[03,04]= 75; DMG_S[04,04]= 65; DMG_S[05,04]= 35; DMG_S[06,04]= 45; DMG_S[07,04]=  8; DMG_S[08,04]= 45; DMG_S[09,04]=  8; DMG_S[10,04]= 35; DMG_S[11,04]=  1; DMG_S[12,04]= 55; DMG_S[13,04]=  0; // 04. Officer 
+    DMG_S[01,05]= 75; DMG_S[02,05]= 65; DMG_S[03,05]= 75; DMG_S[04,05]= 65; DMG_S[05,05]= 35; DMG_S[06,05]= 45; DMG_S[07,05]=  8; DMG_S[08,05]= 45; DMG_S[09,05]=  8; DMG_S[10,05]= 35; DMG_S[11,05]=  1; DMG_S[12,05]= 55; DMG_S[13,05]=  0; // 05. Recon
+    DMG_S[01,06]= -1; DMG_S[02,06]= -1; DMG_S[03,06]= -1; DMG_S[04,06]= -1; DMG_S[05,06]= -1; DMG_S[06,06]= -1; DMG_S[07,06]= -1; DMG_S[08,06]= -1; DMG_S[09,06]= -1; DMG_S[10,06]= -1; DMG_S[11,06]= -1; DMG_S[12,06]= -1; DMG_S[13,06]= -1; // 06. APC
+    DMG_S[01,07]= 75; DMG_S[02,07]= 70; DMG_S[03,07]= 75; DMG_S[04,07]= 70; DMG_S[05,07]= 40; DMG_S[06,07]= 45; DMG_S[07,07]= -1; DMG_S[08,07]= 45; DMG_S[09,07]=  8; DMG_S[10,07]= 40; DMG_S[11,07]=  1; DMG_S[12,07]= 55; DMG_S[13,07]=  0; // 07. L_Tank
+    DMG_S[01,08]= -1; DMG_S[02,08]= -1; DMG_S[03,08]= -1; DMG_S[04,08]= -1; DMG_S[05,08]= -1; DMG_S[06,08]= -1; DMG_S[07,08]= -1; DMG_S[08,08]= -1; DMG_S[09,08]= -1; DMG_S[10,08]= -1; DMG_S[11,08]= -1; DMG_S[12,08]= -1; DMG_S[13,08]= -1; // 08. Artillery
+    DMG_S[01,09]= -1; DMG_S[02,09]= -1; DMG_S[03,09]= -1; DMG_S[04,09]= -1; DMG_S[05,09]= -1; DMG_S[06,09]= -1; DMG_S[07,09]= -1; DMG_S[08,09]= -1; DMG_S[09,09]= -1; DMG_S[10,09]= -1; DMG_S[11,09]=  3; DMG_S[12,09]= -1; DMG_S[13,09]= -1; // 09. Anti-Air
+    DMG_S[01,10]= 75; DMG_S[02,10]= 65; DMG_S[03,10]= 75; DMG_S[04,10]= 65; DMG_S[05,10]= 35; DMG_S[06,10]= 45; DMG_S[07,10]=  8; DMG_S[08,10]= 45; DMG_S[09,10]=  8; DMG_S[10,10]= 35; DMG_S[11,10]=  1; DMG_S[12,10]= 55; DMG_S[13,10]=  0; // 10. Covert_op
+    DMG_S[01,11]=105; DMG_S[02,11]= 95; DMG_S[03,11]=105; DMG_S[04,11]= 95; DMG_S[05,11]= 45; DMG_S[06,11]= 45; DMG_S[07,11]= 10; DMG_S[08,11]= 45; DMG_S[09,11]= 10; DMG_S[10,11]= 45; DMG_S[11,11]=  2; DMG_S[12,11]= 65; DMG_S[13,11]=  0; // 11. H_tank
+    DMG_S[01,12]= -1; DMG_S[02,12]= -1; DMG_S[03,12]= -1; DMG_S[04,12]= -1; DMG_S[05,12]= -1; DMG_S[06,12]= -1; DMG_S[07,12]= -1; DMG_S[08,12]= -1; DMG_S[09,12]= -1; DMG_S[10,12]= -1; DMG_S[11,12]= -1; DMG_S[12,12]= -1; DMG_S[13,12]=  0; // 12. Rocket
+    DMG_S[01,13]=400; DMG_S[02,13]=400; DMG_S[03,13]=400; DMG_S[04,13]=400; DMG_S[05,13]= 85; DMG_S[06,13]= 75; DMG_S[07,13]= 55; DMG_S[08,13]= 70; DMG_S[09,13]= 75; DMG_S[10,13]= 85; DMG_S[11,13]= 25; DMG_S[12,13]= 85; DMG_S[13,13]=  5; // 13. Lancruiser
 </string>
           </argument>
         </arguments>

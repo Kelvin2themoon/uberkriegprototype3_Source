@@ -29,7 +29,7 @@
 event_inherited(); //from parent "unit"
 
 ///Initialize defaults
-
+unit_index = 03;
 name = "Long Gun";
 state = "idle" //describe stat of animation
 

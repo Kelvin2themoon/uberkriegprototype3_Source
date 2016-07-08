@@ -351,7 +351,7 @@ if ( keyboard_check_pressed( global.keyCONFIRM) ){
         //unit is not visible
         else{
             //open system menu
-             instance_create(x+24,y,obj_syscom_system);
+            instance_create(x+24,y,obj_syscom_system);
             instance_deactivate_object(obj_battleCursor);
             }
         }

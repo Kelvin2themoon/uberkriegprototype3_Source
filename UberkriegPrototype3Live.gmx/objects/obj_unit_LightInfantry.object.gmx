@@ -29,7 +29,7 @@
 event_inherited(); //from parent "unit"
 
 ///Initialize defaults
-
+unit_index = 01;
 name = "Light Infantry";
 state = "idle" //describe stat of animation
 

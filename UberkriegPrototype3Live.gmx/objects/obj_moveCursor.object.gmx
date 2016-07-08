@@ -98,6 +98,10 @@ obj_map.units[moveOriginX,moveOriginY] = 0;
 
 isActionable = false ;
 
+//clear targetable list
+
+ds_list_clear(global.targetables);
+
 
 
 
@@ -516,12 +520,14 @@ global.disrupt      = false;
         if ( global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 ){
             if ( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
                 global.engage = true;
+                global.engage_type = 1;
                 }
             }
         //check secondary weapon
         else if (global.acting_unit.haveSecondaryWeapon){
             if ( scr_check_units_in_range( global.posX, global.posY, 1 , 1 , false)){
                 global.engage = true;
+                global.engage_type = 2;
                 }
             }
     //add wait command

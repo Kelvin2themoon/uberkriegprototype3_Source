@@ -237,6 +237,8 @@ else            image_alpha = 0;
             <string>///Draw is Lost
 
 if (!isStanding and global.blinking and isVisible) draw_sprite(spr_unitStats_Radio,3,x,y);
+
+if (hp &lt; 10 and hp  &gt; 0) draw_sprite( spr_unitStats_HP, hp , x,y)
 </string>
           </argument>
         </arguments>

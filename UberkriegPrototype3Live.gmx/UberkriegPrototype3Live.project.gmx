@@ -398,6 +398,7 @@
       <script>scripts\scr_exe_wait.gml</script>
       <script>scripts\scr_exe_attach.gml</script>
       <script>scripts\scr_check_units_in_range.gml</script>
+      <script>scripts\scr_damageCalculator.gml</script>
     </scripts>
     <scripts name="AVIRecording">
       <script>scripts\InitRecorder.gml</script>
@@ -458,14 +459,14 @@
       <object>objects\obj_temp_MainMenu</object>
     </objects>
     <objects name="Basic Battle ">
+      <object>objects\obj_battleController_basic</object>
+      <object>objects\obj_battleCursor</object>
       <object>objects\template_sandboxCursor</object>
       <objects name="BasicObjects">
         <object>objects\obj_checker_tile</object>
         <object>objects\obj_UI_deploy</object>
         <object>objects\obj_miniwin</object>
         <object>objects\obj_player</object>
-        <object>objects\obj_battleCursor</object>
-        <object>objects\obj_battleController_basic</object>
       </objects>
       <objects name="Event Objects">
         <object>objects\obj_starting</object>

@@ -48,6 +48,9 @@ row_size = 36 ;
 
 x = start_x;
 y = start_y; 
+
+//variable needed to cancel deploy
+no_deploy = false;
 </string>
           </argument>
         </arguments>
@@ -289,6 +292,7 @@ if keyboard_check_pressed(global.keyCONFIRM){
             break;
             
             case 6: //cancel
+            no_deploy = true;
             break;
             }
         }            
@@ -333,13 +337,24 @@ if keyboard_check_pressed(global.keyCONFIRM){
             obj_map.units[global.posX,global.posY].state = "exhaust" ;
             }
             
-        //update standing
-        scr_updateStanding_global();
-        scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
-        //Close deploy Window
-        instance_activate_object(obj_battleCursor);
-        instance_activate_object(obj_miniwin);
-        instance_destroy(); 
+        if no_deploy{
+            instance_activate_object(obj_battleCursor);
+            instance_activate_object(obj_miniwin);
+            instance_destroy();
+            }
+        else{
+            //update standing
+            scr_updateStanding_global();
+            scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
+            //Close deploy Window
+            instance_activate_object(obj_battleCursor);
+            instance_activate_object(obj_miniwin);
+            instance_destroy();
+            }
+        
+        no_deploy = false;
+        
+         
         }
     
 </string>

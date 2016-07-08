@@ -6,6 +6,7 @@ switch (command){
     case "engage":
        global.action_order = "engage";
        instance_create(0,0,obj_engageCursor);
+       instance_deactivate_object(obj_syscom_command);
        break;
     
     case "attach":

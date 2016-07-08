@@ -29,7 +29,7 @@
 event_inherited(); //from parent "unit"
 
 ///Initialize defaults
-
+unit_index = 06;
 name = "A.P.C.";
 state = "idle" //describe stat of animation
 
