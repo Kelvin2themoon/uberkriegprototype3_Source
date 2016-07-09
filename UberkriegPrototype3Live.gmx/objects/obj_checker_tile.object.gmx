@@ -120,6 +120,17 @@ else on_path = false;
             <string>///draw Order
 
 if (sprite_index != -1) draw_self();
+
+//draw unit stats
+
+if ( obj_map.units[x div 24, y div 24] != 0){
+    if (obj_map.units[x div 24, y div 24].isVisible){
+        with( obj_map.units[x div 24, y div 24]) if (hp &lt; 10 and hp  &gt; 0) draw_sprite( spr_unitStats_HP, hp , x,y);
+        }
+    }
+
+
+
 /*
 if (on_path){ 
     draw_sprite(spr_rangecheck_bluedk,image_index,x,y);

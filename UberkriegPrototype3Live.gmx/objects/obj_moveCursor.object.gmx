@@ -518,10 +518,25 @@ global.disrupt      = false;
         //add engage if visible enemy units are in range 
         //check primary weaopn
         if ( global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 ){
+        
+        if (global.acting_unit.max_range = 1 or global.acting_unit.name = "Land Cruiser"){
+            //max range is 1 or is land cuiser, process as direct attack (can move and 
             if ( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
-                global.engage = true;
-                global.engage_type = 1;
+                    global.engage = true;
+                    global.engage_type = 1;
+                    }
                 }
+            //otherwise process as direct (target location = origin)
+            else {
+                if ( x = global.origin.x and y = global.origin.y){
+                    if ( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
+                        global.engage = true;
+                        global.engage_type = 1;
+                        }
+                    }
+                
+                }
+        
             }
         //check secondary weapon
         else if (global.acting_unit.haveSecondaryWeapon){
@@ -580,6 +595,30 @@ draw_text(0,130,"X = " + string(global.acting_unit.x div 24));
 draw_text(0,142,"Y = " + string(global.acting_unit.y div 24));  
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self();
+if (global.acting_unit.name = "Land Cruiser" and global.acting_unit.ammo &gt; 0) draw_sprite(spr_CruiserPlusCursor,0,x,y);
 </string>
           </argument>
         </arguments>

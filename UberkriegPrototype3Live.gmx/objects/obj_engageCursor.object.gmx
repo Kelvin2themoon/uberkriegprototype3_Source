@@ -274,8 +274,13 @@ if ( view_yview[0] + view_hport[0] &lt; y + view_border+24) view_yview[0] += vie
             <string>///Damage Display Calculator
 
 
+if (global.acting_unit.name = "Land Cruiser" and abs(global.destination.x-x) + abs(global.destination.y-y) = 24){
+    dmg_percent= scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,2);
+    }
+else dmg_percent= scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,global.engage_type); 
 
-dmg_percent= scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,global.engage_type);
+
+
 </string>
           </argument>
         </arguments>

@@ -12,6 +12,10 @@ targets_avaliable = false;
 uir_temp_x = 0;
 uir_temp_y = 0;
 
+//adjust for ;land cruiser
+
+if (global.acting_unit.name = "Land Cruiser") uir_minRange = 1; 
+
 //for all possible positions
 for (uir_temp_x = (-1)*uir_maxRange ; uir_temp_x <= uir_maxRange ; uir_temp_x +=1 ){
     for (uir_temp_y = (-1)*uir_maxRange ; uir_temp_y <= uir_maxRange ; uir_temp_y +=1 ){

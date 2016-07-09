@@ -98,6 +98,7 @@
           <sprite>sprites\spr_basicCursor_Icons</sprite>
           <sprite>sprites\spr_greenCursor</sprite>
           <sprite>sprites\spr_redCursor</sprite>
+          <sprite>sprites\spr_CruiserPlusCursor</sprite>
         </sprites>
         <sprites name="checks">
           <sprite>sprites\spr_rangecheck_red</sprite>

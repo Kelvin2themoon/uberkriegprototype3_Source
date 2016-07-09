@@ -1,9 +1,22 @@
 //damage to target unit
 
-global.target_unit.hp -=
-    (scr_damageCalculator(global.acting_unit, global.target_unit, obj_map.terrains[global.target_unit.x div 24, global.target_unit.y div 24].cover, global.engage_type)
+
+//check for land cruiser exception
+if (global.acting_unit.name = "Land Cruiser" and global.engage_type = 1 and abs( global.acting_unit.x - global.target_unit.x) +abs( global.acting_unit.y - global.target_unit.y) = 24 ){
+    // damage using secondary weapon
+    global.target_unit.hp -=
+    (scr_damageCalculator(global.acting_unit, global.target_unit, obj_map.terrains[global.target_unit.x div 24, global.target_unit.y div 24].cover, 2)
     + random(global.acting_unit.hp))
-    div 10 ;
+    div 10
+    }
+    
+else{    
+
+    global.target_unit.hp -=
+        (scr_damageCalculator(global.acting_unit, global.target_unit, obj_map.terrains[global.target_unit.x div 24, global.target_unit.y div 24].cover, global.engage_type)
+        + random(global.acting_unit.hp))
+        div 10 ;
+    }
 
 //check if target unit survives
 if (global.target_unit.hp <= 0){
@@ -20,9 +33,26 @@ else{
             //if primary weapon is avaliable
             if(global.target_unit.havePrimaryWeapon and global.target_unit.ammo > 0){
                 // damage by primary weapon
+                if(global.acting_unit.name = "Land Cruiser"){
+                    // if target unit is adjacent
+                    if (abs(global.target_unit.x - global.acting_unit.x) +  abs(global.target_unit.y - global.acting_unit.y) = 1){
+                        //damage using secondary weapon
+                        global.acting_unit.hp -= 
+                        (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 2)
+                        + random(global.acting_unit.hp)) div 10;
+                        }
+                    else{
+                        global.acting_unit.hp -= 
+                        (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 1)
+                        + random(global.target_unit.hp)) div 10;
+                        }
+                    }  
+                //regular unit
+                else{
                 global.acting_unit.hp -= 
                 (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 1)
                 + random(global.target_unit.hp)) div 10;
+                    }
                 }
             // secondary weapon is avaliable
             else if (global.target_unit.haveSecondaryWeapon){
@@ -31,13 +61,14 @@ else{
                 (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 2)
                 + random(global.acting_unit.hp)) div 10;
                 }
+            
+            }
             //if  target unit is land cruiser, counter attack with 
             if (global.target_unit.name = "Land Cruiser"){
                 global.acting_unit.hp -= 
                 (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 2)
                 + random(global.acting_unit.hp)) div 10;
                 }
-            }
         }
     }
 
