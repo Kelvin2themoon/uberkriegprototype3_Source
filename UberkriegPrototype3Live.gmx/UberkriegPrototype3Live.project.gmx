@@ -399,6 +399,7 @@
       <script>scripts\scr_exe_attach.gml</script>
       <script>scripts\scr_check_units_in_range.gml</script>
       <script>scripts\scr_damageCalculator.gml</script>
+      <script>scripts\scr_exe_engage.gml</script>
     </scripts>
     <scripts name="AVIRecording">
       <script>scripts\InitRecorder.gml</script>

@@ -1,0 +1,71 @@
+//damage to target unit
+
+global.target_unit.hp -=
+    (scr_damageCalculator(global.acting_unit, global.target_unit, obj_map.terrains[global.target_unit.x div 24, global.target_unit.y div 24].cover, global.engage_type)
+    + random(global.acting_unit.hp))
+    div 10 ;
+
+//check if target unit survives
+if (global.target_unit.hp <= 0){
+    //hp is less than zero, destroy and set map's unit array
+    obj_map.units[global.target_unit.x div 24, global.target_unit.y div 24] = 0 ; 
+    with global.target_unit instance_destroy();
+    global.target_unit = 0;
+    }
+//if unit survives, check for rcounter attack
+else{ 
+    if (  abs(global.acting_unit.x - global.target_unit.x) + abs(global.acting_unit.y - global.target_unit.y) = 24){ // unit is adjacent
+        //check if target unit can counter attack
+        if ( global.target_unit.max_range = 1){
+            //if primary weapon is avaliable
+            if(global.target_unit.havePrimaryWeapon and global.target_unit.ammo > 0){
+                // damage by primary weapon
+                global.acting_unit.hp -= 
+                (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 1)
+                + random(global.target_unit.hp)) div 10;
+                }
+            // secondary weapon is avaliable
+            else if (global.target_unit.haveSecondaryWeapon){
+                // damage by secondary weapon
+                global.acting_unit.hp -= 
+                (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 2)
+                + random(global.acting_unit.hp)) div 10;
+                }
+            //if  target unit is land cruiser, counter attack with 
+            if (global.target_unit.name = "Land Cruiser"){
+                global.acting_unit.hp -= 
+                (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 2)
+                + random(global.acting_unit.hp)) div 10;
+                }
+            }
+        }
+    }
+
+//check if acting unit survivesdestroy and set map's unit array
+if (global.acting_unit.hp <= 0){
+    //if hp less than 0, 
+    obj_map.units[global.acting_unit.x div 24, global.acting_unit.y div 24] = 0 ; 
+    with global.acting_unit instance_destroy();
+    }
+else{
+    //adjust acting unit and place back into map's units array
+    //obj_map.units[destination.x div 24,destination.y div 24] = global.acting_unit;
+    obj_map.units[global.acting_unit.x div 24,global.acting_unit.y div 24] = global.acting_unit;
+    global.acting_unit.state =  "exhaust";
+    global.acting_unit.alarm[0] =  1;
+    //reset depth
+    scr_setUnitDepth(global.acting_unit); 
+    }
+    
+    instance_activate_object(obj_miniwin);
+    instance_activate_object(obj_battleCursor);
+    with obj_battleCursor{
+        x = global.posX*24;
+        y = global.posY*24;
+        }
+    
+
+
+
+
+
