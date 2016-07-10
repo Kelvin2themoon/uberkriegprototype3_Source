@@ -479,9 +479,9 @@ global.disrupt      = false;
 global.wait         = true ; // wait is on by default
 
 
-    //if target location is out of move range: pathority not calculated)
+    //check range
     if (global.rangeCheck[global.posX,global.posY].move_cost = -1){
-        //do nothin (invalide move position)
+        //oout of range, do nothin (invalide move position)
         }
     //if a unit [ally] occupies target location, destination is invalid    
     else if (global.target_unit != 0){
@@ -521,6 +521,14 @@ global.wait         = true ; // wait is on by default
         with(obj_checker_tile) sprite_index = -1;
         //change sprite back at destination
         global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
+        
+        //check for property
+        if( object_is_ancestor(obj_map.terrains[global.posX, global.posY].object_index, obj_property) 
+            and obj_map.terrains[global.posX, global.posY].ownership != global.P_Turn.number
+            and global.acting_unit.canCapture ){
+                global.capture = true ;
+            }
+        
         //add engage if visible enemy units are in range 
         //check primary weaopn
         if ( global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 ){

@@ -1,6 +1,4 @@
-    // set unit state
-                  
-                    //obj_map.units[destination.x div 24,destination.y div 24] = global.acting_unit;
+//obj_map.units[destination.x div 24,destination.y div 24] = global.acting_unit;
                     obj_map.units[global.posX,global.posY] = global.acting_unit; 
                    
                      // reactivate main phaze UI

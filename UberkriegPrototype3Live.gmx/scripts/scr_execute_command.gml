@@ -1,5 +1,6 @@
 
 switch (global.action_order){
+    case "capture"  :   scr_exe_capture();   break;
     case "join"     :   scr_exe_join();     break;
     case "engage"   :   scr_exe_engage();   break;
     case "attach"   :   scr_exe_attach();   break;

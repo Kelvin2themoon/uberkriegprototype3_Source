@@ -76,6 +76,10 @@ alarm[0] = 1;
 //radio checking
 isStanding = false;
 
+//action variables
+capturing = 0;
+
+
 
 
 </string>
