@@ -2,6 +2,10 @@ command = argument0; //string
 
 
 switch (command){
+    case "join":
+        global.action_order = "join";
+        instance_create(0,0,obj_execute_unit_orders);
+        break;
     
     case "engage":
        global.action_order = "engage";

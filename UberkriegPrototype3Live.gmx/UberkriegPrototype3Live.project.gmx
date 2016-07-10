@@ -397,6 +397,7 @@
     <scripts name="Unit Commands">
       <script>scripts\scr_execute_command.gml</script>
       <script>scripts\scr_exe_wait.gml</script>
+      <script>scripts\scr_exe_join.gml</script>
       <script>scripts\scr_exe_attach.gml</script>
       <script>scripts\scr_check_units_in_range.gml</script>
       <script>scripts\scr_damageCalculator.gml</script>

@@ -476,6 +476,7 @@ global.infiltrate   = false;
 global.hide         = false;
 global.appear       = false;
 global.disrupt      = false;
+global.wait         = true ; // wait is on by default
 
 
     //if target location is out of move range: pathority not calculated)
@@ -486,10 +487,15 @@ global.disrupt      = false;
     else if (global.target_unit != 0){
         //if target unit is an ally
         if (global.target_unit.ownership = global.P_Turn.number){
+        //if target and acting are the same type : turn on join comman
+        if(global.target_unit.name = global.acting_unit.name and obj_map.units[x div 24, y div 24].hp &lt; 10) global.join = true; 
         //if acting is officer and target is not commander
         if ( global.acting_unit.object_index = obj_unit_Officer and global.target_unit.isCommander = false){
             //add attach command
             global.attach = true;
+            }
+        if (global.attach or global.join){
+            global.wait = false; 
             //create command menu    
             instance_create(x+24,y,obj_syscom_command);
             //deactivate move cursor object
@@ -507,7 +513,7 @@ global.disrupt      = false;
         instance_create(x+24,y,obj_syscom_command);
         //deactivate move cursor object
         instance_deactivate_object(obj_moveCursor);
-        }
+            }
         }
     //else target is in range &amp; no unit visibly occupies the location    
     else{
@@ -546,7 +552,7 @@ global.disrupt      = false;
                 }
             }
     //add wait command
-        global.wait = true;
+        
         //create command menu    
         instance_create(x+24,y,obj_syscom_command);
         //deactivate move cursor object
