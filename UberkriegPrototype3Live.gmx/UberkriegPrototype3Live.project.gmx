@@ -119,6 +119,7 @@
         <sprite>sprites\spr_DeplayWin_curosr</sprite>
       </sprites>
       <sprites name="HUD">
+        <sprite>sprites\spr_black</sprite>
         <sprites name="Mini_win">
           <sprite>sprites\spr_miniwin_halfsize</sprite>
           <sprite>sprites\spr_miniwin_capturewin</sprite>
@@ -162,7 +163,11 @@
           <sprite>sprites\spr_auxwin</sprite>
           <sprite>sprites\spr_topwin</sprite>
         </sprites>
-        <sprite>sprites\spr_black</sprite>
+        <sprites name="Capture">
+          <sprite>sprites\spr_captureBar</sprite>
+          <sprite>sprites\spr_captureBar_done</sprite>
+          <sprite>sprites\spr_capturebar_frame</sprite>
+        </sprites>
       </sprites>
       <sprites name="SysComMenu">
         <sprite>sprites\spr_syscom_cap</sprite>
