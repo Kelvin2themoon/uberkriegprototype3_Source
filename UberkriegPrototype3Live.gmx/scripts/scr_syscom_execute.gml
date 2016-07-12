@@ -1,5 +1,7 @@
-command = argument0; //string
+// this script is activated when a menu item is selected from syscom menu, 
+//actual execution of unit action after move: see unit Command -> scr_execute_command
 
+command = argument0; //string
 
 switch (command){
     
@@ -12,6 +14,12 @@ switch (command){
         global.action_order = "join";
         instance_create(0,0,obj_execute_unit_orders);
         break;
+    case "supply" :
+        global.action_order = "supply";
+        instance_create(0,0,obj_supplyCursor);
+        instance_deactivate_object(obj_syscom_command);
+        break;
+        
     
     case "engage":
        global.action_order = "engage";

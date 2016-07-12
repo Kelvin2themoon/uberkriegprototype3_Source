@@ -1,6 +1,9 @@
+// this script activates after unit has moves.
+//does not execute if "trap" interups the move action
 
 switch (global.action_order){
-    case "capture"  :   scr_exe_capture();   break;
+    case "supply"   :   scr_exe_supply();   break;
+    case "capture"  :   scr_exe_capture();  break;
     case "join"     :   scr_exe_join();     break;
     case "engage"   :   scr_exe_engage();   break;
     case "attach"   :   scr_exe_attach();   break;

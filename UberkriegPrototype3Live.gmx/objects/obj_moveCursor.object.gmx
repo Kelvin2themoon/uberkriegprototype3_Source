@@ -528,6 +528,10 @@ global.wait         = true ; // wait is on by default
             and global.acting_unit.canCapture ){
                 global.capture = true ;
             }
+        //for APC, check for adjacent ally unit for Supply action
+        if ( global.acting_unit.name = "A.P.C." and scr_check_units_in_range( global.posX, global.posY,1, 1, true)){
+            global.supply = true;
+            }
         
         //add engage if visible enemy units are in range 
         //check primary weaopn

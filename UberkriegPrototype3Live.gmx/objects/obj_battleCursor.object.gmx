@@ -451,6 +451,8 @@ if keyboard_check_released(vk_space){
 if obj_map.units[global.posX,global.posY] !=0 {
 draw_text(0,48,obj_map.units[global.posX,global.posY].state);
 draw_text(0,60,"unit standning : " + string(obj_map.units[global.posX,global.posY].isStanding));
+draw_text(0,200,"fuel: " + string(obj_map.units[global.posX,global.posY].fuel));
+draw_text(0,188,"ammo: " + string(obj_map.units[global.posX,global.posY].ammo));
 }
 
 if object_is_ancestor( obj_map.terrains[global.posX,global.posY].object_index, obj_property)
@@ -461,6 +463,8 @@ draw_text(0,94, "posY: " + string(global.posY));
 
 
 draw_text(0,108, "Player Q size: " + string(  (ds_queue_size(global.player_q)) ) );
+
+
 
 </string>
           </argument>

@@ -128,6 +128,8 @@ else{
 if( global.acting_unit.x = move_to.x and global.acting_unit.y = move_to.y){
     //update vision
     scr_updateLocalVision(global.acting_unit);
+    //fuel consumption
+    global.acting_unit.fuel -= scr_check_move_cost(global.acting_unit, obj_map.terrains[move_to.x div 24, move_to.y div 24]);
     //set new co-ordinates
     move_from = move_to;
     move_to = ds_priority_delete_min(global.move_order);

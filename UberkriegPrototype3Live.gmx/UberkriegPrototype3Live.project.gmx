@@ -408,6 +408,7 @@
       <script>scripts\scr_damageCalculator.gml</script>
       <script>scripts\scr_exe_engage.gml</script>
       <script>scripts\scr_exe_capture.gml</script>
+      <script>scripts\scr_exe_supply.gml</script>
     </scripts>
     <scripts name="AVIRecording">
       <script>scripts\InitRecorder.gml</script>
@@ -486,17 +487,20 @@
         <object>objects\obj_syscom_system</object>
         <object>objects\obj_syscom_command</object>
       </objects>
-      <objects name="UnitMove">
+      <objects name="Unit Control">
         <object>objects\obj_moveCursor</object>
-        <object>objects\obj_path_node</object>
-        <object>objects\obj_execute_unit_orders</object>
-        <object>objects\obj_event_trap</object>
-      </objects>
-      <objects name="Engage">
-        <object>objects\obj_engageCursor</object>
-      </objects>
-      <objects name="Capture">
-        <object>objects\obj_captureBar</object>
+        <objects name="UnitMove">
+          <object>objects\obj_path_node</object>
+          <object>objects\obj_execute_unit_orders</object>
+          <object>objects\obj_event_trap</object>
+        </objects>
+        <objects name="Engage">
+          <object>objects\obj_engageCursor</object>
+        </objects>
+        <objects name="Capture">
+          <object>objects\obj_captureBar</object>
+        </objects>
+        <object>objects\obj_supplyCursor</object>
       </objects>
     </objects>
     <objects name="AVIRecording">

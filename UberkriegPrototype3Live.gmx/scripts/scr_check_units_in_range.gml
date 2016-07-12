@@ -1,4 +1,4 @@
-// checks for aly or units in range (uir)
+// checks for aly or units in range (uir) for engage, supply, and disrupt
 
 uir_origin_x    = argument0 //posX
 uir_origin_y    = argument1 //posY
