@@ -1,7 +1,12 @@
 // this script activates after unit has moves.
 //does not execute if "trap" interups the move action
 
+show_debug_message("Script: Execute Command");
+
 switch (global.action_order){
+    case "drop_A"   :   scr_exe_drop("A");  break;
+    case "drop_B"   :   scr_exe_drop("B");  break;
+    case "load"     :   scr_exe_load();     break;
     case "supply"   :   scr_exe_supply();   break;
     case "capture"  :   scr_exe_capture();  break;
     case "join"     :   scr_exe_join();     break;
@@ -12,10 +17,10 @@ switch (global.action_order){
         
         
 //reset global order variables
-global.acting_unit  = 0;
-global.target_unit  = 0;
+//global.acting_unit  = 0;
+//global.target_unit  = 0;
 //global.move_order   = ds_priority_create();
-global.action_order = "wait" ;//default to wait
+//global.action_order = "wait" ;//default to wait
 
 //update radio status
 scr_updateStanding_global();

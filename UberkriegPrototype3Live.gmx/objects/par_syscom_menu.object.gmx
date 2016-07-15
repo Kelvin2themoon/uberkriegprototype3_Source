@@ -306,8 +306,21 @@ i = 0 ;
 //start loop to read from menu_content
 
 for ( i=0 ; i&lt;ds_list_size(menu_content) ; i+=1){
+
     item = ds_list_find_value(menu_content, i);
-    draw_sprite( asset_get_index("spr_syscom_"+item+"_up"),global.P_Turn.number-1,start_x,start_y+(i*24)); 
+    //exception for drop 
+    if (item = "drop_A"){
+        draw_sprite(spr_syscom_drop_up,global.P_Turn.number-1,start_x,start_y+(i*24));
+        if (global.acting_unit.load_A != 0) draw_sprite(global.acting_unit.load_A.sprite_index,0,start_x+24,start_y+(i*24)); 
+        }
+    else if (item = "drop_B"){
+        draw_sprite(spr_syscom_drop_up,global.P_Turn.number-1,start_x,start_y+(i*24));
+        if (global.acting_unit.load_B != 0) draw_sprite(global.acting_unit.load_B.sprite_index,0,start_x+24,start_y+(i*24)); 
+        }
+    
+    else{
+        draw_sprite( asset_get_index("spr_syscom_"+item+"_up"),global.P_Turn.number-1,start_x,start_y+(i*24)); 
+        }
     }
 
 draw_self();

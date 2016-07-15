@@ -409,6 +409,8 @@
       <script>scripts\scr_exe_engage.gml</script>
       <script>scripts\scr_exe_capture.gml</script>
       <script>scripts\scr_exe_supply.gml</script>
+      <script>scripts\scr_exe_load.gml</script>
+      <script>scripts\scr_exe_drop.gml</script>
     </scripts>
     <scripts name="AVIRecording">
       <script>scripts\InitRecorder.gml</script>
@@ -501,6 +503,7 @@
           <object>objects\obj_captureBar</object>
         </objects>
         <object>objects\obj_supplyCursor</object>
+        <object>objects\obj_dropCursor</object>
       </objects>
     </objects>
     <objects name="AVIRecording">

@@ -24,4 +24,7 @@ with obj_battleCursor{
     x = global.posX*24;
     y = global.posY*24;
     }
+    
+//nuke syscom
+with par_syscom_menu instance_destroy();
                     

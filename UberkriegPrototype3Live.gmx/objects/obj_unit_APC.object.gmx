@@ -64,6 +64,17 @@ canSupply       = true; //APC, uses ammo
 canLoadInfantry = 2;    //APC, spacific to infantry in case naval and sea units mak it
 canHide         = false;
 canDisrupt      = false;
+
+//special variable containers for load
+load_A = 0;
+load_B = 0;
+
+
+
+
+
+
+
 </string>
           </argument>
         </arguments>

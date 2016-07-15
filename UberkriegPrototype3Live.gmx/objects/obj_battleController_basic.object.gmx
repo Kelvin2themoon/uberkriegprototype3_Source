@@ -378,14 +378,17 @@ global.engage       = false;
 global.join         = false;
 global.supply       = false;
 global.load         = false;
-global.drop         = false;
+global.drop_A       = false;
+global.drop_B       = false;
 global.infiltrate   = false; 
 global.hide         = false;
 global.appear       = false;
 global.disrupt      = false;
 global.wait         = false;
 
+// extra command variables
 global.engage_type  = 1; //default to primary
+global.drop_phaze_2 = false; //true if second drop action is taking place to bypass move in execute order event
 
 </string>
           </argument>
@@ -472,7 +475,8 @@ global.join         = false;
 global.attach       = false;
 global.supply       = false;
 global.load         = false;
-global.drop         = false;
+global.drop_A       = false;
+global.drop_B       = false;
 global.infiltrate   = false; 
 global.hide         = false;
 global.appear       = false;

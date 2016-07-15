@@ -1,4 +1,5 @@
 //update is standing statuf for all players
+show_debug_message("update Standing: Global");
 
 // reset all units
 with obj_unit isStanding = false ;

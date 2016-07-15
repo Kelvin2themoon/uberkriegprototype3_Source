@@ -36,7 +36,8 @@ if global.join         ds_list_add(menu_content,"join");
 if global.attach       ds_list_add(menu_content,"attach");
 if global.supply       ds_list_add(menu_content,"supply");
 if global.load         ds_list_add(menu_content,"load");
-if global.drop         ds_list_add(menu_content,"drop");
+if global.drop_A       ds_list_add(menu_content,"drop_A");
+if global.drop_B       ds_list_add(menu_content,"drop_B");
 if global.infiltrate   ds_list_add(menu_content,"infiltrate");
 if global.hide         ds_list_add(menu_content,"hide");
 if global.appear       ds_list_add(menu_content,"appear");
@@ -130,8 +131,7 @@ event_inherited();
           <argument>
             <kind>1</kind>
             <string>///press "B"
-if  (keyboard_check_pressed(global.keyCANCEL))
-    {
+if  (keyboard_check_pressed(global.keyCANCEL) and !global.drop_phaze_2){// donnot activate if in drop-phaze2
     //reactivate move cursor
     instance_activate_object(obj_moveCursor);
     
@@ -141,10 +141,6 @@ if  (keyboard_check_pressed(global.keyCANCEL))
         instance_destroy();
         }
     }
-    
-    
-    
-    
     //redraw move range check tiles
     with(obj_checker_tile) if (move_cost != -1) sprite_index = spr_rangecheck_clear;
     // destroy this menu

@@ -27,6 +27,9 @@
             <kind>1</kind>
             <string>///Initiate
 
+//destroy redundent syscom command menues
+
+
 //deactivate battle cursor
 instance_deactivate_object(obj_battleCursor);
 
@@ -471,7 +474,8 @@ global.join         = false;
 global.attach       = false;
 global.supply       = false;
 global.load         = false;
-global.drop         = false;
+global.drop_A       = false;
+global.drop_B       = false;
 global.infiltrate   = false; 
 global.hide         = false;
 global.appear       = false;
@@ -487,6 +491,12 @@ global.wait         = true ; // wait is on by default
     else if (global.target_unit != 0){
         //if target unit is an ally
         if (global.target_unit.ownership = global.P_Turn.number){
+        
+        //check for load
+        if ( global.target_unit.name = "A.P.C." and (global.acting_unit.name="Light Infantry" or (global.acting_unit.name="Heavy Infantry" or (global.acting_unit.name="Long Gun")))){
+            if (global.target_unit.load_A = 0 or global.target_unit.load_B = 0) global.load = true;
+            }
+        
         //if target and acting are the same type : turn on join comman
         if(global.target_unit.name = global.acting_unit.name and obj_map.units[x div 24, y div 24].hp &lt; 10) global.join = true; 
         //if acting is officer and target is not commander
@@ -494,7 +504,7 @@ global.wait         = true ; // wait is on by default
             //add attach command
             global.attach = true;
             }
-        if (global.attach or global.join){
+        if (global.attach or global.join or global.load){
             global.wait = false; 
             //create command menu    
             instance_create(x+24,y,obj_syscom_command);
@@ -529,8 +539,14 @@ global.wait         = true ; // wait is on by default
                 global.capture = true ;
             }
         //for APC, check for adjacent ally unit for Supply action
-        if ( global.acting_unit.name = "A.P.C." and scr_check_units_in_range( global.posX, global.posY,1, 1, true)){
-            global.supply = true;
+        if ( global.acting_unit.name = "A.P.C."){
+            if(scr_check_units_in_range( global.posX, global.posY,1, 1, true)){
+                global.supply = true;
+                }
+            //if units can be dropped
+            if (global.acting_unit.load_A != 0) global.drop_A = true;
+            if (global.acting_unit.load_B != 0) global.drop_B = true;
+            
             }
         
         //add engage if visible enemy units are in range 
