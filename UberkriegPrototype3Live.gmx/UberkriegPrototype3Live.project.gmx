@@ -327,6 +327,7 @@
       <sprite>sprites\spr_unitStats_Cap</sprite>
       <sprite>sprites\spr_unitStats_Load</sprite>
       <sprite>sprites\spr_unitStats_Hide</sprite>
+      <sprite>sprites\spr_unitStats_Disrupted</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -414,6 +415,7 @@
       <script>scripts\scr_exe_drop.gml</script>
       <script>scripts\scr_exe_hide.gml</script>
       <script>scripts\scr_exe_appear.gml</script>
+      <script>scripts\scr_exe_disrupt.gml</script>
     </scripts>
     <scripts name="AVIRecording">
       <script>scripts\InitRecorder.gml</script>
@@ -506,6 +508,7 @@
           <object>objects\obj_captureBar</object>
         </objects>
         <object>objects\obj_supplyCursor</object>
+        <object>objects\obj_disruptCursor</object>
         <object>objects\obj_dropCursor</object>
       </objects>
     </objects>

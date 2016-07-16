@@ -27,7 +27,6 @@ while (ds_queue_size(standing_Q) != 0 ){
     cst_temp_x = 0;
     cst_temp_y = 0;
     //increase range if over mountain
-    
     broadcast_range = checkStandTarget.radio;
     if ( obj_map.terrains[cst_origin_x,cst_origin_y].object_index = obj_terrain_Mountain and checkStandTarget.radio != 0) broadcast_range +=2;
     
@@ -44,7 +43,8 @@ while (ds_queue_size(standing_Q) != 0 ){
                          and obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].isStanding = false
                          and obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].ownership = standingPlayer.number
                          ){
-                            //add unit to Q
+                            //add unit to Q, exclude disrupted units
+                            if (obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].isDisrupted = false)
                             ds_queue_enqueue(standing_Q,obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ]);
                             }
                     }

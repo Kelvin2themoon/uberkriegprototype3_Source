@@ -6,6 +6,12 @@ command = argument0; //string
 
 switch (command){
 
+    case "disrupt" :
+        global.action_order = "disrupt";
+        instance_create(0,0,obj_disruptCursor);
+        instance_destroy();
+        break;
+    
     case "appear"   :
         global.action_order = "appear";
         instance_create(0,0,obj_execute_unit_orders);

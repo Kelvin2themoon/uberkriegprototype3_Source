@@ -4,6 +4,8 @@
 show_debug_message("Script: Execute Command");
 
 switch (global.action_order){
+
+    case "disrupt"  :   scr_exe_disrupt();  break;
     case "appear"   :   scr_exe_appear();   break;
     case "hide"     :   scr_exe_hide();     break;
     case "drop_A"   :   scr_exe_drop("A");  break;

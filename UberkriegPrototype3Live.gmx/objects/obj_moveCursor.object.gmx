@@ -513,12 +513,76 @@ global.wait         = true ; // wait is on by default
             }
             
         }
-        else{
         //clear all checker graphics ( no sprite)
         with(obj_checker_tile) sprite_index = -1;
         //change sprite back at destination
         global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
+        
+        //check if unit is vovert op. and turn on appear or dissapppear
+        
+        if (global.acting_unit.name = "Covert Op."){
+            if (global.acting_unit.isHidden){
+                //activate appear
+                global.appear = true;
+                }
+            else{
+                global.hide = true;
+                }
+            }
+        
+        //check for property
+        if( object_is_ancestor(obj_map.terrains[global.posX, global.posY].object_index, obj_property) 
+            and obj_map.terrains[global.posX, global.posY].ownership != global.P_Turn.number
+            and global.acting_unit.canCapture ){
+                global.capture = true ;
+            }
+        //for APC, check for adjacent ally unit for Supply action
+        if ( global.acting_unit.name = "A.P.C."){
+            if(scr_check_units_in_range( global.posX, global.posY,1, 1, true)){
+                global.supply = true;
+                }
+            //if units can be dropped
+            if (global.acting_unit.load_A != 0) global.drop_A = true;
+            if (global.acting_unit.load_B != 0) global.drop_B = true;
             
+            }
+        
+        //add engage if visible enemy units are in range 
+        //check primary weaopn
+        if ( global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 ){
+        
+            if (global.acting_unit.max_range = 1 or global.acting_unit.name = "Land Cruiser"){
+                //max range is 1 or is land cuiser, process as direct attack (can move and 
+                if (scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
+                        global.engage = true;
+                        global.engage_type = 1;
+                        }
+                    }
+                //otherwise process as direct (target location = origin)
+                else {
+                    if ( x = global.origin.x and y = global.origin.y){
+                        if ( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
+                            global.engage = true;
+                            global.engage_type = 1;
+                            }
+                        }
+                    
+                    }
+        
+            }
+        //check secondary weapon
+        else if (global.acting_unit.haveSecondaryWeapon){
+            if ( scr_check_units_in_range( global.posX, global.posY, 1 , 1 , false)){
+                global.engage = true;
+                global.engage_type = 2;
+                //if disrupt is avaliable
+                if (global.acting_unit.canDisrupt and global.acting_unit.ammo &gt;0) {
+                    global.disrupt = true;
+                
+            }
+        }
+    //add wait command
+        
         //create command menu    
         instance_create(x+24,y,obj_syscom_command);
         //deactivate move cursor object
@@ -565,23 +629,23 @@ global.wait         = true ; // wait is on by default
         //check primary weaopn
         if ( global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 ){
         
-        if (global.acting_unit.max_range = 1 or global.acting_unit.name = "Land Cruiser"){
-            //max range is 1 or is land cuiser, process as direct attack (can move and 
-            if ( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
-                    global.engage = true;
-                    global.engage_type = 1;
-                    }
-                }
-            //otherwise process as direct (target location = origin)
-            else {
-                if ( x = global.origin.x and y = global.origin.y){
-                    if ( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
+            if (global.acting_unit.max_range = 1 or global.acting_unit.name = "Land Cruiser"){
+                //max range is 1 or is land cuiser, process as direct attack (can move and 
+                if (scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
                         global.engage = true;
                         global.engage_type = 1;
                         }
                     }
-                
-                }
+                //otherwise process as direct (target location = origin)
+                else {
+                    if ( x = global.origin.x and y = global.origin.y){
+                        if ( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
+                            global.engage = true;
+                            global.engage_type = 1;
+                            }
+                        }
+                    
+                    }
         
             }
         //check secondary weapon
@@ -589,8 +653,12 @@ global.wait         = true ; // wait is on by default
             if ( scr_check_units_in_range( global.posX, global.posY, 1 , 1 , false)){
                 global.engage = true;
                 global.engage_type = 2;
+                //if disrupt is avaliable
+                if (global.acting_unit.canDisrupt and global.acting_unit.ammo &gt;0) {
+                    global.disrupt = true;
                 }
             }
+        }
     //add wait command
         
         //create command menu    
