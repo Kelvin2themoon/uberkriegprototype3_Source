@@ -5,6 +5,18 @@ show_debug_message("Script: syscom select");
 command = argument0; //string
 
 switch (command){
+
+    case "appear"   :
+        global.action_order = "appear";
+        instance_create(0,0,obj_execute_unit_orders);
+        instance_destroy();
+        break;
+
+    case "hide"   :
+        global.action_order = "hide";
+        instance_create(0,0,obj_execute_unit_orders);
+        instance_destroy();
+        break;
     
     case "drop_A" :
         global.action_order = "drop_A";

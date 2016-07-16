@@ -532,6 +532,18 @@ global.wait         = true ; // wait is on by default
         //change sprite back at destination
         global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
         
+        //check if unit is vovert op. and turn on appear or dissapppear
+        
+        if (global.acting_unit.name = "Covert Op."){
+            if (global.acting_unit.isHidden){
+                //activate appear
+                global.appear = true;
+                }
+            else{
+                global.hide = true;
+                }
+            }
+        
         //check for property
         if( object_is_ancestor(obj_map.terrains[global.posX, global.posY].object_index, obj_property) 
             and obj_map.terrains[global.posX, global.posY].ownership != global.P_Turn.number

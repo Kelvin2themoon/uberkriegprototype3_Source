@@ -326,6 +326,7 @@
       <sprite>sprites\spr_unitStats_Vet</sprite>
       <sprite>sprites\spr_unitStats_Cap</sprite>
       <sprite>sprites\spr_unitStats_Load</sprite>
+      <sprite>sprites\spr_unitStats_Hide</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -411,6 +412,8 @@
       <script>scripts\scr_exe_supply.gml</script>
       <script>scripts\scr_exe_load.gml</script>
       <script>scripts\scr_exe_drop.gml</script>
+      <script>scripts\scr_exe_hide.gml</script>
+      <script>scripts\scr_exe_appear.gml</script>
     </scripts>
     <scripts name="AVIRecording">
       <script>scripts\InitRecorder.gml</script>
