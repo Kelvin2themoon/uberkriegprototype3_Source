@@ -29,7 +29,9 @@
 step_counter = 0;
 animate_state = "start";
 startpos_x = x;
-startpos_y = y; 
+startpos_y = y;
+
+depth = UI_DEPTH_CURSOR  
 
 image_speed = 0;
 /*

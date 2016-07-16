@@ -42,36 +42,90 @@ view_speed = 8;
 view_border = 4*24;
 
 //clear targetables
+ds_list_clear(global.targetables);
+
  
 //check for open  adjacent terrain
 //check north ( open and valid terrain)
-if(obj_map.units[global.posX+0, global.posY-1] = 0 and scr_check_move_cost(global.target_unit, 
-obj_map.terrains[global.posX+0, global.posY-1]) != 99 ){
-    //add node to list
-    global.rangeCheck[global.posX+0, global.posY-1].sprite_index =  spr_rangecheck_clear;
-    ds_list_add(global.targetables, global.rangeCheck[global.posX+0, global.posY-1]);
+if(scr_check_move_cost(global.target_unit, obj_map.terrains[global.posX+0, global.posY-1]) != 99 ){
+    //check for unit is in place
+    if (obj_map.units[global.posX+0, global.posY-1] != 0){
+        if (obj_map.units[global.posX+0, global.posY-1].isVisible){
+            //visible unit, ally or enemy, do not add destination to list
+            }
+        else{
+            //unit not visible , add new location to drop list
+            global.rangeCheck[global.posX+0, global.posY-1].sprite_index =  spr_rangecheck_clear;
+            ds_list_add(global.targetables, global.rangeCheck[global.posX+0, global.posY-1]);
+            }
+        } 
+    else{
+        //no unit at destination, add new locatin to list
+        global.rangeCheck[global.posX+0, global.posY-1].sprite_index =  spr_rangecheck_clear;
+        ds_list_add(global.targetables, global.rangeCheck[global.posX+0, global.posY-1]);
+        } 
     }
+    
 //check east
-if(obj_map.units[global.posX+1, global.posY-0] = 0 and scr_check_move_cost(global.target_unit, 
-obj_map.terrains[global.posX+1, global.posY-0]) != 99 ){
-    //add node to list
-    global.rangeCheck[global.posX+1, global.posY-0].sprite_index =  spr_rangecheck_clear;
-    ds_list_add(global.targetables, global.rangeCheck[global.posX+1, global.posY-0]);
-    }  
+if(scr_check_move_cost(global.target_unit, obj_map.terrains[global.posX+1, global.posY-0]) != 99 ){
+    //check for unit is in place
+    if (obj_map.units[global.posX+1, global.posY-0] != 0){
+        if (obj_map.units[global.posX+1, global.posY-0].isVisible){
+            //visible unit, ally or enemy, do not add destination to list
+            }
+        else{
+            //unit not visible , add new location to drop list
+            global.rangeCheck[global.posX+1, global.posY-0].sprite_index =  spr_rangecheck_clear;
+            ds_list_add(global.targetables, global.rangeCheck[global.posX+1, global.posY-0]);
+            }
+        } 
+    else{
+        //no unit at destination, add new locatin to list
+        global.rangeCheck[global.posX+1, global.posY-0].sprite_index =  spr_rangecheck_clear;
+        ds_list_add(global.targetables, global.rangeCheck[global.posX+1, global.posY-0]);
+        } 
+    }
+     
 //check south
-if(obj_map.units[global.posX+0, global.posY+1] = 0 and scr_check_move_cost(global.target_unit, 
-obj_map.terrains[global.posX+0, global.posY+1]) != 99 ){
-    //add node to list
-    global.rangeCheck[global.posX+0, global.posY+1].sprite_index =  spr_rangecheck_clear;
-    ds_list_add(global.targetables, global.rangeCheck[global.posX+0, global.posY+1]);
+if(scr_check_move_cost(global.target_unit, obj_map.terrains[global.posX+0, global.posY+1]) != 99 ){
+    //check for unit is in place
+    if (obj_map.units[global.posX+0, global.posY+1] != 0){
+        if (obj_map.units[global.posX+0, global.posY+1].isVisible){
+            //visible unit, ally or enemy, do not add destination to list
+            }
+        else{
+            //unit not visible , add new location to drop list
+            global.rangeCheck[global.posX+0, global.posY+1].sprite_index =  spr_rangecheck_clear;
+            ds_list_add(global.targetables, global.rangeCheck[global.posX+0, global.posY+1]);
+            }
+        } 
+    else{
+        //no unit at destination, add new locatin to list
+        global.rangeCheck[global.posX+0, global.posY+1].sprite_index =  spr_rangecheck_clear;
+        ds_list_add(global.targetables, global.rangeCheck[global.posX+0, global.posY+1]);
+        } 
     }
+    
 //check west
-if(obj_map.units[global.posX-1, global.posY-0] = 0 and scr_check_move_cost(global.target_unit, 
-obj_map.terrains[global.posX-1, global.posY-0]) != 99 ){
-    //add node to list
-    global.rangeCheck[global.posX-1, global.posY-0].sprite_index =  spr_rangecheck_clear;
-    ds_list_add(global.targetables, global.rangeCheck[global.posX-1, global.posY-0]);
+if(scr_check_move_cost(global.target_unit, obj_map.terrains[global.posX-1, global.posY-0]) != 99 ){
+    //check for unit is in place
+    if (obj_map.units[global.posX-1, global.posY-0] != 0){
+        if (obj_map.units[global.posX-1, global.posY-0].isVisible){
+            //visible unit, ally or enemy, do not add destination to list
+            }
+        else{
+            //unit not visible , add new location to drop list
+            global.rangeCheck[global.posX-1, global.posY-0].sprite_index =  spr_rangecheck_clear;
+            ds_list_add(global.targetables, global.rangeCheck[global.posX-1, global.posY-0]);
+            }
+        } 
+    else{
+        //no unit at destination, add new locatin to list
+        global.rangeCheck[global.posX-1, global.posY-0].sprite_index =  spr_rangecheck_clear;
+        ds_list_add(global.targetables, global.rangeCheck[global.posX-1, global.posY-0]);
+        } 
     }
+    
 
 //move to first targetable location and initiate navigation variables    
 drop_zone_index = 0;

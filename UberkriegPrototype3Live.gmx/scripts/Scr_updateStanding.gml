@@ -7,7 +7,7 @@ standingPlayer = argument0;
 standing_Q = ds_queue_create();
 
 //add commanding units and properties
-with (obj_unit)     if(ownership = other.standingPlayer.number and isCommander) ds_queue_enqueue(other.standing_Q,    obj_map.units[ x div 24, y div 24 ]);
+with (obj_unit)     if(ownership = other.standingPlayer.number and isCommander and scr_inBound(x div 24, y div 24)) ds_queue_enqueue(other.standing_Q, obj_map.units[ x div 24, y div 24 ]);
 with (obj_property) if(ownership = other.standingPlayer.number and isCommander) ds_queue_enqueue(other.standing_Q, obj_map.terrains[ x div 24, y div 24 ]);
 
 //start loop
