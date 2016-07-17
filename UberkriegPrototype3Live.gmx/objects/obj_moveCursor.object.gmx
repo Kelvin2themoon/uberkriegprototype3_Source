@@ -28,7 +28,8 @@
             <string>///Initiate
 
 //destroy redundent syscom command menues
-
+with obj_path_node instance_destroy();
+ds_priority_clear(global.move_order);
 
 //deactivate battle cursor
 instance_deactivate_object(obj_battleCursor);
@@ -112,12 +113,6 @@ ds_list_clear(global.targetables);
 
 
 
-//ds_priority_add(global.move_order,global.rangeCheck[global.posX,global.posY],0)
-
-//create origin node add to global.move_order priority Q
-//ds_priority_add(global.move_order,instance_create(x,y,obj
-
-//AAdd origin path node
 
 
 
@@ -487,10 +482,13 @@ global.wait         = true ; // wait is on by default
     if (global.rangeCheck[global.posX,global.posY].move_cost = -1){
         //oout of range, do nothin (invalide move position)
         }
+    else{
     //if a unit [ally] occupies target location, destination is invalid    
-    else if (global.target_unit != 0){
+     if (global.target_unit != 0){
         //if target unit is an ally
         if (global.target_unit.ownership = global.P_Turn.number){
+            //disable: wait
+            global.wait = false;
         
         //check for load
         if ( global.target_unit.name = "A.P.C." and (global.acting_unit.name="Light Infantry" or (global.acting_unit.name="Heavy Infantry" or (global.acting_unit.name="Long Gun")))){
@@ -506,17 +504,9 @@ global.wait         = true ; // wait is on by default
             }
         if (global.attach or global.join or global.load){
             global.wait = false; 
-            //create command menu    
-            instance_create(x+24,y,obj_syscom_command);
-            //deactivate move cursor object
-            instance_deactivate_object(obj_moveCursor);
             }
             
         }
-        //clear all checker graphics ( no sprite)
-        with(obj_checker_tile) sprite_index = -1;
-        //change sprite back at destination
-        global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
         
         //check if unit is vovert op. and turn on appear or dissapppear
         
@@ -533,6 +523,7 @@ global.wait         = true ; // wait is on by default
         //check for property
         if( object_is_ancestor(obj_map.terrains[global.posX, global.posY].object_index, obj_property) 
             and obj_map.terrains[global.posX, global.posY].ownership != global.P_Turn.number
+            and obj_map.units[global.posX, global.posY] = 0
             and global.acting_unit.canCapture ){
                 global.capture = true ;
             }
@@ -581,20 +572,12 @@ global.wait         = true ; // wait is on by default
                 
             }
         }
-    //add wait command
-        
-        //create command menu    
-        instance_create(x+24,y,obj_syscom_command);
-        //deactivate move cursor object
-        instance_deactivate_object(obj_moveCursor);
+
             }
         }
     //else target is in range &amp; no unit visibly occupies the location    
     else{
-        //clear all checker graphics ( no sprite)
-        with(obj_checker_tile) sprite_index = -1;
-        //change sprite back at destination
-        global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
+
         
         //check if unit is vovert op. and turn on appear or dissapppear
         
@@ -659,14 +642,38 @@ global.wait         = true ; // wait is on by default
                 }
             }
         }
-    //add wait command
+
+            }
+    //if items exsist, create syscom_command
+    if(global.capture   or
+    global.engage       or
+    global.join         or
+    global.attach       or
+    global.supply       or
+    global.load         or
+    global.drop_A       or
+    global.drop_B       or
+    global.infiltrate   or
+    global.hide         or
+    global.appear       or
+    global.disrupt      or
+    global.wait){
         
-        //create command menu    
-        instance_create(x+24,y,obj_syscom_command);
+        
+        //clear all checker graphics ( no sprite)
+        with(obj_checker_tile) sprite_index = -1;
+        //change sprite back at destination
+        global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
+        
         //deactivate move cursor object
         instance_deactivate_object(obj_moveCursor);
-            } 
+        //create command menu    
+        instance_create(x+24,y,obj_syscom_command); 
         }
+            
+        
+        }
+}
 
 </string>
           </argument>

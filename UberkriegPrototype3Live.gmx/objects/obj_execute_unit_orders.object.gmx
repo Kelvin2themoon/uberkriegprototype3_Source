@@ -38,7 +38,6 @@ show_debug_message("Create: execute orders");
 with (obj_path_node) sprite_index = -1; 
 //reset checker tiles
 scr_rangeCheck_reset();
-//destroy move cursor
 
 //set destination
 destination = ds_priority_find_max(global.move_order);
@@ -109,7 +108,7 @@ if (global.acting_unit.x = destination.x and global.acting_unit.y = destination.
     //destroy redundent move cursors, if the exsist?
     with (obj_moveCursor){ instance_destroy();}
     //destroy this event and any redundancies
-    with obj_execute_unit_orders instance_destroy();
+    instance_destroy();
     }
 //move unit according to moveward
 else{
@@ -184,7 +183,7 @@ if( global.acting_unit.x = move_to.x and global.acting_unit.y = move_to.y){
             global.acting_unit.alarm[0] = 1;
             with(obj_path_node) instance_destroy();
             //destroy redundent move cursors, if the exsist?
-            with (obj_moveCursor){ instance_destroy();}
+            with (obj_moveCursor){instance_destroy();}
             //destroy this event
             instance_destroy();
             }

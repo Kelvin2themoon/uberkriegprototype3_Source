@@ -229,9 +229,17 @@ global.temp_pq = ds_priority_create();
 //debug variable, keeps track of number of HQs
 global. HQnum = 0;
 
+//Players in play
+global.P1_in_play = false;
+global.P2_in_play = false;
+global.P3_in_play = false;
+global.P4_in_play = false;
+
+
 //creat player objects for each Exsisting HQ into a priority Q
 with (obj_terrain_HQ){
-    
+
+
 
     switch (ownership){
         case 0 :
@@ -242,6 +250,7 @@ with (obj_terrain_HQ){
         global.P1 = instance_create(0,0,obj_player); 
         global.P1.number = 1;
         ds_priority_add(global.temp_pq, global.P1 ,1);
+        global.P1_in_play = true;
         break;
         
         case 2: // create player 2
@@ -249,6 +258,7 @@ with (obj_terrain_HQ){
         global.P2 = instance_create(0,0,obj_player);
         global.P2.number = 2;
         ds_priority_add(global.temp_pq, global.P2 ,2);
+        global.P2_in_play = true;
         break; 
         
         case 3: // create player 3
@@ -256,6 +266,7 @@ with (obj_terrain_HQ){
         global.P3 = instance_create(0,0,obj_player);
         global.P3.number = 3;
         ds_priority_add(global.temp_pq, global.P3 ,3);
+        global.P3_in_play = true;
         break;
         
         case 4: // create player 4
@@ -263,6 +274,7 @@ with (obj_terrain_HQ){
         global.P4 = instance_create(0,0,obj_player);
         global.P4.number = 4;  
         ds_priority_add(global.temp_pq, global.P4 ,4);
+        global.P4_in_play = true;
         break;
     
         }
@@ -376,6 +388,7 @@ global.action_order = "wait" ;//default to wait
 global.capture      = false;
 global.engage       = false;
 global.join         = false;
+global.attach       = false;
 global.supply       = false;
 global.load         = false;
 global.drop_A       = false;

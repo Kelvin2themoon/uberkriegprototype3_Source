@@ -337,7 +337,7 @@ global.target_unit = obj_map.units[ x div 24 , y div 24 ];
             <string>/// cancel to re-activate command menu
 
 if keyboard_check_pressed (global.keyCANCEL){
-    instance_activate_object(obj_syscom_command);
+    instance_create(x,y,obj_syscom_command);
     instance_destroy();
     }
 </string>

@@ -8,5 +8,10 @@ with global.acting_unit instance_destroy();
 instance_activate_object(obj_miniwin);
 instance_activate_object(obj_battleCursor);
 
+with obj_battleCursor{
+    x = global.posX*24;
+    y = global.posY*24;
+    }
+
 //nuke syscom
 with par_syscom_menu instance_destroy();
