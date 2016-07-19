@@ -43,9 +43,12 @@ while (ds_queue_size(standing_Q) != 0 ){
                          and obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].isStanding = false
                          and obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].ownership = standingPlayer.number
                          ){
-                            //add unit to Q, exclude disrupted units
-                            if (obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].isDisrupted = false)
-                            ds_queue_enqueue(standing_Q,obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ]);
+                            //add unit to Q, exclude disrupted units and move check exceptions
+                            if (obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].isDisrupted = true or
+                                obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ].isException = true){
+                                //do nothing
+                                }
+                                else ds_queue_enqueue(standing_Q,obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ]);
                             }
                     }
                 //check if therrain is property

@@ -10,12 +10,18 @@ origin_x = move_check_target.x div 24;
 origin_y = move_check_target.y div 24;
 
 
+
 //graphic
 move_tile_graphic = spr_rangecheck_clear;
 check_move_cost = 0
 
 //initiate seed tile at origin
 global.rangeCheck[origin_x,origin_y].move_cost = 0;
+
+//make exception
+move_check_target.isException = true;
+//check standing
+scr_updateStanding_global();
 
 //perform global radio check 
 scr_globalRadioCheck();
@@ -125,6 +131,11 @@ if (move_check_target.isCommander) {
     with (obj_checker_tile) if (sprite_index != -1) sprite_index = spr_rangecheck_clear;     
 
     }
+    
+//undo make exception
+move_check_target.isException = false;
+//check standing
+scr_updateStanding_global();
 
 
 
