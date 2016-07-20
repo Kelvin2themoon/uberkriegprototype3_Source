@@ -274,6 +274,7 @@ if ( view_yview[0] + view_hport[0] &lt; y + view_border+24) view_yview[0] += vie
 
 if keyboard_check_pressed(global.keyCONFIRM){
     global.target_unit = supply_target;
+    global.acting_unit.ammo -=1;
     instance_create(0,0,obj_execute_unit_orders);
     instance_destroy();
     }
@@ -331,7 +332,18 @@ if keyboard_check_pressed (global.keyCANCEL){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Damage %
+            <string>///Debug 
+unit_selection      = supply_target;
+
+if (global.Phaze = "Main" and unit_selection != 0){
+    if (unit_selection.isVisible){
+        draw_text(12,60, string_upper(unit_selection.name));
+        draw_text(12,72,"HP: " + string(unit_selection.hp)+"/10");
+        draw_text(12,84,"Fuel: " + string(unit_selection.fuel)+"/"+string(unit_selection.max_fuel));
+        draw_text(12,96,"Ammo: " + string(unit_selection.ammo)+"/"+string(unit_selection.max_ammo));
+        }
+    }  
+
 
 
 </string>

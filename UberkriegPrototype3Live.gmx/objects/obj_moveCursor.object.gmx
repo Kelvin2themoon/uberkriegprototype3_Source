@@ -697,23 +697,7 @@ global.wait         = true ; // wait is on by default
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///troubleshoot readout
-
-/*
-
-draw_text(0,48,global.acting_unit.state);
-
-//draw_text(0,72,string(still_to_check));
-draw_text(0,84,"Move:"+string(global.rangeCheck[global.posX,global.posY].move_cost));
-draw_text(0,96,"Path:"+string(path_total));
-draw_text(0,108,"Loop:"+string(loop));
-
-numberofmovecursors =0;
-with (obj_moveCursor) numberofmovecursors +=1;
-draw_text(0,120,"cursors = " + string(numberofmovecursors));
-
-draw_text(0,130,"X = " + string(global.acting_unit.x div 24));
-draw_text(0,142,"Y = " + string(global.acting_unit.y div 24));  
+            <string>
 
 
 </string>

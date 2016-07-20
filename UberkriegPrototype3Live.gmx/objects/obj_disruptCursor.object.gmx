@@ -331,7 +331,17 @@ if keyboard_check_pressed (global.keyCANCEL){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Damage %
+            <string>///Debug 
+unit_selection      = supply_target;
+
+if (global.Phaze = "Main" and unit_selection != 0){
+    if (unit_selection.isVisible){
+        draw_text(12,60, string_upper(unit_selection.name));
+        draw_text(12,72,"HP: " + string(unit_selection.hp)+"/10");
+        draw_text(12,84,"Fuel: " + string(unit_selection.fuel)+"/"+string(unit_selection.max_fuel));
+        draw_text(12,96,"Ammo: " + string(unit_selection.ammo)+"/"+string(unit_selection.max_ammo));
+        }
+    }  
 
 
 </string>

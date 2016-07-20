@@ -144,29 +144,6 @@ scr_updateGlobalVision();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initiate cursor traking global variable
-global.posX = 0;
-global.posY = 0; 
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///creat &amp; load map
 instance_create(0,0,obj_map);
 scr_ubermap_load("protoland.ubm");
@@ -462,6 +439,30 @@ global.drop_phaze_2 = false; //true if second drop action is taking place to byp
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Initiate Variables
+global.posX = 0;
+global.posY = 0;
+global.Phaze = "Waiting";  
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="1" enumb="0">
       <action>
@@ -542,29 +543,15 @@ global.rangeCheckerFramIndex +=1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-// DAY
-draw_text(0,0, "DAY: " + string(global.Day));
-//player and phaze
-draw_text(0,12, global.Phaze + "P" + string(global.P_Turn.number));
-//funds
-current_player = ds_queue_head(global.player_q);
-draw_text(0,24, "Funds: " + string(current_player.funds ));
-//depth
-draw_text(0,36,"DEPTH: " + string( obj_map.units[global.posX,global.posY].depth));
-
-
-
-
-
-
-/*
-draw_text(0,24, global.Phaze + string(global.P_Turn.number));
-draw_text(0,36, "playernum:"+string(ds_queue_size(global.player_q)));
-draw_text(0,48, "HQ count: " + string(global.HQnum));
-draw_text(0,72, "Last Player: : " + string(global.last_player));
-draw_text(0,12, string_letters(obj_map.terrains[global.posX,global.posY].name));
-8?
+            <string>// DAY
+draw_text(12,12, "DAY: " + string(global.Day));
+//Player Phaze
+if (global.Phaze = "Waiting")   draw_text(12,36, "P" + string(global.P_Turn.number) + ": Press Z-key to start turn" );
+if (global.Phaze = "Main"){      
+                                draw_text(12,24, "PLAYER " + string(global.P_Turn.number ));
+                                //Funds
+                                draw_text(12,36, "FUNDS: " + string(global.P_Turn.funds ));
+                                }
 
 
 
