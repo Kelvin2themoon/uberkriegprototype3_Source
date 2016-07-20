@@ -398,6 +398,7 @@
         <script>scripts\scr_updateStanding_global.gml</script>
         <script>scripts\scr_globalRadioCheck.gml</script>
       </scripts>
+      <script>scripts\scr_attack_rance_check.gml</script>
     </scripts>
     <script>scripts\scr_calc_revenue.gml</script>
     <script>scripts\scr_setUnitDepth.gml</script>

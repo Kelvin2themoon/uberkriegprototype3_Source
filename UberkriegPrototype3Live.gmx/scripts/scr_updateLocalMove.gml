@@ -15,6 +15,10 @@ origin_y = move_check_target.y div 24;
 move_tile_graphic = spr_rangecheck_clear;
 check_move_cost = 0
 
+max_move_points =  move_check_target.move_points;
+if (move_check_target.fuel < max_move_points) max_move_points = move_check_target.fuel;
+
+
 //initiate seed tile at origin
 global.rangeCheck[origin_x,origin_y].move_cost = 0;
 
@@ -33,7 +37,7 @@ with (obj_checker_tile){
     }
 
 
-for (check_move_cost = 0; check_move_cost < move_check_target.move_points; check_move_cost += 1){
+for (check_move_cost = 0; check_move_cost < max_move_points; check_move_cost += 1){
     with (obj_checker_tile){
         //remove dark blue tiles
         //if sprite_index = spr_rangecheck_bluedk sprite_index =-1;
@@ -142,118 +146,4 @@ scr_updateStanding_global();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-old [faliour] code
-
-
-
-
-
-//create seed note at unit origin
-global.rangeCheck[origin_x,origin_y].check_this_node 
-= true;//check this node is true
-
-//set origin move_points left to move or fuel if limited
-if (move_check_target.fuel < move_check_target.move_points){
-    global.rangeCheck[origin_x,origin_y].move_points_left 
-    = move_check_target.fuel; 
-    }
-else{
-    global.rangeCheck[origin_x,origin_y].move_points_left 
-    =  move_check_target.move_points;
-    }
-    
-//create ender variable (stop when zero)
-still_to_check = 1;
-
-while (still_to_check > 0 ){
-    with (obj_checker_tile){
-        if (check_this_node){
-            check_this_node = false;
-            
-            //check north
-            //if there is enugh local movepoints to move north
-            if( move_points_left >=  scr_check_move_cost( other.move_check_target,obj_map.terrains[ (x div 24)+0 , (y div 24)-1])){
-                global.rangeCheck[ (x div 24)+0 , (y div 24)-1].sprite_index    = other.tile_graphic; //change graphic
-                global.rangeCheck[ (x div 24)+0 , (y div 24)-1].check_this_node = true; // add to be checked
-                //set new move points left
-                global.rangeCheck[ (x div 24)+0 , (y div 24)-1].move_points_left = move_points_left 
-                - scr_check_move_cost( other.move_check_target,obj_map.terrains[ (x div 24)+0 , (y div 24)-1]);
-                //increase still to check
-                other.still_to_check +=1;       
-                }
-                
-            
-            ///check east
-            if( move_points_left >=  scr_check_move_cost( other.move_check_target,obj_map.terrains[ (x div 24)+1 , (y div 24)+0])){
-                global.rangeCheck[ (x div 24)+1 , (y div 24)-0].sprite_index    = other.tile_graphic; //change graphic
-                global.rangeCheck[ (x div 24)+1 , (y div 24)-0].check_this_node = true; // add to be checked
-                //set new move points left
-                global.rangeCheck[ (x div 24)+1 , (y div 24)-0].move_points_left = move_points_left 
-                - scr_check_move_cost( other.move_check_target,obj_map.terrains[ (x div 24)+1 , (y div 24)-0]);
-                //increase still to check
-                other.still_to_check +=1;       
-                }
-            
-          
-            
-            ///check west
-            if( move_points_left >=  scr_check_move_cost( other.move_check_target,obj_map.terrains[ (x div 24)-1 , (y div 24)+0])){
-                global.rangeCheck[ (x div 24)-1 , (y div 24)-0].sprite_index    = other.tile_graphic; //change graphic
-                global.rangeCheck[ (x div 24)-1 , (y div 24)-0].check_this_node = true; // add to be checked
-                //set new move points left
-                global.rangeCheck[ (x div 24)-1 , (y div 24)-0].move_points_left = move_points_left 
-                - scr_check_move_cost( other.move_check_target,obj_map.terrains[ (x div 24)-1 , (y div 24)-0]);
-                //increase still to check
-                other.still_to_check +=1;       
-                }
-            other.still_to_check -=1;   
-            }
-            
-
-        }
-            
-    }
-
-
-
-/*
-while (still_to_check > 0){
-    with(obj_checker_tile ){
-        if (check_this_node){
-            //check north if enough Mp
-            if (move_points_left >= scr_check_move_cost(other.move_check_target,obj_map.terrains[(x div 24)+0, (y div 24)-1])){
-                //if tile has not been checked
-                    if (global.rangeCheck[(x div 24)+0, (y div 24)-1].move_points_left = -1){
-                        //activate new node & increase check count
-                        global.rangeCheck[(x div 24)+0, (y div 24)-1].check_this_node = true;
-                        other.still_to_check +=1
-                        //set move points left
-                        global.rangeCheck[(x div 24)+0, (y div 24)-1].move_points_left 
-                        = move_points_left - scr_check_move_cost(other.move_check_target,obj_map.terrains[(x div 24)+0, (y div 24)-1]);
-                        //set graphic on
-                        sprite_index = other.tile_graphic;
-                    } 
-                }
-            check_this_node = false;
-            other.still_to_check -=1;
-            }
-        }    
-    }
 

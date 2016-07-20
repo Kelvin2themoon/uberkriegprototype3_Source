@@ -216,8 +216,6 @@ global.P4_in_play = false;
 //creat player objects for each Exsisting HQ into a priority Q
 with (obj_terrain_HQ){
 
-
-
     switch (ownership){
         case 0 :
         break;
@@ -228,6 +226,12 @@ with (obj_terrain_HQ){
         global.P1.number = 1;
         ds_priority_add(global.temp_pq, global.P1 ,1);
         global.P1_in_play = true;
+        //add cursor pose at 
+        global.P1.save_cursor_pos_x = x;
+        global.P1.save_cursor_pos_y = y;
+        //check view
+        if (x &gt; (768-96)) global.P2.save_view_pos_x = x - (768-24*5);
+        if (y &gt; (432-96)) global.P2.save_view_pos_y = y - (432-24*5);
         break;
         
         case 2: // create player 2
@@ -236,6 +240,12 @@ with (obj_terrain_HQ){
         global.P2.number = 2;
         ds_priority_add(global.temp_pq, global.P2 ,2);
         global.P2_in_play = true;
+        //add cursor pose at 
+        global.P2.save_cursor_pos_x = x;
+        global.P2.save_cursor_pos_y = y;
+        //check view
+        if (x &gt; (768-96)) global.P2.save_view_pos_x = x - (768-24*5);
+        if (y &gt; (432-96)) global.P2.save_view_pos_y = y - (432-24*5);
         break; 
         
         case 3: // create player 3
@@ -244,6 +254,12 @@ with (obj_terrain_HQ){
         global.P3.number = 3;
         ds_priority_add(global.temp_pq, global.P3 ,3);
         global.P3_in_play = true;
+        //add cursor pose at 
+        global.P3.save_cursor_pos_x = x;
+        global.P3.save_cursor_pos_y = y;
+        //check view
+        if (x &gt; (768-96)) global.P2.save_view_pos_x = x - (768-24*5);
+        if (y &gt; (432-96)) global.P2.save_view_pos_y = y - (432-24*5);
         break;
         
         case 4: // create player 4
@@ -252,6 +268,12 @@ with (obj_terrain_HQ){
         global.P4.number = 4;  
         ds_priority_add(global.temp_pq, global.P4 ,4);
         global.P4_in_play = true;
+        //add cursor pose at 
+        global.P4.save_cursor_pos_x = x;
+        global.P4.save_cursor_pos_y = y;
+        //check view
+        if (x &gt; (768-96)) global.P2.save_view_pos_x = x - (768-24*5);
+        if (y &gt; (432-96)) global.P2.save_view_pos_y = y - (432-24*5);
         break;
     
         }

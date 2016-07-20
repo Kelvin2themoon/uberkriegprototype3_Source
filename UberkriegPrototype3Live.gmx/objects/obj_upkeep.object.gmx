@@ -37,7 +37,16 @@ global.P_Turn.funds += scr_calc_revenue(global.P_Turn.number);
 //turn units on if standing
 with obj_unit{ 
     if isStanding state = "idle";
+    if isDisrupted state = "exhaust";
     if isDisrupted isDisrupted = false;
+    if ( obj_map.terrains[ x div 24, y div 24].isProperty ){
+        if ( obj_map.terrains[ x div 24, y div 24].canRepair_g and obj_map.terrains[ x div 24, y div 24].ownership = global.P_Turn.number){
+            hp += 2;
+            if (hp &gt; 10) hp = 10;
+            fuel = max_fuel;
+            ammo = max_ammo;
+            }
+        }
     }
 
 
@@ -45,6 +54,13 @@ with obj_unit{
 //activate HUD
 instance_activate_object(obj_battleCursor);
 instance_activate_object(obj_miniwin);
+
+//change cursor position
+with obj_battleCursor{
+    x = global.P_Turn.save_cursor_pos_x;
+    y = global.P_Turn.save_cursor_pos_y;
+    }
+
 //change phaze
 global.Phaze = "Main"
 

@@ -1,5 +1,7 @@
 
 //hp-1 for now, ammo and fuel max
+global.acting_unit.ammo -=1;
+
 with (global.target_unit){
     isDisrupted = true;
     state = "exhaust";

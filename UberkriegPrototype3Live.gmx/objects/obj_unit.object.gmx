@@ -196,6 +196,13 @@ if(instance_exists(obj_terrain_RiverBridge))
         }
     }
     
+///Draw is Lost isrupt
+if (!isStanding and global.blinking and isVisible) draw_sprite(spr_unitStats_Radio,3,x,y);
+//if (hp &lt; 10 and hp  &gt; 0) draw_sprite( spr_unitStats_HP, hp , x,y)
+if (isDisrupted and isVisible){ 
+    draw_sprite(spr_unitStats_Disrupted,0,x,y);
+    }
+    
 if (isCommander and isVisible) draw_sprite(spr_unitStats_Radio,0,x,y);
 </string>
           </argument>
@@ -241,14 +248,7 @@ else            image_alpha = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw is Lost anddisrupt
-
-if (!isStanding and global.blinking and isVisible) draw_sprite(spr_unitStats_Radio,3,x,y);
-//if (hp &lt; 10 and hp  &gt; 0) draw_sprite( spr_unitStats_HP, hp , x,y)
-if (isDisrupted and isVisible){ 
-    draw_sprite(spr_unitStats_Disrupted,0,x,y);
-    }
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>
