@@ -98,7 +98,7 @@ ds_priority_add(global.move_order,new_path_node,path_total);
 //remove acting unit from map array
 obj_map.units[moveOriginX,moveOriginY] = 0;
 
-//initiate cando variable
+//initiate cambo variable
 
 isActionable = false ;
 
@@ -697,7 +697,11 @@ global.wait         = true ; // wait is on by default
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>
+
+draw_text(12,300, "movecost: " + string( global.rangeCheck[x div 24, y div 24].move_cost));
+draw_text(12,313, "terrain cost: " + string(scr_check_move_cost(global.acting_unit,obj_map.terrains[x div 24, y div 24])));
+</string>
           </argument>
         </arguments>
       </action>

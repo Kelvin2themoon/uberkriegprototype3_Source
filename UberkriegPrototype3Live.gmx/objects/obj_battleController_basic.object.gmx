@@ -258,8 +258,8 @@ with (obj_terrain_HQ){
         global.P3.save_cursor_pos_x = x;
         global.P3.save_cursor_pos_y = y;
         //check view
-        if (x &gt; (768-96)) global.P2.save_view_pos_x = x - (768-24*5);
-        if (y &gt; (432-96)) global.P2.save_view_pos_y = y - (432-24*5);
+        if (x &gt; (768-96)) global.P3.save_view_pos_x = x - (768-24*5);
+        if (y &gt; (432-96)) global.P3.save_view_pos_y = y - (432-24*5);
         break;
         
         case 4: // create player 4
@@ -272,8 +272,8 @@ with (obj_terrain_HQ){
         global.P4.save_cursor_pos_x = x;
         global.P4.save_cursor_pos_y = y;
         //check view
-        if (x &gt; (768-96)) global.P2.save_view_pos_x = x - (768-24*5);
-        if (y &gt; (432-96)) global.P2.save_view_pos_y = y - (432-24*5);
+        if (x &gt; (768-96)) global.P4.save_view_pos_x = x - (768-24*5);
+        if (y &gt; (432-96)) global.P4.save_view_pos_y = y - (432-24*5);
         break;
     
         }

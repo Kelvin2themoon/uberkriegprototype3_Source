@@ -18,6 +18,34 @@ if( obj_map.units[check_move_cost_terrain.x div 24, check_move_cost_terrain.y di
         obj_map.units[check_move_cost_terrain.x div 24, check_move_cost_terrain.y div 24].isVisible = true){
             check_move_cost_output = 99;
             }
+    else{
+        switch (check_move_cost_unit.move_type)
+        {
+    
+        case "Boots":
+            check_move_cost_output = check_move_cost_terrain.mtype_boots;
+            break;
+        case "Heavy Boots":
+            check_move_cost_output = check_move_cost_terrain.mtype_heavyBoots;
+            break;
+        case "Tires":
+            check_move_cost_output = check_move_cost_terrain.mtype_tires;
+            break;
+        case "Heavy Tires":
+            check_move_cost_output = check_move_cost_terrain.mtype_heavyTires;
+            break;
+        case "Special Tires":
+            check_move_cost_output = check_move_cost_terrain.mtype_specialTires;
+            break;
+        case "Tracks":
+            check_move_cost_output = check_move_cost_terrain.mtype_tracks;
+            break;
+        case "Heavy Tracks":
+            check_move_cost_output = check_move_cost_terrain.mtype_heavyTracks;        
+            break;
+            }
+        
+        }
     }
 
 else{

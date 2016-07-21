@@ -111,7 +111,7 @@ if (arc_unit.max_range = 1){
 
     }
 
-else if (arc_unit.name = "Land Cruiser") {
+else if (arc_unit.name = "Land Cruiser" and arc_unit.ammo > 0) {
 //make generic move check (without radio check)...then check each attack possibilities
     //graphic
     move_tile_graphic = spr_rangecheck_clear;
@@ -234,14 +234,17 @@ else if (arc_unit.name = "Land Cruiser") {
     }
 
 //regular indirecr fire range check
-
-else{
+    
+    //check for land cruiser
+    aux_min_range = arc_unit.min_range;
+    if (arc_unit.name = "Land Cruiser") aux_min_range = 1;
+    
     //indirect range check
     ix = 0;
     iy = 0;
     for (ix = arc_unit.max_range*(-1) ; ix <= arc_unit.max_range ; ix+=1 ){
         for (iy = arc_unit.max_range*(-1) ; iy <= arc_unit.max_range ; iy+=1 ){
-            if( abs(ix) + abs(iy) >= arc_unit.min_range and abs(ix) + abs(iy) <= arc_unit.max_range ){
+            if( abs(ix) + abs(iy) >= aux_min_range and abs(ix) + abs(iy) <= arc_unit.max_range ){
             newpos_x = (arc_unit.x div 24) + ix;
             newpos_y = (arc_unit.y div 24) + iy;
             if scr_inBound(newpos_x,newpos_y) global.rangeCheck[newpos_x, newpos_y].sprite_index = spr_rangecheck_red;
@@ -249,7 +252,7 @@ else{
                 }
             } 
         }   
-    }
+    
 
 
 

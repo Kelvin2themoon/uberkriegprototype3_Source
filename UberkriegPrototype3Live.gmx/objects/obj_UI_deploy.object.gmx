@@ -319,7 +319,6 @@ no_deploy = false;
             
             case 6: //cancel
                 no_deploy = true;
-                unit_has_deploy = true;
                 break;
             }
         }            
@@ -384,14 +383,15 @@ no_deploy = false;
            break;
             }        
         }
-    
-        if unit_has_deployed{
-            if no_deploy{
+        if no_deploy {
                 instance_activate_object(obj_battleCursor);
                 instance_activate_object(obj_miniwin);
                 instance_destroy();
                 }
-            else if obj_map.units[global.posX,global.posY] !=0{
+    
+        if unit_has_deployed{
+
+             if obj_map.units[global.posX,global.posY] !=0{
                 //update vision for depoyed unit
                 scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
                 //exshaust deployed unit
