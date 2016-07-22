@@ -49,6 +49,14 @@ engage_target = ds_list_find_value( global.targetables,0);
 x = engage_target.x ;
 y = engage_target.y ;
 
+initial_type = global.engage_type;
+
+//check engage type
+global.engage_type = initial_type;
+if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,1) &lt; 0){
+    global.engage_type = 2;
+    } 
+     
 //initiate display
 dmg_percent=scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,global.engage_type);
 
@@ -175,6 +183,11 @@ if (alarm[1] = -1 )
             x = engage_target.x ;
             y = engage_target.y ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
+            //check engage type
+            global.engage_type = initial_type;
+            if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,1) &lt; 0){
+                global.engage_type = 2;
+                } 
             break;
         
         case vk_down :
@@ -189,6 +202,11 @@ if (alarm[1] = -1 )
             x = engage_target.x ;
             y = engage_target.y ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
+            //check engage type
+            global.engage_type = initial_type;
+            if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,1) &lt; 0){
+                global.engage_type = 2;
+                } 
             break;
         
         case vk_left :
@@ -203,7 +221,12 @@ if (alarm[1] = -1 )
             x = engage_target.x ;
             y = engage_target.y ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
-            break;;  
+            //check engage type
+            global.engage_type = initial_type;
+            if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,1) &lt; 0){
+                global.engage_type = 2;
+                } 
+            break; 
                     
         case vk_right :
             if ( global.posY &gt; 0 ) 
@@ -217,6 +240,11 @@ if (alarm[1] = -1 )
             x = engage_target.x ;
             y = engage_target.y ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
+            //check engage type
+            global.engage_type = initial_type;
+            if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,1) &lt; 0){
+                global.engage_type = 2;
+                } 
             break;
               
         }
