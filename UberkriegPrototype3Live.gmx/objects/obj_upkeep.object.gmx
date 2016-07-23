@@ -41,8 +41,14 @@ with obj_unit{
     if isDisrupted isDisrupted = false;
     if ( obj_map.terrains[ x div 24, y div 24].isProperty ){
         if ( obj_map.terrains[ x div 24, y div 24].canRepair_g and obj_map.terrains[ x div 24, y div 24].ownership = global.P_Turn.number){
-            hp += 2;
-            if (hp &gt; 10) hp = 10;
+            if (hp=9){
+                hp = 10
+                global.P_Turn.funds -= cost div 10;
+                }
+            else if ( hp &lt; 9){
+                hp +=2
+                 global.P_Turn.funds -= (cost div 10)*2;
+                }
             fuel = max_fuel;
             ammo = max_ammo;
             }
