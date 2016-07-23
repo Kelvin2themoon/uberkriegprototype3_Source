@@ -523,7 +523,7 @@ global.wait         = true ; // wait is on by default
         //check for property
         if( object_is_ancestor(obj_map.terrains[global.posX, global.posY].object_index, obj_property) 
             and obj_map.terrains[global.posX, global.posY].ownership != global.P_Turn.number
-            and obj_map.units[global.posX, global.posY] = 0
+            and obj_map.units[global.posX, global.posY].isVisible = false
             and global.acting_unit.canCapture ){
                 global.capture = true ;
             }

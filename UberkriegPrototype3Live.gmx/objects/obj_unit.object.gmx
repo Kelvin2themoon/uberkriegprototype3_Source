@@ -38,7 +38,7 @@ fuel        = 90;
 ammo        =  5;
 isDisrupted = false; //true when hit by Covert.Op disrupter
 isVisible   = true;
-isHidden    = false;
+isHidden    = false; // consumes 5 fuel when true, see upkeep
 
  
 

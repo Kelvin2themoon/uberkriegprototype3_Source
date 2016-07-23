@@ -44,7 +44,7 @@ mtype_heavyTracks   = 2;
 //property only fields
 vision          = 2;
 radio           = 3;
-income          = 2000;         // added to funds each turn to owner
+income          = 1000;         // added to funds each turn to owner
 isCommander     = true;
 
 
