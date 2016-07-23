@@ -109,6 +109,12 @@ if (global.acting_unit.x = destination.x and global.acting_unit.y = destination.
     with (obj_moveCursor){ instance_destroy();}
     //destroy this event and any redundancies
     instance_destroy();
+    with(obj_unit){
+        isEngageTarget  = false;
+        isDisruptTarget = false;
+        isSupplyTarget  = false;
+        }
+    
     }
 //move unit according to moveward
 else{

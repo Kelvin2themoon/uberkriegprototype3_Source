@@ -61,6 +61,11 @@ if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,en
 dmg_percent=scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,global.engage_type);
 
 
+i =0;
+for (i=0 ; i &lt; engage_list_size ; i+=1){
+    targeting = ds_list_find_value(global.targetables,i);
+    targeting.isEngageTarget = true;
+    } 
 
 
 
@@ -367,6 +372,7 @@ global.target_unit = obj_map.units[ x div 24 , y div 24 ];
             <string>/// cancel to re-activate command menu
 
 if keyboard_check_pressed (global.keyCANCEL){
+    with (obj_unit) isEngageTarget = false; 
     instance_create(x,y,obj_syscom_command);
     instance_destroy();
     }

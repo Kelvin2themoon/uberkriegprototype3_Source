@@ -13,6 +13,8 @@ if (arc_unit.fuel < max_move_points)  max_move_points = arc_unit.fuel;
 
 //check for direct attack
 if (arc_unit.max_range = 1){
+if (arc_unit.ammo  = 0 and !arc_unit.haveSecondaryWeapon){} //if cant attack
+else{
     //make generic move check (without radio check)...then check each attack possibilities
     //graphic
     move_tile_graphic = spr_rangecheck_clear;
@@ -108,8 +110,9 @@ if (arc_unit.max_range = 1){
                 }        
             }
         }
-
     }
+
+}
 
 else if (arc_unit.name = "Land Cruiser" and arc_unit.ammo > 0) {
 //make generic move check (without radio check)...then check each attack possibilities
@@ -238,7 +241,8 @@ else if (arc_unit.name = "Land Cruiser" and arc_unit.ammo > 0) {
     //check for land cruiser
     aux_min_range = arc_unit.min_range;
     if (arc_unit.name = "Land Cruiser") aux_min_range = 1;
-    
+if (arc_unit.ammo  = 0 and !arc_unit.haveSecondaryWeapon){} //if cant attack
+else{
     //indirect range check
     ix = 0;
     iy = 0;
@@ -252,8 +256,7 @@ else if (arc_unit.name = "Land Cruiser" and arc_unit.ammo > 0) {
                 }
             } 
         }   
-    
-
+    }
 
 
 

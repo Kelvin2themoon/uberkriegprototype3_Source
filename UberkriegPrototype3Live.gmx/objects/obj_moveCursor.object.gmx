@@ -725,6 +725,20 @@ draw_text(12,313, "terrain cost: " + string(scr_check_move_cost(global.acting_un
             <kind>1</kind>
             <string>draw_self();
 if (global.acting_unit.name = "Land Cruiser" and global.acting_unit.ammo &gt; 0) draw_sprite(spr_CruiserPlusCursor,0,x,y);
+
+
+if (obj_map.units[global.posX,global.posY] !=0 ){
+    if (global.cursorFrame = 2 or global.cursorFrame = 1){
+        //join
+        if (obj_map.units[global.posX,global.posY].hp &lt; 10 and obj_map.units[global.posX,global.posY].name = global.acting_unit.name) draw_sprite( spr_basicCursor_Icons,4,x,y); 
+        //attach
+        if ( obj_map.units[global.posX,global.posY].isCommander = false and global.acting_unit.canAttach) draw_sprite(spr_basicCursor_Icons,3,x,y);
+        //Load
+        if ( obj_map.units[global.posX,global.posY].name = "A.P.C."){
+            if (global.acting_unit.name = "long Gun" or global.acting_unit.name = "Light Infantry" or global.acting_unit.name = "Heavy Infantry") draw_sprite( spr_basicCursor_Icons,2,x,y);
+            }                
+        }
+    }
 </string>
           </argument>
         </arguments>

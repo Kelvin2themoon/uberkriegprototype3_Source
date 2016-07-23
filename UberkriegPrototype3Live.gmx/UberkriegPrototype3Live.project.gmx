@@ -328,6 +328,7 @@
       <sprite>sprites\spr_unitStats_Load</sprite>
       <sprite>sprites\spr_unitStats_Hide</sprite>
       <sprite>sprites\spr_unitStats_Disrupted</sprite>
+      <sprite>sprites\spr_unitStats_ammofuel</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
