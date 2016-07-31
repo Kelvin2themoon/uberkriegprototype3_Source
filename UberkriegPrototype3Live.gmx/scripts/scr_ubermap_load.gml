@@ -61,6 +61,8 @@ if (file_exists(loading_map))
                 player_set = ini_read_real("Units",posRead +"P",1);
                 setting_unit = ini_read_real("Units",posRead,1);
                 scr_setUnit(setting_unit,i,j,player_set);
+                //check for command rank
+                if (ini_read_real("Units",posRead +"C",0) = 1)  obj_map.units[i,j].isCommander = true;
                 }
 
             }    

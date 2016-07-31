@@ -30,6 +30,9 @@ for( i = 0 ; i < global.mapW ; i += 1 )         // i is to X
             ini_write_real("Units", posKey , obj_map.units[i,j].object_index);
             //save unit ownership
             ini_write_real("Units", posKey+"P" , obj_map.units[i,j].ownership);
+            //save commander status (1 = True, 0 = False)
+            if (obj_map.units[i,j].isCommander) ini_write_real("Units", posKey+"C" ,1);
+            else ini_write_real("Units", posKey+"C" ,0);
             }
         }
     }
