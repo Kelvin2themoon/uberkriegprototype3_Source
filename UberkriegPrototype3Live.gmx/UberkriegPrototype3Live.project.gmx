@@ -518,6 +518,9 @@
     <objects name="AVIRecording">
       <object>objects\oRecorder</object>
     </objects>
+    <objects name="Map Edit acc.">
+      <object>objects\obj_promote_pointer</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_debugStart</room>
