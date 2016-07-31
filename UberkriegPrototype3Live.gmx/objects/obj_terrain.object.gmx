@@ -34,7 +34,7 @@ graphic_index = 0 ;     //used to save &amp; draw appropriate tile image, use in
 Cover = 0;              //for defence coverage
 inFog = true;           //for fog of war
 isProperty = false;
-isVisible = true; 
+isVisible = true;
 
 //stop animation
 image_speed = 0;

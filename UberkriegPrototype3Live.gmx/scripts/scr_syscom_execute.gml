@@ -92,6 +92,13 @@ switch (command){
             instance_destroy();
             break;
             }
+    case "save" : //end turn
+        scr_quick_save("QUICK_SAVE.sav");
+        instance_activate_object(obj_battleCursor);
+        instance_activate_object(obj_miniwin);
+        instance_destroy();
+        break;
+        
     case "endturn" : //end turn
         scr_syscom_endturn();
         instance_destroy();
