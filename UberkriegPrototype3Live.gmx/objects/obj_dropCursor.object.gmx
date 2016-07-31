@@ -429,13 +429,13 @@ if keyboard_check_pressed (global.keyCANCEL){
             <string>draw_self();
 
 //north
-if (drop_zone.y div 24 &lt; global.posY and (global.cursorFrame=1 or global.cursorFrame=2) ) draw_sprite( spr_basicCursor_Icons,8,x,y);
+if (drop_zone.y div 24 &lt; global.posY and (global.cursorFrame=1 or global.cursorFrame=2)) draw_sprite(global.target_unit.sprite_index,0,x,y);//draw_sprite( spr_basicCursor_Icons,8,x,y);
 //east
-if (drop_zone.x div 24 &gt; global.posX and (global.cursorFrame=1 or global.cursorFrame=2)) draw_sprite( spr_basicCursor_Icons,9,x,y);
+if (drop_zone.x div 24 &gt; global.posX and (global.cursorFrame=1 or global.cursorFrame=2)) draw_sprite(global.target_unit.sprite_index,0,x,y);//draw_sprite( spr_basicCursor_Icons,8,x,y);
 //south
-if (drop_zone.y div 24 &gt; global.posY and (global.cursorFrame=1 or global.cursorFrame=2)) draw_sprite( spr_basicCursor_Icons,10,x,y);
+if (drop_zone.y div 24 &gt; global.posY and (global.cursorFrame=1 or global.cursorFrame=2)) draw_sprite(global.target_unit.sprite_index,0,x,y);//draw_sprite( spr_basicCursor_Icons,8,x,y);
 //west
-if (drop_zone.x div 24 &lt; global.posX and (global.cursorFrame=1 or global.cursorFrame=2)) draw_sprite( spr_basicCursor_Icons,11,x,y);
+if (drop_zone.x div 24 &lt; global.posX and (global.cursorFrame=1 or global.cursorFrame=2)) draw_sprite(global.target_unit.sprite_index,0,x,y);//draw_sprite( spr_basicCursor_Icons,8,x,y);
 </string>
           </argument>
         </arguments>
