@@ -371,9 +371,10 @@
       <script>scripts\scr_unit_change_sprite.gml</script>
     </scripts>
     <scripts name="FileHandlers">
-      <script>scripts\scr_ubermap_load.gml</script>
+      <script>scripts\scr_quick_load.gml</script>
       <script>scripts\scr_ubermap_save.gml</script>
       <script>scripts\scr_quick_save.gml</script>
+      <script>scripts\scr_ubermap_load.gml</script>
     </scripts>
     <scripts name="Syscom">
       <script>scripts\scr_syscom_execute.gml</script>
@@ -480,6 +481,7 @@
     </objects>
     <objects name="Basic Battle ">
       <object>objects\obj_battleController_basic</object>
+      <object>objects\obj_battleController_continue</object>
       <object>objects\obj_battleCursor</object>
       <object>objects\template_sandboxCursor</object>
       <objects name="BasicObjects">
@@ -527,6 +529,7 @@
     <room>rooms\rm_MapEditor</room>
     <room>rooms\rm_game_Basic</room>
     <room>rooms\rExampleRoom</room>
+    <room>rooms\rm_continue</room>
   </rooms>
   <constants number="7">
     <constant name="CHECK_LAYRE">-64100</constant>
