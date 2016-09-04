@@ -3,68 +3,19 @@ loading_map = argument0;
 
 if (file_exists(loading_map))
     {
+    //open ini file
+    ini_open("QUICK_SAVE.sav");
+    
     //nuke
     with (obj_terrain){instance_destroy();}
     with (obj_unit){instance_destroy();}
+    with (obj_player){instance_destroy();}
+    show_debug_message("map loading");
+    
     
     
     //LOAD PLAYER DATA
-    //P1
-     if (ini_read_real("Game Data","P1 in play",0) =1){
-        global.P1_in_play = true;
-        global.P1 = instance_create(0,0,obj_player);
-        //assign team
-        global.P1.team = ini_read_real("Game Data","P1 Team", 1);
-        //funds
-        global.P1.funds =  ini_read_real("Game Data","P1 funds", 0);
-        //view and cursor
-        global.P1.save_cursor_pos_x = ini_read_real("Game Data", "P2 posX", 0);
-        global.P1.save_cursor_pos_y = ini_read_real("Game Data", "P2 posY", 0);
-        global.P1.save_view_pos_x   = ini_read_real("Game Data", "P2 viewX",0);
-        global.P1.save_view_pos_y   = ini_read_real("Game Data", "P2 viewY",0);
-        }
-     //P2
-     if (ini_read_real("Game Data","P2 in play",0) =1){
-        global.P2_in_play = true;
-        global.P2 = instance_create(0,0,obj_player);
-        //assign team
-        global.P2.team = ini_read_real("Game Data","P2 Team", 2);
-        //funds
-        global.P2.funds =  ini_read_real("Game Data","P2 funds", 0);
-        //view and cursor
-        global.P2.save_cursor_pos_x = ini_read_real("Game Data", "P2 posX", 0);
-        global.P2.save_cursor_pos_y = ini_read_real("Game Data", "P2 posY", 0);
-        global.P2.save_view_pos_x   = ini_read_real("Game Data", "P2 viewX",0);
-        global.P2.save_view_pos_y   = ini_read_real("Game Data", "P2 viewY",0);
-        }
-       //P3
-     if (ini_read_real("Game Data","P3 in play",0) =1){
-        global.P3_in_play = true;
-        global.P3 = instance_create(0,0,obj_player);
-        //assign team
-        global.P3.team = ini_read_real("Game Data","P3 Team", 3);
-        //funds
-        global.P3.funds =  ini_read_real("Game Data","P3 funds", 0);
-        //view and cursor
-        global.P3.save_cursor_pos_x = ini_read_real("Game Data", "P3 posX", 0);
-        global.P3.save_cursor_pos_y = ini_read_real("Game Data", "P3 posY", 0);
-        global.P3.save_view_pos_x   = ini_read_real("Game Data", "P3 viewX",0);
-        global.P3.save_view_pos_y   = ini_read_real("Game Data", "P3 viewY",0);
-        }
-     //P4
-     if (ini_read_real("Game Data","P4 in play",0) =1){
-        global.P4_in_play = true;
-        global.P4 = instance_create(0,0,obj_player);
-        //assign team
-        global.P4.team = ini_read_real("Game Data","P4 Team", 4);
-        //funds
-        global.P4.funds =  ini_read_real("Game Data","P4 funds", 0);
-        //view and cursor
-        global.P4.save_cursor_pos_x = ini_read_real("Game Data", "P4 posX", 0);
-        global.P4.save_cursor_pos_y = ini_read_real("Game Data", "P4 posY", 0);
-        global.P4.save_view_pos_x   = ini_read_real("Game Data", "P4 viewX",0);
-        global.P4.save_view_pos_y   = ini_read_real("Game Data", "P4 viewY",0);
-        }    
+    
     
     //rebuild
     ini_open(loading_map); //load protoland
@@ -115,14 +66,14 @@ if (file_exists(loading_map))
             setting_terrain = ini_read_real("Terrains",posRead,0);
             scr_setTerrain(setting_terrain,i,j,player_set);
             //set visibility and standing
-            with (obj_map.terrains[i,j]){
-                //visibility
-                if (ini_read_real("Terrains",posRead + "isVisible",0) = 1) isVisible = true;
-                else isVisible = false;
+
+            //visibility
+            if (ini_read_real("Terrains",posRead + "isVisible",0) = 1) obj_map.terrains[i,j].isVisible = true;
+            else obj_map.terrains[i,j].isVisible = false;
                 //standing
-                if (isProperty){ 
-                    if (ini_read_real("Terrains",posRead + "isStanding",0) = 1) isStanding = true;
-                else isStanding = false;
+            if (obj_map.terrains[i,j].isProperty){ 
+                if (ini_read_real("Terrains",posRead + "isStanding",0) = 1) obj_map.terrains[i,j].isStanding = true;
+                else obj_map.terrains[i,j].isStanding = false;
                     }
                 }
             
@@ -161,5 +112,72 @@ if (file_exists(loading_map))
                 }
 
             }    
+        
+        
+        // LOAD PLAYER DATA
+        //P1
+     if (ini_read_real("Game Data","P1 in play",0) =1){
+        show_debug_message("P1 created");
+        global.P1_in_play = true;
+        global.P1 = instance_create(0,0,obj_player);
+        global.P1.number = 1;
+        //assign team
+        global.P1.team = ini_read_real("Game Data","P1 Team", 1);
+        //funds
+        global.P1.funds =  ini_read_real("Game Data","P1 funds", 0);
+        //view and cursor
+        global.P1.save_cursor_pos_x = ini_read_real("Game Data", "P2 posX", 0);
+        global.P1.save_cursor_pos_y = ini_read_real("Game Data", "P2 posY", 0);
+        global.P1.save_view_pos_x   = ini_read_real("Game Data", "P2 viewX",0);
+        global.P1.save_view_pos_y   = ini_read_real("Game Data", "P2 viewY",0);
         }
+     //P2
+     if (ini_read_real("Game Data","P2 in play",0) =1){
+        show_debug_message("P2 created");
+        global.P2_in_play = true;
+        global.P2 = instance_create(0,0,obj_player);
+        global.P2.number = 2;
+        //assign team
+        global.P2.team = ini_read_real("Game Data","P2 Team", 2);
+        //funds
+        global.P2.funds =  ini_read_real("Game Data","P2 funds", 0);
+        //view and cursor
+        global.P2.save_cursor_pos_x = ini_read_real("Game Data", "P2 posX", 0);
+        global.P2.save_cursor_pos_y = ini_read_real("Game Data", "P2 posY", 0);
+        global.P2.save_view_pos_x   = ini_read_real("Game Data", "P2 viewX",0);
+        global.P2.save_view_pos_y   = ini_read_real("Game Data", "P2 viewY",0);
+        }
+       //P3
+     if (ini_read_real("Game Data","P3 in play",0) =1){
+        show_debug_message("P3 created");
+        global.P3_in_play = true;
+        global.P3 = instance_create(0,0,obj_player);
+        global.P3.number = 3;
+        //assign team
+        global.P3.team = ini_read_real("Game Data","P3 Team", 3);
+        //funds
+        global.P3.funds =  ini_read_real("Game Data","P3 funds", 0);
+        //view and cursor
+        global.P3.save_cursor_pos_x = ini_read_real("Game Data", "P3 posX", 0);
+        global.P3.save_cursor_pos_y = ini_read_real("Game Data", "P3 posY", 0);
+        global.P3.save_view_pos_x   = ini_read_real("Game Data", "P3 viewX",0);
+        global.P3.save_view_pos_y   = ini_read_real("Game Data", "P3 viewY",0);
+        }
+     //P4
+     if (ini_read_real("Game Data","P4 in play",0) =1){
+        show_debug_message("P4 created");
+        global.P4_in_play = true;
+        global.P4 = instance_create(0,0,obj_player);
+        global.P4.number = 4;
+        //assign team
+        global.P4.team = ini_read_real("Game Data","P4 Team", 4);
+        //funds
+        global.P4.funds =  ini_read_real("Game Data","P4 funds", 0);
+        //view and cursor
+        global.P4.save_cursor_pos_x = ini_read_real("Game Data", "P4 posX", 0);
+        global.P4.save_cursor_pos_y = ini_read_real("Game Data", "P4 posY", 0);
+        global.P4.save_view_pos_x   = ini_read_real("Game Data", "P4 viewX",0);
+        global.P4.save_view_pos_y   = ini_read_real("Game Data", "P4 viewY",0);
+        }    
+        ini_close();
     }

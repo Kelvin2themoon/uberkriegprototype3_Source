@@ -378,7 +378,7 @@ if(global.P3_in_play){
     ds_priority_add(global.temp_pq, global.P3 ,3);
     //global.P3_in_play = true;
     //assign team
-    global.P3.team = 1;
+    global.P3.team = 3;
     //add cursor pose at 
     global.P3.save_cursor_pos_x = P3_x;
     global.P3.save_cursor_pos_y = P3_y;
@@ -400,7 +400,7 @@ if (global.P4_in_play){
     ds_priority_add(global.temp_pq, global.P4 ,4);
     //global.P4_in_play = true;
     //assign team
-    global.P4.team = 2;
+    global.P4.team = 4;
     //add cursor pose at 
     global.P4.save_cursor_pos_x = P4_x;
     global.P4.save_cursor_pos_y = P4_y;
@@ -430,7 +430,6 @@ for( i=0 ; i&lt; global.HQnum ; i+=1){
 ds_priority_destroy(global.temp_pq);    
 
 ///CRITICAL TURNING VARIABLS !!!
- 
 //turn phaze
 global.Phaze = "starting" //  starting -&gt; upkeep -&gt; main -&gt; end
 //player turn, returns player object

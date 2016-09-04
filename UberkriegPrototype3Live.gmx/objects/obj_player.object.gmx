@@ -38,7 +38,7 @@ team = 0
 funds = 0 ;
 //revenue (first turn)
 revenue = 0;
-scr_calc_revenue( ds_queue_head(global.player_q) );
+//scr_calc_revenue( ds_queue_head(global.player_q) );
 
 //save cursor and view pos
 save_cursor_pos_x = 0;

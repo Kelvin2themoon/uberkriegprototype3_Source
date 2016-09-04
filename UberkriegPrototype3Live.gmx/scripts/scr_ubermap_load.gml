@@ -6,8 +6,8 @@ if (file_exists(loading_map))
     //nuke
     with (obj_terrain){instance_destroy();}
     with (obj_unit){instance_destroy();}
-    //rebuild
     
+    //rebuild
     ini_open(loading_map); //load protoland
     
     global.mapW = ini_read_real("Meta", "Width", 5);

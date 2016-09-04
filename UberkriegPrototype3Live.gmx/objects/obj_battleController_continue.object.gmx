@@ -25,125 +25,6 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// OLD CODE
-/*
-//set cursor positions
-global.posX = 0;
-global.posY = 0;
-
-//Create and Load Map
-instance_create(0,0,obj_map);
-scr_ubermap_load("protoland.ubm");
-
-//create Cursor
-instance_create(24,24,obj_battleCursor);
-//deactivate, to reactivate when main phaze start
-instance_deactivate_object(obj_battleCursor);
-
-//create miniwin
-instance_create(24,24,obj_miniwin);
-instance_deactivate_object(obj_miniwin);
-
-//player Queue
-global.player_q = ds_queue_create();
-//create priority q to organize player order 
-global.temp_pq = ds_priority_create();
-//debug variable, keeps track of number of HQs
-global.HQnum = 0;
-
-
-//creat player objects for each Exsisting HQ into a priority Q
-with (obj_terrain_HQ){
-
-    switch (ownership){
-        case 0 :
-        break;
-        
-        case 1: // create player 1
-        global.HQnum +=1;
-        global.P1 = instance_create(0,0,obj_player); 
-        global.P1.number = 1;
-        ds_priority_add(global.temp_pq, global.P1 ,1);
-        break;
-        
-        case 2: // create player 2
-        global.HQnum +=1;
-        global.P2 = instance_create(0,0,obj_player);
-        global.P2.number = 2;
-        ds_priority_add(global.temp_pq, global.P2 ,2);
-        break; 
-        
-        case 3: // create player 3
-        global.HQnum +=1;
-        global.P3 = instance_create(0,0,obj_player);
-        global.P3.number = 3;
-        ds_priority_add(global.temp_pq, global.P3 ,3);
-        break;
-        
-        case 4: // create player 4
-        global.HQnum +=1;
-        global.P4 = instance_create(0,0,obj_player);
-        global.P4.number = 4;  
-        ds_priority_add(global.temp_pq, global.P4 ,4);
-        break;
-    
-        }
-    }
-    
-//find last player: used to detect day change
-global.last_player = ds_priority_find_max(global.temp_pq).number;
-
-    
-//convert priority Q to regular Q
-i = 0;
-for( i=0 ; i&lt;ds_priority_size(global.temp_pq)+1 ; i+=1){
-    p_priority = ds_priority_delete_min(global.temp_pq);
-    ds_queue_enqueue(global.player_q,p_priority);
-    }
-//delete temp priority Q
-ds_priority_destroy(global.temp_pq);    
-
-
-//turn phaze
-global.Phaze = "starting" //  starting -&gt; upkeep -&gt; main -&gt; end
-//player turn
-global.P_Turn = ds_queue_head(global.player_q);
-//global Day
-global.Day = 1;
-
-//create fadein
- instance_create(0,0,obj_starting);
- obj_starting.state = "waiting"; 
- 
-//vision reset and update for first player
-scr_globalVisionReset();
-scr_updateGlobalVision();
- 
-
- 
-
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///change mode to Basic Battle
 global.mode = "Basic Battle";
 </string>
@@ -174,7 +55,7 @@ global.P2_in_play = false;
 global.P3_in_play = false;
 global.P4_in_play = false;
 
-scr_quick_load("QUICK_SAVE.save");
+scr_ubermap_load("QUICK_SAVE.sav");
 
 
 </string>
@@ -233,16 +114,398 @@ global.player_q = ds_queue_create();
 //create priority q to organize player order 
 //to be destroyed once players are ordered 
 global.temp_pq = ds_priority_create();
-
 //debug variable, keeps track of number of HQs
-global. HQnum = 0;
+global.HQnum = 0;
 
 //Players in play
-if (global.P1_in_play = true) HQnum+=1;
-if (global.P2_in_play = true) HQnum+=1;
-if (global.P3_in_play = true) HQnum+=1;
-if (global.P4_in_play = true) HQnum+=1;
+global.P1_in_play = false;
+global.P2_in_play = false;
+global.P3_in_play = false;
+global.P4_in_play = false;
 
+if (file_exists("QUICK_SAVE.sav")){
+    //re-open file ( terrain and units should be loaded, set players, and dynamic properties
+    ini_open("QUICK_SAVE.sav");
+    //set players in play
+    
+    //P1 IN PLAY
+    if ( ini_read_real("Game Data","P1 in play",0) = 1){
+        global.P1_in_play = true;
+        global.P1 = instance_create(0,0,obj_player);
+        //add to  Q
+        ds_priority_add(global.temp_pq,global.P1,1);
+        global.HQnum =+1;
+        //set dynamic values from save
+        with (global.P1){
+            number = 1;
+            team = ini_read_real("Game Data","P1 Team",1);
+            funds = ini_read_real("Game Data","P1 Funds",0);
+            //cursor and view pose
+            global.P1.save_cursor_pos_x = ini_read_real("Game Data","P1 posX",0);
+            global.P1.save_cursor_pos_y = ini_read_real("Game Data","P1 posY",0);
+            global.P1.save_view_pos_x = ini_read_real("Game Data","P1 viewX",0);
+            global.P1.save_view_pos_y = ini_read_real("Game Data","P1 viewY",0);
+            }
+        //set unit and property teams
+        with (obj_property and obj_unit){
+            if (ownership = 1) team = global.P1.team;             
+            } 
+       with (obj_unit){
+            if (ownership = 1) team = global.P1.team;
+            }
+        }
+        //P2 IN PLAY
+       if ( ini_read_real("Game Data","P2 in play",0) = 1){
+        global.P2_in_play = true;
+        global.P2 = instance_create(0,0,obj_player);
+        //add to  Q
+        ds_priority_add(global.temp_pq,global.P2,2);
+        global.HQnum =+1;
+        //set dynamic values from save
+        with (global.P2){
+            number = 2;
+            team = ini_read_real("Game Data","P2 Team",2);
+            funds = ini_read_real("Game Data","P1 Funds",0);
+            //cursor and view pose
+            global.P2.save_cursor_pos_x = ini_read_real("Game Data","P2 posX",0);
+            global.P2.save_cursor_pos_y = ini_read_real("Game Data","P2 posY",0);
+            global.P2.save_view_pos_x = ini_read_real("Game Data","P2 viewX",0);
+            global.P2.save_view_pos_y = ini_read_real("Game Data","P2 viewY",0);
+            }
+        //set unit and property teams
+        with (obj_property and obj_unit){
+            if (ownership = 2) team = global.P2.team;             
+            } 
+       with (obj_unit){
+            if (ownership = 2) team = global.P2.team;
+            }
+        }
+        //P3 IN PLAY
+        if ( ini_read_real("Game Data","P3 in play",0) = 1){
+        global.P3_in_play = true;
+        global.P3 = instance_create(0,0,obj_player);
+        //add to  Q
+        ds_priority_add(global.temp_pq,global.P3,3);
+        global.HQnum =+1;
+        //set dynamic values from save
+        with (global.P3){
+            number = 3;
+            team = ini_read_real("Game Data","P3 Team",3);
+            funds = ini_read_real("Game Data","P3 Funds",0);
+            //cursor and view pose
+            global.P3.save_cursor_pos_x = ini_read_real("Game Data","P3 posX",0);
+            global.P3.save_cursor_pos_y = ini_read_real("Game Data","P3 posY",0);
+            global.P3.save_view_pos_x = ini_read_real("Game Data","P3 viewX",0);
+            global.P3.save_view_pos_y = ini_read_real("Game Data","P3 viewY",0);
+            }
+        //set unit and property teams
+        with (obj_property and obj_unit){
+            if (ownership = 3) team = global.P3.team;             
+            } 
+       with (obj_unit){
+            if (ownership = 3) team = global.P3.team;
+            }
+        }
+        //P4 IN PLAY
+        if ( ini_read_real("Game Data","P4 in play",0) = 1){
+        global.P4_in_play = true;
+        global.P4 = instance_create(0,0,obj_player);
+        //add to  Q
+        ds_priority_add(global.temp_pq,global.P4,4);
+        global.HQnum =+1;
+        //set dynamic values from save
+        with (global.P4){
+            number = 4;
+            team = ini_read_real("Game Data","P4 Team",4);
+            funds = ini_read_real("Game Data","P4 Funds",0);
+            //cursor and view pose
+            global.P4.save_cursor_pos_x = ini_read_real("Game Data","P4 posX",0);
+            global.P4.save_cursor_pos_y = ini_read_real("Game Data","P4 posY",0);
+            global.P4.save_view_pos_x = ini_read_real("Game Data","P4 viewX",0);
+            global.P4.save_view_pos_y = ini_read_real("Game Data","P4 viewY",0);
+            }
+        //set unit and property teams
+        with (obj_property and obj_unit){
+            if (ownership = 4) team = global.P4.team;             
+            } 
+       with (obj_unit){
+            if (ownership = 4) team = global.P4.team;
+            }
+        }
+    //set last player (for turning)
+    global.last_player = ds_priority_find_max(global.temp_pq).number;
+    
+    //convert priority Q to regular Q
+    i = 0;
+    for( i=0 ; i&lt; global.HQnum ; i+=1){
+        p_priority = ds_priority_delete_min(global.temp_pq);
+        ds_queue_enqueue(global.player_q,p_priority);
+        }
+    //delete temp priority Q
+    ds_priority_destroy(global.temp_pq);
+    
+    //rotate Q until head is current player
+    starting_player = ds_queue_head(global.player_q);
+    while (starting_player.number !=  ini_read_real("Game Data","P_Turn",0)){
+        ds_queue_enqueue(global.player_q,starting_player);
+        ds_queue_dequeue(global.player_q);
+        starting_player = ds_queue_head(global.player_q);
+        }
+    
+    ///CRITICAL TURNING VARIABLS !!!
+    //turn phaze
+    global.Phaze = "starting" //  starting -&gt; upkeep -&gt; main -&gt; end
+    //player turn, returns player object
+    global.P_Turn = ds_queue_head(global.player_q);
+    //global Day
+    global.Day = ini_read_real("Game Data", "Day",1);  
+    
+    //set unit and propert dyma,ic variables
+    
+    i =0;
+    j=0;
+    for ( i=0 ; i&lt;global.mapW ; i+=1){
+        for ( j=0 ; j&lt;global.mapH ; j+=1){
+            poskey = string(i)+"X"+string(j)+"Y";
+            with (obj_map.terrains[i,j]){
+                if (ini_read_real("Terrains",other.poskey+"isVisible",0)=1) isVisible = true;
+                if (isProperty){
+                    ownership = ini_read_real("Terrains",other.poskey+"ownership",1);
+                    if (ini_read_real("Terrains",other.poskey+"isStanding",0) = 1) isStanding = true;
+                    }   
+                }
+            if (obj_map.units[i,j] != 0){
+                with (obj_map.units[i,j]){
+                    ownership = ini_read_real("Units",other.poskey+"ownership",1);
+                    hp = ini_read_real("Units",other.poskey+"hp",10);
+                    fuel = ini_read_real("Units",other.poskey+"fuel",0);
+                    ammo = ini_read_real("Units",other.poskey+"ammo",0);
+                    capturing  = ini_read_real("Units",other.poskey+"capturing",0);
+                    state = ini_read_string("Units",other.poskey+"state","idle");
+                    if ( ini_read_real("Units",other.poskey+"isCommander",0) = 1) isCommander = true;
+                    if ( ini_read_real("Units",other.poskey+"isDisrupted",0) = 1) isDisrupted = true;
+                    if ( ini_read_real("Units",other.poskey+"isVisible",0) = 1) isVisible = true;
+                    if ( ini_read_real("Units",other.poskey+"isHidden",0) = 1) isHidden = true;
+                    if ( ini_read_real("Units",other.poskey+"isStanding",0) = 1) isStanding = true;
+                    }
+                }
+            } 
+        }
+        
+        ini_close();
+    //create turn change object set to start in waiting state
+     instance_create(0,0,obj_starting);
+     obj_starting.state = "waiting"; 
+        
+    
+    }
+else show_message("File does not exsist");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+//switch player on if HQ exsist, save xy positions for starting vcursor and view positions
+with (obj_terrain_HQ){
+
+    switch (ownership){
+        case 0 :
+        break;
+        
+        case 1: // create player 1
+        global.P1_in_play = true;
+        //variable for cursor and view
+        other.P1_x = x;
+        other.P1_y = y;
+        break;
+        
+        case 2: // create player 2
+        global.P2_in_play = true;
+        //variable for cursor and view
+        other.P2_x = x;
+        other.P2_y = y;
+        break; 
+        
+        case 3: // create player 3
+        global.P3_in_play = true;
+        //variable for cursor and view
+        other.P3_x = x;
+        other.P3_y = y;
+        break;
+        
+        case 4: // create player 4
+        global.P4_in_play = true;
+        //variable for cursor and view
+        other.P4_x = x;
+        other.P4_y = y;
+        break;
+    
+        }
+    }
+    
+//do same for units that are also commanders
+with (obj_unit){
+    if (isCommander){
+        switch (ownership){
+            case 0 :
+            break;
+            
+            case 1: // create player 1
+                if(global.P1_in_play = false){
+                    global.P1_in_play = true;
+                    //variable for cursor and view
+                    other.P1_x = x;
+                    other.P1_y = y;
+                    }
+                break;
+            
+            case 2: // create player 2
+                if(global.P2_in_play = false){
+                    global.P2_in_play = true;
+                    //variable for cursor and view
+                    other.P2_x = x;
+                    other.P2_y = y;
+                    }
+                break; 
+            
+            case 3: // create player 3
+                if(global.P3_in_play = false){
+                    global.P3_in_play = true;
+                    //variable for cursor and view
+                    other.P3_x = x;
+                    other.P3_y = y;
+                    }
+                break;
+            
+            case 4: // create player 4
+                if(global.P4_in_play = false){
+                    global.P4_in_play = true;
+                    //variable for cursor and view
+                    other.P4_x = x;
+                    other.P4_y = y;
+                    }
+                break;
+        
+            }
+        }
+    }
+
+
+ 
+    
+//initiate player objects and place them in Q (hard code teams here)
+//P1
+if (global.P1_in_play){
+        global.HQnum +=1;
+        global.P1 = instance_create(0,0,obj_player); 
+        global.P1.number = 1;
+        ds_priority_add(global.temp_pq, global.P1 ,1);
+        //global.P1_in_play = true;
+        //assign team
+        global.P1.team = 1;
+        //add cursor pose at 
+        global.P1.save_cursor_pos_x = P1_x;
+        global.P1.save_cursor_pos_y =P1_y;
+        //check view
+        if (P1_x &gt; (768-96)) global.P1.save_view_pos_x = P1_x - (768-24*5);
+        if (P1_y &gt; (432-96)) global.P1.save_view_pos_y = P1_y - (432-24*5);
+        //set unit and property teams
+        with (obj_property and obj_unit){
+            if (ownership = 1) team = global.P1.team;             
+            } 
+       with (obj_unit){
+            if (ownership = 1) team = global.P1.team;
+        }
+    }
+//P2    
+if (global.P2_in_play){
+    global.HQnum +=1;
+    global.P2 = instance_create(0,0,obj_player);
+    global.P2.number = 2;
+    ds_priority_add(global.temp_pq, global.P2 ,2);
+    //global.P2_in_play = true;
+    //assign team
+    global.P2.team = 2;
+    //add cursor pose at 
+    global.P2.save_cursor_pos_x = P2_x;
+    global.P2.save_cursor_pos_y = P2_y;
+    //check view
+    if (P2_x &gt; (768-96)) global.P2.save_view_pos_x = P2_x - (768-24*5);
+    if (P2_y &gt; (432-96)) global.P2.save_view_pos_y = P2_y - (432-24*5);
+    //set unit and property teams
+    with (obj_property){
+        if (ownership = 2) team = global.P2.team;             
+        }
+    with (obj_unit){
+        if (ownership = 2) team = global.P2.team;             
+        } 
+    }
+//P3
+if(global.P3_in_play){
+    global.HQnum +=1;
+    global.P3 = instance_create(0,0,obj_player);
+    global.P3.number = 3;
+    ds_priority_add(global.temp_pq, global.P3 ,3);
+    //global.P3_in_play = true;
+    //assign team
+    global.P3.team = 1;
+    //add cursor pose at 
+    global.P3.save_cursor_pos_x = P3_x;
+    global.P3.save_cursor_pos_y = P3_y;
+    //check view
+    if (P3_x &gt; (768-96)) global.P3.save_view_pos_x = P3_x - (768-24*5);
+    if (P3_y &gt; (432-96)) global.P3.save_view_pos_y = P3_y - (432-24*5);
+    with (obj_property){
+        if (ownership = 3) team = global.P3.team;             
+        }
+    with (obj_unit){
+        if (ownership = 3) team = global.P3.team;             
+        }  
+    }
+//P4
+if (global.P4_in_play){
+    global.HQnum +=1;
+    global.P4 = instance_create(0,0,obj_player);
+    global.P4.number = 4;  
+    ds_priority_add(global.temp_pq, global.P4 ,4);
+    //global.P4_in_play = true;
+    //assign team
+    global.P4.team = 2;
+    //add cursor pose at 
+    global.P4.save_cursor_pos_x = P4_x;
+    global.P4.save_cursor_pos_y = P4_y;
+    //check view
+    if (P4_x &gt; (768-96)) global.P4.save_view_pos_x = P4_x - (768-24*5);
+    if (P4_y &gt; (432-96)) global.P4.save_view_pos_y = P4_y - (432-24*5);
+    with (obj_property){
+        if (ownership = 4) team = global.P4.team;             
+        }
+    with (obj_unit){
+        if (ownership = 4) team = global.P4.team;             
+        }   
+    
+    }
     
 //find last player: used to detect day change
 global.last_player = ds_priority_find_max(global.temp_pq).number;

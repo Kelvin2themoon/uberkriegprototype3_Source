@@ -1,3 +1,6 @@
+//reset Capturing
+global.acting_unit.capturing  = 0;
+
 //assumes load action is posible
 if (global.target_unit.load_A = 0){
 //load slot A

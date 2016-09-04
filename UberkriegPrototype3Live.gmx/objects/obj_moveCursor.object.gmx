@@ -728,7 +728,7 @@ if (global.acting_unit.name = "Land Cruiser" and global.acting_unit.ammo &gt; 0)
 
 
 if (obj_map.units[global.posX,global.posY] !=0 ){
-    if (global.cursorFrame = 2 or global.cursorFrame = 1){
+    if ((global.cursorFrame = 2 or global.cursorFrame = 1) and obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number ){
         //join
         if (obj_map.units[global.posX,global.posY].hp &lt; 10 and obj_map.units[global.posX,global.posY].name = global.acting_unit.name) draw_sprite( spr_basicCursor_Icons,4,x,y); 
         //attach

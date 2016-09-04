@@ -1,4 +1,4 @@
-// this script activates after unit has moves.
+// this script activates after unit has moved.
 //does not execute if "trap" interups the move action
 
 show_debug_message("Script: Execute Command");

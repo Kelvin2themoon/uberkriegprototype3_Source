@@ -23,7 +23,7 @@ ini_write_real( "Game Data", "Day", global.Day);
 if (global.P1_in_play){
     ini_write_real("Game Data", "P1 in play",1);
     ini_write_real("Game Data", "P1 Team",global.P1.team);
-    ini_write_real("Game Data", "P1 funds",global.P1.funds);
+    ini_write_real("Game Data", "P1 Funds",global.P1.funds);
     //view and cursor
     ini_write_real("Game Data", "P1 posX",global.P1.save_cursor_pos_x);
     ini_write_real("Game Data", "P1 posY",global.P1.save_cursor_pos_y);
@@ -35,7 +35,7 @@ else ini_write_real("Game Data", "P1 in play",0);
 if (global.P2_in_play){
     ini_write_real("Game Data", "P2 in play",1);
     ini_write_real("Game Data", "P2 Team",global.P2.team);
-    ini_write_real("Game Data", "P2 funds",global.P2.funds);
+    ini_write_real("Game Data", "P2 Funds",global.P2.funds);
     //view and cursor
     ini_write_real("Game Data", "P2 posX",global.P2.save_cursor_pos_x);
     ini_write_real("Game Data", "P2 posY",global.P2.save_cursor_pos_y);
@@ -47,7 +47,7 @@ else ini_write_real("Game Data", "P2 in play",0);
 if (global.P3_in_play){
     ini_write_real("Game Data", "P3 in play",1);
     ini_write_real("Game Data", "P2 Team",global.P3.team);
-    ini_write_real("Game Data", "P3 funds",global.P3.funds);
+    ini_write_real("Game Data", "P3 Funds",global.P3.funds);
     //view and cursor
     ini_write_real("Game Data", "P3 posX",global.P3.save_cursor_pos_x);
     ini_write_real("Game Data", "P3 posY",global.P3.save_cursor_pos_y);
@@ -57,9 +57,9 @@ if (global.P3_in_play){
 else ini_write_real("Game Data", "P3 in play",0);
 
 if (global.P4_in_play){
-    ini_write_real("Game Data", "P4 in play",4);
+    ini_write_real("Game Data", "P4 in play",1);
     ini_write_real("Game Data", "P2 Team",global.P4.team);
-    ini_write_real("Game Data", "P4 funds",global.P4.funds);
+    ini_write_real("Game Data", "P4 Funds",global.P4.funds);
     //view and cursor
     ini_write_real("Game Data", "P4 posX",global.P4.save_cursor_pos_x);
     ini_write_real("Game Data", "P4 posY",global.P4.save_cursor_pos_y);
@@ -74,8 +74,8 @@ ini_write_real( "Game Data", "P_Turn", global.P_Turn.number);
 //player data
 
 
-
-
+i=0;
+j=0;
 //start loop to all positions in map
 for( i = 0 ; i < global.mapW ; i += 1 )         // i is to X
     {
@@ -86,7 +86,8 @@ for( i = 0 ; i < global.mapW ; i += 1 )         // i is to X
         posKey = string(i)+ "X" + string(j) + "Y";       
         ini_write_real("Terrains", posKey, obj_map.terrains[i,j].object_index);
         //save visibility
-        ini_write_real("Terrains", posKey+"isVisible", obj_map.terrains[i,j].isVisible);
+        if(obj_map.terrains[i,j].isVisible) ini_write_real("Terrains", posKey+"isVisible",1);
+        else ini_write_real("Terrains", posKey+"isVisible",0);
         if ( obj_map.terrains[i,j].isProperty = true )
             {
             //ownership

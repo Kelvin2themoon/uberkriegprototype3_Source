@@ -1,5 +1,8 @@
 //damage to target unit
 
+//reset captue
+global.acting_unit.capturing  = 0;
+
 
 //check for land cruiser exception
 if (global.acting_unit.name = "Land Cruiser" and global.engage_type = 1 and abs( global.acting_unit.x - global.target_unit.x) +abs( global.acting_unit.y - global.target_unit.y) = 24 ){
