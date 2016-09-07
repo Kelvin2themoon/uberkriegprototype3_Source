@@ -540,6 +540,7 @@ global.wait         = true ; // wait is on by default
         
         //add engage if visible enemy units are in range 
         //check primary weaopn
+        /* comment out engeage becasue it should be unavaliable if target location is occupied by any unit
         if ( global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 ){
         
             if (global.acting_unit.max_range = 1 or global.acting_unit.name = "Land Cruiser"){
@@ -574,6 +575,7 @@ global.wait         = true ; // wait is on by default
         }
 
             }
+            */
         }
     //else target is in range &amp; no unit visibly occupies the location    
     else{
@@ -727,7 +729,7 @@ draw_text(12,313, "terrain cost: " + string(scr_check_move_cost(global.acting_un
 if (global.acting_unit.name = "Land Cruiser" and global.acting_unit.ammo &gt; 0) draw_sprite(spr_CruiserPlusCursor,0,x,y);
 
 
-if (obj_map.units[global.posX,global.posY] !=0 ){
+if (obj_map.units[global.posX,global.posY] !=0 and global.rangeCheck[global.posX,global.posY].sprite_index =spr_rangecheck_clear){
     if ((global.cursorFrame = 2 or global.cursorFrame = 1) and obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number ){
         //join
         if (obj_map.units[global.posX,global.posY].hp &lt; 10 and obj_map.units[global.posX,global.posY].name = global.acting_unit.name) draw_sprite( spr_basicCursor_Icons,4,x,y); 

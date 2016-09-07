@@ -6,6 +6,9 @@ uir_minRange    = argument2 //max range
 uir_maxRange    = argument3 //min range
 uir_isAlly      = argument4 //true if ally, false if enemy
 
+//clear targetables
+ds_list_clear(global.targetables);
+
 targets_avaliable = false;
 
 //initiate loop variables

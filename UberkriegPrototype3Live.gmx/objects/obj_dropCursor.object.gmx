@@ -44,6 +44,12 @@ view_border = 4*24;
 //clear targetables
 ds_list_clear(global.targetables);
 
+//switches for drawing drop zones
+drop_north_ok = false;
+drop_east_ok = false;
+drop_south_ok = false;
+drop_west_ok = false;
+
  
 //check for open  adjacent terrain
 //check north ( open and valid terrain)
@@ -55,13 +61,16 @@ if(scr_check_move_cost(global.target_unit, obj_map.terrains[global.posX+0, globa
             }
         else{
             //unit not visible , add new location to drop list
-            global.rangeCheck[global.posX+0, global.posY-1].sprite_index =  spr_rangecheck_clear;
+            //global.rangeCheck[global.posX+0, global.posY-1].sprite_index =  spr_rangecheck_clear;
+            drop_north_ok = true;
+            
             ds_list_add(global.targetables, global.rangeCheck[global.posX+0, global.posY-1]);
             }
         } 
     else{
         //no unit at destination, add new locatin to list
-        global.rangeCheck[global.posX+0, global.posY-1].sprite_index =  spr_rangecheck_clear;
+        //global.rangeCheck[global.posX+0, global.posY-1].sprite_index =  spr_rangecheck_clear;
+        drop_north_ok = true;
         ds_list_add(global.targetables, global.rangeCheck[global.posX+0, global.posY-1]);
         } 
     }
@@ -75,13 +84,15 @@ if(scr_check_move_cost(global.target_unit, obj_map.terrains[global.posX+1, globa
             }
         else{
             //unit not visible , add new location to drop list
-            global.rangeCheck[global.posX+1, global.posY-0].sprite_index =  spr_rangecheck_clear;
+           //global.rangeCheck[global.posX+1, global.posY-0].sprite_index =  spr_rangecheck_clear;
+            drop_east_ok = true;
             ds_list_add(global.targetables, global.rangeCheck[global.posX+1, global.posY-0]);
             }
         } 
     else{
         //no unit at destination, add new locatin to list
-        global.rangeCheck[global.posX+1, global.posY-0].sprite_index =  spr_rangecheck_clear;
+        //global.rangeCheck[global.posX+1, global.posY-0].sprite_index =  spr_rangecheck_clear;
+        drop_east_ok = true;
         ds_list_add(global.targetables, global.rangeCheck[global.posX+1, global.posY-0]);
         } 
     }
@@ -95,13 +106,15 @@ if(scr_check_move_cost(global.target_unit, obj_map.terrains[global.posX+0, globa
             }
         else{
             //unit not visible , add new location to drop list
-            global.rangeCheck[global.posX+0, global.posY+1].sprite_index =  spr_rangecheck_clear;
+            //global.rangeCheck[global.posX+0, global.posY+1].sprite_index =  spr_rangecheck_clear;
+            drop_south_ok = true;
             ds_list_add(global.targetables, global.rangeCheck[global.posX+0, global.posY+1]);
             }
         } 
     else{
         //no unit at destination, add new locatin to list
-        global.rangeCheck[global.posX+0, global.posY+1].sprite_index =  spr_rangecheck_clear;
+        //global.rangeCheck[global.posX+0, global.posY+1].sprite_index =  spr_rangecheck_clear;
+        drop_south_ok = true;
         ds_list_add(global.targetables, global.rangeCheck[global.posX+0, global.posY+1]);
         } 
     }
@@ -115,13 +128,15 @@ if(scr_check_move_cost(global.target_unit, obj_map.terrains[global.posX-1, globa
             }
         else{
             //unit not visible , add new location to drop list
-            global.rangeCheck[global.posX-1, global.posY-0].sprite_index =  spr_rangecheck_clear;
+            //global.rangeCheck[global.posX-1, global.posY-0].sprite_index =  spr_rangecheck_clear;
+            drop_west_ok = true;
             ds_list_add(global.targetables, global.rangeCheck[global.posX-1, global.posY-0]);
             }
         } 
     else{
         //no unit at destination, add new locatin to list
-        global.rangeCheck[global.posX-1, global.posY-0].sprite_index =  spr_rangecheck_clear;
+        //global.rangeCheck[global.posX-1, global.posY-0].sprite_index =  spr_rangecheck_clear;
+        drop_west_ok = true;
         ds_list_add(global.targetables, global.rangeCheck[global.posX-1, global.posY-0]);
         } 
     }
@@ -426,7 +441,21 @@ if keyboard_check_pressed (global.keyCANCEL){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>//Draw drop zones (clear highlight)
+drop_from_x = global.destination.x;
+drop_from_y = global.destination.y;
+if global.drop_phaze_2 {
+    drop_from_x = global.acting_unit.x;
+    drop_from_y = global.acting_unit.y;
+    
+    } 
+
+if drop_north_ok    draw_sprite(spr_rangecheck_clear, global.rangeCheckerFramIndex,drop_from_x + 00, drop_from_y - 24);
+if drop_east_ok     draw_sprite(spr_rangecheck_clear, global.rangeCheckerFramIndex,drop_from_x + 24, drop_from_y - 00);
+if drop_south_ok    draw_sprite(spr_rangecheck_clear, global.rangeCheckerFramIndex,drop_from_x + 00, drop_from_y + 24);
+if drop_west_ok     draw_sprite(spr_rangecheck_clear, global.rangeCheckerFramIndex,drop_from_x - 24, drop_from_y - 00);
+
+draw_self();
 
 //north
 if (drop_zone.y div 24 &lt; global.posY and (global.cursorFrame=1 or global.cursorFrame=2)) draw_sprite(global.target_unit.sprite_index,0,x,y);//draw_sprite( spr_basicCursor_Icons,8,x,y);
@@ -436,6 +465,8 @@ if (drop_zone.x div 24 &gt; global.posX and (global.cursorFrame=1 or global.curs
 if (drop_zone.y div 24 &gt; global.posY and (global.cursorFrame=1 or global.cursorFrame=2)) draw_sprite(global.target_unit.sprite_index,0,x,y);//draw_sprite( spr_basicCursor_Icons,8,x,y);
 //west
 if (drop_zone.x div 24 &lt; global.posX and (global.cursorFrame=1 or global.cursorFrame=2)) draw_sprite(global.target_unit.sprite_index,0,x,y);//draw_sprite( spr_basicCursor_Icons,8,x,y);
+
+
 </string>
           </argument>
         </arguments>

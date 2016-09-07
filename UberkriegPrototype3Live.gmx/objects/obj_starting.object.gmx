@@ -83,7 +83,7 @@ switch state {
             view_yview[0] = global.P_Turn.save_view_pos_y;
             //chang phase
             global.Phaze = "Waiting";
-            //reset visivility af all positions
+            //reset visibility af all positions
             scr_globalVisionReset();
             scr_updateGlobalVision();
             //reset units and propeties
@@ -116,7 +116,8 @@ switch state {
             //change phasze to "main"
             global.Phaze = "Upkeep";
             //pre-check standing
-            scr_updateStanding_global(); 
+            scr_updateStanding_global();
+            scr_updateGlobalVision(); 
             }
         break;
     case "fade out" :
