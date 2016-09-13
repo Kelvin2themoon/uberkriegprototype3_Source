@@ -375,6 +375,7 @@
       <script>scripts\scr_ubermap_save.gml</script>
       <script>scripts\scr_quick_save.gml</script>
       <script>scripts\scr_ubermap_load.gml</script>
+      <script>scripts\scr_update_upkeep_stats.gml</script>
     </scripts>
     <scripts name="Syscom">
       <script>scripts\scr_syscom_execute.gml</script>
@@ -427,6 +428,7 @@
       <script>scripts\AddFrame.gml</script>
       <script>scripts\EndRecording.gml</script>
     </scripts>
+    <script>scripts\scr_calc_battleStrength.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>

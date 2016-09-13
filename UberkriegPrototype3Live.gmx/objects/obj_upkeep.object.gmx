@@ -31,11 +31,20 @@
 
 //income added to funds
 
+global.P_Turn.revenue = scr_calc_revenue(global.P_Turn.number)
+global.P_Turn.funds += global.P_Turn.revenue;
+//reset unit count
+global.P_Turn.unit_count = 0;
+//calc battle strenth
+global.P_Turn.battle_strength = scr_calc_battleStrength(global.P_Turn);
 
-global.P_Turn.funds += scr_calc_revenue(global.P_Turn.number);
+scr_update_upkeep_stats("History",global.P_Turn);
+
+
 
 //turn units on if standing
 with obj_unit{ 
+    if (ownership = global.P_Turn.number) global.P_Turn.unit_count += 1;
     if isStanding state = "idle";
     if isDisrupted state = "exhaust";
     if isDisrupted isDisrupted = false;

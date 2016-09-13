@@ -34,10 +34,13 @@ name = "Player " + string(number); // default to "player #"
 
 //Teeam number to be used in stading and victory checks
 team = 0
-
 funds = 0 ;
 //revenue (first turn)
 revenue = 0;
+//unit stats
+unit_count = 0;
+battle_strength = 0;
+
 //scr_calc_revenue( ds_queue_head(global.player_q) );
 
 //save cursor and view pos

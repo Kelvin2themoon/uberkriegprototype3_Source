@@ -14,7 +14,7 @@ target.isVisible = true;
 vision_range = target.vision
 
 if ( obj_map.terrains[originV_X,originV_Y].object_index = obj_terrain_Mountain) vision_range += (target.vision div 2);
-if target.isStanding = false vision_range =0;
+if (target.isStanding = false ) vision_range =0;
 
 for ( tempV_X= (-1)*vision_range ; tempV_X<= vision_range ; tempV_X+=1 ){ //for each possible value of X in range
     for ( tempV_Y= (-1)*vision_range ; tempV_Y<= vision_range ; tempV_Y+=1 ){ //for each possible value of Y in range
