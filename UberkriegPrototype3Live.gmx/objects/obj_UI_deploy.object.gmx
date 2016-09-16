@@ -360,7 +360,7 @@ no_deploy = false;
                 
            case 4: //Heavy Tank
            if (global.P_Turn.funds &gt;= 15000){
-               global.P_Turn.funds -= 9000;
+               global.P_Turn.funds -= 15000;
                scr_setUnit(obj_unit_HeavyTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
                unit_has_deployed = true;
                }
