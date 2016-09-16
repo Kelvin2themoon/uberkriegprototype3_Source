@@ -516,7 +516,10 @@ global.origin = -1;
 global.destination = -1;
  
 global.move_order   = ds_priority_create();
+global.acting_unit_moved = true;
 global.action_order = "wait" ;//default to wait
+
+
 
 //actionable commands switches to populate command Menu
 
@@ -713,7 +716,7 @@ if (global.Phaze = "Main"){
                                 //Income
                                 draw_text(12,48,"INCOME: " + string(global.P_Turn.revenue));
                                 //Unit Stats
-                                draw_text(12,60, "Units: " + string(global.P_Turn.unit_count) +"/"+ string(global.P_Turn.battle_strength));
+                                draw_text(12,60, "UNITS: " + string(global.P_Turn.unit_count) +"/"+ string(global.P_Turn.battle_strength));
                                 }
 
 

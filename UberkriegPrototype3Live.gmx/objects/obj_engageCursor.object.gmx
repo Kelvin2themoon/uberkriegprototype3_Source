@@ -403,16 +403,16 @@ unit_selection      = engage_target;
 
 if (global.Phaze = "Main" and unit_selection != 0){
     if (unit_selection.isVisible){
-        draw_text(12,60, string_upper(unit_selection.name));
-        draw_text(12,72,"HP: " + string(unit_selection.hp)+"/10");
-        draw_text(12,84,"Fuel: " + string(unit_selection.fuel)+"/"+string(unit_selection.max_fuel));
-        draw_text(12,96,"Ammo: " + string(unit_selection.ammo)+"/"+string(unit_selection.max_ammo));
+        draw_text(12,84, string_upper(unit_selection.name));
+        draw_text(12,96,"HP: " + string(unit_selection.hp)+"/10");
+        draw_text(12,108,"Fuel: " + string(unit_selection.fuel)+"/"+string(unit_selection.max_fuel));
+        draw_text(12,120,"Ammo: " + string(unit_selection.ammo)+"/"+string(unit_selection.max_ammo));
         }
     }  
 
 
 ///Damage %
-draw_text(12,120, "Damage: " + string(dmg_percent) + "%");
+draw_text(12,132, "Damage: " + string(dmg_percent) + "%");
 
 
 </string>

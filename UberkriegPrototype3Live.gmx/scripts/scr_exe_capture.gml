@@ -1,3 +1,6 @@
+//reset captue
+
+
 instance_create(global.acting_unit.x,global.acting_unit.y,obj_captureBar);
 
 //obj_map.units[destination.x div 24,destination.y div 24] = global.acting_unit;

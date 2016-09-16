@@ -39,8 +39,12 @@ with (obj_path_node) sprite_index = -1;
 //reset checker tiles
 scr_rangeCheck_reset();
 
+//check move size
+
+
 //set destination
 destination = ds_priority_find_max(global.move_order);
+
 //set starting position
 move_from = ds_priority_delete_min(global.move_order);
 //set next pos

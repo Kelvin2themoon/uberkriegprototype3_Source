@@ -38,7 +38,7 @@ cap_left = global.acting_unit.hp;
 capping_unit = global.acting_unit;
 
 //reset cap if unit moved
-if (global.origin.x != capping_unit.x or global.origin.y != capping_unit.y){
+if global.acting_unit_moved{
     capping_unit.capturing = 0;
     }
 

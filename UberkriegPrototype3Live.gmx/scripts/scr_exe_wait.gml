@@ -1,7 +1,7 @@
 //obj_map.units[destination.x div 24,destination.y div 24] = global.acting_unit;
 
-//reset Capturing
-global.acting_unit.capturing  = 0;
+//reset captue
+ if (global.acting_unit_moved) global.acting_unit.capturing  = 0;
 
                     global.drop_phaze_2 = false;
                     obj_map.units[global.posX,global.posY] = global.acting_unit; 

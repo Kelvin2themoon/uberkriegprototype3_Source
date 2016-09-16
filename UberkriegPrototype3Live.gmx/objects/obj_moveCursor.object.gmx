@@ -340,6 +340,8 @@ if (alarm[1] = -1 )
                         }
                     }
                 }
+           
+            //juice
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         }
@@ -476,6 +478,11 @@ global.hide         = false;
 global.appear       = false;
 global.disrupt      = false;
 global.wait         = true ; // wait is on by default
+
+    //check move
+    if (ds_priority_size(global.move_order) &lt;2) global.acting_unit_moved = false;
+    else global.acting_unit_moved = true;
+
 
 
     //check range
@@ -621,9 +628,9 @@ global.wait         = true ; // wait is on by default
                         global.engage_type = 1;
                         }
                     }
-                //otherwise process as direct (target location = origin)
+                //otherwise process as indirect (target location = origin)
                 else {
-                    if ( x = global.origin.x and y = global.origin.y){
+                    if (global.acting_unit_moved = false){
                         if ( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
                             global.engage = true;
                             global.engage_type = 1;
