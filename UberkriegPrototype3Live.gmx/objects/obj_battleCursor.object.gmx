@@ -501,7 +501,7 @@ if (global.Phaze = "Main" and unit_selection != 0){
         draw_text(12,108,"Fuel: " + string(unit_selection.fuel)+"/"+string(unit_selection.max_fuel));
         draw_text(12,120,"Ammo: " + string(unit_selection.ammo)+"/"+string(unit_selection.max_ammo));
         
-        if (unit_selection.capturing &gt; 0) draw_text(12,120,"Capture: " + string(unit_selection.capturing) +"/20");
+        if (unit_selection.capturing &gt; 0) draw_text(12,144,"Capture: " + string(unit_selection.capturing) +"/20");
         
         if (unit_selection.name = "A.P.C."){
             if (unit_selection.load_A != 0) draw_text(12,144, "Load A: " +  string(unit_selection.load_A.name));
