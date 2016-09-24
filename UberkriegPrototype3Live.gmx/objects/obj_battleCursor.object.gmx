@@ -490,7 +490,11 @@ if (keyboard_check_released(global.keyCANCEL)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Debug 
+            <string>//Debug
+
+//Scal GUI
+display_set_gui_size(768, 432);
+ 
 unit_selection      = obj_map.units[global.posX,global.posY];
 terrain_selection   = obj_map.terrains[global.posX,global.posY];
 

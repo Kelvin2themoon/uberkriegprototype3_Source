@@ -53,7 +53,7 @@ havePrimaryWeapon   = true;
 haveSecondaryWeapon = false;
 
 min_range   = 4;
-max_range   = 8;
+max_range   = 7;
 
 
 //spceial abilities
