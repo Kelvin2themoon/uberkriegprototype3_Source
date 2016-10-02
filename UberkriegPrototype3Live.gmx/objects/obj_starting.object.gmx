@@ -33,6 +33,18 @@ depth = TRANS;
 state = "fade in" //  *create -&gt; fade in -&gt; waiting -&gt; fade out -&gt; *destroy
 image_alpha = 0; //alpha value
 
+//reset units and propeties
+            with(obj_unit){
+                state = "idle";
+                if ownership = global.P_Turn.number state = "exhaust";
+                image_index = 21;
+                isStanding = false ;
+                }
+            with (obj_property) isStanding = false;
+            //set is standing for all players
+            //scr_updateStanding(global.P_Turn);
+            scr_updateStanding_global();
+
 
 </string>
           </argument>

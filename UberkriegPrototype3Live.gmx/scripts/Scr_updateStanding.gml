@@ -37,7 +37,7 @@ while (ds_queue_size(standing_Q) != 0 ){
     
     for ( cst_temp_x = (-1)*broadcast_range ; cst_temp_x <= broadcast_range ; cst_temp_x+=1){
         for ( cst_temp_y = (-1)*broadcast_range ; cst_temp_y <= broadcast_range ; cst_temp_y+=1){
-            if ( abs(cst_temp_x) + abs(cst_temp_y) <= broadcast_range){
+            if ( abs(cst_temp_x) + abs(cst_temp_y) <= broadcast_range and scr_inBound(cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y) ){
                 
             //check if a unit is present (must be ally and not already a commander asnd not standing)
                 if ( obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ] != 0){
