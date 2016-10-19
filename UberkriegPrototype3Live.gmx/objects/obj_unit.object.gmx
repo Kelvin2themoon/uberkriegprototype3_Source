@@ -86,6 +86,10 @@ isEngageTarget  = false;
 isDisruptTarget = false;
 isSupplyTarget  = false;
 
+//Unit Description
+
+descript = "this is a parent object"
+
 
 
 

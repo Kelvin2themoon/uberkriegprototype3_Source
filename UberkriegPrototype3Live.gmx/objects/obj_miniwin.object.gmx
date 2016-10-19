@@ -154,10 +154,11 @@ if ( obj_map.units[global.posX,global.posY] != 0){
 miniwin_terrain = asset_get_index("spr_miniwin_" + string_letters(obj_map.terrains[global.posX,global.posY].name));
 
 // retrive terrain ownership if property
-if  (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,obj_property)){ 
+if  (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,obj_property) and (obj_map.terrains[global.posX,global.posY].isVisible or obj_map.terrains[global.posX,global.posY].name = "HQ")  ){ 
     miniwin_terrain_ownership = obj_map.terrains[global.posX,global.posY].ownership;
     }
-    
+else miniwin_terrain_ownership = 0;
+
 // retrieve unit info
 
 if (obj_map.units[global.posX,global.posY] != 0){
@@ -188,7 +189,8 @@ if (obj_map.units[global.posX,global.posY] != 0){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_index = global.P_Turn.number - 1 ;
+            <string>///Image Index Controller
+image_index = global.P_Turn.number - 1 ;
 </string>
           </argument>
         </arguments>
@@ -211,16 +213,90 @@ if (obj_map.units[global.posX,global.posY] != 0){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>///draw stuff
 draw_self();
 //draw Terrain intel
 draw_sprite(miniwin_terrain,miniwin_terrain_ownership,x,y);
+
+
+
 //draw Unit intel
 if (obj_map.units[global.posX,global.posY] != 0){
     if (obj_map.units[global.posX,global.posY].isVisible){
+    
+        // switch to APC load win
+        if (obj_map.units[global.posX,global.posY].name = "A.P.C."){
+            //LR position switch
+            if (isLeft) draw_sprite(spr_miniwin_load_L,global.P_Turn.number-1,x,y);
+            else draw_sprite(spr_miniwin_load_R,global.P_Turn.number-1,x,y);
+            if (obj_map.units[global.posX,global.posY] !=0){
+                //draw load A
+                if (obj_map.units[global.posX,global.posY].load_A != 0){
+                    APC_load_A = obj_map.units[global.posX,global.posY].load_A;
+                    if isLeft{
+                        draw_sprite(APC_load_A.sprite_index,0,x+172, y+12);
+                        if  APC_load_A.hp &lt; 0 draw_sprite(spr_unitStats_HP, APC_load_A.hp, x+172, y+12);
+                        if  APC_load_A.isCommander draw_sprite(spr_unitStats_Radio, 0, x+172, y+12);
+                        if  APC_load_A.max_ammo &gt; 0 and APC_load_A.ammo/APC_load_A.max_ammo &lt; 0.5 and global.blinking draw_sprite(spr_unitStats_ammofuel,2, x+172, y+12);
+                        if  APC_load_A.max_fuel &gt; 0 and APC_load_A.fuel/APC_load_A.max_fuel &lt; 0.5 and !global.blinking draw_sprite(spr_unitStats_ammofuel,1, x+172, y+12);                 
+                        }
+                    else {
+                        draw_sprite(APC_load_A.sprite_index,0,x-28, y+12);
+                        if  APC_load_A.hp &lt; 0 draw_sprite(spr_unitStats_HP, APC_load_A.hp, x-28, y+12);
+                        if  APC_load_A.isCommander draw_sprite(spr_unitStats_Radio, 0, x-28, y+12);
+                        if  APC_load_A.max_ammo &gt; 0 and APC_load_A.ammo/APC_load_A.max_ammo &lt; 0.5 and global.blinking draw_sprite(spr_unitStats_ammofuel,2, x-28, y+12);
+                        if  APC_load_A.max_fuel &gt; 0 and APC_load_A.fuel/APC_load_A.max_fuel &lt; 0.5 and !global.blinking draw_sprite(spr_unitStats_ammofuel,1,x-28, y+12);
+                        }
+                    }
+            if (obj_map.units[global.posX,global.posY].load_B != 0){
+                APC_load_B = obj_map.units[global.posX,global.posY].load_B;
+                    if isLeft {
+                        draw_sprite(APC_load_B.sprite_index,0,x+172, y+62);
+                        if  APC_load_B.hp &lt; 0 draw_sprite(spr_unitStats_HP, APC_load_B.hp, x+172, y+62);
+                        if  APC_load_B.isCommander draw_sprite(spr_unitStats_Radio, 0, x+172, y+62);
+                        if  APC_load_B.max_ammo &gt; 0 and APC_load_B.ammo/APC_load_B.max_ammo &lt; 0.5 and global.blinking draw_sprite(spr_unitStats_ammofuel,2, x+172, y+62);
+                        if  APC_load_B.max_fuel &gt; 0 and APC_load_B.fuel/APC_load_B.max_fuel &lt; 0.5 and !global.blinking draw_sprite(spr_unitStats_ammofuel,1, x+172, y+62);  
+                       
+                        }
+                    else {
+                        draw_sprite(APC_load_B.sprite_index,0,x-28, y+62); 
+                        if  APC_load_B.hp &lt; 0 draw_sprite(spr_unitStats_HP, APC_load_B.hp, x-28, y+62);
+                        if  APC_load_B.isCommander draw_sprite(spr_unitStats_Radio, 0, x-28, y+62);
+                        if  APC_load_B.max_ammo &gt; 0 and APC_load_B.ammo/APC_load_B.max_ammo &lt; 0.5 and global.blinking draw_sprite(spr_unitStats_ammofuel,2, x-28, y+62);
+                        if  APC_load_B.max_fuel &gt; 0 and APC_load_B.fuel/APC_load_B.max_fuel &lt; 0.5 and !global.blinking draw_sprite(spr_unitStats_ammofuel,1, x-28, y+62); 
+                        }
+                    }
+                     
+                     
+                    
+                    
+                }
+        }
+        //draw unit base
         draw_sprite(miniwin_unit,miniwin_unit_ownership,x,y);
+    //draw HP, Fuel, Ammo
+
+    scr_draw_num(spr_num_light,false,obj_map.units[global.posX,global.posY].hp,x+78,y+26);
+    scr_draw_num(spr_num_light,false,obj_map.units[global.posX,global.posY].fuel,x+123,y+26);
+    if obj_map.units[global.posX,global.posY].ammo != -1 scr_draw_num(spr_num_light,true,obj_map.units[global.posX,global.posY].ammo,x+142,y+26);
+    else draw_sprite(spr_num_light,10,x+142,y+26);
+    
+    //draw Terrain intel
+    draw_sprite(miniwin_terrain,miniwin_terrain_ownership,x,y);
+    // draw capture progress
+    if( obj_map.units[global.posX,global.posY].capturing!= 0){
+            scr_draw_num(spr_num_light,false,obj_map.units[global.posX,global.posY].capturing,x+139,y+74);
+            draw_sprite(spr_miniFlag,obj_map.units[global.posX,global.posY].ownership-1,x+144,y+74)
+            }
+    
+    
+    
         }
     }
+    
+
+
+    
 
 
 </string>

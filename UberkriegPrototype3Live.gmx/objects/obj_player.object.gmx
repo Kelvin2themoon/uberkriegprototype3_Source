@@ -30,7 +30,7 @@
 //variables
 
 number = 0; // re assign from 1~4 when create
-name = "Player " + string(number); // default to "player #"
+name = "Player 0";
 
 //Teeam number to be used in stading and victory checks
 team = 0

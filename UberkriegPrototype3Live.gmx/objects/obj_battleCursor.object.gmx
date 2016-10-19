@@ -542,6 +542,13 @@ draw_self();
 if (cursor_icon == 5 ){
     draw_sprite(spr_basicCursor_Icons,5,x,y);
     }
+
+/*
+if (obj_map.units[global.posX,global.posY]!=0)
+if (obj_map.units[global.posX,global.posY].capturing !=0){ 
+    draw_sprite(spr_captureBar,obj_map.units[global.posX,global.posY].capturing,obj_miniwin.x+6,obj_miniwin.y-24);
+    draw_sprite(spr_capturebar_frame,global.P_Turn.number-1,obj_miniwin.x+6,obj_miniwin.y-24);
+    }
 </string>
           </argument>
         </arguments>
