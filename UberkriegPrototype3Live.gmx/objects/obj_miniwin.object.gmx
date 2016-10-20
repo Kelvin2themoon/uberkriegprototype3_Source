@@ -115,19 +115,27 @@ miniwinLRcheckY = 24*global.posY;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Window Type change: standard, halfsize, load L or R
+            <string>///Retrieve Intel from battle curosr
 
+//retrive terrain object index
+miniwin_terrain = asset_get_index("spr_miniwin_" + string_letters(global.terrain_check.name));
 
-if ( obj_map.units[global.posX,global.posY] = 0){
-    sprite_index = asset_get_index("spr_miniwin_halfsize");
+// retrive terrain ownership if property
+if  (object_is_ancestor(global.terrain_check.object_index,obj_property) and (global.terrain_check.isVisible or global.terrain_check.name = "HQ")  ){ 
+    miniwin_terrain_ownership = global.terrain_check.ownership;
     }
-    
-if ( obj_map.units[global.posX,global.posY] != 0){
-     if (obj_map.units[global.posX,global.posY].isVisible)
-        sprite_index = asset_get_index("spr_miniwin_standard");
-    }
-    
+else miniwin_terrain_ownership = 0;
 
+// retrieve unit info
+
+if (global.unit_check != 0){
+    if (global.unit_check.isVisible){
+        //get unit sprite index
+        miniwin_unit = asset_get_index("spr_miniwin_" + string_letters(global.unit_check.name));
+        //get unit ownership, and interpet image index
+        miniwin_unit_ownership = global.unit_check.ownership - 1;
+        }
+    }
 </string>
           </argument>
         </arguments>
@@ -148,27 +156,19 @@ if ( obj_map.units[global.posX,global.posY] != 0){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Retrieve Intel from battle curosr
+            <string>///Window Type change: standard, halfsize, load L or R
 
-//retrive terrain object index
-miniwin_terrain = asset_get_index("spr_miniwin_" + string_letters(obj_map.terrains[global.posX,global.posY].name));
 
-// retrive terrain ownership if property
-if  (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,obj_property) and (obj_map.terrains[global.posX,global.posY].isVisible or obj_map.terrains[global.posX,global.posY].name = "HQ")  ){ 
-    miniwin_terrain_ownership = obj_map.terrains[global.posX,global.posY].ownership;
+if ( global.unit_check = 0){
+    sprite_index = asset_get_index("spr_miniwin_halfsize");
     }
-else miniwin_terrain_ownership = 0;
-
-// retrieve unit info
-
-if (obj_map.units[global.posX,global.posY] != 0){
-    if (obj_map.units[global.posX,global.posY].isVisible){
-        //get unit sprite index
-        miniwin_unit = asset_get_index("spr_miniwin_" + string_letters(obj_map.units[global.posX,global.posY].name));
-        //get unit ownership, and interpet image index
-        miniwin_unit_ownership = obj_map.units[global.posX,global.posY].ownership - 1;
-        }
+    
+if ( global.unit_check != 0){
+     if (global.unit_check.isVisible)
+        sprite_index = asset_get_index("spr_miniwin_standard");
     }
+    
+
 </string>
           </argument>
         </arguments>
@@ -221,18 +221,18 @@ draw_sprite(miniwin_terrain,miniwin_terrain_ownership,x,y);
 
 
 //draw Unit intel
-if (obj_map.units[global.posX,global.posY] != 0){
-    if (obj_map.units[global.posX,global.posY].isVisible){
+if (global.unit_check != 0){
+    if (global.unit_check.isVisible){
     
         // switch to APC load win
-        if (obj_map.units[global.posX,global.posY].name = "A.P.C."){
+        if (global.unit_check.name = "A.P.C."){
             //LR position switch
             if (isLeft) draw_sprite(spr_miniwin_load_L,global.P_Turn.number-1,x,y);
             else draw_sprite(spr_miniwin_load_R,global.P_Turn.number-1,x,y);
-            if (obj_map.units[global.posX,global.posY] !=0){
+            if (global.unit_check !=0){
                 //draw load A
-                if (obj_map.units[global.posX,global.posY].load_A != 0){
-                    APC_load_A = obj_map.units[global.posX,global.posY].load_A;
+                if (global.unit_check.load_A != 0){
+                    APC_load_A = global.unit_check.load_A;
                     if isLeft{
                         draw_sprite(APC_load_A.sprite_index,0,x+172, y+12);
                         if  APC_load_A.hp &lt; 0 draw_sprite(spr_unitStats_HP, APC_load_A.hp, x+172, y+12);
@@ -248,8 +248,8 @@ if (obj_map.units[global.posX,global.posY] != 0){
                         if  APC_load_A.max_fuel &gt; 0 and APC_load_A.fuel/APC_load_A.max_fuel &lt; 0.5 and !global.blinking draw_sprite(spr_unitStats_ammofuel,1,x-28, y+12);
                         }
                     }
-            if (obj_map.units[global.posX,global.posY].load_B != 0){
-                APC_load_B = obj_map.units[global.posX,global.posY].load_B;
+            if (global.unit_check.load_B != 0){
+                APC_load_B = global.unit_check.load_B;
                     if isLeft {
                         draw_sprite(APC_load_B.sprite_index,0,x+172, y+62);
                         if  APC_load_B.hp &lt; 0 draw_sprite(spr_unitStats_HP, APC_load_B.hp, x+172, y+62);
@@ -276,17 +276,17 @@ if (obj_map.units[global.posX,global.posY] != 0){
         draw_sprite(miniwin_unit,miniwin_unit_ownership,x,y);
     //draw HP, Fuel, Ammo
 
-    scr_draw_num(spr_num_light,false,obj_map.units[global.posX,global.posY].hp,x+78,y+26);
-    scr_draw_num(spr_num_light,false,obj_map.units[global.posX,global.posY].fuel,x+123,y+26);
-    if obj_map.units[global.posX,global.posY].ammo != -1 scr_draw_num(spr_num_light,true,obj_map.units[global.posX,global.posY].ammo,x+142,y+26);
+    scr_draw_num(spr_num_light,false,global.unit_check.hp,x+78,y+26);
+    scr_draw_num(spr_num_light,false,global.unit_check.fuel,x+123,y+26);
+    if global.unit_check.ammo != -1 scr_draw_num(spr_num_light,true,global.unit_check.ammo,x+142,y+26);
     else draw_sprite(spr_num_light,10,x+142,y+26);
     
     //draw Terrain intel
     draw_sprite(miniwin_terrain,miniwin_terrain_ownership,x,y);
     // draw capture progress
-    if( obj_map.units[global.posX,global.posY].capturing!= 0){
-            scr_draw_num(spr_num_light,false,obj_map.units[global.posX,global.posY].capturing,x+139,y+74);
-            draw_sprite(spr_miniFlag,obj_map.units[global.posX,global.posY].ownership-1,x+144,y+74)
+    if( global.unit_check.capturing!= 0){
+            scr_draw_num(spr_num_light,false,global.unit_check.capturing,x+139,y+74);
+            draw_sprite(spr_miniFlag,global.unit_check.ownership-1,x+144,y+74)
             }
     
     

@@ -191,6 +191,9 @@ scr_ubermap_load("protoland.ubm");
             <kind>1</kind>
             <string>///Create HUD objects: Cursor,miniwin
 
+global.terrain_check = obj_map.terrains[1,1];
+global.unit_check = obj_map.units[1,1];
+
 //create &amp; deactivate Cursor
 instance_create(24,24,obj_battleCursor);
 instance_deactivate_object(obj_battleCursor);
