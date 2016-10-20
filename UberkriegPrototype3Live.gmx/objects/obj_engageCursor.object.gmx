@@ -436,9 +436,45 @@ if (global.Phaze = "Main" and unit_selection != 0){
 
 
 ///Damage %
-draw_text(12,132, "Damage: " + string(dmg_percent) + "%");
+draw_text(12,132, "Damage: " + string(round(dmg_percent)) + "%");
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self();
+with(obj_miniwin){
+    if isLeft{ 
+        draw_sprite(spr_damage_indicator_red,0,x+119,y-37);
+        scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+119+7,y-37+12);
+        draw_sprite(spr_num_bright,12,x+119+7+33,y-37+12);
+        
+        }
+    else{ 
+        draw_sprite(spr_damage_indicator_red,0,x,y-37);
+        scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+7,y-37+12);
+        draw_sprite(spr_num_bright,12,x+7+33,y-37+12);
+        }
+    }
 </string>
           </argument>
         </arguments>

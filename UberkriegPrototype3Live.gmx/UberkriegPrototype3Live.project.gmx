@@ -108,11 +108,14 @@
           <sprite>sprites\spr_rangecheck_gold</sprite>
           <sprite>sprites\scr_rangecheck_bluelt</sprite>
           <sprite>sprites\sprite220</sprite>
+          <sprite>sprites\sprite253</sprite>
         </sprites>
         <sprite>sprites\spr_movePath</sprite>
         <sprite>sprites\spr_num_light</sprite>
         <sprite>sprites\spr_miniFlag</sprite>
         <sprite>sprites\spr_num_red</sprite>
+        <sprite>sprites\spr_num_gold</sprite>
+        <sprite>sprites\spr_num_bright</sprite>
       </sprites>
       <sprites name="MapEditor">
         <sprite>sprites\spr_grabHand</sprite>
@@ -161,6 +164,13 @@
           </sprites>
           <sprite>sprites\spr_miniwin_load_L</sprite>
           <sprite>sprites\spr_miniwin_load_R</sprite>
+          <sprites name="Damage Indicator">
+            <sprite>sprites\spr_damage_indicator_red</sprite>
+            <sprite>sprites\spr_damage_indicator_gold</sprite>
+            <sprite>sprites\spr_damage_indicator_green</sprite>
+            <sprite>sprites\spr_damage_indicator_blue</sprite>
+            <sprite>sprites\sprite252</sprite>
+          </sprites>
         </sprites>
         <sprites name="Top Win">
           <sprite>sprites\spr_auxwin</sprite>

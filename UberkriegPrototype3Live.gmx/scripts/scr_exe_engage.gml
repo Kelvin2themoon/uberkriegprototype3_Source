@@ -28,6 +28,7 @@ if (global.target_unit.hp <= 0){
     obj_map.units[global.target_unit.x div 24, global.target_unit.y div 24] = 0 ; 
     with global.target_unit instance_destroy();
     global.target_unit = 0;
+    global.unit_check = 0;
     }
 //if unit survives, check for counter attack
 else{ 
