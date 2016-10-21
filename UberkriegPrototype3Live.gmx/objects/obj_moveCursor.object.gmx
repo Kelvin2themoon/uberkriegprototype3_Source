@@ -106,6 +106,9 @@ isActionable = false ;
 
 ds_list_clear(global.targetables);
 
+//set unit check
+global.unit_check = global.acting_unit;
+
 
 
 
@@ -730,7 +733,9 @@ global.unit_check = obj_map.units[global.posX,global.posY];
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>///Debug
+
+/*
 
 draw_text(12,300, "movecost: " + string( global.rangeCheck[x div 24, y div 24].move_cost) + "/" +string(global.acting_unit.move_points));
 draw_text(12,313, "terrain cost: " + string(scr_check_move_cost(global.acting_unit,obj_map.terrains[x div 24, y div 24])));

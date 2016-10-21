@@ -712,10 +712,26 @@ global.rangeCheckerFramIndex +=1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// DAY
-draw_text(12,12, "DAY: " + string(global.Day));
+            <string>/// Debug
+
+
+
 //Player Phaze
-if (global.Phaze = "Waiting")   draw_text(12,36, "P" + string(global.P_Turn.number) + ": Press Z-key to start turn" );
+if (global.Phaze = "Waiting"){   
+    
+    draw_text(12,12, "DAY: " + string(global.Day));
+    
+    draw_text(12,36, "P" + string(global.P_Turn.number) + ": Press CONFIRM [Z] to start turn" );
+    
+    draw_text(12,60, "CONTROLS:" );
+    draw_text(12,72, "Z - Confirm:" );
+    draw_text(12,84, "X - Cancel:" );
+    draw_text(12,96, "C - Intel");
+    draw_text(12,108, "SPACE - Radio Checks");
+    
+    
+    }
+/*
 if (global.Phaze = "Main"){      
                                 //Player umber
                                 draw_text(12,24, "PLAYER " + string(global.P_Turn.number ));

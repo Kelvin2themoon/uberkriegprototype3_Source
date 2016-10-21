@@ -12,7 +12,7 @@ if (global.acting_unit.name = "Land Cruiser" and global.engage_type = 1 and abs(
     div 10
     }
     
-else{    
+else{    ///regular damage
 
     global.target_unit.hp -=
         (scr_damageCalculator(global.acting_unit, global.target_unit, obj_map.terrains[global.target_unit.x div 24, global.target_unit.y div 24].cover, global.engage_type)
@@ -20,7 +20,8 @@ else{
         div 10 ;
         //ammo consume
         if (global.engage_type = 1) global.acting_unit.ammo -=1;
-    }
+        }
+    
 
 //check if target unit survives
 if (global.target_unit.hp <= 0){
@@ -46,6 +47,8 @@ else{
                         (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 2)
                         + random(global.acting_unit.hp)) div 10;
                         }
+                        
+                      
                     else{
                     //damage unsing primary weapon
                         global.acting_unit.hp -= 
@@ -54,7 +57,8 @@ else{
                         //ammo consume
                         global.target_unit.ammo -=1;
                         }
-                    }  
+                    }
+                      
                 //regular unit
                 else{
                 //damage unitg primary weapon
@@ -64,7 +68,8 @@ else{
                 //ammo consume
                 global.target_unit.ammo -=1;
                     }
-                }
+               } 
+                
             // secondary weapon is avaliable
             else if (global.target_unit.haveSecondaryWeapon){
                 // damage by secondary weapon
@@ -73,7 +78,7 @@ else{
                 + random(global.acting_unit.hp)) div 10;
                 }
             
-            }
+            
             //if  target unit is land cruiser, counter attack with 
             if (global.target_unit.name = "Land Cruiser"){
                 //damage using secondary weapon
@@ -81,8 +86,11 @@ else{
                 (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 2)
                 + random(global.acting_unit.hp)) div 10;
                 }
+           
+            }
         }
     }
+    
 
 //check if acting unit survivesdestroy and set map's unit array
 if (global.acting_unit.hp <= 0){
@@ -106,6 +114,7 @@ else{
         x = global.posX*24;
         y = global.posY*24;
         }
+        
         
 //nuke syscom
 with par_syscom_menu instance_destroy();

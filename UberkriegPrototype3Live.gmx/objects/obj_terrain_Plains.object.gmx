@@ -28,6 +28,7 @@
             <string>///initialize
 event_inherited();
 
+index = 1;
 name = "Plains";
 
 //graphic utility variables

@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>///initialize
 event_inherited();//inherite parent object "properties"
+
+index = 12;
 name = "Command Post";
 
 //required fields

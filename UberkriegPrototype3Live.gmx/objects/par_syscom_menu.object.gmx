@@ -270,10 +270,12 @@ if ( keyboard_check_pressed( global.keyCONFIRM) ){
           <argument>
             <kind>1</kind>
             <string>///set mini win targets if load
-if global.acting_unit.name = "A.P.C."{
-    if ds_list_find_value(menu_content,row) = "drop_A" global.unit_check = global.acting_unit.load_A;
-    else if ds_list_find_value(menu_content,row) = "drop_B" global.unit_check = global.acting_unit.load_B;
-
+if global.acting_unit !=0{
+    if global.acting_unit.name = "A.P.C."{
+        if ds_list_find_value(menu_content,row) = "drop_A" global.unit_check = global.acting_unit.load_A;
+        else if ds_list_find_value(menu_content,row) = "drop_B" global.unit_check = global.acting_unit.load_B;
+    
+        }
     }
 </string>
           </argument>

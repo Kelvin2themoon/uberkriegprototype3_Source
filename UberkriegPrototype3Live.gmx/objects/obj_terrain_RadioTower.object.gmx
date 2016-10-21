@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>///initialize
 event_inherited();//inherite parent object "properties"
+index = 11;
 name = "Radio Tower";
 
 //required fields

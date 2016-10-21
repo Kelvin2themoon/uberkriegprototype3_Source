@@ -29,6 +29,7 @@
 ///initialize
 event_inherited();
 
+index = 0;
 name = "Sea";
 isLand = false;
 isWet = true;

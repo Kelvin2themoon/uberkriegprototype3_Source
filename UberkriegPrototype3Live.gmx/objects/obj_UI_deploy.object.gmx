@@ -51,6 +51,8 @@ y = start_y;
 
 //variable needed to cancel deploy
 no_deploy = false;
+//inten display variable
+display_on = false;
 </string>
           </argument>
         </arguments>
@@ -416,6 +418,35 @@ no_deploy = false;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Temo, Display unit info
+
+if keyboard_check_pressed(global.keyAUX){
+    display_on = true;
+    }
+    
+if keyboard_check_released(global.keyAUX){
+    display_on = false;
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -472,6 +503,93 @@ draw_self();
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Temo, Display unit info
+
+if display_on{
+    if col = 0{
+        switch row{
+            
+            case 0: // Light infantry
+            draw_sprite(spr_temp_unit_summary,1,390,110);
+            break;
+            
+            case 1: // H infantry
+            draw_sprite(spr_temp_unit_summary,2,390,110);
+            break;
+            
+            case 2: // L gun infantry
+            draw_sprite(spr_temp_unit_summary,3,390,110);
+            break;
+            
+            case 3: // officer
+            draw_sprite(spr_temp_unit_summary,4,390,110);
+            break;
+            
+            case 4: // Recom
+            draw_sprite(spr_temp_unit_summary,5,390,110);
+            break;
+            
+            case 5: // APC
+            draw_sprite(spr_temp_unit_summary,6,390,110);
+            break;
+            
+            }
+        draw_sprite(spr_temp_summary_boarder,global.P_Turn.number-1,390,110);
+        }
+    else if col = 1 {
+        switch row {
+            case 0 : //light Tank
+            draw_sprite(spr_temp_unit_summary,7,150,110);
+            break;
+            
+            case 1 : //artillery
+            draw_sprite(spr_temp_unit_summary,8,150,110);
+            break;
+            
+            case 2 : //IFV
+            draw_sprite(spr_temp_unit_summary,9,150,110);
+            break;
+            
+            case 3 : //spy
+            draw_sprite(spr_temp_unit_summary,10,150,110);
+            break;
+            
+            case 4 : //heavy tank
+            draw_sprite(spr_temp_unit_summary,11,150,110);
+            break;
+            
+            case 5 : //rocket
+            draw_sprite(spr_temp_unit_summary,12,150,110);
+            break;
+            
+            case 6 : //l.Cruiser
+            draw_sprite(spr_temp_unit_summary,13,150,110);
+            break;
+                
+                }
+        draw_sprite(spr_temp_summary_boarder,global.P_Turn.number-1,150,110);
+            }
+    }
 </string>
           </argument>
         </arguments>

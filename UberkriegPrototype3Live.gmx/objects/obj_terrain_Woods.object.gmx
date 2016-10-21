@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>///initialize
 event_inherited();
+
+index = 4;
 name = "Woods";
 
 //graphic utility Variables

@@ -344,6 +344,11 @@
       <sprite>sprites\spr_unitStats_ammofuel</sprite>
       <sprite>sprites\sprite245</sprite>
     </sprites>
+    <sprites name="place holder">
+      <sprite>sprites\spr_temp_unit_summary</sprite>
+      <sprite>sprites\spr_temp_terrain_summary</sprite>
+      <sprite>sprites\spr_temp_summary_boarder</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Holders">

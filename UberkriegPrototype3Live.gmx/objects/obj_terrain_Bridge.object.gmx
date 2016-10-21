@@ -32,6 +32,8 @@ this is an emplty object used to consolodate  River-Bridge and Sea-Bridge as a s
 */
 
 event_inherited();
+
+index = 5;
 name = "Bridge" ;
 
 

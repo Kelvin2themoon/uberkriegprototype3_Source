@@ -517,7 +517,8 @@ global.unit_check = obj_map.units[global.posX,global.posY];
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Debug
+            <string>///Debug
+/*
 
 //Scal GUI
 display_set_gui_size(768, 432);

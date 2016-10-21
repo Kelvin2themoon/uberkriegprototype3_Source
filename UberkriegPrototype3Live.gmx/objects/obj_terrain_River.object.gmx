@@ -29,6 +29,7 @@
 
 event_inherited();
 
+index = 6;
 name = "River";
 isLand = true;
 isWet = true;

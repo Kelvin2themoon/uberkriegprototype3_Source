@@ -28,6 +28,8 @@
             <string>///Road
 
 event_inherited();
+
+index = 2;
 name = "Road" ;
 isLand = true;
 
