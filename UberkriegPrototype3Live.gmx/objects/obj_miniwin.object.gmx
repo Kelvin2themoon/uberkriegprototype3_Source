@@ -355,8 +355,15 @@ if (global.unit_check != 0){
             <string>///drqaw temp aux
 
 if aux_on{
-    if global.unit_check !=0 draw_sprite(spr_temp_unit_summary,global.unit_check.unit_index, view_xview[0]+150,view_yview[0]+110);
+    if global.unit_check !=0{
+    if global.unit_check.isVisible{ 
+        draw_sprite(spr_temp_unit_summary,global.unit_check.unit_index, view_xview[0]+150,view_yview[0]+110);
+        draw_sprite(spr_temp_summary_boarder,global.P_Turn.number-1,view_xview[0]+150,view_yview[0]+110);
+        }
+        }
     draw_sprite(spr_temp_terrain_summary,global.terrain_check.index,view_xview[0]+390,view_yview[0]+110);
+    draw_sprite(spr_temp_summary_boarder,global.P_Turn.number-1,view_xview[0]+390,view_yview[0]+110);
+    
     }
 </string>
           </argument>
