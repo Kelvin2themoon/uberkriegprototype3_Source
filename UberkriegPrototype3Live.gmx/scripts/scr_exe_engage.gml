@@ -32,12 +32,20 @@ if (global.target_unit.hp <= 0){
     global.unit_check = 0;
     }
 //if unit survives, check for counter attack
-else{ 
-    if (  abs(global.acting_unit.x - global.target_unit.x) + abs(global.acting_unit.y - global.target_unit.y) = 24){ // unit is adjacent
+else{
+    //of unit is land cruiser
+    if (global.target_unit.name = "Land Cruiser" and abs(global.acting_unit.x - global.target_unit.x) + abs(global.acting_unit.y - global.target_unit.y) = 24){
+        //damage using secondary weapon
+        global.acting_unit.hp -= 
+        (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 2)
+        + random(global.acting_unit.hp)) div 10;
+        } 
+    else if (  abs(global.acting_unit.x - global.target_unit.x) + abs(global.acting_unit.y - global.target_unit.y) = 24){ // unit is adjacent
+        
         //check if target unit can counter attack
         if ( global.target_unit.max_range = 1){
             //if primary weapon is avaliable
-            if(global.target_unit.havePrimaryWeapon and global.target_unit.ammo > 0 and obj_battleController_basic.DMG_P[global.target_unit.unit_index,global.acting_unit.unit_index] ){
+            if(global.target_unit.havePrimaryWeapon and global.target_unit.ammo > 0 and obj_battleController_basic.DMG_P[global.acting_unit.unit_index,global.target_unit.unit_index] ){
                 // damage by primary weapon
                 if(global.acting_unit.name = "Land Cruiser"){
                     // if target unit is adjacent
@@ -79,13 +87,7 @@ else{
                 }
             
             
-            //if  target unit is land cruiser, counter attack with 
-            if (global.target_unit.name = "Land Cruiser"){
-                //damage using secondary weapon
-                global.acting_unit.hp -= 
-                (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 2)
-                + random(global.acting_unit.hp)) div 10;
-                }
+            
            
             }
         }

@@ -270,7 +270,7 @@ if ( keyboard_check_pressed( global.keyCONFIRM) ){
           <argument>
             <kind>1</kind>
             <string>///set mini win targets if load
-if global.acting_unit !=0{
+if global.acting_unit != 0{
     if global.acting_unit.name = "A.P.C."{
         if ds_list_find_value(menu_content,row) = "drop_A" global.unit_check = global.acting_unit.load_A;
         else if ds_list_find_value(menu_content,row) = "drop_B" global.unit_check = global.acting_unit.load_B;
@@ -337,7 +337,7 @@ for ( i=0 ; i&lt;ds_list_size(menu_content) ; i+=1){
 
     item = ds_list_find_value(menu_content, i);
     //exception for drop 
-    if (item = "drop_A"){
+    if (item = "drop_A" and global.acting_unit.load_A !=0){
         draw_sprite(spr_syscom_drop_up,global.P_Turn.number-1,start_x,start_y+(i*24));
         if (global.acting_unit.load_A != 0) {
                 draw_sprite(global.acting_unit.load_A.sprite_index,0,start_x+24,start_y+(i*24));
@@ -345,7 +345,7 @@ for ( i=0 ; i&lt;ds_list_size(menu_content) ; i+=1){
                 if (global.acting_unit.load_A.hp &lt; 10)     draw_sprite(spr_unitStats_HP,global.acting_unit.load_A.hp,start_x+24,start_y+(i*24));
                 } 
         }
-    else if (item = "drop_B"){
+    else if (item = "drop_B" and global.acting_unit.load_B != 0){
         draw_sprite(spr_syscom_drop_up,global.P_Turn.number-1,start_x,start_y+(i*24));
         draw_sprite(global.acting_unit.load_B.sprite_index,0,start_x+24,start_y+(i*24));
         if (global.acting_unit.load_B .isCommander)  draw_sprite(spr_unitStats_Radio,0,start_x+24,start_y+(i*24));
