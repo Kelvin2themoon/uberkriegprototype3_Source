@@ -345,7 +345,7 @@ if (global.P1_in_play){
         if (P1_x &gt; (768-96)) global.P1.save_view_pos_x = P1_x - (768-24*5);
         if (P1_y &gt; (432-96)) global.P1.save_view_pos_y = P1_y - (432-24*5);
         //set unit and property teams
-        with (obj_property and obj_unit){
+        with (obj_property){
             if (ownership = 1) team = global.P1.team;             
             } 
        with (obj_unit){

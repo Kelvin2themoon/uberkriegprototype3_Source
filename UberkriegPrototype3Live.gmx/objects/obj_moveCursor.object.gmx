@@ -521,33 +521,9 @@ global.wait         = true ; // wait is on by default
         
         //check if unit is vovert op. and turn on appear or dissapppear
         
-        if (global.acting_unit.name = "Covert Op."){
-            if (global.acting_unit.isHidden){
-                //activate appear
-                global.appear = true;
-                }
-            else{
-                global.hide = true;
-                }
-            }
+
         
         //check for property
-        if( object_is_ancestor(obj_map.terrains[global.posX, global.posY].object_index, obj_property) 
-            and obj_map.terrains[global.posX, global.posY].ownership != global.P_Turn.number
-            and obj_map.units[global.posX, global.posY].isVisible = false
-            and global.acting_unit.canCapture ){
-                global.capture = true ;
-            }
-        //for APC, check for adjacent ally unit for Supply action
-        if ( global.acting_unit.name = "A.P.C."){
-            if(scr_check_units_in_range( global.posX, global.posY,1, 1, true)){
-                global.supply = true;
-                }
-            //if units can be dropped
-            if (global.acting_unit.load_A != 0) global.drop_A = true;
-            if (global.acting_unit.load_B != 0) global.drop_B = true;
-            
-            }
         
         //add engage if visible enemy units are in range 
         //check primary weaopn
@@ -590,6 +566,7 @@ global.wait         = true ; // wait is on by default
         }
     //else target is in range &amp; no unit visibly occupies the location    
     else{
+        show_debug_message("empty check passed");
 
         
         //check if unit is vovert op. and turn on appear or dissapppear
@@ -618,12 +595,12 @@ global.wait         = true ; // wait is on by default
             //if units can be dropped
             if (global.acting_unit.load_A != 0) global.drop_A = true;
             if (global.acting_unit.load_B != 0) global.drop_B = true;
-            
             }
         
         //add engage if visible enemy units are in range 
         //check primary weaopn
         if ( global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 ){
+        show_debug_message("Primary Weapon Check");
         
             if (global.acting_unit.max_range = 1 or global.acting_unit.name = "Land Cruiser"){
                 //max range is 1 or is land cuiser, process as direct attack (can move and 
@@ -646,6 +623,7 @@ global.wait         = true ; // wait is on by default
             }
         //check secondary weapon
         else if (global.acting_unit.haveSecondaryWeapon){
+        show_debug_message("secondary weapon check");
             if ( scr_check_units_in_range( global.posX, global.posY, 1 , 1 , false)){
                 global.engage = true;
                 global.engage_type = 2;
@@ -655,8 +633,7 @@ global.wait         = true ; // wait is on by default
                 }
             }
         }
-
-            }
+    }
     //if items exsist, create syscom_command
     if(global.capture   or
     global.engage       or
@@ -685,7 +662,7 @@ global.wait         = true ; // wait is on by default
         }
             
         
-        }
+    }
 }
 
 </string>
