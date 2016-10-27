@@ -347,6 +347,10 @@ if ( keyboard_check_pressed( global.keyCONFIRM) ){
                 obj_map.units[global.posX,global.posY].state = "idle"
                 ){
             //start unit command
+            instance_activate_object(obj_moveCursor);
+            with(obj_moveCursor){ 
+                instance_destroy();
+                }
             instance_create(x,y,obj_moveCursor);
             instance_deactivate_object(obj_battleCursor);
             }
