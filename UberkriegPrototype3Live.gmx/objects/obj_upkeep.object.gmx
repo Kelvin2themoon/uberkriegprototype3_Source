@@ -50,7 +50,7 @@ with obj_unit{
     if isDisrupted isDisrupted = false;
     if (isHidden and ownership = global.P_Turn.number) {fuel -= 5; show_debug_message("hidden fuel consum");}
     if ( obj_map.terrains[ x div 24, y div 24].isProperty ){
-        if ( obj_map.terrains[ x div 24, y div 24].canRepair_g and obj_map.terrains[ x div 24, y div 24].ownership = global.P_Turn.number){
+        if ( obj_map.terrains[ x div 24, y div 24].canRepair_g and obj_map.terrains[ x div 24, y div 24].ownership = global.P_Turn.number and ownership = global.P_Turn.number){
             if (hp=9){
                 hp = 10
                 global.P_Turn.funds -= cost div 10;
