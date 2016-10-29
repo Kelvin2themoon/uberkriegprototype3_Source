@@ -582,25 +582,38 @@ global.wait         = true ; // wait is on by default
             }
         
         //check for property
-        if( object_is_ancestor(obj_map.terrains[global.posX, global.posY].object_index, obj_property) 
+        if(object_is_ancestor(obj_map.terrains[global.posX, global.posY].object_index, obj_property) 
             and obj_map.terrains[global.posX, global.posY].ownership != global.P_Turn.number
-            and global.acting_unit.canCapture ){
-                global.capture = true ;
-            }
-        //for APC, check for adjacent ally unit for Supply action
-        if ( global.acting_unit.name = "A.P.C."){
-            if(scr_check_units_in_range( global.posX, global.posY,1, 1, true)){
+            and global.acting_unit.canCapture )
+        {
+            global.capture = true ;
+        }
+        
+        // For APC:
+        if (global.acting_unit.name = "A.P.C.")
+        {
+            // Check for adjacent ally unit for Supply action
+            if (scr_check_units_in_range(global.posX, global.posY, 1, 1, true))
+            {
                 global.supply = true;
-                }
-            //if units can be dropped
-            if (global.acting_unit.load_A != 0) global.drop_A = true;
-            if (global.acting_unit.load_B != 0) global.drop_B = true;
             }
+            // Check if units can be dropped
+            var num_units_adjacent = ds_list_size(global.targetables);
+            if ( global.acting_unit.load_A != 0 and num_units_adjacent &lt; 4 )
+            {
+                global.drop_A = true;
+            }
+            if ( global.acting_unit.load_B != 0 and num_units_adjacent &lt; 4 )
+            {
+                global.drop_B = true;
+            }
+        }
         
         //add engage if visible enemy units are in range 
         //check primary weaopn
-        if ( global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 ){
-        show_debug_message("Primary Weapon Check");
+        if ( global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 )
+        {
+            show_debug_message("Primary Weapon Check");
         
             if (global.acting_unit.max_range = 1 or global.acting_unit.name = "Land Cruiser"){
                 //max range is 1 or is land cuiser, process as direct attack (can move and 
