@@ -1,7 +1,7 @@
 //reset captue
 
-
-instance_create(global.acting_unit.x,global.acting_unit.y,obj_captureBar);
+if (global.acting_unit.x-view_xview[0] < 768-(168+24) )  instance_create(global.acting_unit.x+36,global.acting_unit.y,obj_captureBar);
+else instance_create(global.acting_unit.x-168,global.acting_unit.y,obj_captureBar);
 
 //obj_map.units[destination.x div 24,destination.y div 24] = global.acting_unit;
 obj_map.units[global.posX,global.posY] = global.acting_unit; 

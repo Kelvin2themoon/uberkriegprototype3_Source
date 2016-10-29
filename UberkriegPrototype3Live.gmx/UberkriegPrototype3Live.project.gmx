@@ -515,7 +515,7 @@
         <object>objects\obj_player</object>
         <object>objects\obj_topwin</object>
       </objects>
-      <objects name="Event Objects">
+      <objects name="Turn Event Objects">
         <object>objects\obj_starting</object>
         <object>objects\obj_upkeep</object>
       </objects>

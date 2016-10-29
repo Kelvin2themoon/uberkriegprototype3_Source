@@ -67,11 +67,66 @@ for (i=0 ; i &lt; engage_list_size ; i+=1){
     targeting.isEngageTarget = true;
     } 
 
+//initiate damage indicator animation controm variables
+indicator_frame = 0;
+indicator_reverse = false;
+alarm[2] =5;
 
 
 
 
 
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Damage indicatior animation control
+
+ if (indicator_frame = 5){
+     indicator_reverse = true;
+     indicator_frame = 4;
+     alarm[2] = 5; 
+    }
+
+else if (indicator_frame  = 0){
+        indicator_reverse = false;
+        indicator_frame = 1
+        alarm[2] = 5;
+    }
+else if (!indicator_reverse and indicator_frame = 4){
+    indicator_frame += 1
+    alarm[2] = 10;
+    }
+
+else if (indicator_reverse){
+    indicator_frame -= 1
+    alarm[2] = 5;
+    }
+else{
+    indicator_frame += 1;
+    alarm[2] = 5;
+    } 
 
 </string>
           </argument>
@@ -465,19 +520,39 @@ draw_text(12,132, "Damage: " + string(round(dmg_percent)) + "%");
           <argument>
             <kind>1</kind>
             <string>draw_self();
-with(obj_miniwin){
-    if isLeft{ 
-        draw_sprite(spr_damage_indicator_red,0,x+119,y-37);
-        scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+119+7,y-37+12);
-        draw_sprite(spr_num_bright,12,x+119+7+33,y-37+12);
-        
-        }
-    else{ 
-        draw_sprite(spr_damage_indicator_red,0,x,y-37);
-        scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+7,y-37+12);
-        draw_sprite(spr_num_bright,12,x+7+33,y-37+12);
+
+//if 3 digit long
+if (string_length(string(round(dmg_percent))) &gt; 2){
+    with(obj_miniwin){
+        if isLeft{ 
+            draw_sprite(spr_damage_indicator_red,other.indicator_frame,x+119,y-37-other.indicator_frame);
+            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+119+7-3,y-37+12-other.indicator_frame);
+            draw_sprite(spr_num_bright,12,x+119+7+33-2,y-37+12-other.indicator_frame);
+            
+            }
+        else{ 
+            draw_sprite(spr_damage_indicator_red,other.indicator_frame,x,y-37-other.indicator_frame);
+            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+7-3,y-37+12-other.indicator_frame);
+            draw_sprite(spr_num_bright,12,x+7+33-2,y-37+12-other.indicator_frame);
+            }
         }
     }
+// if 2 digit long
+else{
+        with(obj_miniwin){
+        if isLeft{ 
+            draw_sprite(spr_damage_indicator_red,other.indicator_frame,x+119,y-37-other.indicator_frame);
+            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+119+8,y-37+12-other.indicator_frame);
+            draw_sprite(spr_num_bright,12,x+119+7+33-11+5,y-37+12-other.indicator_frame);
+            
+            }
+        else{ 
+            draw_sprite(spr_damage_indicator_red,other.indicator_frame,x,y-37-other.indicator_frame);
+            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+8,y-37+12-other.indicator_frame);
+            draw_sprite(spr_num_bright,12,x+7+33-11+5,y-37+12-other.indicator_frame);
+        }
+    }
+}
 </string>
           </argument>
         </arguments>
