@@ -53,6 +53,11 @@ y = start_y;
 no_deploy = false;
 //inten display variable
 display_on = false;
+
+//math variables
+display_cost = 0;
+display_difference = 0;
+
 </string>
           </argument>
         </arguments>
@@ -104,6 +109,7 @@ if  (keyboard_check_pressed(global.keyCANCEL))
     {
     instance_activate_object(obj_battleCursor);
     instance_activate_object(obj_miniwin);
+    instance_activate_object(obj_topwin);
     instance_destroy();
     }
 </string>
@@ -388,6 +394,7 @@ no_deploy = false;
         if no_deploy {
                 instance_activate_object(obj_battleCursor);
                 instance_activate_object(obj_miniwin);
+                instance_activate_object(obj_topwin);
                 instance_destroy();
                 }
     
@@ -447,6 +454,94 @@ if keyboard_check_released(global.keyAUX){
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///cost nav
+if col == 0{
+        //check row
+        switch row
+            {
+            case 0: //Light Infantry
+                display_cost = 1000;
+                break;
+            
+            case 1: //Heavy Infantry (mechanized Infnatry)
+                display_cost = 2000;
+                break;
+            
+            case 2: //Long Gun
+                display_cost = 3000;
+                break;
+            
+            case 3: //Field Officer (commander)
+                display_cost = 4000;
+                break; 
+            
+            case 4: //Recon
+                display_cost = 4000;
+                break;
+            
+            case 5: //APC
+               display_cost = 5000;
+                break;
+            
+            case 6: //cancel
+                display_cost = 0;
+                break;
+            }
+        }            
+    if col == 1{
+        //check row
+           switch row
+                {
+           case 0: //Light Tank
+                display_cost = 6000;             
+                break;
+                
+           case 1: //Artillery
+                display_cost = 7000;
+                break;
+                
+           case 2: //IFV (AA)
+               display_cost = 8000;
+                break;
+                
+           case 3: //Covert Op.
+                display_cost = 9000
+                break; 
+                
+           case 4: //Heavy Tank
+               display_cost = 15000;
+            break;
+                
+           case 5: //Rocket
+                display_cost = 16000;
+                break;
+                
+           case 6: //Land Cruiser
+                display_cost = 32000;
+                break;
+            }        
+        }   
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -475,6 +570,40 @@ if keyboard_check_released(global.keyAUX){
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// number cruncher
+
+//funds
+scr_draw_num(spr_num_light,false,global.P_Turn.funds,229,55);
+//cost
+scr_draw_num(spr_num_light,false,display_cost,409,55);
+
+//draw difference
+
+if global.P_Turn.funds-display_cost &lt; 0
+scr_draw_num(spr_num_red,false,global.P_Turn.funds-display_cost,595,55);
+
+else
+scr_draw_num(spr_num_light,false,global.P_Turn.funds-display_cost,595,55);
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -496,9 +625,20 @@ if keyboard_check_released(global.keyAUX){
             <string>///Draw order
 
 
+
 //Draw menu
 draw_sprite(spr_DeployWin,global.P_Turn.number-1,view_xview + 132,view_yview + 42);
-//drw cursor or "self"
+
+
+//draw overcost
+if (global.P_Turn.number &lt; 32000) //Land Cruiser
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),12,view_xview+378,view_yview+318);
+
+if (global.P_Turn.number &lt; 16000) //LRocket
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),11,view_xview+378,view_yview+282);
+ 
+
+//draw cursor or "self"
 draw_self();
 
 

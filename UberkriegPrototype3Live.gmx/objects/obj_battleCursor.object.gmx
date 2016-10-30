@@ -330,6 +330,7 @@ if ( keyboard_check_pressed( global.keyCONFIRM) ){
             instance_create(0,0,obj_UI_deploy);
             instance_deactivate_object(obj_miniwin);
             instance_deactivate_object(obj_battleCursor);
+            instance_deactivate_object(obj_topwin);
             }
         //if terrain is anything else
         else {

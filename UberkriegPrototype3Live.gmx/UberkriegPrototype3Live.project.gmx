@@ -123,6 +123,10 @@
       <sprites name="Deploy">
         <sprite>sprites\spr_DeployWin</sprite>
         <sprite>sprites\spr_DeplayWin_curosr</sprite>
+        <sprite>sprites\spr_overCost_P1</sprite>
+        <sprite>sprites\spr_overCost_P2</sprite>
+        <sprite>sprites\spr_overCost_P3</sprite>
+        <sprite>sprites\spr_overCost_P4</sprite>
       </sprites>
       <sprites name="HUD">
         <sprite>sprites\spr_black</sprite>

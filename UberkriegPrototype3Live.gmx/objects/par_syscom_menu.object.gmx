@@ -316,7 +316,8 @@ if ( keyboard_check_pressed( global.keyCONFIRM) ){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// draw cap and base
+            <string>///draw menu
+// draw cap and base
 draw_sprite(spr_syscom_cap , global.P_Turn.number-1,start_x,start_y-24);
 draw_sprite(spr_syscom_base, global.P_Turn.number-1,start_x,start_y +(ds_list_size(menu_content))*24);
 
