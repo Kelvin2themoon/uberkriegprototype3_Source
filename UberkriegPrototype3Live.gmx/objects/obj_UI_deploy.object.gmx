@@ -631,12 +631,44 @@ draw_sprite(spr_DeployWin,global.P_Turn.number-1,view_xview + 132,view_yview + 4
 
 
 //draw overcost
-if (global.P_Turn.number &lt; 32000) //Land Cruiser
+if (global.P_Turn.funds &lt; 32000) //Land Cruiser
 draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),12,view_xview+378,view_yview+318);
 
-if (global.P_Turn.number &lt; 16000) //LRocket
+if (global.P_Turn.funds &lt; 16000) //Rocket
 draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),11,view_xview+378,view_yview+282);
+
+if (global.P_Turn.funds &lt; 15000) //Heavy Tank
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),10,view_xview+378,view_yview+246);
+
+if (global.P_Turn.funds &lt; 9000) //Covert Op
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),9,view_xview+378,view_yview+210);
+
+if (global.P_Turn.funds &lt; 8000) //IFV (AA)
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),8,view_xview+378,view_yview+174);
+
+if (global.P_Turn.funds &lt; 7000) //Artillery
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),7,view_xview+378,view_yview+138);
  
+if (global.P_Turn.funds &lt; 6000) //Light tank
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),6,view_xview+378,view_yview+102);
+
+if (global.P_Turn.funds &lt; 5000) //APC
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),5,view_xview+138,view_yview+282);
+
+if (global.P_Turn.funds &lt; 4000) //Recon
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),4,view_xview+138,view_yview+246);
+
+if (global.P_Turn.funds &lt; 4000) //Officer
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),3,view_xview+138,view_yview+210);
+
+if (global.P_Turn.funds &lt; 3000) //Long Gun
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),2,view_xview+138,view_yview+174);
+
+if (global.P_Turn.funds &lt; 2000) //Heavy Infantry
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),1,view_xview+138,view_yview+138);
+
+if (global.P_Turn.funds &lt; 1000) //Light Infantry
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),0,view_xview+138,view_yview+102);
 
 //draw cursor or "self"
 draw_self();
