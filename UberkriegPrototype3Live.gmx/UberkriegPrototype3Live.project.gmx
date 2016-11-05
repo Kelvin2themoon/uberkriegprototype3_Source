@@ -458,6 +458,7 @@
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>
+    <font>fonts\font1</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>
@@ -553,6 +554,9 @@
       <object>objects\obj_promote_pointer</object>
     </objects>
   </objects>
+  <timelines name="timelines">
+    <timeline>timelines\isDisrupt</timeline>
+  </timelines>
   <rooms name="rooms">
     <room>rooms\rm_debugStart</room>
     <room>rooms\rm_MapEditor</room>

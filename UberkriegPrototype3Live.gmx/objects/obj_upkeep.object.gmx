@@ -47,7 +47,6 @@ with obj_unit{
     if (ownership = global.P_Turn.number) global.P_Turn.unit_count += 1;
     if isStanding state = "idle";
     if isDisrupted state = "exhaust";
-    if isDisrupted isDisrupted = false;
     if (isHidden and ownership = global.P_Turn.number) {fuel -= 5; show_debug_message("hidden fuel consum");}
     if ( obj_map.terrains[ x div 24, y div 24].isProperty ){
         if ( obj_map.terrains[ x div 24, y div 24].canRepair_g and obj_map.terrains[ x div 24, y div 24].ownership = global.P_Turn.number and ownership = global.P_Turn.number){

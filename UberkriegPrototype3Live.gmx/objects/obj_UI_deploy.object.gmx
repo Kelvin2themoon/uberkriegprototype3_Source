@@ -411,9 +411,13 @@ no_deploy = false;
                 //update standing
                 scr_updateStanding_global();
                 scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
+                //update vision
+                scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
+                
                 //Close deploy Window
                 instance_activate_object(obj_battleCursor);
                 instance_activate_object(obj_miniwin);
+                instance_activate_object(obj_topwin);
                 instance_destroy();
                 }
             }
@@ -588,6 +592,9 @@ if col == 0{
             <kind>1</kind>
             <string>/// number cruncher
 
+//adjust for when full screan
+display_set_gui_size(768, 432);
+
 //funds
 scr_draw_num(spr_num_light,false,global.P_Turn.funds,229,55);
 //cost
@@ -632,43 +639,43 @@ draw_sprite(spr_DeployWin,global.P_Turn.number-1,view_xview + 132,view_yview + 4
 
 //draw overcost
 if (global.P_Turn.funds &lt; 32000) //Land Cruiser
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),12,view_xview+378,view_yview+318);
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),12,view_xview[0]+378,view_yview[0]+318);
 
 if (global.P_Turn.funds &lt; 16000) //Rocket
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),11,view_xview+378,view_yview+282);
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),11,view_xview[0]+378,view_yview[0]+282);
 
 if (global.P_Turn.funds &lt; 15000) //Heavy Tank
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),10,view_xview+378,view_yview+246);
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),10,view_xview[0]+378,view_yview[0]+246);
 
 if (global.P_Turn.funds &lt; 9000) //Covert Op
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),9,view_xview+378,view_yview+210);
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),9,view_xview[0]+378,view_yview[0]+210);
 
 if (global.P_Turn.funds &lt; 8000) //IFV (AA)
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),8,view_xview+378,view_yview+174);
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),8,view_xview[0]+378,view_yview[0]+174);
 
 if (global.P_Turn.funds &lt; 7000) //Artillery
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),7,view_xview+378,view_yview+138);
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),7,view_xview[0]+378,view_yview[0]+138);
  
 if (global.P_Turn.funds &lt; 6000) //Light tank
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),6,view_xview+378,view_yview+102);
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),6,view_xview[0]+378,view_yview[0]+102);
 
 if (global.P_Turn.funds &lt; 5000) //APC
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),5,view_xview+138,view_yview+282);
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),5,view_xview[0]+138,view_yview[0]+282);
 
 if (global.P_Turn.funds &lt; 4000) //Recon
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),4,view_xview+138,view_yview+246);
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),4,view_xview[0]+138,view_yview[0]+246);
 
 if (global.P_Turn.funds &lt; 4000) //Officer
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),3,view_xview+138,view_yview+210);
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),3,view_xview[0]+138,view_yview[0]+210);
 
 if (global.P_Turn.funds &lt; 3000) //Long Gun
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),2,view_xview+138,view_yview+174);
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),2,view_xview[0]+138,view_yview[0]+174);
 
 if (global.P_Turn.funds &lt; 2000) //Heavy Infantry
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),1,view_xview+138,view_yview+138);
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),1,view_xview[0]+138,view_yview[0]+138);
 
 if (global.P_Turn.funds &lt; 1000) //Light Infantry
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),0,view_xview+138,view_yview+102);
+draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),0,view_xview[0]+138,view_yview[0]+102);
 
 //draw cursor or "self"
 draw_self();
@@ -702,64 +709,65 @@ if display_on{
         switch row{
             
             case 0: // Light infantry
-            draw_sprite(spr_temp_unit_summary,1,390,110);
+            draw_sprite(spr_temp_unit_summary,1,view_xview+390,view_yview+110);
             break;
             
             case 1: // H infantry
-            draw_sprite(spr_temp_unit_summary,2,390,110);
+            draw_sprite(spr_temp_unit_summary,2,view_xview+390,view_yview+110);
             break;
             
             case 2: // L gun infantry
-            draw_sprite(spr_temp_unit_summary,3,390,110);
+            draw_sprite(spr_temp_unit_summary,3,view_xview+390,view_yview+110);
             break;
             
             case 3: // officer
-            draw_sprite(spr_temp_unit_summary,4,390,110);
+            draw_sprite(spr_temp_unit_summary,4,view_xview+390,view_yview+110);
             break;
             
             case 4: // Recom
-            draw_sprite(spr_temp_unit_summary,5,390,110);
+            draw_sprite(spr_temp_unit_summary,5,view_xview+390,view_yview+110);
             break;
             
             case 5: // APC
-            draw_sprite(spr_temp_unit_summary,6,390,110);
+            draw_sprite(spr_temp_unit_summary,6,view_xview+390,view_yview+110);
             break;
             
             }
-        draw_sprite(spr_temp_summary_boarder,global.P_Turn.number-1,390,110);
+        if (display_cost != 0)    
+        draw_sprite(spr_temp_summary_boarder,global.P_Turn.number-1,view_xview+390,view_yview+110);
         }
     else if col = 1 {
         switch row {
             case 0 : //light Tank
-            draw_sprite(spr_temp_unit_summary,7,150,110);
+            draw_sprite(spr_temp_unit_summary,7,view_xview+150,view_yview+110);
             break;
             
             case 1 : //artillery
-            draw_sprite(spr_temp_unit_summary,8,150,110);
+            draw_sprite(spr_temp_unit_summary,8,view_xview+150,view_yview+110);
             break;
             
             case 2 : //IFV
-            draw_sprite(spr_temp_unit_summary,9,150,110);
+            draw_sprite(spr_temp_unit_summary,9,view_xview+150,view_yview+110);
             break;
             
             case 3 : //spy
-            draw_sprite(spr_temp_unit_summary,10,150,110);
+            draw_sprite(spr_temp_unit_summary,10,view_xview+150,view_yview+110);
             break;
             
             case 4 : //heavy tank
-            draw_sprite(spr_temp_unit_summary,11,150,110);
-            break;
+            draw_sprite(spr_temp_unit_summary,11,view_xview+150,view_yview+110);
             
             case 5 : //rocket
-            draw_sprite(spr_temp_unit_summary,12,150,110);
+            draw_sprite(spr_temp_unit_summary,12,view_xview+150,view_yview+110);
             break;
             
             case 6 : //l.Cruiser
-            draw_sprite(spr_temp_unit_summary,13,150,110);
+            draw_sprite(spr_temp_unit_summary,13,view_xview+150,view_yview+110);
             break;
                 
                 }
-        draw_sprite(spr_temp_summary_boarder,global.P_Turn.number-1,150,110);
+        if (display_cost != 0)    
+        draw_sprite(spr_temp_summary_boarder,global.P_Turn.number-1,view_xview+150,view_yview+110);
             }
     }
 </string>
