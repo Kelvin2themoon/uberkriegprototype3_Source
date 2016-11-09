@@ -459,6 +459,8 @@
   <fonts name="fonts">
     <font>fonts\ft_AuroraEx</font>
     <font>fonts\font1</font>
+    <font>fonts\font2</font>
+    <font>fonts\font3</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>

@@ -512,7 +512,7 @@ if ( keyboard_check_pressed( global.keyCONFIRM) )
             if ( global.target_unit.ownership = global.P_Turn.number ) 
             {
                 // Join: check target unit is of the same type and hp is less than 10
-                if ( global.acting_unit.name = global.target_unit  and global.target_unit.hp &lt; 10) global.join = true;
+                if ( global.acting_unit.name = global.target_unit.name  and global.target_unit.hp &lt; 10) global.join = true;
                
                 // Attach: check acting unit is  officer and target unit is not of command rank
                 if ( global.acting_unit.name = "Officer" and !global.target_unit.isCommander ) global.attach = true;

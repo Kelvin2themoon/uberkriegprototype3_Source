@@ -29,16 +29,20 @@ adjQ = ds_priority_create();
 while( move_left > 0){    
     //feed adjecent tiles into priority Q
     
-    if (global.rangeCheck[checkingX+1,checkingY+0].move_cost !=  -1 and scr_inBound(checkingX+1,checkingY+0))
+    if scr_inBound(checkingX+1,checkingY+0)
+    if (global.rangeCheck[checkingX+1,checkingY+0].move_cost !=  -1 )
     ds_priority_add(adjQ,global.rangeCheck[checkingX+1,checkingY+0].id,global.rangeCheck[checkingX+1,checkingY+0].move_cost);
     
-    if (global.rangeCheck[checkingX-1,checkingY+0].move_cost !=  -1 and scr_inBound(checkingX-1,checkingY+0))
+    if scr_inBound(checkingX-1,checkingY+0)
+    if (global.rangeCheck[checkingX-1,checkingY+0].move_cost !=  -1 )
     ds_priority_add(adjQ,global.rangeCheck[checkingX-1,checkingY+0].id,global.rangeCheck[checkingX-1,checkingY+0].move_cost);
     
-    if (global.rangeCheck[checkingX+0,checkingY+1].move_cost !=  -1 and scr_inBound(checkingX+0,checkingY+1))
+    if scr_inBound(checkingX+0,checkingY+1)
+    if (global.rangeCheck[checkingX+0,checkingY+1].move_cost !=  -1 )
     ds_priority_add(adjQ,global.rangeCheck[checkingX+0,checkingY+1].id,global.rangeCheck[checkingX+0,checkingY+1].move_cost);
     
-    if (global.rangeCheck[checkingX+0,checkingY-1].move_cost !=  -1 and scr_inBound(checkingX+0,checkingY-1))
+    if scr_inBound(checkingX+0,checkingY-1)
+    if (global.rangeCheck[checkingX+0,checkingY-1].move_cost !=  -1 )
     ds_priority_add(adjQ,global.rangeCheck[checkingX+0,checkingY-1].id,global.rangeCheck[checkingX+0,checkingY-1].move_cost);
     
     //minus move_cost
