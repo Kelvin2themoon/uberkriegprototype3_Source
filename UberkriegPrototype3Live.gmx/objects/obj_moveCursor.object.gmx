@@ -538,6 +538,7 @@ if ( keyboard_check_pressed( global.keyCONFIRM) )
             //target is enemy
             else if ( global.target_unit.team != global.P_Turn.team ) 
             {
+                show_debug_message("enemy unit check pass");
                 if (global.target_unit.isVisible) //destination is vivibally occupied by an enemy unit
                 {
                     // do nothing
@@ -545,6 +546,7 @@ if ( keyboard_check_pressed( global.keyCONFIRM) )
                 }
                 else
                 {
+                    show_debug_message("invisible enemy unit check pass");
                     //teat destination as if it is empty
                     isEmpty = true;
                     global.wait = true; //turn wait back on
@@ -560,7 +562,7 @@ if ( keyboard_check_pressed( global.keyCONFIRM) )
         }
         
         // destination appears empty
-        else if ( isEmpty )
+        if ( isEmpty )
         {
         
         show_debug_message("empty check passed");

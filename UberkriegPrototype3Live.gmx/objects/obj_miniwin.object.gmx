@@ -258,7 +258,7 @@ if (global.unit_check != 0){
     if (global.unit_check.isVisible){
     
         // switch to APC load win
-        if (global.unit_check.name = "A.P.C."){
+        if (global.unit_check.name = "A.P.C." and global.unit_check.team = global.P_Turn.team){
             //LR position switch
             if (isLeft) draw_sprite(spr_miniwin_load_L,global.P_Turn.number-1,x,y);
             else draw_sprite(spr_miniwin_load_R,global.P_Turn.number-1,x,y);
