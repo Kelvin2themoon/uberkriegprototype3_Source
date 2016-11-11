@@ -139,7 +139,13 @@ if( global.acting_unit.x = move_to.x and global.acting_unit.y = move_to.y){
     global.acting_unit.fuel -= scr_check_move_cost(global.acting_unit, obj_map.terrains[move_to.x div 24, move_to.y div 24]);
     //set new co-ordinates
     move_from = move_to;
+    if ds_priority_size(global.move_order) &gt; 0
     move_to = ds_priority_delete_min(global.move_order);
+    
+    
+    //DeBug
+    
+    show_debug_message("Move to (" + string(move_to.x) + "," + string(move_to.y) + ") : " +string(obj_map.units[ move_to.x div 24, move_to.y div 24]));
     
    
     
@@ -169,7 +175,10 @@ if( global.acting_unit.x = move_to.x and global.acting_unit.y = move_to.y){
     
      //check for TRAP! (if an enemy unit occupies move_to)
     if ( obj_map.units[ move_to.x div 24, move_to.y div 24] != 0){
+        show_debug_message("pass unit occupes this space");
+        
         if(obj_map.units[ move_to.x div 24, move_to.y div 24].ownership != global.P_Turn.number){
+            show_debug_message("this is an enemy unit");
         
             //deactivate drop targets if action is drop A or B
             if (global.action_order = "drop_A" or global.action_order = "drop_B"){
@@ -210,6 +219,31 @@ if( global.acting_unit.x = move_to.x and global.acting_unit.y = move_to.y){
 
 
 
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///debug
 
 
 </string>

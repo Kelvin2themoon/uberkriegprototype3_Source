@@ -884,6 +884,8 @@ global.unit_check = obj_map.units[global.posX,global.posY];
             <kind>1</kind>
             <string>///Debug
 
+draw_text(12, 240, string(global.acting_unit.team) + "/" + string(global.acting_unit.ownership));
+
 /*
 
 draw_text(12,300, "movecost: " + string( global.rangeCheck[x div 24, y div 24].move_cost) + "/" +string(global.acting_unit.move_points));
