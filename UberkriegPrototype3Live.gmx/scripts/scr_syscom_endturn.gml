@@ -1,9 +1,5 @@
 //reactivate disrupted units
 
-with(obj_unit)
-{
-    if (isDisrupted and ownership = global.P_Turn.number) isDisrupted = false;
-}
 
 with global.P_Turn {
     save_cursor_pos_x = global.posX*24;

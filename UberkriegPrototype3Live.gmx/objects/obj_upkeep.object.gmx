@@ -62,6 +62,8 @@ with obj_unit{
     if (isHidden and ownership = global.P_Turn.number) {fuel -= 5; show_debug_message("hidden fuel consum");}
     if ( obj_map.terrains[ x div 24, y div 24].isProperty ){
         if ( obj_map.terrains[ x div 24, y div 24].canRepair_g and obj_map.terrains[ x div 24, y div 24].ownership = global.P_Turn.number and ownership = global.P_Turn.number){
+            //repair disrupt
+            if (isDisrupted and ownership = global.P_Turn.number) isDisrupted = false;
             
             //add unit to upkeep Q
             //if ( hp &lt; 10 ) ds_queue_enqueue(global.upkeep_q, self);

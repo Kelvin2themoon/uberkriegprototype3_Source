@@ -90,6 +90,9 @@ isSupplyTarget  = false;
 
 descript = "this is a parent object"
 
+//check player that disrupted this unit
+disruptor = 0;
+
 
 
 

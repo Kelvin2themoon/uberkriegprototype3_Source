@@ -4,6 +4,7 @@ global.acting_unit.ammo -=1;
 
 with (global.target_unit){
     isDisrupted = true;
+    disruptor = global.acting_unit.ownership;
     state = "exhaust";
     }
 

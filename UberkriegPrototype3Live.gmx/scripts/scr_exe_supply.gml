@@ -2,6 +2,7 @@
 //hp-1 for now, ammo and fuel max
 with (global.target_unit){
     fuel = max_fuel;
+    isDisrupted = false;
     if name != "A.P.C." ammo = max_ammo;
     }
 
