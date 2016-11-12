@@ -4,7 +4,7 @@ var uir_origin_x    = argument0 //posX
 var uir_origin_y    = argument1 //posY
 var uir_minRange    = argument2 //max range
 var uir_maxRange    = argument3 //min range
-var uir_isAlly      = argument4 //true if ally, false if enemy
+var uir_isAlly      = argument4 //true if team, false if enemy
 
 //clear targetables
 ds_list_clear(global.targetables);

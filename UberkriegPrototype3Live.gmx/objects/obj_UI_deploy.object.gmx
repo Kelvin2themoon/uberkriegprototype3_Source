@@ -564,12 +564,25 @@ if col == 0{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///trouible shoot readout
+            <string>/// number cruncher
+
+//adjust for when full screan
+display_set_gui_size(768, 432);
+
+//funds
+scr_draw_num(spr_num_light,false,global.P_Turn.funds,229,55,8);
 
 
+//cost
+scr_draw_num(spr_num_light,false,display_cost,409,55,8);
 
-//draw_text(0,0,string(alarm[1]) + " X: " + string(col) + "  Y: " + string(row));
+//draw difference
 
+if global.P_Turn.funds-display_cost &lt; 0
+scr_draw_num(spr_num_red,false,global.P_Turn.funds-display_cost,595,55,8);
+
+else
+scr_draw_num(spr_num_light,false,global.P_Turn.funds-display_cost,595,55,8);
 </string>
           </argument>
         </arguments>
@@ -590,23 +603,12 @@ if col == 0{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// number cruncher
+            <string>///trouible shoot readout
 
-//adjust for when full screan
-display_set_gui_size(768, 432);
 
-//funds
-scr_draw_num(spr_num_light,false,global.P_Turn.funds,229,55);
-//cost
-scr_draw_num(spr_num_light,false,display_cost,409,55);
 
-//draw difference
+//draw_text(0,0,string(alarm[1]) + " X: " + string(col) + "  Y: " + string(row));
 
-if global.P_Turn.funds-display_cost &lt; 0
-scr_draw_num(spr_num_red,false,global.P_Turn.funds-display_cost,595,55);
-
-else
-scr_draw_num(spr_num_light,false,global.P_Turn.funds-display_cost,595,55);
 </string>
           </argument>
         </arguments>

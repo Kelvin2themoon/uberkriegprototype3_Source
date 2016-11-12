@@ -177,7 +177,7 @@ if( global.acting_unit.x = move_to.x and global.acting_unit.y = move_to.y){
     if ( obj_map.units[ move_to.x div 24, move_to.y div 24] != 0){
         show_debug_message("pass unit occupes this space");
         
-        if(obj_map.units[ move_to.x div 24, move_to.y div 24].ownership != global.P_Turn.number){
+        if(obj_map.units[ move_to.x div 24, move_to.y div 24].team != global.P_Turn.team){
             show_debug_message("this is an enemy unit");
         
             //deactivate drop targets if action is drop A or B

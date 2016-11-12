@@ -509,7 +509,7 @@ if ( keyboard_check_pressed( global.keyCONFIRM) )
             global.wait = false; 
             
             // target is ally ( therefor is also visible ) valid ations: join, attach, load
-            if ( global.target_unit.ownership = global.P_Turn.number ) 
+            if ( global.target_unit.team = global.P_Turn.team ) 
             {
                 // Join: check target unit is of the same type and hp is less than 10
                 if ( global.acting_unit.name = global.target_unit.name  and global.target_unit.hp &lt; 10) global.join = true;
@@ -568,7 +568,7 @@ if ( keyboard_check_pressed( global.keyCONFIRM) )
         show_debug_message("empty check passed");
 
         
-        //check if unit is vovert op. and turn on appear or dissapppear
+        //check if unit is covert op. and turn on appear or dissapppear
         
         if (global.acting_unit.name = "Covert Op."){
             if (global.acting_unit.isHidden){
@@ -917,7 +917,7 @@ if (global.acting_unit.name = "Land Cruiser" and global.acting_unit.ammo &gt; 0)
 
 
 if (obj_map.units[global.posX,global.posY] !=0 and global.rangeCheck[global.posX,global.posY].sprite_index =spr_rangecheck_clear){
-    if ((global.cursorFrame = 2 or global.cursorFrame = 1) and obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number ){
+    if ((global.cursorFrame = 2 or global.cursorFrame = 1) and obj_map.units[global.posX,global.posY].team = global.P_Turn.team ){
         //join
         if (obj_map.units[global.posX,global.posY].hp &lt; 10 and obj_map.units[global.posX,global.posY].name = global.acting_unit.name) draw_sprite( spr_basicCursor_Icons,4,x,y); 
         //attach

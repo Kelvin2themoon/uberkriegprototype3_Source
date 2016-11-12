@@ -14,7 +14,7 @@ check_move_cost_movetype = "free";
 //check if unit exsist at target terrain location
 if( obj_map.units[check_move_cost_terrain.x div 24, check_move_cost_terrain.y div 24] != 0){
     //check ownership and visibility
-    if  (obj_map.units[check_move_cost_terrain.x div 24, check_move_cost_terrain.y div 24].ownership != check_move_cost_unit.ownership and 
+    if  (obj_map.units[check_move_cost_terrain.x div 24, check_move_cost_terrain.y div 24].team != check_move_cost_unit.team and 
         obj_map.units[check_move_cost_terrain.x div 24, check_move_cost_terrain.y div 24].isVisible = true){
             check_move_cost_output = 99;
             }

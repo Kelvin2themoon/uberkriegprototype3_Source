@@ -410,7 +410,7 @@ if(global.P3_in_play){
     ds_priority_add(global.temp_pq, global.P3 ,3);
     //global.P3_in_play = true;
     //assign team
-    global.P3.team = 3;
+    global.P3.team = 1;
     //add cursor pose at 
     global.P3.save_cursor_pos_x = P3_x;
     global.P3.save_cursor_pos_y = P3_y;
@@ -433,7 +433,7 @@ if (global.P4_in_play){
     ds_priority_add(global.temp_pq, global.P4 ,4);
     //global.P4_in_play = true;
     //assign team
-    global.P4.team = 4;
+    global.P4.team = 2;
     //add cursor pose at 
     global.P4.save_cursor_pos_x = P4_x;
     global.P4.save_cursor_pos_y = P4_y;

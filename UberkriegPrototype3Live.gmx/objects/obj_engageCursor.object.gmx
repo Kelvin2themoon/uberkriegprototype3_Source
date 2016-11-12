@@ -527,13 +527,13 @@ if (string_length(string(round(dmg_percent))) &gt; 2){
     with(obj_miniwin){
         if isLeft{ 
             draw_sprite(spr_damage_indicator_red,other.indicator_frame,x+119,y-37-other.indicator_frame);
-            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+119+7-3,y-37+12-other.indicator_frame);
+            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+119+7-3,y-37+12-other.indicator_frame,3);
             draw_sprite(spr_num_bright,12,x+119+7+33-2,y-37+12-other.indicator_frame);
             
             }
         else{ 
             draw_sprite(spr_damage_indicator_red,other.indicator_frame,x,y-37-other.indicator_frame);
-            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+7-3,y-37+12-other.indicator_frame);
+            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+7-3,y-37+12-other.indicator_frame,3);
             draw_sprite(spr_num_bright,12,x+7+33-2,y-37+12-other.indicator_frame);
             }
         }
@@ -543,13 +543,13 @@ else{
         with(obj_miniwin){
         if isLeft{ 
             draw_sprite(spr_damage_indicator_red,other.indicator_frame,x+119,y-37-other.indicator_frame);
-            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+119+8,y-37+12-other.indicator_frame);
+            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+119+8,y-37+12-other.indicator_frame,2);
             draw_sprite(spr_num_bright,12,x+119+7+33-11+5,y-37+12-other.indicator_frame);
             
             }
         else{ 
             draw_sprite(spr_damage_indicator_red,other.indicator_frame,x,y-37-other.indicator_frame);
-            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+8,y-37+12-other.indicator_frame);
+            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+8,y-37+12-other.indicator_frame,2);
             draw_sprite(spr_num_bright,12,x+7+33-11+5,y-37+12-other.indicator_frame);
         }
     }

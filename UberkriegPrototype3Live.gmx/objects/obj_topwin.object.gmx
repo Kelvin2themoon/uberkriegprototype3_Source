@@ -133,40 +133,12 @@ draw_text(x+101,y+10,global.P_Turn.name);
 //funds
 
 
-if ( global.P_Turn.funds &gt; 999999999 )
-{ //number is greater than can be displayed
-
-    draw_sprite( spr_num_light,11,x+101,y+32);
-    draw_sprite( spr_num_light,11,x+101+11,y+32);
-    draw_sprite( spr_num_light,11,x+101+22,y+32);
-    draw_sprite( spr_num_light,11,x+101+33,y+32);
-    draw_sprite( spr_num_light,11,x+101+44,y+32);
-    draw_sprite( spr_num_light,11,x+101+55,y+32);
-    draw_sprite( spr_num_light,11,x+101+66,y+32);
-    draw_sprite( spr_num_light,11,x+101+77,y+32);
-    draw_sprite( spr_num_light,11,x+101+88,y+32);
-    
-}
-
-else if ( global.P_Turn.funds &lt; -99999999 )
-{ //number is greater than can be displayed
-
-    draw_sprite( spr_num_red,10,x+101,y+32);
-    draw_sprite( spr_num_red,11,x+101+11,y+32);
-    draw_sprite( spr_num_red,11,x+101+22,y+32);
-    draw_sprite( spr_num_red,11,x+101+33,y+32);
-    draw_sprite( spr_num_red,11,x+101+44,y+32);
-    draw_sprite( spr_num_red,11,x+101+55,y+32);
-    draw_sprite( spr_num_red,11,x+101+66,y+32);
-    draw_sprite( spr_num_red,11,x+101+77,y+32);
-    draw_sprite( spr_num_red,11,x+101+88,y+32);
-    
-}
-
-else if global.P_Turn.funds &lt; 0 scr_draw_num(spr_num_red, true, global.P_Turn.funds,x+101,y+32);
 
 
-else scr_draw_num(spr_num_light, true, global.P_Turn.funds,x+101,y+32);
+if global.P_Turn.funds &lt; 0 scr_draw_num(spr_num_red, true, global.P_Turn.funds,x+101,y+32,8);
+
+
+else scr_draw_num(spr_num_light, true, global.P_Turn.funds,x+101,y+32,8);
 </string>
           </argument>
         </arguments>

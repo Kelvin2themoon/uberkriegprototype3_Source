@@ -309,16 +309,16 @@ if (global.unit_check != 0){
         draw_sprite(miniwin_unit,miniwin_unit_ownership,x,y);
     //draw HP, Fuel, Ammo
 
-    scr_draw_num(spr_num_light,false,global.unit_check.hp,x+78,y+26);
-    scr_draw_num(spr_num_light,false,global.unit_check.fuel,x+123,y+26);
-    if global.unit_check.ammo != -1 scr_draw_num(spr_num_light,true,global.unit_check.ammo,x+142,y+26);
+    scr_draw_num(spr_num_light,false,global.unit_check.hp,x+78,y+26,2);
+    scr_draw_num(spr_num_light,false,global.unit_check.fuel,x+123,y+26,3);
+    if global.unit_check.ammo != -1 scr_draw_num(spr_num_light,true,global.unit_check.ammo,x+142,y+26,1);
     else draw_sprite(spr_num_light,10,x+142,y+26);
     
     //draw Terrain intel
     draw_sprite(miniwin_terrain,miniwin_terrain_ownership,x,y);
     // draw capture progress
     if( global.unit_check.capturing!= 0){
-            scr_draw_num(spr_num_light,false,global.unit_check.capturing,x+139,y+74);
+            scr_draw_num(spr_num_light,false,global.unit_check.capturing,x+139,y+74,2);
             draw_sprite(spr_miniFlag,global.unit_check.ownership-1,x+144,y+74)
             }
     
