@@ -45,7 +45,9 @@ view_border = 4*24;
 cursor_icon = 0;
 
 isOnGlobalRadioCheck = false;
+checking_move_range = false;
 checking_attack_range = false;
+fast_scroll_on = false;
 </string>
           </argument>
         </arguments>
@@ -152,47 +154,102 @@ if (alarm[1] = -1 )
             break;
         
         case vk_up :
-            if ( global.posY &gt; 0 ) y = y  - 24 ;
-            scr_cursorKey_juice(1,global.cursorKey_sfx);
-            if (isOnGlobalRadioCheck = false and checking_attack_range = false)  scr_rangeCheck_reset();
+        
+        
+            if (fast_scroll_on and global.posY &gt; 0)
+            {
+                
+                y -= 24 ;
+                view_yview -= 24;
+                
+            } 
             
-            if scr_inBound(global.posX,global.posY-1)
-            if (obj_map.units[global.posX,global.posY-1] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false) 
-            scr_updateLocalRadio(obj_map.units[global.posX,global.posY-1]);
+            else
+            {
+            
+                if ( global.posY &gt; 0 ) y = y  - 24 ;
+                scr_cursorKey_juice(1,global.cursorKey_sfx);
+                if (isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range = false)  scr_rangeCheck_reset();
+                
+                if scr_inBound(global.posX,global.posY-1)
+                if (obj_map.units[global.posX,global.posY-1] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false) 
+                scr_updateLocalRadio(obj_map.units[global.posX,global.posY-1]);
+            
+            }
             
             break;
         
         case vk_down :
-            if ( global.posY &lt; global.mapH - 1 ) y = y  + 24 ;
-            scr_cursorKey_juice(1,global.cursorKey_sfx);
-            if (isOnGlobalRadioCheck = false and checking_attack_range = false) scr_rangeCheck_reset();
+        
+        
+           if ( global.posY &lt; global.mapH - 1  and fast_scroll_on )
+            {
             
-            if scr_inBound(global.posX,global.posY+1)
-            if (obj_map.units[global.posX,global.posY+1] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false) 
-            scr_updateLocalRadio(obj_map.units[global.posX,global.posY+1]);
+                y += 24 ;
+                view_yview += 24;
+                
+            }
+        
+            else
+            {
             
+                if ( global.posY &lt; global.mapH - 1 ) y = y  + 24 ;
+                scr_cursorKey_juice(1,global.cursorKey_sfx);
+                if (isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range = false) scr_rangeCheck_reset();
+                
+                if scr_inBound(global.posX,global.posY+1)
+                if (obj_map.units[global.posX,global.posY+1] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false) 
+                scr_updateLocalRadio(obj_map.units[global.posX,global.posY+1]);
+            
+            }    
             break;
         
         case vk_left :
-            if ( global.posX &gt; 0 ) x = x  - 24 ;
-            scr_cursorKey_juice(1,global.cursorKey_sfx);
-            if ( isOnGlobalRadioCheck = false and checking_attack_range = false ) scr_rangeCheck_reset();
+        
+            if ( global.posX &gt; 0 and fast_scroll_on )
+            {
+                
+                x -= 24 ;
+                view_xview -= 24 ;
+                
+            }
             
-            if scr_inBound(global.posX-1,global.posY)
-            if (obj_map.units[global.posX-1,global.posY] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false) 
-            scr_updateLocalRadio(obj_map.units[global.posX-1,global.posY]);
+            else
+            {
             
+                if ( global.posX &gt; 0 ) x = x  - 24 ;
+                scr_cursorKey_juice(1,global.cursorKey_sfx);
+                if ( isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range = false ) scr_rangeCheck_reset();
+                
+                if scr_inBound(global.posX-1,global.posY)
+                if (obj_map.units[global.posX-1,global.posY] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false) 
+                scr_updateLocalRadio(obj_map.units[global.posX-1,global.posY]);
+            
+            }
             break;  
                     
         case vk_right :
-            if ( global.posX &lt; global.mapW - 1 ) x = x  + 24 ;
-            scr_cursorKey_juice(1,global.cursorKey_sfx);
-            if (isOnGlobalRadioCheck = false and checking_attack_range = false) scr_rangeCheck_reset();
-            
-            if scr_inBound(global.posX+1,global.posY)
-            if (obj_map.units[global.posX+1,global.posY] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false ) 
-            scr_updateLocalRadio(obj_map.units[global.posX+1,global.posY]);
-            
+        
+            if ( global.posX &lt; global.mapW - 1 and fast_scroll_on )
+            { 
+                
+                x += 24 ;
+                view_xview +=24 ;
+                
+            }
+        
+            else
+            {
+        
+                if ( global.posX &lt; global.mapW - 1 ) x = x  + 24 ;
+                scr_cursorKey_juice(1,global.cursorKey_sfx);
+                if (isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range = false) scr_rangeCheck_reset();
+                
+                if scr_inBound(global.posX+1,global.posY)
+                if (obj_map.units[global.posX+1,global.posY] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false ) 
+                scr_updateLocalRadio(obj_map.units[global.posX+1,global.posY]);
+                
+            }
             break;
         }
         // 
@@ -298,7 +355,7 @@ if (obj_map.terrains[global.posX,global.posY].name == "Base" and obj_map.units[g
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Open System, deploy menu,  start unit command
+            <string>///Open System, deploy menu,  start unit command, enemy or idle unit move range check
 
 
 if ( keyboard_check_pressed( global.keyCONFIRM) ){
@@ -339,6 +396,9 @@ if ( keyboard_check_pressed( global.keyCONFIRM) ){
             //enemy unit
             else{
                 //switch to enemy move range check cursor
+                scr_updateLocalMove(obj_map.units[global.posX,global.posY]);
+                checking_move_range = true;
+                
                 } 
             }
         //unit is not visible
@@ -349,7 +409,18 @@ if ( keyboard_check_pressed( global.keyCONFIRM) ){
             }
         }
     }
+    
+if ( keyboard_check_released( global.keyCONFIRM) )
+{
+    
+    scr_rangeCheck_reset();
+    checking_move_range = false;
+    //reset unit radio check if applicable
+    if obj_map.units[global.posX, global.posY] !=0
+    scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
+    
 
+}
 
 /*
 //check: key press confirm
@@ -413,10 +484,18 @@ if keyboard_check_pressed(vk_space){
         } 
     }
     
-if keyboard_check_released(vk_space){
+if keyboard_check_released(vk_space)
+{
+
     isOnGlobalRadioCheck = false;
     scr_rangeCheck_reset();
-    }
+    
+    //reset unit radio check if applicable
+    if obj_map.units[global.posX, global.posY] !=0
+    scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
+    
+
+}
 </string>
           </argument>
         </arguments>
@@ -440,20 +519,28 @@ if keyboard_check_released(vk_space){
             <string>/// B - attack range and quick view move 
 
 if (keyboard_check_pressed(global.keyCANCEL)){
+    fast_scroll_on = true;
     //attack Range check if over unit
     if (obj_map.units[global.posX, global.posY] != 0){
+        if obj_map.units[global.posX, global.posY].isVisible
+        {
         //do move range check
         checking_attack_range = true;
         scr_attack_rance_check(obj_map.units[global.posX, global.posY]);
-        
+        }
         }    
     //quick move
     
     }
 
 if (keyboard_check_released(global.keyCANCEL)){
+    fast_scroll_on = false;
     checking_attack_range = false;
     scr_rangeCheck_reset();
+    
+    //reset unit radio check if applicable
+    if obj_map.units[global.posX, global.posY] !=0
+    scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
     }
 </string>
           </argument>
