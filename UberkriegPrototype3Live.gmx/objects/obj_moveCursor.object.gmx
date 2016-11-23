@@ -884,7 +884,7 @@ global.unit_check = obj_map.units[global.posX,global.posY];
             <kind>1</kind>
             <string>///Debug
 
-draw_text(12, 240, string(global.acting_unit.team) + "/" + string(global.acting_unit.ownership));
+//draw_text(12, 240, string(global.acting_unit.team) + "/" + string(global.acting_unit.ownership));
 
 /*
 
@@ -928,6 +928,9 @@ if (obj_map.units[global.posX,global.posY] !=0 and global.rangeCheck[global.posX
             }                
         }
     }
+    
+//draw_text(x, y-24, "move cost"); 
+
 </string>
           </argument>
         </arguments>

@@ -79,11 +79,11 @@ if  (step_counter &lt; 7){
     image_index = step_counter;     
     y -=2;
     }
-if (step_counter = 8){
-    y -=2;
+if (step_counter = 10){
+    y +=2;
     image_index = 5;
     }
-if (step_counter = 18){
+if (step_counter = 24){
     // reactivate main phaze UI
     instance_activate_object(obj_battleCursor);
     with obj_battleCursor{
@@ -122,7 +122,7 @@ step_counter+=1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text (x+24 ,y,string(step_counter));
+            <string>//draw_text (x+24 ,y,string(step_counter));
 draw_self();
 </string>
           </argument>

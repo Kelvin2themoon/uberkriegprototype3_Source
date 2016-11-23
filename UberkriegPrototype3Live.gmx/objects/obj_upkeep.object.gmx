@@ -50,6 +50,9 @@ conclude_upkeep = false;
 alarm[0] = 1;
 processing = 0;
 
+animation_counter = 0;
+height_displace = 0;
+
 view_border = 4*24;
 view_speed = 8;
 
@@ -93,6 +96,7 @@ if (ds_queue_size(global.upkeep_q) &gt; 0)
     x = processing.x;
     y = processing.y;
     depth = UI_DEPTH_CURSOR;
+    alarm[0] = 1;
 }
 
 else
@@ -216,11 +220,47 @@ else if (!ready_for_next_event)
 
     //go to and hold graphic at processing unit position
     
-    //x = processing.x;
-    //y = processing.y;
+    x = processing.x;
+    y = processing.y + height_displace;
     
-    alarm[0] = 60;
-    ready_for_next_event = true;
+    if (animation_counter &lt; 7)
+    {
+    
+        height_displace -= 2;
+        image_index = animation_counter;
+    
+    }
+    
+    if (animation_counter = 10 )
+    {
+    
+        height_displace += 2;
+        image_index = 5;
+        
+    }
+    
+    
+    if (animation_counter = 24)
+    {
+    
+        ready_for_next_event = true;
+        height_displace = 0
+    
+    }
+    
+    
+
+    
+    
+    
+
+    
+    
+    //ready_for_next_event = true;
+    
+    animation_counter +=1;
+    alarm[0] = 1 ;
+    
 
     
 
@@ -244,10 +284,12 @@ else if ( ready_for_next_event )
         
          ready_for_next_event = false;
          processing = ds_queue_dequeue(global.upkeep_q);
-         x= processing.x;
-         y = processing.y;
+         
+         animation_counter = 0;
+         
+         //x = processing.x;
+         //y = processing.y;    
          alarm[0] = 1;
-    
         
 
     }
