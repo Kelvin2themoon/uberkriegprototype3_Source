@@ -168,7 +168,10 @@ global.mode = "Basic Battle";
             <kind>1</kind>
             <string>///creat &amp; load map
 instance_create(0,0,obj_map);
-scr_ubermap_load("protoland.ubm");
+
+
+if   ( file_exists ("protoland.ubm")) scr_ubermap_load("protoland.ubm");
+else scr_ubermap_load("2P_SabreRanger_v3.ubm");
 </string>
           </argument>
         </arguments>
@@ -788,19 +791,23 @@ with( obj_moveCursor ) other.temp_move_count +=1;
 
 //draw_text(12,12,"MOVE CURSOR COUNT: " + string(temp_move_count));
 
+//Scal GUI
+display_set_gui_size(768, 432);
 
 //Player Phaze
 if (global.Phaze = "Waiting"){   
+
+    draw_sprite(spr_factionIcon_square, global.P_Turn.number-1,12,24)
     
-    draw_text(12,12, "DAY: " + string(global.Day));
+    draw_text(36,32, "DAY: " + string(global.Day));
     
-    draw_text(12,36, "P" + string(global.P_Turn.number) + ": Press CONFIRM [Z] to start turn" );
+    draw_text(12,48, "P" + string(global.P_Turn.name) + ": Press CONFIRM [Z] to start turn" );
     
-    draw_text(12,60, "CONTROLS:" );
-    draw_text(12,72, "Z - Confirm:" );
-    draw_text(12,84, "X - Cancel:" );
-    draw_text(12,96, "C - Intel");
-    draw_text(12,108, "SPACE - Radio Checks");
+    draw_text(12,84, "CONTROLS:" );
+    draw_text(12,84+16, "Z - Confirm" );
+    draw_text(12,84+16*2, "X - Cancel" );
+    draw_text(12,84+16*3, "C - Intel");
+    draw_text(12,84+16*4, "SPACE - Radio Checks");
     
     
     }

@@ -3,6 +3,25 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
+  <datafiles number="2" name="datafiles">
+    <datafile>
+      <name>2P_SabreRanger_v3.ubm</name>
+      <exists>-1</exists>
+      <size>29811</size>
+      <exportAction>2</exportAction>
+      <exportDir></exportDir>
+      <overwrite>0</overwrite>
+      <freeData>-1</freeData>
+      <removeEnd>0</removeEnd>
+      <store>0</store>
+      <ConfigOptions>
+        <Config name="Default">
+          <CopyToMask>615727263486190</CopyToMask>
+        </Config>
+      </ConfigOptions>
+      <filename>2P_SabreRanger_v3.ubm</filename>
+    </datafile>
+  </datafiles>
   <NewExtensions>
     <extension index="0">extensions\AVI Extension</extension>
   </NewExtensions>
@@ -261,6 +280,7 @@
           </sprites>
         </sprites>
       </sprites>
+      <sprite>sprites\spr_factionIcon_square</sprite>
     </sprites>
     <sprites name="Units">
       <sprites name="P1">
@@ -352,6 +372,7 @@
       <sprite>sprites\spr_temp_unit_summary</sprite>
       <sprite>sprites\spr_temp_terrain_summary</sprite>
       <sprite>sprites\spr_temp_summary_boarder</sprite>
+      <sprite>sprites\spr_tempTitle</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -461,6 +482,8 @@
     <font>fonts\font1</font>
     <font>fonts\font2</font>
     <font>fonts\font3</font>
+    <font>fonts\font4</font>
+    <font>fonts\font5</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>

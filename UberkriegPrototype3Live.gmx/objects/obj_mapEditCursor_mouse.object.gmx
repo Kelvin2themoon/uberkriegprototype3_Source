@@ -725,6 +725,30 @@ if(scr_inBound(posX,posY))
         </arguments>
       </action>
     </event>
+    <event eventtype="9" enumb="114">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///load default map
+scr_ubermap_load("2P_SabreRanger_v3.ubm");
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="113">
       <action>
         <libid>1</libid>
@@ -771,8 +795,8 @@ scr_ubermap_save("protoland.ubm");
           <argument>
             <kind>1</kind>
             <string>///Temp Load
-
-scr_ubermap_load("protoland.ubm");
+if (file_exists("protoland.ubm"))   scr_ubermap_load("protoland.ubm");
+else scr_ubermap_load("2P_SabreRanger_v3.ubm");
 
 /*
 
