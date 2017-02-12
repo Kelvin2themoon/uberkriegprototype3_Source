@@ -1,140 +1,267 @@
 /*
 QUICK SAVE
-this script is calle dfrom the system menue and saves the entire state of the game so it can be paused
+this script is calle dfrom the system menu and saves the entire state of the game
 */
 
-quick_save= argument0;
-
+//name and location of the save file (string i think)
+var quick_save = argument0; 
+ 
 //delete exsisting save
 if (file_exists(quick_save)) file_delete(quick_save);
 //create and open file
 ini_open(quick_save);
 
+//save global variables
+
+//turning Variables
+
+//save P_turn ( current player turn  via number variable)
+ini_write_real("globals","P_turn", global.P_Turn.number);
+//save current day
+ini_write_real("globals","Day",global.Day);
+//save cursor position
+ini_write_real("globals","posX",global.posX);
+ini_write_real("globals","posY",global.posY);
+
+
+
+//players in play( 0 for false, 1 for true)
+
+//PLAYER 1
+if (global.P1_in_play)
+    {  
+        ini_write_real("players","P1inPlay",1);
+        //this player exsista, save all relative data
+        
+        //save team affiliation
+        ini_write_real("players","P1Team",global.P1.team);
+        
+        //save funds
+        ini_write_real("players","P1Funds",global.P1.funds);
+        
+        //save player cursor position
+        ini_write_real("players","P1CursorX",global.P1.save_cursor_pos_x);
+        ini_write_real("players","P1CursorY",global.P1.save_cursor_pos_y);
+        
+        //save view position
+        ini_write_real("players","P1ViewX",global.P1.save_view_pos_x);
+        ini_write_real("players","P1ViewY",global.P1.save_view_pos_y);
+    }
+else 
+    {
+     ini_write_real("players","P1inPlay",0);
+    }                   
+    
+
+//PLAYER 2
+if (global.P2_in_play)
+    {  
+        ini_write_real("players","P2inPlay",1);
+        //this player exsista, save all relative data
+        
+        //save team affiliation
+        ini_write_real("players","P2Team",global.P2.team);
+        
+        //save funds
+        ini_write_real("players","P2Funds",global.P2.funds);
+        
+        //save player cursor position
+        ini_write_real("players","P2CursorX",global.P2.save_cursor_pos_x);
+        ini_write_real("players","P2CursorY",global.P2.save_cursor_pos_y);
+        
+        //save view position
+        ini_write_real("players","P2ViewX",global.P2.save_view_pos_x);
+        ini_write_real("players","P2ViewY",global.P2.save_view_pos_y);
+    }
+else 
+    {
+     ini_write_real("players","P2inPlay",0);
+    }                   
+    
+//PLAYER 3
+if (global.P3_in_play)
+    {  
+        ini_write_real("players","P3inPlay",1);
+        //this player exsista, save all relative data
+        
+        //save team affiliation
+        ini_write_real("players","P3Team",global.P3.team);
+        
+        //save funds
+        ini_write_real("players","P3Funds",global.P3.funds);
+        
+        //save player cursor position
+        ini_write_real("players","P3CursorX",global.P3.save_cursor_pos_x);
+        ini_write_real("players","P3CursorY",global.P3.save_cursor_pos_y);
+        
+        //save view position
+        ini_write_real("players","P3ViewX",global.P3.save_view_pos_x);
+        ini_write_real("players","P3ViewY",global.P3.save_view_pos_y);
+    }
+else 
+    {
+     ini_write_real("players","P3inPlay",0);
+    }
+
+//PLAYER 4
+if (global.P4_in_play)
+    {  
+        ini_write_real("players","P4inPlay",1);
+        //this player exsista, save all relative data
+        
+        //save team affiliation
+        ini_write_real("players","P4Team",global.P4.team);
+        
+        //save funds
+        ini_write_real("players","P4Funds",global.P4.funds);
+        
+        //save player cursor position
+        ini_write_real("players","P4CursorX",global.P4.save_cursor_pos_x);
+        ini_write_real("players","P4CursorY",global.P4.save_cursor_pos_y);
+        
+        //save view position
+        ini_write_real("players","P4ViewX",global.P4.save_view_pos_x);
+        ini_write_real("players","P4ViewY",global.P4.save_view_pos_y);
+    }
+else 
+    {
+     ini_write_real("players","P4inPlay",0);
+    }
+    
+    
+/// MAP DATA
+    
 //write to meta section [ map name and size ]
 ini_write_string("Meta","name",obj_map.name); //save name as protoland
 ini_write_real( "Meta", "Width", global.mapW);
 ini_write_real( "Meta", "Height", global.mapH);
 
-//save game data
-ini_write_real( "Game Data", "Day", global.Day);
 
-//players in play
-//player1
-if (global.P1_in_play){
-    ini_write_real("Game Data", "P1 in play",1);
-    ini_write_real("Game Data", "P1 Team",global.P1.team);
-    ini_write_real("Game Data", "P1 Funds",global.P1.funds);
-    //view and cursor
-    ini_write_real("Game Data", "P1 posX",global.P1.save_cursor_pos_x);
-    ini_write_real("Game Data", "P1 posY",global.P1.save_cursor_pos_y);
-    ini_write_real("Game Data", "P1 viewX",global.P1.save_view_pos_x);
-    ini_write_real("Game Data", "P1 viewY",global.P1.save_view_pos_y);
-    }
-else ini_write_real("Game Data", "P1 in play",0);
-
-if (global.P2_in_play){
-    ini_write_real("Game Data", "P2 in play",1);
-    ini_write_real("Game Data", "P2 Team",global.P2.team);
-    ini_write_real("Game Data", "P2 Funds",global.P2.funds);
-    //view and cursor
-    ini_write_real("Game Data", "P2 posX",global.P2.save_cursor_pos_x);
-    ini_write_real("Game Data", "P2 posY",global.P2.save_cursor_pos_y);
-    ini_write_real("Game Data", "P2 viewX",global.P2.save_view_pos_x);
-    ini_write_real("Game Data", "P2 viewY",global.P2.save_view_pos_y);
-    }
-else ini_write_real("Game Data", "P2 in play",0);
-
-if (global.P3_in_play){
-    ini_write_real("Game Data", "P3 in play",1);
-    ini_write_real("Game Data", "P2 Team",global.P3.team);
-    ini_write_real("Game Data", "P3 Funds",global.P3.funds);
-    //view and cursor
-    ini_write_real("Game Data", "P3 posX",global.P3.save_cursor_pos_x);
-    ini_write_real("Game Data", "P3 posY",global.P3.save_cursor_pos_y);
-    ini_write_real("Game Data", "P3 viewX",global.P3.save_view_pos_x);
-    ini_write_real("Game Data", "P3 viewY",global.P3.save_view_pos_y);
-    }
-else ini_write_real("Game Data", "P3 in play",0);
-
-if (global.P4_in_play){
-    ini_write_real("Game Data", "P4 in play",1);
-    ini_write_real("Game Data", "P2 Team",global.P4.team);
-    ini_write_real("Game Data", "P4 Funds",global.P4.funds);
-    //view and cursor
-    ini_write_real("Game Data", "P4 posX",global.P4.save_cursor_pos_x);
-    ini_write_real("Game Data", "P4 posY",global.P4.save_cursor_pos_y);
-    ini_write_real("Game Data", "P4 viewX",global.P4.save_view_pos_x);
-    ini_write_real("Game Data", "P4 viewY",global.P4.save_view_pos_y);
-    }
-else ini_write_real("Game Data", "P4 in play",0);
-
-//player turn
-ini_write_real( "Game Data", "P_Turn", global.P_Turn.number);
-
-//player data
-
-
-i=0;
-j=0;
 //start loop to all positions in map
 for( i = 0 ; i < global.mapW ; i += 1 )         // i is to X
     {
     for( j = 0 ; j < global.mapH; j += 1 )      // j is to Y
         {
-
         //save terrain   
         posKey = string(i)+ "X" + string(j) + "Y";       
         ini_write_real("Terrains", posKey, obj_map.terrains[i,j].object_index);
-        //save visibility
-        if(obj_map.terrains[i,j].isVisible) ini_write_real("Terrains", posKey+"isVisible",1);
-        else ini_write_real("Terrains", posKey+"isVisible",0);
-        if ( obj_map.terrains[i,j].isProperty = true )
+        //save terrain visibility
+        if (obj_map.terrains[i,j].isVisible) ini_write_real("Terrains",posKey+"isVisible",1);
+        else ini_write_real("Terrains",posKey+"isVisible",0);
+        
+        
+        //save property ownership
+        if ( obj_map.terrains[i,j].isProperty )
             {
-            //ownership
-            ini_write_real("Terrains", posKey+"ownership", obj_map.terrains[i,j].ownership);
-            //standing
-            if (obj_map.terrains[i,j].isStanding) ini_write_real("Terrains", posKey+"isStanding" , 1 ); 
-            else ini_write_real("Terrains", posKey+"isStanding" , 0 );  
+            
+            ini_write_real("Terrains", posKey+"P", obj_map.terrains[i,j].ownership);
+            
             }
-        //save units and stats
+        //save units
         if (obj_map.units[i,j] != 0)
             {
-            with (obj_map.units[i,j]){
-                //save all dynamic unit stat starting with object index
-                ini_write_real("Units", other.posKey, object_index);
-                //ownership
-                ini_write_real("Units", other.posKey+"ownership" , ownership);
-                //hp
-                ini_write_real("Units", other.posKey+"hp" , hp);
+            with obj_map.units[i,j]
+                {
+                
+                 ini_write_real("Units", other.posKey , object_index);
+                //save unit ownership
+                ini_write_real("Units", other.posKey+"P" , ownership);
+                //save commander status (1 = True, 0 = False)
+                if (isCommander) ini_write_real("Units", other.posKey+"C" ,1);
+                else ini_write_real("Units", other.posKey+"C" ,0);
+                
+                //Save all other dynamic unit values
+                
+                //state ( idle or exhause )
+                ini_write_string("Units",other.posKey+"state",state);
+                //HP
+                ini_write_real("Units",other.posKey+"hp",hp);
                 //fuel
-                ini_write_real("Units", other.posKey+"fuel" , fuel);
+                ini_write_real("Units",other.posKey+"fuel",fuel);
                 //ammo
-                ini_write_real("Units", other.posKey+"ammo" , ammo);    
-                //capturing
-                ini_write_real("Units", other.posKey+"capturing" , capturing);
-                //unit state (String)
-                ini_write_string("Units", other.posKey+"state" , state);
+                ini_write_real("Units",other.posKey+"ammo",ammo);
+                //team
+                ini_write_real("Units",other.posKey+"team",team);
+                //isDisrupted (boolean)
+                if (isDisrupted) ini_write_real("Units",other.posKey+"isDisrupted",1);
+                else ini_write_real("Units",other.posKey+"isDisrupted",0);
+                //isHidden (Boolean)
+                if (isHidden) ini_write_real("Units",other.posKey+"isHidden",1);
+                else ini_write_real("Units",other.posKey+"isHidden",0);
+                //Capturing
+                ini_write_real("Units",other.posKey+"capturing",capturing);
                 
-                /// BOOLEANS
                 
-                //isCommander
-                if (isCommander) ini_write_real("Units", other.posKey+"isCommander" , 1 ); 
-                else ini_write_real("Units", other.posKey+"isCommander" , 0 );
-                //isDisrupted
-                if (isDisrupted) ini_write_real("Units", other.posKey+"isDisrupted" , 1 ); 
-                else ini_write_real("Units", other.posKey+"isDisrupted" , 0 );
-                //isVisible
-                if (isVisible) ini_write_real("Units", other.posKey+"isVisible" , 1 ); 
-                else ini_write_real("Units", other.posKey+"isVisible" , 0 );
-                //isHidden
-                if (isHidden) ini_write_real("Units", other.posKey+"isHidden" , 1 ); 
-                else ini_write_real("Units", other.posKey+"isHidden" , 0 );
-                //isStanding
-                if (isStanding) ini_write_real("Units", other.posKey+"isStanding" , 1 ); 
-                else ini_write_real("Units", other.posKey+"isStanding" , 0 );  
+                //Special case: Loaded APC
                 
+                if name = "A.P.C." 
+                    {
+                    
+                    if (load_A = 0) ini_write_real("Units",other.posKey+"loadA",0)
+                    else
+                        {
+                            instance_activate_object(load_A);
+                        
+                            ini_write_real("Units",other.posKey+"loadA",load_A.object_index);
+                            
+                            loadA_posKey = other.posKey;
+                        
+                            with (load_A)
+                                {
+                                
+                                ini_write_real("Units",other.loadA_posKey+"loadAownership",ownership);
+                                ini_write_real("Units",other.loadA_posKey+"loadAhp",hp);
+                                ini_write_real("Units",other.loadA_posKey+"loadAfuel",fuel);
+                                ini_write_real("Units",other.loadA_posKey+"loadAammo",ammo);
+                          
+                                
+                                
+                                if (isCommander) ini_write_real("Units",other.loadA_posKey+"loadAisCommander",1);
+                                else ini_write_real("Units",other.loadA_posKey+"loadAisCommander",0);
+                                
+                                //no need for disrupted, hiddem, or capturing
+                                
+                                }
+                        }
+                    if (load_B = 0) ini_write_real("Units",other.posKey+"loadB",0)
+                    else
+                        {
+                            instance_activate_object(load_B);
+                        
+                            ini_write_real("Units",other.posKey+"loadB",load_B.object_index);
+                            
+                            loadB_posKey = other.posKey;
+                        
+                            with (load_B)
+                                {
+                                
+                                ini_write_real("Units",other.loadB_posKey+"loadBownership",ownership);
+                                ini_write_real("Units",other.loadB_posKey+"loadBhp",hp);
+                                ini_write_real("Units",other.loadB_posKey+"loadBfuel",fuel);
+                                ini_write_real("Units",other.loadB_posKey+"loadBammo",ammo);
+                         
+                                
+                                
+                                if (isCommander) ini_write_real("Units",other.loadB_posKey+"loadBisCommander",1);
+                                else ini_write_real("Units",other.loadB_posKey+"loadBisCommander",0);
+                                
+                                //no need for disrupted, hiddem, or capturing
+                                
+                                }
+                        }  
+                    
+                    }
+
                 }
+
             }
         }
     }
 ini_close();
+                      
+
+
+
+
+
+

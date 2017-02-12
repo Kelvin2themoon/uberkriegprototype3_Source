@@ -10,10 +10,10 @@ chart_val = 0;
 damage = 0;
 
 if (dmgCalc_type = 1){ // primary weapon
-    chart_val = obj_battleController_basic.DMG_P[dmgCalc_def.unit_index,dmgCalc_atk.unit_index];
+    chart_val = obj_MastertControls.DMG_P[dmgCalc_def.unit_index,dmgCalc_atk.unit_index];
     }
 else if (dmgCalc_type = 2 ){ // secondary weapon
-    chart_val = obj_battleController_basic.DMG_S[dmgCalc_def.unit_index,dmgCalc_atk.unit_index];
+    chart_val = obj_MastertControls.DMG_S[dmgCalc_def.unit_index,dmgCalc_atk.unit_index];
     }  
     damage =  (chart_val*dmgCalc_atk.hp/10)/(100+((dmgCalc_def.hp)*dmgCalc_cov))*100;    
 return damage

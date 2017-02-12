@@ -110,9 +110,13 @@ switch state {
             //scr_updateStanding(global.P_Turn);
             scr_updateStanding_global();
             
-        //change cursor pose to saved (to player) 
+        //change cursor pose to saved (to player)
         
-              
+        //auto save turn
+        scr_quick_save("quicksave.ubq"); 
+        
+
+        
             
             }
         else{

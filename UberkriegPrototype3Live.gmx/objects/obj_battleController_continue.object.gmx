@@ -25,6 +25,125 @@
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>/// OLD CODE
+/*
+//set cursor positions
+global.posX = 0;
+global.posY = 0;
+
+//Create and Load Map
+instance_create(0,0,obj_map);
+scr_ubermap_load("protoland.ubm");
+
+//create Cursor
+instance_create(24,24,obj_battleCursor);
+//deactivate, to reactivate when main phaze start
+instance_deactivate_object(obj_battleCursor);
+
+//create miniwin
+instance_create(24,24,obj_miniwin);
+instance_deactivate_object(obj_miniwin);
+
+//player Queue
+global.player_q = ds_queue_create();
+//create priority q to organize player order 
+global.temp_pq = ds_priority_create();
+//debug variable, keeps track of number of HQs
+global.HQnum = 0;
+
+
+//creat player objects for each Exsisting HQ into a priority Q
+with (obj_terrain_HQ){
+
+    switch (ownership){
+        case 0 :
+        break;
+        
+        case 1: // create player 1
+        global.HQnum +=1;
+        global.P1 = instance_create(0,0,obj_player); 
+        global.P1.number = 1;
+        ds_priority_add(global.temp_pq, global.P1 ,1);
+        break;
+        
+        case 2: // create player 2
+        global.HQnum +=1;
+        global.P2 = instance_create(0,0,obj_player);
+        global.P2.number = 2;
+        ds_priority_add(global.temp_pq, global.P2 ,2);
+        break; 
+        
+        case 3: // create player 3
+        global.HQnum +=1;
+        global.P3 = instance_create(0,0,obj_player);
+        global.P3.number = 3;
+        ds_priority_add(global.temp_pq, global.P3 ,3);
+        break;
+        
+        case 4: // create player 4
+        global.HQnum +=1;
+        global.P4 = instance_create(0,0,obj_player);
+        global.P4.number = 4;  
+        ds_priority_add(global.temp_pq, global.P4 ,4);
+        break;
+    
+        }
+    }
+    
+//find last player: used to detect day change
+global.last_player = ds_priority_find_max(global.temp_pq).number;
+
+    
+//convert priority Q to regular Q
+i = 0;
+for( i=0 ; i&lt;ds_priority_size(global.temp_pq)+1 ; i+=1){
+    p_priority = ds_priority_delete_min(global.temp_pq);
+    ds_queue_enqueue(global.player_q,p_priority);
+    }
+//delete temp priority Q
+ds_priority_destroy(global.temp_pq);    
+
+
+//turn phaze
+global.Phaze = "starting" //  starting -&gt; upkeep -&gt; main -&gt; end
+//player turn
+global.P_Turn = ds_queue_head(global.player_q);
+//global Day
+global.Day = 1;
+
+//create fadein
+ instance_create(0,0,obj_starting);
+ obj_starting.state = "waiting"; 
+ 
+//vision reset and update for first player
+scr_globalVisionReset();
+scr_updateGlobalVision();
+ 
+
+ 
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///change mode to Basic Battle
 global.mode = "Basic Battle";
 </string>
@@ -49,14 +168,34 @@ global.mode = "Basic Battle";
             <kind>1</kind>
             <string>///creat &amp; load map
 instance_create(0,0,obj_map);
-//initiate some variables
-global.P1_in_play = false;
-global.P2_in_play = false;
-global.P3_in_play = false;
-global.P4_in_play = false;
 
-scr_ubermap_load("QUICK_SAVE.sav");
 
+if   ( file_exists ("quicksave.ubq")) scr_quick_load("quicksave.ubq");
+else scr_ubermap_load("2P_SabreRanger_v3.ubm");
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Unit upkeep Q
+
+//this queue is for upkeep events
+global.upkeep_q = ds_queue_create();
 
 </string>
           </argument>
@@ -80,6 +219,9 @@ scr_ubermap_load("QUICK_SAVE.sav");
             <kind>1</kind>
             <string>///Create HUD objects: Cursor,miniwin
 
+global.terrain_check = obj_map.terrains[1,1];
+global.unit_check = obj_map.units[1,1];
+
 //create &amp; deactivate Cursor
 instance_create(24,24,obj_battleCursor);
 instance_deactivate_object(obj_battleCursor);
@@ -87,6 +229,7 @@ instance_deactivate_object(obj_battleCursor);
 //create &amp; deactivate miniwin
 instance_create(24,24,obj_miniwin);
 instance_deactivate_object(obj_miniwin);
+instance_create(24,24,obj_topwin);
 </string>
           </argument>
         </arguments>
@@ -115,7 +258,10 @@ global.player_q = ds_queue_create();
 //to be destroyed once players are ordered 
 global.temp_pq = ds_priority_create();
 //debug variable, keeps track of number of HQs
-global.HQnum = 0;
+global. HQnum = 0;
+
+
+
 
 //Players in play
 global.P1_in_play = false;
@@ -123,208 +269,213 @@ global.P2_in_play = false;
 global.P3_in_play = false;
 global.P4_in_play = false;
 
-if (file_exists("QUICK_SAVE.sav")){
-    //re-open file ( terrain and units should be loaded, set players, and dynamic properties
-    ini_open("QUICK_SAVE.sav");
-    //set players in play
+if ( file_exists ("quicksave.ubq")){
+
+//check save if P1 is in play
+if (ini_read_real("players","P1inPlay",0) = 1)
+    {
+    global.P1_in_play = true;
+    //set saved cursor position
+    P1_x = ini_read_real("players","P1CursorX",0);
+    P1_y = ini_read_real("players","P1CursorY",0);
+    }
     
-    //P1 IN PLAY
-    if ( ini_read_real("Game Data","P1 in play",0) = 1){
-        global.P1_in_play = true;
-        global.P1 = instance_create(0,0,obj_player);
-        //add to  Q
-        ds_priority_add(global.temp_pq,global.P1,1);
-        global.HQnum =+1;
-        //set dynamic values from save
-        with (global.P1){
-            number = 1;
-            team = ini_read_real("Game Data","P1 Team",1);
-            funds = ini_read_real("Game Data","P1 Funds",0);
-            //cursor and view pose
-            global.P1.save_cursor_pos_x = ini_read_real("Game Data","P1 posX",0);
-            global.P1.save_cursor_pos_y = ini_read_real("Game Data","P1 posY",0);
-            global.P1.save_view_pos_x = ini_read_real("Game Data","P1 viewX",0);
-            global.P1.save_view_pos_y = ini_read_real("Game Data","P1 viewY",0);
-            }
-        //set unit and property teams
-        with (obj_property and obj_unit){
-            if (ownership = 1) team = global.P1.team;             
-            } 
-       with (obj_unit){
-            if (ownership = 1) team = global.P1.team;
-            }
-        }
-        //P2 IN PLAY
-       if ( ini_read_real("Game Data","P2 in play",0) = 1){
-        global.P2_in_play = true;
-        global.P2 = instance_create(0,0,obj_player);
-        //add to  Q
-        ds_priority_add(global.temp_pq,global.P2,2);
-        global.HQnum =+1;
-        //set dynamic values from save
-        with (global.P2){
-            number = 2;
-            team = ini_read_real("Game Data","P2 Team",2);
-            funds = ini_read_real("Game Data","P1 Funds",0);
-            //cursor and view pose
-            global.P2.save_cursor_pos_x = ini_read_real("Game Data","P2 posX",0);
-            global.P2.save_cursor_pos_y = ini_read_real("Game Data","P2 posY",0);
-            global.P2.save_view_pos_x = ini_read_real("Game Data","P2 viewX",0);
-            global.P2.save_view_pos_y = ini_read_real("Game Data","P2 viewY",0);
-            }
-        //set unit and property teams
-        with (obj_property and obj_unit){
-            if (ownership = 2) team = global.P2.team;             
-            } 
-       with (obj_unit){
-            if (ownership = 2) team = global.P2.team;
-            }
-        }
-        //P3 IN PLAY
-        if ( ini_read_real("Game Data","P3 in play",0) = 1){
-        global.P3_in_play = true;
-        global.P3 = instance_create(0,0,obj_player);
-        //add to  Q
-        ds_priority_add(global.temp_pq,global.P3,3);
-        global.HQnum =+1;
-        //set dynamic values from save
-        with (global.P3){
-            number = 3;
-            team = ini_read_real("Game Data","P3 Team",3);
-            funds = ini_read_real("Game Data","P3 Funds",0);
-            //cursor and view pose
-            global.P3.save_cursor_pos_x = ini_read_real("Game Data","P3 posX",0);
-            global.P3.save_cursor_pos_y = ini_read_real("Game Data","P3 posY",0);
-            global.P3.save_view_pos_x = ini_read_real("Game Data","P3 viewX",0);
-            global.P3.save_view_pos_y = ini_read_real("Game Data","P3 viewY",0);
-            }
-        //set unit and property teams
-        with (obj_property and obj_unit){
-            if (ownership = 3) team = global.P3.team;             
-            } 
-       with (obj_unit){
-            if (ownership = 3) team = global.P3.team;
-            }
-        }
-        //P4 IN PLAY
-        if ( ini_read_real("Game Data","P4 in play",0) = 1){
-        global.P4_in_play = true;
-        global.P4 = instance_create(0,0,obj_player);
-        //add to  Q
-        ds_priority_add(global.temp_pq,global.P4,4);
-        global.HQnum =+1;
-        //set dynamic values from save
-        with (global.P4){
-            number = 4;
-            team = ini_read_real("Game Data","P4 Team",4);
-            funds = ini_read_real("Game Data","P4 Funds",0);
-            //cursor and view pose
-            global.P4.save_cursor_pos_x = ini_read_real("Game Data","P4 posX",0);
-            global.P4.save_cursor_pos_y = ini_read_real("Game Data","P4 posY",0);
-            global.P4.save_view_pos_x = ini_read_real("Game Data","P4 viewX",0);
-            global.P4.save_view_pos_y = ini_read_real("Game Data","P4 viewY",0);
-            }
-        //set unit and property teams
-        with (obj_property and obj_unit){
-            if (ownership = 4) team = global.P4.team;             
-            } 
-       with (obj_unit){
-            if (ownership = 4) team = global.P4.team;
-            }
-        }
-    //set last player (for turning)
-    global.last_player = ds_priority_find_max(global.temp_pq).number;
+//check save if P2 is in play
+if (ini_read_real("players","P2inPlay",0) = 1)
+    {
+    global.P2_in_play = true;
+    //set saved cursor position
+    P2_x = ini_read_real("players","P2CursorX",0);
+    P2_y = ini_read_real("players","P2CursorY",0);
+    }
     
-    //convert priority Q to regular Q
-    i = 0;
-    for( i=0 ; i&lt; global.HQnum ; i+=1){
-        p_priority = ds_priority_delete_min(global.temp_pq);
-        ds_queue_enqueue(global.player_q,p_priority);
-        }
-    //delete temp priority Q
-    ds_priority_destroy(global.temp_pq);
+//check save if P3 is in play
+if (ini_read_real("players","P3inPlay",0) = 1)
+    {
+    global.P3_in_play = true;
+    //set saved cursor position
+    P3_x = ini_read_real("players","P3CursorX",0);
+    P3_y = ini_read_real("players","P3CursorY",0);
+    }
     
-    //rotate Q until head is current player
-    starting_player = ds_queue_head(global.player_q);
-    while (starting_player.number !=  ini_read_real("Game Data","P_Turn",0)){
-        ds_queue_enqueue(global.player_q,starting_player);
-        ds_queue_dequeue(global.player_q);
-        starting_player = ds_queue_head(global.player_q);
-        }
+//check save if P4 is in play
+if (ini_read_real("players","P4inPlay",0) = 1)
+    {
+    global.P4_in_play = true;
+    //set saved cursor position
+    P4_x = ini_read_real("players","P4CursorX",0);
+    P4_y = ini_read_real("players","P4CursorY",0);
+    }
     
-    ///CRITICAL TURNING VARIABLS !!!
-    //turn phaze
-    global.Phaze = "starting" //  starting -&gt; upkeep -&gt; main -&gt; end
-    //player turn, returns player object
-    global.P_Turn = ds_queue_head(global.player_q);
-    //global Day
-    global.Day = ini_read_real("Game Data", "Day",1);  
-    
-    //set unit and propert dyma,ic variables
-    
-    i =0;
-    j=0;
-    for ( i=0 ; i&lt;global.mapW ; i+=1){
-        for ( j=0 ; j&lt;global.mapH ; j+=1){
-            poskey = string(i)+"X"+string(j)+"Y";
-            with (obj_map.terrains[i,j]){
-                if (ini_read_real("Terrains",other.poskey+"isVisible",0)=1) isVisible = true;
-                if (isProperty){
-                    ownership = ini_read_real("Terrains",other.poskey+"ownership",1);
-                    if (ini_read_real("Terrains",other.poskey+"isStanding",0) = 1) isStanding = true;
-                    }   
-                }
-            if (obj_map.units[i,j] != 0){
-                with (obj_map.units[i,j]){
-                    ownership = ini_read_real("Units",other.poskey+"ownership",1);
-                    hp = ini_read_real("Units",other.poskey+"hp",10);
-                    fuel = ini_read_real("Units",other.poskey+"fuel",0);
-                    ammo = ini_read_real("Units",other.poskey+"ammo",0);
-                    capturing  = ini_read_real("Units",other.poskey+"capturing",0);
-                    state = ini_read_string("Units",other.poskey+"state","idle");
-                    if ( ini_read_real("Units",other.poskey+"isCommander",0) = 1) isCommander = true;
-                    if ( ini_read_real("Units",other.poskey+"isDisrupted",0) = 1) isDisrupted = true;
-                    if ( ini_read_real("Units",other.poskey+"isVisible",0) = 1) isVisible = true;
-                    if ( ini_read_real("Units",other.poskey+"isHidden",0) = 1) isHidden = true;
-                    if ( ini_read_real("Units",other.poskey+"isStanding",0) = 1) isStanding = true;
-                    }
-                }
-            } 
-        }
+  
+//initiate player objects and place them in Q (hard code teams here)
+//P1
+if (global.P1_in_play){
+        global.HQnum +=1;
+        global.P1 = instance_create(0,0,obj_player); 
+        global.P1.number = 1;
+        global.P1.name = "COOKIELAND";
+        ds_priority_add(global.temp_pq, global.P1 ,1);
+        //assign team
+        global.P1.team = ini_read_real("players","P1Team",1);
+        //add cursor pose at 
+        global.P1.save_cursor_pos_x = P1_x;
+        global.P1.save_cursor_pos_y =P1_y;
         
-        ini_close();
-    //create turn change object set to start in waiting state
-     instance_create(0,0,obj_starting);
-     obj_starting.state = "waiting"; 
+        //set view to ini file
+        global.P1.save_view_pos_x = ini_read_real("players","P1ViewX",0);
+        global.P1.save_view_pos_y = ini_read_real("players","P1ViewY",0);
         
+        //check view
+        if (P1_x &gt; (768-96)) global.P1.save_view_pos_x = P1_x - (768-24*5);
+        if (P1_y &gt; (432-96)) global.P1.save_view_pos_y = P1_y - (432-24*5);
+        
+        //funds
+        global.P1.funds = ini_read_real("players","P1Funds",0);
+        
+        //properties set team
+        with (obj_property) if (ownership = 1) team = global.P1.team;             
+        
+        
+    }
+    
+//P2
+if (global.P2_in_play){
+        global.HQnum +=1;
+        global.P2 = instance_create(0,0,obj_player); 
+        global.P2.number = 2;
+        global.P2.name = "PEPPERLAND";
+        ds_priority_add(global.temp_pq, global.P2 ,2);
+        //assign team
+        global.P2.team = ini_read_real("players","P2Team",2);
+        //add cursor pose at 
+        global.P2.save_cursor_pos_x = P2_x;
+        global.P2.save_cursor_pos_y =P2_y;
+        
+        //set view to ini file
+        //global.P2.save_view_pos_x = ini_read_real("players","P2ViewX",0);
+        //global.P2.save_view_pos_y = ini_read_real("players","P2ViewY",0);
+        
+        //check view
+        if (P2_x &gt; (768-96)) global.P2.save_view_pos_x = P2_x - (768-24*5);
+        if (P2_y &gt; (432-96)) global.P2.save_view_pos_y = P2_y - (432-24*5);
+        
+        //funds
+        global.P2.funds = ini_read_real("players","P2Funds",0);
+        //properties set team
+        with (obj_property) if (ownership = 2) team = global.P2.team;
+        
+        
+    }
+//P3
+if (global.P3_in_play){
+        global.HQnum +=1;
+        global.P3 = instance_create(0,0,obj_player); 
+        global.P3.number = 3;
+        global.P3.name = "MARMALADELAND";
+        ds_priority_add(global.temp_pq, global.P3 ,3);
+        //assign team
+        global.P1.team = ini_read_real("players","P3Team",3);
+        //add cursor pose at 
+        global.P3.save_cursor_pos_x = P3_x;
+        global.P3.save_cursor_pos_y = P3_y;
+        
+        //set view to ini file
+        global.P3.save_view_pos_x = ini_read_real("players","P3ViewX",0);
+        global.P3.save_view_pos_y = ini_read_real("players","P3ViewY",0);
+        
+        //check view
+        if (P3_x &gt; (768-96)) global.P3.save_view_pos_3 = P1_3 - (768-24*5);
+        if (P3_y &gt; (432-96)) global.P3.save_view_pos_3 = P1_3 - (432-24*5);
+        
+        //funds
+        global.P3.funds = ini_read_real("players","P3Funds",0);
+        
+        //properties set team
+        with (obj_property) if (ownership = 3) team = global.P3.team;             
+        
+        
+    }
+    
+//P4
+if (global.P4_in_play){
+        global.HQnum +=1;
+        global.P4 = instance_create(0,0,obj_player); 
+        global.P4.number = 4;
+        global.P4.name = "PRETZELAND";
+        ds_priority_add(global.temp_pq, global.P4 ,4);
+        //assign team
+        global.P4.team = ini_read_real("players","P4Team",4);
+        //add cursor pose at 
+        global.P4.save_cursor_pos_x = P4_x;
+        global.P4.save_cursor_pos_y = P4_y;
+        
+        //set view to ini file
+        //global.P4.save_view_pos_x = ini_read_real("players","P4ViewX",0);
+        //global.P4.save_view_pos_y = ini_read_real("players","P4ViewY",0);
+        
+        //check view
+        if (P4_x &gt; (768-96)) global.P4.save_view_pos_x = P4_x - (768-24*5);
+        if (P4_y &gt; (432-96)) global.P4.save_view_pos_y = P4_y - (432-24*5);
+        
+        //funds
+        global.P4.funds = ini_read_real("players","P4Funds",0);
+        //properties set team
+        with (obj_property) if (ownership = 4) team = global.P4.team;
+        
+        
+    }
+
+
+    
+//find last player: used to detect day change
+global.last_player = ds_priority_find_max(global.temp_pq).number;
+
+    
+//convert priority Q to regular Q
+i = 0;
+for( i=0 ; i&lt; global.HQnum ; i+=1){
+    p_priority = ds_priority_delete_min(global.temp_pq);
+    ds_queue_enqueue(global.player_q,p_priority);
+    }
+//delete temp priority Q
+ds_priority_destroy(global.temp_pq);
+
+//rotate playerQ until matches saved player turn
+var starting_player_number = ini_read_real("globals","P_turn",1); //this is an int
+var current_head = ds_queue_head(global.player_q)
+var q = 1;
+while( starting_player_number != current_head.number)
+    {
+    q = ds_queue_dequeue(global.player_q);
+    ds_queue_enqueue(global.player_q,q);
+    current_head = ds_queue_head(global.player_q);
     
     }
-else show_message("File does not exsist");
+
+    
+
+///CRITICAL TURNING VARIABLS !!!
+//turn phaze
+global.Phaze = "starting" //  starting -&gt; upkeep -&gt; main -&gt; end
+//player turn, returns player object
+global.P_Turn = ds_queue_head(global.player_q);
+//global Day
+global.Day = ini_read_real("globals","Day",1);
 
 
 
+//create turn change object set to start in waiting state
+ instance_create(0,0,obj_starting);
+ obj_starting.state = "waiting"; 
+ 
+//vision reset and update for first player
+scr_globalVisionReset();
+scr_updateGlobalVision();
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
+else
+{
 
 //switch player on if HQ exsist, save xy positions for starting vcursor and view positions
 with (obj_terrain_HQ){
@@ -420,6 +571,7 @@ if (global.P1_in_play){
         global.HQnum +=1;
         global.P1 = instance_create(0,0,obj_player); 
         global.P1.number = 1;
+        global.P1.name = "COOKIELAND";
         ds_priority_add(global.temp_pq, global.P1 ,1);
         //global.P1_in_play = true;
         //assign team
@@ -431,7 +583,7 @@ if (global.P1_in_play){
         if (P1_x &gt; (768-96)) global.P1.save_view_pos_x = P1_x - (768-24*5);
         if (P1_y &gt; (432-96)) global.P1.save_view_pos_y = P1_y - (432-24*5);
         //set unit and property teams
-        with (obj_property and obj_unit){
+        with (obj_property){
             if (ownership = 1) team = global.P1.team;             
             } 
        with (obj_unit){
@@ -443,6 +595,7 @@ if (global.P2_in_play){
     global.HQnum +=1;
     global.P2 = instance_create(0,0,obj_player);
     global.P2.number = 2;
+    global.P2.name = "PEPPERLAND";
     ds_priority_add(global.temp_pq, global.P2 ,2);
     //global.P2_in_play = true;
     //assign team
@@ -466,10 +619,11 @@ if(global.P3_in_play){
     global.HQnum +=1;
     global.P3 = instance_create(0,0,obj_player);
     global.P3.number = 3;
+    global.P3.name = "MARMALADELAND";
     ds_priority_add(global.temp_pq, global.P3 ,3);
     //global.P3_in_play = true;
     //assign team
-    global.P3.team = 1;
+    global.P3.team = 3;
     //add cursor pose at 
     global.P3.save_cursor_pos_x = P3_x;
     global.P3.save_cursor_pos_y = P3_y;
@@ -487,11 +641,12 @@ if(global.P3_in_play){
 if (global.P4_in_play){
     global.HQnum +=1;
     global.P4 = instance_create(0,0,obj_player);
-    global.P4.number = 4;  
+    global.P4.number = 4;
+    global.P4.name = "PRETZELLAND";  
     ds_priority_add(global.temp_pq, global.P4 ,4);
     //global.P4_in_play = true;
     //assign team
-    global.P4.team = 2;
+    global.P4.team = 4;
     //add cursor pose at 
     global.P4.save_cursor_pos_x = P4_x;
     global.P4.save_cursor_pos_y = P4_y;
@@ -521,7 +676,6 @@ for( i=0 ; i&lt; global.HQnum ; i+=1){
 ds_priority_destroy(global.temp_pq);    
 
 ///CRITICAL TURNING VARIABLS !!!
- 
 //turn phaze
 global.Phaze = "starting" //  starting -&gt; upkeep -&gt; main -&gt; end
 //player turn, returns player object
@@ -536,6 +690,9 @@ global.Day = 1;
 //vision reset and update for first player
 scr_globalVisionReset();
 scr_updateGlobalVision();
+
+}
+
 </string>
           </argument>
         </arguments>
@@ -608,7 +765,10 @@ global.origin = -1;
 global.destination = -1;
  
 global.move_order   = ds_priority_create();
+global.acting_unit_moved = true;
 global.action_order = "wait" ;//default to wait
+
+
 
 //actionable commands switches to populate command Menu
 
@@ -652,22 +812,22 @@ global.drop_phaze_2 = false; //true if second drop action is taking place to byp
             <kind>1</kind>
             <string>///Damage charts
 
-//Primary def/attacker
+//Primary [defender,attacker]
 
 //  01. L_Inf         02. H_Inf         03. L.Gun         04. Officer       05. Recon         06. APC           07. L_Tank        08. Artillery     09. Anti-air      10. Covert_Op     11. H_Tank        12. Rocket        13. Land_Cruiser / X by Y
-    DMG_P[01,01]= -1; DMG_P[02,01]= -1; DMG_P[03,01]= -1; DMG_P[04,01]= -1; DMG_P[05,01]= -1; DMG_P[06,01]= -1; DMG_P[07,01]= -1; DMG_P[08,01]= 70; DMG_P[09,01]= -1; DMG_P[10,01]= -1; DMG_P[11,01]= -1; DMG_P[12,01]= -1; DMG_P[13,01]= -1; // 01. L_Inf      
-    DMG_P[01,02]= -1; DMG_P[02,02]= -1; DMG_P[03,02]= -1; DMG_P[04,02]= -1; DMG_P[05,02]= 85; DMG_P[06,02]= 75; DMG_P[07,02]= 55; DMG_P[08,02]= 25; DMG_P[09,02]= 55; DMG_P[10,02]= 85; DMG_P[11,02]= 15; DMG_P[12,02]= 85; DMG_P[13,02]=  5; // 02. H_Inf    
-    DMG_P[01,03]= 65; DMG_P[02,03]= 45; DMG_P[03,03]= 55; DMG_P[04,03]= 45; DMG_P[05,03]= 25; DMG_P[06,03]= 35; DMG_P[07,03]= 15; DMG_P[08,03]= -1; DMG_P[09,03]= 15; DMG_P[10,03]= 25; DMG_P[11,03]=  5; DMG_P[12,03]= 25; DMG_P[13,03]=  3; // 03. L.Gun  
+    DMG_P[01,01]= -1; DMG_P[02,01]= -1; DMG_P[03,01]= -1; DMG_P[04,01]= -1; DMG_P[05,01]= -1; DMG_P[06,01]= -1; DMG_P[07,01]= -1; DMG_P[08,01]= -1; DMG_P[09,01]= -1; DMG_P[10,01]= -1; DMG_P[11,01]= -1; DMG_P[12,01]= -1; DMG_P[13,01]= -1; // 01. L_Inf      
+    DMG_P[01,02]= -1; DMG_P[02,02]= -1; DMG_P[03,02]= -1; DMG_P[04,02]= -1; DMG_P[05,02]= 85; DMG_P[06,02]= 75; DMG_P[07,02]= 55; DMG_P[08,02]= 75; DMG_P[09,02]= 55; DMG_P[10,02]= 85; DMG_P[11,02]= 15; DMG_P[12,02]= 85; DMG_P[13,02]=  5; // 02. H_Inf    
+    DMG_P[01,03]= 55; DMG_P[02,03]= 45; DMG_P[03,03]= 55; DMG_P[04,03]= 45; DMG_P[05,03]= 25; DMG_P[06,03]= 25; DMG_P[07,03]= 15; DMG_P[08,03]= 25; DMG_P[09,03]= 15; DMG_P[10,03]= 25; DMG_P[11,03]=  5; DMG_P[12,03]= 25; DMG_P[13,03]=  3; // 03. L.Gun  
     DMG_P[01,04]= -1; DMG_P[02,04]= -1; DMG_P[03,04]= -1; DMG_P[04,04]= -1; DMG_P[05,04]= -1; DMG_P[06,04]= -1; DMG_P[07,04]= -1; DMG_P[08,04]= -1; DMG_P[09,04]= -1; DMG_P[10,04]= -1; DMG_P[11,04]= -1; DMG_P[12,04]= -1; DMG_P[13,04]= -1; // 04. Officer 
     DMG_P[01,05]= -1; DMG_P[02,05]= -1; DMG_P[03,05]= -1; DMG_P[04,05]= -1; DMG_P[05,05]= -1; DMG_P[06,05]= -1; DMG_P[07,05]= -1; DMG_P[08,05]= -1; DMG_P[09,05]= -1; DMG_P[10,05]= -1; DMG_P[11,05]= -1; DMG_P[12,05]= -1; DMG_P[13,05]= -1; // 05. Recon
     DMG_P[01,06]= -1; DMG_P[02,06]= -1; DMG_P[03,06]= -1; DMG_P[04,06]= -1; DMG_P[05,06]= -1; DMG_P[06,06]= -1; DMG_P[07,06]= -1; DMG_P[08,06]= -1; DMG_P[09,06]= -1; DMG_P[10,06]= -1; DMG_P[11,06]= -1; DMG_P[12,06]= -1; DMG_P[13,06]= -1; // 06. APC
     DMG_P[01,07]= -1; DMG_P[02,07]= -1; DMG_P[03,07]= -1; DMG_P[04,07]= -1; DMG_P[05,07]= 85; DMG_P[06,07]= 75; DMG_P[07,07]= 55; DMG_P[08,07]= 70; DMG_P[09,07]= 75; DMG_P[10,07]= 85; DMG_P[11,07]= 15; DMG_P[12,07]= 85; DMG_P[13,07]=  5; // 07. L_Tank
-    DMG_P[01,08]= 90; DMG_P[02,08]= 85; DMG_P[03,08]= 95; DMG_P[04,08]= 85; DMG_P[05,08]= 80; DMG_P[06,08]= 70; DMG_P[07,08]= 60; DMG_P[08,08]= 70; DMG_P[09,08]= 65; DMG_P[10,08]= 80; DMG_P[11,08]= 25; DMG_P[12,08]= 80; DMG_P[13,08]= 15; // 08. Artillery
+    DMG_P[01,08]= 90; DMG_P[02,08]= 85; DMG_P[03,08]= 90; DMG_P[04,08]= 85; DMG_P[05,08]= 80; DMG_P[06,08]= 70; DMG_P[07,08]= 60; DMG_P[08,08]= 75; DMG_P[09,08]= 65; DMG_P[10,08]= 80; DMG_P[11,08]= 25; DMG_P[12,08]= 80; DMG_P[13,08]= 10; // 08. Artillery
     DMG_P[01,09]=105; DMG_P[02,09]=105; DMG_P[03,09]=105; DMG_P[04,09]=105; DMG_P[05,09]= 60; DMG_P[06,09]= 50; DMG_P[07,09]= 15; DMG_P[08,09]= 50; DMG_P[09,09]= 45; DMG_P[10,09]= 60; DMG_P[11,09]=  5; DMG_P[12,09]= 55; DMG_P[13,09]=  1; // 09. Anti-Air
     DMG_P[01,10]= -1; DMG_P[02,10]= -1; DMG_P[03,10]= -1; DMG_P[04,10]= -1; DMG_P[05,10]= -1; DMG_P[06,10]= -1; DMG_P[07,10]= -1; DMG_P[08,10]= -1; DMG_P[09,10]= -1; DMG_P[10,10]= -1; DMG_P[11,10]= -1; DMG_P[12,10]= -1; DMG_P[13,10]= -1; // 10. Covert_op
-    DMG_P[01,11]= -1; DMG_P[02,11]= -1; DMG_P[03,11]= -1; DMG_P[04,11]= -1; DMG_P[05,11]=105; DMG_P[06,11]=105; DMG_P[07,11]= 85; DMG_P[08,11]=105; DMG_P[09,11]=105; DMG_P[10,11]=105; DMG_P[11,11]= 35; DMG_P[12,11]=105; DMG_P[13,11]= 15; // 11. H_tank
-    DMG_P[01,12]= 90; DMG_P[02,12]= 85; DMG_P[03,12]= 95; DMG_P[04,12]= 90; DMG_P[05,12]= 80; DMG_P[06,12]= 70; DMG_P[07,12]= 60; DMG_P[08,12]= 70; DMG_P[09,12]= 65; DMG_P[10,12]= 80; DMG_P[11,12]= 25; DMG_P[12,12]= 80; DMG_P[13,12]= 15; // 12. Rocket
-    DMG_P[01,13]=300; DMG_P[02,13]= -1; DMG_P[03,13]= -1; DMG_P[04,13]= -1; DMG_P[05,13]=340; DMG_P[06,13]=300; DMG_P[07,13]=220; DMG_P[08,13]=280; DMG_P[09,13]=300; DMG_P[10,13]=340; DMG_P[11,13]= 95; DMG_P[12,13]=340; DMG_P[13,13]= 35; // 13. Lancruiser
+    DMG_P[01,11]= -1; DMG_P[02,11]= -1; DMG_P[03,11]= -1; DMG_P[04,11]= -1; DMG_P[05,11]= 90; DMG_P[06,11]= 90; DMG_P[07,11]= 70; DMG_P[08,11]= 85; DMG_P[09,11]= 90; DMG_P[10,11]= 95; DMG_P[11,11]= 35; DMG_P[12,11]= 95; DMG_P[13,11]= 15; // 11. H_tank
+    DMG_P[01,12]= 90; DMG_P[02,12]= 85; DMG_P[03,12]= 90; DMG_P[04,12]= 85; DMG_P[05,12]= 80; DMG_P[06,12]= 70; DMG_P[07,12]= 60; DMG_P[08,12]= 75; DMG_P[09,12]= 65; DMG_P[10,12]= 80; DMG_P[11,12]= 25; DMG_P[12,12]= 80; DMG_P[13,12]= 10; // 12. Rocket
+    DMG_P[01,13]=500; DMG_P[02,13]=500; DMG_P[03,13]=500; DMG_P[04,13]=500; DMG_P[05,13]=340; DMG_P[06,13]=300; DMG_P[07,13]=220; DMG_P[08,13]=300; DMG_P[09,13]=300; DMG_P[10,13]=340; DMG_P[11,13]= 95; DMG_P[12,13]=340; DMG_P[13,13]= 35; // 13. Lancruiser
     
 //Secondary
 
@@ -680,7 +840,7 @@ global.drop_phaze_2 = false; //true if second drop action is taking place to byp
     DMG_S[01,06]= -1; DMG_S[02,06]= -1; DMG_S[03,06]= -1; DMG_S[04,06]= -1; DMG_S[05,06]= -1; DMG_S[06,06]= -1; DMG_S[07,06]= -1; DMG_S[08,06]= -1; DMG_S[09,06]= -1; DMG_S[10,06]= -1; DMG_S[11,06]= -1; DMG_S[12,06]= -1; DMG_S[13,06]= -1; // 06. APC
     DMG_S[01,07]= 75; DMG_S[02,07]= 70; DMG_S[03,07]= 75; DMG_S[04,07]= 70; DMG_S[05,07]= 40; DMG_S[06,07]= 45; DMG_S[07,07]= -1; DMG_S[08,07]= 45; DMG_S[09,07]=  8; DMG_S[10,07]= 40; DMG_S[11,07]=  1; DMG_S[12,07]= 55; DMG_S[13,07]=  0; // 07. L_Tank
     DMG_S[01,08]= -1; DMG_S[02,08]= -1; DMG_S[03,08]= -1; DMG_S[04,08]= -1; DMG_S[05,08]= -1; DMG_S[06,08]= -1; DMG_S[07,08]= -1; DMG_S[08,08]= -1; DMG_S[09,08]= -1; DMG_S[10,08]= -1; DMG_S[11,08]= -1; DMG_S[12,08]= -1; DMG_S[13,08]= -1; // 08. Artillery
-    DMG_S[01,09]= -1; DMG_S[02,09]= -1; DMG_S[03,09]= -1; DMG_S[04,09]= -1; DMG_S[05,09]= -1; DMG_S[06,09]= -1; DMG_S[07,09]= -1; DMG_S[08,09]= -1; DMG_S[09,09]= -1; DMG_S[10,09]= -1; DMG_S[11,09]=  3; DMG_S[12,09]= -1; DMG_S[13,09]= -1; // 09. Anti-Air
+    DMG_S[01,09]= -1; DMG_S[02,09]= -1; DMG_S[03,09]= -1; DMG_S[04,09]= -1; DMG_S[05,09]= -1; DMG_S[06,09]= -1; DMG_S[07,09]= -1; DMG_S[08,09]= -1; DMG_S[09,09]= -1; DMG_S[10,09]= -1; DMG_S[11,09]= -1; DMG_S[12,09]= -1; DMG_S[13,09]= -1; // 09. Anti-Air
     DMG_S[01,10]= 75; DMG_S[02,10]= 65; DMG_S[03,10]= 75; DMG_S[04,10]= 65; DMG_S[05,10]= 35; DMG_S[06,10]= 45; DMG_S[07,10]=  8; DMG_S[08,10]= 45; DMG_S[09,10]=  8; DMG_S[10,10]= 35; DMG_S[11,10]=  1; DMG_S[12,10]= 55; DMG_S[13,10]=  0; // 10. Covert_op
     DMG_S[01,11]=105; DMG_S[02,11]= 95; DMG_S[03,11]=105; DMG_S[04,11]= 95; DMG_S[05,11]= 45; DMG_S[06,11]= 45; DMG_S[07,11]= 10; DMG_S[08,11]= 45; DMG_S[09,11]= 10; DMG_S[10,11]= 45; DMG_S[11,11]=  2; DMG_S[12,11]= 65; DMG_S[13,11]=  0; // 11. H_tank
     DMG_S[01,12]= -1; DMG_S[02,12]= -1; DMG_S[03,12]= -1; DMG_S[04,12]= -1; DMG_S[05,12]= -1; DMG_S[06,12]= -1; DMG_S[07,12]= -1; DMG_S[08,12]= -1; DMG_S[09,12]= -1; DMG_S[10,12]= -1; DMG_S[11,12]= -1; DMG_S[12,12]= -1; DMG_S[13,12]=  0; // 12. Rocket
@@ -709,6 +869,28 @@ global.drop_phaze_2 = false; //true if second drop action is taking place to byp
 global.posX = 0;
 global.posY = 0;
 global.Phaze = "Waiting";  
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///close  quick-save ini file
+ini_close();
 </string>
           </argument>
         </arguments>
@@ -775,6 +957,33 @@ global.rangeCheckerFramIndex +=1;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// debug, count move cursors
+
+temp_move_count = 0;
+
+with( obj_moveCursor ) other.temp_move_count +=1;
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -793,14 +1002,40 @@ global.rangeCheckerFramIndex +=1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// DAY
-draw_text(12,12, "DAY: " + string(global.Day));
+            <string>/// Debug
+
+//draw_text(12,12,"MOVE CURSOR COUNT: " + string(temp_move_count));
+
+//Scal GUI
+display_set_gui_size(768, 432);
+
 //Player Phaze
-if (global.Phaze = "Waiting")   draw_text(12,36, "P" + string(global.P_Turn.number) + ": Press Z-key to start turn" );
+if (global.Phaze = "Waiting"){   
+
+    draw_sprite(spr_factionIcon_square, global.P_Turn.number-1,12,24)
+    
+    draw_text(36,32, "DAY: " + string(global.Day));
+    
+    draw_text(12,48, "P" + string(global.P_Turn.name) + ": Press CONFIRM [Z] to start turn" );
+    
+    draw_text(12,84, "CONTROLS:" );
+    draw_text(12,84+16, "Z - Confirm" );
+    draw_text(12,84+16*2, "X - Cancel" );
+    draw_text(12,84+16*3, "C - Intel");
+    draw_text(12,84+16*4, "SPACE - Radio Checks");
+    
+    
+    }
+/*
 if (global.Phaze = "Main"){      
+                                //Player umber
                                 draw_text(12,24, "PLAYER " + string(global.P_Turn.number ));
                                 //Funds
                                 draw_text(12,36, "FUNDS: " + string(global.P_Turn.funds ));
+                                //Income
+                                draw_text(12,48,"INCOME: " + string(global.P_Turn.revenue));
+                                //Unit Stats
+                                draw_text(12,60, "UNITS: " + string(global.P_Turn.unit_count) +"/"+ string(global.P_Turn.battle_strength));
                                 }
 
 

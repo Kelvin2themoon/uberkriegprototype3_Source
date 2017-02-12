@@ -146,6 +146,7 @@ scr_updateGlobalVision();
             <kind>1</kind>
             <string>///change mode to Basic Battle
 global.mode = "Basic Battle";
+
 </string>
           </argument>
         </arguments>

@@ -53,6 +53,7 @@ else {
         instance_activate_object(obj_syscom_command); 
         with(obj_syscom_command) instance_destroy();
         instance_create(global.acting_unit.x+24,global.acting_unit.y,obj_syscom_command);
+        scr_updateLocalVision(global.target_unit);
         global.drop_phaze_2 = true;
         }
     else if (global.acting_unit.load_B !=0){
@@ -61,6 +62,7 @@ else {
         instance_activate_object(obj_syscom_command); 
         with(obj_syscom_command) instance_destroy();
         instance_create(global.acting_unit.x+24,global.acting_unit.y,obj_syscom_command);
+        scr_updateLocalVision(global.target_unit);
         global.drop_phaze_2 = true;
         }
     else{
@@ -84,6 +86,10 @@ else {
     
         }
     }
+    
+scr_updateStanding_global();
+
+
 
 
 

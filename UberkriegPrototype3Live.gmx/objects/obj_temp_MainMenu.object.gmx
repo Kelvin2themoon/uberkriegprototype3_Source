@@ -54,7 +54,7 @@ draw_text(227,230+16,"F2: Map Editor");
           <argument>
             <kind>1</kind>
             <string>///Local Continue
-//room_goto(rm_continue);
+room_goto(rm_continue);
 </string>
           </argument>
         </arguments>

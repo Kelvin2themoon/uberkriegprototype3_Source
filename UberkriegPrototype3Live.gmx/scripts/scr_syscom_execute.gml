@@ -92,8 +92,8 @@ switch (command){
             instance_destroy();
             break;
             }
-    case "save" : //end turn
-        scr_quick_save("QUICK_SAVE.sav");
+    case "save" : //save
+        scr_quick_save("quicksave.ubq");
         instance_activate_object(obj_battleCursor);
         instance_activate_object(obj_miniwin);
         instance_destroy();
