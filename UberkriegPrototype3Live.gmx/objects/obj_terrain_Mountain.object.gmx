@@ -35,7 +35,7 @@ name = "Mountain";
 isLand = true;
 
 //required fields
-cover               = 3; //1~5
+cover               = 4; //1~5
 // Move Costs
 mtype_boots         = 3;
 mtype_heavyBoots    = 4;

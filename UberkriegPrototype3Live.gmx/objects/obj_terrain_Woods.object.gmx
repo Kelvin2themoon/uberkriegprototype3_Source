@@ -35,7 +35,7 @@ name = "Woods";
 isLand = true;
 
 //required fields
-cover               = 2; //1~5
+cover               = 3; //1~5
 // Move Costs
 mtype_boots         = 2;
 mtype_heavyBoots    = 3;

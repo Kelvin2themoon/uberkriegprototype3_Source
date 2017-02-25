@@ -600,6 +600,9 @@ global.drop_phaze_2 = false; //true if second drop action is taking place to byp
             <kind>1</kind>
             <string>///Damage charts
 
+//Damage chart moved to Master Controller ( this version is no longer up to date
+
+/*
 //Primary [defender,attacker]
 
 //  01. L_Inf         02. H_Inf         03. L.Gun         04. Officer       05. Recon         06. APC           07. L_Tank        08. Artillery     09. Anti-air      10. Covert_Op     11. H_Tank        12. Rocket        13. Land_Cruiser / X by Y
