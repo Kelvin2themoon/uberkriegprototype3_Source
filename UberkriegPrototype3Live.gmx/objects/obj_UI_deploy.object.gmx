@@ -351,15 +351,15 @@ no_deploy = false;
            break;
                 
            case 2: //IFV (AA)
-           if (global.P_Turn.funds &gt;= 8000){
-               global.P_Turn.funds -= 8000;
+           if (global.P_Turn.funds &gt;= 6000){
+               global.P_Turn.funds -= 6000;
                scr_setUnit(obj_unit_AA ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
                unit_has_deployed = true;
                }
            break;
                 
            case 3: //Covert Op.
-           if (global.P_Turn.funds &gt;= 9000){
+           if (global.P_Turn.funds &gt;= 8000){
                global.P_Turn.funds -= 9000; 
                scr_setUnit(obj_unit_CovertOp,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
                unit_has_deployed = true;
@@ -649,10 +649,10 @@ draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),11,vi
 if (global.P_Turn.funds &lt; 15000) //Heavy Tank
 draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),10,view_xview[0]+378,view_yview[0]+246);
 
-if (global.P_Turn.funds &lt; 9000) //Covert Op
+if (global.P_Turn.funds &lt; 8000) //Covert Op
 draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),9,view_xview[0]+378,view_yview[0]+210);
 
-if (global.P_Turn.funds &lt; 8000) //IFV (AA)
+if (global.P_Turn.funds &lt; 6000) //IFV (AA)
 draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),8,view_xview[0]+378,view_yview[0]+174);
 
 if (global.P_Turn.funds &lt; 7000) //Artillery
