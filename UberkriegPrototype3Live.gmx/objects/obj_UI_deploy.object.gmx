@@ -758,6 +758,7 @@ if display_on{
             
             case 4 : //heavy tank
             draw_sprite(spr_temp_unit_summary,11,view_xview+150,view_yview+110);
+            break;
             
             case 5 : //rocket
             draw_sprite(spr_temp_unit_summary,12,view_xview+150,view_yview+110);
