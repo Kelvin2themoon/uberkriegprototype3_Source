@@ -48,6 +48,61 @@ isOnGlobalRadioCheck = false;
 checking_move_range = false;
 checking_attack_range = false;
 fast_scroll_on = false;
+
+//mouse control, open menue click delay switch variable, uses alarm 2
+menu_ok = false;
+//mouse control, pause screen scroll after exeting, usue alarm 3 
+menuExitDelay = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//return menuExitDelay = false
+menuExitDelay = false;
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///return menu_ok to false 
+menu_ok = false;
 </string>
           </argument>
         </arguments>
@@ -572,6 +627,162 @@ global.unit_check = obj_map.units[global.posX,global.posY];
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Mouse Controls
+
+///Mouse Controls
+
+//screen scroll
+
+//left click    
+
+if(mouse_check_button_pressed(mb_left) and  !menuExitDelay)
+    {
+        
+        mousePosX = mouse_x div 24
+        mousePosY = mouse_y div 24
+  
+        if (scr_inBound(mousePosX,mousePosY))
+            {
+                //change curosr position
+                x = (mousePosX)*24;
+                y = (mousePosY)*24;
+                
+                global.posX = x div 24;
+                global.posY = y div 24;
+            }
+         
+
+        //turn off deploy icon
+        cursor_icon = -1;
+        
+        //local property radio chech if terrain i sproperty
+        if (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,obj_property))
+            {
+            
+                scr_updateLocalRadio(obj_map.terrains[global.posX,global.posY]);
+                isOnGlobalRadioCheck = true;
+            
+            }
+        else
+            {
+                
+                //turn on global radio check
+                scr_globalRadioCheck();
+                isOnGlobalRadioCheck = true;
+            
+            }
+        
+        
+        
+        //set alarm for releas delay for deploy and syscom menus
+        alarm[2] = 10;
+        menu_ok = true;
+    
+    }
+    
+    
+if(mouse_check_button(mb_left) and !menuExitDelay)
+    {
+        
+        //turn off deploy icon
+        cursor_icon = -1;
+        
+        mousePosX = mouse_x div 24
+        mousePosY = mouse_y div 24
+  
+    if (scr_inBound(mousePosX,mousePosY))
+        {
+            //change curosr position
+            x = (mousePosX)*24;
+            y = (mousePosY)*24;
+            
+            global.posX = x div 24;
+            global.posY = y div 24;
+            
+        }
+
+    }
+        
+    
+if(mouse_check_button_released(mb_left))
+    {
+    
+        isOnGlobalRadioCheck = false;
+        scr_rangeCheck_reset();
+    
+        //reset unit radio check if applicable
+        if obj_map.units[global.posX, global.posY] !=0
+        scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
+        
+        //open deploy menu
+        if  (
+            obj_map.terrains[global.posX,global.posY].name = "Base" 
+            and obj_map.terrains[global.posX,global.posY].ownership = global.P_Turn.number 
+            and obj_map.terrains[global.posX,global.posY].isStanding
+            and menu_ok
+            )
+            {
+            
+            //Open Deploy menu!
+            instance_create(0,0,obj_UI_deploy_mouse);
+            instance_deactivate_object(obj_miniwin);
+            instance_deactivate_object(obj_battleCursor);
+            instance_deactivate_object(obj_topwin);    
+            
+            }
+        
+        
+    
+    }    
+    
+    
+    
+    
+//right click
+if(mouse_check_button_pressed(mb_right))
+    {
+        mousePosX = mouse_x div 24
+        mousePosY = mouse_y div 24
+  
+    if (scr_inBound(mousePosX,mousePosY))
+        {
+            //move cursor
+            x = (mousePosX)*24;
+            y = (mousePosY)*24;
+            //open SystemMenu
+            //check location is open
+            instance_create(x+24,y,obj_syscom_system);
+            instance_deactivate_object(obj_battleCursor);
+            
+            
+            
+        }
+
+    }
+
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -645,7 +856,7 @@ if (global.Phaze = "Main" and unit_selection != 0){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// draw order and animation 
+            <string>///draw order and animation 
 draw_self();
 
 if (cursor_icon == 5 ){
@@ -658,6 +869,29 @@ if (obj_map.units[global.posX,global.posY].capturing !=0){
     draw_sprite(spr_captureBar,obj_map.units[global.posX,global.posY].capturing,obj_miniwin.x+6,obj_miniwin.y-24);
     draw_sprite(spr_capturebar_frame,global.P_Turn.number-1,obj_miniwin.x+6,obj_miniwin.y-24);
     }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw Mouse Pointer
+
+draw_sprite(spr_mousePointer,global.P_Turn.number - 1, mouse_x, mouse_y);
 </string>
           </argument>
         </arguments>

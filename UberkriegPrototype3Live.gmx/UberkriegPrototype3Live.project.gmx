@@ -118,6 +118,7 @@
           <sprite>sprites\spr_greenCursor</sprite>
           <sprite>sprites\spr_redCursor</sprite>
           <sprite>sprites\spr_CruiserPlusCursor</sprite>
+          <sprite>sprites\spr_mousePointer</sprite>
         </sprites>
         <sprites name="checks">
           <sprite>sprites\spr_rangecheck_red</sprite>
@@ -539,8 +540,9 @@
       <object>objects\obj_battleCursor</object>
       <object>objects\template_sandboxCursor</object>
       <objects name="BasicObjects">
-        <object>objects\obj_checker_tile</object>
         <object>objects\obj_UI_deploy</object>
+        <object>objects\obj_UI_deploy_mouse</object>
+        <object>objects\obj_checker_tile</object>
         <object>objects\obj_miniwin</object>
         <object>objects\obj_player</object>
         <object>objects\obj_topwin</object>
