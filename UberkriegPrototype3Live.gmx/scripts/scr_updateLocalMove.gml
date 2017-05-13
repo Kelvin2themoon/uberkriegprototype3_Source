@@ -52,7 +52,7 @@ for (check_move_cost = 0; check_move_cost < max_move_points; check_move_cost += 
                 other.check_move_cost 
                 + scr_check_move_cost(other.move_check_target,obj_map.terrains[newpos_x ,newpos_y])
                 //less than or equalt to move points avaliable
-                <= other.move_check_target.move_points){
+                <= other.max_move_points){
                 //set move cost to new tile
                 global.rangeCheck[newpos_x,newpos_y].move_cost = 
                 move_cost 
@@ -73,7 +73,7 @@ for (check_move_cost = 0; check_move_cost < max_move_points; check_move_cost += 
                 other.check_move_cost 
                 + scr_check_move_cost(other.move_check_target,obj_map.terrains[newpos_x ,newpos_y])
                 //less than or equalt to move points avaliable
-                <= other.move_check_target.move_points){
+                <= other.max_move_points){
                 //set move cost to new tile
                 global.rangeCheck[newpos_x,newpos_y].move_cost = 
                 move_cost 
@@ -95,7 +95,7 @@ for (check_move_cost = 0; check_move_cost < max_move_points; check_move_cost += 
                 other.check_move_cost 
                 + scr_check_move_cost(other.move_check_target,obj_map.terrains[newpos_x ,newpos_y])
                 //less than or equalt to move points avaliable
-                <= other.move_check_target.move_points){
+                <= other.max_move_points){
                 //set move cost to new tile
                 global.rangeCheck[newpos_x,newpos_y].move_cost = 
                 move_cost 
@@ -117,7 +117,7 @@ for (check_move_cost = 0; check_move_cost < max_move_points; check_move_cost += 
                 other.check_move_cost 
                 + scr_check_move_cost(other.move_check_target,obj_map.terrains[newpos_x ,newpos_y])
                 //less than or equalt to move points avaliable
-                <= other.move_check_target.move_points){
+                <= other.max_move_points){
                 //set move cost to new tile
                 global.rangeCheck[newpos_x,newpos_y].move_cost = 
                 move_cost 

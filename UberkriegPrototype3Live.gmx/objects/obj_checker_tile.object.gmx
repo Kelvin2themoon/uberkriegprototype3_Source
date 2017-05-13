@@ -155,15 +155,17 @@ if ( obj_map.units[x div 24, y div 24] != 0){
         
     
 
+if move_cost != -1 draw_text(x,y,string(move_cost));
 
 
 
-/*
 if (on_path){ 
-    draw_sprite(spr_rangecheck_bluedk,image_index,x,y);
+    //draw_sprite(spr_rangecheck_bluedk,image_index,x,y);
     draw_text(x,y,string(pathority));
     }
+
 //if (pathority != -1) draw_sprite(spr_movePath,arrow_index,x,y);//draw red tile temp
+
 
 
 </string>

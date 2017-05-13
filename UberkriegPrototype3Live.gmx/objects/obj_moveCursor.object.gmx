@@ -110,7 +110,8 @@ ds_list_clear(global.targetables);
 global.unit_check = global.acting_unit;
 
 
-
+//boolean to check if move destination was out of bounds so reset on reentry can occure
+move_out = false;
 
 
 
@@ -238,6 +239,7 @@ if (alarm[1] = -1 )
                 newpos_x = global.posX +0;
                 newpos_y = global.posY -1;
                 path_total += scr_check_move_cost(global.acting_unit,obj_map.terrains[newpos_x,newpos_y]);
+                if global.rangeCheck[newpos_x,newpos_y].pathority = -1 moveout = true;
                 
                 //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
@@ -249,12 +251,13 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached
-                    if( path_total &gt; global.acting_unit.move_points){
+                    if( (path_total &gt; global.acting_unit.move_points or path_total &gt; global.acting_unit.fuel) or move_out){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
                         scr_find_path( global.rangeCheck[newpos_x,newpos_y]);
                         }
+                     move_out = false;   
                     }
                 }
             scr_cursorKey_juice(1,global.cursorKey_sfx);
@@ -266,6 +269,7 @@ if (alarm[1] = -1 )
                 newpos_x = global.posX +0;
                 newpos_y = global.posY +1;
                 path_total += scr_check_move_cost(global.acting_unit,obj_map.terrains[newpos_x,newpos_y]);
+                if global.rangeCheck[newpos_x,newpos_y].pathority = -1 moveout = true;
                
                //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
@@ -277,12 +281,13 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached
-                    if( path_total &gt; global.acting_unit.move_points){
+                    if( (path_total &gt; global.acting_unit.move_points or path_total &gt; global.acting_unit.fuel) or move_out){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
                         scr_find_path( global.rangeCheck[newpos_x,newpos_y]);
                         }
+                    move_out = false;
                     }
                 }
             scr_cursorKey_juice(1,global.cursorKey_sfx);
@@ -295,6 +300,7 @@ if (alarm[1] = -1 )
                 newpos_x = global.posX -1;
                 newpos_y = global.posY +0;
                 path_total += scr_check_move_cost(global.acting_unit,obj_map.terrains[newpos_x,newpos_y]);
+                if global.rangeCheck[newpos_x,newpos_y].pathority = -1 moveout = true;
                 
                 //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
@@ -306,12 +312,13 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached
-                    if( path_total &gt; global.acting_unit.move_points){
+                   if( (path_total &gt; global.acting_unit.move_points or path_total &gt; global.acting_unit.fuel) or move_out){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
                         scr_find_path( global.rangeCheck[newpos_x,newpos_y]);
                         }
+                    move_our = false;
                     }
                 }
             scr_cursorKey_juice(1,global.cursorKey_sfx);
@@ -324,6 +331,7 @@ if (alarm[1] = -1 )
                 newpos_x = global.posX +1;
                 newpos_y = global.posY +0;
                 path_total += scr_check_move_cost(global.acting_unit,obj_map.terrains[newpos_x,newpos_y]);
+                if global.rangeCheck[newpos_x,newpos_y].pathority = -1 moveout = true;
                 
                 //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
@@ -334,13 +342,14 @@ if (alarm[1] = -1 )
                     ds_priority_add(global.move_order,new_path_node,path_total);
                     scr_draw_move_path();
                 
-                    //if max range reached
-                    if( path_total &gt; global.acting_unit.move_points){
+                    //if max range reached (re calculate path)
+                    if( (path_total &gt; global.acting_unit.move_points or path_total &gt; global.acting_unit.fuel) or move_out){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
                         scr_find_path( global.rangeCheck[newpos_x,newpos_y]);
                         }
+                    move_our = false;
                     }
                 }
            
@@ -886,10 +895,13 @@ global.unit_check = obj_map.units[global.posX,global.posY];
 
 //draw_text(12, 240, string(global.acting_unit.team) + "/" + string(global.acting_unit.ownership));
 
+
 /*
 
 draw_text(12,300, "movecost: " + string( global.rangeCheck[x div 24, y div 24].move_cost) + "/" +string(global.acting_unit.move_points));
 draw_text(12,313, "terrain cost: " + string(scr_check_move_cost(global.acting_unit,obj_map.terrains[x div 24, y div 24])));
+
+
 </string>
           </argument>
         </arguments>
