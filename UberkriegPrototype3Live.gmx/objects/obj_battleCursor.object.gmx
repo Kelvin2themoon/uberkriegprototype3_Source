@@ -766,6 +766,8 @@ if(mouse_check_button_pressed(mb_right))
             //move cursor
             x = (mousePosX)*24;
             y = (mousePosY)*24;
+            global.posX = x div 24;
+            global.posY = y div 24;
             //open SystemMenu
             //check location is open
             instance_create(x+24,y,obj_syscom_system);

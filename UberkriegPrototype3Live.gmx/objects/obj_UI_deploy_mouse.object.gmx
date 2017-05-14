@@ -113,7 +113,7 @@ if  (keyboard_check_pressed(global.keyCANCEL))
     instance_activate_object(obj_battleCursor);
     instance_activate_object(obj_miniwin);
     instance_activate_object(obj_topwin);
-    instance_destroy();
+    with(obj_UI_deploy_mouse)  instance_destroy();
     }
 </string>
           </argument>

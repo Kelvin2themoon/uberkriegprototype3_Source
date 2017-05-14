@@ -56,6 +56,11 @@ menu_content = ds_list_create();
 
 if (x &gt; view_xview+view_wview -216) x -= 192;
 
+if ( y  &lt;= view_yview) y = view_yview + 12;
+
+if ( y +  item_height*4  &gt; view_yview + view_hview) y =  (view_yview + view_hview)-(item_height*4) +12;
+
+
 start_y = y;
 start_x = x;
 
@@ -286,10 +291,28 @@ else mouse_on = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///press "A" : execute
+            <string>///execute command (press "A" or leftclick)
 
-if ( keyboard_check_pressed( global.keyCONFIRM) ){
+if ( keyboard_check_pressed( global.keyCONFIRM) )
+    {
     scr_syscom_execute(ds_list_find_value(menu_content,row));
+    }
+    
+if ( mouse_check_button_pressed( mb_left) 
+
+    )
+    {
+    if (mouse_on)
+    scr_syscom_execute(ds_list_find_value(menu_content,mouse_row));
+    
+    else
+        {
+        
+        instance_activate_object(obj_battleCursor);
+        instance_activate_object(obj_miniwin);
+        instance_destroy();
+        }
+    
     }
 </string>
           </argument>
