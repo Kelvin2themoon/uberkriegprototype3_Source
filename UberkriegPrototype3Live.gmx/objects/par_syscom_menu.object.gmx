@@ -63,6 +63,11 @@ row = 0
 row_max = 0;
 row_size = 24;
 
+//mpouse control variables
+mouse_on = false;
+mouse_row = 0;
+mouse_item = "wait";
+
 
 </string>
           </argument>
@@ -244,11 +249,23 @@ if (alarm[1] = -1 )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///press "A" : execute
+            <string>///mouse Navigation
 
-if ( keyboard_check_pressed( global.keyCONFIRM) ){
-    scr_syscom_execute(ds_list_find_value(menu_content,row));
+if (
+    
+       mouse_x &gt; start_x + 16 and mouse_x &lt; start_x + 150
+   and mouse_y &gt; start_y      and mouse_y &lt; start_y + item_height*(row_max+1)
+    
+    )
+    {
+    mouse_on = true;
+    mouse_row = (mouse_y - start_y) div item_height;
+    mouse_item = ds_list_find_value(menu_content, mouse_row);
+
     }
+else mouse_on = false;
+
+    
 </string>
           </argument>
         </arguments>
@@ -269,7 +286,12 @@ if ( keyboard_check_pressed( global.keyCONFIRM) ){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>///press "A" : execute
+
+if ( keyboard_check_pressed( global.keyCONFIRM) ){
+    scr_syscom_execute(ds_list_find_value(menu_content,row));
+    }
+</string>
           </argument>
         </arguments>
       </action>
@@ -350,7 +372,77 @@ for ( i=0 ; i&lt;ds_list_size(menu_content) ; i+=1){
         }
     }
 
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw Mouse Select
+
+if mouse_on
+draw_sprite( asset_get_index("spr_syscom_"+mouse_item+"_down"),global.P_Turn.number-1,start_x,start_y+(mouse_row*24)); 
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw self
 draw_self();
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw Mouse Pointer
+
+draw_sprite(spr_mousePointer,global.P_Turn.number - 1, mouse_x, mouse_y);
 </string>
           </argument>
         </arguments>

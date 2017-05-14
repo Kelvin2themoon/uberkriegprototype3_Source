@@ -61,7 +61,7 @@ row_max = ds_list_size(menu_content) - 1 ;
           <argument>
             <kind>1</kind>
             <string>///press "B"
-if  (keyboard_check_pressed(global.keyCANCEL))
+if  (keyboard_check_pressed(global.keyCANCEL) or mouse_check_button_pressed(mb_right) )
     {
     instance_activate_object(obj_battleCursor);
     instance_activate_object(obj_miniwin);
