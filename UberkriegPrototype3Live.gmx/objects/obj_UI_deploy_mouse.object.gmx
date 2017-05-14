@@ -58,6 +58,9 @@ display_on = false;
 display_cost = 0;
 display_difference = 0;
 
+// switch cursor graphic on if inbound and vice versa
+cursor_on = false;
+
 </string>
           </argument>
         </arguments>
@@ -166,6 +169,9 @@ if (
     )
     {
         
+        //surface UI
+       cursor_on = true;
+        
        col = (mouse_x - start_x) div col_size;
        x = start_x + col *col_size;
        
@@ -173,6 +179,14 @@ if (
        y = start_y + row *row_size;
         
         
+    
+    }
+    
+else 
+    {
+    cursor_on = false;
+    col = 0;
+    row = 6;
     
     }
     
@@ -431,7 +445,9 @@ no_deploy = false;
                 
                 instance_activate_object(obj_miniwin);
                 instance_activate_object(obj_topwin);
-                instance_destroy();
+                with(obj_UI_deploy_mouse) instance_destroy();
+                //second deplay menu is created for some reson when another base is selected first &amp; second base is select to deploy while cursor on first base is showing deploy icon...temp solution = nuke all deploy menus
+                
                 }
     
         if unit_has_deployed{
@@ -452,6 +468,7 @@ no_deploy = false;
                 
                 //Close deploy Window
                 instance_activate_object(obj_battleCursor);
+                
                 
                 //set menu exit delay to prevent unwanted view scrolling
                 obj_battleCursor.alarm[3] = 10;
@@ -758,7 +775,7 @@ if (global.P_Turn.funds &lt; 1000) //Light Infantry
 draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),0,view_xview[0]+138,view_yview[0]+102);
 
 //draw cursor or "self"
-draw_self();
+if cursor_on draw_self();
 
 //draw mouse pointer
 draw_sprite(spr_mousePointer, global.P_Turn.number-1, mouse_x, mouse_y);

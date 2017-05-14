@@ -645,9 +645,7 @@ global.unit_check = obj_map.units[global.posX,global.posY];
             <kind>1</kind>
             <string>///Mouse Controls
 
-///Mouse Controls
 
-//screen scroll
 
 //left click    
 
@@ -735,6 +733,9 @@ if(mouse_check_button_released(mb_left))
             obj_map.terrains[global.posX,global.posY].name = "Base" 
             and obj_map.terrains[global.posX,global.posY].ownership = global.P_Turn.number 
             and obj_map.terrains[global.posX,global.posY].isStanding
+            
+            and obj_map.units[global.posX,global.posY] = 0
+            
             and menu_ok
             )
             {
