@@ -53,6 +53,10 @@ fast_scroll_on = false;
 menu_ok = false;
 //mouse control, pause screen scroll after exeting, usue alarm 3 
 menuExitDelay = false;
+//mouse control, for switching to move cursor
+move_ready = false;             //aswitchmous press and release
+move_ready_count = 0;           //counter
+mover_ready_threshold = 3;     //mover ready after count
 </string>
           </argument>
         </arguments>
@@ -334,6 +338,210 @@ if (alarm[1] = -1 )
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Mouse Controls
+
+
+
+//left click    
+
+if(mouse_check_button_pressed(mb_left) and !menuExitDelay)
+    {
+        
+        mousePosX = mouse_x div 24
+        mousePosY = mouse_y div 24
+  
+        if (scr_inBound(mousePosX,mousePosY))
+            {
+                //change curosr position
+                x = (mousePosX)*24;
+                y = (mousePosY)*24;
+                
+                global.posX = x div 24;
+                global.posY = y div 24;
+                
+                //check for ally unit
+                if(obj_map.units[global.posX,global.posY] !=0)
+                    {
+                        if(obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number)
+                            {
+                            
+                                //initiate move ready
+                                move_ready = true;
+                            
+                            }
+                    }
+            }
+         
+
+        //turn off deploy icon
+        cursor_icon = -1;
+        
+        //local property radio chech if terrain i sproperty
+        if (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,obj_property))
+            {
+                scr_rangeCheck_reset();
+                scr_updateLocalRadio(obj_map.terrains[global.posX,global.posY]);
+                isOnGlobalRadioCheck = true;
+            
+            }
+        else
+            {
+                
+                //turn on global radio check
+                scr_globalRadioCheck();
+                isOnGlobalRadioCheck = true;
+            
+            }
+        
+        
+        
+        //set alarm for releas delay for deploy and syscom menus
+        alarm[2] = 10;
+        menu_ok = true;
+    
+    }
+    
+    
+if(mouse_check_button(mb_left) and !menuExitDelay)
+    {
+        
+        //turn off deploy icon
+        cursor_icon = -1;
+        
+        mousePosX = mouse_x div 24
+        mousePosY = mouse_y div 24
+  
+    if (scr_inBound(mousePosX,mousePosY) )
+        {
+            //change curosr position
+            x = (mousePosX)*24;
+            y = (mousePosY)*24;
+            
+            global.posX = x div 24;
+            global.posY = y div 24;
+            
+        }
+    if ( mouse_check_button(mb_right) and  obj_map.units[global.posX,global.posY] !=0 )
+        {
+        
+                        //move_ready_count=0;
+                        //detroy redundentcies
+                        instance_activate_object(obj_moveCursorMouse);
+                        with(obj_moveCursorMouse) instance_destroy();
+                        //create new instace
+                        instance_create(x,y,obj_moveCursorMouse);
+                        instance_deactivate_object(obj_battleCursor);
+        
+        }
+    
+       
+
+    }
+        
+    
+if(mouse_check_button_released(mb_left))
+    {
+    
+        isOnGlobalRadioCheck = false;
+        scr_rangeCheck_reset();
+    
+        //reset unit radio check if applicable
+        if obj_map.units[global.posX, global.posY] !=0
+        scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
+        
+        //reset move ready
+        move_ready = false;
+        move_ready_count=0;
+                
+        
+        //open deploy menu
+        if  (
+            obj_map.terrains[global.posX,global.posY].name = "Base" 
+            and obj_map.terrains[global.posX,global.posY].ownership = global.P_Turn.number 
+            and obj_map.terrains[global.posX,global.posY].isStanding
+            
+            and obj_map.units[global.posX,global.posY] = 0
+            
+            and menu_ok
+            )
+            {
+            
+            //Open Deploy menu!
+            instance_create(0,0,obj_UI_deploy_mouse);
+            instance_deactivate_object(obj_miniwin);
+            instance_deactivate_object(obj_battleCursor);
+            instance_deactivate_object(obj_topwin);    
+            
+            }
+        
+        
+    
+    }    
+    
+    
+    
+    
+//right click
+if(mouse_check_button_pressed(mb_right) and !mouse_check_button(mb_left))
+    {
+        mousePosX = mouse_x div 24
+        mousePosY = mouse_y div 24
+  
+    if (scr_inBound(mousePosX,mousePosY) )
+        {
+            //move cursor
+            x = (mousePosX)*24;
+            y = (mousePosY)*24;
+            global.posX = x div 24;
+            global.posY = y div 24;
+            
+            
+            if (obj_map.units[global.posX,global.posY] = 0)
+                {
+                    //open SystemMenu
+                    //check location is open
+                    instance_create(x+24,y,obj_syscom_system);
+                    instance_deactivate_object(obj_battleCursor);
+                }
+            else
+                {
+                    //do move range check
+                    checking_attack_range = true;
+                    scr_attack_rance_check(obj_map.units[global.posX, global.posY]);
+                }   
+        }
+
+    }
+    
+if(mouse_check_button_released(mb_right))
+    {
+        checking_attack_range = false;
+        scr_rangeCheck_reset();
+    }
+
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>/// view control
 
 
@@ -413,7 +621,7 @@ if (obj_map.terrains[global.posX,global.posY].name == "Base" and obj_map.units[g
             <string>///Open System, deploy menu,  start unit command, enemy or idle unit move range check
 
 
-if ( keyboard_check_pressed( global.keyCONFIRM) ){
+if ( keyboard_check_pressed( global.keyCONFIRM) and menuExitDelay = false ){
     //check if terrain is open
     if ( obj_map.units[global.posX,global.posY] = 0){
         //if terrain is base owned by player
@@ -623,165 +831,6 @@ if (keyboard_check_released(global.keyCANCEL)){
 
 global.terrain_check = obj_map.terrains[global.posX,global.posY];
 global.unit_check = obj_map.units[global.posX,global.posY];
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Mouse Controls
-
-
-
-//left click    
-
-if(mouse_check_button_pressed(mb_left) and  !menuExitDelay)
-    {
-        
-        mousePosX = mouse_x div 24
-        mousePosY = mouse_y div 24
-  
-        if (scr_inBound(mousePosX,mousePosY))
-            {
-                //change curosr position
-                x = (mousePosX)*24;
-                y = (mousePosY)*24;
-                
-                global.posX = x div 24;
-                global.posY = y div 24;
-            }
-         
-
-        //turn off deploy icon
-        cursor_icon = -1;
-        
-        //local property radio chech if terrain i sproperty
-        if (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,obj_property))
-            {
-            
-                scr_updateLocalRadio(obj_map.terrains[global.posX,global.posY]);
-                isOnGlobalRadioCheck = true;
-            
-            }
-        else
-            {
-                
-                //turn on global radio check
-                scr_globalRadioCheck();
-                isOnGlobalRadioCheck = true;
-            
-            }
-        
-        
-        
-        //set alarm for releas delay for deploy and syscom menus
-        alarm[2] = 10;
-        menu_ok = true;
-    
-    }
-    
-    
-if(mouse_check_button(mb_left) and !menuExitDelay)
-    {
-        
-        //turn off deploy icon
-        cursor_icon = -1;
-        
-        mousePosX = mouse_x div 24
-        mousePosY = mouse_y div 24
-  
-    if (scr_inBound(mousePosX,mousePosY))
-        {
-            //change curosr position
-            x = (mousePosX)*24;
-            y = (mousePosY)*24;
-            
-            global.posX = x div 24;
-            global.posY = y div 24;
-            
-        }
-
-    }
-        
-    
-if(mouse_check_button_released(mb_left))
-    {
-    
-        isOnGlobalRadioCheck = false;
-        scr_rangeCheck_reset();
-    
-        //reset unit radio check if applicable
-        if obj_map.units[global.posX, global.posY] !=0
-        scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
-        
-        //open deploy menu
-        if  (
-            obj_map.terrains[global.posX,global.posY].name = "Base" 
-            and obj_map.terrains[global.posX,global.posY].ownership = global.P_Turn.number 
-            and obj_map.terrains[global.posX,global.posY].isStanding
-            
-            and obj_map.units[global.posX,global.posY] = 0
-            
-            and menu_ok
-            )
-            {
-            
-            //Open Deploy menu!
-            instance_create(0,0,obj_UI_deploy_mouse);
-            instance_deactivate_object(obj_miniwin);
-            instance_deactivate_object(obj_battleCursor);
-            instance_deactivate_object(obj_topwin);    
-            
-            }
-        
-        
-    
-    }    
-    
-    
-    
-    
-//right click
-if(mouse_check_button_pressed(mb_right))
-    {
-        mousePosX = mouse_x div 24
-        mousePosY = mouse_y div 24
-  
-    if (scr_inBound(mousePosX,mousePosY))
-        {
-            //move cursor
-            x = (mousePosX)*24;
-            y = (mousePosY)*24;
-            global.posX = x div 24;
-            global.posY = y div 24;
-            //open SystemMenu
-            //check location is open
-            instance_create(x+24,y,obj_syscom_system);
-            instance_deactivate_object(obj_battleCursor);
-            
-            
-            
-        }
-
-    }
-
-
-
-
 </string>
           </argument>
         </arguments>

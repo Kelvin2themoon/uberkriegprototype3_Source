@@ -680,7 +680,13 @@ global.Phaze = "Waiting";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>///debug counters
+
+battleCurosrCount = 0 ;
+moveCusorCount = 0 ;
+battle_controller_count = 0;
+roomCounter = 0;
+</string>
           </argument>
         </arguments>
       </action>
@@ -815,6 +821,34 @@ if (global.Phaze = "Waiting"){
     
     
     }
+
+battleCurosrCount =0;        
+with obj_battleCursor other.battleCurosrCount+=1;
+draw_text(12,84+16*5, "Battle Cursor Count : " +string(string(battleCurosrCount)));
+
+moveCusorCount = 0;
+with (obj_moveCursor or obj_moveCursorMouse) other.moveCusorCount+=1;
+draw_text(12,84+16*6, "Move Cursor Count : " +string(string(moveCusorCount)));
+
+battle_controller_count =0;
+with obj_moveCursor other.moveCusorCount+=1;
+draw_text(12,84+16*6, "Move Cursor Count : " +string(string(moveCusorCount)));
+
+battle_controller_count= 0;
+with obj_battleController_basic other.battle_controller_count+=1;
+draw_text(12,84+16*7, "Battle Controller Count : " +string(string(battle_controller_count)));
+
+
+roomCounter = 0;
+with obj_UI_deploy_mouse other.roomCounter+=1;
+draw_text(12,84+16*8, "Deploy win : " +string(string(roomCounter)));
+
+draw_text(12,84+16*10, "X : " +string(string(global.posX)));
+draw_text(12,84+16*11, "X : " +string(string(global.posY)));
+
+
+
+
 /*
 if (global.Phaze = "Main"){      
                                 //Player umber

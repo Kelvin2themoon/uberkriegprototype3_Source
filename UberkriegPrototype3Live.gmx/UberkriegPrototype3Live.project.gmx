@@ -485,6 +485,7 @@
     <font>fonts\font3</font>
     <font>fonts\font4</font>
     <font>fonts\font5</font>
+    <font>fonts\font6</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>
@@ -558,6 +559,7 @@
       </objects>
       <objects name="Unit Control">
         <object>objects\obj_moveCursor</object>
+        <object>objects\obj_moveCursorMouse</object>
         <objects name="UnitMove">
           <object>objects\obj_path_node</object>
           <object>objects\obj_execute_unit_orders</object>
