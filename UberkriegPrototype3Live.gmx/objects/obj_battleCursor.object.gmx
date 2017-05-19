@@ -424,6 +424,13 @@ if(mouse_check_button(mb_left) and !menuExitDelay)
     if ( mouse_check_button(mb_right) and  obj_map.units[global.posX,global.posY] !=0 )
         {
         
+                        //start unit Command
+                        x = (mousePosX)*24;
+                        y = (mousePosY)*24;
+                        
+                        global.posX = x div 24;
+                        global.posY = y div 24;               
+                        
                         //move_ready_count=0;
                         //detroy redundentcies
                         instance_activate_object(obj_moveCursorMouse);

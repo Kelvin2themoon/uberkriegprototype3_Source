@@ -131,11 +131,13 @@ event_inherited();
           <argument>
             <kind>1</kind>
             <string>///press "B"
-if  (keyboard_check_pressed(global.keyCANCEL) and !global.drop_phaze_2){// donnot activate if in drop-phaze2
+if  ((keyboard_check_pressed(global.keyCANCEL) or mouse_check_button_released(mb_right)) and !global.drop_phaze_2){// donnot activate if in drop-phaze2
     //reactivate move cursor
     //scr_rangeCheck_reset();
     //scr_updateLocalMove(global.acting_unit);
     instance_activate_object(obj_moveCursor);
+    instance_activate_object(obj_moveCursorMouse);
+    
     
     //check for other move cursors and destroy them
     with(obj_moveCursor){
