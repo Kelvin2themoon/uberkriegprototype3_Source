@@ -419,7 +419,47 @@ for ( i=0 ; i&lt;ds_list_size(menu_content) ; i+=1){
             <string>///Draw Mouse Select
 
 if mouse_on
-draw_sprite( asset_get_index("spr_syscom_"+mouse_item+"_down"),global.P_Turn.number-1,start_x,start_y+(mouse_row*24)); 
+
+    {
+    
+        //fist handle exceptions drop A and B    
+        
+        if (mouse_item = "drop_A")
+            {
+            
+                draw_sprite( spr_syscom_drop_down,global.P_Turn.number-1,start_x,start_y+(mouse_row*24));
+                //draw unit and stats 
+                draw_sprite(global.acting_unit.load_A.sprite_index,0,start_x+24,start_y+(mouse_row*24));
+                if (global.acting_unit.load_A.isCommander)  draw_sprite(spr_unitStats_Radio,0,start_x+24,start_y+(mouse_row*24));
+                if (global.acting_unit.load_A.hp &lt; 10)     draw_sprite(spr_unitStats_HP,global.acting_unit.load_A.hp,start_x+24,start_y+(mouse_row*24));
+            
+            }
+            
+        else if (mouse_item = "drop_B")
+            {
+            
+                draw_sprite( spr_syscom_drop_down,global.P_Turn.number-1,start_x,start_y+(mouse_row*24));
+                //draw unit and stats 
+                draw_sprite(global.acting_unit.load_B.sprite_index,0,start_x+24,start_y+(mouse_row*24));
+                if (global.acting_unit.load_B.isCommander)  draw_sprite(spr_unitStats_Radio,0,start_x+24,start_y+(mouse_row*24));
+                if (global.acting_unit.load_B.hp &lt; 10)     draw_sprite(spr_unitStats_HP,global.acting_unit.load_B.hp,start_x+24,start_y+(mouse_row*24));
+            
+            }
+        else 
+            {
+            
+                //draw normal menue items
+                draw_sprite( asset_get_index("spr_syscom_"+mouse_item+"_down"),global.P_Turn.number-1,start_x,start_y+(mouse_row*24)); 
+
+            
+            }
+    
+    }
+
+
+
+
+
 
 </string>
           </argument>

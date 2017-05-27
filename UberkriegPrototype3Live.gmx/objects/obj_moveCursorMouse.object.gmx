@@ -454,6 +454,8 @@ if (scr_inBound(mouse_pos_x,mouse_pos_y))
                     path_total + scr_check_move_cost(global.acting_unit,obj_map.terrains[mouse_pos_x,mouse_pos_y]) &lt; global.acting_unit.fuel
                     and
                     !move_out
+                    and
+                    global.rangeCheck[mouse_pos_x,mouse_pos_y].move_cost != -1
                     
                     )
                         {
@@ -475,22 +477,34 @@ if (scr_inBound(mouse_pos_x,mouse_pos_y))
                         }
                         
                 // position is not adjacent but within valid move range
-                else if (obj_map.terrains[mouse_pos_x,mouse_pos_y] != -1)
+                else if ( global.rangeCheck[mouse_pos_x,mouse_pos_y].move_cost != -1)
                     {
                     
                         //switch back in
-                        mouve_out = false
+                        move_out = false
                         //auto-detect path
                         scr_find_path( global.rangeCheck[mouse_pos_x,mouse_pos_y]);
+                        
+                        //update last positions
+                        last_pos_x = mouse_pos_x;
+                        last_pos_y = mouse_pos_y;
                     
                     
                     }
                     
-                else if (obj_map.terrains[mouse_pos_x,mouse_pos_y] = -1)
+                else if ( global.rangeCheck[mouse_pos_x,mouse_pos_y].move_cost = -1)
                     {
                         
+                        //reset paths
+                        with(obj_path_node) instance_destroy();
                         //switch on out of bounds
-                        move_out = true;    
+                        move_out = true;
+                        
+                        //update last positions
+                        last_pos_x = mouse_pos_x;
+                        last_pos_y = mouse_pos_y;
+                        
+                            
                     
                     }
                 
@@ -533,7 +547,7 @@ global.destination  = obj_map.terrains[mouse_pos_x,mouse_pos_y];
 
 
 //check: key press confirm
-if ( mouse_check_button_released(mb_left))
+if ( !mouse_check_button(mb_left))
     {
     if (obj_map.terrains[mouse_pos_x,mouse_pos_y] != -1)
     {

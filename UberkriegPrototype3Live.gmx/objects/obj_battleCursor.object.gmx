@@ -346,7 +346,7 @@ if (alarm[1] = -1 )
 
 if(mouse_check_button_pressed(mb_left) and !menuExitDelay)
     {
-        
+        move_ready = false;
         mousePosX = mouse_x div 24
         mousePosY = mouse_y div 24
   
@@ -421,7 +421,7 @@ if(mouse_check_button(mb_left) and !menuExitDelay)
             global.posY = y div 24;
             
         }
-    if ( mouse_check_button(mb_right) and  obj_map.units[global.posX,global.posY] !=0 )
+    if ( mouse_check_button(mb_right) and  obj_map.units[global.posX,global.posY] !=0 and move_ready )
         {
         
                         //start unit Command
@@ -438,6 +438,8 @@ if(mouse_check_button(mb_left) and !menuExitDelay)
                         //create new instace
                         instance_create(x,y,obj_moveCursorMouse);
                         instance_deactivate_object(obj_battleCursor);
+                        
+                        move_ready = false;
         
         }
     

@@ -329,6 +329,91 @@ if (alarm[1] = -1 )
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///navigate by mouse
+
+if mouse_check_button_pressed(mb_left)
+
+    {
+    
+        //positions to check
+        var mousecheck_pos_x = mouse_x div 24 ;
+        var mousecheck_pos_y = mouse_y div 24 ;
+        
+        var target_check = -1;
+        
+        //check map bounderies
+        if (scr_inBound(mousecheck_pos_x,mousecheck_pos_y))
+            {
+                //if target is already confirmed, engage
+               //check if mous pos match target pose
+               if ((mousecheck_pos_x = target_check.x div 24 and mousecheck_pos_y = target_check.y div 24))
+                    {
+                                
+                                //confirm engage
+                                global.target_unit = engage_target;
+                                instance_create(0,0,obj_execute_unit_orders);
+                                with (obj_engageCursor) instance_destroy();
+                                    
+                                
+                    }
+
+                else
+                    {
+                        //for each unit in targetables, check if pos match
+                        var i = 0;
+                        for (i = 0 ; i &lt; engage_list_size ; i++)
+                            {
+                            
+                                target_check =  ds_list_find_value( global.targetables,i);
+                                
+                                //if  mouse and target pos match
+                                if (mousecheck_pos_x = target_check.x div 24 and mousecheck_pos_y = target_check.y div 24)
+                                            {
+                                            
+                                                //change targets
+                                                engage_target = ds_list_find_value( global.targetables,i);
+                                                //move cursor
+                                                x = engage_target.x ;
+                                                y = engage_target.y ;
+                                                scr_cursorKey_juice(1,global.cursorKey_sfx);
+                                                //check engage type
+                                                global.engage_type = initial_type;
+                                                //set engage type ( direct or indirect )
+                                                if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,1) &lt; 0)
+                                                    global.engage_type = 2;
+                                                
+                                                break;
+                                            
+                                            }
+                            
+                            }
+                    }
+            
+            }
+    
+    }
+    
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>/// view control
 
 
@@ -504,6 +589,29 @@ draw_text(12,132, "Damage: " + string(round(dmg_percent)) + "%");
       </action>
     </event>
     <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw Mouse
+
+draw_sprite(spr_mousePointer,global.P_Turn.number - 1, mouse_x, mouse_y);
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
