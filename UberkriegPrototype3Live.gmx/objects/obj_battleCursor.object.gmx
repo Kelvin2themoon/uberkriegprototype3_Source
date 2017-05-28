@@ -504,7 +504,7 @@ if(mouse_check_button_released(mb_left))
     
     
 //right click
-if(mouse_check_button_pressed(mb_right) and !mouse_check_button(mb_left))
+if(mouse_check_button_pressed(mb_right) and !mouse_check_button(mb_left) and !menuExitDelay)
     {
         mousePosX = mouse_x div 24
         mousePosY = mouse_y div 24

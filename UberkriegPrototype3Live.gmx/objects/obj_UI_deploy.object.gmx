@@ -40,6 +40,9 @@ alarm[1] = 1;
 start_x = view_xview+132;
 start_y = view_yview+96;
 
+//just created switch
+just_created = true ;
+
 col = 0; //1 of 2
 row = 0; // 1 of 7
 
@@ -47,7 +50,9 @@ col_size = 240 ;
 row_size = 36 ;
 
 x = start_x;
-y = start_y; 
+y = start_y;
+
+ 
 
 //variable needed to cancel deploy
 no_deploy = false;
@@ -906,7 +911,18 @@ scr_draw_num(spr_num_light,false,global.P_Turn.funds-display_cost,595,55,8);
             <kind>1</kind>
             <string>///Draw order
 
-
+if just_created
+    {
+    
+        start_x = view_xview+132;
+        start_y = view_yview+96;
+        
+        x = start_x;
+        y = start_y;
+        
+        just_created = false ;
+    
+    }
 
 //Draw menu
 draw_sprite(spr_DeployWin,global.P_Turn.number-1,view_xview + 132,view_yview + 42);
