@@ -156,7 +156,7 @@ image_index = global.cursorFrameIndex ;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Navigation
+            <string>/// Keyboard Navigation
 
 
 
@@ -246,6 +246,279 @@ if (alarm[1] = -1 )
         }
         
     
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Mouse Nav
+
+if (mouse_check_button_pressed(mb_left))
+    {
+    
+        //check if cursor is inbound
+        if (
+                mouse_x &gt; start_x and mouse_x &lt; start_x + col_size*2
+            and mouse_y &gt; start_y and mouse_y &lt; start_y + row_size*7
+            
+        )
+        
+            {
+            
+                //deploy if col and row match mouse pos
+                if (  col = (mouse_x - start_x) div col_size and row = (mouse_y - start_y) div row_size )
+                    
+                    {
+                        
+                        unit_has_deployed = false;
+                        no_deploy = false;
+                            //check col
+                            if col == 0{
+                                //check row
+                                switch row
+                                    {
+                                    case 0: //Light Infantry
+                                    if (global.P_Turn.funds &gt;= 1000){
+                                        global.P_Turn.funds -= 1000;
+                                        scr_setUnit(obj_unit_LightInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                                        unit_has_deployed = true;
+                                        }
+                                    break;
+                                    
+                                    case 1: //Heavy Infantry (mechanized Infnatry)
+                                        if(global.P_Turn.funds &gt;= 2000){
+                                        global.P_Turn.funds -= 2000;
+                                        scr_setUnit(obj_unit_HeavyInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                                        unit_has_deployed = true;
+                                        }
+                                    break;
+                                    
+                                    case 2: //Long Gun
+                                    if (global.P_Turn.funds &gt;= 3000){
+                                        global.P_Turn.funds -= 3000;
+                                        scr_setUnit(obj_unit_LongGun ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                                        unit_has_deployed = true;
+                                        }
+                                    break;
+                                    
+                                    case 3: //Field Officer (commander)
+                                    if (global.P_Turn.funds &gt;= 4000){
+                                        global.P_Turn.funds -= 4000;
+                                        scr_setUnit(obj_unit_Officer,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                                        unit_has_deployed = true;
+                                        }
+                                    break; 
+                                    
+                                    case 4: //Recon
+                                        if (global.P_Turn.funds &gt;= 4000){
+                                        global.P_Turn.funds -= 4000;
+                                        scr_setUnit(obj_unit_Recon,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                                        unit_has_deployed = true;
+                                        }
+                                    break;
+                                    
+                                    case 5: //APC
+                                    if (global.P_Turn.funds &gt;= 5000){
+                                        global.P_Turn.funds -= 5000;
+                                        scr_setUnit(obj_unit_APC,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                                        unit_has_deployed = true;
+                                        }
+                                    break;
+                                    
+                                    case 6: //cancel
+                                        no_deploy = true;
+                                        break;
+                                    }
+                                }            
+                            if col == 1{
+                                //check row
+                                   switch row
+                                        {
+                                   case 0: //Light Tank
+                                   if  (global.P_Turn.funds &gt;= 6000){
+                                        global.P_Turn.funds -= 6000; 
+                                        scr_setUnit(obj_unit_LightTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                                        unit_has_deployed = true;
+                                        }            
+                                    break;
+                                        
+                                   case 1: //Artillery
+                                    if (global.P_Turn.funds &gt;= 7000){
+                                        global.P_Turn.funds -= 7000;
+                                        scr_setUnit(obj_unit_Artillery,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                                        unit_has_deployed = true;
+                                        }
+                                   break;
+                                        
+                                   case 2: //IFV (AA)
+                                   if (global.P_Turn.funds &gt;= 6000){
+                                       global.P_Turn.funds -= 6000;
+                                       scr_setUnit(obj_unit_AA ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                                       unit_has_deployed = true;
+                                       }
+                                   break;
+                                        
+                                   case 3: //Covert Op.
+                                   if (global.P_Turn.funds &gt;= 8000){
+                                       global.P_Turn.funds -= 8000; 
+                                       scr_setUnit(obj_unit_CovertOp,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                                       unit_has_deployed = true;
+                                       }
+                                   break; 
+                                        
+                                   case 4: //Heavy Tank
+                                   if (global.P_Turn.funds &gt;= 15000){
+                                       global.P_Turn.funds -= 15000;
+                                       scr_setUnit(obj_unit_HeavyTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                                       unit_has_deployed = true;
+                                       }
+                                   break;
+                                        
+                                   case 5: //Rocket
+                                   if (global.P_Turn.funds &gt;= 16000){
+                                       global.P_Turn.funds -= 16000; 
+                                       scr_setUnit(obj_unit_Rocket,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                                       unit_has_deployed = true;
+                                       }
+                                   break;
+                                        
+                                   case 6: //Land Cruiser
+                                    if (global.P_Turn.funds &gt;= 32000){
+                                        global.P_Turn.funds -= 32000;
+                                        scr_setUnit(obj_unit_LandCruiser,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                                        unit_has_deployed = true;
+                                        }
+                                   break;
+                                    }        
+                                }
+                                if no_deploy {
+                                        instance_activate_object(obj_battleCursor);
+                                        
+                                        //set menu exit delay to prevent unwanted view scrolling
+                                        obj_battleCursor.alarm[3] = 10;
+                                        obj_battleCursor.menuExitDelay = true;
+                                        
+                                        instance_activate_object(obj_miniwin);
+                                        instance_activate_object(obj_topwin);
+                                        with(obj_UI_deploy_mouse) instance_destroy();
+                                        //second deplay menu is created for some reson when another base is selected first &amp; second base is select to deploy while cursor on first base is showing deploy icon...temp solution = nuke all deploy menus
+                                        
+                                        }
+                            
+                                if unit_has_deployed{
+                        
+                                     if obj_map.units[global.posX,global.posY] !=0{
+                                        //set team
+                                        obj_map.units[global.posX, global.posY].team = global.P_Turn.team;
+                                        //update vision for depoyed unit
+                                        scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
+                                        //exshaust deployed unit
+                                        obj_map.units[global.posX,global.posY].state = "exhaust" ;
+                        
+                                        //update standing
+                                        scr_updateStanding_global();
+                                        scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
+                                        //update vision
+                                        scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
+                                        
+                                        //Close deploy Window
+                                        instance_activate_object(obj_battleCursor);
+                                        
+                                        
+                                        //set menu exit delay to prevent unwanted view scrolling
+                                        obj_battleCursor.alarm[3] = 10;
+                                        obj_battleCursor.menuExitDelay = true;
+                                        
+                                        instance_activate_object(obj_miniwin);
+                                        instance_activate_object(obj_topwin);
+                                        instance_destroy();
+                                        }
+                                    }
+                        
+                    
+                    }
+                    
+                else
+                    {
+                    
+                               col = (mouse_x - start_x) div col_size;
+                               x = start_x + col *col_size;
+                               
+                               row = (mouse_y - start_y) div row_size;
+                               y = start_y + row *row_size;
+        
+                    
+                    }
+            
+            }
+        else
+            {
+            
+            instance_activate_object(obj_battleCursor);
+                    
+            //set menu exit delay to prevent unwanted view scrolling
+            obj_battleCursor.alarm[3] = 10;
+            obj_battleCursor.menuExitDelay = true;
+                        
+            instance_activate_object(obj_miniwin);
+            instance_activate_object(obj_topwin);
+            instance_destroy();
+            
+            }
+        
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///mouse left button = exit menu
+
+if (mouse_check_button_pressed(mb_right))
+    {
+    
+        instance_activate_object(obj_battleCursor);
+                    
+        //set menu exit delay to prevent unwanted view scrolling
+        obj_battleCursor.alarm[3] = 10;
+        obj_battleCursor.menuExitDelay = true;
+                    
+        instance_activate_object(obj_miniwin);
+        instance_activate_object(obj_topwin);
+        instance_destroy();
+             
+    
+    }
 </string>
           </argument>
         </arguments>
@@ -684,6 +957,28 @@ draw_self();
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw mouse pointer
+draw_sprite(spr_mousePointer, global.P_Turn.number-1, mouse_x, mouse_y);
 </string>
           </argument>
         </arguments>

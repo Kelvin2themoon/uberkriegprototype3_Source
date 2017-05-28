@@ -537,13 +537,6 @@ if (scr_inBound(mouse_pos_x,mouse_pos_y))
             <string>///on release
 ///confirm to open command menu
 
-global.posX =
-
-global.target_unit  = obj_map.units[mouse_pos_x,mouse_pos_y];
-global.destination  = obj_map.terrains[mouse_pos_x,mouse_pos_y];
-        
-
-
 
 
 //check: key press confirm

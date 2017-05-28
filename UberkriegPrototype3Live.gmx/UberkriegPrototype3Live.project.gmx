@@ -524,10 +524,10 @@
       <object>objects\obj_unit_Officer</object>
       <object>objects\obj_unit_Recon</object>
       <object>objects\obj_unit_APC</object>
+      <object>objects\obj_unit_CovertOp</object>
       <object>objects\obj_unit_LightTank</object>
       <object>objects\obj_unit_Artillery</object>
       <object>objects\obj_unit_AA</object>
-      <object>objects\obj_unit_CovertOp</object>
       <object>objects\obj_unit_HeavyTank</object>
       <object>objects\obj_unit_Rocket</object>
       <object>objects\obj_unit_LandCruiser</object>
@@ -567,7 +567,6 @@
         </objects>
         <objects name="Engage">
           <object>objects\obj_engageCursor</object>
-          <object>objects\object62</object>
         </objects>
         <objects name="Capture">
           <object>objects\obj_captureBar</object>

@@ -799,6 +799,8 @@ with( obj_moveCursor ) other.temp_move_count +=1;
             <kind>1</kind>
             <string>/// Debug
 
+
+
 //draw_text(12,12,"MOVE CURSOR COUNT: " + string(temp_move_count));
 
 //Scal GUI
@@ -821,6 +823,8 @@ if (global.Phaze = "Waiting"){
     
     
     }
+
+/*
 
 battleCurosrCount =0;        
 with obj_battleCursor other.battleCurosrCount+=1;

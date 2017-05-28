@@ -50,10 +50,10 @@ vision      = 1;
 radio       = 1;
 
 havePrimaryWeapon   = false;
-haveSecondaryWeapon = false;
+haveSecondaryWeapon = true;
 
-min_range = 0;
-max_range = 0;
+min_range = 1;
+max_range = 1;
 
 
 //spceial abilities

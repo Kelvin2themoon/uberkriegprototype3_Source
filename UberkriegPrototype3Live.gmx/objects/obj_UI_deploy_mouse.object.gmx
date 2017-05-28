@@ -505,7 +505,7 @@ no_deploy = false;
             <kind>1</kind>
             <string>///mouse left button = exit menu
 
-if (mouse_check_button_released(mb_right))
+if (mouse_check_button_pressed(mb_right))
     {
     
         instance_activate_object(obj_battleCursor);
