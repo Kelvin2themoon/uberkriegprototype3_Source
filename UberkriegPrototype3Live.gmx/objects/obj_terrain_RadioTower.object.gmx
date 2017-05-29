@@ -31,7 +31,7 @@ index = 11;
 name = "Radio Tower";
 
 //required fields
-cover               = 3; //1~5
+cover               = 2; //1~5
 // Move Costs
 mtype_boots         = 1;
 mtype_heavyBoots    = 2;
