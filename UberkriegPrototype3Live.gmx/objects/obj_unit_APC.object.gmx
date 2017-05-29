@@ -49,8 +49,8 @@ move_points = 8;
 vision      = 1;
 radio       = 1;
 
-havePrimaryWeapon   = false;
-haveSecondaryWeapon = true;
+havePrimaryWeapon   = true;
+haveSecondaryWeapon = false;
 
 min_range = 1;
 max_range = 1;

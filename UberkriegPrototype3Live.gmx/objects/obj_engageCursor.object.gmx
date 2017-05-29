@@ -33,6 +33,9 @@ depth = UI_DEPTH_CURSOR;
 image_speed = 0
 //set position
 
+scr_check_units_in_range(global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false);
+
+
 
 //set alarm to Cursor move speed
 alarm[1] = 0;
