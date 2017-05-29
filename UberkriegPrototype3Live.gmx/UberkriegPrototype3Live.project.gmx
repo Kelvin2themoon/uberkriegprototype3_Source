@@ -119,6 +119,7 @@
           <sprite>sprites\spr_redCursor</sprite>
           <sprite>sprites\spr_CruiserPlusCursor</sprite>
           <sprite>sprites\spr_mousePointer</sprite>
+          <sprite>sprites\spr_mouseViewScrole</sprite>
         </sprites>
         <sprites name="checks">
           <sprite>sprites\spr_rangecheck_red</sprite>

@@ -16,8 +16,12 @@
                     
                     global.acting_unit.state =  "exhaust";
                     global.acting_unit.alarm[0] =  1;
+                    
                     //reset depth
                     scr_setUnitDepth(global.acting_unit);
                     
                     //nuke syscom
                     with par_syscom_menu instance_destroy();
+                    
+                    //clear active unit
+                    global.acting_unit = 0;

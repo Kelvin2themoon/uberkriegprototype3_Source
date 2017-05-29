@@ -29,3 +29,5 @@ switch (global.action_order){
 //update radio status
 scr_updateStanding_global();
 
+
+

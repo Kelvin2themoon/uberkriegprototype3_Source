@@ -3,12 +3,12 @@ hp_remainder = 0
 
 with (global.target_unit){
     hp = hp + global.acting_unit.hp;
+    isDisrupted = false; 
     if (hp > 10){  
         hp_remainder = hp - 10;
         hp = 10;
         hp_remainder *= (cost div 10);
         global.P_Turn.funds += hp_remainder;
-        state =  "exhaust";
         state =  "exhaust";
         if (global.acting_unit.isCommander) isCommander = true;   
         }    
@@ -27,4 +27,7 @@ with obj_battleCursor{
     
 //nuke syscom
 with par_syscom_menu instance_destroy();
+
+//clear active unit
+global.acting_unit = 0;
                     

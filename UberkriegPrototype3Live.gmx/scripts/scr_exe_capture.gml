@@ -17,3 +17,4 @@ scr_setUnitDepth(global.acting_unit);
 
 //nuke syscom
 with par_syscom_menu instance_destroy();
+

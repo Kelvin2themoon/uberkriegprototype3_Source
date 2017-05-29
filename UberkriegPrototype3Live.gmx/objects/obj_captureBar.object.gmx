@@ -84,6 +84,8 @@ if captureComplete {
         }
     //destoy capBar
     instance_destroy();
+    //clear active unit
+    global.acting_unit = 0;
     }
 //chek if cap is complete
 else if(capping_unit.capturing = 20){

@@ -30,3 +30,5 @@ with obj_battleCursor{
 instance_destroy();
 //nuke syscom
 with obj_syscom_command instance_destroy();
+//clear active unit
+global.acting_unit = 0;

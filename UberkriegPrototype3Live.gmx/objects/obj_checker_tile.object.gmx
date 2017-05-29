@@ -153,7 +153,7 @@ if ( obj_map.units[x div 24, y div 24] != 0){
     
         }
         
-    
+    /*
 
 if move_cost != -1 draw_text(x,y,string(move_cost));
 

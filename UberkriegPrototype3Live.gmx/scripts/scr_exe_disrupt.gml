@@ -28,3 +28,5 @@ scr_setUnitDepth(global.acting_unit);
 global.drop_phaze_2 = false;
 //nuke syscom
 with par_syscom_menu instance_destroy();
+//clear active unit
+global.acting_unit = 0;

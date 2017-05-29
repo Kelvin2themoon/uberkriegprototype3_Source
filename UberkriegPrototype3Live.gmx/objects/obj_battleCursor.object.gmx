@@ -60,6 +60,10 @@ mover_ready_threshold = 3;     //mover ready after count
 
 //booleran for can deploy graphic
 can_mouse_deploy = false;
+
+//used to id if mouse will scroll
+mscroll = 0;
+dmscroll = -1;
 </string>
           </argument>
         </arguments>
@@ -341,6 +345,112 @@ if (alarm[1] = -1 )
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>/// view control
+
+
+// check for boarders and move 
+
+if ( view_xview[0] &gt; x - view_border and global.canScroll_x) view_xview[0] -= view_speed;
+
+if ( view_xview[0] + view_wport[0] &lt; x + view_border + 24 and global.canScroll_x) view_xview[0] += view_speed;
+
+if ( view_yview[0] &gt; y - view_border and global.canScroll_y) view_yview[0] -= view_speed;
+
+if ( view_yview[0] + view_hport[0] &lt; y + view_border+24 and global.canScroll_y) view_yview[0] += view_speed;
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///check if mouse will scroll
+
+//reset mscroll
+mscroll = 0;
+dmscroll = -1;
+// check for boarders and and add to mscroll 
+
+if ( view_xview[0] &gt; mouse_x - view_border and global.canScroll_x) mscroll += 1 ;
+
+if ( view_xview[0] + view_wport[0] &lt; mouse_x + view_border + 0 and global.canScroll_x) mscroll += 4 ;
+
+if ( view_yview[0] &gt; mouse_y - view_border and global.canScroll_y) mscroll += 8 ;
+
+if ( view_yview[0] + view_hport[0] &lt; mouse_y + view_border + 0 and global.canScroll_y) mscroll += 2 ;
+
+
+switch (mscroll)
+{
+
+    case 8: 
+    dmscroll = 0;
+    break;
+    
+    case 4: 
+    dmscroll = 1;
+    break;
+    
+    case 2: 
+    dmscroll = 2;
+    break;
+    
+    case 1:
+    dmscroll = 3;
+    break;
+    
+    case 12:
+    dmscroll = 4;
+    break;
+    
+    case 6:
+    dmscroll = 5;
+    break;
+    
+    case 3:
+    dmscroll = 6;
+    break;
+    
+    case 9: 
+    dmscroll = 7;
+    break;    
+
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Mouse Controls
 
 
@@ -364,6 +474,7 @@ if (scr_inBound(mpx,mpy))
                                 and obj_map.terrains[mpx,mpy].ownership = global.P_Turn.number 
                                 and obj_map.terrains[mpx,mpy].isStanding
                                 and obj_map.units[mpx,mpy] = 0
+                                
                     )
                                 
                         {
@@ -379,6 +490,8 @@ if (scr_inBound(mpx,mpy))
 
 if(mouse_check_button_pressed(mb_left) and !menuExitDelay)
     {
+        
+        
         move_ready = false;
         mousePosX = mouse_x div 24
         mousePosY = mouse_y div 24
@@ -392,11 +505,17 @@ if(mouse_check_button_pressed(mb_left) and !menuExitDelay)
                 global.posX = x div 24;
                 global.posY = y div 24;
                 
+                //juice
+                scr_cursorKey_juice(1,global.cursorKey_sfx);
+                
                 //check for ally unit
                 if(obj_map.units[global.posX,global.posY] !=0)
                     {
-                        if(obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number 
-                        and obj_map.units[global.posX,global.posY].state != "exhaust")
+                        if(
+                            obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number 
+                        and obj_map.units[global.posX,global.posY].state != "exhaust"
+                            
+                            )
                             {
                             
                                 //initiate move ready
@@ -441,6 +560,8 @@ if(mouse_check_button(mb_left) and !menuExitDelay)
         
         //turn off deploy icon
         cursor_icon = -1;
+        
+        if (global.posX != mpx or global.posY != mpy) scr_cursorKey_juice(1,-1); //juice 
         
         mousePosX = mouse_x div 24
         mousePosY = mouse_y div 24
@@ -524,6 +645,7 @@ if(mouse_check_button_pressed(mb_right) and !mouse_check_button(mb_left) and !me
                 and obj_map.terrains[global.posX,global.posY].ownership = global.P_Turn.number 
                 and obj_map.terrains[global.posX,global.posY].isStanding
                 and obj_map.units[global.posX,global.posY] = 0
+                and mscroll = 0
 
                 )
                 {
@@ -561,40 +683,6 @@ if(mouse_check_button_released(mb_right))
     }
 
 
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// view control
-
-
-// check for boarders and move 
-
-if ( view_xview[0] &gt; x - view_border and global.canScroll_x) view_xview[0] -= view_speed;
-
-if ( view_xview[0] + view_wport[0] &lt; x + view_border + 24 and global.canScroll_x) view_xview[0] += view_speed;
-
-if ( view_yview[0] &gt; y - view_border and global.canScroll_y) view_yview[0] -= view_speed;
-
-if ( view_yview[0] + view_hport[0] &lt; y + view_border+24 and global.canScroll_y) view_yview[0] += view_speed;
 
 
 </string>
@@ -988,15 +1076,55 @@ if (obj_map.units[global.posX,global.posY].capturing !=0){
             <kind>1</kind>
             <string>///Draw Mouse Pointer
 
-//draw deploy
-if can_mouse_deploy 
-draw_sprite(spr_basicCursor_Icons,5, (mouse_x div 24)*24, (mouse_y div 24) *24);
+//draw_text(12,200, string(mscroll));   
 
+if (dmscroll != -1)
 
-//draw pointer
-draw_sprite(spr_mousePointer,global.P_Turn.number - 1, mouse_x, mouse_y);
+    {
 
+    draw_sprite(spr_mouseViewScrole, dmscroll, mouse_x, mouse_y);
+    
+    
+    }
+    
+else
 
+    { 
+    
+        //draw deploy
+        if can_mouse_deploy 
+        draw_sprite(spr_basicCursor_Icons,5, (mouse_x div 24)*24, (mouse_y div 24) *24);
+        
+        
+        //draw pointer
+        draw_sprite(spr_mousePointer,global.P_Turn.number - 1, mouse_x, mouse_y);
+
+    }
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="112">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///load end of turn save
+room_goto(rm_continue);
 </string>
           </argument>
         </arguments>

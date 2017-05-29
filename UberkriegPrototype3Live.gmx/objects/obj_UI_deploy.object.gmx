@@ -466,6 +466,9 @@ if (mouse_check_button_pressed(mb_left))
                                
                                row = (mouse_y - start_y) div row_size;
                                y = start_y + row *row_size;
+                               
+                               //juice
+                               scr_cursorKey_juice(1,global.cursorKey_sfx);
         
                     
                     }
