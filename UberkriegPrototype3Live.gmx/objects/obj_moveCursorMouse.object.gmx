@@ -49,7 +49,7 @@ alarm[1] = 0;
 //view control speed - should be divisable by 24
 view_speed = 8;
 //view boarder to cursor
-view_border = 4*24;
+view_border = 2*24;
 
 //set origin (for after curswor moves)
 moveOriginX = global.posX ;
