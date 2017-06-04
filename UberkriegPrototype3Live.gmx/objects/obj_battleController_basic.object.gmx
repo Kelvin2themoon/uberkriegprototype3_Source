@@ -371,8 +371,10 @@ if (global.P1_in_play){
         global.P1.save_cursor_pos_x = P1_x;
         global.P1.save_cursor_pos_y =P1_y;
         //check view
-        if (P1_x &gt; (768-96)) global.P1.save_view_pos_x = P1_x - (768-24*5);
-        if (P1_y &gt; (432-96)) global.P1.save_view_pos_y = P1_y - (432-24*5);
+        
+        
+        if global.canScroll_x if (P1_x &gt; (768-96)) global.P1.save_view_pos_x = P1_x - (768-24*5);
+        if global.canScroll_y if (P1_y &gt; (432-96)) global.P1.save_view_pos_y = P1_y - (432-24*5);
         //set unit and property teams
         with (obj_property){
             if (ownership = 1) team = global.P1.team;             
@@ -395,8 +397,8 @@ if (global.P2_in_play){
     global.P2.save_cursor_pos_x = P2_x;
     global.P2.save_cursor_pos_y = P2_y;
     //check view
-    if (P2_x &gt; (768-96)) global.P2.save_view_pos_x = P2_x - (768-24*5);
-    if (P2_y &gt; (432-96)) global.P2.save_view_pos_y = P2_y - (432-24*5);
+    if global.canScroll_x if (P2_x &gt; (768-96)) global.P2.save_view_pos_x = P2_x - (768-24*5);
+    if global.canScroll_y if (P2_y &gt; (432-96)) global.P2.save_view_pos_y = P2_y - (432-24*5);
     //set unit and property teams
     with (obj_property){
         if (ownership = 2) team = global.P2.team;             
@@ -419,8 +421,8 @@ if(global.P3_in_play){
     global.P3.save_cursor_pos_x = P3_x;
     global.P3.save_cursor_pos_y = P3_y;
     //check view
-    if (P3_x &gt; (768-96)) global.P3.save_view_pos_x = P3_x - (768-24*5);
-    if (P3_y &gt; (432-96)) global.P3.save_view_pos_y = P3_y - (432-24*5);
+    if global.canScroll_x if (P3_x &gt; (768-96)) global.P3.save_view_pos_x = P3_x - (768-24*5);
+    if global.canScroll_y if (P3_y &gt; (432-96)) global.P3.save_view_pos_y = P3_y - (432-24*5);
     with (obj_property){
         if (ownership = 3) team = global.P3.team;             
         }
@@ -442,8 +444,8 @@ if (global.P4_in_play){
     global.P4.save_cursor_pos_x = P4_x;
     global.P4.save_cursor_pos_y = P4_y;
     //check view
-    if (P4_x &gt; (768-96)) global.P4.save_view_pos_x = P4_x - (768-24*5);
-    if (P4_y &gt; (432-96)) global.P4.save_view_pos_y = P4_y - (432-24*5);
+    if global.canScroll_x if (P4_x &gt; (768-96)) global.P4.save_view_pos_x = P4_x - (768-24*5);
+    if global.canScroll_y if (P4_y &gt; (432-96)) global.P4.save_view_pos_y = P4_y - (432-24*5);
     with (obj_property){
         if (ownership = 4) team = global.P4.team;             
         }

@@ -487,6 +487,7 @@
     <font>fonts\font4</font>
     <font>fonts\font5</font>
     <font>fonts\font6</font>
+    <font>fonts\font7</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>
