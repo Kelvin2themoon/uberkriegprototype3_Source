@@ -50,7 +50,7 @@ vision      = 1;
 radio       = 1;
 
 havePrimaryWeapon   = true;
-haveSecondaryWeapon = false;
+haveSecondaryWeapon = true;
 
 min_range = 1;
 max_range = 1;
