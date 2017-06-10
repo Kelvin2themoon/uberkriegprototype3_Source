@@ -327,6 +327,8 @@ if (global.P1_in_play){
         global.P1.save_view_pos_y = ini_read_real("players","P1ViewY",0);
         
         //check view
+        global.P1.save_view_pos_x = view_xview[0];
+        global.P1.save_view_pos_y = view_yview[0];
         if (P1_x &gt; (768-96)) global.P1.save_view_pos_x = P1_x - (768-24*5);
         if (P1_y &gt; (432-96)) global.P1.save_view_pos_y = P1_y - (432-24*5);
         
@@ -357,6 +359,8 @@ if (global.P2_in_play){
         //global.P2.save_view_pos_y = ini_read_real("players","P2ViewY",0);
         
         //check view
+        global.P2.save_view_pos_x = view_xview[0];
+        global.P2.save_view_pos_y = view_yview[0];
         if (P2_x &gt; (768-96)) global.P2.save_view_pos_x = P2_x - (768-24*5);
         if (P2_y &gt; (432-96)) global.P2.save_view_pos_y = P2_y - (432-24*5);
         
@@ -381,6 +385,8 @@ if (global.P3_in_play){
         global.P3.save_cursor_pos_y = P3_y;
         
         //set view to ini file
+        global.P3.save_view_pos_x = view_xview[0];
+        global.P3.save_view_pos_y = view_yview[0];
         global.P3.save_view_pos_x = ini_read_real("players","P3ViewX",0);
         global.P3.save_view_pos_y = ini_read_real("players","P3ViewY",0);
         
@@ -415,6 +421,8 @@ if (global.P4_in_play){
         //global.P4.save_view_pos_y = ini_read_real("players","P4ViewY",0);
         
         //check view
+        global.P4.save_view_pos_x = view_xview[0];
+        global.P4.save_view_pos_y = view_yview[0];
         if (P4_x &gt; (768-96)) global.P4.save_view_pos_x = P4_x - (768-24*5);
         if (P4_y &gt; (432-96)) global.P4.save_view_pos_y = P4_y - (432-24*5);
         

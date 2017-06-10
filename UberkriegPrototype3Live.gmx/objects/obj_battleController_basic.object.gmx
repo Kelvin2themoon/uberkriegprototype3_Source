@@ -371,8 +371,8 @@ if (global.P1_in_play){
         global.P1.save_cursor_pos_x = P1_x;
         global.P1.save_cursor_pos_y =P1_y;
         //check view
-        
-        
+        global.P1.save_view_pos_x = view_xview[0];
+        global.P1.save_view_pos_y = view_yview[0];
         if global.canScroll_x if (P1_x &gt; (768-96)) global.P1.save_view_pos_x = P1_x - (768-24*5);
         if global.canScroll_y if (P1_y &gt; (432-96)) global.P1.save_view_pos_y = P1_y - (432-24*5);
         //set unit and property teams
@@ -397,6 +397,8 @@ if (global.P2_in_play){
     global.P2.save_cursor_pos_x = P2_x;
     global.P2.save_cursor_pos_y = P2_y;
     //check view
+    global.P2.save_view_pos_x = view_xview[0];
+    global.P2.save_view_pos_y = view_yview[0];
     if global.canScroll_x if (P2_x &gt; (768-96)) global.P2.save_view_pos_x = P2_x - (768-24*5);
     if global.canScroll_y if (P2_y &gt; (432-96)) global.P2.save_view_pos_y = P2_y - (432-24*5);
     //set unit and property teams
@@ -417,7 +419,9 @@ if(global.P3_in_play){
     //global.P3_in_play = true;
     //assign team
     global.P3.team = 3;
-    //add cursor pose at 
+    //add cursor pose at
+    global.P3.save_view_pos_x = view_xview[0];
+    global.P3.save_view_pos_y = view_yview[0]; 
     global.P3.save_cursor_pos_x = P3_x;
     global.P3.save_cursor_pos_y = P3_y;
     //check view
@@ -440,7 +444,9 @@ if (global.P4_in_play){
     //global.P4_in_play = true;
     //assign team
     global.P4.team = 4;
-    //add cursor pose at 
+    //add cursor pose at
+    global.P4.save_view_pos_x = view_xview[0];
+    global.P4.save_view_pos_y = view_yview[0]; 
     global.P4.save_cursor_pos_x = P4_x;
     global.P4.save_cursor_pos_y = P4_y;
     //check view
