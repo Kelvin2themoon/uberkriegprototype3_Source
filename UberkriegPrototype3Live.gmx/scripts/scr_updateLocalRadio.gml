@@ -7,10 +7,33 @@ originV_Y = target.y div 24;
 tempV_X = 0;
 tempV_Y = 0;
 
-//make self visible
 
-radio_range = target.radio;
 
+radio_range = target.radio
+
+if (target.ownership !=0)
+    {
+    
+        var owner = 0;
+        switch target.ownership 
+            {
+                case 1 : owner = global.P1; break;
+                case 2 : owner = global.P2; break;    
+                case 3 : owner = global.P3; break;
+                case 4 : owner = global.P4; break;
+            }
+            
+        if target.radio != 0 
+        
+            {
+            
+                var radio_bonus = owner.CO.D2D_Radio ; 
+                radio_range += radio_bonus;
+            
+            }
+    }
+    
+//make self visible   
 if ( obj_map.terrains[originV_X,originV_Y].object_index = obj_terrain_Mountain and target.radio != 0) radio_range +=2;
 
 

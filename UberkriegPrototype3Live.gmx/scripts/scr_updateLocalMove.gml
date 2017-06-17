@@ -16,6 +16,30 @@ move_tile_graphic = spr_rangecheck_clear;
 check_move_cost = 0
 
 max_move_points =  move_check_target.move_points;
+
+//check for CO bonus
+
+if (move_check_target.ownership !=0)
+    {
+    
+        var owner = 0;
+        switch move_check_target.ownership 
+            {
+                case 1 : owner = global.P1; break;
+                case 2 : owner = global.P2; break;    
+                case 3 : owner = global.P3; break;
+                case 4 : owner = global.P4; break;
+            }
+
+
+                var move_bonus = owner.CO.D2D_Move; 
+                max_move_points += move_bonus;    
+
+    }
+
+
+
+//chek fuel restrictions
 if (move_check_target.fuel < max_move_points) max_move_points = move_check_target.fuel;
 
 

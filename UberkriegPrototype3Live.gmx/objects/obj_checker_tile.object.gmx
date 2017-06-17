@@ -156,8 +156,8 @@ if ( obj_map.units[x div 24, y div 24] != 0)
                 if (image_index != -1)
                 {
                 
-                    var oversprite = obj_map.units[ x div 24 , y div 24 ] ;
-                    draw_sprite(oversprite.sprite_index,oversprite.image_index,x,y);
+                    //var oversprite = obj_map.units[ x div 24 , y div 24 ] ;
+                    //draw_sprite(oversprite.sprite_index,oversprite.image_index,x,y);
                     
                     
                 }

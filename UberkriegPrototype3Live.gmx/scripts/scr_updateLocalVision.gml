@@ -13,6 +13,26 @@ target.isVisible = true;
 
 vision_range = target.vision
 
+//check for Co ability
+if (target.ownership !=0)
+    {
+    
+        var owner = 0;
+        switch target.ownership 
+            {
+                case 1 : owner = global.P1; break;
+                case 2 : owner = global.P2; break;    
+                case 3 : owner = global.P3; break;
+                case 4 : owner = global.P4; break;
+            }
+                var vision_bonus = owner.CO.D2D_Vision ; 
+                vision_range += vision_bonus;
+    }
+
+
+
+
+
 if ( obj_map.terrains[originV_X,originV_Y].object_index = obj_terrain_Mountain) vision_range += (target.vision div 2);
 if (target.isStanding = false)
 {

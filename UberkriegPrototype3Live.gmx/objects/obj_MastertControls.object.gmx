@@ -164,7 +164,14 @@ global.window_size = 1;
             <kind>1</kind>
             <string>///GLOBAL OPTIONS
 
+//Fog Of war
 global.FoW_on = true;
+
+//player COs
+global.P1_CO = 0 ;
+global.P2_CO = 0 ;
+global.P3_CO = 0 ; 
+global.P4_CO = 0 ; 
 </string>
           </argument>
         </arguments>

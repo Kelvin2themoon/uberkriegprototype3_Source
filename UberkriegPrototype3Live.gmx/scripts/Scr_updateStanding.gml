@@ -32,6 +32,39 @@ while (ds_queue_size(standing_Q) != 0 ){
     //increase range if over mountain
     broadcast_range = checkStandTarget.radio;
     if ( obj_map.terrains[cst_origin_x,cst_origin_y].object_index = obj_terrain_Mountain and checkStandTarget.radio != 0) broadcast_range +=2;
+    //increase bonus range (COs)
+    
+    //check owership
+    if (checkStandTarget.ownership != 0)
+        {
+            
+            var owner = 0;
+            switch checkStandTarget.ownership
+                
+                {
+                    
+                    case 1 : owner = global.P1; break;
+                    case 2 : owner = global.P2; break;    
+                    case 3 : owner = global.P3; break;
+                    case 4 : owner = global.P4; break;
+                
+                }
+            if checkStandTarget.radio != 0
+                {
+             
+                    var radio_bonus = owner.CO.D2D_Radio ; 
+                    broadcast_range += radio_bonus;
+             }
+        
+        
+        }
+    
+    
+    
+    
+    
+    
+    
     
     //check all co-ordinates in range of origin
     

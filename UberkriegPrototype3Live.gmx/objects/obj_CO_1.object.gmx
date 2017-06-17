@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_CO_0</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,55 +25,30 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Initiate
+            <string>///CO 01: Radio CO
 
-//variables
+event_inherited();
 
-number = 0; // re assign from 1~4 when create
-name = "Player 0";
+// Initiate Parent Object and defaults
 
-//Teeam number to be used in stading and victory checks
-team = 0
-funds = 0 ;
-//revenue (first turn)
-revenue = 0;
-//unit stats
-unit_count = 0;
-battle_strength = 0;
+Index = 1 ;
+name = "Radio+" 
 
-//scr_calc_revenue( ds_queue_head(global.player_q) );
 
-//save cursor and view pos
-save_cursor_pos_x = 0;
-save_cursor_pos_y = 0;
+//COP and SCOP Varialbes
 
-save_view_pos_x =   0;
-save_view_pos_y =   0;
+COP_Bar     = 0 ;       //number of charged stars required to activate CO metre
+COP_Charge  = 0 ;       //COp charge 10 000 per star
+COP_on      = false ;   //CO power switch
 
-CO = noone ;
+
+SCOP_Bar    = 0 ;
+SCOP_Charge = 0 ;
+SCOP_on     = false ;   //SCOP switch
+
+//passive abilities
+D2D_Radio = 1 ;
 </string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string></string>
           </argument>
         </arguments>
       </action>

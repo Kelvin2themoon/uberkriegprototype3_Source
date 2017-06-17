@@ -3,16 +3,16 @@
   <caption></caption>
   <width>768</width>
   <height>432</height>
-  <vsnap>32</vsnap>
-  <hsnap>32</hsnap>
+  <vsnap>24</vsnap>
+  <hsnap>24</hsnap>
   <isometric>0</isometric>
   <speed>60</speed>
   <persistent>0</persistent>
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
-  <code>instance_create(0,0,obj_temp_MainMenu);
+  <code>instance_create(0,0,obj_MastertControls);
 
-instance_create(0,0,obj_MastertControls);</code>
+instance_create(0,0,obj_temp_MainMenu);</code>
   <enableViews>0</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

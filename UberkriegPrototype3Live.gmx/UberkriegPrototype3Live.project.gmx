@@ -584,6 +584,12 @@
     <objects name="Map Edit acc.">
       <object>objects\obj_promote_pointer</object>
     </objects>
+    <objects name="COs">
+      <object>objects\obj_CO_0</object>
+      <object>objects\obj_CO_1</object>
+      <object>objects\obj_CO_2</object>
+      <object>objects\obj_CO_3</object>
+    </objects>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\isDisrupt</timeline>
