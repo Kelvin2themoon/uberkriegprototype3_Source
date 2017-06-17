@@ -23,6 +23,14 @@ ini_write_real("globals","Day",global.Day);
 ini_write_real("globals","posX",global.posX);
 ini_write_real("globals","posY",global.posY);
 
+//save CO options
+ini_write_real("globals","P1CO",global.P1_CO);
+ini_write_real("globals","P2CO",global.P2_CO);
+ini_write_real("globals","P3CO",global.P3_CO);
+ini_write_real("globals","P4CO",global.P4_CO);
+
+
+
 
 
 //players in play( 0 for false, 1 for true)
