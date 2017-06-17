@@ -47,7 +47,7 @@ SCOP_Charge = 0 ;
 SCOP_on     = false ;   //SCOP switch
 
 //passive abilities
-D2D_Vision = 1 ;
+D2D_Vision = 2 ;
 </string>
           </argument>
         </arguments>

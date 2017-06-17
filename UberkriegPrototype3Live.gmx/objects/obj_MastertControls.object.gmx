@@ -171,7 +171,12 @@ global.FoW_on = true;
 global.P1_CO = 0 ;
 global.P2_CO = 0 ;
 global.P3_CO = 0 ; 
-global.P4_CO = 0 ; 
+global.P4_CO = 0 ;
+
+
+//debug controls
+global.alt_Disrupt = false; //disruptor is indirect fire
+global.Disruptor_spread = false; // disruptor propigates throught target enemy unit radio
 </string>
           </argument>
         </arguments>

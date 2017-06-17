@@ -696,29 +696,33 @@ if ( !mouse_check_button(mb_left))
             
             //add engage if visible enemy units are in range 
             //check primary weaopn
-            if ( global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 )
+           if ( (global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0) or (global.acting_unit.name = "Covert Op." and global.alt_Disrupt ))
             {
-                show_debug_message("Primary Weapon Check");
-            
-                if (global.acting_unit.max_range = 1 or global.acting_unit.name = "Land Cruiser"){
-                    //max range is 1 or is land cuiser, process as direct attack (can move and 
-                    if (scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
+            show_debug_message("Primary Weapon Check");
+        
+            if (global.acting_unit.max_range = 1 or global.acting_unit.name = "Land Cruiser"){
+                //max range is 1 or is land cuiser, process as direct attack (can move and 
+                if (scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
+                        global.engage = true;
+                        global.engage_type = 1;
+                        }
+                    }
+                //otherwise process as indirect (target location = origin)
+                else {
+                    if (global.acting_unit_moved = false ){
+                        if ( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)and global.acting_unit.name != "Covert Op."){
                             global.engage = true;
                             global.engage_type = 1;
                             }
-                        }
-                    //otherwise process as indirect (target location = origin)
-                    else {
-                        if (global.acting_unit_moved = false){
-                            if ( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
-                                global.engage = true;
-                                global.engage_type = 1;
-                                }
+                        else if (scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false and global.alt_Disrupt ))
+                            {
+                                global.disrupt = true ;
                             }
-                        
                         }
-            
-                }
+                    
+                    }
+        
+            }
             //check secondary weapon
             else if (global.acting_unit.haveSecondaryWeapon){
             show_debug_message("secondary weapon check");
@@ -726,7 +730,7 @@ if ( !mouse_check_button(mb_left))
                     global.engage = true;
                     global.engage_type = 2;
                     //if disrupt is avaliable
-                    if (global.acting_unit.canDisrupt and global.acting_unit.ammo &gt;0) {
+                    if (global.acting_unit.canDisrupt and global.acting_unit.ammo &gt;0 and !global.alt_Disrupt  ) {
                         global.disrupt = true;
                     }
                 }
@@ -883,7 +887,7 @@ if  (mouse_check_button_released(mb_left))
             <kind>1</kind>
             <string>///confirm to open command menu
 
-
+/*
 
 global.target_unit  = obj_map.units[global.posX,global.posY];
 global.destination  = obj_map.terrains[global.posX,global.posY];

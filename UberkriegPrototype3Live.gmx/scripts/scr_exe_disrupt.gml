@@ -8,6 +8,53 @@ with (global.target_unit){
     state = "exhaust";
     }
 
+//find spash targets
+
+
+    if (global.Disruptor_spread )
+
+        {
+            var ix = (-1)*global.target_unit.radio ;
+            var iy = (-1)*global.target_unit.radio ;
+            
+            for ( ix = (-1)*global.target_unit.radio ; ix <= global.target_unit.radio ;  ix +=1 )
+            
+                {
+                
+                    for ( iy= (-1)*global.target_unit.radio ; iy <= global.target_unit.radio ;  iy +=1 )
+                        
+                        {
+                        
+                            if (abs(ix)+abs(iy) <= global.target_unit.radio)
+                                
+                                {
+                                    var tx = (global.target_unit.x div 24) + ix ;
+                                    var ty = (global.target_unit.y div 24) + iy;
+                                    
+                                    if (obj_map.units[tx,ty] != 0)
+                                        {
+                                            if ( obj_map.units[tx,ty].team != global.acting_unit.team )
+                                                {
+                                                
+                                                    obj_map.units[tx,ty].isDisrupted = true ;
+                                                    obj_map.units[tx,ty].state = "exhaust"; 
+                                            
+                                                }
+                                   
+                                            
+                                         
+                                        }
+                                
+                                }
+                        
+                        } 
+                
+                }
+        
+        }
+    
+
+
 // place active unit back in map array
 obj_map.units[global.posX,global.posY] = global.acting_unit; 
 //activate UI
@@ -29,4 +76,4 @@ global.drop_phaze_2 = false;
 //nuke syscom
 with par_syscom_menu instance_destroy();
 //clear active unit
-global.acting_unit = 0;
+global.acting_unit = 0; 

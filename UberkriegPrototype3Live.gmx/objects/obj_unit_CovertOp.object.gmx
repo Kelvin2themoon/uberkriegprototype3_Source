@@ -40,7 +40,8 @@ ammo    = 1;
 isDisrupted = false; //true when hit by Covert.Op disrupter
 //max fuel &amp; ammo
 max_fuel    = 120;
-max_ammo    = 1;   
+max_ammo    = 1;
+
 
 //unit static variables
 cost        = 14000;
@@ -51,6 +52,9 @@ radio       = 0;
 
 havePrimaryWeapon   = false; //spacial ability that consumes ammo
 haveSecondaryWeapon = true;
+
+min_range   = 2;
+max_range   = 3;
 
 
 //spceial abilities

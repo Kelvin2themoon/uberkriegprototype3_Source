@@ -619,7 +619,7 @@ if ( keyboard_check_pressed( global.keyCONFIRM) )
         
         //add engage if visible enemy units are in range 
         //check primary weaopn
-        if ( global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 )
+        if ( (global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0) or (global.acting_unit.name = "Covert Op." and global.alt_Disrupt ))
         {
             show_debug_message("Primary Weapon Check");
         
@@ -632,10 +632,14 @@ if ( keyboard_check_pressed( global.keyCONFIRM) )
                     }
                 //otherwise process as indirect (target location = origin)
                 else {
-                    if (global.acting_unit_moved = false){
-                        if ( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
+                    if (global.acting_unit_moved = false ){
+                        if ( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)and global.acting_unit.name != "Covert Op."){
                             global.engage = true;
                             global.engage_type = 1;
+                            }
+                        else if (scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false and global.alt_Disrupt ))
+                            {
+                                global.disrupt = true ;
                             }
                         }
                     
@@ -648,8 +652,8 @@ if ( keyboard_check_pressed( global.keyCONFIRM) )
             if ( scr_check_units_in_range( global.posX, global.posY, 1 , 1 , false)){
                 global.engage = true;
                 global.engage_type = 2;
-                //if disrupt is avaliable
-                if (global.acting_unit.canDisrupt and global.acting_unit.ammo &gt;0) {
+                //if disrupt is avaliable and basic type
+                if (global.acting_unit.canDisrupt and global.acting_unit.ammo &gt;0 and !global.alt_Disrupt) {
                     global.disrupt = true;
                 }
             }
