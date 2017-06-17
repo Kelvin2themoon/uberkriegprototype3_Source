@@ -41,6 +41,9 @@ view_speed = 8;
 //view boarder to cursor
 view_border = 2*24;
 
+//check units in range
+scr_check_units_in_range(global.acting_unit.x div 24, global.acting_unit.y div 24, global.acting_unit.min_range, global.acting_unit.max_range,false);
+
 //move to first targetable unit
 supply_list_index   = 0;
 supply_list_size    = ds_list_size(global.targetables);

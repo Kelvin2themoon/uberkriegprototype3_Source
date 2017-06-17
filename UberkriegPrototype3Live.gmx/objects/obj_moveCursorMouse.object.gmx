@@ -696,7 +696,7 @@ if ( !mouse_check_button(mb_left))
             
             //add engage if visible enemy units are in range 
             //check primary weaopn
-           if ( (global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0) or (global.acting_unit.name = "Covert Op." and global.alt_Disrupt ))
+           if ( global.acting_unit.ammo &gt; 0 and ((global.acting_unit.havePrimaryWeapon) xor (global.acting_unit.name = "Covert Op." and global.alt_Disrupt)))
             {
             show_debug_message("Primary Weapon Check");
         
@@ -717,6 +717,12 @@ if ( !mouse_check_button(mb_left))
                         else if (scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false and global.alt_Disrupt ))
                             {
                                 global.disrupt = true ;
+                                if ( scr_check_units_in_range( global.posX, global.posY, 1 , 1 , false))
+                                    
+                                    {
+                                        global.engage = true;
+                                        global.engage_type = 2;
+                                    }
                             }
                         }
                     

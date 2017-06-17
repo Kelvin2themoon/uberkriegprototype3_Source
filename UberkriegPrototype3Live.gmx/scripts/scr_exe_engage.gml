@@ -12,7 +12,7 @@ if (global.acting_unit.name = "Land Cruiser" and global.engage_type = 1 and abs(
     div 10
     }
     
-else{    ///regular damage
+else {    ///regular damage
 
     global.target_unit.hp -=
         (scr_damageCalculator(global.acting_unit, global.target_unit, obj_map.terrains[global.target_unit.x div 24, global.target_unit.y div 24].cover, global.engage_type)
@@ -45,7 +45,7 @@ else{
         //check if target unit can counter attack
         if ( global.target_unit.max_range = 1){
             //if primary weapon is avaliable
-            if(global.target_unit.havePrimaryWeapon and global.target_unit.ammo > 0 and obj_MastertControls.DMG_P[global.acting_unit.unit_index,global.target_unit.unit_index] ){
+            if(global.target_unit.havePrimaryWeapon and global.target_unit.ammo > 0 and obj_MastertControls.DMG_P[global.acting_unit.unit_index,global.target_unit.unit_index] and global.acting_unit.name != "Covert Op." ){
                 // damage by primary weapon
                 if(global.acting_unit.name = "Land Cruiser"){
                     // if target unit is adjacent

@@ -33,7 +33,16 @@ depth = UI_DEPTH_CURSOR;
 image_speed = 0
 //set position
 
-scr_check_units_in_range(global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false);
+//Exception: Covert Op
+if ( global.acting_unit.name = "Covert Op." and global.alt_Disrupt)
+    
+    {
+    
+        scr_check_units_in_range(global.posX, global.posY, 1, 1, false);
+    
+    }
+
+else scr_check_units_in_range(global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false);
 
 
 
@@ -56,7 +65,7 @@ initial_type = global.engage_type;
 
 //check engage type
 global.engage_type = initial_type;
-if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,1) &lt; 0){
+if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,1) &lt; 0 ){
     global.engage_type = 2;
     } 
      
