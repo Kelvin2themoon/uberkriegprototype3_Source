@@ -52,8 +52,12 @@ while (ds_queue_size(standing_Q) != 0 ){
             if checkStandTarget.radio != 0
                 {
              
-                    var radio_bonus = owner.CO.D2D_Radio ; 
+                    var radio_bonus = owner.CO.D2D_Radio ;
+                    if (owner.CO.COP_on) radio_bonus  += owner.CO.COP_Radio  ;
+                    if (owner.CO.SCOP_on) radio_bonus += owner.CO.SCOP_Radio ;
+                     
                     broadcast_range += radio_bonus;
+                    
              }
         
         

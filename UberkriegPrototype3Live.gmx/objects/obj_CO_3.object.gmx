@@ -33,18 +33,21 @@ event_inherited();
 
 Index = 3 ;
 name = "Move+" ;
+charge = 5000 ;
 
 
 //COP and SCOP Varialbes
 
-COP_Bar     = 0 ;       //number of charged stars required to activate CO metre
+COP_Bar     = 2 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
-SCOP_Bar    = 0 ;
+SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
 //passive abilities
-D2D_Move = 1 ;
+D2D_Move  = 1 ;
+COP_Move  = 1 ;
+SCOP_Move = 3 ;
 </string>
           </argument>
         </arguments>

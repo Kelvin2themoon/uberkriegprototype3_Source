@@ -32,7 +32,12 @@ if (move_check_target.ownership !=0)
             }
 
 
-                var move_bonus = owner.CO.D2D_Move; 
+                var move_bonus = owner.CO.D2D_Move;
+                if (global.P_Turn.CO.COP_on)  move_bonus += owner.CO.COP_Move ;
+                if (global.P_Turn.CO.SCOP_on)  move_bonus += owner.CO.SCOP_Move ;
+                
+                
+                  
                 max_move_points += move_bonus;    
 
     }

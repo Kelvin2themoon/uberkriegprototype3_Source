@@ -129,6 +129,7 @@ with (obj_unit)
             
                 COP = false ;
                 SCOP = false ;
+                scr_updateStanding_global();
             
             }     
         

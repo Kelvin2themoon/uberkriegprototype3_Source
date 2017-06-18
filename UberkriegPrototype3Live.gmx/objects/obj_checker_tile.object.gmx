@@ -123,6 +123,8 @@ if (sprite_index != -1) draw_self();
 
 //draw unit stats
 
+//find unit's CO
+
 if ( obj_map.units[x div 24, y div 24] != 0)
     {
         if (obj_map.units[x div 24, y div 24].isVisible)
@@ -130,29 +132,35 @@ if ( obj_map.units[x div 24, y div 24] != 0)
         
                 with( obj_map.units[x div 24, y div 24])
                     {
-            
-                        if (hp &lt; 10 and hp  &gt; 0)    draw_sprite( spr_unitStats_HP, hp , x,y);
-                        if (capturing  &gt; 0)         draw_sprite( spr_unitStats_Cap,0,x,y);
-                        if (isCommander)            draw_sprite( spr_unitStats_Radio,0,x,y);
-                        if (isHidden)               draw_sprite(spr_unitStats_Hide,0,x,y);
-                        if (!isStanding and global.blinking)    draw_sprite(spr_unitStats_Radio,3,x,y);
-                        if (isDisrupted and !global.blinking)   draw_sprite(spr_unitStats_Disrupted,0,x,y);
-                        ///DRAW Power if power on
-                        if COP draw_sprite(spr_unitStats_Power,0,x,y);
-                        if SCOP draw_sprite(spr_unitStats_Power,1,x,y);
-                        
-                        //ammo and fuel
-                        if ( max_ammo &gt; 0 and  ammo / max_ammo &lt; 0.5 and global.blinking)
-                                {
                             
-                                    if (name = "A.P.C.") draw_sprite(spr_unitStats_ammofuel,2,x,y);
-                                    else draw_sprite(spr_unitStats_ammofuel,0,x,y);
+                                if (HP_hidden and ownership != global.P_Turn.number) draw_sprite( spr_unitStats_HP, 0 , x,y);
                                 
+                                else
+                                {
+                                if (hp &lt; 10 and hp  &gt; 0)    draw_sprite( spr_unitStats_HP, hp , x,y);
+                                if (capturing  &gt; 0)         draw_sprite( spr_unitStats_Cap,0,x,y);
+                                if (isCommander)            draw_sprite( spr_unitStats_Radio,0,x,y);
+                                if (isHidden)               draw_sprite(spr_unitStats_Hide,0,x,y);
+                                if (!isStanding and global.blinking)    draw_sprite(spr_unitStats_Radio,3,x,y);
+                                if (isDisrupted and !global.blinking)   draw_sprite(spr_unitStats_Disrupted,0,x,y);
+                                ///DRAW Power if power on
+                                if COP draw_sprite(spr_unitStats_Power,0,x,y);
+                                if SCOP draw_sprite(spr_unitStats_Power,1,x,y);
+                                
+                                //ammo and fuel
+                                if ( max_ammo &gt; 0 and  ammo / max_ammo &lt; 0.5 and global.blinking)
+                                        {
+                                    
+                                            if (name = "A.P.C.") draw_sprite(spr_unitStats_ammofuel,2,x,y);
+                                            else draw_sprite(spr_unitStats_ammofuel,0,x,y);
+                                        
+                                        }
+                                
+                                if (fuel/max_fuel &lt; 0.5 and !global.blinking) draw_sprite(spr_unitStats_ammofuel,1,x,y);
+                                
+                                if ( name = "A.P.C." and ownership = global.P_Turn.number) if ( load_A !=0 or load_B !=0 ) draw_sprite(spr_unitStats_Load,0,x,y);
                                 }
-                        
-                        if (fuel/max_fuel &lt; 0.5 and !global.blinking) draw_sprite(spr_unitStats_ammofuel,1,x,y);
-                        
-                        if ( name = "A.P.C." and ownership = global.P_Turn.number) if ( load_A !=0 or load_B !=0 ) draw_sprite(spr_unitStats_Load,0,x,y);
+                           
                             
                     }
                     

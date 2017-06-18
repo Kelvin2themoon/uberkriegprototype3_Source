@@ -27,17 +27,17 @@
             <kind>1</kind>
             <string>/// Initiate Parent Object and defaults
 
-Index = 0 ; //CO index, 0 = default CO with no powers
+index = 0 ; //CO index, 0 = default CO with no powers
 name = "Normy McNormalson" //default "nobody"
 ownership = 0 ;
 
 
 //COP and SCOP Varialbes
 
-COP_Bar     =  1;       //number of charged stars required to activate CO metre
+COP_Bar     =  0;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
-SCOP_Bar    = 1 ;
+SCOP_Bar    = 0 ;
 SCOP_on     = false ;   //SCOP switch
 
 charge = 0 ; //ammount CO pwer charged
@@ -48,7 +48,7 @@ use_count = 0 ; //number of times COP and SCOP are used
 
 //  D2D                         COP                         SCOP
 
-    D2D_Radio       =   0 ;     COP_Radio       =   0 ;     SCOP_Radoio         =   0 ;   
+    D2D_Radio       =   0 ;     COP_Radio       =   0 ;     SCOP_Radio         =   0 ;   
     D2D_Vision      =   0 ;     COP_Vision      =   0 ;     SCOP_Vision         =   0 ; 
     D2D_Move        =   0 ;     COP_Move        =   0 ;     SCOP_Move           =   0 ;
     D2D_Range       =   0 ;     COP_Range       =   0 ;     SCOP_Range          =   0 ;

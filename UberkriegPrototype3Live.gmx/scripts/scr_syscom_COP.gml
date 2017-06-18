@@ -9,6 +9,8 @@ with global.P_Turn.CO
     }
     
 with (obj_unit) if ownership = global.P_Turn.number COP = true;
+scr_updateStanding_global();
+scr_updateGlobalVision();
     
     
 //reactivate UI    

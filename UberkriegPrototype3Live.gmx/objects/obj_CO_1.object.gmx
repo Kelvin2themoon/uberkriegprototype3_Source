@@ -32,20 +32,24 @@ event_inherited();
 // Initiate Parent Object and defaults
 
 Index = 1 ;
-name = "Radio+" 
+name = "Radio+"
+
+charge = 6000 ; 
 
 
 //COP and SCOP Varialbes
 
-COP_Bar     = 1 ;       //number of charged stars required to activate CO metre
+COP_Bar     = 3 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
 
-SCOP_Bar    = 1 ;
+SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
-//passive abilities
-D2D_Radio = 1 ;
+//passive abilities, COP, and SCOP
+D2D_Radio   = 1 ;
+COP_Radio   = 1 ;
+SCOP_Radio  = 2 ;
 </string>
           </argument>
         </arguments>

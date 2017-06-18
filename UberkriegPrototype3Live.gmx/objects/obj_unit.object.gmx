@@ -97,6 +97,7 @@ disruptor = 0;
 //cop on or off
 COP  = false;
 SCOP = false ;
+HP_hidden = false ;
 
 
 

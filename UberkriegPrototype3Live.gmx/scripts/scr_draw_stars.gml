@@ -18,7 +18,7 @@ for (i = 0 ; i <  small_stars; i++ )
     
     {
         //if charge is over 1000 draw a full star
-        if (charge > 1000)
+        if (charge >= 1000)
             
             {           
                 draw_sprite(spr_COPstar_charge,5,posx+(i*8),posy);
@@ -30,7 +30,7 @@ for (i = 0 ; i <  small_stars; i++ )
         
             {
             
-                draw_sprite(spr_COPstar_charge,(charge/1000)*6,posx+(i*8),posy);
+                draw_sprite(spr_COPstar_charge,(charge/1000)*5,posx+(i*8),posy);
                 charge = 0 ;
                 
         }    
