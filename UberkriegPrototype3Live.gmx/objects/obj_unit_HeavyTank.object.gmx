@@ -43,6 +43,7 @@ max_fuel    = 70;
 max_ammo    = 5;   
 
 //unit static variables
+charge      = 16 ;
 cost        = 15000;
 move_type   = "Tracks";
 move_points = 7;

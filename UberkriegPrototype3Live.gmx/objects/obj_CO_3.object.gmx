@@ -38,12 +38,9 @@ name = "Move+" ;
 //COP and SCOP Varialbes
 
 COP_Bar     = 0 ;       //number of charged stars required to activate CO metre
-COP_Charge  = 0 ;       //COp charge 10 000 per star
 COP_on      = false ;   //CO power switch
 
-
 SCOP_Bar    = 0 ;
-SCOP_Charge = 0 ;
 SCOP_on     = false ;   //SCOP switch
 
 //passive abilities

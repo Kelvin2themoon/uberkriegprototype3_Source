@@ -43,6 +43,7 @@ max_fuel    = 80;
 max_ammo    = 3;   
 
 //unit static variables
+charge      = 22 ;
 cost        = 32000;
 move_type   = "Heavy Tracks";
 move_points = 8;

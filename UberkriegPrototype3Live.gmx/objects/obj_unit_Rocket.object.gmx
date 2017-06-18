@@ -43,6 +43,7 @@ max_fuel    = 80;
 max_ammo    = 3;   
 
 //unit static variables
+charge      = 14 ;
 cost        = 16000;
 move_type   = "Tires";
 move_points = 8;

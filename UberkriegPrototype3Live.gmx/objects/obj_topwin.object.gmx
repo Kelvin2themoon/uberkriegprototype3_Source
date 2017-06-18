@@ -161,7 +161,7 @@ else scr_draw_num(spr_num_light, true, global.P_Turn.funds,x+101,y+32,8);
             <kind>1</kind>
             <string>///draw stars
 
-scr_draw_stars( x+12, y+45,global.P_Turn.CO.COP_Bar,global.P_Turn.CO.SCOP_Bar);
+scr_draw_stars( x+12, y+45,global.P_Turn.CO.COP_Bar,global.P_Turn.CO.SCOP_Bar,global.P_Turn.CO.charge);
 </string>
           </argument>
         </arguments>

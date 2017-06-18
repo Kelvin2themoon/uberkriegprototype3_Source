@@ -378,7 +378,7 @@
       <sprite>sprites\spr_unitStats_Hide</sprite>
       <sprite>sprites\spr_unitStats_Disrupted</sprite>
       <sprite>sprites\spr_unitStats_ammofuel</sprite>
-      <sprite>sprites\sprite245</sprite>
+      <sprite>sprites\spr_unitStats_Power</sprite>
     </sprites>
     <sprites name="place holder">
       <sprite>sprites\spr_temp_unit_summary</sprite>
@@ -436,6 +436,8 @@
     <scripts name="Syscom">
       <script>scripts\scr_syscom_execute.gml</script>
       <script>scripts\scr_syscom_endturn.gml</script>
+      <script>scripts\scr_syscom_COP.gml</script>
+      <script>scripts\scr_syscom_SCOP.gml</script>
     </scripts>
     <scripts name="RangeChecks">
       <script>scripts\scr_rangeCheck_reset.gml</script>

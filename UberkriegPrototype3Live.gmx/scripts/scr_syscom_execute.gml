@@ -103,6 +103,16 @@ switch (command){
         scr_syscom_endturn();
         instance_destroy();
         break;
+        
+    case "COP" : // CO power or "Krieg Skill"
+        scr_syscom_COP();
+        instance_destroy();
+        break;
+        
+    case "SCOP" : // CO power or "Krieg Skill"
+        scr_syscom_SCOP();
+        instance_destroy();
+        break;
     }
     
 

@@ -9,9 +9,9 @@ with (global.target_unit){
         hp = 10;
         hp_remainder *= (cost div 10);
         global.P_Turn.funds += hp_remainder;
-        state =  "exhaust";
         if (global.acting_unit.isCommander) isCommander = true;   
-        }    
+        }
+    state =  "exhaust";    
     }
 //delete activ unit
 with(global.acting_unit) instance_destroy();

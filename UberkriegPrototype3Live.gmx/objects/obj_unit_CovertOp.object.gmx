@@ -44,6 +44,7 @@ max_ammo    = 1;
 
 
 //unit static variables
+charge      = 10 ;
 cost        = 14000;
 move_type   = "Special Tires";
 move_points = 12;

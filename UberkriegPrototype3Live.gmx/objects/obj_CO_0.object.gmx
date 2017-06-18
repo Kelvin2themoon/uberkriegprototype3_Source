@@ -29,18 +29,19 @@
 
 Index = 0 ; //CO index, 0 = default CO with no powers
 name = "Normy McNormalson" //default "nobody"
+ownership = 0 ;
 
 
 //COP and SCOP Varialbes
 
-COP_Bar     = 0 ;       //number of charged stars required to activate CO metre
-COP_Charge  = 0 ;       //COp charge 10 000 per star
+COP_Bar     =  1;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
-
-SCOP_Bar    = 0 ;
-SCOP_Charge = 0 ;
+SCOP_Bar    = 1 ;
 SCOP_on     = false ;   //SCOP switch
+
+charge = 0 ; //ammount CO pwer charged
+use_count = 0 ; //number of times COP and SCOP are used 
 
 
 //global passive modifyers (Day to day)

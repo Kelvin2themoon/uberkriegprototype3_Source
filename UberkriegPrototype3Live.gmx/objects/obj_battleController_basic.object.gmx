@@ -366,6 +366,7 @@ if (global.P1_in_play){
         ds_priority_add(global.temp_pq, global.P1 ,1);
         //create CO 
         global.P1.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.P1_CO)));
+        global.P1.CO.ownership = 1;
         //global.P1_in_play = true;
         //assign team
         global.P1.team = 1;
@@ -394,6 +395,7 @@ if (global.P2_in_play){
     ds_priority_add(global.temp_pq, global.P2 ,2);
     //create CO 
     global.P2.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.P2_CO)));
+    global.P2.CO.ownership = 2;
     //global.P2_in_play = true;
     //assign team
     global.P2.team = 2;
@@ -422,6 +424,7 @@ if(global.P3_in_play){
     ds_priority_add(global.temp_pq, global.P3 ,3);
     //create CO 
     global.P3.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.P3_CO)));
+    global.P3.CO.ownership = 3;
     //global.P3_in_play = true;
     //assign team
     global.P3.team = 3;
@@ -449,6 +452,7 @@ if (global.P4_in_play){
     ds_priority_add(global.temp_pq, global.P4 ,4);
     //create CO 
     global.P4.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.P4_CO)));
+    global.P4.CO.ownership = 4;
     //global.P4_in_play = true;
     //assign team
     global.P4.team = 4;

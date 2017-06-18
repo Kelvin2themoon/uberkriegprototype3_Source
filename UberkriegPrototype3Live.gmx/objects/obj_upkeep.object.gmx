@@ -113,7 +113,50 @@ conclude_upkeep = true;
 with obj_battleCursor{
     x = global.P_Turn.save_cursor_pos_x;
     y = global.P_Turn.save_cursor_pos_y;
+    
     }
+    
+    
+//deactivate COP and SCOP
+
+global.P_Turn.CO.COP_on = false ;
+global.P_Turn.CO.SCOP_on = false ;
+
+with (obj_unit)
+    {
+        if (ownership = global.P_Turn.number)
+            {
+            
+                COP = false ;
+                SCOP = false ;
+            
+            }     
+        
+    
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 //change phaze
 global.Phaze = "Main"

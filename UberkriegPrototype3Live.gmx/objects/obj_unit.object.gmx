@@ -44,6 +44,7 @@ isHidden    = false; // consumes 5 fuel when true, see upkeep
  
 
 //unit static variables
+charge      = 10; //unit contributes to CO metre per HP
 cost        = 6000;
 move_type   = "Tracks"; // camps and space please
 move_points = 9;
@@ -93,6 +94,9 @@ descript = "this is a parent object"
 //check player that disrupted this unit
 disruptor = 0;
 
+//cop on or off
+COP  = false;
+SCOP = false ;
 
 
 
@@ -269,6 +273,26 @@ if (isCommander and isVisible) draw_sprite(spr_unitStats_Radio,0,x,y);
 if isVisible    image_alpha = 1;
 else            image_alpha = 0;
 </string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
           </argument>
         </arguments>
       </action>
