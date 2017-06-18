@@ -200,6 +200,12 @@
         <sprites name="Top Win">
           <sprite>sprites\spr_auxwin</sprite>
           <sprite>sprites\spr_topwin</sprite>
+          <sprites name="Powerstar">
+            <sprite>sprites\spr_COPstar_charge</sprite>
+            <sprite>sprites\spr_COPstar_flash</sprite>
+            <sprite>sprites\spr_SCOPstar_charge</sprite>
+            <sprite>sprites\spr_SCOPstar_flash</sprite>
+          </sprites>
         </sprites>
         <sprites name="Capture">
           <sprite>sprites\spr_captureBar</sprite>
@@ -230,6 +236,8 @@
             <sprite>sprites\spr_syscom_terms_up</sprite>
             <sprite>sprites\spr_syscom_terrain_up</sprite>
             <sprite>sprites\spr_syscom_units_up</sprite>
+            <sprite>sprites\spr_syscom_COP_up</sprite>
+            <sprite>sprites\spr_syscom_SCOP_up</sprite>
           </sprites>
           <sprites name="DOWN">
             <sprite>sprites\spr_syscom_audio_down</sprite>
@@ -249,6 +257,8 @@
             <sprite>sprites\spr_syscom_terms_down</sprite>
             <sprite>sprites\spr_syscom_terrain_down</sprite>
             <sprite>sprites\spr_syscom_units_down</sprite>
+            <sprite>sprites\spr_syscom_COP_down</sprite>
+            <sprite>sprites\spr_syscom_SCOP_down</sprite>
           </sprites>
         </sprites>
         <sprites name="Command">
@@ -477,6 +487,7 @@
     <script>scripts\scr_calc_battleStrength.gml</script>
     <scripts name="Drawing">
       <script>scripts\scr_draw_num.gml</script>
+      <script>scripts\scr_draw_stars.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
