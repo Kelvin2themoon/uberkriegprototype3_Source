@@ -992,10 +992,18 @@ global.unit_check = obj_map.units[global.posX,global.posY];
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>///Debug
+/*
+unit_selection      = obj_map.units[global.posX,global.posY];
+terrain_selection   = obj_map.terrains[global.posX,global.posY];
 
-///Debug
+if (global.Phaze = "Main" and unit_selection != 0){
+    if (unit_selection.isVisible){
+    
+        draw_text(12,120, "HP hidden?" + string( obj_map.units[global.posX,global.posY].HP_hidden));
 
+        }
+}
 //draw_text(12, 240,  string(obj_map.units[ x div 24, y div 24]));
 
 /*

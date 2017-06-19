@@ -34,7 +34,7 @@ event_inherited();
 Index = 1 ;
 name = "Radio+"
 
-charge = 6000 ; 
+charge = 0 ; 
 
 
 //COP and SCOP Varialbes

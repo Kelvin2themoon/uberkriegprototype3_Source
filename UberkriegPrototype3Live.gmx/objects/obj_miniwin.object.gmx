@@ -309,7 +309,10 @@ if (global.unit_check != 0){
         draw_sprite(miniwin_unit,miniwin_unit_ownership,x,y);
     //draw HP, Fuel, Ammo
 
-    scr_draw_num(spr_num_light,false,global.unit_check.hp,x+78,y+26,2);
+    if (global.unit_check.HP_hidden and global.unit_check.ownership != global.P_Turn.number) draw_sprite(spr_num_light,11,x+78-11,y+26);
+    else scr_draw_num(spr_num_light,false,global.unit_check.hp,x+78,y+26,2);
+    
+    
     scr_draw_num(spr_num_light,false,global.unit_check.fuel,x+123,y+26,3);
     if global.unit_check.ammo != -1 scr_draw_num(spr_num_light,true,global.unit_check.ammo,x+142,y+26,1);
     else draw_sprite(spr_num_light,10,x+142,y+26);

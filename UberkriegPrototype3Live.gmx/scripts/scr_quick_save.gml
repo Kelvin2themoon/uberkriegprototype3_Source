@@ -33,6 +33,9 @@ ini_write_real("globals","P4CO",global.P4_CO);
 
 
 
+
+
+
 //players in play( 0 for false, 1 for true)
 
 //PLAYER 1
@@ -54,6 +57,10 @@ if (global.P1_in_play)
         //save view position
         ini_write_real("players","P1ViewX",global.P1.save_view_pos_x);
         ini_write_real("players","P1ViewY",global.P1.save_view_pos_y);
+        //CO stats
+        ini_write_real("players","P1_charge",    global.P1.CO.charge);
+        ini_write_real("players","P1_COP",       global.P1.CO.COP_on);
+        ini_write_real("players","P1_SCOP_on",   global.P1.CO.SCOP_on);
     }
 else 
     {
@@ -80,6 +87,11 @@ if (global.P2_in_play)
         //save view position
         ini_write_real("players","P2ViewX",global.P2.save_view_pos_x);
         ini_write_real("players","P2ViewY",global.P2.save_view_pos_y);
+        
+        //CO stats
+        ini_write_real("players","P2_charge",    global.P2.CO.charge);
+        ini_write_real("players","P2_COP",       global.P2.CO.COP_on);
+        ini_write_real("players","P2_SCOP_on",   global.P2.CO.SCOP_on);
     }
 else 
     {
@@ -105,6 +117,11 @@ if (global.P3_in_play)
         //save view position
         ini_write_real("players","P3ViewX",global.P3.save_view_pos_x);
         ini_write_real("players","P3ViewY",global.P3.save_view_pos_y);
+        
+        //CO stats
+        ini_write_real("players","P3_charge",    global.P3.CO.charge);
+        ini_write_real("players","P3_COP",       global.P3.CO.COP_on);
+        ini_write_real("players","P3_SCOP_on",   global.P3.CO.SCOP_on);
     }
 else 
     {
@@ -130,6 +147,11 @@ if (global.P4_in_play)
         //save view position
         ini_write_real("players","P4ViewX",global.P4.save_view_pos_x);
         ini_write_real("players","P4ViewY",global.P4.save_view_pos_y);
+        
+        //CO stats
+        ini_write_real("players","P4_charge",    global.P4.CO.charge);
+        ini_write_real("players","P4_COP",       global.P4.CO.COP_on);
+        ini_write_real("players","P4_SCOP_on",   global.P4.CO.SCOP_on);
     }
 else 
     {

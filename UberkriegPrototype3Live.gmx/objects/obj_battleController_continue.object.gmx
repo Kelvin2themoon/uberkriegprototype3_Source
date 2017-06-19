@@ -318,6 +318,7 @@ if (global.P1_in_play){
         ds_priority_add(global.temp_pq, global.P1 ,1);
         //create CO object
         global.P1.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(ini_read_real("globals","P1CO",0))));
+        global.P1.CO.charge =  ini_read_real("P1 charge","P1Team",1);
         //assign team
         global.P1.team = ini_read_real("players","P1Team",1);
         //add cursor pose at 
@@ -338,7 +339,12 @@ if (global.P1_in_play){
         global.P1.funds = ini_read_real("players","P1Funds",0);
         
         //properties set team
-        with (obj_property) if (ownership = 1) team = global.P1.team;             
+        with (obj_property) if (ownership = 1) team = global.P1.team;
+        
+        //CO stats
+        global.P1.CO.charge  = ini_read_real("players","P1_charge",    0);
+        global.P1.CO.COP_on  = ini_read_real("players","P1_COP",       false);
+        global.P1.CO.SCOP_on =  ini_read_real("players","P1_SCOP_on",   false);             
         
         
     }
@@ -373,6 +379,11 @@ if (global.P2_in_play){
         //properties set team
         with (obj_property) if (ownership = 2) team = global.P2.team;
         
+        //CO stats
+        global.P2.CO.charge  = ini_read_real("players","P2_charge",    0);
+        global.P2.CO.COP_on  = ini_read_real("players","P2_COP",       false);
+        global.P2.CO.SCOP_on =  ini_read_real("players","P2_SCOP_on",   false);  
+        
         
     }
 //P3
@@ -404,7 +415,12 @@ if (global.P3_in_play){
         global.P3.funds = ini_read_real("players","P3Funds",0);
         
         //properties set team
-        with (obj_property) if (ownership = 3) team = global.P3.team;             
+        with (obj_property) if (ownership = 3) team = global.P3.team;
+        
+        //CO stats
+        global.P3.CO.charge  = ini_read_real("players","P3_charge",    0);
+        global.P3.CO.COP_on  = ini_read_real("players","P3_COP",       false);
+        global.P3.CO.SCOP_on =  ini_read_real("players","P3_SCOP_on",   false);               
         
         
     }
@@ -438,6 +454,11 @@ if (global.P4_in_play){
         global.P4.funds = ini_read_real("players","P4Funds",0);
         //properties set team
         with (obj_property) if (ownership = 4) team = global.P4.team;
+        
+        //CO stats
+        global.P4.CO.charge  = ini_read_real("players", "P4_charge",    0);
+        global.P4.CO.COP_on  = ini_read_real("players", "P4_COP",       false);
+        global.P4.CO.SCOP_on =  ini_read_real("players","P4_SCOP_on",   false);  
         
         
     }
@@ -927,10 +948,63 @@ ini_close();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//hardset viewport
+            <string>///hardset viewport
 
 view_wport = 768 ;
 view_hport = 432 ;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///check if unit HP is hidden
+
+if (global.P1_in_play)
+    {
+    if (global.P1.CO.COFX_HiddenHP)
+        {
+        with (obj_unit) if (ownership = 1)   HP_hidden = true ;
+        }
+    }
+    
+if (global.P2_in_play)
+    {
+    if (global.P2.CO.COFX_HiddenHP)
+        {
+        with (obj_unit) if (ownership = 2)   HP_hidden = true ;
+        }
+    }
+    
+if (global.P3_in_play)
+    {
+    if (global.P3.CO.COFX_HiddenHP)
+        {
+        with (obj_unit) if (ownership = 3)   HP_hidden = true ;
+        }
+    }
+    
+if (global.P4_in_play)
+    {
+    if (global.P4.CO.COFX_HiddenHP)
+        {
+        with (obj_unit) if (ownership = 4)   HP_hidden = true ;
+        }
+    }
 </string>
           </argument>
         </arguments>

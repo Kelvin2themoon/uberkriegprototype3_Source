@@ -688,12 +688,15 @@ no_deploy = false;
                 scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
                 //exshaust deployed unit
                 obj_map.units[global.posX,global.posY].state = "exhaust" ;
+                //set if HP is Hidden
+                if(global.P_Turn.CO.COFX_HiddenHP)obj_map.units[global.posX,global.posY].HP_hidden = true ;
 
                 //update standing
                 scr_updateStanding_global();
                 scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
                 //update vision
                 scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
+
                 
                 //Close deploy Window
                 instance_activate_object(obj_battleCursor);
