@@ -35,18 +35,18 @@ state = "idle" //describe stat of animation
 
 //Unit stats
 hp      = 10;
-fuel    = 30;
+fuel    = 15;
 ammo    = 1; // no primary weapon
 isDisrupted = false; //true when hit by Covert.Op disrupter
 //max fuel &amp; ammo
-max_fuel    = 30;
+max_fuel    = 15;
 max_ammo    = 1;  
 
 //unit static variables
 charge      = 4 ;
 cost        = 2000;
 move_type   = "Heavy Boots";
-move_points = 6;
+move_points = 3;
 vision      = 2;
 radio       = 3;
 

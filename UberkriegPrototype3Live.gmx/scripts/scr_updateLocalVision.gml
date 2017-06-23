@@ -11,7 +11,8 @@ tempV_X = 0;
 if target.team = global.P_Turn.team
 target.isVisible = true;
 
-vision_range = target.vision
+var vision_range = target.vision
+var vision_bonus = 0
 perfectVision = false ;
 
 //check for Co ability
@@ -26,7 +27,10 @@ if (target.ownership !=0)
                 case 3 : owner = global.P3; break;
                 case 4 : owner = global.P4; break;
             }
-                var vision_bonus = owner.CO.D2D_Vision ; 
+                vision_bonus = owner.CO.D2D_Vision ;
+                if owner.CO.COP_on  vision_bonus += owner.CO.COP_Vision ;
+                if owner.CO.SCOP_on  vision_bonus += owner.CO.SCOP_Vision ;
+                 
                 vision_range += vision_bonus;
                 
                 if (owner.CO.COFX_PerfectVision and (owner.CO.COP_on or owner.CO.SCOP_on) ) perfectVision = true; 

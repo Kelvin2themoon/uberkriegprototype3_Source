@@ -35,7 +35,7 @@ name = "City";
 cover               = 2; //1~5
 // Move Costs
 mtype_boots         = 1;
-mtype_heavyBoots    = 2;
+mtype_heavyBoots    = 1;
 mtype_tires         = 1;
 mtype_heavyTires    = 1;
 mtype_specialTires  = 1;

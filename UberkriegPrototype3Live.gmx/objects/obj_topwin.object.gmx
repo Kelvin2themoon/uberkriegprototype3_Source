@@ -166,6 +166,52 @@ scr_draw_stars( x+12, y+45,global.P_Turn.CO.COP_Bar,global.P_Turn.CO.SCOP_Bar,gl
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw skill ready
+
+//add COP and SCOP
+if (global.P_Turn.CO.charge &gt;= (global.P_Turn.CO.COP_Bar*1000 + global.P_Turn.CO.SCOP_Bar*1000 )and global.P_Turn.CO.SCOP_Bar !=0) 
+draw_sprite(spr_ready,1, x+12, y + 60); 
+
+
+else if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar*1000 and global.P_Turn.CO.COP_Bar !=0) 
+draw_sprite(spr_ready,0, x+12, y + 60);
+
+//temp markers
+if global.P1_in_play if global.P1.CO.COP_on draw_sprite(spr_ready,2,x+12, y+60+(16*1));
+if global.P2_in_play if global.P2.CO.COP_on draw_sprite(spr_ready,3,x+12, y+60+(16*2));
+if global.P3_in_play if global.P3.CO.COP_on draw_sprite(spr_ready,4,x+12, y+60+(16*3));
+if global.P4_in_play if global.P4.CO.COP_on draw_sprite(spr_ready,5,x+12, y+60+(16*4));
+
+if global.P1_in_play if global.P1.CO.SCOP_on draw_sprite(spr_ready,6,x+12, y+60+(16*1));
+if global.P2_in_play if global.P2.CO.SCOP_on draw_sprite(spr_ready,7,x+12, y+60+(16*2));
+if global.P3_in_play if global.P3.CO.SCOP_on draw_sprite(spr_ready,8,x+12, y+60+(16*3));
+if global.P4_in_play if global.P4.CO.SCOP_on draw_sprite(spr_ready,9,x+12, y+60+(16*4));
+
+
+ 
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
   </events>
   <PhysicsObject>0</PhysicsObject>

@@ -212,6 +212,7 @@
           <sprite>sprites\spr_captureBar_done</sprite>
           <sprite>sprites\spr_capturebar_frame</sprite>
         </sprites>
+        <sprite>sprites\spr_ready</sprite>
       </sprites>
       <sprites name="SysComMenu">
         <sprite>sprites\spr_syscom_cap</sprite>

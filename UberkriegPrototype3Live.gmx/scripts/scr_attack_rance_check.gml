@@ -7,8 +7,32 @@ arc_origin_y = arc_unit.y div 24;
 scr_rangeCheck_reset();
 
 //move_max
-
+//check CO effects
 max_move_points = arc_unit.move_points;
+
+if (arc_unit.ownership !=0)
+    {
+    
+        var owner = 0;
+        switch arc_unit.ownership 
+            {
+                case 1 : owner = global.P1; break;
+                case 2 : owner = global.P2; break;    
+                case 3 : owner = global.P3; break;
+                case 4 : owner = global.P4; break;
+            }
+
+
+                var move_bonus = owner.CO.D2D_Move;
+                if (global.P_Turn.CO.COP_on)  move_bonus += owner.CO.COP_Move ;
+                if (global.P_Turn.CO.SCOP_on)  move_bonus += owner.CO.SCOP_Move ;
+                
+                
+                  
+                max_move_points += move_bonus;    
+
+    }
+//rstrict by fuel
 if (arc_unit.fuel < max_move_points)  max_move_points = arc_unit.fuel;
 
 //check for direct attack
@@ -38,7 +62,7 @@ else{
             and  global.rangeCheck[newpos_x,newpos_y].move_cost = -1 ){
                 if( //total move points needed to move into new tile
                     other.check_move_cost 
-                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.arc_unit.move_points){
+                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.max_move_points){
                     //set move cost to new tile
                     global.rangeCheck[newpos_x,newpos_y].move_cost = move_cost + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x,newpos_y]);
                     //change adjacent tiles to red
@@ -58,7 +82,7 @@ else{
             and  global.rangeCheck[newpos_x,newpos_y].move_cost = -1 ){
                 if( //total move points needed to move into new tile
                     other.check_move_cost 
-                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.arc_unit.move_points){
+                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.max_move_points){
                     //set move cost to new tile
                     global.rangeCheck[newpos_x,newpos_y].move_cost = move_cost + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x,newpos_y]);
                     //change adjacent tiles to red
@@ -78,7 +102,7 @@ else{
             and  global.rangeCheck[newpos_x,newpos_y].move_cost = -1 ){
                 if( //total move points needed to move into new tile
                     other.check_move_cost 
-                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.arc_unit.move_points){
+                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.max_move_points){
                     //set move cost to new tile
                     global.rangeCheck[newpos_x,newpos_y].move_cost = move_cost + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x,newpos_y]);
                     //change adjacent tiles to red
@@ -98,7 +122,7 @@ else{
             and  global.rangeCheck[newpos_x,newpos_y].move_cost = -1 ){
                 if( //total move points needed to move into new tile
                     other.check_move_cost 
-                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.arc_unit.move_points){
+                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.max_move_points){
                     //set move cost to new tile
                     global.rangeCheck[newpos_x,newpos_y].move_cost = move_cost + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x,newpos_y]);
                     //change adjacent tiles to red
@@ -138,7 +162,7 @@ else if (arc_unit.name = "Land Cruiser" and arc_unit.ammo > 0) {
             and  global.rangeCheck[newpos_x,newpos_y].move_cost = -1 ){
                 if( //total move points needed to move into new tile
                     other.check_move_cost 
-                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.arc_unit.move_points){
+                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.max_move_points){
                     //set move cost to new tile
                     global.rangeCheck[newpos_x,newpos_y].move_cost = move_cost + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x,newpos_y]);
                     //change adjacent tiles to red
@@ -164,7 +188,7 @@ else if (arc_unit.name = "Land Cruiser" and arc_unit.ammo > 0) {
             and  global.rangeCheck[newpos_x,newpos_y].move_cost = -1 ){
                 if( //total move points needed to move into new tile
                     other.check_move_cost 
-                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.arc_unit.move_points){
+                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.max_move_points){
                     //set move cost to new tile
                     global.rangeCheck[newpos_x,newpos_y].move_cost = move_cost + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x,newpos_y]);
                      ix = 0;
@@ -189,7 +213,7 @@ else if (arc_unit.name = "Land Cruiser" and arc_unit.ammo > 0) {
             and  global.rangeCheck[newpos_x,newpos_y].move_cost = -1 ){
                 if( //total move points needed to move into new tile
                     other.check_move_cost 
-                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.arc_unit.move_points){
+                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.max_move_points){
                     //set move cost to new tile
                     global.rangeCheck[newpos_x,newpos_y].move_cost = move_cost + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x,newpos_y]);
                     //change adjacent tiles to red
@@ -215,7 +239,7 @@ else if (arc_unit.name = "Land Cruiser" and arc_unit.ammo > 0) {
             and  global.rangeCheck[newpos_x,newpos_y].move_cost = -1 ){
                 if( //total move points needed to move into new tile
                     other.check_move_cost 
-                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.arc_unit.move_points){
+                    + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x ,newpos_y]) <= other.max_move_points){
                     //set move cost to new tile
                     global.rangeCheck[newpos_x,newpos_y].move_cost = move_cost + scr_check_move_cost(other.arc_unit,obj_map.terrains[newpos_x,newpos_y]);
                     //change adjacent tiles to red

@@ -38,7 +38,7 @@ isLand = true;
 cover               = 3; //1~5
 // Move Costs
 mtype_boots         = 2;
-mtype_heavyBoots    = 3;
+mtype_heavyBoots    = 1;
 mtype_tires         = 3;
 mtype_heavyTires    = 2;
 mtype_specialTires  = 2;

@@ -39,7 +39,7 @@ isSolid = false;
 cover               = 0; //1~5
 // Move Costs
 mtype_boots         = 2;
-mtype_heavyBoots    = 4;
+mtype_heavyBoots    = 1;
 mtype_tires         = 99;
 mtype_heavyTires    = 99;
 mtype_specialTires  = 6;
