@@ -40,7 +40,7 @@ COP_on      = false ;   //CO power switch
 SCOP_Bar    = 0 ;
 SCOP_on     = false ;   //SCOP switch
 
-charge = 0 ; //ammount CO pwer charged
+charge = 6000 ; //ammount CO pwer charged
 use_count = 0 ; //number of times COP and SCOP are used 
 
 

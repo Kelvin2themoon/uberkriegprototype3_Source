@@ -543,7 +543,7 @@ if (scr_inBound(mouse_pos_x,mouse_pos_y))
 
 
 //check: key press confirm
-if ( !mouse_check_button(mb_left))
+if ( !mouse_check_button(mb_left)and scr_inBound(mouse_pos_x,mouse_pos_y))
     {
     if (obj_map.terrains[mouse_pos_x,mouse_pos_y] != -1)
     {

@@ -34,9 +34,6 @@ event_inherited();
 Index = 1 ;
 name = "Radio+"
 
-charge = 0 ; 
-
-
 //COP and SCOP Varialbes
 
 COP_Bar     = 3 ;       //number of charged stars required to activate CO metre

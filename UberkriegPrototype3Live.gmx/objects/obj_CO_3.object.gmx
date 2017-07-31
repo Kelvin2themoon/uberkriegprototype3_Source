@@ -33,8 +33,6 @@ event_inherited();
 
 Index = 3 ;
 name = "Move+" ;
-charge = 0 ;
-
 
 //COP and SCOP Varialbes
 

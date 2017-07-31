@@ -33,7 +33,6 @@ event_inherited();
 
 Index = 2 ;
 name = "Vision+" 
-charge = 0;
 
 
 //COP and SCOP Varialbes
