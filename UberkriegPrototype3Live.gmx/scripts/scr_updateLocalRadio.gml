@@ -11,19 +11,20 @@ tempV_Y = 0;
 
 radio_range = target.radio
 
+
 if (target.ownership !=0)
     {
     
         var owner = 0;
         switch target.ownership 
             {
-                case 1 : owner = global.P1; break;
-                case 2 : owner = global.P2; break;    
-                case 3 : owner = global.P3; break;
-                case 4 : owner = global.P4; break;
+                case 1 : if(global.P1_in_play) owner = global.P1; break;
+                case 2 : if(global.P2_in_play) owner = global.P2; break;    
+                case 3 : if(global.P3_in_play) owner = global.P3; break;
+                case 4 : if(global.P4_in_play) owner = global.P4; break;
             }
             
-        if target.radio != 0 
+        if (target.radio != 0 and owner !=0)
         
             {
             

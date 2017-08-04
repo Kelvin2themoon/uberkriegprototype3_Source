@@ -120,6 +120,8 @@
           <sprite>sprites\spr_CruiserPlusCursor</sprite>
           <sprite>sprites\spr_mousePointer</sprite>
           <sprite>sprites\spr_mouseViewScrole</sprite>
+          <sprite>sprites\spr_radioAssist_gold</sprite>
+          <sprite>sprites\spr_radioAssist_darkBlue</sprite>
         </sprites>
         <sprites name="checks">
           <sprite>sprites\spr_rangecheck_red</sprite>

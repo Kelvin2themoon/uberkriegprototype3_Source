@@ -242,7 +242,7 @@ if (alarm[1] = -1 )
                 if (isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range = false)  scr_rangeCheck_reset();
                 
                 if scr_inBound(global.posX,global.posY-1)
-                if (obj_map.units[global.posX,global.posY-1] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false) 
+                if (obj_map.units[global.posX,global.posY-1] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range= false) 
                 scr_updateLocalRadio(obj_map.units[global.posX,global.posY-1]);
             
             }
@@ -268,7 +268,7 @@ if (alarm[1] = -1 )
                 if (isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range = false) scr_rangeCheck_reset();
                 
                 if scr_inBound(global.posX,global.posY+1)
-                if (obj_map.units[global.posX,global.posY+1] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false) 
+                if (obj_map.units[global.posX,global.posY+1] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range= false) 
                 scr_updateLocalRadio(obj_map.units[global.posX,global.posY+1]);
             
             }    
@@ -292,7 +292,7 @@ if (alarm[1] = -1 )
                 if ( isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range = false ) scr_rangeCheck_reset();
                 
                 if scr_inBound(global.posX-1,global.posY)
-                if (obj_map.units[global.posX-1,global.posY] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false) 
+                if (obj_map.units[global.posX-1,global.posY] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range= false) 
                 scr_updateLocalRadio(obj_map.units[global.posX-1,global.posY]);
             
             }
@@ -316,7 +316,7 @@ if (alarm[1] = -1 )
                 if (isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range = false) scr_rangeCheck_reset();
                 
                 if scr_inBound(global.posX+1,global.posY)
-                if (obj_map.units[global.posX+1,global.posY] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false ) 
+                if (obj_map.units[global.posX+1,global.posY] != 0 and isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range= false) 
                 scr_updateLocalRadio(obj_map.units[global.posX+1,global.posY]);
                 
             }

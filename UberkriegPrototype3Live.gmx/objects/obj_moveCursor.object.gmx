@@ -134,6 +134,30 @@ move_out = false;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///check Radio range for Radio Assist
+
+radioAssistRange = global.acting_unit.radio ;
+assis_sprite = spr_radioAssist_gold;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="1">
       <action>
@@ -181,6 +205,11 @@ image_index = global.cursorFrameIndex
 //set pos
 global.posX = x div 24 ;
 global.posY = y div 24 ;
+
+//switch Radio assis graphics
+if (global.rangeCheck[global.posX, global.posY].sprite_index = spr_rangecheck_bluedk or (global.acting_unit.x div 24 = global.posX and global.acting_unit.y div 24 = global.posY and global.acting_unit.isStanding = false) ) assis_sprite = spr_radioAssist_darkBlue ;
+else if (global.rangeCheck[global.posX, global.posY].sprite_index = spr_rangecheck_clear or (global.acting_unit.x div 24 = global.posX and global.acting_unit.y div 24 = global.posY and global.acting_unit.isStanding = true)) assis_sprite = spr_radioAssist_gold ;
+else assis_sprite = -1 ;
 
 
 </string>
@@ -356,6 +385,7 @@ if (alarm[1] = -1 )
             //juice
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
+            
         }
         
     }
@@ -977,6 +1007,71 @@ if (obj_map.units[global.posX,global.posY] !=0 and global.rangeCheck[global.posX
     
 //draw_text(x, y-24, "move cost"); 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw radio assist
+
+var ix = 0 ;
+var iy = 0 ;
+
+
+if (radioAssistRange != 0 and assis_sprite != -1 )
+    {
+    //double loop through all possible positions
+    for ( ix =  (-1)*radioAssistRange ; ix &lt;= radioAssistRange ; ix += 1 )
+        {
+        for ( iy =  (-1)*radioAssistRange ; iy &lt;= radioAssistRange ; iy += 1 )
+            {
+            //check if is boarder, max range
+            if ( abs(ix) + abs(iy) =  radioAssistRange )
+                {
+                //check in map bounds
+                if scr_inBound(global.posX+ix,global.posY+iy)
+                    {
+                    //draw_sprite(spr_radioAsist_darkBlue,0,(global.posX+ix)*24,(global.posY+iy)*24) ;
+                    //Draw Corners, compansate for rotate
+                    if(iy = (-1)*radioAssistRange) draw_sprite(assis_sprite,0,(global.posX+ix)*24,(global.posY+iy)*24) ;
+                    else if(iy =      radioAssistRange) draw_sprite_ext( assis_sprite, 0,(global.posX+ix+1)*24,(global.posY+iy+1)*24,1,1,180,c_white,1);
+                    else if(ix = (-1)*radioAssistRange) draw_sprite_ext( assis_sprite, 0,(global.posX+ix+0)*24,(global.posY+iy+1)*24,1,1, 90,c_white,1);
+                    else if(ix =      radioAssistRange) draw_sprite_ext( assis_sprite, 0,(global.posX+ix+1)*24,(global.posY+iy+0)*24,1,1,270,c_white,1);
+                    //draw edges
+                    else if (ix &gt; 0)
+                        {
+                        if( iy &gt; 0 ) draw_sprite_ext(assis_sprite, 1, 24*(global.posX+ix+1), 24*(global.posY+iy+0),1,1,270,c_white,1);
+                        else if( iy &lt; 0 ) draw_sprite_ext(assis_sprite, 1, 24*(global.posX+ix+0), 24*(global.posY+iy+0),1,1,0,c_white,1);
+                        }
+                    else if (ix &lt; 0)
+                        {
+                        if (iy &gt; 0 ) draw_sprite_ext(assis_sprite, 1, 24*(global.posX+ix+1), 24*(global.posY+iy+1),1,1,180,c_white,1);
+                        else if (iy &lt; 0 ) draw_sprite_ext(assis_sprite, 1, 24*(global.posX+ix+0), 24*(global.posY+iy+1),1,1,90,c_white,1);
+                        } 
+                     
+                    
+                    }
+    
+                }
+    
+            }
+        }
+    }
 </string>
           </argument>
         </arguments>

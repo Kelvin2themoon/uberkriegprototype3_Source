@@ -178,7 +178,7 @@ G_smooth = true;
 
 
 //debug controls
-global.alt_Disrupt = true; //disruptor is indirect fire
+global.alt_Disrupt = false; //disruptor is indirect fire
 global.Disruptor_spread = false; // disruptor propigates throught target enemy unit radio
 </string>
           </argument>

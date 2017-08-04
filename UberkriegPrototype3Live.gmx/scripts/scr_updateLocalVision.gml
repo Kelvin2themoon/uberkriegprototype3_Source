@@ -22,18 +22,22 @@ if (target.ownership !=0)
         var owner = 0;
         switch target.ownership 
             {
-                case 1 : owner = global.P1; break;
-                case 2 : owner = global.P2; break;    
-                case 3 : owner = global.P3; break;
-                case 4 : owner = global.P4; break;
+                case 1 : if(global.P1_in_play) owner = global.P1; break;
+                case 2 : if(global.P1_in_play) owner = global.P2; break;    
+                case 3 : if(global.P1_in_play) owner = global.P3; break;
+                case 4 : if(global.P1_in_play) owner = global.P4; break;
             }
+            
+            if(owner !=0)
+                {
                 vision_bonus = owner.CO.D2D_Vision ;
                 if owner.CO.COP_on  vision_bonus += owner.CO.COP_Vision ;
                 if owner.CO.SCOP_on  vision_bonus += owner.CO.SCOP_Vision ;
                  
                 vision_range += vision_bonus;
                 
-                if (owner.CO.COFX_PerfectVision and (owner.CO.COP_on or owner.CO.SCOP_on) ) perfectVision = true; 
+                if (owner.CO.COFX_PerfectVision and (owner.CO.COP_on or owner.CO.SCOP_on) ) perfectVision = true;
+                } 
                 
                 
     }

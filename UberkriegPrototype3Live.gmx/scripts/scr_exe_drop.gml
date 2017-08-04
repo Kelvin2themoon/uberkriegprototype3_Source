@@ -22,12 +22,12 @@ if (obj_map.units[global.destination.x div 24,global.destination.y div 24] !=0){
     }
     
 else {
-    //reactivate target unit and place at lovation
+    //reactivate target unit and place at location
     instance_activate_object(global.target_unit);
     obj_map.units[global.destination.x div 24, global.destination.y div 24] = global.target_unit;
     with global.target_unit{
         image_index = 21;
-        state = "exhaust";
+        state = "idle";
         x = global.destination.x;
         y = global.destination.y;
         }
