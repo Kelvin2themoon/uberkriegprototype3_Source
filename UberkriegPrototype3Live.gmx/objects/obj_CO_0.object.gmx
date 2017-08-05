@@ -28,8 +28,8 @@
             <string>/// Initiate Parent Object and defaults
 
 index = 0 ; //CO index, 0 = default CO with no powers
-name = "Normy McNormalson" //default "nobody"
-ownership = 0 ;
+name = "no-co" //default "nobody"
+ownership =  0 ;
 
 
 //COP and SCOP Varialbes

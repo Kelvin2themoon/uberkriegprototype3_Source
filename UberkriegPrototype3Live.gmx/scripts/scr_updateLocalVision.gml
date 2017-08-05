@@ -16,6 +16,11 @@ var vision_bonus = 0
 perfectVision = false ;
 
 //check for Co ability
+
+
+
+
+
 if (target.ownership !=0)
     {
     
@@ -23,9 +28,9 @@ if (target.ownership !=0)
         switch target.ownership 
             {
                 case 1 : if(global.P1_in_play) owner = global.P1; break;
-                case 2 : if(global.P1_in_play) owner = global.P2; break;    
-                case 3 : if(global.P1_in_play) owner = global.P3; break;
-                case 4 : if(global.P1_in_play) owner = global.P4; break;
+                case 2 : if(global.P2_in_play) owner = global.P2; break;    
+                case 3 : if(global.P3_in_play) owner = global.P3; break;
+                case 4 : if(global.P4_in_play) owner = global.P4; break;
             }
             
             if(owner !=0)

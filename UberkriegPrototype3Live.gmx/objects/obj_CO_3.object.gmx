@@ -32,7 +32,7 @@ event_inherited();
 // Initiate Parent Object and defaults
 
 Index = 3 ;
-name = "Move+" ;
+name = "move+" ;
 
 //COP and SCOP Varialbes
 

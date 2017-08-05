@@ -32,7 +32,7 @@ event_inherited();
 // Initiate Parent Object and defaults
 
 Index = 2 ;
-name = "Vision+" 
+name = "vision+" 
 
 
 //COP and SCOP Varialbes
@@ -44,9 +44,9 @@ SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
 //passive abilities
-D2D_Vision  = 2 ;
-COP_Vision  = 2 ;
-SCOP_Vision = 4 ;
+D2D_Vision  = 1 ;
+COP_Vision  = 1 ;
+SCOP_Vision = 3 ;
 
 COFX_HiddenHP       = true ;
 COFX_PerfectVision  = true ;

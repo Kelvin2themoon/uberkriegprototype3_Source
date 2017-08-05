@@ -32,7 +32,7 @@ event_inherited();
 // Initiate Parent Object and defaults
 
 Index = 1 ;
-name = "Radio+"
+name = "radio+"
 
 //COP and SCOP Varialbes
 
@@ -45,8 +45,8 @@ SCOP_on     = false ;   //SCOP switch
 
 //passive abilities, COP, and SCOP
 D2D_Radio   = 1 ;
-COP_Radio   = 1 ;
-SCOP_Radio  = 2 ;
+COP_Radio   = 2 ;
+SCOP_Radio  = 4 ;
 </string>
           </argument>
         </arguments>
