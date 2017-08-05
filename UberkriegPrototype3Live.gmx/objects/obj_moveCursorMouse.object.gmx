@@ -543,6 +543,53 @@ if (scr_inBound(mouse_pos_x,mouse_pos_y))
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Radio assist checks
+radioAssistRange = global.acting_unit.radio ;
+radioAssist_sprite = spr_radioAssist_gold;
+radio_assist_on = false;
+
+
+if (scr_inBound(global.posX,global.posY))
+    {
+    if (global.rangeCheck[global.posX,global.posY].sprite_index != -1 or (global.posX = moveOriginX and global.posY = moveOriginY ))
+        {
+        radioAssistRange = scr_getUnitRadioRange(global.acting_unit,obj_map.terrains[global.posX,global.posY]);
+        if(global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear or (global.posX = moveOriginX and global.posY = moveOriginY)) radioAssist_sprite = spr_radioAssist_gold;
+        else radioAssist_sprite = spr_radioAssist_darkBlue;
+        radio_assist_on = true;
+        //check if position is occupied by a unit
+        if(obj_map.units[global.posX,global.posY] != 0)
+            {
+            //chang range to target unit
+            radioAssistRange = scr_getUnitRadioRange(obj_map.units[global.posX,global.posY],obj_map.terrains[global.posX,global.posY]);
+            //if target unit is field officer
+            if( obj_map.units[global.posX,global.posY].name = "Officer")
+                {
+                radioAssist_sprite = spr_radioAssist_gold;
+                }
+            }
+        }
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///on release
 ///confirm to open command menu
 
@@ -605,6 +652,16 @@ if ( !mouse_check_button(mb_left)and scr_inBound(mouse_pos_x,mouse_pos_y))
                 {
                     // Join: check target unit is of the same type and hp is less than 10
                     if ( global.acting_unit.name = global.target_unit.name  and global.target_unit.hp &lt; 10) global.join = true;
+                    
+                    //turn join off if unit can load
+                    if  (global.acting_unit.canLoadInfantry &gt; 0 )
+                        {
+                        if(global.acting_unit.load_A != 0 or global.acting_unit.load_B != 0) global.join = false;
+                        }
+                    if  (global.target_unit.canLoadInfantry &gt; 0 )
+                        {
+                        if(global.target_unit.load_A != 0 or global.target_unit.load_B != 0) global.join = false;
+                        }
                    
                     // Attach: check acting unit is  officer and target unit is not of command rank
                     if ( global.acting_unit.name = "Officer" and !global.target_unit.isCommander ) global.attach = true;
@@ -1298,53 +1355,6 @@ else{
 
 global.terrain_check = obj_map.terrains[global.posX,global.posY];
 global.unit_check = obj_map.units[global.posX,global.posY];
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Radio assist checks
-radioAssistRange = global.acting_unit.radio ;
-radioAssist_sprite = spr_radioAssist_gold;
-radio_assist_on = false;
-
-
-if (scr_inBound(global.posX,global.posY))
-    {
-    if (global.rangeCheck[global.posX,global.posY].sprite_index != -1 or (global.posX = moveOriginX and global.posY = moveOriginY ))
-        {
-        radioAssistRange = scr_getUnitRadioRange(global.acting_unit,obj_map.terrains[global.posX,global.posY]);
-        if(global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear or (global.posX = moveOriginX and global.posY = moveOriginY)) radioAssist_sprite = spr_radioAssist_gold;
-        else radioAssist_sprite = spr_radioAssist_darkBlue;
-        radio_assist_on = true;
-        //check if position is occupied by a unit
-        if(obj_map.units[global.posX,global.posY] != 0)
-            {
-            //chang range to target unit
-            radioAssistRange = scr_getUnitRadioRange(obj_map.units[global.posX,global.posY],obj_map.terrains[global.posX,global.posY]);
-            //if target unit is field officer
-            if( obj_map.units[global.posX,global.posY].name = "Officer")
-                {
-                radioAssist_sprite = spr_radioAssist_gold;
-                }
-            }
-        }
-    }
 </string>
           </argument>
         </arguments>

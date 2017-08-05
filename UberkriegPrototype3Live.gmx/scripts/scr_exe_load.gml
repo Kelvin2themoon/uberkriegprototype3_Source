@@ -6,7 +6,10 @@ if (global.target_unit.load_A = 0){
 //load slot A
     global.acting_unit.depth = 0;//hide unit behind terrain
     //global.acting_unit.state = "exhaust";
-    global.target_unit.load_A = global.acting_unit.id;
+    global.target_unit.load_A = global.acting_unit.id
+    //fuel and ammo
+    global.target_unit.load_A.ammo = global.target_unit.load_A.max_ammo;
+    global.target_unit.load_A.fuel = global.target_unit.load_A.max_fuel;;
     instance_destroy();
     }
 else {
@@ -14,6 +17,9 @@ else {
     global.acting_unit.depth = 0;//hide unit behind terrain
     //global.acting_unit.state = "exhaust";
     global.target_unit.load_B = global.acting_unit.id;
+    //fuel and ammo
+    global.target_unit.load_B.ammo = global.target_unit.load_B.max_ammo;
+    global.target_unit.load_B.fuel = global.target_unit.load_B.max_fuel;
     instance_destroy();
     }
 

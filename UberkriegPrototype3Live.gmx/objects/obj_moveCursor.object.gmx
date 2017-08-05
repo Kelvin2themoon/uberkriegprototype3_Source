@@ -498,7 +498,17 @@ if ( keyboard_check_pressed( global.keyCONFIRM) )
             {
                 // Join: check target unit is of the same type and hp is less than 10
                 if ( global.acting_unit.name = global.target_unit.name  and global.target_unit.hp &lt; 10) global.join = true;
-               
+                
+                //turn join off if unit can load
+                if  (global.acting_unit.canLoadInfantry &gt; 0 )
+                    {
+                    if(global.acting_unit.load_A != 0 or global.acting_unit.load_B != 0) global.join = false;
+                    }
+                if  (global.target_unit.canLoadInfantry &gt; 0 )
+                    {
+                    if(global.target_unit.load_A != 0 or global.target_unit.load_B != 0) global.join = false;
+                    }
+                
                 // Attach: check acting unit is  officer and target unit is not of command rank
                 if ( global.acting_unit.name = "Officer" and !global.target_unit.isCommander ) global.attach = true;
                 
