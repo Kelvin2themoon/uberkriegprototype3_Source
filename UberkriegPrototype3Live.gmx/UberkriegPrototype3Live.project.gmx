@@ -462,6 +462,7 @@
         <script>scripts\scr_updateStanding.gml</script>
         <script>scripts\scr_updateStanding_global.gml</script>
         <script>scripts\scr_globalRadioCheck.gml</script>
+        <script>scripts\scr_getUnitRadioRange.gml</script>
       </scripts>
       <script>scripts\scr_attack_rance_check.gml</script>
     </scripts>
@@ -493,6 +494,7 @@
     <scripts name="Drawing">
       <script>scripts\scr_draw_num.gml</script>
       <script>scripts\scr_draw_stars.gml</script>
+      <script>scripts\scr_draw_radioAssist.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">

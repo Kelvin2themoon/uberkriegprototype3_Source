@@ -148,7 +148,10 @@ drop_zone_list_size = ds_list_size(global.targetables);
     
 drop_zone = ds_list_find_value(global.targetables,0); 
 x = drop_zone.x;
-y = drop_zone.y;    
+y = drop_zone.y;   
+
+//radio assist range
+RA_range = 0; 
 
 
 
@@ -534,6 +537,28 @@ global.terrain_check = obj_map.terrains[x div 24,y div 24];
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///get radio assist range
+RA_range = scr_getUnitRadioRange(global.target_unit,obj_map.terrains[x div 24,y div 24]) ;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -566,7 +591,7 @@ if drop_east_ok     draw_sprite(spr_rangecheck_clear, global.rangeCheckerFramInd
 if drop_south_ok    draw_sprite(spr_rangecheck_clear, global.rangeCheckerFramIndex,drop_from_x + 00, drop_from_y + 24);
 if drop_west_ok     draw_sprite(spr_rangecheck_clear, global.rangeCheckerFramIndex,drop_from_x - 24, drop_from_y - 00);
 
-draw_self();
+scr_draw_radioAssist(x div 24 , y div 24 ,RA_range,spr_radioAssist_gold);
 
 //north
 if (drop_zone.y div 24 &lt; global.posY and (global.cursorFrame=1 or global.cursorFrame=2)) draw_sprite(global.target_unit.sprite_index,0,x,y);//draw_sprite( spr_basicCursor_Icons,8,x,y);
@@ -576,6 +601,9 @@ if (drop_zone.x div 24 &gt; global.posX and (global.cursorFrame=1 or global.curs
 if (drop_zone.y div 24 &gt; global.posY and (global.cursorFrame=1 or global.cursorFrame=2)) draw_sprite(global.target_unit.sprite_index,0,x,y);//draw_sprite( spr_basicCursor_Icons,8,x,y);
 //west
 if (drop_zone.x div 24 &lt; global.posX and (global.cursorFrame=1 or global.cursorFrame=2)) draw_sprite(global.target_unit.sprite_index,0,x,y);//draw_sprite( spr_basicCursor_Icons,8,x,y);
+
+
+draw_self();
 
 //draw mouse
 draw_sprite(spr_mousePointer,global.P_Turn.number - 1, mouse_x, mouse_y);

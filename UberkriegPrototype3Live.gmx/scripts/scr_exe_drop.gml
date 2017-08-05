@@ -27,7 +27,7 @@ else {
     obj_map.units[global.destination.x div 24, global.destination.y div 24] = global.target_unit;
     with global.target_unit{
         image_index = 21;
-        state = "idle";
+        state = "exhaust";
         x = global.destination.x;
         y = global.destination.y;
         }

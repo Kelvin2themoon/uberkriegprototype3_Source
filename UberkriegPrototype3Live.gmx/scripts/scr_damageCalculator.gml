@@ -9,6 +9,8 @@ dmgCalc_type   = argument3; // int : 1 or 2
 chart_val = 0;
 damage = 0;
 
+if dmgCalc_atk.name = "Covert Op." dmgCalc_type = 2 ;
+
 if (dmgCalc_type = 1){ // primary weapon
     chart_val = obj_MastertControls.DMG_P[dmgCalc_def.unit_index,dmgCalc_atk.unit_index];
     }

@@ -122,6 +122,12 @@ pointer_pos_Y = mouse_y div 24 ;
 last_pos_x = moveOriginX ;
 last_pos_y = moveOriginY ;
 
+//radio assist
+radioAssistRange = global.acting_unit.radio ;
+radioAssist_sprite = spr_radioAssist_gold;
+radio_assist_on = false;
+
+
 
 
 
@@ -1296,6 +1302,53 @@ global.unit_check = obj_map.units[global.posX,global.posY];
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Radio assist checks
+radioAssistRange = global.acting_unit.radio ;
+radioAssist_sprite = spr_radioAssist_gold;
+radio_assist_on = false;
+
+
+if (scr_inBound(global.posX,global.posY))
+    {
+    if (global.rangeCheck[global.posX,global.posY].sprite_index != -1 or (global.posX = moveOriginX and global.posY = moveOriginY ))
+        {
+        radioAssistRange = scr_getUnitRadioRange(global.acting_unit,obj_map.terrains[global.posX,global.posY]);
+        if(global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear or (global.posX = moveOriginX and global.posY = moveOriginY)) radioAssist_sprite = spr_radioAssist_gold;
+        else radioAssist_sprite = spr_radioAssist_darkBlue;
+        radio_assist_on = true;
+        //check if position is occupied by a unit
+        if(obj_map.units[global.posX,global.posY] != 0)
+            {
+            //chang range to target unit
+            radioAssistRange = scr_getUnitRadioRange(obj_map.units[global.posX,global.posY],obj_map.terrains[global.posX,global.posY]);
+            //if target unit is field officer
+            if( obj_map.units[global.posX,global.posY].name = "Officer")
+                {
+                radioAssist_sprite = spr_radioAssist_gold;
+                }
+            }
+        }
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -1368,6 +1421,32 @@ if (obj_map.units[global.posX,global.posY] !=0 and global.rangeCheck[global.posX
     
 //draw_text(x, y-24, "move cost"); 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw radio assist
+
+if radio_assist_on
+    {
+    scr_draw_radioAssist(global.posX,global.posY,radioAssistRange,radioAssist_sprite);
+    }
 </string>
           </argument>
         </arguments>

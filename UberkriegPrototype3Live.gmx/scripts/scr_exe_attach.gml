@@ -2,6 +2,7 @@
 
 // do these things
 global.target_unit.isCommander = true ;
+global.target_unit.isDisrupted = false;
 global.target_unit.state = "exhaust" ;
 with global.acting_unit instance_destroy();
 // reactivate main phaze UI

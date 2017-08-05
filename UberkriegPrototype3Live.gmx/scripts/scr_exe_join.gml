@@ -9,7 +9,9 @@ with (global.target_unit){
         hp = 10;
         hp_remainder *= (cost div 10);
         global.P_Turn.funds += hp_remainder;
-        if (global.acting_unit.isCommander) isCommander = true;   
+        if (global.acting_unit.isCommander) isCommander = true;
+        isDisrupted = false;   
+         
         }
     state =  "exhaust";    
     }
