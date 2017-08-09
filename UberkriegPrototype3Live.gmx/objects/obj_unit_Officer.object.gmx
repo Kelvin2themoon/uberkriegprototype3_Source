@@ -44,11 +44,16 @@ max_ammo    = -1;
 
 //unit static variables
 charge      = 10 ;
-cost        = 4000;
+cost        = global.cost[unit_index] ; // see cost array in obj_MasterControlls
 move_type   = "Tires";
 move_points = 8;
 vision      = 1;
 radio       = 1;
+
+//weapon type
+havePrimaryWeapon   = false;
+haveSecondaryWeapon = true;
+canMoveFire         = true;
 
 havePrimaryWeapon   = false;
 haveSecondaryWeapon = true;

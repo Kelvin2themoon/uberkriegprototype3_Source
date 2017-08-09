@@ -53,12 +53,47 @@ menu_content = ds_list_create();
 
 
 //left side
-
 if (x &gt; view_xview+view_wview -216) x -= 192;
 
-if ( y  &lt;= view_yview) y = view_yview + 12;
+//variable
+var extra_items = 0
 
-if ( y +  item_height*4  &gt; view_yview + view_hview) y =  (view_yview + view_hview)-(item_height*4) +12;
+///manage height for System menu
+if (global.acting_unit  = 0)
+    {
+    if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar*1000 and global.P_Turn.CO.COP_Bar !=0 and global.P_Turn.CO.COP_on = false and global.P_Turn.CO.SCOP_on = false ) 
+    extra_items += 1;
+    
+    if (global.P_Turn.CO.charge &gt;= (global.P_Turn.CO.COP_Bar*1000 + global.P_Turn.CO.SCOP_Bar*1000 )and global.P_Turn.CO.SCOP_Bar !=0 and global.P_Turn.CO.COP_on = false and global.P_Turn.CO.SCOP_on = false )  
+    extra_items += 1;
+    //too low
+if ( y &gt; view_yview + view_hview - 24*5) y -= 24*(3-((view_yview + view_hview -y) div 24)+extra_items);
+    }
+//manage Command
+else
+    {
+    if global.capture      extra_items += 1;
+    if global.engage       extra_items += 1;
+    if global.join         extra_items += 1;
+    if global.attach       extra_items += 1;
+    if global.supply       extra_items += 1;
+    if global.load         extra_items += 1;
+    if global.drop_A       extra_items += 1;
+    if global.drop_B       extra_items += 1;
+    if global.infiltrate   extra_items += 1;
+    if global.hide         extra_items += 1;
+    if global.appear       extra_items += 1;
+    if global.disrupt      extra_items += 1;
+    if global.wait         extra_items += 1;
+    
+    //draw at appropriate height
+    if (y &gt; view_yview + view_hview - extra_items*24) y -=  (extra_items-2)*24; 
+    
+    }
+
+
+
+
 
 
 start_y = y;

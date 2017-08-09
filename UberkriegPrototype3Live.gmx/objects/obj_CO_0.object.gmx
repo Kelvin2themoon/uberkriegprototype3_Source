@@ -40,7 +40,7 @@ COP_on      = false ;   //CO power switch
 SCOP_Bar    = 0 ;
 SCOP_on     = false ;   //SCOP switch
 
-charge = 6000 ; //ammount CO pwer charged
+charge = 0 ; //ammount CO pwer charged
 use_count = 0 ; //number of times COP and SCOP are used 
 
 
@@ -48,112 +48,58 @@ use_count = 0 ; //number of times COP and SCOP are used
 
 //  D2D                         COP                         SCOP
 
-    D2D_Radio       =   0 ;     COP_Radio       =   0 ;     SCOP_Radio         =   0 ;   
+    D2D_Radio       =   0 ;     COP_Radio       =   0 ;     SCOP_Radio          =   0 ;   
     D2D_Vision      =   0 ;     COP_Vision      =   0 ;     SCOP_Vision         =   0 ; 
     D2D_Move        =   0 ;     COP_Move        =   0 ;     SCOP_Move           =   0 ;
     D2D_Range       =   0 ;     COP_Range       =   0 ;     SCOP_Range          =   0 ;
     
-    D2D_Pow         = 100 ;     COP_Pow         = 100 ;     SCOP_Pow            = 100 ; 
-    D2D_Def         = 100 ;     COP_Def         = 100 ;     SCOP_Def            = 100 ;
-    
-    D2D_DirectPow   = 100 ;     COP_DirectPow   = 100 ;     SCOP_DirectPow      = 100 ;
-    D2D_DirectDef   = 100 ;     COP_DirectDef   = 100 ;     SCOP_DirectDef      = 100 ;
-    
-    D2D_IndirectPow = 100 ;     COP_IndirectPow = 100 ;     SCOP_IndirectPow    = 100 ;
-    D2D_IndirectDef = 100 ;     COP_IndirectDef = 100 ;     SCOP_IndirectPow    = 100 ;
-    
     D2D_Cost        = 100 ;     COP_Cost        = 100 ;     SCOP_Cost           = 100 ;        
     D2D_Income      = 100 ;     COP_Income      = 100 ;     SCOP_Income         = 100 ;
-    D2D_Salvage     =   0 ;     COP_Salvage     = 100 ;     SCOP_Salvage        =   0 ; // damage enemy units to fain funds
+    D2D_Salvage     =   0 ;     COP_Salvage     = 100 ;     SCOP_Salvage        =   0 ; // damage enemy units to gain funds
     D2D_Repair      =   0 ;     COP_Repair      =   0 ;     SCOP_Repair         =   0 ;
-    
-    D2D_HP          =   0 ;     COP_HP          =   0 ;     SCOP_HP             =   0 ;
-    D2D_Ammo        =   0 ;     COP_Ammo        =   0 ;     SCOP_Ammo           =   0 ;
-    D2D_Fuel        = 100 ;     COP_Fuel        = 100 ;     SCOP_Ammo           = 100 ;
     
     D2D_GainHP      =   0 ;     COP_GainHP      =   0 ;     SCOP_GainHP         =   0 ;
     D2D_DrainHP     =   0 ;     COP_DrainHP     =   0 ;     SCOP_DrainHP        =   0 ;
     
     D2D_MaxLuck     =   0 ;     COP_MaxLuck     =   0 ;     SCOP_MaxLuck        =   0 ;
     D2D_MinLuck     =   0 ;     COP_minLuck     =   0 ;     SCOP_MinLuck        =   0 ;
+    
+//unit stats
 
-    
-    
-    
-//  D2D Stats                           COP stats                           SCOP stats
+//strength
+var i = 0
 
-    D2D_LightInfantry_Pow   = 100 ;     COP_LightInfantry_Pow   = 100 ;     SCOP_LightInfantry_Pow   = 100 ;
-    D2D_LightInfantry_Def   = 100 ;     COP_LightInfantry_Pow   = 100 ;     SCOP_LightInfantry_Pow   = 100 ;
-    D2D_LightInfantry_Mov   =   0 ;     COP_LightInfantry_mov   =   0 ;     SCOP_LightInfantry_mov   =   0 ;
+for ( i = 0 ; i &lt;= 13 ; i += 1)
+    {
+    D2D_Atk[i]   = 1;
+    D2D_Def[i]   = 1;
+    D2D_Cost[i]     = global.cost[i]; 
     
+    COP_Atk[i]   = 1;
+    COP_Def[i]   = 1;
+    COP_Cost[i]     = global.cost[i]; 
     
-    D2D_HeavyInfantry_Pow   = 100 ;     COP_HeavyInfantry_Pow   = 100 ;     SCOP_HeavyInfantry_Pow   = 100 ;
-    D2D_Heavyinfantry_Def   = 100 ;     COP_Heavyinfantry_Def   = 100 ;     SCOP_Heavyinfantry_Def   = 100 ;
-    D2D_Heavyinfantry_Mov   =   0 ;     COP_Heavyinfantry_Mov   =   0 ;     SCOP_Heavyinfantry_Mov   =   0 ;
-    
-    D2D_LonGun_Pow          = 100 ;     COP_LonGun_Pow          = 100 ;     SCOP_LonGun_Pow          = 100 ;
-    D2D_longGun_Def         = 100 ;     COP_longGun_Def         = 100 ;     SCOP_longGun_Def         = 100 ;
-    D2D_longGun_Def         =   0 ;     COP_longGun_Def         =   0 ;     SCOP_longGun_Def         =   0 ;
-    
-    D2D_Officer_Pow         = 100 ;     COP_Officer_Pow         = 100 ;     SCOP_Officer_Pow         = 100 ;
-    D2D_Officer_Def         = 100 ;     COP_Officer_Def         = 100 ;     SCOP_Officer_Def         = 100 ;
-    D2D_Officer_Mov         =   0 ;     COP_Officer_mov         =   0 ;     SCOP_Officer_Def         =   0 ;
-    
-    D2D_Recon_Pow           = 100 ;     COP_Recon_Pow           = 100 ;     SCOP_Recon_Pow           = 100 ;
-    D2D_Recon_Def           = 100 ;     COP_Recon_Def           = 100 ;     SCOP_Recon_Def           = 100 ;
-    D2D_Recon_Mov           =   0 ;     COP_Recon_Mov           =   0 ;     SCOP_Recon_Mov           =   0 ;
-    
-    D2D_APC_Pow             = 100 ;     COP_APC_Pow             = 100 ;     SCOP_APC_Pow             = 100 ;
-    D2D_APC_Def             = 100 ;     COP_APC_Def             = 100 ;     SCOP_APC_Def             = 100 ;
-    D2D_APC_Mov             =   0 ;     COP_APC_Mov             =   0 ;     SCOP_APC_Mov             =   0 ;
-    
-    D2D_LightTank_Pow       = 100 ;     COP_LightTank_Pow       = 100 ;     SCOP_LightTank_Pow       = 100 ;
-    D2D_LightTank_Def       = 100 ;     COP_LightTank_Def       = 100 ;     SCOP_LightTank_Def       = 100 ;
-    D2D_LightTank_Mov       =   0 ;     COP_LightTank_Def       =   0 ;     SCOP_LightTank_Mov       =   0 ;
-    
-    D2D_AA_Pow              = 100 ;     COP_AA_Pow              = 100 ;     SCOP_AA_Pow              = 100 ;
-    D2D_AA_Def              = 100 ;     COP_AA_Def              = 100 ;     SCOP_AA_Def              = 100 ;
-    D2D_AA_Mov              =   0 ;     COP_AA_Mov              =   0 ;     SCOP_AA_Mov              =   0 ;
-    
-    D2D_Artillery_Pow       = 100 ;     COP_Artillery_Pow       = 100 ;     SCOP_Artillery_Pow       = 100 ;
-    D2D_Artillery_Def       = 100 ;     COP_Artillery_Def       = 100 ;     SCOP_Artillery_Def       = 100 ;
-    D2D_Artillery_Mov       =   0 ;     COP_Artillery_Mov       =   0 ;     SCOP_Artillery_Mov       =   0 ;
-    
-    D2D_CovertOp_Pow        = 100 ;     COP_CovertOp_Pow        = 100 ;     SCOP_CovertOp_Pow        = 100 ;
-    D2D_CovertOp_Def        = 100 ;     COP_CovertOp_Def        = 100 ;     SCOP_CovertOp_Def        = 100 ;
-    D2D_CovertOp_Mov        =   0 ;     COP_CovertOp_Mov        =   0 ;     SCOP_CovertOp_Mov        =   0 ;
-    
-    D2D_HeavyTank_Pow       = 100 ;     COP_HeavyTank_Pow       = 100 ;     SCOP_HeavyTank_Pow       = 100 ;
-    D2D_HeavyTank_Def       = 100 ;     COP_HeavyTank_Def       = 100 ;     SCOP_HeavyTank_Def       = 100 ;
-    D2D_HeavyTank_Mov       =   0 ;     COP_HeavyTank_Mov       =   0 ;     SCOP_HeavyTank_Mov       =   0 ;
-    
-    D2D_Rocket_Pow          = 100 ;     COP_Rocket_Pow          = 100 ;     SCOP_Rocket_Pow          = 100 ;
-    D2D_Rocket_Def          = 100 ;     COP_Rocket_Def          = 100 ;     SCOP_Rocket_Def          = 100 ;
-    D2D_Rocket_Mov          =   0 ;     COP_Rocket_Mov          =   0 ;     SCOP_Rocket_Mov          =   0 ;
-    
-    D2D_LandCruiser_Pow     = 100 ;     COP_LandCruiser_Pow     = 100 ;     SCOP_LandCruiser_Pow     = 100 ;
-    D2D_LandCruiser_Def     = 100 ;     COP_LandCruiser_Def     = 100 ;     SCOP_LandCruiser_Def     = 100 ;
-    D2D_LandCruiser_Mov     = 100 ;     COP_LandCruiser_Mov     =   0 ;     SCOP_LandCruiser_Mov     =   0 ;
-    
-//Terrain Power Boosts
-
-    D2D_Plains              = 100 ;     COP_Plains              = 100 ;     SCOP_Plains             = 100 ;
-    D2D_Road                = 100 ;     COP_Road                = 100 ;     SCOP_Road               = 100 ;
-    D2D_Mountain            = 100 ;     COP_Mountain            = 100 ;     SCOP_Mountain           = 100 ;
-    D2D_Woods               = 100 ;     COP_Woods               = 100 ;     SCOP_Woods              = 100 ;
-    D2D_Road                = 100 ;     COP_Road                = 100 ;     SCOP_Road               = 100 ;
-    D2D_Bridge              = 100 ;     COP_Bridge              = 100 ;     SCOP_Bridge             = 100 ;
-    D2D_Grass               = 100 ;     COP_Grass               = 100 ;     SCOP_Grass              = 100 ;
+    SCOP_Atk[i]  = 1;
+    SCOP_Def[i]  = 1;
+    SCOP_Cost[i]    = global.cost[i]; 
+    }
+ 
+ 
             
     
 //special CO FX and activate only affects
+COFX_HiddenHP       = false ;
+COFX_PerfectVision  = false ;
+COFX_DeployDummy    = false ;
+COFX_SmokeScreen    = 0     ; //defines charge     
+
 
 COFX_FastCap        = false ;
 COFX_PerfectCap     = false ;
 
-COFX_HiddenHP       = false ;
-COFX_FirstStrile    = false ;
-COFX_PerfectVision  = false ;
+
+COFX_FirstStrike    = false ;
+
 COFX_Ambush         = false ; // attack on Trap
 COFX_Sonja          = false ; // reduces effects of cover
 

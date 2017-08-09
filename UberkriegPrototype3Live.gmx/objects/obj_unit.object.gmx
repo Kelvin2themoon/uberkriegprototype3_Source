@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///Initialize defaults
+unit_index = 00;
 name = "Unit"
 state = "idle" //describe stat of animation
 image_speed = 0; //stops image
@@ -53,6 +54,8 @@ radio       = 3;
 
 havePrimaryWeapon   = true;
 haveSecondaryWeapon = true;
+canMoveFire         = true;
+canFireMove         = false;
 
 min_range = 1;
 max_range = 1;
@@ -63,7 +66,7 @@ canCapture      = false;
 isCommander     = false;
 canAttach       = false; //officers only
 canSupply       = false; //APC, uses ammo
-canLoadInfantry = 0; //APC, spacific to infantry in case naval and sea units mak it
+canLoadInfantry = false; //APC, spacific to infantry in case naval and sea units mak it
 canHide         = false;
 canDisrupt      = false;
 
@@ -97,8 +100,17 @@ disruptor = 0;
 //cop on or off
 COP  = false;
 SCOP = false ;
+//Special CO things
 HP_hidden = false ;
+Fuel_hidden = false;
+Ammo_hidden = false;
 
+////special variable containers for load
+load_A = 0;
+load_B = 0;
+
+//SPECIAL: Dummy units
+dummy = false;
 
 
 

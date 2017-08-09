@@ -452,7 +452,7 @@ global.target_unit  = obj_map.units[global.posX,global.posY];
 global.destination  = obj_map.terrains[global.posX,global.posY];
 
 //check: key press confirm
-if ( keyboard_check_pressed( global.keyCONFIRM) )
+if( keyboard_check_pressed( global.keyCONFIRM) )
     {
     //reset actionable variables (just in case)
     global.capture      = false;
@@ -468,403 +468,198 @@ if ( keyboard_check_pressed( global.keyCONFIRM) )
     global.appear       = false;
     global.disrupt      = false;
     global.wait         = true ; // wait is on by default
-    
-    var isEmpty = true; // destination is default empty
+    //destination is default empty
+    var isEmpty = true; 
     
     //check if unit has moved: for indirect fire checks
     if (ds_priority_size(global.move_order) &lt;2) global.acting_unit_moved = false;
     else global.acting_unit_moved = true;
-    
-    
-    
+
     //check range
-    if (global.rangeCheck[global.posX,global.posY].move_cost = -1) 
-    { 
-    //out of range, do nothing, switch off wait
-    global.wait = false;
-    } 
+    if(global.rangeCheck[global.posX,global.posY].move_cost = -1) 
+        { 
+        //out of range, do nothing, switch off wait
+        global.wait = false;
+        } 
     
-    
-    else // check: destination is in range, check for appropriate commands and turn them on
-    {
-        if (global.target_unit != 0 ) //check:  a unit occupies the destination
+    // check: destination is in range, check for appropriate commands and turn them on
+    else
         {
+//******check:  a unit occupies the destination
+        if (global.target_unit != 0) 
+            {
             // destination is occupied
             isEmpty = false; 
             global.wait = false; 
             
             // target is ally ( therefor is also visible ) valid ations: join, attach, load
             if ( global.target_unit.team = global.P_Turn.team ) 
-            {
+                {
                 // Join: check target unit is of the same type and hp is less than 10
-                if ( global.acting_unit.name = global.target_unit.name  and global.target_unit.hp &lt; 10) global.join = true;
-                
-                //turn join off if unit can load
-                if  (global.acting_unit.canLoadInfantry &gt; 0 )
-                    {
-                    if(global.acting_unit.load_A != 0 or global.acting_unit.load_B != 0) global.join = false;
-                    }
-                if  (global.target_unit.canLoadInfantry &gt; 0 )
-                    {
-                    if(global.target_unit.load_A != 0 or global.target_unit.load_B != 0) global.join = false;
-                    }
-                
+                if ( global.acting_unit.name = global.target_unit.name  and global.target_unit.hp &lt; 10 and !global.acting_unit.dummy and !global.target_unit.dummy) global.join = true;
+                //turn join off one either unit is can Load and has units loaded
+                if  (global.acting_unit.canLoadInfantry &gt; 0 ) if(global.acting_unit.load_A != 0 or global.acting_unit.load_B != 0 ) global.join = false;
+                if  (global.target_unit.canLoadInfantry &gt; 0 ) if(global.target_unit.load_A != 0 or global.target_unit.load_B != 0 ) global.join = false;
                 // Attach: check acting unit is  officer and target unit is not of command rank
-                if ( global.acting_unit.name = "Officer" and !global.target_unit.isCommander ) global.attach = true;
+                if ( global.acting_unit.name = "Officer" and !global.target_unit.isCommander and !global.acting_unit.dummy and !global.target_unit.dummy) global.attach = true;
                 
                 //Load: check if target is APC and if acting unit is infantry
-                if (    global.target_unit.name = "A.P.C." 
-                        and 
-                        ( 
+                if( global.target_unit.canLoadInfantry
+                    and !global.target_unit.dummy
+                    and ( 
                         global.acting_unit.name="Light Infantry" 
                      or global.acting_unit.name="Heavy Infantry" 
                      or global.acting_unit.name="Long Gun"
                         ) 
-                   )
-                {
-                
-                // there is room in the APC
-                if (global.target_unit.load_A = 0 or global.target_unit.load_B = 0) global.load = true;
-                
-                }    
-                
-            }
+                  )
+                    {
+                    // there is room in the APC
+                    if (global.target_unit.load_A = 0 or global.target_unit.load_B = 0 and !global.target_unit.dummy) global.load = true;
+                    }    
+                }
             
             //target is enemy
-            else if ( global.target_unit.team != global.P_Turn.team ) 
-            {
-                show_debug_message("enemy unit check pass");
-                if (global.target_unit.isVisible) //destination is vivibally occupied by an enemy unit
+            else if ( global.target_unit.team != global.P_Turn.team) 
                 {
+                //debug
+                //show_debug_message("enemy unit check pass");
+                
+                //if destination is visibally occupied by an enemy unit
+                if (global.target_unit.isVisible) 
+                    {
                     // do nothing
-                    // this will eventually be a short-cut for engage and disrupt
-                }
+                    // this will eventually be a short-cut for engage and disrupt********************************************************************************************************
+                    //hey i thought about this, Im a clever boy
+                    }
                 else
-                {
-                    show_debug_message("invisible enemy unit check pass");
+                    {
+                    //show_debug_message("invisible enemy unit check pass");
                     //teat destination as if it is empty
                     isEmpty = true;
                     global.wait = true; //turn wait back on
-                } 
-            }
+                    }   
+                }
+                
+                
             //target unit is on the same team but does not belong to the currrent player ( team, but not ally )
-            else if ( global.target_unit.team = global.P_Turn.team ) 
-            {
+            else if ( global.target_unit.team = global.P_Turn.team and !global.acting_unit.dummy and !global.target_unit.dummy) 
+                {
                 //do nothing
                 //don't thing there will be dooin' of anything here, though...
+                }    
             }
-            
-        }
         
-        // destination appears empty
+//NEW MAJOR CHECK destination appears empty
         if ( isEmpty )
-        {
-        
-        show_debug_message("empty check passed");
-
-        
-        //check if unit is covert op. and turn on appear or dissapppear
-        
-        if (global.acting_unit.name = "Covert Op."){
-            if (global.acting_unit.isHidden){
-                //activate appear
-                global.appear = true;
+            {
+            show_debug_message("empty check passed");
+            //check if unit is covert op. and turn on appear or dissapppear
+            if (global.acting_unit.name = "Covert Op." and !global.acting_unit.dummy)
+                {
+                //check if the actiing unit is hidden
+                if (global.acting_unit.isHidden) global.appear = true;
+                else global.hide = true;
                 }
-            else{
-                global.hide = true;
-                }
-            }
-        
-        //check for property
-        if(object_is_ancestor(obj_map.terrains[global.posX, global.posY].object_index, obj_property) 
-            and obj_map.terrains[global.posX, global.posY].ownership != global.P_Turn.number
-            and global.acting_unit.canCapture )
-        {
-            global.capture = true ;
-        }
-        
-        // For APC:
-        if (global.acting_unit.name = "A.P.C.")
-        {
-            // Check for adjacent ally unit for Supply action
-            if (scr_check_units_in_range(global.posX, global.posY, 1, 1, true))
-            {
-                global.supply = true;
-            }
-            // Check if units can be dropped
-            var num_units_adjacent = ds_list_size(global.targetables);
-            if ( global.acting_unit.load_A != 0 and num_units_adjacent &lt; 4 )
-            {
-                global.drop_A = true;
-            }
-            if ( global.acting_unit.load_B != 0 and num_units_adjacent &lt; 4 )
-            {
-                global.drop_B = true;
-            }
-        }
-        
-        //add engage if visible enemy units are in range 
-        //check primary weaopn
-        if ( (global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0) or (global.acting_unit.name = "Covert Op." and global.alt_Disrupt )) //---------------------------------
-            {
-                show_debug_message("Primary Weapon Check");
-                //exception: land cruiser
-                if (global.acting_unit.max_range = 1 or global.acting_unit.name = "Land Cruiser")
                 
-                    {
-                    //max range is 1 or is land cuiser, process as direct attack (can move and 
-                            if (scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false))
-                            {
-                            
-                                global.engage = true;
-                                global.engage_type = 1;
-                                if global.acting_unit.name = "Covert Op." global.engage_type = 2;
-                            
-                            }
-                    
-                        }
-                //otherwise process as indirect (target location = origin)
-                else 
-                    {
-                        
-                        if (global.acting_unit_moved = false )
-                            {
-                                if ( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)and global.acting_unit.name != "Covert Op.")
-                                    {
-                                    
-                                        global.engage = true;
-                                        global.engage_type = 1;
-                                    
-                                    }
-                                else if (scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false and global.alt_Disrupt ))
-                                    {
-                                    
-                                        if global.acting_unit.ammo &gt; 0 global.disrupt = true ;
-                                    
-                                    }
-                            }
-                        
-                        }
-        
-            }
-        //check secondary weapon
-        else if (global.acting_unit.haveSecondaryWeapon){
-        show_debug_message("secondary weapon check");
-            if ( scr_check_units_in_range( global.posX, global.posY, 1 , 1 , false)){
-                global.engage = true;
-                global.engage_type = 2;
-                //if disrupt is avaliable and basic type
-                if (global.acting_unit.canDisrupt and global.acting_unit.ammo &gt;0 and !global.alt_Disrupt) {
-                    global.disrupt = true;
-                }
-            }
-        }
-        //exception: covert Op
-        if (global.acting_unit.name = "Covert Op." and global.alt_Disrupt)
-            
-            {
-            
-                if ( scr_check_units_in_range( global.posX, global.posY, 1 , 1 , false))
-                    
-                    {
-                    
-                        global.engage = true;
-                        global.engage_type = 2;
-                    
-                    }
-        
-            
-            }
-        
-        }
-    
-    
-    
-    }
-    
-    //if items exsist, create syscom_command
-    if(global.capture   or
-    global.engage       or
-    global.join         or
-    global.attach       or
-    global.supply       or
-    global.load         or
-    global.drop_A       or
-    global.drop_B       or
-    global.infiltrate   or
-    global.hide         or
-    global.appear       or
-    global.disrupt      or
-    global.wait)
-    {
-        
-        
-        //clear all checker graphics ( no sprite)
-        with(obj_checker_tile) sprite_index = -1;
-        //change sprite back at destination
-        global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
-        
-        //deactivate move cursor object
-        instance_deactivate_object(obj_moveCursor);
-        //create command menu    
-        instance_create(x+24,y,obj_syscom_command); 
-    }
-            
-        
-    
-
-}
-        
-    
-
-
-
-
-
-/*old code for check syntax
-
-else{
-    //if a unit [ally] occupies target location, destination is invalid    
-     if (global.target_unit != 0){
-        //if target unit is an ally
-        if (global.target_unit.ownership = global.P_Turn.number){
-            //disable: wait
-            global.wait = false;
-        
-        //check for load
-        if ( global.target_unit.name = "A.P.C." and (global.acting_unit.name="Light Infantry" or (global.acting_unit.name="Heavy Infantry" or (global.acting_unit.name="Long Gun")))){
-            if (global.target_unit.load_A = 0 or global.target_unit.load_B = 0) global.load = true;
-            }
-        
-        //if target and acting are the same type : turn on join comman
-        if(global.target_unit.name = global.acting_unit.name and obj_map.units[x div 24, y div 24].hp &lt; 10) global.join = true; 
-        //if acting is officer and target is not commander
-        if ( global.acting_unit.object_index = obj_unit_Officer and global.target_unit.isCommander = false){
-            //add attach command
-            global.attach = true;
-            }
-        if (global.attach or global.join or global.load){
-            global.wait = false; 
-            }
-            
-        }
-        
-
-        
-        }
-    //else target is in range &amp; no unit visibly occupies the location    
-    else{
-        show_debug_message("empty check passed");
-
-        
-        //check if unit is vovert op. and turn on appear or dissapppear
-        
-        if (global.acting_unit.name = "Covert Op."){
-            if (global.acting_unit.isHidden){
-                //activate appear
-                global.appear = true;
-                }
-            else{
-                global.hide = true;
-                }
-            }
-        
-        //check for property
-        if(object_is_ancestor(obj_map.terrains[global.posX, global.posY].object_index, obj_property) 
+            //check for property and turn on Capture
+            if( object_is_ancestor(obj_map.terrains[global.posX, global.posY].object_index, obj_property) 
             and obj_map.terrains[global.posX, global.posY].ownership != global.P_Turn.number
-            and global.acting_unit.canCapture )
-        {
-            global.capture = true ;
-        }
-        
-        // For APC:
-        if (global.acting_unit.name = "A.P.C.")
-        {
-            // Check for adjacent ally unit for Supply action
-            if (scr_check_units_in_range(global.posX, global.posY, 1, 1, true))
-            {
-                global.supply = true;
-            }
-            // Check if units can be dropped
-            var num_units_adjacent = ds_list_size(global.targetables);
-            if ( global.acting_unit.load_A != 0 and num_units_adjacent &lt; 4 )
-            {
-                global.drop_A = true;
-            }
-            if ( global.acting_unit.load_B != 0 and num_units_adjacent &lt; 4 )
-            {
-                global.drop_B = true;
-            }
-        }
-        
-        //add engage if visible enemy units are in range 
-        //check primary weaopn
-        if ( global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 )
-        {
-            show_debug_message("Primary Weapon Check");
-        
-            if (global.acting_unit.max_range = 1 or global.acting_unit.name = "Land Cruiser"){
-                //max range is 1 or is land cuiser, process as direct attack (can move and 
-                if (scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
+            and global.acting_unit.canCapture 
+            and !global.acting_unit.dummy)
+                {
+                global.capture = true ;
+                }
+            
+            //check for supply action
+            if (global.acting_unit.canSupply and !global.acting_unit.dummy)
+                {
+                // Check for adjacent ally unit for Supply action
+                if (scr_check_units_in_range(global.posX, global.posY, 1, 1, true)) global.supply = true;
+                } 
+                
+            //check Load action
+            if( global.acting_unit.canLoadInfantry)
+                {
+                // Check if units can be dropped
+                var num_units_adjacent = ds_list_size(global.targetables);
+                //check for and switch  on drap A
+                if ( global.acting_unit.load_A != 0 and num_units_adjacent &lt; 4 ) global.drop_A = true;
+                //check for and switch  on drap B
+                if ( global.acting_unit.load_B != 0 and num_units_adjacent &lt; 4 ) global.drop_B = true;
+                }
+            
+            //check for disrupt
+            if( global.acting_unit.canDisrupt and global.acting_unit.ammo &gt; 0 and !global.acting_unit.dummy)
+                {
+                // check enemy units are in range unit in range
+                if( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false) )
+                    {
+                    //check if can Move fire
+                    if(global.acting_unit.canMoveFire)    global.disrupt = true;
+                    //check indirect fire only
+                    else if ( !global.acting_unit_moved ) global.disrupt = true;
+                    }
+                }
+                
+            //check for secondary weapon attack type (Direct only)  Note: this will also activate primary weapon types if they are direct fire
+            if(global.acting_unit.haveSecondaryWeapon and global.acting_unit.canMoveFire  and scr_check_units_in_range(global.posX,global.posY,1,1,false)and !global.acting_unit.dummy) global.engage = true;
+            
+            //check nd process primary weapons and overide engage type to primary 
+            if (global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 and !global.acting_unit.dummy)
+                {
+                if( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false) )
+                    {
+                    //check if can Move fire
+                    if(global.acting_unit.canMoveFire)
+                        {    
                         global.engage = true;
-                        global.engage_type = 1;
+                        global.engage_type = 1 ;
                         }
-                    }
-                //otherwise process as indirect (target location = origin)
-                else {
-                    if (global.acting_unit_moved = false){
-                        if ( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false)){
-                            global.engage = true;
-                            global.engage_type = 1;
-                            }
+                    //check indirect fire only
+                    else if ( !global.acting_unit_moved ) 
+                        {
+                        global.engage = true;
+                        global.engage_type = 1 ;
                         }
-                    
-                    }
-        
-            }
-        //check secondary weapon
-        else if (global.acting_unit.haveSecondaryWeapon){
-        show_debug_message("secondary weapon check");
-            if ( scr_check_units_in_range( global.posX, global.posY, 1 , 1 , false)){
-                global.engage = true;
-                global.engage_type = 2;
-                //if disrupt is avaliable
-                if (global.acting_unit.canDisrupt and global.acting_unit.ammo &gt;0) {
-                    global.disrupt = true;
+                    } 
                 }
             }
         }
-    }
+    
     //if items exsist, create syscom_command
-    if(global.capture   or
-    global.engage       or
-    global.join         or
-    global.attach       or
-    global.supply       or
-    global.load         or
-    global.drop_A       or
-    global.drop_B       or
-    global.infiltrate   or
-    global.hide         or
-    global.appear       or
-    global.disrupt      or
-    global.wait){
-        
-        
+    if( global.capture   
+    or  global.engage       
+    or  global.join         
+    or  global.attach       
+    or  global.supply       
+    or  global.load         
+    or  global.drop_A       
+    or  global.drop_B       
+    or  global.infiltrate   
+    or  global.hide         
+    or  global.appear       
+    or  global.disrupt      
+    or  global.wait)
+        {
         //clear all checker graphics ( no sprite)
         with(obj_checker_tile) sprite_index = -1;
         //change sprite back at destination
         global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
-        
+    
         //deactivate move cursor object
         instance_deactivate_object(obj_moveCursor);
         //create command menu    
         instance_create(x+24,y,obj_syscom_command); 
         }
-            
-        
     }
-}
+        
+    
+
+
+
+
+
+
 
 </string>
           </argument>
@@ -1078,17 +873,20 @@ if radio_assist_on
             <kind>1</kind>
             <string>///draw self
 draw_self();
-if (global.acting_unit.name = "Land Cruiser" and global.acting_unit.ammo &gt; 0) draw_sprite(spr_CruiserPlusCursor,0,x,y);
+if (global.acting_unit.max_range &gt;1 and global.acting_unit.ammo &gt; 0 and global.acting_unit.canMoveFire) scr_draw_radioAssist(global.posX,global.posY,global.acting_unit.max_range,spr_rangeAssist);
 
 
-if (obj_map.units[global.posX,global.posY] !=0 and global.rangeCheck[global.posX,global.posY].sprite_index =spr_rangecheck_clear){
-    if ((global.cursorFrame = 2 or global.cursorFrame = 1) and obj_map.units[global.posX,global.posY].team = global.P_Turn.team ){
+if (obj_map.units[global.posX,global.posY] !=0 and global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear)
+    {
+    if ((global.cursorFrame = 2 or global.cursorFrame = 1) and obj_map.units[global.posX,global.posY].team = global.P_Turn.team )
+        {
         //join
-        if (obj_map.units[global.posX,global.posY].hp &lt; 10 and obj_map.units[global.posX,global.posY].name = global.acting_unit.name) draw_sprite( spr_basicCursor_Icons,4,x,y); 
+        if (obj_map.units[global.posX,global.posY].hp &lt; 10 and obj_map.units[global.posX,global.posY].name = global.acting_unit.name and !global.acting_unit.dummy and global.target_unit.dummy) draw_sprite( spr_basicCursor_Icons,4,x,y); 
         //attach
-        if ( obj_map.units[global.posX,global.posY].isCommander = false and global.acting_unit.canAttach) draw_sprite(spr_basicCursor_Icons,3,x,y);
+        if ( obj_map.units[global.posX,global.posY].isCommander = false and global.acting_unit.canAttach and !global.acting_unit.dummy and global.target_unit.dummy) draw_sprite(spr_basicCursor_Icons,3,x,y);
         //Load
-        if ( obj_map.units[global.posX,global.posY].name = "A.P.C."){
+        if ( obj_map.units[global.posX,global.posY].canLoadInfantry and global.target_unit.dummy)
+            {
             if (global.acting_unit.name = "long Gun" or global.acting_unit.name = "Light Infantry" or global.acting_unit.name = "Heavy Infantry") draw_sprite( spr_basicCursor_Icons,2,x,y);
             }                
         }

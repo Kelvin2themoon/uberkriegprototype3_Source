@@ -230,7 +230,7 @@ if global.P4_in_play if global.P4.CO.SCOP_on draw_sprite(spr_ready,9,x+12, y+60+
             <kind>1</kind>
             <string>///temp drae CO name
 draw_set_color(make_color_rgb(235,218,206));
-draw_text(x+16,7+19,global.P_Turn.CO.name);
+draw_text(x+16,y+25,global.P_Turn.CO.name);
 draw_set_colour(global.c_uiWhite);
 </string>
           </argument>

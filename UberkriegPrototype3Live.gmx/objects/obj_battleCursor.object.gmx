@@ -1183,7 +1183,7 @@ if (cursor_icon == 5 ){
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="119">
+    <event eventtype="9" enumb="115">
       <action>
         <libid>1</libid>
         <id>603</id>

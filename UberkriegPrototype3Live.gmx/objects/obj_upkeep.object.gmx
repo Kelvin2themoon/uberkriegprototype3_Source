@@ -58,32 +58,37 @@ view_speed = 8;
 
 
 //turn units on if standing
-with obj_unit{ 
+with obj_unit
+    { 
     if (ownership = global.P_Turn.number) global.P_Turn.unit_count += 1;
     if isStanding state = "idle";
     if isDisrupted state = "exhaust";
-    if (isHidden and ownership = global.P_Turn.number) {fuel -= 5; show_debug_message("hidden fuel consum");}
-    if ( obj_map.terrains[ x div 24, y div 24].isProperty ){
-        if ( obj_map.terrains[ x div 24, y div 24].canRepair_g and obj_map.terrains[ x div 24, y div 24].ownership = global.P_Turn.number and ownership = global.P_Turn.number){
+    if (isHidden and ownership = global.P_Turn.number) {fuel -= 5; show_debug_message("hidden fuel consum");
+    }
+    
+    if ( obj_map.terrains[ x div 24, y div 24].isProperty )
+        {
+        if ( obj_map.terrains[ x div 24, y div 24].canRepair_g and obj_map.terrains[ x div 24, y div 24].ownership = global.P_Turn.number and ownership = global.P_Turn.number)
+            {
             //repair disrupt
-            if (isDisrupted and ownership = global.P_Turn.number) isDisrupted = false;
-            
-            //add unit to upkeep Q
-            //if ( hp &lt; 10 ) ds_queue_enqueue(global.upkeep_q, self);
-            
-            if (hp=9){
+            if (isDisrupted and ownership = global.P_Turn.number) isDisrupted = false; 
+           //HP UP
+            if( hp=9 and !dummy)
+                {
                 hp = 10
                 global.P_Turn.funds -= cost div 10;
                 ds_queue_enqueue(global.upkeep_q, obj_map.units[x div 24, y div 24]);
                 }
-            else if ( hp &lt; 9){
+                
+            else if ( hp &lt; 9 and !dummy)
+                {
                 hp +=2
                  global.P_Turn.funds -= (cost div 10)*2;
                  ds_queue_enqueue(global.upkeep_q, obj_map.units[x div 24, y div 24]);
                 }
+                
             fuel = max_fuel;
             ammo = max_ammo;
-            
             }
         }
     }

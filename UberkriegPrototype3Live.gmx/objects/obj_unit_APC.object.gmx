@@ -44,14 +44,16 @@ max_ammo    = 6;
 
 //unit static variables
 charge      = 10 ;
-cost        = 5000;
+cost        = global.cost[unit_index] ; // see cost array in obj_MasterControlls
 move_type   = "Tracks";
 move_points = 8;
 vision      = 1;
 radio       = 1;
 
-havePrimaryWeapon   = true;
+//weapon type
+havePrimaryWeapon   = false;
 haveSecondaryWeapon = true;
+canMoveFire         = true;
 
 min_range = 1;
 max_range = 1;
@@ -62,7 +64,7 @@ canCapture      = false;
 isCommander     = true;
 canAttach       = false; //officers only
 canSupply       = true; //APC, uses ammo
-canLoadInfantry = 2;    //APC, spacific to infantry in case naval and sea units mak it
+canLoadInfantry = true;    //APC, spacific to infantry in case naval and sea units mak it
 canHide         = false;
 canDisrupt      = false;
 

@@ -63,6 +63,11 @@ display_on = false;
 display_cost = 0;
 display_difference = 0;
 
+//Deploy modifyer (COFX)
+cost_mod = 1;
+//check for dummy
+if( global.P_Turn.CO.COFX_DeployDummy and (global.P_Turn.CO.COP_on or global.P_Turn.CO.SCOP_on) ) cost_mod = 0;
+
 </string>
           </argument>
         </arguments>
@@ -275,210 +280,221 @@ if (alarm[1] = -1 )
 
 if (mouse_check_button_pressed(mb_left))
     {
-    
-        //check if cursor is inbound
-        if (
-                mouse_x &gt; start_x and mouse_x &lt; start_x + col_size*2
-            and mouse_y &gt; start_y and mouse_y &lt; start_y + row_size*7
-            
-        )
-        
+    //check if cursor is inbound
+    if( mouse_x &gt; start_x and mouse_x &lt; start_x + col_size*2
+    and mouse_y &gt; start_y and mouse_y &lt; start_y + row_size*7)
+        {
+        //deploy if col and row match mouse pos
+        if (  col = (mouse_x - start_x) div col_size and row = (mouse_y - start_y) div row_size )
             {
-            
-                //deploy if col and row match mouse pos
-                if (  col = (mouse_x - start_x) div col_size and row = (mouse_y - start_y) div row_size )
-                    
+            unit_has_deployed = false;
+            no_deploy = false;
+            //check col
+            if col == 0
+                {
+                //check row
+                switch row
                     {
-                        
-                        unit_has_deployed = false;
-                        no_deploy = false;
-                            //check col
-                            if col == 0{
-                                //check row
-                                switch row
-                                    {
-                                    case 0: //Light Infantry
-                                    if (global.P_Turn.funds &gt;= 1000){
-                                        global.P_Turn.funds -= 1000;
-                                        scr_setUnit(obj_unit_LightInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                                        unit_has_deployed = true;
-                                        }
-                                    break;
-                                    
-                                    case 1: //Heavy Infantry (mechanized Infnatry)
-                                        if(global.P_Turn.funds &gt;= 2000){
-                                        global.P_Turn.funds -= 2000;
-                                        scr_setUnit(obj_unit_HeavyInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                                        unit_has_deployed = true;
-                                        }
-                                    break;
-                                    
-                                    case 2: //Long Gun
-                                    if (global.P_Turn.funds &gt;= 3000){
-                                        global.P_Turn.funds -= 3000;
-                                        scr_setUnit(obj_unit_LongGun ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                                        unit_has_deployed = true;
-                                        }
-                                    break;
-                                    
-                                    case 3: //Field Officer (commander)
-                                    if (global.P_Turn.funds &gt;= 4000){
-                                        global.P_Turn.funds -= 4000;
-                                        scr_setUnit(obj_unit_Officer,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                                        unit_has_deployed = true;
-                                        }
-                                    break; 
-                                    
-                                    case 4: //Recon
-                                        if (global.P_Turn.funds &gt;= 4000){
-                                        global.P_Turn.funds -= 4000;
-                                        scr_setUnit(obj_unit_Recon,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                                        unit_has_deployed = true;
-                                        }
-                                    break;
-                                    
-                                    case 5: //APC
-                                    if (global.P_Turn.funds &gt;= 5000){
-                                        global.P_Turn.funds -= 5000;
-                                        scr_setUnit(obj_unit_APC,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                                        unit_has_deployed = true;
-                                        }
-                                    break;
-                                    
-                                    case 6: //cancel
-                                        no_deploy = true;
-                                        break;
-                                    }
-                                }            
-                            if col == 1{
-                                //check row
-                                   switch row
-                                        {
-                                   case 0: //Light Tank
-                                   if  (global.P_Turn.funds &gt;= 6000){
-                                        global.P_Turn.funds -= 6000; 
-                                        scr_setUnit(obj_unit_LightTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                                        unit_has_deployed = true;
-                                        }            
-                                    break;
-                                        
-                                   case 1: //Artillery
-                                    if (global.P_Turn.funds &gt;= 7000){
-                                        global.P_Turn.funds -= 7000;
-                                        scr_setUnit(obj_unit_Artillery,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                                        unit_has_deployed = true;
-                                        }
-                                   break;
-                                        
-                                   case 2: //IFV (AA)
-                                   if (global.P_Turn.funds &gt;= 6000){
-                                       global.P_Turn.funds -= 6000;
-                                       scr_setUnit(obj_unit_AA ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                                       unit_has_deployed = true;
-                                       }
-                                   break;
-                                        
-                                   case 3: //Covert Op.
-                                   if (global.P_Turn.funds &gt;= 8000){
-                                       global.P_Turn.funds -= 8000; 
-                                       scr_setUnit(obj_unit_CovertOp,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                                       unit_has_deployed = true;
-                                       }
-                                   break; 
-                                        
-                                   case 4: //Heavy Tank
-                                   if (global.P_Turn.funds &gt;= 15000){
-                                       global.P_Turn.funds -= 15000;
-                                       scr_setUnit(obj_unit_HeavyTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                                       unit_has_deployed = true;
-                                       }
-                                   break;
-                                        
-                                   case 5: //Rocket
-                                   if (global.P_Turn.funds &gt;= 16000){
-                                       global.P_Turn.funds -= 16000; 
-                                       scr_setUnit(obj_unit_Rocket,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                                       unit_has_deployed = true;
-                                       }
-                                   break;
-                                        
-                                   case 6: //Land Cruiser
-                                    if (global.P_Turn.funds &gt;= 32000){
-                                        global.P_Turn.funds -= 32000;
-                                        scr_setUnit(obj_unit_LandCruiser,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                                        unit_has_deployed = true;
-                                        }
-                                   break;
-                                    }        
-                                }
-                                if no_deploy {
-                                        instance_activate_object(obj_battleCursor);
-                                        
-                                        //set menu exit delay to prevent unwanted view scrolling
-                                        obj_battleCursor.alarm[3] = 10;
-                                        obj_battleCursor.menuExitDelay = true;
-                                        
-                                        instance_activate_object(obj_miniwin);
-                                        instance_activate_object(obj_topwin);
-                                        with(obj_UI_deploy_mouse) instance_destroy();
-                                        //second deplay menu is created for some reson when another base is selected first &amp; second base is select to deploy while cursor on first base is showing deploy icon...temp solution = nuke all deploy menus
-                                        
-                                        }
+                    case 0: //Light Infantry
+                        if (global.P_Turn.funds &gt;= global.cost[1]*cost_mod)
+                            {
+                            global.P_Turn.funds -= global.cost[1]*cost_mod;
+                            scr_setUnit(obj_unit_LightInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            unit_has_deployed = true;
+                            }
+                            break;
+                         
+                    case 1: //Heavy Infantry (mechanized Infnatry)
+                        if(global.P_Turn.funds &gt;= global.cost[2]*cost_mod)
+                            {
+                            global.P_Turn.funds -= global.cost[2]*cost_mod;
+                            scr_setUnit(obj_unit_HeavyInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            unit_has_deployed = true;
+                            }
+                            break;
+                                
+                    case 2: //Long Gun
+                        if (global.P_Turn.funds &gt;= global.cost[3]*cost_mod)
+                            {
+                            global.P_Turn.funds -= global.cost[3]*cost_mod;
+                            scr_setUnit(obj_unit_LongGun ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            unit_has_deployed = true;
+                            }
+                            break;
                             
-                                if unit_has_deployed{
-                        
-                                     if obj_map.units[global.posX,global.posY] !=0{
-                                        //set team
-                                        obj_map.units[global.posX, global.posY].team = global.P_Turn.team;
-                                        //update vision for depoyed unit
-                                        scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
-                                        //exshaust deployed unit
-                                        obj_map.units[global.posX,global.posY].state = "exhaust" ;
-                        
-                                        //update standing
-                                        scr_updateStanding_global();
-                                        scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
-                                        //update vision
-                                        scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
-                                        
-                                        //Close deploy Window
-                                        instance_activate_object(obj_battleCursor);
-                                        
-                                        
-                                        //set menu exit delay to prevent unwanted view scrolling
-                                        obj_battleCursor.alarm[3] = 10;
-                                        obj_battleCursor.menuExitDelay = true;
-                                        
-                                        instance_activate_object(obj_miniwin);
-                                        instance_activate_object(obj_topwin);
-                                        instance_destroy();
-                                        }
-                                    }
-                        
-                    
+                    case 3: //Field Officer (commander)
+                        if (global.P_Turn.funds &gt;= global.cost[4]*cost_mod)
+                            {
+                            global.P_Turn.funds -= global.cost[4]*cost_mod;
+                            scr_setUnit(obj_unit_Officer,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            unit_has_deployed = true;
+                            }
+                            break; 
+                            
+                    case 4: //Recon
+                        if (global.P_Turn.funds &gt;= global.cost[5]*cost_mod)
+                            {
+                            global.P_Turn.funds -= global.cost[5]*cost_mod;
+                            scr_setUnit(obj_unit_Recon,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            unit_has_deployed = true;
+                            }
+                            break;
+                            
+                    case 5: //APC
+                        if (global.P_Turn.funds &gt;= global.cost[6]*cost_mod)
+                            {
+                            global.P_Turn.funds -= global.cost[6]*cost_mod;
+                            scr_setUnit(obj_unit_APC,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            unit_has_deployed = true;
+                            }
+                            break;
+                            
+                    case 6: //cancel
+                        no_deploy = true;
+                        break;
                     }
-                    
-                else
+                }            
+            if col == 1
+                {
+                //check row
+                switch row
                     {
-                    
-                               col = (mouse_x - start_x) div col_size;
-                               x = start_x + col *col_size;
-                               
-                               row = (mouse_y - start_y) div row_size;
-                               y = start_y + row *row_size;
-                               
-                               //juice
-                               scr_cursorKey_juice(1,global.cursorKey_sfx);
-        
-                    
+                    case 0: //Light Tank
+                    if  (global.P_Turn.funds &gt;= global.cost[7]*cost_mod)
+                        {
+                        global.P_Turn.funds -= global.cost[7]*cost_mod; 
+                        scr_setUnit(obj_unit_LightTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                        unit_has_deployed = true;
+                        }            
+                        break;
+                                    
+                    case 1: //Artillery
+                        if (global.P_Turn.funds &gt;= global.cost[8]*cost_mod)
+                            {
+                            global.P_Turn.funds -= global.cost[8]*cost_mod;
+                            scr_setUnit(obj_unit_Artillery,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            unit_has_deployed = true;
+                            }
+                            break;
+                                    
+                    case 2: //IFV (AA)
+                        if (global.P_Turn.funds &gt;= global.cost[9]*cost_mod)
+                            {
+                            global.P_Turn.funds -= global.cost[9]*cost_mod;
+                            scr_setUnit(obj_unit_AA ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            unit_has_deployed = true;
+                            }
+                            break;
+                                    
+                    case 3: //Covert Op.
+                        if (global.P_Turn.funds &gt;= global.cost[10]*cost_mod)
+                            {
+                            global.P_Turn.funds -= global.cost[10]*cost_mod; 
+                            scr_setUnit(obj_unit_CovertOp,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            unit_has_deployed = true;
+                            }
+                            break; 
+                                    
+                    case 4: //Heavy Tank
+                        if (global.P_Turn.funds &gt;= global.cost[11]*cost_mod)
+                            {
+                            global.P_Turn.funds -= global.cost[11]*cost_mod;
+                            scr_setUnit(obj_unit_HeavyTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            unit_has_deployed = true;
+                            }
+                            break;
+                                    
+                    case 5: //Rocket
+                        if (global.P_Turn.funds &gt;= global.cost[12]*cost_mod)
+                            {
+                            global.P_Turn.funds -= global.cost[12]*cost_mod; 
+                            scr_setUnit(obj_unit_Rocket,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            unit_has_deployed = true;
+                            }
+                            break;
+                                    
+                    case 6: //Land Cruiser
+                        if (global.P_Turn.funds &gt;= global.cost[13]*cost_mod)
+                            {
+                            global.P_Turn.funds -= global.cost[13]*cost_mod;
+                            scr_setUnit(obj_unit_LandCruiser,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            unit_has_deployed = true;
+                            }
+                            break;
+                        }        
                     }
-            
+                    
+                if no_deploy 
+                    {
+                    instance_activate_object(obj_battleCursor);
+                    
+                    //set menu exit delay to prevent unwanted view scrolling
+                    obj_battleCursor.alarm[3] = 10;
+                    obj_battleCursor.menuExitDelay = true;
+                    
+                    instance_activate_object(obj_miniwin);
+                    instance_activate_object(obj_topwin);
+                    with(obj_UI_deploy_mouse) instance_destroy();
+                    //second deplay menu is created for some reson when another base is selected first &amp; second base is select to deploy while cursor on first base is showing deploy icon...temp solution = nuke all deploy menus
+                    }
+                            
+                if unit_has_deployed
+                    {
+                    if obj_map.units[global.posX,global.posY] !=0
+                        {
+                        //set team
+                        obj_map.units[global.posX, global.posY].team = global.P_Turn.team;
+                        //update vision for depoyed unit
+                        scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
+                        //exshaust deployed unit
+                        obj_map.units[global.posX,global.posY].state = "exhaust" ;
+                        
+                        //set if Dummy
+                        if( global.P_Turn.CO.COFX_DeployDummy and (global.P_Turn.CO.COP_on or global.P_Turn.CO.SCOP_on) ) 
+                            {
+                            with( obj_map.units[global.posX,global.posY] )
+                                {
+                                hp = 1;
+                                dummy = true;
+                                }
+                            }
+        
+                        //update standing
+                        scr_updateStanding_global();
+                        scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
+                        //update vision
+                        scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
+                        
+                        //Close deploy Window
+                        instance_activate_object(obj_battleCursor);
+                        
+                        
+                        //set menu exit delay to prevent unwanted view scrolling
+                        obj_battleCursor.alarm[3] = 10;
+                        obj_battleCursor.menuExitDelay = true;
+                        
+                        instance_activate_object(obj_miniwin);
+                        instance_activate_object(obj_topwin);
+                        instance_destroy();
+                        }
+                    }
+                }   
+            else
+                {
+                col = (mouse_x - start_x) div col_size;
+                x = start_x + col *col_size;
+               
+                row = (mouse_y - start_y) div row_size;
+                y = start_y + row *row_size;
+               
+                //juice
+                scr_cursorKey_juice(1,global.cursorKey_sfx);
+                }
             }
         else
             {
-            
             instance_activate_object(obj_battleCursor);
-                    
+                
             //set menu exit delay to prevent unwanted view scrolling
             obj_battleCursor.alarm[3] = 10;
             obj_battleCursor.menuExitDelay = true;
@@ -486,10 +502,8 @@ if (mouse_check_button_pressed(mb_left))
             instance_activate_object(obj_miniwin);
             instance_activate_object(obj_topwin);
             instance_destroy();
-            
             }
-        
-    }
+        }
 </string>
           </argument>
         </arguments>
@@ -550,57 +564,66 @@ if (mouse_check_button_pressed(mb_right))
             <string>///Deploy Action
 
 //check for key
-if keyboard_check_pressed(global.keyCONFIRM){
-unit_has_deployed = false;
-no_deploy = false;
+if keyboard_check_pressed(global.keyCONFIRM)
+    {
+    unit_has_deployed = false;
+    no_deploy = false;
+
     //check col
-    if col == 0{
-        //check row
+    if( col == 0 )
+        {
+    //check row
         switch row
             {
             case 0: //Light Infantry
-            if (global.P_Turn.funds &gt;= 1000){
-                global.P_Turn.funds -= 1000;
+            if (global.P_Turn.funds &gt;= global.cost[1]*cost_mod)
+                {
+                global.P_Turn.funds -= global.cost[1]*cost_mod;
                 scr_setUnit(obj_unit_LightInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
                 unit_has_deployed = true;
                 }
             break;
             
             case 1: //Heavy Infantry (mechanized Infnatry)
-                if(global.P_Turn.funds &gt;= 2000){
-                global.P_Turn.funds -= 2000;
+            if(global.P_Turn.funds &gt;= global.cost[2]*cost_mod)
+                {
+                global.P_Turn.funds -= global.cost[2]*cost_mod;
                 scr_setUnit(obj_unit_HeavyInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
                 unit_has_deployed = true;
                 }
             break;
             
             case 2: //Long Gun
-            if (global.P_Turn.funds &gt;= 3000){
-                global.P_Turn.funds -= 3000;
+            if (global.P_Turn.funds &gt;= global.cost[3]*cost_mod)
+                {
+                global.P_Turn.funds -= global.cost[3]*cost_mod;
                 scr_setUnit(obj_unit_LongGun ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
                 unit_has_deployed = true;
                 }
             break;
             
             case 3: //Field Officer (commander)
-            if (global.P_Turn.funds &gt;= 4000){
-                global.P_Turn.funds -= 4000;
+            if (global.P_Turn.funds &gt;= global.cost[4]*cost_mod)
+                {
+                global.P_Turn.funds -= global.cost[4]*cost_mod;
                 scr_setUnit(obj_unit_Officer,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
                 unit_has_deployed = true;
                 }
             break; 
             
             case 4: //Recon
-                if (global.P_Turn.funds &gt;= 4000){
-                global.P_Turn.funds -= 4000;
+                if (global.P_Turn.funds &gt;= global.cost[5]*cost_mod)
+                {
+                global.P_Turn.funds -= global.cost[5]*cost_mod;
                 scr_setUnit(obj_unit_Recon,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
                 unit_has_deployed = true;
                 }
             break;
             
             case 5: //APC
-            if (global.P_Turn.funds &gt;= 5000){
-                global.P_Turn.funds -= 5000;
+            if (global.P_Turn.funds &gt;= global.cost[6]*cost_mod)
+                {
+                global.P_Turn.funds -= global.cost[6]*cost_mod;
                 scr_setUnit(obj_unit_APC,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
                 unit_has_deployed = true;
                 }
@@ -611,67 +634,78 @@ no_deploy = false;
                 break;
             }
         }            
-    if col == 1{
+    if( col == 1)
+        {
         //check row
-           switch row
+        switch row
+            {
+            case 0: //Light Tank
+            if  (global.P_Turn.funds &gt;= global.cost[7]*cost_mod)
                 {
-           case 0: //Light Tank
-           if  (global.P_Turn.funds &gt;= 6000){
-                global.P_Turn.funds -= 6000; 
+                global.P_Turn.funds -= global.cost[7]*cost_mod; 
                 scr_setUnit(obj_unit_LightTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
                 unit_has_deployed = true;
                 }            
             break;
                 
-           case 1: //Artillery
-            if (global.P_Turn.funds &gt;= 7000){
-                global.P_Turn.funds -= 7000;
+            case 1: //Artillery
+            if (global.P_Turn.funds &gt;= global.cost[8]*cost_mod)
+                {
+                global.P_Turn.funds -= global.cost[8]*cost_mod;
                 scr_setUnit(obj_unit_Artillery,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
                 unit_has_deployed = true;
                 }
            break;
                 
            case 2: //IFV (AA)
-           if (global.P_Turn.funds &gt;= 6000){
-               global.P_Turn.funds -= 6000;
-               scr_setUnit(obj_unit_AA ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-               unit_has_deployed = true;
-               }
+           if (global.P_Turn.funds &gt;= global.cost[9]*cost_mod)
+                {
+                global.P_Turn.funds -= global.cost[9]*cost_mod;
+                scr_setUnit(obj_unit_AA ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                unit_has_deployed = true;
+                }
            break;
                 
            case 3: //Covert Op.
-           if (global.P_Turn.funds &gt;= 8000){
-               global.P_Turn.funds -= 8000; 
-               scr_setUnit(obj_unit_CovertOp,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-               unit_has_deployed = true;
-               }
+           if( global.P_Turn.funds &gt;= global.cost[10]*cost_mod)
+                {
+                global.P_Turn.funds -= global.cost[10]*cost_mod; 
+                scr_setUnit(obj_unit_CovertOp,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                unit_has_deployed = true;
+                }
            break; 
                 
            case 4: //Heavy Tank
-           if (global.P_Turn.funds &gt;= 15000){
-               global.P_Turn.funds -= 15000;
-               scr_setUnit(obj_unit_HeavyTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-               unit_has_deployed = true;
-               }
+           if( global.P_Turn.funds &gt;= global.cost[11]*cost_mod)
+                {
+                global.P_Turn.funds -= global.cost[11]*cost_mod;
+                scr_setUnit(obj_unit_HeavyTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                unit_has_deployed = true;
+                }
            break;
                 
            case 5: //Rocket
-           if (global.P_Turn.funds &gt;= 16000){
-               global.P_Turn.funds -= 16000; 
-               scr_setUnit(obj_unit_Rocket,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-               unit_has_deployed = true;
-               }
+           if (global.P_Turn.funds &gt;= global.cost[12]*cost_mod)
+                {
+                global.P_Turn.funds -= global.cost[12]*cost_mod; 
+                scr_setUnit(obj_unit_Rocket,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                unit_has_deployed = true;
+                }
            break;
                 
            case 6: //Land Cruiser
-            if (global.P_Turn.funds &gt;= 32000){
-                global.P_Turn.funds -= 32000;
+            if (global.P_Turn.funds &gt;= global.cost[13]*cost_mod)
+                {
+                global.P_Turn.funds -= global.cost[13]*cost_mod;
                 scr_setUnit(obj_unit_LandCruiser,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
                 unit_has_deployed = true;
                 }
            break;
             }        
         }
+        
+        
+        
         if no_deploy {
                 instance_activate_object(obj_battleCursor);
                 instance_activate_object(obj_miniwin);
@@ -689,8 +723,16 @@ no_deploy = false;
                 //exshaust deployed unit
                 obj_map.units[global.posX,global.posY].state = "exhaust" ;
                 //set if HP is Hidden
-                if(global.P_Turn.CO.COFX_HiddenHP)obj_map.units[global.posX,global.posY].HP_hidden = true ;
-
+                if (global.P_Turn.CO.COFX_HiddenHP) obj_map.units[global.posX,global.posY].HP_hidden = true ;
+                //set HJP to 1 if deplying Dummy
+                if( global.P_Turn.CO.COFX_DeployDummy and (global.P_Turn.CO.COP_on or global.P_Turn.CO.SCOP_on) ) 
+                    {
+                    with obj_map.units[global.posX,global.posY]
+                        {
+                        hp = 1;
+                        dummy = true;
+                        }
+                    }
                 //update standing
                 scr_updateStanding_global();
                 scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
@@ -917,62 +959,151 @@ scr_draw_num(spr_num_light,false,global.P_Turn.funds-display_cost,595,55,8);
             <kind>1</kind>
             <string>///Draw order
 
-if just_created
+
+
+
+//draw Normal
+if (just_created) 
     {
-    
-        start_x = view_xview+132;
-        start_y = view_yview+96;
-        
-        x = start_x;
-        y = start_y;
-        
-        just_created = false ;
-    
+    start_x = view_xview+132;
+    start_y = view_yview+96;
+    x = start_x;
+    y = start_y;
+    just_created = false ;
     }
+
 
 //Draw menu
 draw_sprite(spr_DeployWin,global.P_Turn.number-1,view_xview + 132,view_yview + 42);
 
+//draw cost and over
+if (global.P_Turn.funds &lt; global.cost[13]*cost_mod) //Land Cruiser
+    {
+    draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),12,view_xview[0]+378,view_yview[0]+318);
+    //draw ovewrcost number
+     scr_draw_num(  spr_num_dark,false, global.cost[13]*cost_mod,view_xview+617,view_yview+119+36*6,8);
+    }
+else scr_draw_num( spr_num_light,false, global.cost[13]*cost_mod,view_xview+617,view_yview+119+36*6,8);
 
-//draw overcost
-if (global.P_Turn.funds &lt; 32000) //Land Cruiser
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),12,view_xview[0]+378,view_yview[0]+318);
+//Rocket
+if (global.P_Turn.funds &lt; global.cost[12]*cost_mod) //Rocket
+    {
+    draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),11,view_xview[0]+378,view_yview[0]+282);
+    //draw ovewrcost number
+     scr_draw_num(  spr_num_dark,false, global.cost[12]*cost_mod,view_xview+617,view_yview+119+36*5,8);
+    }
+else scr_draw_num( spr_num_light,false, global.cost[12]*cost_mod,view_xview+617,view_yview+119+36*5,8);
 
-if (global.P_Turn.funds &lt; 16000) //Rocket
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),11,view_xview[0]+378,view_yview[0]+282);
 
-if (global.P_Turn.funds &lt; 15000) //Heavy Tank
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),10,view_xview[0]+378,view_yview[0]+246);
+//Heavy Tank
+if (global.P_Turn.funds &lt; global.cost[11]*cost_mod) //Heavy Tank
+    {
+    draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),10,view_xview[0]+378,view_yview[0]+246);
+    //draw ovewrcost number
+     scr_draw_num(  spr_num_dark,false, global.cost[11]*cost_mod,view_xview+617,view_yview+119+36*4,8);
+    }
+else scr_draw_num( spr_num_light,false, global.cost[11]*cost_mod,view_xview+617,view_yview+119+36*4,8);
 
-if (global.P_Turn.funds &lt; 8000) //Covert Op
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),9,view_xview[0]+378,view_yview[0]+210);
 
-if (global.P_Turn.funds &lt; 6000) //IFV (AA)
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),8,view_xview[0]+378,view_yview[0]+174);
+//Covert Op
+if (global.P_Turn.funds &lt; global.cost[10]*cost_mod) 
+    {
+    draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),9,view_xview[0]+378,view_yview[0]+210);
+    //draw ovewrcost number
+     scr_draw_num(  spr_num_dark,false, global.cost[10]*cost_mod,view_xview+617,view_yview+119+36*3,8);
+    }
+else scr_draw_num( spr_num_light,false, global.cost[10]*cost_mod,view_xview+617,view_yview+119+36*3,8);
 
-if (global.P_Turn.funds &lt; 7000) //Artillery
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),7,view_xview[0]+378,view_yview[0]+138);
- 
-if (global.P_Turn.funds &lt; 6000) //Light tank
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),6,view_xview[0]+378,view_yview[0]+102);
 
-if (global.P_Turn.funds &lt; 5000) //APC
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),5,view_xview[0]+138,view_yview[0]+282);
+//IFV aka AA
+if (global.P_Turn.funds &lt; global.cost[09]*cost_mod) 
+    {
+    draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),8,view_xview[0]+378,view_yview[0]+174);
+    //draw ovewrcost number
+     scr_draw_num(  spr_num_dark,false, global.cost[09]*cost_mod,view_xview+617,view_yview+119+36*2,8);
+    }
+else scr_draw_num( spr_num_light,false, global.cost[09]*cost_mod,view_xview+617,view_yview+119+36*2,8);
 
-if (global.P_Turn.funds &lt; 4000) //Recon
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),4,view_xview[0]+138,view_yview[0]+246);
 
-if (global.P_Turn.funds &lt; 4000) //Officer
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),3,view_xview[0]+138,view_yview[0]+210);
+//Artillery
+if (global.P_Turn.funds &lt; global.cost[8]*cost_mod)
+    {
+    draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),7,view_xview[0]+378,view_yview[0]+138);
+    //draw ovewrcost number
+     scr_draw_num(  spr_num_dark,false, global.cost[08]*cost_mod,view_xview+617,view_yview+119+36*1,8);
+    }
+else scr_draw_num( spr_num_light,false, global.cost[08]*cost_mod,view_xview+617,view_yview+119+36*1,8);
 
-if (global.P_Turn.funds &lt; 3000) //Long Gun
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),2,view_xview[0]+138,view_yview[0]+174);
+//Light Tank
+if (global.P_Turn.funds &lt; global.cost[7]*cost_mod) 
+    {
+    draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),6,view_xview[0]+378,view_yview[0]+102);
+    //draw ovewrcost number
+     scr_draw_num(  spr_num_dark,false, global.cost[07]*cost_mod,view_xview+617,view_yview+119+36*0,8);
+    }
+else scr_draw_num( spr_num_light,false, global.cost[07]*cost_mod,view_xview+617,view_yview+119+36*0,8);
 
-if (global.P_Turn.funds &lt; 2000) //Heavy Infantry
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),1,view_xview[0]+138,view_yview[0]+138);
 
-if (global.P_Turn.funds &lt; 1000) //Light Infantry
-draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),0,view_xview[0]+138,view_yview[0]+102);
+//APC
+if (global.P_Turn.funds &lt; global.cost[6]*cost_mod) 
+    {
+    draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),5,view_xview[0]+138,view_yview[0]+282);
+    //draw ovewrcost number
+     scr_draw_num(  spr_num_dark,false, global.cost[06]*cost_mod,view_xview+377,view_yview+119+36*5,8);
+    }
+else scr_draw_num( spr_num_light,false, global.cost[06]*cost_mod,view_xview+377,view_yview+119+36*5,8);
+
+
+//Recon
+if (global.P_Turn.funds &lt; global.cost[5]*cost_mod)
+    {
+    draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),4,view_xview[0]+138,view_yview[0]+246);
+    //draw ovewrcost number
+     scr_draw_num(  spr_num_dark,false, global.cost[05]*cost_mod,view_xview+377,view_yview+119+36*4,8);
+    }
+else scr_draw_num( spr_num_light,false, global.cost[05]*cost_mod,view_xview+377,view_yview+119+36*4,8);
+
+
+//Officer
+if (global.P_Turn.funds &lt; global.cost[4]*cost_mod) 
+    {
+    draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),3,view_xview[0]+138,view_yview[0]+210);
+    //draw ovewrcost number
+     scr_draw_num(  spr_num_dark,false, global.cost[04]*cost_mod,view_xview+377,view_yview+119+36*3,8);
+    }
+else scr_draw_num( spr_num_light,false, global.cost[04]*cost_mod,view_xview+377,view_yview+119+36*3,8);
+
+
+//Long Gun
+if (global.P_Turn.funds &lt; global.cost[3]*cost_mod) 
+    {  
+    draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),2,view_xview[0]+138,view_yview[0]+174);
+    //draw ovewrcost number
+     scr_draw_num(  spr_num_dark,false, global.cost[03]*cost_mod,view_xview+377,view_yview+119+36*2,8);
+    }
+else scr_draw_num( spr_num_light,false, global.cost[03]*cost_mod,view_xview+377,view_yview+119+36*2,8);
+
+
+//Heavy Infantry
+if (global.P_Turn.funds &lt; global.cost[02]*cost_mod) 
+    {
+    draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),1,view_xview[0]+138,view_yview[0]+138);
+    //draw ovewrcost number
+      scr_draw_num(  spr_num_dark,false, global.cost[02]*cost_mod,view_xview+377,view_yview+119+36*1,8);
+    }
+else scr_draw_num( spr_num_light,false, global.cost[02]*cost_mod,view_xview+377,view_yview+119+36*1,8);
+
+
+//Light Infantry
+if (global.P_Turn.funds &lt; global.cost[01]*cost_mod) 
+    {
+    //draw Overcost sprite
+    draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),0,view_xview[0]+138,view_yview[0]+102);
+    //draw ovewrcost number
+     scr_draw_num(  spr_num_dark,false, global.cost[01]*cost_mod,view_xview+377,view_yview+119+36*0,8);
+    }
+else scr_draw_num( spr_num_light,false, global.cost[01]*cost_mod,view_xview+377,view_yview+119+36*0,8);
+    
 
 //draw cursor or "self"
 draw_self();

@@ -45,15 +45,18 @@ max_ammo    = 1;
 
 //unit static variables
 charge      = 10 ;
-cost        = 14000;
+cost        = global.cost[unit_index] ; // see cost array in obj_MasterControlls
 move_type   = "Special Tires";
 move_points = 12;
 vision      = 5;
 radio       = 0;
 
-havePrimaryWeapon   = false; //spacial ability that consumes ammo
+//weapon type
+havePrimaryWeapon   = false;
 haveSecondaryWeapon = true;
+canMoveFire         = true; //used for Disrupt
 
+//special case used for disrupt only
 min_range   = 1;
 max_range   = 1;
 

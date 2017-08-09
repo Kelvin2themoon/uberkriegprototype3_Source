@@ -3,7 +3,7 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="2" name="datafiles">
+  <datafiles number="3" name="datafiles">
     <datafile>
       <name>2P_SabreRanger_v3.ubm</name>
       <exists>-1</exists>
@@ -20,6 +20,23 @@
         </Config>
       </ConfigOptions>
       <filename>2P_SabreRanger_v3.ubm</filename>
+    </datafile>
+    <datafile>
+      <name>1P_ThreeByFive_v1.ubm</name>
+      <exists>-1</exists>
+      <size>10400</size>
+      <exportAction>2</exportAction>
+      <exportDir></exportDir>
+      <overwrite>0</overwrite>
+      <freeData>-1</freeData>
+      <removeEnd>0</removeEnd>
+      <store>0</store>
+      <ConfigOptions>
+        <Config name="Default">
+          <CopyToMask>9223372036854775807</CopyToMask>
+        </Config>
+      </ConfigOptions>
+      <filename>1P_ThreeByFive_v1.ubm</filename>
     </datafile>
   </datafiles>
   <NewExtensions>
@@ -121,6 +138,7 @@
           <sprite>sprites\spr_mousePointer</sprite>
           <sprite>sprites\spr_mouseViewScrole</sprite>
           <sprite>sprites\spr_radioAssist_gold</sprite>
+          <sprite>sprites\spr_rangeAssist</sprite>
           <sprite>sprites\spr_radioAssist_darkBlue</sprite>
         </sprites>
         <sprites name="checks">
@@ -132,6 +150,7 @@
           <sprite>sprites\scr_rangecheck_bluelt</sprite>
           <sprite>sprites\sprite220</sprite>
           <sprite>sprites\sprite253</sprite>
+          <sprite>sprites\spr_num_dark</sprite>
         </sprites>
         <sprite>sprites\spr_movePath</sprite>
         <sprite>sprites\spr_num_light</sprite>
@@ -150,6 +169,7 @@
         <sprite>sprites\spr_overCost_P2</sprite>
         <sprite>sprites\spr_overCost_P3</sprite>
         <sprite>sprites\spr_overCost_P4</sprite>
+        <sprite>sprites\spr_DeployWin_Copy</sprite>
       </sprites>
       <sprites name="HUD">
         <sprite>sprites\spr_black</sprite>
@@ -509,6 +529,7 @@
     <font>fonts\font5</font>
     <font>fonts\font6</font>
     <font>fonts\font7</font>
+    <font>fonts\font8</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>
@@ -547,10 +568,10 @@
       <object>objects\obj_unit_Officer</object>
       <object>objects\obj_unit_Recon</object>
       <object>objects\obj_unit_APC</object>
-      <object>objects\obj_unit_CovertOp</object>
       <object>objects\obj_unit_LightTank</object>
       <object>objects\obj_unit_Artillery</object>
       <object>objects\obj_unit_AA</object>
+      <object>objects\obj_unit_CovertOp</object>
       <object>objects\obj_unit_HeavyTank</object>
       <object>objects\obj_unit_Rocket</object>
       <object>objects\obj_unit_LandCruiser</object>
@@ -565,7 +586,6 @@
       <object>objects\template_sandboxCursor</object>
       <objects name="BasicObjects">
         <object>objects\obj_UI_deploy</object>
-        <object>objects\obj_UI_deploy_mouse</object>
         <object>objects\obj_checker_tile</object>
         <object>objects\obj_miniwin</object>
         <object>objects\obj_player</object>
@@ -597,6 +617,10 @@
         <object>objects\obj_supplyCursor</object>
         <object>objects\obj_disruptCursor</object>
         <object>objects\obj_dropCursor</object>
+        <objects name="Cursor Backup">
+          <object>objects\obj_Bup_moveCurosr</object>
+          <object>objects\obj_Bup_moveCursorMouse</object>
+        </objects>
       </objects>
     </objects>
     <objects name="AVIRecording">
@@ -621,6 +645,7 @@
     <room>rooms\rm_game_Basic</room>
     <room>rooms\rExampleRoom</room>
     <room>rooms\rm_continue</room>
+    <room>rooms\room5</room>
   </rooms>
   <constants number="7">
     <constant name="CHECK_LAYRE">-64100</constant>

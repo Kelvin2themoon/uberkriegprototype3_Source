@@ -563,23 +563,19 @@ global.rangeCheckerFramIndex = 0;
             <string>///check if unit HP is hidden
 
 with (obj_CO_0)
-
     {
-    
+    if (COFX_HiddenHP )
+        {
         with (obj_unit)
-        
             {
-            
-                if (other.COFX_HiddenHP and other.ownership = ownership)
-                    {
-                    
-                        HP_hidden = true ;
-                    
-                    }
-            
+            if (ownership = other.ownership) HP_hidden = true ;
             }
-    
+        }
     }
+    
+    
+    
+
 </string>
           </argument>
         </arguments>

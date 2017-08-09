@@ -43,13 +43,19 @@ COP_on      = false ;   //CO power switch
 SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
+charge = 6000
+
 //passive abilities
 D2D_Vision  = 1 ;
 COP_Vision  = 1 ;
 SCOP_Vision = 3 ;
 
-COFX_HiddenHP       = true ;
+COFX_HiddenHP       = true ; //includes fuel and ammo
 COFX_PerfectVision  = true ;
+COFX_DeployDummy    = true ;
+COFX_SmokeScreen    = 0     ; //defines charge 
+
+
 
 
 </string>

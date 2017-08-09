@@ -109,6 +109,8 @@ if(!fast_mode){
           <argument>
             <kind>1</kind>
             <string>/// Start/Stop recording
+
+/*
 if( AVI==0 ){
     StartRecording();
 }else {
