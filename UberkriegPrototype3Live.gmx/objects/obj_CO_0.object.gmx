@@ -88,10 +88,17 @@ for ( i = 0 ; i &lt;= 13 ; i += 1)
             
     
 //special CO FX and activate only affects
+
+//vision+
 COFX_HiddenHP       = false ;
 COFX_PerfectVision  = false ;
 COFX_DeployDummy    = false ;
-COFX_SmokeScreen    = 0     ; //defines charge     
+COFX_SmokeScreen    = 0     ; //defines charge
+
+//hp+
+COFX_APC_Repair  = 0 ;
+
+     
 
 
 COFX_FastCap        = false ;

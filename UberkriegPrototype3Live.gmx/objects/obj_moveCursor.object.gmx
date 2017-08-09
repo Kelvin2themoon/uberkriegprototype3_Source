@@ -468,6 +468,10 @@ if( keyboard_check_pressed( global.keyCONFIRM) )
     global.appear       = false;
     global.disrupt      = false;
     global.wait         = true ; // wait is on by default
+    
+    //special CO commands
+    global.smoke        = false;
+
     //destination is default empty
     var isEmpty = true; 
     
@@ -553,6 +557,16 @@ if( keyboard_check_pressed( global.keyCONFIRM) )
         if ( isEmpty )
             {
             show_debug_message("empty check passed");
+            
+            //check if unit can smoke screen
+            if( global.P_Turn.CO.COFX_SmokeScreen &gt; 0 and global.P_Turn.CO.COFX_rounds &gt; 0)
+                {
+                //cannot move and fire
+                if( global.acting_unit.canMoveFire )    global.smoke = true; 
+                else if(!global.acting_unit_moved)      global.smoke = true; 
+                }
+                
+                
             //check if unit is covert op. and turn on appear or dissapppear
             if (global.acting_unit.name = "Covert Op." and !global.acting_unit.dummy)
                 {
@@ -639,7 +653,9 @@ if( keyboard_check_pressed( global.keyCONFIRM) )
     or  global.hide         
     or  global.appear       
     or  global.disrupt      
-    or  global.wait)
+    or  global.wait
+    //Special CO commands
+    or  global.smoke)
         {
         //clear all checker graphics ( no sprite)
         with(obj_checker_tile) sprite_index = -1;

@@ -622,6 +622,8 @@ if ( !mouse_check_button(mb_left)and scr_inBound(mouse_pos_x,mouse_pos_y))
         global.disrupt      = false;
         global.wait         = true ; // wait is on by default
         
+        global.smoke        = false; //spacial CO command
+        
         var isEmpty = true; // destination is default empty
         
         //check if unit has moved: for indirect fire checks
@@ -655,7 +657,7 @@ if ( !mouse_check_button(mb_left)and scr_inBound(mouse_pos_x,mouse_pos_y))
                 if  (global.acting_unit.canLoadInfantry &gt; 0 ) if(global.acting_unit.load_A != 0 or global.acting_unit.load_B != 0 ) global.join = false;
                 if  (global.target_unit.canLoadInfantry &gt; 0 ) if(global.target_unit.load_A != 0 or global.target_unit.load_B != 0 ) global.join = false;
                 // Attach: check acting unit is  officer and target unit is not of command rank
-                if ( global.acting_unit.name = "Officer" and !global.target_unit.isCommander and !global.acting_unit.dummy and !global.target.dummy) global.attach = true;
+                if ( global.acting_unit.name = "Officer" and !global.target_unit.isCommander and !global.acting_unit.dummy and !global.target_unit.dummy) global.attach = true;
                 
                 //Load: check if target is APC and if acting unit is infantry
                 if( global.target_unit.canLoadInfantry
@@ -706,6 +708,16 @@ if ( !mouse_check_button(mb_left)and scr_inBound(mouse_pos_x,mouse_pos_y))
         if ( isEmpty )
             {
             show_debug_message("empty check passed");
+            
+            //check if unit can smoke screen
+            if( global.P_Turn.CO.COFX_SmokeScreen &gt; 0 and global.P_Turn.CO.COFX_rounds &gt; 0)
+                {
+                //cannot move and fire
+                if( global.acting_unit.canMoveFire )    global.smoke = true; 
+                else if(!global.acting_unit_moved)      global.smoke = true; 
+                }
+                
+                
             //check if unit is covert op. and turn on appear or dissapppear
             if (global.acting_unit.name = "Covert Op.")
                 {
@@ -794,7 +806,9 @@ if ( !mouse_check_button(mb_left)and scr_inBound(mouse_pos_x,mouse_pos_y))
     or  global.hide         
     or  global.appear       
     or  global.disrupt      
-    or  global.wait)
+    or  global.wait
+    //special CO commands
+    or global.smoke)
             {
             //clear all checker graphics ( no sprite)
             with(obj_checker_tile) sprite_index = -1;

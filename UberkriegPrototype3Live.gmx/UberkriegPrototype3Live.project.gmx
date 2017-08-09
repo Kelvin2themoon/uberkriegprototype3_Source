@@ -298,6 +298,7 @@
             <sprite>sprites\spr_syscom_load_up</sprite>
             <sprite>sprites\spr_syscom_supply_up</sprite>
             <sprite>sprites\spr_syscom_wait_up</sprite>
+            <sprite>sprites\spr_syscom_smoke_up</sprite>
           </sprites>
           <sprites name="DOWN">
             <sprite>sprites\spr_syscom_appear_down</sprite>
@@ -312,6 +313,7 @@
             <sprite>sprites\spr_syscom_load_down</sprite>
             <sprite>sprites\spr_syscom_supply_down</sprite>
             <sprite>sprites\spr_syscom_wait_down</sprite>
+            <sprite>sprites\spr_syscom_smoke_down</sprite>
           </sprites>
         </sprites>
       </sprites>
@@ -408,6 +410,9 @@
       <sprite>sprites\spr_temp_terrain_summary</sprite>
       <sprite>sprites\spr_temp_summary_boarder</sprite>
       <sprite>sprites\spr_tempTitle</sprite>
+    </sprites>
+    <sprites name="COFX">
+      <sprite>sprites\spr_smoke</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -615,6 +620,7 @@
           <object>objects\obj_captureBar</object>
         </objects>
         <object>objects\obj_supplyCursor</object>
+        <object>objects\obj_smokeScreenCurosr</object>
         <object>objects\obj_disruptCursor</object>
         <object>objects\obj_dropCursor</object>
         <objects name="Cursor Backup">
@@ -634,6 +640,7 @@
       <object>objects\obj_CO_1</object>
       <object>objects\obj_CO_2</object>
       <object>objects\obj_CO_3</object>
+      <object>objects\obj_CO_4</object>
     </objects>
   </objects>
   <timelines name="timelines">

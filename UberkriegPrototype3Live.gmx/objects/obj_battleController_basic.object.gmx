@@ -630,6 +630,10 @@ global.appear       = false;
 global.disrupt      = false;
 global.wait         = false;
 
+//special CO commands
+
+global.smoke        = false;
+
 // extra command variables
 global.engage_type  = 1; //default to primary
 global.drop_phaze_2 = false; //true if second drop action is taking place to bypass move in execute order event

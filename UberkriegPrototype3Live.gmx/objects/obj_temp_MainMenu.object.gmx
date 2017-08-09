@@ -27,38 +27,30 @@
             <kind>1</kind>
             <string>///CO select
 
-var maxCO = 3 ;
+var maxCO = 4 ;
 
 if keyboard_check_pressed( ord("1"))
     {
-    
-        if ( global.P1_CO &lt; maxCO ) global.P1_CO += 1 ;
-        else                        global.P1_CO  = 0 ;
-    
+    if ( global.P1_CO &lt; maxCO ) global.P1_CO += 1 ;
+    else                        global.P1_CO  = 0 ;
     }
     
 if keyboard_check_pressed( ord("2"))
     {
-    
-        if ( global.P2_CO &lt; maxCO ) global.P2_CO += 1 ;
-        else                        global.P2_CO  = 0 ;
-    
+    if ( global.P2_CO &lt; maxCO ) global.P2_CO += 1 ;
+    else                        global.P2_CO  = 0 ;
     }
     
 if keyboard_check_pressed( ord("3"))
     {
-    
-        if ( global.P3_CO &lt; maxCO ) global.P3_CO += 1 ;
-        else                        global.P3_CO  = 0 ;
-    
+    if ( global.P3_CO &lt; maxCO ) global.P3_CO += 1 ;
+    else                        global.P3_CO  = 0 ;
     }
     
 if keyboard_check_pressed( ord("4"))
     {
-    
-        if ( global.P4_CO &lt; maxCO ) global.P4_CO += 1 ;
-        else                        global.P4_CO  = 0 ;
-    
+    if ( global.P4_CO &lt; maxCO ) global.P4_CO += 1 ;
+    else                        global.P4_CO  = 0 ;
     }
 </string>
           </argument>

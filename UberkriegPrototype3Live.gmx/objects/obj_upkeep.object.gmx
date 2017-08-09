@@ -95,52 +95,63 @@ with obj_unit
     
 //start upkeep event with heead of Q
 if (ds_queue_size(global.upkeep_q) &gt; 0)
-{
-
+    {
     processing = ds_queue_dequeue(global.upkeep_q);
     x = processing.x;
     y = processing.y;
     depth = UI_DEPTH_CURSOR;
     alarm[0] = 1;
-}
+    }
 
-else
-{
-conclude_upkeep = true;
-}
-
-
-//activate HUD
-//instance_activate_object(obj_battleCursor);
-//instance_activate_object(obj_miniwin);
+else conclude_upkeep = true;
 
 //change cursor position
-with obj_battleCursor{
+with obj_battleCursor
+    {
     x = global.P_Turn.save_cursor_pos_x;
     y = global.P_Turn.save_cursor_pos_y;
-    
     }
     
     
 //deactivate COP and SCOP
-
 global.P_Turn.CO.COP_on = false ;
 global.P_Turn.CO.SCOP_on = false ;
 
 with (obj_unit)
     {
-        if (ownership = global.P_Turn.number)
-            {
-            
-                COP = false ;
-                SCOP = false ;
-                scr_updateStanding_global();
-            
-            }     
-        
+    if( ownership = global.P_Turn.number)
+        {
+        COP = false ;
+        SCOP = false ;
+        scr_updateStanding_global();
+        }     
+    }
     
+//turn smoke off
+with obj_terrain 
+    {
+    if (isSmoke and smoker = global.P_Turn.number)
+        {
+        isSmoke = false;
+        smoker = 0;
+        if( name != "woods" )canHide = false;
+        
+        }
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
@@ -161,14 +172,6 @@ with (obj_unit)
 
 
 
-
-
-/*
-//change phaze
-global.Phaze = "Main"
-
-//destroy self
-instance_destroy();
 </string>
           </argument>
         </arguments>

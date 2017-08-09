@@ -1,17 +1,28 @@
 
 //hp-1 for now, ammo and fuel max
-with (global.target_unit){
+with (global.target_unit)
+    {
     fuel = max_fuel;
     isDisrupted = false;
     if name != "A.P.C." ammo = max_ammo;
+    //special CO ability
+    if( global.P_Turn.CO.COFX_APC_Repair > 0
+    and global.target_unit.hp <10 
+    and global.target_unit.dummy = false)
+        {
+        hp += global.P_Turn.CO.COFX_APC_Repair;
+        if hp > 10 hp = 10;
+        }
     }
 
 // place active unit back in map array
 obj_map.units[global.posX,global.posY] = global.acting_unit; 
+
 //activate UI
 instance_activate_object(obj_miniwin);
 instance_activate_object(obj_battleCursor);
-with obj_battleCursor{
+with obj_battleCursor
+    {
     x = global.posX*24;
     y = global.posY*24;
     }
