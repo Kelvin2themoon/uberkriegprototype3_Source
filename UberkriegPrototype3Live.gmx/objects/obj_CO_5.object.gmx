@@ -25,61 +25,25 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 01: Radio CO
-
+            <string>///CO 04: HP+
 event_inherited();
 
 // Initiate Parent Object and defaults
-
-Index = 1 ;
-name = "radio+"
+Index = 4 ;
+name = "hp+" ;
 
 //COP and SCOP Varialbes
 
 COP_Bar     = 3 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
-
 SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
-//passive abilities, COP, and SCOP
-D2D_Radio   = 1 ;
-COP_Radio   = 1 ;
-SCOP_Radio  = 2 ;
-
-//eagle skills
-COP_ActAgain = true;
-SCOP_ActAgain = true;
-
-//Atk and Def
-
-
-var i = 0;
-
-for( i = 1 ; i &lt;=13 ; i++ )
-    {
-    COP_Atk[i] = 50;
-    }
-
-
-/*
-COP_Atk[01]   = 50;
-COP_Atk[02]   = 50;
-COP_Atk[03]   = 50;
-COP_Atk[04]   = 50;
-COP_Atk[05]   = 50;
-COP_Atk[06]   = 50;
-COP_Atk[07]   = 50;
-COP_Atk[08]   = 50;
-COP_Atk[09]   = 50;
-COP_Atk[10]   = 50;
-COP_Atk[11]   = 50;
-COP_Atk[12]   = 50;
-COP_Atk[13]   = 50;
-
-    
-
+//passive abilities
+COFX_APC_Repair  = 1 ;
+COP_GainHP  = 2 ;
+SCOP_GainHP = 5 ;
 </string>
           </argument>
         </arguments>

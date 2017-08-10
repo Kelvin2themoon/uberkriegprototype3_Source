@@ -71,17 +71,14 @@ var i = 0
 
 for ( i = 0 ; i &lt;= 13 ; i += 1)
     {
-    D2D_Atk[i]   = 1;
-    D2D_Def[i]   = 1;
-    D2D_Cost[i]     = global.cost[i]; 
+    D2D_Atk[i]   = 100;
+    D2D_Def[i]   = 100;
     
-    COP_Atk[i]   = 1;
-    COP_Def[i]   = 1;
-    COP_Cost[i]     = global.cost[i]; 
+    COP_Atk[i]   = 100;
+    COP_Def[i]   = 100;
     
-    SCOP_Atk[i]  = 1;
-    SCOP_Def[i]  = 1;
-    SCOP_Cost[i]    = global.cost[i]; 
+    SCOP_Atk[i]  = 100;
+    SCOP_Def[i]  = 100;
     }
  
  
@@ -97,6 +94,10 @@ COFX_SmokeScreen    = 0     ; //defines charge
 
 //hp+
 COFX_APC_Repair  = 0 ;
+
+//radio+ eagle type
+COP_ActAgain  = false;
+SCOP_ActAgain = false;
 
      
 

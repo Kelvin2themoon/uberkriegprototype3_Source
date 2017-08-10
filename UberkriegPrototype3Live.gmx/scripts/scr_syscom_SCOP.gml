@@ -14,6 +14,8 @@ with (obj_unit)
         SCOP = true;
         if( global.P_Turn.CO.SCOP_GainHP > 0 ) hp += global.P_Turn.CO.SCOP_GainHP ;
         if hp > 10 hp = 10;
+        //act again
+        if (global.P_Turn.CO.SCOP_ActAgain and isStanding and unit_index > 4) state = "idle";
         }
     }
 
