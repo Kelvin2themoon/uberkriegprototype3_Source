@@ -25,12 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 04: HP+
+            <string>///CO 05: Direct+
+
 event_inherited();
 
 // Initiate Parent Object and defaults
+
 index = 5 ;
-name = "hp+" ;
+name = "direct+" ;
 
 //COP and SCOP Varialbes
 
@@ -40,13 +42,30 @@ COP_on      = false ;   //CO power switch
 SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
-//passive abilities
-D2D_RepairCosts = 50;
-D2D_Repair = 3;
+//individual unit stats
+var i = 0
 
-COFX_APC_Repair  = 2 ;
-COP_GainHP  = 2 ;
-SCOP_GainHP = 5 ;
+for ( i = 0 ; i &lt;= 13 ; i += 1)
+    {
+    //Power Bonuses
+    if( i &gt; 4 or i !=8 or i !=12 ) D2D_Atk[i]   = 130;
+    if( i &gt; 4 or i !=8 or i !=12 ) COP_Atk[i]   = 140;
+    if( i &gt; 4 or i !=8 or i !=12 ) SCOP_Atk[i]  = 160;
+    //MoveBonuses, non infantry units only
+    if( i &gt; 4 or i !=8 or i !=12 ) COP_Mov[i]   = 1
+    if( i &gt; 4 or i !=8 or i !=12 ) SCOP_Mov[i]  = 2
+    }
+    
+    //attack range reduction
+D2D_Rng[ 3]   = -1; // long gun
+D2D_Rng[ 8]   = -1; // artillery
+D2D_Rng[12]   = -1; // rocket
+D2D_Rng[13]   = -1; // land cruiser
+ 
+//Push ability (activates in engate)       
+COP_Push = true;
+SCOP_Push = true;
+ 
 </string>
           </argument>
         </arguments>

@@ -47,22 +47,25 @@ use_count = 0 ; //number of times COP and SCOP are used
 //global passive modifyers (Day to day)
 
 //  D2D                         COP                         SCOP
-
     D2D_Radio       =   0 ;     COP_Radio       =   0 ;     SCOP_Radio          =   0 ;   
-    D2D_Vision      =   0 ;     COP_Vision      =   0 ;     SCOP_Vision         =   0 ; 
-    D2D_Move        =   0 ;     COP_Move        =   0 ;     SCOP_Move           =   0 ;
-    D2D_Range       =   0 ;     COP_Range       =   0 ;     SCOP_Range          =   0 ;
-    
-    D2D_Cost        = 100 ;     COP_Cost        = 100 ;     SCOP_Cost           = 100 ;        
-    D2D_Income      = 100 ;     COP_Income      = 100 ;     SCOP_Income         = 100 ;
-    D2D_Salvage     =   0 ;     COP_Salvage     = 100 ;     SCOP_Salvage        =   0 ; // damage enemy units to gain funds
-    D2D_Repair      =   0 ;     COP_Repair      =   0 ;     SCOP_Repair         =   0 ;
+    D2D_Vision      =   0 ;     COP_Vision      =   0 ;     SCOP_Vision         =   0 ;
     
     D2D_GainHP      =   0 ;     COP_GainHP      =   0 ;     SCOP_GainHP         =   0 ;
-    D2D_DrainHP     =   0 ;     COP_DrainHP     =   0 ;     SCOP_DrainHP        =   0 ;
+
+     
+//    D2D_Move        =   0 ;     COP_Move        =   0 ;     SCOP_Move           =   0 ;
+//    D2D_Range       =   0 ;     COP_Range       =   0 ;     SCOP_Range          =   0 ;
     
-    D2D_MaxLuck     =   0 ;     COP_MaxLuck     =   0 ;     SCOP_MaxLuck        =   0 ;
-    D2D_MinLuck     =   0 ;     COP_minLuck     =   0 ;     SCOP_MinLuck        =   0 ;
+//    D2D_Cost        = 100 ;     COP_Cost        = 100 ;     SCOP_Cost           = 100 ;        
+//    D2D_Income      = 100 ;     COP_Income      = 100 ;     SCOP_Income         = 100 ;
+//    D2D_Salvage     =   0 ;     COP_Salvage     = 100 ;     SCOP_Salvage        =   0 ; // damage enemy units to gain funds
+//    D2D_Repair      =   0 ;     COP_Repair      =   0 ;     SCOP_Repair         =   0 ;
+    
+
+//    D2D_DrainHP     =   0 ;     COP_DrainHP     =   0 ;     SCOP_DrainHP        =   0 ;
+    
+//    D2D_MaxLuck     =   0 ;     COP_MaxLuck     =   0 ;     SCOP_MaxLuck        =   0 ;
+//    D2D_MinLuck     =   0 ;     COP_minLuck     =   0 ;     SCOP_MinLuck        =   0 ;
     
 //individual unit stats
 var i = 0
@@ -71,15 +74,18 @@ for ( i = 0 ; i &lt;= 13 ; i += 1)
     {
     D2D_Atk[i]   = 100;
     D2D_Def[i]   = 100;
-    D2D_Mov[i]   = 0 
+    D2D_Mov[i]   = 0  ;
+    D2D_Rng[i]   = 0  ;
     
     COP_Atk[i]   = 100;
     COP_Def[i]   = 100;
-    COP_Mov[i]   = 0
+    COP_Mov[i]   = 0  ;
+    COP_Rng[i]   = 0  ;
     
     SCOP_Atk[i]  = 100;
     SCOP_Def[i]  = 100;
-    SCOP_Mov[i]  = 0
+    SCOP_Mov[i]  = 0  ;
+    SCOP_Rng[i]   = 0  ;
     }
  
  
@@ -102,9 +108,12 @@ D2D_Repair = 2;
 COP_ActAgain  = false;
 SCOP_ActAgain = false;
 
-     
+//direct+
+COP_Push = true;
+SCOP_Push = true;
 
 
+/*
 COFX_FastCap        = false ;
 COFX_PerfectCap     = false ;
 

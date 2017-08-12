@@ -641,6 +641,7 @@
       <object>objects\obj_CO_2</object>
       <object>objects\obj_CO_3</object>
       <object>objects\obj_CO_4</object>
+      <object>objects\obj_CO_5</object>
     </objects>
   </objects>
   <timelines name="timelines">
@@ -653,6 +654,7 @@
     <room>rooms\rExampleRoom</room>
     <room>rooms\rm_continue</room>
     <room>rooms\room5</room>
+    <room>rooms\room6</room>
   </rooms>
   <constants number="7">
     <constant name="CHECK_LAYRE">-64100</constant>

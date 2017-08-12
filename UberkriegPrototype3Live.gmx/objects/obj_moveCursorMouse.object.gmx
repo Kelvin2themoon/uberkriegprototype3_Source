@@ -151,6 +151,31 @@ radio_assist_on = false;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///apply CO range FX for move and shoot cursor
+fire_range = global.acting_unit.max_range
+fire_range += global.P_Turn.CO.D2D_Rng[global.acting_unit.unit_index];
+if ( global.P_Turn.CO.COP_on ) fire_range += global.P_Turn.CO.COP_Rng[global.acting_unit.unit_index];
+if ( global.P_Turn.CO.SCOP_on ) fire_range += global.P_Turn.CO.SCOP_Rng[global.acting_unit.unit_index];
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="1">
       <action>
@@ -774,7 +799,13 @@ if ( !mouse_check_button(mb_left)and scr_inBound(mouse_pos_x,mouse_pos_y))
         //check nd process primary weapons and overide engage type to primary 
         if (global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 and !global.acting_unit.dummy)
             {
-            if( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false) )
+            //apply CO range FX
+            fire_range = global.acting_unit.max_range
+            fire_range += global.P_Turn.CO.D2D_Rng[global.acting_unit.unit_index];
+            if ( global.P_Turn.CO.COP_on ) fire_range += global.P_Turn.CO.COP_Rng[global.acting_unit.unit_index];
+            if ( global.P_Turn.CO.SCOP_on ) fire_range += global.P_Turn.CO.SCOP_Rng[global.acting_unit.unit_index];
+            
+            if( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, fire_range, false) )
                 {
                 //check if can Move fire
                 if(global.acting_unit.canMoveFire)
@@ -937,7 +968,7 @@ draw_text(12,313, "terrain cost: " + string(scr_check_move_cost(global.acting_un
             <string>
 ///draw things
 draw_self();
-if (global.acting_unit.max_range &gt;1 and global.acting_unit.ammo &gt; 0 and global.acting_unit.canMoveFire) scr_draw_radioAssist(global.posX,global.posY,global.acting_unit.max_range,spr_rangeAssist);
+if (fire_range &gt; 1 and global.acting_unit.ammo &gt; 0 and global.acting_unit.canMoveFire) scr_draw_radioAssist(global.posX,global.posY,fire_range,spr_rangeAssist);
 
 
 if (obj_map.units[global.posX,global.posY] !=0 and global.rangeCheck[global.posX,global.posY].sprite_index =spr_rangecheck_clear){

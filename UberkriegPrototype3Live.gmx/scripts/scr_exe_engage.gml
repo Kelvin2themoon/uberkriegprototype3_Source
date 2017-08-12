@@ -4,7 +4,7 @@
 var damage = 0 ;
 
 //reset captue
- if (global.acting_unit_moved) global.acting_unit.capturing  = 0;
+if (global.acting_unit_moved) global.acting_unit.capturing  = 0;
 
 //check for land cruiser exception
 if (global.acting_unit.name = "Land Cruiser" and global.engage_type = 1 and abs( global.acting_unit.x - global.target_unit.x) +abs( global.acting_unit.y - global.target_unit.y) = 24 )
@@ -14,12 +14,10 @@ if (global.acting_unit.name = "Land Cruiser" and global.engage_type = 1 and abs(
     (scr_damageCalculator(global.acting_unit, global.target_unit, obj_map.terrains[global.target_unit.x div 24, global.target_unit.y div 24].cover, 2)
     + random(global.acting_unit.hp))
     div 10
-    
     //check if damage is over HP
     if ( damage > global.target_unit.hp ) damage = global.target_unit.hp;
-    
+   //subtract damage from target HP 
     global.target_unit.hp -= damage ;
-    
     //charge Defender Metre
     with (obj_player)
         {
@@ -41,8 +39,10 @@ if (global.acting_unit.name = "Land Cruiser" and global.engage_type = 1 and abs(
         if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;
         }  
     }
-    
-else {    ///regular damage
+
+//regular damage    
+else 
+    {    
     damage = 
     (scr_damageCalculator(global.acting_unit, global.target_unit, obj_map.terrains[global.target_unit.x div 24, global.target_unit.y div 24].cover, global.engage_type)
     + random(global.acting_unit.hp))
@@ -50,12 +50,10 @@ else {    ///regular damage
     
     //check if damage is over HP
     if ( damage > global.target_unit.hp ) damage = global.target_unit.hp;
-    
     //damage target unit
     global.target_unit.hp -= damage;
     //ammo consume
     if (global.engage_type = 1) global.acting_unit.ammo -=1;
-    
     //charge Defender Metre
     with (obj_player)
         {  
@@ -128,7 +126,33 @@ else if (global.target_unit.dummy = false )
     
     // unit is adjacent   (check for regular counter attack
     else if (  abs(global.acting_unit.x - global.target_unit.x) + abs(global.acting_unit.y - global.target_unit.y) = 24)
-        { 
+        {
+       //check for Push
+        if( (global.P_Turn.CO.COP_Push and global.P_Turn.CO.COP_on) or (global.P_Turn.CO.SCOP_Push and global.P_Turn.CO.SCOP_on))
+            {
+            //move target unit away from acting unit
+            push_x = global.target_unit.x - global.acting_unit.x;
+            push_y = global.target_unit.y - global.acting_unit.y;
+            //check inbound
+            if( scr_inBound( (global.target_unit.x + push_x) div 24, (global.target_unit.y + push_y) div 24))
+                {
+                //check if new space is clear and terrain is valis
+                if( obj_map.units[ (global.target_unit.x + push_x) div 24 , (global.target_unit.y + push_y) div 24] =0
+                and scr_check_move_cost(global.target_unit, obj_map.terrains[ (global.target_unit.x + push_x) div 24 , (global.target_unit.y + push_y) div 24]) !=99)
+                    {
+                    //clear current position
+                    obj_map.units[ global.target_unit.x div 24 , global.target_unit.y div 24 ] = 0 ;
+                    //move target unit to new space
+                    global.target_unit.x = global.target_unit.x + push_x;
+                    global.target_unit.y = global.target_unit.y + push_y;
+                    //enter into new position
+                    obj_map.units[global.target_unit.x div 24,global.target_unit.y div 24] = global.target_unit; 
+                    ///set depth
+                    scr_setUnitDepth(global.target_unit);    
+                    }
+                }
+            }
+            
         //check if target unit can counter attack
         if ( global.target_unit.max_range = 1)
             {
@@ -276,6 +300,7 @@ else if (global.target_unit.dummy = false )
                 }
             }
         }
+    
     }
             
         
@@ -288,8 +313,6 @@ if (global.acting_unit.hp <= 0)
     }
 else
     {
-    //adjust acting unit and place back into map's units array
-    //obj_map.units[destination.x div 24,destination.y div 24] = global.acting_unit;
     obj_map.units[global.acting_unit.x div 24,global.acting_unit.y div 24] = global.acting_unit;
     global.acting_unit.state =  "exhaust";
     global.acting_unit.alarm[0] =  1;
