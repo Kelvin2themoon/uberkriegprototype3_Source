@@ -56,6 +56,10 @@ height_displace = 0;
 view_border = 4*24;
 view_speed = 8;
 
+//hp repaired by
+RepairCostPercent = global.P_Turn.CO.D2D_RepairCosts;
+RepairAmmount = global.P_Turn.CO.D2D_Repair;//global.P_Turn.CO.D2D_Repair;
+
 
 //turn units on if standing
 with obj_unit
@@ -73,18 +77,18 @@ with obj_unit
             //repair disrupt
             if (isDisrupted and ownership = global.P_Turn.number) isDisrupted = false; 
            //HP UP
-            if( hp=9 and !dummy)
+            if( hp &gt;= 10 - other.RepairAmmount and !dummy and hp &lt;10)
                 {
+                global.P_Turn.funds -= (cost div 10)*(10 -hp)*( other.RepairCostPercent/100);
                 hp = 10
-                global.P_Turn.funds -= cost div 10;
                 ds_queue_enqueue(global.upkeep_q, obj_map.units[x div 24, y div 24]);
                 }
                 
-            else if ( hp &lt; 9 and !dummy)
+            else if ( hp &lt;= 10 -other.RepairAmmount  and !dummy and hp &lt;10)
                 {
-                hp +=2
-                 global.P_Turn.funds -= (cost div 10)*2;
-                 ds_queue_enqueue(global.upkeep_q, obj_map.units[x div 24, y div 24]);
+                hp +=  other.RepairAmmount;
+                global.P_Turn.funds -= (cost div 10)* other.RepairAmmount*( other.RepairCostPercent/100);
+                ds_queue_enqueue(global.upkeep_q, obj_map.units[x div 24, y div 24]);
                 }
                 
             fuel = max_fuel;

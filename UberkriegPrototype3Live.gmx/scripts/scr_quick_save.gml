@@ -23,139 +23,112 @@ ini_write_real("globals","Day",global.Day);
 ini_write_real("globals","posX",global.posX);
 ini_write_real("globals","posY",global.posY);
 
-//save CO options
-ini_write_real("globals","P1CO",global.P1_CO);
-ini_write_real("globals","P2CO",global.P2_CO);
-ini_write_real("globals","P3CO",global.P3_CO);
-ini_write_real("globals","P4CO",global.P4_CO);
-
-
-
-
-
-
-
-
 //players in play( 0 for false, 1 for true)
 
 //PLAYER 1
 if (global.P1_in_play)
     {  
-        ini_write_real("players","P1inPlay",1);
-        //this player exsista, save all relative data
-        
-        //save team affiliation
-        ini_write_real("players","P1Team",global.P1.team);
-        
-        //save funds
-        ini_write_real("players","P1Funds",global.P1.funds);
-        
-        //save player cursor position
-        ini_write_real("players","P1CursorX",global.P1.save_cursor_pos_x);
-        ini_write_real("players","P1CursorY",global.P1.save_cursor_pos_y);
-        
-        //save view position
-        ini_write_real("players","P1ViewX",global.P1.save_view_pos_x);
-        ini_write_real("players","P1ViewY",global.P1.save_view_pos_y);
-        //CO stats
-        ini_write_real("players","P1_charge",    global.P1.CO.charge);
-        ini_write_real("players","P1_COP",       global.P1.CO.COP_on);
-        ini_write_real("players","P1_SCOP_on",   global.P1.CO.SCOP_on);
+    //in play
+    ini_write_real("players","P1inPlay",1);
+    //this player exsista, save all relative data
+    ini_write_real("globals","P1CO",global.P1.CO.index);
+    //save team affiliation
+    ini_write_real("players","P1Team",global.P1.team);
+    //save funds
+    ini_write_real("players","P1Funds",global.P1.funds);
+    //save player cursor position
+    ini_write_real("players","P1CursorX",global.P1.save_cursor_pos_x);
+    ini_write_real("players","P1CursorY",global.P1.save_cursor_pos_y);
+    //save view position
+    ini_write_real("players","P1ViewX",global.P1.save_view_pos_x);
+    ini_write_real("players","P1ViewY",global.P1.save_view_pos_y);
+    //CO stats
+    ini_write_real("players","P1_charge",   global.P1.CO.charge);
+    ini_write_real("players","P1_COP",      global.P1.CO.COP_on);
+    ini_write_real("players","P1_SCOP_on",  global.P1.CO.SCOP_on);
     }
 else 
     {
-     ini_write_real("players","P1inPlay",0);
+    ini_write_real("players","P1inPlay",0);
     }                   
     
 
 //PLAYER 2
 if (global.P2_in_play)
     {  
-        ini_write_real("players","P2inPlay",1);
-        //this player exsista, save all relative data
-        
-        //save team affiliation
-        ini_write_real("players","P2Team",global.P2.team);
-        
-        //save funds
-        ini_write_real("players","P2Funds",global.P2.funds);
-        
-        //save player cursor position
-        ini_write_real("players","P2CursorX",global.P2.save_cursor_pos_x);
-        ini_write_real("players","P2CursorY",global.P2.save_cursor_pos_y);
-        
-        //save view position
-        ini_write_real("players","P2ViewX",global.P2.save_view_pos_x);
-        ini_write_real("players","P2ViewY",global.P2.save_view_pos_y);
-        
-        //CO stats
-        ini_write_real("players","P2_charge",    global.P2.CO.charge);
-        ini_write_real("players","P2_COP",       global.P2.CO.COP_on);
-        ini_write_real("players","P2_SCOP_on",   global.P2.CO.SCOP_on);
+    ini_write_real("players","P2inPlay",1);
+    //this player exsista, save all relative data
+    ini_write_real("globals","P2CO",global.P2.CO.index);
+    //save team affiliation
+    ini_write_real("players","P2Team",global.P2.team);
+    //save funds
+    ini_write_real("players","P2Funds",global.P2.funds);
+    //save player cursor position
+    ini_write_real("players","P2CursorX",global.P2.save_cursor_pos_x);
+    ini_write_real("players","P2CursorY",global.P2.save_cursor_pos_y);
+    //save view position
+    ini_write_real("players","P2ViewX",global.P2.save_view_pos_x);
+    ini_write_real("players","P2ViewY",global.P2.save_view_pos_y);
+    //CO stats
+    ini_write_real("players","P2_charge",    global.P2.CO.charge);
+    ini_write_real("players","P2_COP",       global.P2.CO.COP_on);
+    ini_write_real("players","P2_SCOP_on",   global.P2.CO.SCOP_on);
     }
 else 
     {
-     ini_write_real("players","P2inPlay",0);
+    ini_write_real("players","P2inPlay",0);
     }                   
     
 //PLAYER 3
 if (global.P3_in_play)
     {  
-        ini_write_real("players","P3inPlay",1);
-        //this player exsista, save all relative data
-        
-        //save team affiliation
-        ini_write_real("players","P3Team",global.P3.team);
-        
-        //save funds
-        ini_write_real("players","P3Funds",global.P3.funds);
-        
-        //save player cursor position
-        ini_write_real("players","P3CursorX",global.P3.save_cursor_pos_x);
-        ini_write_real("players","P3CursorY",global.P3.save_cursor_pos_y);
-        
-        //save view position
-        ini_write_real("players","P3ViewX",global.P3.save_view_pos_x);
-        ini_write_real("players","P3ViewY",global.P3.save_view_pos_y);
-        
-        //CO stats
-        ini_write_real("players","P3_charge",    global.P3.CO.charge);
-        ini_write_real("players","P3_COP",       global.P3.CO.COP_on);
-        ini_write_real("players","P3_SCOP_on",   global.P3.CO.SCOP_on);
+    ini_write_real("players","P3inPlay",1);
+    //this player exsista, save all relative data
+    ini_write_real("globals","P3CO",global.P3.CO.index);
+    //save team affiliation
+    ini_write_real("players","P3Team",global.P3.team);
+    //save funds
+    ini_write_real("players","P3Funds",global.P3.funds);
+    //save player cursor position
+    ini_write_real("players","P3CursorX",global.P3.save_cursor_pos_x);
+    ini_write_real("players","P3CursorY",global.P3.save_cursor_pos_y);
+    //save view position
+    ini_write_real("players","P3ViewX",global.P3.save_view_pos_x);
+    ini_write_real("players","P3ViewY",global.P3.save_view_pos_y);
+    //CO stats
+    ini_write_real("players","P3_charge",    global.P3.CO.charge);
+    ini_write_real("players","P3_COP",       global.P3.CO.COP_on);
+    ini_write_real("players","P3_SCOP_on",   global.P3.CO.SCOP_on);
     }
 else 
     {
-     ini_write_real("players","P3inPlay",0);
+    ini_write_real("players","P3inPlay",0);
     }
 
 //PLAYER 4
 if (global.P4_in_play)
     {  
-        ini_write_real("players","P4inPlay",1);
-        //this player exsista, save all relative data
-        
-        //save team affiliation
-        ini_write_real("players","P4Team",global.P4.team);
-        
-        //save funds
-        ini_write_real("players","P4Funds",global.P4.funds);
-        
-        //save player cursor position
-        ini_write_real("players","P4CursorX",global.P4.save_cursor_pos_x);
-        ini_write_real("players","P4CursorY",global.P4.save_cursor_pos_y);
-        
-        //save view position
-        ini_write_real("players","P4ViewX",global.P4.save_view_pos_x);
-        ini_write_real("players","P4ViewY",global.P4.save_view_pos_y);
-        
-        //CO stats
-        ini_write_real("players","P4_charge",    global.P4.CO.charge);
-        ini_write_real("players","P4_COP",       global.P4.CO.COP_on);
-        ini_write_real("players","P4_SCOP_on",   global.P4.CO.SCOP_on);
-    }
+    ini_write_real("players","P4inPlay",1);
+    //this player exsista, save all relative data
+    ini_write_real("globals","P4CO",global.P4.CO.index);
+    //save team affiliation
+    ini_write_real("players","P4Team",global.P4.team);
+    //save funds
+    ini_write_real("players","P4Funds",global.P4.funds);
+    //save player cursor position
+    ini_write_real("players","P4CursorX",global.P4.save_cursor_pos_x);
+    ini_write_real("players","P4CursorY",global.P4.save_cursor_pos_y);
+    //save view position
+    ini_write_real("players","P4ViewX",global.P4.save_view_pos_x);
+    ini_write_real("players","P4ViewY",global.P4.save_view_pos_y);
+    //CO stats
+    ini_write_real("players","P4_charge",    global.P4.CO.charge);
+    ini_write_real("players","P4_COP",       global.P4.CO.COP_on);
+    ini_write_real("players","P4_SCOP_on",   global.P4.CO.SCOP_on);
+}
 else 
     {
-     ini_write_real("players","P4inPlay",0);
+    ini_write_real("players","P4inPlay",0);
     }
     
     
@@ -178,6 +151,11 @@ for( i = 0 ; i < global.mapW ; i += 1 )         // i is to X
         //save terrain visibility
         if (obj_map.terrains[i,j].isVisible) ini_write_real("Terrains",posKey+"isVisible",1);
         else ini_write_real("Terrains",posKey+"isVisible",0);
+        //save terrain smoke
+        if (obj_map.terrains[i,j].isSmoke) ini_write_real("Terrains",posKey+"isSmoke",1);
+        else ini_write_real("Terrains",posKey+"isSmoke",0);
+        //save smoker
+        ini_write_real("Terrains", posKey+"smoker", obj_map.terrains[i,j].smoker);
         
         
         //save property ownership
@@ -192,8 +170,7 @@ for( i = 0 ; i < global.mapW ; i += 1 )         // i is to X
             {
             with obj_map.units[i,j]
                 {
-                
-                 ini_write_real("Units", other.posKey , object_index);
+                ini_write_real("Units", other.posKey , object_index);
                 //save unit ownership
                 ini_write_real("Units", other.posKey+"P" , ownership);
                 //save commander status (1 = True, 0 = False)
@@ -220,6 +197,9 @@ for( i = 0 ; i < global.mapW ; i += 1 )         // i is to X
                 else ini_write_real("Units",other.posKey+"isHidden",0);
                 //Capturing
                 ini_write_real("Units",other.posKey+"capturing",capturing);
+                //dummy
+                if (dummy) ini_write_real("Units",other.posKey+"dummy",1);
+                else ini_write_real("Units",other.posKey+"dummy",0);
                 
                 
                 //Special case: Loaded APC

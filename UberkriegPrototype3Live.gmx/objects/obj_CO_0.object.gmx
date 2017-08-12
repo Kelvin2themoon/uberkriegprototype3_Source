@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>/// Initiate Parent Object and defaults
 
-index = 0 ; //CO index, 0 = default CO with no powers
+index = 5 ; //CO index, 0 = default CO with no powers
 name = "no-co" //default "nobody"
 ownership =  0 ;
 
@@ -64,21 +64,22 @@ use_count = 0 ; //number of times COP and SCOP are used
     D2D_MaxLuck     =   0 ;     COP_MaxLuck     =   0 ;     SCOP_MaxLuck        =   0 ;
     D2D_MinLuck     =   0 ;     COP_minLuck     =   0 ;     SCOP_MinLuck        =   0 ;
     
-//unit stats
-
-//strength
+//individual unit stats
 var i = 0
 
 for ( i = 0 ; i &lt;= 13 ; i += 1)
     {
     D2D_Atk[i]   = 100;
     D2D_Def[i]   = 100;
+    D2D_Mov[i]   = 0 
     
     COP_Atk[i]   = 100;
     COP_Def[i]   = 100;
+    COP_Mov[i]   = 0
     
     SCOP_Atk[i]  = 100;
     SCOP_Def[i]  = 100;
+    SCOP_Mov[i]  = 0
     }
  
  
@@ -94,6 +95,8 @@ COFX_SmokeScreen    = 0     ; //defines charge
 
 //hp+
 COFX_APC_Repair  = 0 ;
+D2D_RepairCosts = 100;
+D2D_Repair = 2;
 
 //radio+ eagle type
 COP_ActAgain  = false;

@@ -31,7 +31,7 @@ event_inherited();
 
 // Initiate Parent Object and defaults
 
-Index = 2 ;
+index = 2 ;
 name = "vision+" 
 
 
@@ -48,7 +48,7 @@ charge = 0;
 //passive abilities
 D2D_Vision  = 1 ;
 COP_Vision  = 1 ;
-SCOP_Vision = 3 ;
+SCOP_Vision = 2 ;
 
 COFX_HiddenHP       = true ; //includes fuel and ammo
 COFX_PerfectVision  = true ;

@@ -54,7 +54,15 @@ if (file_exists(loading_map))
             player_set = ini_read_real("Terrains",posRead +"P",1);
             setting_terrain = ini_read_real("Terrains",posRead,0);
             scr_setTerrain(setting_terrain,i,j,player_set);
+            //set terrain attributes
+            if (ini_read_real("Terrains",posRead+"isSmoke",0)=1) 
+                {
+                obj_map.terrains[i,j].isSmoke = true;
+                obj_map.terrains[i,j].canHide = true;
+                obj_map.terrains[i,j].smoker = ini_read_real("Terrains",posRead+"smoker",0);
+                }
             
+
             //set unit
             if (ini_key_exists("Units",posRead+"P"))
                 {
@@ -70,6 +78,9 @@ if (file_exists(loading_map))
                  
                 //specia case, isHidden
                  if (ini_read_real("Units",posRead+"isHidden",0)=1) obj_map.units[i,j].isHidden = true;
+                 
+                 //specia case, dummy
+                 if (ini_read_real("Units",posRead+"dummy",0)=1) obj_map.units[i,j].dummy = true;
                     
                     //read variables from ini_file and prep "new" variables
                     new_hp = ini_read_real("Units",posRead+"hp",10);
@@ -77,7 +88,7 @@ if (file_exists(loading_map))
                     new_ammo = ini_read_real("Units",posRead+"ammo",-1);
                     new_capturing = ini_read_real("Units",posRead+"capturing",0);
                     new_team = ini_read_real("Units",posRead+"team",1);
-                     
+                   
                     
                 with(obj_map.units[i,j])
                     {

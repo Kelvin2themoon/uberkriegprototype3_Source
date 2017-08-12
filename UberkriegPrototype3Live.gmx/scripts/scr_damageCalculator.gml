@@ -45,7 +45,11 @@ with( obj_CO_0)
         if( SCOP_on ) other.def_CO_mod = SCOP_Def[other.dmgCalc_def.unit_index];
         }
         
-    }    
+    }
+//EXCEPTIOM attack strength for move again at 50% on player turn only
+if( global.P_Turn.CO.COP_ActAgain
+and global.P_Turn.CO.COP_on 
+and global.P_Turn.number = dmgCalc_atk.ownership ) atk_CO_mod = atk_CO_mod div 2;
 
     
 //damage Formula     

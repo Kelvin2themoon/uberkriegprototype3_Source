@@ -29,7 +29,7 @@
 event_inherited();
 
 // Initiate Parent Object and defaults
-Index = 4 ;
+index = 4 ;
 name = "hp+" ;
 
 //COP and SCOP Varialbes
@@ -41,7 +41,10 @@ SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
 //passive abilities
-COFX_APC_Repair  = 1 ;
+D2D_RepairCosts = 50;
+D2D_Repair = 3;
+
+COFX_APC_Repair  = 2 ;
 COP_GainHP  = 2 ;
 SCOP_GainHP = 5 ;
 </string>

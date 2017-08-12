@@ -31,7 +31,7 @@ event_inherited();
 
 // Initiate Parent Object and defaults
 
-Index = 1 ;
+index = 1 ;
 name = "radio+"
 
 //COP and SCOP Varialbes
@@ -52,31 +52,7 @@ SCOP_Radio  = 2 ;
 COP_ActAgain = true;
 SCOP_ActAgain = true;
 
-//Atk and Def
 
-
-var i = 0;
-
-for( i = 1 ; i &lt;=13 ; i++ )
-    {
-    COP_Atk[i] = 50;
-    }
-
-
-/*
-COP_Atk[01]   = 50;
-COP_Atk[02]   = 50;
-COP_Atk[03]   = 50;
-COP_Atk[04]   = 50;
-COP_Atk[05]   = 50;
-COP_Atk[06]   = 50;
-COP_Atk[07]   = 50;
-COP_Atk[08]   = 50;
-COP_Atk[09]   = 50;
-COP_Atk[10]   = 50;
-COP_Atk[11]   = 50;
-COP_Atk[12]   = 50;
-COP_Atk[13]   = 50;
 
     
 

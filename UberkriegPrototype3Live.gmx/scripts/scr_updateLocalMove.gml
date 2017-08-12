@@ -21,25 +21,15 @@ max_move_points =  move_check_target.move_points;
 
 if (move_check_target.ownership !=0)
     {
-    
-        var owner = 0;
-        switch move_check_target.ownership 
+    with(obj_CO_0)
+        {
+        if( other.move_check_target.ownership = ownership )
             {
-                case 1 : owner = global.P1; break;
-                case 2 : owner = global.P2; break;    
-                case 3 : owner = global.P3; break;
-                case 4 : owner = global.P4; break;
+            other.max_move_points += D2D_Mov[other.move_check_target.unit_index];
+            if( COP_on ) other.max_move_points += COP_Mov[other.move_check_target.unit_index];
+            if( SCOP_on ) other.max_move_points += SCOP_Mov[other.move_check_target.unit_index];
             }
-
-
-                var move_bonus = owner.CO.D2D_Move;
-                if (global.P_Turn.CO.COP_on)  move_bonus += owner.CO.COP_Move ;
-                if (global.P_Turn.CO.SCOP_on)  move_bonus += owner.CO.SCOP_Move ;
-                
-                
-                  
-                max_move_points += move_bonus;    
-
+        }
     }
 
 
