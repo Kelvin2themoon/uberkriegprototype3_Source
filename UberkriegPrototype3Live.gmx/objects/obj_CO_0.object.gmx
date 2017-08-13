@@ -123,11 +123,15 @@ SCOP_PerfectCapture = false; //victory march
 SCOP_Cleave = false;
 
 //Officer+
-//COFX: 
+
 D2D_CannotAttach = false;
 D2D_OfficerBoost = false; //units in officer radio range Stats++
 COP_RadioDrainHP = 0;
 SCOP_Promote = false;
+
+//anti-radio
+COP_Disrupt = 0;
+SCOP_Disrupt = 0;
 
 
 

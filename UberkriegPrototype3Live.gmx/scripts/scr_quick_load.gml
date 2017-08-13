@@ -88,7 +88,7 @@ if (file_exists(loading_map))
                     new_ammo = ini_read_real("Units",posRead+"ammo",-1);
                     new_capturing = ini_read_real("Units",posRead+"capturing",0);
                     new_team = ini_read_real("Units",posRead+"team",1);
-                   
+                    new_cost = ini_read_real("Units",posRead+"cost",1000);
                     
                 with(obj_map.units[i,j])
                     {
@@ -98,6 +98,7 @@ if (file_exists(loading_map))
                     ammo = other.new_ammo;
                     capturing = other.new_capturing;
                     team = other.new_team;
+                    cost = other.new_cost;
                     
                     //special case: loaded APC
                     

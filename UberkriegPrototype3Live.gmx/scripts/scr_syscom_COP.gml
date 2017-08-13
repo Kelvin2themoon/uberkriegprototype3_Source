@@ -29,12 +29,23 @@ with (obj_unit)
                 }
             }
     }
+    
+
+        
 scr_updateStanding_global();
 scr_updateGlobalVision();
-    
-    
-//reactivate UI    
-instance_activate_object(obj_battleCursor);
-instance_activate_object(obj_miniwin);
-instance_destroy();
 
+//check for disruptor
+if( global.P_Turn.CO.COP_Disrupt > 0)
+    {
+    instance_create(global.posX,global.posY,obj_disruptorCurosr);
+    with(obj_disruptorCurosr) range = global.P_Turn.CO.COP_Disrupt
+    }
+    
+else
+    { 
+    //reactivate UI    
+    instance_activate_object(obj_battleCursor);
+    instance_activate_object(obj_miniwin);
+    instance_destroy();
+    }

@@ -187,6 +187,8 @@ for( i = 0 ; i < global.mapW ; i += 1 )         // i is to X
                 ini_write_real("Units",other.posKey+"fuel",fuel);
                 //ammo
                 ini_write_real("Units",other.posKey+"ammo",ammo);
+                //cost
+                ini_write_real("Units",other.posKey+"cost",cost);
                 //team
                 ini_write_real("Units",other.posKey+"team",team);
                 //isDisrupted (boolean)

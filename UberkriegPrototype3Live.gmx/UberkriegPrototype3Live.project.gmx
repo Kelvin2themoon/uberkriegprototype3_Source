@@ -623,7 +623,8 @@
         </objects>
         <object>objects\obj_supplyCursor</object>
         <object>objects\obj_smokeScreenCurosr</object>
-        <object>objects\obj_disruptCursor</object>
+        <object>objects\obj_disruptorCurosr</object>
+        <object>objects\obj_promote_Cursor</object>
         <object>objects\obj_dropCursor</object>
         <objects name="Cursor Backup">
           <object>objects\obj_Bup_moveCurosr</object>
@@ -649,6 +650,7 @@
       <object>objects\obj_CO_8</object>
       <object>objects\obj_CO_9</object>
       <object>objects\obj_CO_10</object>
+      <object>objects\obj_CO_11</object>
     </objects>
   </objects>
   <timelines name="timelines">
