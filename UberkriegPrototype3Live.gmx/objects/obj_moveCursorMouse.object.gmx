@@ -694,7 +694,7 @@ if ( !mouse_check_button(mb_left)and scr_inBound(mouse_pos_x,mouse_pos_y))
                   )
                     {
                     // there is room in the APC
-                    if (global.target_unit.load_A = 0 or global.target_unit.load_B = 0 and !global.target.dummy) global.load = true;
+                    if ((global.target_unit.load_A = 0 or global.target_unit.load_B = 0) and !global.target_unit.dummy) global.load = true;
                     }    
                 }
             
