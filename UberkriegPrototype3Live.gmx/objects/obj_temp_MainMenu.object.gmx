@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>///CO select
 
-var maxCO = 6 ;
+var maxCO = 10 ;
 
 if keyboard_check_pressed( ord("1"))
     {

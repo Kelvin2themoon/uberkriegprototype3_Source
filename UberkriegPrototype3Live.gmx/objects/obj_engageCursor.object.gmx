@@ -37,14 +37,10 @@ image_speed = 0
 if ( global.acting_unit.name = "Covert Op." and global.alt_Disrupt)
     
     {
-    
-        scr_check_units_in_range(global.posX, global.posY, 1, 1, false);
-    
+    scr_check_units_in_range(global.posX, global.posY, 1, 1, false);
     }
 
 else scr_check_units_in_range(global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false);
-
-
 
 //set alarm to Cursor move speed
 alarm[1] = 0;
@@ -580,6 +576,8 @@ global.unit_check = obj_map.units[x div 24, y div 24];
             <kind>1</kind>
             <string>///Debug 
 
+draw_text(12,48+12*2,"P2 CO Zone: " + string(global.rangeCheck[mouse_x div 24,mouse_y div 24].CO_Zone[2]));
+draw_text(12,48+12*3, "("+string(global.posX)+","+string(global.posY)+")")
 /*
 
 unit_selection      = engage_target;

@@ -25,14 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 06: Capture+
+            <string>///CO 10: Officer+ CO
 
 event_inherited();
 
 // Initiate Parent Object and defaults
 
-index = 6 ;
-name = "capture+" ;
+index = 10 ;
+name = "officer+" ;
 
 //COP and SCOP Varialbes
 
@@ -42,37 +42,17 @@ COP_on      = false ;   //CO power switch
 SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
-//individual unit stats
+charge = (COP_Bar+SCOP_Bar)*1000
 
-for ( i = 0 ; i &lt;= 4 ; i += 1)
-    {
-    D2D_Atk[i]   = 130;
-    D2D_Def[i]   = 110;
-    D2D_Mov[i]   = 0  ;
-    
-    COP_Atk[i]   = 150;
-    COP_Def[i]   = 110;
-    COP_Mov[i]   = 1  ;
-    
-    SCOP_Atk[i]  = 180;
-    SCOP_Def[i]  = 110;
-    SCOP_Mov[i]  = 2  ;
-    }
-    
-///APC move +1
-D2D_Mov[06] = 1;
-        
-//reduced power to direct combat units    
-D2D_Atk[05] = 80;
-D2D_Atk[07] = 80;
-D2D_Atk[09] = 80;
-D2D_Atk[10] = 80;
-D2D_Atk[11] = 80;
-D2D_Atk[13] = 80;
+//Radi Reducting
+D2D_Radio = -1;
+ 
+//COFX: 
+D2D_CannotAttach = true;
+D2D_OfficerBoost = true; //160, see damageCalc
+COP_RadioDrainHP = 1;
+SCOP_Promote = true;
 
-//Capture ability
-D2D_AdvanceCapture  = true; //capture 1.5x
-SCOP_PerfectCapture = true; //victory march
  
 </string>
           </argument>

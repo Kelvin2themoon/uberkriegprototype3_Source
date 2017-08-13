@@ -37,20 +37,31 @@ with( obj_CO_0)
         other.atk_CO_mod = D2D_Atk[other.dmgCalc_atk.unit_index];
         if(  COP_on ) other.atk_CO_mod =  COP_Atk[other.dmgCalc_atk.unit_index];
         if( SCOP_on ) other.atk_CO_mod = SCOP_Atk[other.dmgCalc_atk.unit_index];
+        //check for officer Boost
+        if( D2D_OfficerBoost and other.dmgCalc_atk.isCommander ) other.atk_CO_mod = other.atk_CO_mod*(160/100);
+        //check CO zone acting unit
+        else if( global.P_Turn.number = ownership and D2D_OfficerBoost and global.rangeCheck[global.posX, global.posY].CO_Zone[ownership]) other.atk_CO_mod = other.atk_CO_mod*(130/100);
+        //check target unit: counterattack
+        else if( D2D_OfficerBoost and global.rangeCheck[other.dmgCalc_atk.x div 24, other.dmgCalc_atk.x div 24].CO_Zone[ownership]) other.atk_CO_mod = other.atk_CO_mod*(130/100);
         }
     if( ownership = other.dmgCalc_def.ownership )
         {
         other.def_CO_mod = D2D_Def[other.dmgCalc_atk.unit_index];
         if(  COP_on ) other.def_CO_mod =  COP_Def[other.dmgCalc_def.unit_index];
         if( SCOP_on ) other.def_CO_mod = SCOP_Def[other.dmgCalc_def.unit_index];
+        // check for CO Boost
+        if( D2D_OfficerBoost and other.dmgCalc_def.isCommander ) other.def_CO_mod = other.def_CO_mod*(160/100);
+        //check CO zone acting unit
+        else if( global.P_Turn.number = ownership and D2D_OfficerBoost and global.rangeCheck[global.posX, global.posY].CO_Zone[ownership]) other.def_CO_mod = other.def_CO_mod*(130/100);
+        //check target unit: counterattack
+        else if(D2D_OfficerBoost and global.rangeCheck[other.dmgCalc_def.x div 24, other.dmgCalc_def.y div 24].CO_Zone[ownership]) other.def_CO_mod = other.def_CO_mod*(130/100);
         }
         
     }
-//EXCEPTIOM attack strength for move again at 50% on player turn only
+//EXCEPTION attack strength for move again at 50% on player turn only
 if( global.P_Turn.CO.COP_ActAgain
 and global.P_Turn.CO.COP_on 
 and global.P_Turn.number = dmgCalc_atk.ownership ) atk_CO_mod = atk_CO_mod div 2;
-
     
 //damage Formula     
 damage =    (

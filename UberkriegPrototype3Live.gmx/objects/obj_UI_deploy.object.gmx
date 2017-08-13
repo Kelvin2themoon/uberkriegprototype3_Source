@@ -72,6 +72,40 @@ if( global.P_Turn.CO.COFX_DeployDummy and (global.P_Turn.CO.COP_on or global.P_T
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Calculate price
+
+//get from CO objects
+var i =1;
+for( i = 1 ; i &lt;= 13 ; i++ )
+    {
+    price[i] = global.P_Turn.CO.D2D_Cost[i]; //determins deploy costs for this instance 
+    worth[i] = global.P_Turn.CO.D2D_Cost[i]; //determinst cost attribute of unit deployed, important to Repair
+    if( global.P_Turn.CO.COP_on ) price[i] = global.P_Turn.CO.COP_Cost[i];
+    if( global.P_Turn.CO.SCOP_on ) price[i] = global.P_Turn.CO.SCOP_Cost[i];
+    }
+    
+
+    
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="1">
       <action>
@@ -296,55 +330,67 @@ if (mouse_check_button_pressed(mb_left))
                 switch row
                     {
                     case 0: //Light Infantry
-                        if (global.P_Turn.funds &gt;= global.cost[1]*cost_mod)
+                        if (global.P_Turn.funds &gt;= price[1])
                             {
-                            global.P_Turn.funds -= global.cost[1]*cost_mod;
+                            global.P_Turn.funds -= price[1];
                             scr_setUnit(obj_unit_LightInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            //set unit's worth
+                            obj_map.units[global.posX,global.posY].cost = worth[1]
                             unit_has_deployed = true;
                             }
                             break;
                          
                     case 1: //Heavy Infantry (mechanized Infnatry)
-                        if(global.P_Turn.funds &gt;= global.cost[2]*cost_mod)
+                        if (global.P_Turn.funds &gt;= price[2])
                             {
-                            global.P_Turn.funds -= global.cost[2]*cost_mod;
+                            global.P_Turn.funds -= price[2];
                             scr_setUnit(obj_unit_HeavyInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            //set unit's worth
+                            obj_map.units[global.posX,global.posY].cost = worth[2];
                             unit_has_deployed = true;
                             }
                             break;
                                 
                     case 2: //Long Gun
-                        if (global.P_Turn.funds &gt;= global.cost[3]*cost_mod)
+                        if (global.P_Turn.funds &gt;= price[3])
                             {
-                            global.P_Turn.funds -= global.cost[3]*cost_mod;
-                            scr_setUnit(obj_unit_LongGun ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            global.P_Turn.funds -= price[3];
+                            scr_setUnit(obj_unit_LongGun,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            //set unit's worth
+                            obj_map.units[global.posX,global.posY].cost = worth[3];
                             unit_has_deployed = true;
                             }
                             break;
                             
                     case 3: //Field Officer (commander)
-                        if (global.P_Turn.funds &gt;= global.cost[4]*cost_mod)
+                        if (global.P_Turn.funds &gt;= price[4])
                             {
-                            global.P_Turn.funds -= global.cost[4]*cost_mod;
+                            global.P_Turn.funds -= price[4];
                             scr_setUnit(obj_unit_Officer,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            //set unit's worth
+                            obj_map.units[global.posX,global.posY].cost = worth[4];
                             unit_has_deployed = true;
                             }
                             break; 
                             
                     case 4: //Recon
-                        if (global.P_Turn.funds &gt;= global.cost[5]*cost_mod)
+                        if (global.P_Turn.funds &gt;= price[5])
                             {
-                            global.P_Turn.funds -= global.cost[5]*cost_mod;
+                            global.P_Turn.funds -= price[5];
                             scr_setUnit(obj_unit_Recon,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            //set unit's worth
+                            obj_map.units[global.posX,global.posY].cost = worth[5];
                             unit_has_deployed = true;
                             }
                             break;
                             
                     case 5: //APC
-                        if (global.P_Turn.funds &gt;= global.cost[6]*cost_mod)
+                        if (global.P_Turn.funds &gt;= price[6])
                             {
-                            global.P_Turn.funds -= global.cost[6]*cost_mod;
+                            global.P_Turn.funds -= price[6];
                             scr_setUnit(obj_unit_APC,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            //set unit's worth
+                            obj_map.units[global.posX,global.posY].cost = worth[6];
                             unit_has_deployed = true;
                             }
                             break;
@@ -360,64 +406,78 @@ if (mouse_check_button_pressed(mb_left))
                 switch row
                     {
                     case 0: //Light Tank
-                    if  (global.P_Turn.funds &gt;= global.cost[7]*cost_mod)
-                        {
-                        global.P_Turn.funds -= global.cost[7]*cost_mod; 
-                        scr_setUnit(obj_unit_LightTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                        unit_has_deployed = true;
-                        }            
-                        break;
+                    if (global.P_Turn.funds &gt;= price[7])
+                            {
+                            global.P_Turn.funds -= price[7];
+                            scr_setUnit(obj_unit_LightTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            //set unit's worth
+                            obj_map.units[global.posX,global.posY].cost = worth[7];
+                            unit_has_deployed = true;
+                            }
+                            break;
                                     
                     case 1: //Artillery
-                        if (global.P_Turn.funds &gt;= global.cost[8]*cost_mod)
+                        if (global.P_Turn.funds &gt;= price[8])
                             {
-                            global.P_Turn.funds -= global.cost[8]*cost_mod;
+                            global.P_Turn.funds -= price[8];
                             scr_setUnit(obj_unit_Artillery,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            //set unit's worth
+                            obj_map.units[global.posX,global.posY].cost = worth[8];
                             unit_has_deployed = true;
                             }
                             break;
                                     
                     case 2: //IFV (AA)
-                        if (global.P_Turn.funds &gt;= global.cost[9]*cost_mod)
+                        if (global.P_Turn.funds &gt;= price[9])
                             {
-                            global.P_Turn.funds -= global.cost[9]*cost_mod;
-                            scr_setUnit(obj_unit_AA ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            global.P_Turn.funds -= price[9];
+                            scr_setUnit(obj_unit_AA,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            //set unit's worth
+                            obj_map.units[global.posX,global.posY].cost = worth[9];
                             unit_has_deployed = true;
                             }
                             break;
                                     
                     case 3: //Covert Op.
-                        if (global.P_Turn.funds &gt;= global.cost[10]*cost_mod)
+                        if (global.P_Turn.funds &gt;= price[10])
                             {
-                            global.P_Turn.funds -= global.cost[10]*cost_mod; 
+                            global.P_Turn.funds -= price[10];
                             scr_setUnit(obj_unit_CovertOp,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            //set unit's worth
+                            obj_map.units[global.posX,global.posY].cost = worth[10];
                             unit_has_deployed = true;
                             }
-                            break; 
+                            break;; 
                                     
                     case 4: //Heavy Tank
-                        if (global.P_Turn.funds &gt;= global.cost[11]*cost_mod)
+                        if (global.P_Turn.funds &gt;= price[11])
                             {
-                            global.P_Turn.funds -= global.cost[11]*cost_mod;
+                            global.P_Turn.funds -= price[11];
                             scr_setUnit(obj_unit_HeavyTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            //set unit's worth
+                            obj_map.units[global.posX,global.posY].cost = worth[11];
                             unit_has_deployed = true;
                             }
                             break;
                                     
                     case 5: //Rocket
-                        if (global.P_Turn.funds &gt;= global.cost[12]*cost_mod)
+                        if (global.P_Turn.funds &gt;= price[12])
                             {
-                            global.P_Turn.funds -= global.cost[12]*cost_mod; 
+                            global.P_Turn.funds -= price[12];
                             scr_setUnit(obj_unit_Rocket,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            //set unit's worth
+                            obj_map.units[global.posX,global.posY].cost = worth[12];
                             unit_has_deployed = true;
                             }
                             break;
                                     
                     case 6: //Land Cruiser
-                        if (global.P_Turn.funds &gt;= global.cost[13]*cost_mod)
+                        if (global.P_Turn.funds &gt;= price[13])
                             {
-                            global.P_Turn.funds -= global.cost[13]*cost_mod;
+                            global.P_Turn.funds -= price[13];
                             scr_setUnit(obj_unit_LandCruiser,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                            //set unit's worth
+                            obj_map.units[global.posX,global.posY].cost = worth[13];
                             unit_has_deployed = true;
                             }
                             break;
@@ -576,59 +636,71 @@ if keyboard_check_pressed(global.keyCONFIRM)
         switch row
             {
             case 0: //Light Infantry
-            if (global.P_Turn.funds &gt;= global.cost[1]*cost_mod)
-                {
-                global.P_Turn.funds -= global.cost[1]*cost_mod;
-                scr_setUnit(obj_unit_LightInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                unit_has_deployed = true;
-                }
-            break;
+                if (global.P_Turn.funds &gt;= price[1])
+                    {
+                    global.P_Turn.funds -= price[1];
+                    scr_setUnit(obj_unit_LightInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                    //set unit's worth
+                    obj_map.units[global.posX,global.posY].cost = worth[1]
+                    unit_has_deployed = true;
+                    }
+                    break;
             
             case 1: //Heavy Infantry (mechanized Infnatry)
-            if(global.P_Turn.funds &gt;= global.cost[2]*cost_mod)
-                {
-                global.P_Turn.funds -= global.cost[2]*cost_mod;
-                scr_setUnit(obj_unit_HeavyInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                unit_has_deployed = true;
-                }
-            break;
+                if (global.P_Turn.funds &gt;= price[2])
+                    {
+                    global.P_Turn.funds -= price[2];
+                    scr_setUnit(obj_unit_HeavyInfantry,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                    //set unit's worth
+                    obj_map.units[global.posX,global.posY].cost = worth[2];
+                    unit_has_deployed = true;
+                    }
+                    break;
             
             case 2: //Long Gun
-            if (global.P_Turn.funds &gt;= global.cost[3]*cost_mod)
-                {
-                global.P_Turn.funds -= global.cost[3]*cost_mod;
-                scr_setUnit(obj_unit_LongGun ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                unit_has_deployed = true;
-                }
-            break;
+                if (global.P_Turn.funds &gt;= price[3])
+                    {
+                    global.P_Turn.funds -= price[3];
+                    scr_setUnit(obj_unit_LongGun,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                    //set unit's worth
+                    obj_map.units[global.posX,global.posY].cost = worth[3];
+                    unit_has_deployed = true;
+                    }
+                    break;
             
             case 3: //Field Officer (commander)
-            if (global.P_Turn.funds &gt;= global.cost[4]*cost_mod)
-                {
-                global.P_Turn.funds -= global.cost[4]*cost_mod;
-                scr_setUnit(obj_unit_Officer,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                unit_has_deployed = true;
-                }
-            break; 
+                if (global.P_Turn.funds &gt;= price[4])
+                    {
+                    global.P_Turn.funds -= price[4];
+                    scr_setUnit(obj_unit_Officer,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                    //set unit's worth
+                    obj_map.units[global.posX,global.posY].cost = worth[4];
+                    unit_has_deployed = true;
+                    }
+                    break; 
             
             case 4: //Recon
-                if (global.P_Turn.funds &gt;= global.cost[5]*cost_mod)
-                {
-                global.P_Turn.funds -= global.cost[5]*cost_mod;
-                scr_setUnit(obj_unit_Recon,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                unit_has_deployed = true;
-                }
-            break;
+                if (global.P_Turn.funds &gt;= price[5])
+                    {
+                    global.P_Turn.funds -= price[5];
+                    scr_setUnit(obj_unit_Recon,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                    //set unit's worth
+                    obj_map.units[global.posX,global.posY].cost = worth[5];
+                    unit_has_deployed = true;
+                    }
+                    break;
             
             case 5: //APC
-            if (global.P_Turn.funds &gt;= global.cost[6]*cost_mod)
-                {
-                global.P_Turn.funds -= global.cost[6]*cost_mod;
-                scr_setUnit(obj_unit_APC,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                unit_has_deployed = true;
-                }
-            break;
-            
+                if (global.P_Turn.funds &gt;= price[6])
+                    {
+                    global.P_Turn.funds -= price[6];
+                    scr_setUnit(obj_unit_APC,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                    //set unit's worth
+                    obj_map.units[global.posX,global.posY].cost = worth[6];
+                    unit_has_deployed = true;
+                    }
+                    break;
+        
             case 6: //cancel
                 no_deploy = true;
                 break;
@@ -640,68 +712,82 @@ if keyboard_check_pressed(global.keyCONFIRM)
         switch row
             {
             case 0: //Light Tank
-            if  (global.P_Turn.funds &gt;= global.cost[7]*cost_mod)
-                {
-                global.P_Turn.funds -= global.cost[7]*cost_mod; 
-                scr_setUnit(obj_unit_LightTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                unit_has_deployed = true;
-                }            
-            break;
+                if (global.P_Turn.funds &gt;= price[7])
+                    {
+                    global.P_Turn.funds -= price[7];
+                    scr_setUnit(obj_unit_LightTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                    //set unit's worth
+                    obj_map.units[global.posX,global.posY].cost = worth[7];
+                    unit_has_deployed = true;
+                    }
+                    break;
                 
             case 1: //Artillery
-            if (global.P_Turn.funds &gt;= global.cost[8]*cost_mod)
-                {
-                global.P_Turn.funds -= global.cost[8]*cost_mod;
-                scr_setUnit(obj_unit_Artillery,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                unit_has_deployed = true;
-                }
-           break;
+                if (global.P_Turn.funds &gt;= price[8])
+                    {
+                    global.P_Turn.funds -= price[8];
+                    scr_setUnit(obj_unit_Artillery,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                    //set unit's worth
+                    obj_map.units[global.posX,global.posY].cost = worth[8];
+                    unit_has_deployed = true;
+                    }
+                    break;
                 
            case 2: //IFV (AA)
-           if (global.P_Turn.funds &gt;= global.cost[9]*cost_mod)
-                {
-                global.P_Turn.funds -= global.cost[9]*cost_mod;
-                scr_setUnit(obj_unit_AA ,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                unit_has_deployed = true;
-                }
-           break;
+                if (global.P_Turn.funds &gt;= price[9])
+                    {
+                    global.P_Turn.funds -= price[9];
+                    scr_setUnit(obj_unit_AA,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                    //set unit's worth
+                    obj_map.units[global.posX,global.posY].cost = worth[9];
+                    unit_has_deployed = true;
+                    }
+                    break;
                 
            case 3: //Covert Op.
-           if( global.P_Turn.funds &gt;= global.cost[10]*cost_mod)
-                {
-                global.P_Turn.funds -= global.cost[10]*cost_mod; 
-                scr_setUnit(obj_unit_CovertOp,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                unit_has_deployed = true;
-                }
-           break; 
+                if (global.P_Turn.funds &gt;= price[10])
+                    {
+                    global.P_Turn.funds -= price[10];
+                    scr_setUnit(obj_unit_CovertOp,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                    //set unit's worth
+                    obj_map.units[global.posX,global.posY].cost = worth[10];
+                    unit_has_deployed = true;
+                    }
+                    break;; 
                 
            case 4: //Heavy Tank
-           if( global.P_Turn.funds &gt;= global.cost[11]*cost_mod)
-                {
-                global.P_Turn.funds -= global.cost[11]*cost_mod;
-                scr_setUnit(obj_unit_HeavyTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                unit_has_deployed = true;
-                }
-           break;
+                if (global.P_Turn.funds &gt;= price[11])
+                    {
+                    global.P_Turn.funds -= price[11];
+                    scr_setUnit(obj_unit_HeavyTank,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                    //set unit's worth
+                    obj_map.units[global.posX,global.posY].cost = worth[11];
+                    unit_has_deployed = true;
+                    }
+                    break;
                 
            case 5: //Rocket
-           if (global.P_Turn.funds &gt;= global.cost[12]*cost_mod)
-                {
-                global.P_Turn.funds -= global.cost[12]*cost_mod; 
-                scr_setUnit(obj_unit_Rocket,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                unit_has_deployed = true;
-                }
-           break;
+                if (global.P_Turn.funds &gt;= price[12])
+                    {
+                    global.P_Turn.funds -= price[12];
+                    scr_setUnit(obj_unit_Rocket,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                    //set unit's worth
+                    obj_map.units[global.posX,global.posY].cost = worth[12];
+                    unit_has_deployed = true;
+                    }
+                    break;
                 
            case 6: //Land Cruiser
-            if (global.P_Turn.funds &gt;= global.cost[13]*cost_mod)
-                {
-                global.P_Turn.funds -= global.cost[13]*cost_mod;
-                scr_setUnit(obj_unit_LandCruiser,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
-                unit_has_deployed = true;
-                }
-           break;
-            }        
+                if (global.P_Turn.funds &gt;= price[13])
+                    {
+                    global.P_Turn.funds -= price[13];
+                    scr_setUnit(obj_unit_LandCruiser,global.posX,global.posY,obj_map.terrains[global.posX,global.posY].ownership);
+                    //set unit's worth
+                    obj_map.units[global.posX,global.posY].cost = worth[13];
+                    unit_has_deployed = true;
+                    }
+                    break;
+    }        
         }
         
         
@@ -806,27 +892,27 @@ if col == 0{
         switch row
             {
             case 0: //Light Infantry
-                display_cost = 1000;
+                display_cost = price[1];
                 break;
             
             case 1: //Heavy Infantry (mechanized Infnatry)
-                display_cost = 2000;
+                display_cost =price[2];
                 break;
             
             case 2: //Long Gun
-                display_cost = 3000;
+                display_cost = price[3];
                 break;
             
             case 3: //Field Officer (commander)
-                display_cost = 4000;
+                display_cost = price[4];
                 break; 
             
             case 4: //Recon
-                display_cost = 4000;
+                display_cost = price[5];
                 break;
             
             case 5: //APC
-               display_cost = 5000;
+               display_cost = price[6];
                 break;
             
             case 6: //cancel
@@ -839,31 +925,31 @@ if col == 0{
            switch row
                 {
            case 0: //Light Tank
-                display_cost = 6000;             
+                display_cost = price[7];             
                 break;
                 
            case 1: //Artillery
-                display_cost = 7000;
+                display_cost = price[8];
                 break;
                 
            case 2: //IFV (AA)
-               display_cost = 6000;
+               display_cost = price[9];
                 break;
                 
            case 3: //Covert Op.
-                display_cost = 8000
+                display_cost = price[10];
                 break; 
                 
            case 4: //Heavy Tank
-               display_cost = 15000;
+               display_cost = price[11];
             break;
                 
            case 5: //Rocket
-                display_cost = 16000;
+                display_cost = price[12];
                 break;
                 
            case 6: //Land Cruiser
-                display_cost = 32000;
+                display_cost = price[13];
                 break;
             }        
         }   
@@ -977,132 +1063,132 @@ if (just_created)
 draw_sprite(spr_DeployWin,global.P_Turn.number-1,view_xview + 132,view_yview + 42);
 
 //draw cost and over
-if (global.P_Turn.funds &lt; global.cost[13]*cost_mod) //Land Cruiser
+if (global.P_Turn.funds &lt; price[13]) //Land Cruiser
     {
     draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),12,view_xview[0]+378,view_yview[0]+318);
     //draw ovewrcost number
-     scr_draw_num(  spr_num_dark,false, global.cost[13]*cost_mod,view_xview+617,view_yview+119+36*6,8);
+     scr_draw_num(  spr_num_dark,false, price[13],view_xview+617,view_yview+119+36*6,8);
     }
-else scr_draw_num( spr_num_light,false, global.cost[13]*cost_mod,view_xview+617,view_yview+119+36*6,8);
+else scr_draw_num( spr_num_light,false, price[13],view_xview+617,view_yview+119+36*6,8);
 
 //Rocket
-if (global.P_Turn.funds &lt; global.cost[12]*cost_mod) //Rocket
+if (global.P_Turn.funds &lt; price[12]) //Rocket
     {
     draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),11,view_xview[0]+378,view_yview[0]+282);
     //draw ovewrcost number
-     scr_draw_num(  spr_num_dark,false, global.cost[12]*cost_mod,view_xview+617,view_yview+119+36*5,8);
+     scr_draw_num(  spr_num_dark,false, price[12],view_xview+617,view_yview+119+36*5,8);
     }
-else scr_draw_num( spr_num_light,false, global.cost[12]*cost_mod,view_xview+617,view_yview+119+36*5,8);
+else scr_draw_num( spr_num_light,false, price[12],view_xview+617,view_yview+119+36*5,8);
 
 
 //Heavy Tank
-if (global.P_Turn.funds &lt; global.cost[11]*cost_mod) //Heavy Tank
+if (global.P_Turn.funds &lt; price[11]) //Heavy Tank
     {
     draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),10,view_xview[0]+378,view_yview[0]+246);
     //draw ovewrcost number
-     scr_draw_num(  spr_num_dark,false, global.cost[11]*cost_mod,view_xview+617,view_yview+119+36*4,8);
+     scr_draw_num(  spr_num_dark,false, price[11],view_xview+617,view_yview+119+36*4,8);
     }
-else scr_draw_num( spr_num_light,false, global.cost[11]*cost_mod,view_xview+617,view_yview+119+36*4,8);
+else scr_draw_num( spr_num_light,false, price[11],view_xview+617,view_yview+119+36*4,8);
 
 
 //Covert Op
-if (global.P_Turn.funds &lt; global.cost[10]*cost_mod) 
+if (global.P_Turn.funds &lt; price[10]) 
     {
     draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),9,view_xview[0]+378,view_yview[0]+210);
     //draw ovewrcost number
-     scr_draw_num(  spr_num_dark,false, global.cost[10]*cost_mod,view_xview+617,view_yview+119+36*3,8);
+     scr_draw_num(  spr_num_dark,false, price[10],view_xview+617,view_yview+119+36*3,8);
     }
-else scr_draw_num( spr_num_light,false, global.cost[10]*cost_mod,view_xview+617,view_yview+119+36*3,8);
+else scr_draw_num( spr_num_light,false, price[10],view_xview+617,view_yview+119+36*3,8);
 
 
 //IFV aka AA
-if (global.P_Turn.funds &lt; global.cost[09]*cost_mod) 
+if (global.P_Turn.funds &lt; price[09]) 
     {
     draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),8,view_xview[0]+378,view_yview[0]+174);
     //draw ovewrcost number
-     scr_draw_num(  spr_num_dark,false, global.cost[09]*cost_mod,view_xview+617,view_yview+119+36*2,8);
+     scr_draw_num(  spr_num_dark,false, price[09],view_xview+617,view_yview+119+36*2,8);
     }
-else scr_draw_num( spr_num_light,false, global.cost[09]*cost_mod,view_xview+617,view_yview+119+36*2,8);
+else scr_draw_num( spr_num_light,false, price[09],view_xview+617,view_yview+119+36*2,8);
 
 
 //Artillery
-if (global.P_Turn.funds &lt; global.cost[8]*cost_mod)
+if (global.P_Turn.funds &lt; price[08])
     {
     draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),7,view_xview[0]+378,view_yview[0]+138);
     //draw ovewrcost number
-     scr_draw_num(  spr_num_dark,false, global.cost[08]*cost_mod,view_xview+617,view_yview+119+36*1,8);
+     scr_draw_num(  spr_num_dark,false, price[08],view_xview+617,view_yview+119+36*1,8);
     }
-else scr_draw_num( spr_num_light,false, global.cost[08]*cost_mod,view_xview+617,view_yview+119+36*1,8);
+else scr_draw_num( spr_num_light,false, price[08],view_xview+617,view_yview+119+36*1,8);
 
 //Light Tank
-if (global.P_Turn.funds &lt; global.cost[7]*cost_mod) 
+if (global.P_Turn.funds &lt; price[07]) 
     {
     draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),6,view_xview[0]+378,view_yview[0]+102);
     //draw ovewrcost number
-     scr_draw_num(  spr_num_dark,false, global.cost[07]*cost_mod,view_xview+617,view_yview+119+36*0,8);
+     scr_draw_num(  spr_num_dark,false, price[07],view_xview+617,view_yview+119+36*0,8);
     }
-else scr_draw_num( spr_num_light,false, global.cost[07]*cost_mod,view_xview+617,view_yview+119+36*0,8);
+else scr_draw_num( spr_num_light,false, price[07],view_xview+617,view_yview+119+36*0,8);
 
 
 //APC
-if (global.P_Turn.funds &lt; global.cost[6]*cost_mod) 
+if (global.P_Turn.funds &lt;price[06]) 
     {
     draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),5,view_xview[0]+138,view_yview[0]+282);
     //draw ovewrcost number
-     scr_draw_num(  spr_num_dark,false, global.cost[06]*cost_mod,view_xview+377,view_yview+119+36*5,8);
+     scr_draw_num(  spr_num_dark,false, price[06],view_xview+377,view_yview+119+36*5,8);
     }
-else scr_draw_num( spr_num_light,false, global.cost[06]*cost_mod,view_xview+377,view_yview+119+36*5,8);
+else scr_draw_num( spr_num_light,false, price[06],view_xview+377,view_yview+119+36*5,8);
 
 
 //Recon
-if (global.P_Turn.funds &lt; global.cost[5]*cost_mod)
+if (global.P_Turn.funds &lt; price[05])
     {
     draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),4,view_xview[0]+138,view_yview[0]+246);
     //draw ovewrcost number
-     scr_draw_num(  spr_num_dark,false, global.cost[05]*cost_mod,view_xview+377,view_yview+119+36*4,8);
+     scr_draw_num(  spr_num_dark,false, price[05],view_xview+377,view_yview+119+36*4,8);
     }
-else scr_draw_num( spr_num_light,false, global.cost[05]*cost_mod,view_xview+377,view_yview+119+36*4,8);
+else scr_draw_num( spr_num_light,false, price[05],view_xview+377,view_yview+119+36*4,8);
 
 
 //Officer
-if (global.P_Turn.funds &lt; global.cost[4]*cost_mod) 
+if (global.P_Turn.funds &lt; price[04]) 
     {
     draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),3,view_xview[0]+138,view_yview[0]+210);
     //draw ovewrcost number
-     scr_draw_num(  spr_num_dark,false, global.cost[04]*cost_mod,view_xview+377,view_yview+119+36*3,8);
+     scr_draw_num(  spr_num_dark,false, price[04],view_xview+377,view_yview+119+36*3,8);
     }
-else scr_draw_num( spr_num_light,false, global.cost[04]*cost_mod,view_xview+377,view_yview+119+36*3,8);
+else scr_draw_num( spr_num_light,false, price[04],view_xview+377,view_yview+119+36*3,8);
 
 
 //Long Gun
-if (global.P_Turn.funds &lt; global.cost[3]*cost_mod) 
+if (global.P_Turn.funds &lt; price[03]) 
     {  
     draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),2,view_xview[0]+138,view_yview[0]+174);
     //draw ovewrcost number
-     scr_draw_num(  spr_num_dark,false, global.cost[03]*cost_mod,view_xview+377,view_yview+119+36*2,8);
+     scr_draw_num(  spr_num_dark,false, price[03],view_xview+377,view_yview+119+36*2,8);
     }
-else scr_draw_num( spr_num_light,false, global.cost[03]*cost_mod,view_xview+377,view_yview+119+36*2,8);
+else scr_draw_num( spr_num_light,false, price[03],view_xview+377,view_yview+119+36*2,8);
 
 
 //Heavy Infantry
-if (global.P_Turn.funds &lt; global.cost[02]*cost_mod) 
+if (global.P_Turn.funds &lt; price[02]) 
     {
     draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),1,view_xview[0]+138,view_yview[0]+138);
     //draw ovewrcost number
-      scr_draw_num(  spr_num_dark,false, global.cost[02]*cost_mod,view_xview+377,view_yview+119+36*1,8);
+      scr_draw_num(  spr_num_dark,false, price[02],view_xview+377,view_yview+119+36*1,8);
     }
-else scr_draw_num( spr_num_light,false, global.cost[02]*cost_mod,view_xview+377,view_yview+119+36*1,8);
+else scr_draw_num( spr_num_light,false, price[02],view_xview+377,view_yview+119+36*1,8);
 
 
 //Light Infantry
-if (global.P_Turn.funds &lt; global.cost[01]*cost_mod) 
+if (global.P_Turn.funds &lt; price[01]) 
     {
     //draw Overcost sprite
     draw_sprite(asset_get_index("spr_overCost_P"+string(global.P_Turn.number)),0,view_xview[0]+138,view_yview[0]+102);
     //draw ovewrcost number
-     scr_draw_num(  spr_num_dark,false, global.cost[01]*cost_mod,view_xview+377,view_yview+119+36*0,8);
+     scr_draw_num(  spr_num_dark,false, price[01],view_xview+377,view_yview+119+36*0,8);
     }
-else scr_draw_num( spr_num_light,false, global.cost[01]*cost_mod,view_xview+377,view_yview+119+36*0,8);
+else scr_draw_num( spr_num_light,false, price[01],view_xview+377,view_yview+119+36*0,8);
     
 
 //draw cursor or "self"

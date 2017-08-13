@@ -76,16 +76,19 @@ for ( i = 0 ; i &lt;= 13 ; i += 1)
     D2D_Def[i]   = 100;
     D2D_Mov[i]   = 0  ;
     D2D_Rng[i]   = 0  ;
+    D2D_Cost[i]  = global.cost[i];
     
     COP_Atk[i]   = 100;
     COP_Def[i]   = 100;
     COP_Mov[i]   = 0  ;
     COP_Rng[i]   = 0  ;
+    COP_Cost[i]  = global.cost[i];
     
     SCOP_Atk[i]  = 100;
     SCOP_Def[i]  = 100;
     SCOP_Mov[i]  = 0  ;
-    SCOP_Rng[i]   = 0  ;
+    SCOP_Rng[i]   = 0 ;
+    SCOP_Cost[i]  = global.cost[i];
     }
  
  
@@ -116,6 +119,15 @@ SCOP_Push = false;
 D2D_AdvanceCapture  = false; //capture 1.5x
 SCOP_PerfectCapture = false; //victory march
 
+//Atk &amp; mov+, cleave
+SCOP_Cleave = false;
+
+//Officer+
+//COFX: 
+D2D_CannotAttach = false;
+D2D_OfficerBoost = false; //units in officer radio range Stats++
+COP_RadioDrainHP = 0;
+SCOP_Promote = false;
 
 
 

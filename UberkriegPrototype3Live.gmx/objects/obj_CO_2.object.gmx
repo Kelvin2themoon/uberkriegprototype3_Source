@@ -45,6 +45,16 @@ SCOP_on     = false ;   //SCOP switch
 
 charge = 0;
 
+//set prices for dummy units
+var i = 1;
+for( i=1 ; i&lt;=13 ; i++ )
+    {
+    COP_Cost[i] =  0;
+    SCOP_Cost[i] = 0;
+    }
+
+
+
 //passive abilities
 D2D_Vision  = 1 ;
 COP_Vision  = 1 ;

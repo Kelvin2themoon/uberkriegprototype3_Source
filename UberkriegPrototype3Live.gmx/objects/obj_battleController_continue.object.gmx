@@ -192,6 +192,45 @@ else scr_ubermap_load("2P_SabreRanger_v3.ubm");
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///create global.rangeCheck (2D array)
+
+for( i = 0 ; i &lt; global.mapW ; i += 1 )         // i is to X
+    {
+    for( j = 0 ; j &lt; global.mapH; j += 1 )      // j is to Y
+        {        
+        //add to array
+        global.rangeCheck[i,j] = instance_create( i*24 , j*24 , obj_checker_tile ) ;
+        //set sprite to none
+        global.rangeCheck[i,j].sprite_index = -1;
+        //set depth
+        global.rangeCheck[i,j].depth = CHECK_LAYRE ; 
+        }
+    }
+    
+//
+global.rangeCheckerFramIndex = 0;
+    
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Unit upkeep Q
 
 //this queue is for upkeep events
@@ -318,6 +357,7 @@ if (global.P1_in_play){
         ds_priority_add(global.temp_pq, global.P1 ,1);
         //create CO object
         global.P1.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(ini_read_real("globals","P1CO",0))));
+        global.P1.CO.ownership = 1;
         global.P1.CO.charge =  ini_read_real("P1 charge","P1Team",1);
         //assign team
         global.P1.team = ini_read_real("players","P1Team",1);
@@ -358,6 +398,7 @@ if (global.P2_in_play){
         ds_priority_add(global.temp_pq, global.P2 ,2);
         //create CO object
         global.P2.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(ini_read_real("globals","P2CO",0))));
+        global.P2.CO.ownership = 2;
         //assign team
         global.P2.team = ini_read_real("players","P2Team",2);
         //add cursor pose at 
@@ -395,6 +436,7 @@ if (global.P3_in_play){
         ds_priority_add(global.temp_pq, global.P3 ,3);
         //create CO object
         global.P3.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(ini_read_real("globals","P3CO",0))));
+        global.P3.CO.ownership = 3;
         //assign team
         global.P1.team = ini_read_real("players","P3Team",3);
         //add cursor pose at 
@@ -434,6 +476,7 @@ if (global.P4_in_play){
         ds_priority_add(global.temp_pq, global.P4 ,4);
         //create CO object
         global.P4.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(ini_read_real("globals","P4CO",0))));
+        global.P4.CO.ownership = 4;
         //assign team
         global.P4.team = ini_read_real("players","P4Team",4);
         //add cursor pose at 
@@ -729,45 +772,6 @@ scr_globalVisionReset();
 scr_updateGlobalVision();
 
 }
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///create global.rangeCheck (2D array)
-
-for( i = 0 ; i &lt; global.mapW ; i += 1 )         // i is to X
-    {
-    for( j = 0 ; j &lt; global.mapH; j += 1 )      // j is to Y
-        {        
-        //add to array
-        global.rangeCheck[i,j] = instance_create( i*24 , j*24 , obj_checker_tile ) ;
-        //set sprite to none
-        global.rangeCheck[i,j].sprite_index = -1;
-        //set depth
-        global.rangeCheck[i,j].depth = CHECK_LAYRE ; 
-        }
-    }
-    
-//
-global.rangeCheckerFramIndex = 0;
-    
 
 </string>
           </argument>

@@ -32,6 +32,11 @@ move_cost = -1;
 pathority = -1; //path priority (-1 = no path)
 arrow_index = 0;
 isOnRadio = false;
+//CO Zone array to be used with COFX OfficerBoost
+CO_Zone[1] = false;
+CO_Zone[2] = false;
+CO_Zone[3] = false;
+CO_Zone[4] = false;
 //Drawing Variables (connections)
 north    = false;
 east     = false;

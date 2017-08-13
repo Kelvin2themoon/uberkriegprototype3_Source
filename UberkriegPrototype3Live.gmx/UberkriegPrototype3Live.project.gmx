@@ -489,6 +489,7 @@
         <script>scripts\scr_updateStanding_global.gml</script>
         <script>scripts\scr_globalRadioCheck.gml</script>
         <script>scripts\scr_getUnitRadioRange.gml</script>
+        <script>scripts\scr_CO_Zone_reset.gml</script>
       </scripts>
       <script>scripts\scr_attack_rance_check.gml</script>
     </scripts>
@@ -644,6 +645,10 @@
       <object>objects\obj_CO_4</object>
       <object>objects\obj_CO_5</object>
       <object>objects\obj_CO_6</object>
+      <object>objects\obj_CO_7</object>
+      <object>objects\obj_CO_8</object>
+      <object>objects\obj_CO_9</object>
+      <object>objects\obj_CO_10</object>
     </objects>
   </objects>
   <timelines name="timelines">

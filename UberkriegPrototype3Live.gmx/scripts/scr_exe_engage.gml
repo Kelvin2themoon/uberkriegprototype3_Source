@@ -2,6 +2,7 @@
 
 //set temp variable
 var damage = 0 ;
+var cleave_check = false;
 
 //reset captue
 if (global.acting_unit_moved) global.acting_unit.capturing  = 0;
@@ -85,6 +86,8 @@ if (global.target_unit.hp <= 0)
     with global.target_unit instance_destroy();
     global.target_unit = 0;
     global.unit_check = 0;
+    //set cleave check to true
+    cleave_check = true;
     }
     
     
@@ -314,7 +317,10 @@ if (global.acting_unit.hp <= 0)
 else
     {
     obj_map.units[global.acting_unit.x div 24,global.acting_unit.y div 24] = global.acting_unit;
-    global.acting_unit.state =  "exhaust";
+    //check for cleave
+    if( global.P_Turn.CO.SCOP_on and global.P_Turn.CO.SCOP_Cleave and cleave_check) global.acting_unit.state =  "idle";
+    else global.acting_unit.state =  "exhaust";
+    //set alarm for animation
     global.acting_unit.alarm[0] =  1;
     //reset depth
     scr_setUnitDepth(global.acting_unit); 

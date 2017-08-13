@@ -530,7 +530,7 @@ if( keyboard_check_pressed( global.keyCONFIRM) )
                 if  (global.acting_unit.canLoadInfantry &gt; 0 ) if(global.acting_unit.load_A != 0 or global.acting_unit.load_B != 0 ) global.join = false;
                 if  (global.target_unit.canLoadInfantry &gt; 0 ) if(global.target_unit.load_A != 0 or global.target_unit.load_B != 0 ) global.join = false;
                 // Attach: check acting unit is  officer and target unit is not of command rank
-                if ( global.acting_unit.name = "Officer" and !global.target_unit.isCommander and !global.acting_unit.dummy and !global.target_unit.dummy) global.attach = true;
+                if ( global.acting_unit.name = "Officer" and !global.target_unit.isCommander and !global.acting_unit.dummy and !global.target_unit.dummy and !global.P_Turn.CO.D2D_CannotAttach) global.attach = true;
                 
                 //Load: check if target is APC and if acting unit is infantry
                 if( global.target_unit.canLoadInfantry

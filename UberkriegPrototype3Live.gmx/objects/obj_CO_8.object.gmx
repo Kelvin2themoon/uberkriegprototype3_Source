@@ -25,55 +25,39 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 06: Capture+
+            <string>///CO 08: mighty CO
 
 event_inherited();
 
 // Initiate Parent Object and defaults
 
-index = 6 ;
-name = "capture+" ;
+index = 8 ;
+name = "mighty" 
+
 
 //COP and SCOP Varialbes
 
-COP_Bar     = 3 ;       //number of charged stars required to activate CO metre
+COP_Bar     = 4 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
 SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
-//individual unit stats
+charge = 0;
 
-for ( i = 0 ; i &lt;= 4 ; i += 1)
+var i =1;
+for( i = 1 ; i &lt;= 13 ; i++ )
     {
-    D2D_Atk[i]   = 130;
-    D2D_Def[i]   = 110;
-    D2D_Mov[i]   = 0  ;
-    
-    COP_Atk[i]   = 150;
-    COP_Def[i]   = 110;
-    COP_Mov[i]   = 1  ;
-    
-    SCOP_Atk[i]  = 180;
-    SCOP_Def[i]  = 110;
-    SCOP_Mov[i]  = 2  ;
+    D2D_Cost[i] = global.cost[i]*(120/100);
+    D2D_Atk[i]  = 120;
+    D2D_Def[i]  = 120;
+    COP_Atk[i]  = 140;
+    COP_Def[i]  = 140;
+    SCOP_Atk[i] = 160;
+    SCOP_Def[i] = 160;
     }
     
-///APC move +1
-D2D_Mov[06] = 1;
-        
-//reduced power to direct combat units    
-D2D_Atk[05] = 80;
-D2D_Atk[07] = 80;
-D2D_Atk[09] = 80;
-D2D_Atk[10] = 80;
-D2D_Atk[11] = 80;
-D2D_Atk[13] = 80;
 
-//Capture ability
-D2D_AdvanceCapture  = true; //capture 1.5x
-SCOP_PerfectCapture = true; //victory march
- 
 </string>
           </argument>
         </arguments>
