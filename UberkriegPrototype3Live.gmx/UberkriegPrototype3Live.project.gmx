@@ -414,6 +414,7 @@
     <sprites name="COFX">
       <sprite>sprites\spr_smoke</sprite>
     </sprites>
+    <sprite>sprites\sprite284</sprite>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Holders">
@@ -642,6 +643,7 @@
       <object>objects\obj_CO_3</object>
       <object>objects\obj_CO_4</object>
       <object>objects\obj_CO_5</object>
+      <object>objects\obj_CO_6</object>
     </objects>
   </objects>
   <timelines name="timelines">

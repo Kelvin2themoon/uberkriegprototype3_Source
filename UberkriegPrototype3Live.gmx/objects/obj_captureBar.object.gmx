@@ -36,6 +36,16 @@ alarm[0] = alarm_delay;
 //ammount to capture
 cap_left = global.acting_unit.hp;
 capping_unit = global.acting_unit;
+//adjust for CO abilities
+with( obj_CO_0 )
+    {
+    if( global.acting_unit.ownership = ownership)
+        {
+        if( D2D_AdvanceCapture ) other.cap_left = round(other.cap_left*1.5);
+        if( SCOP_on and SCOP_PerfectCapture ) other.cap_left = 20
+        }
+    }
+
 
 //reset cap if unit moved
 if global.acting_unit_moved{

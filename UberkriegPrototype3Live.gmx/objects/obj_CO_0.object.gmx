@@ -109,8 +109,15 @@ COP_ActAgain  = false;
 SCOP_ActAgain = false;
 
 //direct+
-COP_Push = true;
-SCOP_Push = true;
+COP_Push = false;
+SCOP_Push = false;
+
+//infantry+ aka capture+
+D2D_AdvanceCapture  = false; //capture 1.5x
+SCOP_PerfectCapture = false; //victory march
+
+
+
 
 
 /*
