@@ -16,6 +16,7 @@ with( obj_CO_0 )
         other.radio_range += D2D_Radio;
         if( COP_on ) other.radio_range += COP_Radio;
         if( SCOP_on ) other.radio_range += SCOP_Radio;
+        if( other.target != 0 and other.target < 1 ) other.radio_range = 1;
         }
     }
             

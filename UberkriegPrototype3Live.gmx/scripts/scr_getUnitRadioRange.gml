@@ -21,6 +21,7 @@ with (obj_CO_0)
         else if SCOP_on other.gur_total_radio += SCOP_Radio;
         }
     }
-    
+
+if( gur_unit.radio != 0 and gur_total_radio < 1 ) gur_total_radio = 1;
 return gur_total_radio;
 
