@@ -40,7 +40,14 @@ if ( global.acting_unit.name = "Covert Op." and global.alt_Disrupt)
     scr_check_units_in_range(global.posX, global.posY, 1, 1, false);
     }
 
-else scr_check_units_in_range(global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false);
+else
+    {
+    mod_range = global.acting_unit.max_range;
+    mod_range += global.P_Turn.CO.D2D_Rng[global.acting_unit.unit_index] ;
+    if( global.P_Turn.CO.COP_on ) mod_range += global.P_Turn.CO.COP_Rng[global.acting_unit.unit_index] ;
+    if( global.P_Turn.CO.SCOP_on ) mod_range += global.P_Turn.CO.SCOP_Rng[global.acting_unit.unit_index] ;
+    scr_check_units_in_range(global.posX, global.posY, global.acting_unit.min_range, mod_range, false);
+    } 
 
 //set alarm to Cursor move speed
 alarm[1] = 0;
@@ -66,7 +73,7 @@ if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,en
     } 
      
 //initiate display
-dmg_percent=scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,global.engage_type);
+dmg_percent= scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,global.engage_type);
 
 
 i =0;
