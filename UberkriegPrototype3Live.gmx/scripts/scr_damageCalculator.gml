@@ -42,7 +42,7 @@ with( obj_CO_0)
         //check CO zone acting unit
         else if( global.P_Turn.number = ownership and D2D_OfficerBoost and global.rangeCheck[global.posX, global.posY].CO_Zone[ownership]) other.atk_CO_mod = other.atk_CO_mod*(130/100);
         //check target unit: counterattack
-        else if( D2D_OfficerBoost and global.rangeCheck[other.dmgCalc_atk.x div 24, other.dmgCalc_atk.x div 24].CO_Zone[ownership]) other.atk_CO_mod = other.atk_CO_mod*(130/100);
+        else if( D2D_OfficerBoost and global.rangeCheck[other.dmgCalc_atk.x div 24, other.dmgCalc_atk.y div 24].CO_Zone[ownership]) other.atk_CO_mod = other.atk_CO_mod*(130/100);
         }
     if( ownership = other.dmgCalc_def.ownership )
         {

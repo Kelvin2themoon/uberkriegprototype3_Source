@@ -66,6 +66,9 @@ isSolid = true;     //used for bridge graphics
 isSmoke = false;
 smoker = 0; //check for which player initiated the smoke and when to disipate
 
+//variable that keeps standing check not crash
+isDisrupted = false;
+
  
 </string>
           </argument>

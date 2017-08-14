@@ -13,9 +13,13 @@ standing_Q = ds_queue_create();
 with (obj_unit)     if(team = other.standingPlayer.team and isCommander and scr_inBound(x div 24, y div 24) and isDisrupted = false) ds_queue_enqueue(other.standing_Q, obj_map.units[ x div 24, y div 24 ]);
 with (obj_property) if(team = other.standingPlayer.team and isCommander) ds_queue_enqueue(other.standing_Q, obj_map.terrains[ x div 24, y div 24 ]);
 
+//CLEAR OFFICER ZONES
+with( obj_checker_tile )
+    {
+    CO_Zone[other.standingPlayer.number] = false;
+    }
+
 //start loop
-
-
 while (ds_queue_size(standing_Q) != 0 )
     {
     //get new check
@@ -36,14 +40,11 @@ while (ds_queue_size(standing_Q) != 0 )
     
     
     //increase bonus range (COFX)
-    with ( obj_CO_0 )
+    with ( standingPlayer.CO )
         {
-        if( ownership = other.checkStandTarget.ownership )
-            {
-            other.broadcast_range += D2D_Radio;
-            if( COP_on ) other.broadcast_range += COP_Radio;
-            if( SCOP_on ) other.broadcast_range += SCOP_Radio;    
-            }
+        other.broadcast_range += D2D_Radio;
+        if( COP_on ) other.broadcast_range += COP_Radio;
+        if( SCOP_on ) other.broadcast_range += SCOP_Radio;    
         }
     
     //check all co-ordinates in range of origin
@@ -54,7 +55,7 @@ while (ds_queue_size(standing_Q) != 0 )
             if ( abs(cst_temp_x) + abs(cst_temp_y) <= broadcast_range and scr_inBound(cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y) )
                 {
                 //switch on local CO Zone
-                if( checkStandTarget.isCommander ) global.rangeCheck[cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y].CO_Zone[checkStandTarget.ownership] = true;
+                if( checkStandTarget.isCommander and checkStandTarget.isDisrupted = false ) global.rangeCheck[cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y].CO_Zone[checkStandTarget.ownership] = true;
                 //check if a unit is present (must be ally and not already a commander asnd not standing)
                 if ( obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ] != 0)
                     {

@@ -33,6 +33,21 @@ depth = UI_DEPTH_CURSOR;
 image_speed = 0
 //set position
 
+//Exception: Covert Op
+if ( global.acting_unit.name = "Covert Op." and global.alt_Disrupt)
+    
+    {
+    scr_check_units_in_range(global.posX, global.posY, 1, 1, false);
+    }
+
+else
+    {
+    mod_range = global.acting_unit.max_range;
+    mod_range += global.P_Turn.CO.D2D_Rng[global.acting_unit.unit_index] ;
+    if( global.P_Turn.CO.COP_on ) mod_range += global.P_Turn.CO.COP_Rng[global.acting_unit.unit_index] ;
+    if( global.P_Turn.CO.SCOP_on ) mod_range += global.P_Turn.CO.SCOP_Rng[global.acting_unit.unit_index] ;
+    scr_check_units_in_range(global.posX, global.posY, global.acting_unit.min_range, mod_range, false);
+    } 
 
 //set alarm to Cursor move speed
 alarm[1] = 0;
@@ -41,23 +56,36 @@ view_speed = 8;
 //view boarder to cursor
 view_border = 2*24;
 
-//check units in range
-scr_check_units_in_range(global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range,false);
-
 //move to first targetable unit
-supply_list_index   = 0;
-supply_list_size    = ds_list_size(global.targetables);
+engage_list_index   = 0;
+engage_list_size    = ds_list_size(global.targetables);
 
-supply_target = ds_list_find_value( global.targetables,0);
-x = supply_target.x ;
-y = supply_target.y ;
+engage_target = ds_list_find_value( global.targetables,0);
+x = engage_target.x ;
+y = engage_target.y ;
+
+initial_type = global.engage_type;
+
+//check engage type
+global.engage_type = initial_type;
+if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,1) &lt; 0 ){
+    global.engage_type = 2;
+    } 
+     
+//initiate display
+dmg_percent= scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,global.engage_type);
+
 
 i =0;
-for (i=0 ; i &lt; supply_list_size ; i+=1){
+for (i=0 ; i &lt; engage_list_size ; i+=1){
     targeting = ds_list_find_value(global.targetables,i);
-    targeting.isDisruptTarget = true;
+    targeting.isEngageTarget = true;
     } 
 
+//initiate damage indicator animation controm variables
+indicator_frame = 0;
+indicator_reverse = false;
+alarm[2] =5;
 
 
 
@@ -66,7 +94,54 @@ for (i=0 ; i &lt; supply_list_size ; i+=1){
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Damage indicatior animation control
 
+ if (indicator_frame = 5){
+     indicator_reverse = true;
+     indicator_frame = 4;
+     alarm[2] = 5; 
+    }
+
+else if (indicator_frame  = 0){
+        indicator_reverse = false;
+        indicator_frame = 1
+        alarm[2] = 5;
+    }
+else if (!indicator_reverse and indicator_frame = 4){
+    indicator_frame += 1
+    alarm[2] = 10;
+    }
+
+else if (indicator_reverse){
+    indicator_frame -= 1
+    alarm[2] = 5;
+    }
+else{
+    indicator_frame += 1;
+    alarm[2] = 5;
+    } 
 
 </string>
           </argument>
@@ -115,6 +190,8 @@ for (i=0 ; i &lt; supply_list_size ; i+=1){
             <kind>1</kind>
             <string>///animate
 image_index = global.cursorFrameIndex
+
+
 
 
 
@@ -170,59 +247,79 @@ if (alarm[1] = -1 )
             break;
         
         case vk_up :
-            if ( global.posY &gt; 0 ) 
-                if (supply_list_index = 0){
-                    supply_list_index = supply_list_size -1;
+            
+                if (engage_list_index = 0){
+                    engage_list_index = engage_list_size -1;
                     }
-            else supply_list_index -=1;
+            else engage_list_index -=1;
             
             global.cursorkey_delay = global.cursorKey_startspeed ;
-            supply_target = ds_list_find_value( global.targetables,supply_list_index);
-            x = supply_target.x ;
-            y = supply_target.y ;
+            engage_target = ds_list_find_value( global.targetables,engage_list_index);
+            x = engage_target.x ;
+            y = engage_target.y ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
+            //check engage type
+            global.engage_type = initial_type;
+            if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,1) &lt; 0){
+                global.engage_type = 2;
+                } 
             break;
         
         case vk_down :
-            if ( global.posY &gt; 0 ) 
-                if (supply_list_index = supply_list_size -1){
-                    supply_list_index = 0;
+           
+                if (engage_list_index = engage_list_size -1){
+                    engage_list_index = 0;
                     }
-            else supply_list_index +=1;
+            else engage_list_index +=1;
             
             global.cursorkey_delay = global.cursorKey_startspeed ;
-            supply_target = ds_list_find_value( global.targetables,supply_list_index);
-            x = supply_target.x ;
-            y = supply_target.y ;
+            engage_target = ds_list_find_value( global.targetables,engage_list_index);
+            x = engage_target.x ;
+            y = engage_target.y ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
+            //check engage type
+            global.engage_type = initial_type;
+            if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,1) &lt; 0){
+                global.engage_type = 2;
+                } 
             break;
         
         case vk_left :
-            if ( global.posY &gt; 0 ) 
-                if (supply_list_index = 0){
-                    supply_list_index = supply_list_size -1;
+           
+                if (engage_list_index = 0){
+                    engage_list_index = engage_list_size -1;
                     }
-            else supply_list_index -=1;
+            else engage_list_index -=1;
             
             global.cursorkey_delay = global.cursorKey_startspeed ;
-            supply_target = ds_list_find_value( global.targetables,supply_list_index);
-            x = supply_target.x ;
-            y = supply_target.y ;
+            engage_target = ds_list_find_value( global.targetables,engage_list_index);
+            x = engage_target.x ;
+            y = engage_target.y ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
-            break;;  
+            //check engage type
+            global.engage_type = initial_type;
+            if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,1) &lt; 0){
+                global.engage_type = 2;
+                } 
+            break; 
                     
         case vk_right :
-            if ( global.posY &gt; 0 ) 
-                if (supply_list_index = supply_list_size -1){
-                    supply_list_index = 0;
+            
+                if (engage_list_index = engage_list_size -1){
+                    engage_list_index = 0;
                     }
-            else supply_list_index +=1;
+            else engage_list_index +=1;
             
             global.cursorkey_delay = global.cursorKey_startspeed ;
-            supply_target = ds_list_find_value( global.targetables,supply_list_index);
-            x = supply_target.x ;
-            y = supply_target.y ;
+            engage_target = ds_list_find_value( global.targetables,engage_list_index);
+            x = engage_target.x ;
+            y = engage_target.y ;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
+            //check engage type
+            global.engage_type = initial_type;
+            if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,1) &lt; 0){
+                global.engage_type = 2;
+                } 
             break;
               
         }
@@ -267,12 +364,11 @@ if mouse_check_button_pressed(mb_left)
                if ((mousecheck_pos_x = target_check.x div 24 and mousecheck_pos_y = target_check.y div 24))
                     {
                                 
-                        //execute
-                        with (obj_unit) isDisrupTarget = false;
-                        global.target_unit = supply_target;
-                        instance_create(0,0,obj_execute_unit_orders);
-                        instance_destroy();
-                                                        
+                                //confirm engage
+                                global.target_unit = engage_target;
+                                instance_create(0,0,obj_execute_unit_orders);
+                                with (obj_engageCursor) instance_destroy();
+                                    
                                 
                     }
 
@@ -280,7 +376,7 @@ if mouse_check_button_pressed(mb_left)
                     {
                         //for each unit in targetables, check if pos match
                         var i = 0;
-                        for (i = 0 ; i &lt; supply_list_size ; i++)
+                        for (i = 0 ; i &lt; engage_list_size ; i++)
                             {
                             
                                 target_check =  ds_list_find_value( global.targetables,i);
@@ -289,10 +385,18 @@ if mouse_check_button_pressed(mb_left)
                                 if (mousecheck_pos_x = target_check.x div 24 and mousecheck_pos_y = target_check.y div 24)
                                             {
                                             
-                                                supply_target = target_check;
-                                                x = supply_target.x ;
-                                                y = supply_target.y ;
+                                                //change targets
+                                                engage_target = ds_list_find_value( global.targetables,i);
+                                                //move cursor
+                                                x = engage_target.x ;
+                                                y = engage_target.y ;
                                                 scr_cursorKey_juice(1,global.cursorKey_sfx);
+                                                //check engage type
+                                                global.engage_type = initial_type;
+                                                //set engage type ( direct or indirect )
+                                                if (global.acting_unit.ammo &lt; 1 or scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,1) &lt; 0)
+                                                    global.engage_type = 2;
+                                                
                                                 break;
                                             
                                             }
@@ -303,6 +407,8 @@ if mouse_check_button_pressed(mb_left)
             }
     
     }
+    
+
 </string>
           </argument>
         </arguments>
@@ -336,6 +442,37 @@ if ( view_yview[0] &gt; y - view_border and global.canScroll_y) view_yview[0] -=
 
 if ( view_yview[0] + view_hport[0] &lt; y + view_border+24 and global.canScroll_y) view_yview[0] += view_speed;
 
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Damage Display Calculator
+
+
+if (global.acting_unit.name = "Land Cruiser" and abs(global.destination.x-x) + abs(global.destination.y-y) = 24){
+    dmg_percent= scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,2);
+    }
+else dmg_percent= scr_damageCalculator(global.acting_unit,engage_target,obj_map.terrains[x div 24, y div 24].cover,global.engage_type); 
+
+
+
 </string>
           </argument>
         </arguments>
@@ -359,10 +496,9 @@ if ( view_yview[0] + view_hport[0] &lt; y + view_border+24 and global.canScroll_
             <string>///confirm
 
 if keyboard_check_pressed(global.keyCONFIRM){
-    with (obj_unit) isDisrupTarget = false;
-    global.target_unit = supply_target;
+    global.target_unit = engage_target;
     instance_create(0,0,obj_execute_unit_orders);
-    instance_destroy();
+    with (obj_disruptCursor) instance_destroy();
     }
     
     
@@ -393,11 +529,9 @@ global.target_unit = obj_map.units[ x div 24 , y div 24 ];
             <string>/// cancel to re-activate command menu
 
 if (keyboard_check_pressed (global.keyCANCEL) or mouse_check_button_pressed(mb_right))
+
     {
-    //remove target highlight
-    with (obj_unit) isDisruptTarget = false;
-    
-    //back
+    with (obj_unit) isEngageTarget = false; 
     instance_create(x,y,obj_syscom_command);
     instance_destroy();
     }
@@ -448,17 +582,26 @@ global.unit_check = obj_map.units[x div 24, y div 24];
           <argument>
             <kind>1</kind>
             <string>///Debug 
-unit_selection      = supply_target;
 
+//draw_text(12,48+12*2,"P2 CO Zone: " + string(global.rangeCheck[mouse_x div 24,mouse_y div 24].CO_Zone[2]));
+//draw_text(12,48+12*3, "("+string(global.posX)+","+string(global.posY)+")")
 /*
+
+unit_selection      = engage_target;
+
 if (global.Phaze = "Main" and unit_selection != 0){
     if (unit_selection.isVisible){
-        draw_text(12,60, string_upper(unit_selection.name));
-        draw_text(12,72,"HP: " + string(unit_selection.hp)+"/10");
-        draw_text(12,84,"Fuel: " + string(unit_selection.fuel)+"/"+string(unit_selection.max_fuel));
-        draw_text(12,96,"Ammo: " + string(unit_selection.ammo)+"/"+string(unit_selection.max_ammo));
+        draw_text(12,84, string_upper(unit_selection.name));
+        draw_text(12,96,"HP: " + string(unit_selection.hp)+"/10");
+        draw_text(12,108,"Fuel: " + string(unit_selection.fuel)+"/"+string(unit_selection.max_fuel));
+        draw_text(12,120,"Ammo: " + string(unit_selection.ammo)+"/"+string(unit_selection.max_ammo));
         }
     }  
+    draw_text(12, 156, "Engange Index: " + string(engage_list_index));
+    draw_text(12, 168, "List size: " + string(engage_list_size));
+
+///Damage %
+draw_text(12,132, "Damage: " + string(round(dmg_percent)) + "%");
 
 
 </string>
@@ -483,13 +626,64 @@ if (global.Phaze = "Main" and unit_selection != 0){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///draw curosr and pointer
-
-draw_self();
-
-//draw Mouse
+            <string>///draw Mouse
 
 draw_sprite(spr_mousePointer,global.P_Turn.number - 1, mouse_x, mouse_y);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self();
+
+/*
+//if 3 digit long
+if (string_length(string(round(dmg_percent))) &gt; 2){
+    with(obj_miniwin){
+        if isLeft{ 
+            draw_sprite(spr_damage_indicator_red,other.indicator_frame,x+119,y-37-other.indicator_frame);
+            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+119+7-3,y-37+12-other.indicator_frame,3);
+            draw_sprite(spr_num_bright,12,x+119+7+33-2,y-37+12-other.indicator_frame);
+            
+            }
+        else{ 
+            draw_sprite(spr_damage_indicator_red,other.indicator_frame,x,y-37-other.indicator_frame);
+            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+7-3,y-37+12-other.indicator_frame,3);
+            draw_sprite(spr_num_bright,12,x+7+33-2,y-37+12-other.indicator_frame);
+            }
+        }
+    }
+// if 2 digit long
+else{
+        with(obj_miniwin){
+        if isLeft{ 
+            draw_sprite(spr_damage_indicator_red,other.indicator_frame,x+119,y-37-other.indicator_frame);
+            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+119+8,y-37+12-other.indicator_frame,2);
+            draw_sprite(spr_num_bright,12,x+119+7+33-11+5,y-37+12-other.indicator_frame);
+            
+            }
+        else{ 
+            draw_sprite(spr_damage_indicator_red,other.indicator_frame,x,y-37-other.indicator_frame);
+            scr_draw_num(spr_num_bright,true,round(other.dmg_percent),x+8,y-37+12-other.indicator_frame,2);
+            draw_sprite(spr_num_bright,12,x+7+33-11+5,y-37+12-other.indicator_frame);
+        }
+    }
+}
 </string>
           </argument>
         </arguments>

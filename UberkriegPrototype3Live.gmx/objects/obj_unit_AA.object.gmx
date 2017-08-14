@@ -46,7 +46,7 @@ max_ammo    = 5;
 charge      = 10 ;
 cost        = global.cost[unit_index] ; // see cost array in obj_MasterControlls
 move_type   = "Tracks";
-move_points = 8;
+move_points = 9;
 vision      = 2;
 radio       = 3;
 

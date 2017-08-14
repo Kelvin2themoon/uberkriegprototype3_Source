@@ -617,6 +617,7 @@
         </objects>
         <objects name="Engage">
           <object>objects\obj_engageCursor</object>
+          <object>objects\obj_disruptCursor</object>
         </objects>
         <objects name="Capture">
           <object>objects\obj_captureBar</object>

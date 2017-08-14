@@ -2,61 +2,47 @@
 //hp-1 for now, ammo and fuel max
 global.acting_unit.ammo -=1;
 
-with (global.target_unit){
+with (global.target_unit)
+    {
     isDisrupted = true;
     disruptor = global.acting_unit.ownership;
     state = "exhaust";
     }
 
-//find spash targets
-
-
+    //find spash targets
     if (global.Disruptor_spread )
-
         {
-            var ix = (-1)*global.target_unit.radio ;
-            var iy = (-1)*global.target_unit.radio ;
+        var ix = (-1)*global.target_unit.radio ;
+        var iy = (-1)*global.target_unit.radio ;
             
-            for ( ix = (-1)*global.target_unit.radio ; ix <= global.target_unit.radio ;  ix +=1 )
-            
+        for( ix = (-1)*global.target_unit.radio ; ix <= global.target_unit.radio ;  ix +=1 )
+            {
+            for ( iy= (-1)*global.target_unit.radio ; iy <= global.target_unit.radio ;  iy +=1 )
                 {
-                
-                    for ( iy= (-1)*global.target_unit.radio ; iy <= global.target_unit.radio ;  iy +=1 )
-                        
-                        {
-                        
-                            if (abs(ix)+abs(iy) <= global.target_unit.radio)
-                                
-                                {
-                                    var tx = (global.target_unit.x div 24) + ix ;
-                                    var ty = (global.target_unit.y div 24) + iy;
+                if (abs(ix)+abs(iy) <= global.target_unit.radio)
+                    {
+                    var tx = (global.target_unit.x div 24) + ix ;
+                    var ty = (global.target_unit.y div 24) + iy;
                                     
-                                    if (obj_map.units[tx,ty] != 0)
-                                        {
-                                            if ( obj_map.units[tx,ty].team != global.acting_unit.team )
-                                                {
-                                                
-                                                    obj_map.units[tx,ty].isDisrupted = true ;
-                                                    obj_map.units[tx,ty].state = "exhaust"; 
-                                            
-                                                }
-                                   
-                                            
-                                         
-                                        }
-                                
-                                }
-                        
-                        } 
-                
-                }
-        
+                    if (obj_map.units[tx,ty] != 0)
+                        {
+                        if ( obj_map.units[tx,ty].team != global.acting_unit.team )
+                            {
+                            obj_map.units[tx,ty].isDisrupted = true ;
+                            obj_map.units[tx,ty].state = "exhaust"; 
+                            }
+                        }
+                    }
+                } 
+            }
         }
     
 
 
 // place active unit back in map array
-obj_map.units[global.posX,global.posY] = global.acting_unit; 
+obj_map.units[global.posX,global.posY] = global.acting_unit;
+//update stamdomg
+scr_updateStanding(global.P_Turn); 
 //activate UI
 instance_activate_object(obj_miniwin);
 instance_activate_object(obj_battleCursor);
