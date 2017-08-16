@@ -42,11 +42,14 @@ while (ds_queue_size(standing_Q) != 0 )
     //increase bonus range (COFX)
     with ( standingPlayer.CO )
         {
-        other.broadcast_range += D2D_Radio;
-        if( COP_on ) other.broadcast_range += COP_Radio;
-        if( SCOP_on ) other.broadcast_range += SCOP_Radio;
-        //set minimum to 1
-        if( other.checkStandTarget.radio != 0 and  other.broadcast_range < 1 )  other.broadcast_range = 1;
+        if( object_is_ancestor(other.checkStandTarget.object_index, obj_unit.object_index))
+            {
+            other.broadcast_range += D2D_Radio;
+            if( COP_on ) other.broadcast_range += COP_Radio;
+            if( SCOP_on ) other.broadcast_range += SCOP_Radio;
+            //set minimum to 1
+            if( other.checkStandTarget.radio != 0 and  other.broadcast_range < 1 )  other.broadcast_range = 1;
+            }
         }
     
     //check all co-ordinates in range of origin

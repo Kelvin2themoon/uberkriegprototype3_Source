@@ -11,12 +11,13 @@ radio_range = target.radio
 
 with( obj_CO_0 )
     {
-    if( ownership = other.target.ownership )
+    if( ownership = other.target.ownership and object_is_ancestor(other.target.object_index, obj_unit.object_index) )
         {
         other.radio_range += D2D_Radio;
         if( COP_on ) other.radio_range += COP_Radio;
         if( SCOP_on ) other.radio_range += SCOP_Radio;
-        if( other.target != 0 and other.target < 1 ) other.radio_range = 1;
+        if( other.target.radio != 0 and other.radio_range < 1 ) other.radio_range = 1;
+        if( other.target.radio = 0 ) other.radio_range = 0;
         }
     }
             

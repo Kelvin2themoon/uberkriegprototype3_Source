@@ -23,5 +23,6 @@ with (obj_CO_0)
     }
 
 if( gur_unit.radio != 0 and gur_total_radio < 1 ) gur_total_radio = 1;
+if( gur_unit.radio < 0 ) gur_total_radio = 0;
 return gur_total_radio;
 

@@ -45,7 +45,7 @@ D2D_RepairCosts = 50;
 D2D_Repair = 3;
 
 COFX_APC_Repair  = 2 ;
-COP_GainHP  = 2 ;
+COP_GainHP  = 3 ;
 SCOP_GainHP = 5 ;
 </string>
           </argument>
