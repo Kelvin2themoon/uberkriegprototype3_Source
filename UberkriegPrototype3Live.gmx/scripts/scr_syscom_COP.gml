@@ -14,8 +14,9 @@ with (obj_unit)
     if ownership = global.P_Turn.number
         { 
         COP = true;
-        //HP+2
-        if( global.P_Turn.CO.COP_GainHP > 0 ) hp += global.P_Turn.CO.COP_GainHP ;
+        //HPgain
+        if( global.P_Turn.CO.COP_GainHP > 0 ) 
+        hp += global.P_Turn.CO.COP_GainHP ;
         if hp > 10 hp = 10;
         //move again
         if (global.P_Turn.CO.COP_ActAgain and isStanding and unit_index > 4) state = "idle";
@@ -35,11 +36,24 @@ with (obj_unit)
 scr_updateStanding_global();
 scr_updateGlobalVision();
 
+//check for dummyDeploy
+if( global.P_Turn.CO.COP_DeployDummy > 0)
+    {
+    instance_create(global.posX,global.posY,obj_deployDummyCursor );
+    global.P_Turn.CO.rounds = global.P_Turn.CO.COP_DeployDummy;
+    }
+
 //check for disruptor
-if( global.P_Turn.CO.COP_Disrupt > 0)
+else if( global.P_Turn.CO.COP_Disrupt > 0)
     {
     instance_create(global.posX,global.posY,obj_disruptorCurosr);
     with(obj_disruptorCurosr) range = global.P_Turn.CO.COP_Disrupt
+    }
+
+else if( global.P_Turn.CO.COP_SmokeScreen > 0)
+    { 
+    instance_create(global.posX,global.posY,obj_smokeScreenCurosr);
+    with( obj_smokeScreenCurosr ) smoke_rounds = global.P_Turn.CO.COP_SmokeScreen;
     }
     
 else

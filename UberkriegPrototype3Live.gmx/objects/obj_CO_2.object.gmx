@@ -25,15 +25,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 01: Vision CO
-
+            <string>///CO 02: HP+
 event_inherited();
 
 // Initiate Parent Object and defaults
-
 index = 2 ;
-name = "vision+" 
-
+name = "hp+" ;
 
 //COP and SCOP Varialbes
 
@@ -43,31 +40,21 @@ COP_on      = false ;   //CO power switch
 SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
-charge = 0;
-
-//set prices for dummy units
-var i = 1;
-for( i=1 ; i&lt;=13 ; i++ )
-    {
-    COP_Cost[i] =  0;
-    SCOP_Cost[i] = 0;
-    }
-
-
-
 //passive abilities
-D2D_Vision  = 1 ;
-COP_Vision  = 1 ;
-SCOP_Vision = 2 ;
+D2D_RepairCosts = 50;
+D2D_Repair = 3;
 
-COFX_HiddenHP       = true ; //includes fuel and ammo
-COFX_PerfectVision  = true ;
-COFX_DeployDummy    = true ;
-COFX_SmokeScreen    = 3    ; //defines charge
-COFX_rounds         = 0    ; //to be to count down smoke screens
+COFX_APC_Repair  = 2 ;
+COP_GainHP  = 3 ;
+SCOP_GainHP = 5 ;
 
-
-
+//generic defence boost
+var i =1;
+for( i = 1 ; i &lt;= 13 ; i++ )
+    {
+    COP_Def[i]  = 110;
+    SCOP_Def[i] = 110;
+    }
 
 </string>
           </argument>

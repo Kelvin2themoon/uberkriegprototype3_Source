@@ -140,6 +140,7 @@
           <sprite>sprites\spr_radioAssist_gold</sprite>
           <sprite>sprites\spr_rangeAssist</sprite>
           <sprite>sprites\spr_radioAssist_darkBlue</sprite>
+          <sprite>sprites\spr_cursorNumBlue</sprite>
         </sprites>
         <sprites name="checks">
           <sprite>sprites\spr_rangecheck_red</sprite>
@@ -593,6 +594,7 @@
       <object>objects\template_sandboxCursor</object>
       <objects name="BasicObjects">
         <object>objects\obj_UI_deploy</object>
+        <object>objects\obj_UI_deployDummy</object>
         <object>objects\obj_checker_tile</object>
         <object>objects\obj_miniwin</object>
         <object>objects\obj_player</object>
@@ -625,6 +627,8 @@
         <object>objects\obj_supplyCursor</object>
         <object>objects\obj_smokeScreenCurosr</object>
         <object>objects\obj_disruptorCurosr</object>
+        <object>objects\obj_deployDummyCursorCopy</object>
+        <object>objects\obj_deployDummyCursor</object>
         <object>objects\obj_promote_Cursor</object>
         <object>objects\obj_dropCursor</object>
         <objects name="Cursor Backup">
@@ -666,7 +670,7 @@
     <room>rooms\room5</room>
     <room>rooms\room6</room>
   </rooms>
-  <constants number="7">
+  <constants number="8">
     <constant name="CHECK_LAYRE">-64100</constant>
     <constant name="PATH">-64200</constant>
     <constant name="ACTIVE_UNIT">-64300</constant>
@@ -674,6 +678,7 @@
     <constant name="UI_DEPTH_CURSOR">-66000</constant>
     <constant name="TRANS">-67000</constant>
     <constant name="UNIT_LAYRE">-2</constant>
+    <constant name="star_value">500</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

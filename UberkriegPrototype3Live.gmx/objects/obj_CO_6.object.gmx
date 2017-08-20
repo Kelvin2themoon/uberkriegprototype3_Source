@@ -25,14 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 06: Capture+
+            <string>///CO 06: Range+ CO
 
 event_inherited();
 
 // Initiate Parent Object and defaults
 
 index = 6 ;
-name = "capture+" ;
+name = "range+" 
+
 
 //COP and SCOP Varialbes
 
@@ -42,38 +43,60 @@ COP_on      = false ;   //CO power switch
 SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
-//individual unit stats
+charge = 0;
 
-for ( i = 0 ; i &lt;= 4 ; i += 1)
+//long gun
+D2D_Atk[03]   = 120;
+D2D_Rng[03]   = 1  ;
+COP_Atk[03]   = 150;
+COP_Rng[03]   = 1  ;
+SCOP_Atk[03]  = 150;
+SCOP_Rng[03]  = 2 ;
+
+//Artillery
+D2D_Atk[08]   = 120;
+D2D_Rng[08]   = 1  ;
+COP_Atk[08]   = 150;
+COP_Rng[08]   = 1  ;
+SCOP_Atk[08]  = 150;
+SCOP_Rng[08]  = 2 ;
+
+//Rocket
+D2D_Atk[12]   = 120;
+D2D_Rng[12]   = 1  ;
+COP_Atk[12]   = 150;
+COP_Rng[12]   = 1  ;
+SCOP_Atk[12]  = 150;
+SCOP_Rng[12]  = 2 ;
+
+//Land Cuiser
+D2D_Atk[13]   = 100;
+D2D_Rng[13]   = 1  ;
+COP_Atk[13]   = 100;
+COP_Rng[13]   = 1  ;
+SCOP_Atk[13]  = 100;
+SCOP_Rng[13]  = 2 ;
+
+//direct combat units Atk reduction
+D2D_Atk[01]   = 80; //infantry
+D2D_Atk[02]   = 80; //mech
+D2D_Atk[04]   = 80; //officer
+D2D_Atk[05]   = 80; //recon
+D2D_Atk[06]   = 80; //APC
+D2D_Atk[07]   = 80; //light tank
+D2D_Atk[90]   = 80; //AA
+D2D_Atk[10]   = 80; //covert op
+D2D_Atk[11]   = 80; //heavy tank
+
+//generic defence boost
+var i =1;
+for( i = 1 ; i &lt;= 13 ; i++ )
     {
-    D2D_Atk[i]   = 130;
-    D2D_Def[i]   = 110;
-    D2D_Mov[i]   = 0  ;
-    
-    COP_Atk[i]   = 150;
-    COP_Def[i]   = 110;
-    COP_Mov[i]   = 1  ;
-    
-    SCOP_Atk[i]  = 180;
-    SCOP_Def[i]  = 110;
-    SCOP_Mov[i]  = 2  ;
+    COP_Def[i]  = 110;
+    SCOP_Def[i] = 110;
     }
-    
-///APC move +1
-D2D_Mov[06] = 1;
-        
-//reduced power to direct combat units    
-D2D_Atk[05] = 80;
-D2D_Atk[07] = 80;
-D2D_Atk[09] = 80;
-D2D_Atk[10] = 80;
-D2D_Atk[11] = 80;
-D2D_Atk[13] = 80;
 
-//Capture ability
-D2D_AdvanceCapture  = true; //capture 1.5x
-SCOP_PerfectCapture = true; //victory march
- 
+
 </string>
           </argument>
         </arguments>

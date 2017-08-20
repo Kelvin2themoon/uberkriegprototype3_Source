@@ -185,11 +185,11 @@ scr_draw_stars( x+12, y+45,global.P_Turn.CO.COP_Bar,global.P_Turn.CO.SCOP_Bar,gl
             <string>///draw skill ready
 
 //add COP and SCOP
-if (global.P_Turn.CO.charge &gt;= (global.P_Turn.CO.COP_Bar*1000 + global.P_Turn.CO.SCOP_Bar*1000 )and global.P_Turn.CO.SCOP_Bar !=0) 
+if (global.P_Turn.CO.charge &gt;= (global.P_Turn.CO.COP_Bar*star_value + global.P_Turn.CO.SCOP_Bar*star_value )and global.P_Turn.CO.SCOP_Bar !=0) 
 draw_sprite(spr_ready,1, x+12, y + 60); 
 
 
-else if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar*1000 and global.P_Turn.CO.COP_Bar !=0) 
+else if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar*star_value and global.P_Turn.CO.COP_Bar !=0) 
 draw_sprite(spr_ready,0, x+12, y + 60);
 
 //temp markers

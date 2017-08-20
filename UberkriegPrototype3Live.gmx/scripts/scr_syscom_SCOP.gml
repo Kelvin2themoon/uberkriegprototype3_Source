@@ -23,14 +23,24 @@ scr_updateStanding_global();
 scr_updateGlobalVision();
 
 //check for smoke screen
-if( global.P_Turn.CO.COFX_SmokeScreen > 0) instance_create(global.posX,global.posY,obj_smokeScreenCurosr);
+if( global.P_Turn.CO.SCOP_SmokeScreen > 0)
+    {
+    instance_create(global.posX,global.posY,obj_smokeScreenCurosr);
+    with( obj_smokeScreenCurosr ) smoke_rounds = global.P_Turn.CO.SCOP_SmokeScreen;
+    }
 //check for promotion
 else if( global.P_Turn.CO.SCOP_Promote ) instance_create(global.posX,global.posY,obj_promote_Cursor);
  //check for disruptor
-if( global.P_Turn.CO.SCOP_Disrupt > 0)
+else if( global.P_Turn.CO.SCOP_Disrupt > 0)
     {
     instance_create(global.posX,global.posY,obj_disruptorCurosr);
     with(obj_disruptorCurosr) range = global.P_Turn.CO.SCOP_Disrupt
+    }
+//check for dummyDeploy
+else if( global.P_Turn.CO.SCOP_DeployDummy > 0)
+    {
+    instance_create(global.posX,global.posY,obj_deployDummyCursor );
+    global.P_Turn.CO.rounds = global.P_Turn.CO.SCOP_DeployDummy;
     }
 //reactivate UI    
 else{

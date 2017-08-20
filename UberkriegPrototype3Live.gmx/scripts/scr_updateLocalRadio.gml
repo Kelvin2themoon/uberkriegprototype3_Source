@@ -11,7 +11,7 @@ radio_range = target.radio
 
 with( obj_CO_0 )
     {
-    if( ownership = other.target.ownership and object_is_ancestor(other.target.object_index, obj_unit.object_index) )
+    if( ownership = other.target.ownership and object_is_ancestor(other.target.object_index, obj_unit) )
         {
         other.radio_range += D2D_Radio;
         if( COP_on ) other.radio_range += COP_Radio;

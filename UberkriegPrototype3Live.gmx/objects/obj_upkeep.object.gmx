@@ -136,10 +136,15 @@ with obj_terrain
     {
     if (isSmoke and smoker = global.P_Turn.number)
         {
-        isSmoke = false;
-        smoker = 0;
-        if( name != "woods" )canHide = false;
-        
+        //reduce smoke
+        smoke_left -= 1;
+        //make smoke go away
+            if( smoke_left &lt;= 0 )
+            { 
+            isSmoke = false;
+            smoker = 0;
+            if( name != "woods" or object_is_ancestor(self.object_index,obj_property))canHide = false;
+            }
         }
     }
 

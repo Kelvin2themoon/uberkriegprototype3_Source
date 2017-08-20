@@ -25,27 +25,32 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 10: Officer+ CO
+            <string>///CO 11: aux move CO
 
 event_inherited();
 
 // Initiate Parent Object and defaults
 
 index = 11 ;
-name = "anti-radio" ;
+name = "aux move+ " ;
 
 //COP and SCOP Varialbes
 
-COP_Bar     = 4 ;       //number of charged stars required to activate CO metre
+COP_Bar     = 2 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
-SCOP_Bar    = 2 ;
+SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
-//anti-radio
-COP_Disrupt = 2;
-SCOP_Disrupt = 3;
+//individual unit stats
+var i = 0
 
+for ( i = 0 ; i &lt;= 13 ; i += 1)
+    {
+    D2D_Mov[i]   = 1
+    COP_Mov[i]   = 1
+    SCOP_Mov[i]  = 2
+    }
  
 </string>
           </argument>

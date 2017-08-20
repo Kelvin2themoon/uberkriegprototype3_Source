@@ -65,6 +65,7 @@ isSolid = true;     //used for bridge graphics
 //special CO Variables
 isSmoke = false;
 smoker = 0; //check for which player initiated the smoke and when to disipate
+smoke_left = 0;//number of turns smokescreen lasts
 
 //variable that keeps standing check not crash
 isDisrupted = false;
@@ -121,7 +122,7 @@ else image_blend = c_gray;
             <kind>1</kind>
             <string>//Draw self then Smoke
 draw_self();
-if( obj_map.terrains[x div 24, y div 24].isSmoke ) draw_sprite(spr_smoke,0,x,y);
+if( obj_map.terrains[x div 24, y div 24].isSmoke ) draw_sprite(spr_smoke,smoke_left-1,x,y);
 </string>
           </argument>
         </arguments>

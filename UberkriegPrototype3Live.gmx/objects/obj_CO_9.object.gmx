@@ -25,42 +25,47 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 09: Attack CO
+            <string>///CO 09: Officer+ CO
 
 event_inherited();
 
 // Initiate Parent Object and defaults
 
-index = 9 ;
-name = "attack+" ;
+index = 09 ;
+name = "officer+" ;
 
 //COP and SCOP Varialbes
 
-COP_Bar     = 2 ;       //number of charged stars required to activate CO metre
+COP_Bar     = 3 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
 SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
-//individual unit stats
-var i = 0
-
-for ( i = 0 ; i &lt;= 13 ; i += 1)
+charge = (COP_Bar+SCOP_Bar)*star_value
+//generic Def boost
+var i =1;
+for( i = 1 ; i &lt;= 13 ; i++ )
     {
-    //move bonuses
-    D2D_Mov[i]   = 1;
-    COP_Mov[i]   = 1;
-    SCOP_Mov[i]  = 2;
-    ///Atk +
-    D2D_Atk[i]   = 130;
-    COP_Atk[i]   = 160;
-    SCOP_Atk[i]  = 190;
-    //Def -
-    D2D_Def[i]   =  80;
+    D2D_Def[i]  = 120;
+    COP_Def[i]  = 130;
+    SCOP_Def[i] = 130;
     }
+
+
+//Radi Reducting
+D2D_Radio = -1;
  
-//COFX: Cleave
-SCOP_Cleave = true;
+//COFX: 
+D2D_CannotAttach = true;
+D2D_OfficerBoost = true; 
+D2D_Boarded = 200;  //officer on board
+D2D_COZone = 150;   //in  officer unit radio range
+COP_RadioDrainHP = 1;
+SCOP_Promote = true;
+
+
+
  
 </string>
           </argument>

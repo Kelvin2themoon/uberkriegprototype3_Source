@@ -280,8 +280,8 @@ else{
         if( ownership = other.arc_unit.ownership)
             {
             other.aux_max_rng += D2D_Rng[other.arc_unit.unit_index];
-            if(COP_on) other.aux_max_Rng += COP_rng[other.arc_unit.unit_index];
-            if(SCOP_on) other.aux_max_Rng += SCOP_rng[other.arc_unit.unit_index];
+            if(COP_on) other.aux_max_rng += COP_Rng[other.arc_unit.unit_index];
+            if(SCOP_on) other.aux_max_rng += SCOP_Rng[other.arc_unit.unit_index];
             }
         } 
     

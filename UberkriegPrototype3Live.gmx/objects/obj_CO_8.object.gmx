@@ -25,14 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 08: mighty CO
+            <string>///CO 08: cost+ CO
 
 event_inherited();
 
 // Initiate Parent Object and defaults
 
 index = 8 ;
-name = "mighty" 
+name = "cost+" 
 
 
 //COP and SCOP Varialbes
@@ -53,8 +53,8 @@ for( i = 1 ; i &lt;= 13 ; i++ )
     D2D_Def[i]  = 120;
     COP_Atk[i]  = 140;
     COP_Def[i]  = 140;
-    SCOP_Atk[i] = 160;
-    SCOP_Def[i] = 160;
+    SCOP_Atk[i] = 180;
+    SCOP_Def[i] = 180;
     }
     
 

@@ -25,69 +25,53 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 07: Range+ CO
+            <string>///CO 07: Attack CO
 
 event_inherited();
 
 // Initiate Parent Object and defaults
 
 index = 7 ;
-name = "range+" 
-
+name = "atk/move++" ;
 
 //COP and SCOP Varialbes
 
-COP_Bar     = 3 ;       //number of charged stars required to activate CO metre
+COP_Bar     = 2 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
 SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
-charge = 0;
+//individual unit stats
+var i = 0
 
-//long gun
-D2D_Atk[03]   = 120;
-D2D_Rng[03]   = 1  ;
-COP_Atk[03]   = 150;
-COP_Rng[03]   = 1  ;
-SCOP_Atk[03]  = 150;
-SCOP_Rng[03]  = 2 ;
+for ( i = 0 ; i &lt;= 13 ; i += 1)
+    {
+    //move bonuses
+    D2D_Mov[i]   = 1;
+    COP_Mov[i]   = 1;
+    SCOP_Mov[i]  = 2;
+    ///Atk +
+    D2D_Atk[i]   = 130;
+    COP_Atk[i]   = 160;
+    SCOP_Atk[i]  = 190;
+    //Def -
+    D2D_Def[i]   =  80;
+    //Def Boost
+    COP_Def[i]  = 90;
+    SCOP_Def[i] = 90;
+    }
+    
 
-//Artillery
-D2D_Atk[08]   = 120;
-D2D_Rng[08]   = 1  ;
-COP_Atk[08]   = 150;
-COP_Rng[08]   = 1  ;
-SCOP_Atk[08]  = 150;
-SCOP_Rng[08]  = 2 ;
+ 
+//COFX: Cleave
+//SCOP_Cleave = true;
+COFX_SmokeScreen    = 3    ; //defines charge
 
-//Rocket
-D2D_Atk[12]   = 120;
-D2D_Rng[12]   = 1  ;
-COP_Atk[12]   = 150;
-COP_Rng[12]   = 1  ;
-SCOP_Atk[12]  = 150;
-SCOP_Rng[12]  = 2 ;
-
-//Land Cuiser
-D2D_Atk[13]   = 100;
-D2D_Rng[13]   = 1  ;
-COP_Atk[13]   = 100;
-COP_Rng[13]   = 1  ;
-SCOP_Atk[13]  = 100;
-SCOP_Rng[13]  = 2 ;
-
-//direct combat units Atk reduction
-D2D_Atk[01]   = 80; //infantry
-D2D_Atk[02]   = 80; //mech
-D2D_Atk[04]   = 80; //officer
-D2D_Atk[05]   = 80; //recon
-D2D_Atk[06]   = 80; //APC
-D2D_Atk[07]   = 80; //light tank
-D2D_Atk[90]   = 80; //AA
-D2D_Atk[10]   = 80; //covert op
-D2D_Atk[11]   = 80; //heavy tank
-
+COP_SmokeScreen    = 1    ; //defines charge
+SCOP_SmokeScreen    = 3    ; //defines charge
+COFX_Cleave = true;
+ 
 </string>
           </argument>
         </arguments>

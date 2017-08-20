@@ -42,7 +42,7 @@ while (ds_queue_size(standing_Q) != 0 )
     //increase bonus range (COFX)
     with ( standingPlayer.CO )
         {
-        if( object_is_ancestor(other.checkStandTarget.object_index, obj_unit.object_index))
+        if( object_is_ancestor(other.checkStandTarget.object_index, obj_unit))
             {
             other.broadcast_range += D2D_Radio;
             if( COP_on ) other.broadcast_range += COP_Radio;

@@ -41,7 +41,10 @@ SCOP_Bar    = 0 ;
 SCOP_on     = false ;   //SCOP switch
 
 charge = 0 ; //ammount CO pwer charged
-use_count = 0 ; //number of times COP and SCOP are used 
+use_count = 0 ; //number of times COP and SCOP are used
+
+//Rounds: how many time spscial active CO abilities can be used, adjusted on SOP or SCOP activate
+rounds = 0; 
 
 
 //global passive modifyers (Day to day)
@@ -100,7 +103,10 @@ for ( i = 0 ; i &lt;= 13 ; i += 1)
 COFX_HiddenHP       = false ;
 COFX_PerfectVision  = false ;
 COFX_DeployDummy    = false ;
-COFX_SmokeScreen    = 0     ; //defines charge
+
+
+COP_DeployDummy = 0;
+SCOP_DeployDummy = 0;
 
 //hp+
 COFX_APC_Repair  = 0 ;
@@ -119,13 +125,18 @@ SCOP_Push = false;
 D2D_AdvanceCapture  = false; //capture 1.5x
 SCOP_PerfectCapture = false; //victory march
 
-//Atk &amp; mov+, cleave
+//Atk &amp; mov+, cleave, smoke screen
 SCOP_Cleave = false;
+COFX_SmokeScreen    = 0     ; //defines charge
+COP_SmokeScreen     = 0    ; //defines charge
+SCOP_SmokeScreen    = 0    ; //defines charge
 
 //Officer+
 
 D2D_CannotAttach = false;
 D2D_OfficerBoost = false; //units in officer radio range Stats++
+D2D_Boarded = 100;  //officer on board
+D2D_COZone = 100;   //in  officer unit radio range
 COP_RadioDrainHP = 0;
 SCOP_Promote = false;
 

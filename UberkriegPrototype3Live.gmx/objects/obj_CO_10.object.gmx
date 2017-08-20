@@ -25,33 +25,26 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 10: Officer+ CO
+            <string>///CO 10: anti-radio+ CO
 
 event_inherited();
 
 // Initiate Parent Object and defaults
 
-index = 10 ;
-name = "officer+" ;
+index = 11 ;
+name = "anti-radio" ;
 
 //COP and SCOP Varialbes
 
-COP_Bar     = 3 ;       //number of charged stars required to activate CO metre
+COP_Bar     = 4 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
-SCOP_Bar    = 3 ;
+SCOP_Bar    = 2 ;
 SCOP_on     = false ;   //SCOP switch
 
-charge = (COP_Bar+SCOP_Bar)*1000
-
-//Radi Reducting
-D2D_Radio = -1;
- 
-//COFX: 
-D2D_CannotAttach = true;
-D2D_OfficerBoost = true; //160, see damageCalc
-COP_RadioDrainHP = 1;
-SCOP_Promote = true;
+//anti-radio
+COP_Disrupt = 2;
+SCOP_Disrupt = 3;
 
  
 </string>

@@ -27,7 +27,7 @@ if (global.acting_unit.name = "Land Cruiser" and global.engage_type = 1 and abs(
             {
             CO.charge += global.target_unit.charge*damage;
             //if metre is full, flatten
-            if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;
+            if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*star_value ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*star_value ;
             }
         }
         
@@ -37,7 +37,7 @@ if (global.acting_unit.name = "Land Cruiser" and global.engage_type = 1 and abs(
         //charge
         CO.charge += (global.target_unit.charge*damage) div 2 ;
         // //if metre is full, flatten
-        if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;
+        if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*star_value ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*star_value ;
         }  
     }
 
@@ -63,7 +63,7 @@ else
             {
             CO.charge += global.target_unit.charge*damage;
             //if metre is full, flatten
-            if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;
+            if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*star_value ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*star_value ;
             }
         }
         
@@ -73,7 +73,7 @@ else
         //charge
         CO.charge += (global.target_unit.charge*damage) div 2 ;
         // //if metre is full, flatten
-        if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;
+        if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*star_value ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*star_value ;
         }  
     }
     
@@ -113,7 +113,7 @@ else if (global.target_unit.dummy = false )
                 {
                  CO.charge += (global.target_unit.charge*damage) div 2;
                 //if metre is full, flatten
-                if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;
+                if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*star_value ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*star_value ;
                 }
             }
             
@@ -123,7 +123,7 @@ else if (global.target_unit.dummy = false )
             //charge
             CO.charge += (global.target_unit.charge*damage);
             // //if metre is full, flatten
-            if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;
+            if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*star_value ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*star_value ;
             }  
         }
     
@@ -188,7 +188,7 @@ else if (global.target_unit.dummy = false )
                             {
                             CO.charge += (global.target_unit.charge*damage) div 2;
                             //if metre is full, flatten
-                            if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;
+                            if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*star_value ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*star_value ;
                             }
                                                         
                         }
@@ -198,7 +198,7 @@ else if (global.target_unit.dummy = false )
                         //charge
                         CO.charge += (global.target_unit.charge*damage);
                         // //if metre is full, flatten
-                        if ( CO.charge > (CO.COP_Bar+CO.COP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;
+                        if ( CO.charge > (CO.COP_Bar+CO.COP_Bar)*star_value ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*star_value ;
                         }  
                     }
                 else
@@ -222,7 +222,7 @@ else if (global.target_unit.dummy = false )
                                 {
                                 CO.charge += (global.target_unit.charge*damage) div 2;
                                 //if metre is full, flatten
-                                if ( CO.charge > (CO.COP_Bar+CO.COP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;
+                                if ( CO.charge > (CO.COP_Bar+CO.COP_Bar)*star_value ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*star_value ;
                                 }
                             }
                         //charge defender
@@ -231,7 +231,7 @@ else if (global.target_unit.dummy = false )
                             //charge
                             CO.charge += (global.target_unit.charge*damage);
                             // //if metre is full, flatten
-                            if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;
+                            if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*star_value ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*star_value ;
                             }  
                         }
                     }
@@ -256,7 +256,7 @@ else if (global.target_unit.dummy = false )
                             {
                             CO.charge += (global.target_unit.charge*damage) div 2;
                             //if metre is full, flatten
-                            if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;
+                            if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*star_value ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*star_value ;
                             }               
                          }
                      //charge defender
@@ -265,7 +265,7 @@ else if (global.target_unit.dummy = false )
                         //charge
                         CO.charge += (global.target_unit.charge*damage);
                         // //if metre is full, flatten
-                        if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;
+                        if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*star_value ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*star_value ;
                         }                 
                      }
                 } 
@@ -289,7 +289,7 @@ else if (global.target_unit.dummy = false )
                         {
                         CO.charge += (global.target_unit.charge*damage) div 2;
                         //if metre is full, flatten
-                        if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;            
+                        if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*star_value ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*star_value ;            
                         }               
                     }
                 //charge defender
@@ -298,7 +298,7 @@ else if (global.target_unit.dummy = false )
                     //charge
                     CO.charge += (global.target_unit.charge*damage);
                     // //if metre is full, flatten
-                    if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*1000 ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*1000 ;
+                    if ( CO.charge > (CO.COP_Bar+CO.SCOP_Bar)*star_value ) CO.charge =  (CO.COP_Bar+CO.SCOP_Bar)*star_value ;
                     } 
                 }
             }
