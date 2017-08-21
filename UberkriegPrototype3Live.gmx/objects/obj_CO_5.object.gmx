@@ -39,7 +39,7 @@ name = "infantry+" ;
 COP_Bar     = 3 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
-SCOP_Bar    = 3 ;
+SCOP_Bar    = 5 ;
 SCOP_on     = false ;   //SCOP switch
 
 //individual unit stats
@@ -51,11 +51,11 @@ for ( i = 0 ; i &lt;= 4 ; i += 1)
     D2D_Mov[i]   = 0  ;
     
     COP_Atk[i]   = 150;
-    COP_Def[i]   = 110;
+    COP_Def[i]   = 120;
     COP_Mov[i]   = 1  ;
     
     SCOP_Atk[i]  = 180;
-    SCOP_Def[i]  = 110;
+    SCOP_Def[i]  = 120;
     SCOP_Mov[i]  = 2  ;
     }
     

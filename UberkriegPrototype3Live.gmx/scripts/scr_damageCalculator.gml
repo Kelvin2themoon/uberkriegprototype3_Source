@@ -1,6 +1,6 @@
 dmgCalc_atk    = argument0; //unit obj
 dmgCalc_def    = argument1; //unit obj
-dmgCalc_cov    = argument2; //int from terrain
+dmgCalc_cov    = argument2; //int from defending terrain
 dmgCalc_type   = argument3; // int : 1 or 2
 
 // Damage % =  (atk_hp x dam_chart) / (def_hp x cover)
@@ -40,9 +40,9 @@ with( obj_CO_0)
         //check for officer Boost
         if( D2D_OfficerBoost and other.dmgCalc_atk.isCommander ) other.atk_CO_mod = other.atk_CO_mod*(D2D_Boarded/100);
         //check CO zone acting unit
-        else if( global.P_Turn.number = ownership and D2D_OfficerBoost and global.rangeCheck[global.posX, global.posY].CO_Zone[ownership]) other.atk_CO_mod = other.atk_CO_mod*(D2D_COZone/100);
+        else if( D2D_OfficerBoost and other.dmgCalc_atk.ownership = ownership and global.P_Turn.number = ownership and  global.rangeCheck[global.posX, global.posY].CO_Zone[4]) other.atk_CO_mod = other.atk_CO_mod*(D2D_COZone/100);
         //check target unit: counterattack
-        else if( D2D_OfficerBoost and global.rangeCheck[other.dmgCalc_atk.x div 24, other.dmgCalc_atk.y div 24].CO_Zone[ownership]) other.atk_CO_mod = other.atk_CO_mod*(D2D_COZone/100);
+        else if( D2D_OfficerBoost and global.P_Turn.number != ownership and global.rangeCheck[other.dmgCalc_atk.x div 24, other.dmgCalc_atk.y div 24].CO_Zone[ownership]) other.atk_CO_mod = other.atk_CO_mod*(D2D_COZone/100);
         }
     if( ownership = other.dmgCalc_def.ownership )
         {
@@ -52,9 +52,9 @@ with( obj_CO_0)
         // check for CO Boost
         if( D2D_OfficerBoost and other.dmgCalc_def.isCommander ) other.def_CO_mod = other.def_CO_mod*(D2D_Boarded/100);
         //check CO zone acting unit
-        else if( global.P_Turn.number = ownership and D2D_OfficerBoost and global.rangeCheck[global.posX, global.posY].CO_Zone[ownership]) other.def_CO_mod = other.def_CO_mod*(D2D_COZone/100);
+        else if( global.P_Turn.number = ownership and D2D_OfficerBoost and global.rangeCheck[global.posX div 24, global.posY div 24].CO_Zone[ownership]) other.def_CO_mod = other.def_CO_mod*(D2D_COZone/100);
         //check target unit: counterattack
-        else if(D2D_OfficerBoost and global.rangeCheck[other.dmgCalc_def.x div 24, other.dmgCalc_def.y div 24].CO_Zone[ownership]) other.def_CO_mod = other.def_CO_mod*(D2D_COZone/100);
+        else if(D2D_OfficerBoost and global.P_Turn.number != ownership and global.rangeCheck[other.dmgCalc_def.x div 24, other.dmgCalc_def.y div 24].CO_Zone[ownership]) other.def_CO_mod = other.def_CO_mod*(D2D_COZone/100);
         }
         
     }

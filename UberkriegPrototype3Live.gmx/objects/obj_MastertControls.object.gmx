@@ -358,25 +358,16 @@ window_set_fullscreen(!window_get_fullscreen());
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-
-///scale window
-
-if (global.window_size = 1)
+            <string>if (global.window_size = 1)
     {
     window_set_size( 768*2, 432*2 );
     global.window_size = 2;
-   
-    }
-    
+    }   
 else
     {  
-    
     window_set_size( 768, 432 );
     global.window_size = 1
-    
-    }///mak full screen!
-//window_set_fullscreen(!window_get_fullscreen());
+    }
 </string>
           </argument>
         </arguments>

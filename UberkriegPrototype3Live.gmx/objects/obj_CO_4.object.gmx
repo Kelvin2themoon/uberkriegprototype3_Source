@@ -48,12 +48,15 @@ var i = 0
 for ( i = 0 ; i &lt;= 13 ; i += 1)
     {
     //Power Bonuses
-    if( i &gt; 4 or i !=8 or i !=12 ) D2D_Atk[i]   = 120;
-    if( i &gt; 4 or i !=8 or i !=12 ) COP_Atk[i]   = 140;
-    if( i &gt; 4 or i !=8 or i !=12 ) SCOP_Atk[i]  = 180;
+    if( i &gt; 4 or i !=8 or i !=12 )
+        { 
+        D2D_Atk[i]   = 120;
+        COP_Atk[i]   = 140;
+        SCOP_Atk[i]  = 180;
+        }
     //MoveBonuses, non infantry units only
-    if( i &gt; 4 or i !=8 or i !=12 ) COP_Mov[i]   = 1
-    if( i &gt; 4 or i !=8 or i !=12 ) SCOP_Mov[i]  = 2
+     COP_Mov[i]   = 1
+     SCOP_Mov[i]  = 2
     //generic defence boose
     COP_Def[i]  = 110;
     SCOP_Def[i] = 110;

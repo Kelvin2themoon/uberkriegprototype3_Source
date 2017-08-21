@@ -67,7 +67,7 @@ if (global.acting_unit  = 0)
     if (global.P_Turn.CO.charge &gt;= (global.P_Turn.CO.COP_Bar*1000 + global.P_Turn.CO.SCOP_Bar*1000 )and global.P_Turn.CO.SCOP_Bar !=0 and global.P_Turn.CO.COP_on = false and global.P_Turn.CO.SCOP_on = false )  
     extra_items += 1;
     //too low
-if ( y &gt; view_yview + view_hview - 24*5) y -= 24*(3-((view_yview + view_hview -y) div 24)+extra_items);
+if ( y &gt; view_yview + view_hview - 24*6) y -= 24*(4-((view_yview + view_hview -y) div 24)+extra_items);
     }
 //manage Command
 else

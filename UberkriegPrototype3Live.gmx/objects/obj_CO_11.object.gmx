@@ -36,7 +36,7 @@ name = "aux move+ " ;
 
 //COP and SCOP Varialbes
 
-COP_Bar     = 2 ;       //number of charged stars required to activate CO metre
+COP_Bar     = 2;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
 SCOP_Bar    = 3 ;

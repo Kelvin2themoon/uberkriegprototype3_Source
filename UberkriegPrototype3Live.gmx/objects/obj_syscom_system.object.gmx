@@ -33,10 +33,10 @@ event_inherited();
 ds_list_add(menu_content,"intel","save",);
 
 //add COP and SCOP
-if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar*1000 and global.P_Turn.CO.COP_Bar !=0 and global.P_Turn.CO.COP_on = false and global.P_Turn.CO.SCOP_on = false ) 
+if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar*star_value and global.P_Turn.CO.COP_Bar !=0 and global.P_Turn.CO.COP_on = false and global.P_Turn.CO.SCOP_on = false ) 
 ds_list_add(menu_content,"COP");
 
-if (global.P_Turn.CO.charge &gt;= (global.P_Turn.CO.COP_Bar*1000 + global.P_Turn.CO.SCOP_Bar*1000 )and global.P_Turn.CO.SCOP_Bar !=0 and global.P_Turn.CO.COP_on = false and global.P_Turn.CO.SCOP_on = false )  
+if (global.P_Turn.CO.charge &gt;= (global.P_Turn.CO.COP_Bar*star_value + global.P_Turn.CO.SCOP_Bar*star_value )and global.P_Turn.CO.SCOP_Bar !=0 and global.P_Turn.CO.COP_on = false and global.P_Turn.CO.SCOP_on = false )  
 ds_list_add(menu_content,"SCOP");
  
 

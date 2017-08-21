@@ -34,6 +34,8 @@ startpos_y = y;
 depth = UI_DEPTH_CURSOR  
 
 image_speed = 0;
+
+
 /*
  // reactivate main phaze UI
 instance_activate_object(obj_miniwin);
@@ -90,6 +92,9 @@ if (step_counter = 24){
         x = global.acting_unit.x;
         y = global.acting_unit.y;
         }
+    //checks
+    scr_updateStanding(global.P_Turn);
+    scr_rangeCheck_reset();
     instance_destroy();
     }
 

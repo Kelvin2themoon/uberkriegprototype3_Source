@@ -726,7 +726,7 @@ if ( keyboard_check_pressed( global.keyCONFIRM) and menuExitDelay = false and sc
         //Open Deploy dummy menu!
         instance_create(0,0,obj_UI_deployDummy);
         instance_deactivate_object(obj_miniwin);
-        instance_deactivate_object(obj_battleCursor);
+        instance_deactivate_object(obj_deployDummyCursor);
         instance_deactivate_object(obj_topwin);
         }
     //else unit exsist

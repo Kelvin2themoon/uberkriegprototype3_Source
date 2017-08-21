@@ -199,7 +199,10 @@ or  (   mouse_check_button_pressed(mb_left)
                                 isSmoke = true;
                                 canHide = true;
                                 smoker = global.P_Turn.number;
-                                if( smoke_left &lt; 3 - (abs(other.ix) + abs(other.iy))) smoke_left = 3 - (abs(other.ix) + abs(other.iy));
+                                //calculatesmake density
+                                smoke_left = 3 - (abs(other.ix) + abs(other.iy)) +smoke_left;
+                                if( smoke_left &gt; 3 ) smoke_left = 3;
+                                   
                                 }
                             obj_map.terrains[global.posX+ix,global.posY+iy].isSmoke = true;
                             obj_map.terrains[global.posX+ix,global.posY+iy].canHide = true;

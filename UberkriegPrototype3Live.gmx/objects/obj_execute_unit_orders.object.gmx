@@ -192,7 +192,6 @@ if( global.acting_unit.x = move_to.x and global.acting_unit.y = move_to.y){
             global.acting_unit.alarm[0] =  1;
             //reset depth
             scr_setUnitDepth(global.acting_unit); 
-            
             //create unit event object and set to trap
             itsatrap = instance_create(move_from.x,move_from.y,obj_event_trap);
             itsatrap.depth = UI_DEPTH_CURSOR

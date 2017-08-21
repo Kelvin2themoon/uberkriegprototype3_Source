@@ -83,7 +83,7 @@ switch state {
             if global.P_Turn.number == global.last_player {
                 global.Day +=1;
                 }
-        //UPKEEP PREP
+            //UPKEEP PREP
             show_debug_message("NEW TURN");
             //change player
             changeplayer = ds_queue_dequeue(global.player_q);
@@ -95,22 +95,31 @@ switch state {
             view_yview[0] = global.P_Turn.save_view_pos_y;
             //chang phase
             global.Phaze = "Waiting";
-            //reset visibility af all positions
-            scr_globalVisionReset();
-            scr_updateGlobalVision();
-            //reset units and propeties
+              //reset units and propeties
             with(obj_unit)
                     {
-                        state = "idle";
-                        if ownership = global.P_Turn.number state = "exhaust";
-                        image_index = 21;
-                        isStanding = false ;
+                    state = "idle";
+                    if ownership = global.P_Turn.number state = "exhaust";
+                    image_index = 21;
+                    isStanding = false ;
+                    if( ownership  = global.P_Turn.number )
+                        {
+                        //cop on or off
+                        COP  = false;
+                        SCOP = false;
+                        }
                     }
             with (obj_property) isStanding = false;
             //set is standing for all players
-            //scr_updateStanding(global.P_Turn);
             scr_updateStanding_global();
             
+            //deactivate COP and SCOP
+            global.P_Turn.CO.COP_on = false ;
+            global.P_Turn.CO.SCOP_on = false ;
+            //reset visibility af all positions
+            scr_globalVisionReset();
+            scr_updateGlobalVision();
+          
         //change cursor pose to saved (to player)
         
         //auto save turn
@@ -133,8 +142,8 @@ switch state {
             //change phasze to "main"
             global.Phaze = "Upkeep";
             //pre-check standing
-            scr_updateStanding_global();
-            scr_updateGlobalVision(); 
+            //scr_updateStanding_global();
+            //scr_updateGlobalVision(); 
             }
         break;
     case "fade out" :

@@ -952,7 +952,7 @@ global.unit_check = obj_map.units[global.posX,global.posY];
 
 if (keyboard_check_pressed(global.keyCANCEL))
     {
-    fast_scroll_on = true;
+    
     //attack Range check if over unit
     if (obj_map.units[global.posX, global.posY] != 0)
         {
@@ -962,7 +962,8 @@ if (keyboard_check_pressed(global.keyCANCEL))
             checking_attack_range = true;
             scr_attack_rance_check(obj_map.units[global.posX, global.posY]);
             }
-        }    
+        }
+    if( !checking_attack_range )fast_scroll_on = true;    
     }
 
 if (keyboard_check_released(global.keyCANCEL) or mouse_check_button_released(mb_right))
@@ -1042,7 +1043,8 @@ if(scr_inBound(global.posX,global.posY))
             <kind>1</kind>
             <string>///Debug
 
-//draw_text(12,48+12*2,"P2 CO Zone: " + string(global.rangeCheck[x div 24,y div 24].CO_Zone[2]));
+draw_text(12,48+12*2,"P2 CO Zone: " + string(global.rangeCheck[global.posX,global.posY].CO_Zone[2]));
+draw_text(12,48+12*3,"P4 CO Zone: " + string(global.rangeCheck[global.posX,global.posY].CO_Zone[4]));
 /*
 draw_text(12,48+12,"X: " + string(global.posX));
 draw_text(12,48+12*2,"X: " + string(global.posY));

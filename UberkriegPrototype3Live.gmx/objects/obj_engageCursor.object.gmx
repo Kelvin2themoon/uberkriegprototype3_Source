@@ -98,6 +98,26 @@ alarm[2] =5;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="2">
       <action>
@@ -582,6 +602,8 @@ global.unit_check = obj_map.units[x div 24, y div 24];
           <argument>
             <kind>1</kind>
             <string>///Debug 
+draw_text(12,48+12*2,"P2 CO Zone: " + string(global.rangeCheck[global.posX,global.posY].CO_Zone[2]));
+draw_text(12,48+12*3,"P4 CO Zone: " + string(global.rangeCheck[global.posX,global.posY].CO_Zone[4]));
 
 //draw_text(12,48+12*2,"P2 CO Zone: " + string(global.rangeCheck[mouse_x div 24,mouse_y div 24].CO_Zone[2]));
 //draw_text(12,48+12*3, "("+string(global.posX)+","+string(global.posY)+")")

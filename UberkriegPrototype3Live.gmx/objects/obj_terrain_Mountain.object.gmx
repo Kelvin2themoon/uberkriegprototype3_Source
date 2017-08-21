@@ -41,7 +41,7 @@ mtype_boots         = 3;
 mtype_heavyBoots    = 1;
 mtype_tires         = 99;
 mtype_heavyTires    = 99;
-mtype_specialTires  = 4;
+mtype_specialTires  = 8;
 mtype_tracks        = 99;
 mtype_heavyTracks   = 99;
 

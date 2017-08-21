@@ -32,14 +32,14 @@ event_inherited();
 // Initiate Parent Object and defaults
 
 index = 7 ;
-name = "atk/move++" ;
+name = "atk/move+" ;
 
 //COP and SCOP Varialbes
 
 COP_Bar     = 2 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
-SCOP_Bar    = 3 ;
+SCOP_Bar    = 4 ;
 SCOP_on     = false ;   //SCOP switch
 
 //individual unit stats
@@ -50,11 +50,11 @@ for ( i = 0 ; i &lt;= 13 ; i += 1)
     //move bonuses
     D2D_Mov[i]   = 1;
     COP_Mov[i]   = 1;
-    SCOP_Mov[i]  = 2;
+    SCOP_Mov[i]  = 1;
     ///Atk +
-    D2D_Atk[i]   = 130;
-    COP_Atk[i]   = 160;
-    SCOP_Atk[i]  = 190;
+    D2D_Atk[i]   = 120;
+    COP_Atk[i]   = 140;
+    SCOP_Atk[i]  = 160;
     //Def -
     D2D_Def[i]   =  80;
     //Def Boost
@@ -70,7 +70,7 @@ COFX_SmokeScreen    = 3    ; //defines charge
 
 COP_SmokeScreen    = 1    ; //defines charge
 SCOP_SmokeScreen    = 3    ; //defines charge
-COFX_Cleave = true;
+SCOP_Cleave = true;
  
 </string>
           </argument>

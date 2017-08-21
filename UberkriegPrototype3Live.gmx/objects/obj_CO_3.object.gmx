@@ -40,7 +40,7 @@ COP_Bar     = 3 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
 
-SCOP_Bar    = 3 ;
+SCOP_Bar    = 6 ;
 SCOP_on     = false ;   //SCOP switch
 
 //passive abilities, COP, and SCOP

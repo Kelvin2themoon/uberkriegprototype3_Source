@@ -31,20 +31,20 @@ event_inherited();
 
 // Initiate Parent Object and defaults
 
-index = 11 ;
+index = 10 ;
 name = "anti-radio" ;
 
 //COP and SCOP Varialbes
 
-COP_Bar     = 4 ;       //number of charged stars required to activate CO metre
+COP_Bar     = 0 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
-SCOP_Bar    = 2 ;
+SCOP_Bar    = 7 ;
 SCOP_on     = false ;   //SCOP switch
 
 //anti-radio
-COP_Disrupt = 2;
-SCOP_Disrupt = 3;
+COP_Disrupt = 1;
+SCOP_Disrupt = 2;
 
  
 </string>

@@ -117,19 +117,7 @@ with obj_battleCursor
     }
     
     
-//deactivate COP and SCOP
-global.P_Turn.CO.COP_on = false ;
-global.P_Turn.CO.SCOP_on = false ;
 
-with (obj_unit)
-    {
-    if( ownership = global.P_Turn.number)
-        {
-        COP = false ;
-        SCOP = false ;
-        scr_updateStanding_global();
-        }     
-    }
     
 //turn smoke off
 with obj_terrain 
