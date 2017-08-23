@@ -59,6 +59,12 @@ for ( i = 0 ; i &lt;= 4 ; i += 1)
     SCOP_Mov[i]  = 2  ;
     }
     
+for ( i = 0 ; i &lt;= 13 ; i += 1)
+    {
+    COP_Def[i]   += 10;
+    SCOP_Def[i]  += 10;
+    }
+    
 ///APC move +1
 D2D_Mov[06] = 1;
         

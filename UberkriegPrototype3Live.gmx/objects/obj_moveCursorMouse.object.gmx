@@ -845,10 +845,12 @@ if ( !mouse_check_button(mb_left)and scr_inBound(mouse_pos_x,mouse_pos_y))
             with(obj_checker_tile) sprite_index = -1;
             //change sprite back at destination
             global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
+            //create command menu    
+            instance_create(x+24,y,obj_syscom_command);
+            with(obj_syscom_command) by_mouse = true; 
             //deactivate move cursor object
             instance_deactivate_object(obj_moveCursorMouse);
-            //create command menu    
-            instance_create(x+24,y,obj_syscom_command); 
+            
             }
     
     else
@@ -933,7 +935,8 @@ global.unit_check = obj_map.units[global.posX,global.posY];
           <argument>
             <kind>1</kind>
             <string>///Debug
-
+//draw_text(12,48+12*2,"P2 CO Zone: " + string(global.rangeCheck[global.posX,global.posY].CO_Zone[2]));
+//draw_text(12,48+12*3,"P4 CO Zone: " + string(global.rangeCheck[global.posX,global.posY].CO_Zone[4]));
 //draw_text(12, 240, string(global.acting_unit.team) + "/" + string(global.acting_unit.ownership));
 
 

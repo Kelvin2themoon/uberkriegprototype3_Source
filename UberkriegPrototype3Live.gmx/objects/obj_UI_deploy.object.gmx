@@ -500,7 +500,7 @@ if (mouse_check_button_pressed(mb_left))
                     
                     instance_activate_object(obj_miniwin);
                     instance_activate_object(obj_topwin);
-                    with(obj_UI_deploy_mouse) instance_destroy();
+                    with(obj_UI_deploy) instance_destroy();
                     //second deplay menu is created for some reson when another base is selected first &amp; second base is select to deploy while cursor on first base is showing deploy icon...temp solution = nuke all deploy menus
                     }
                             
@@ -515,46 +515,24 @@ if (mouse_check_button_pressed(mb_left))
                         //exshaust deployed unit
                         obj_map.units[global.posX,global.posY].state = "exhaust" ;
                         
-                        //set if Dummy
-                        if( deployingdummy ) 
-                            {
-                            with( obj_map.units[global.posX,global.posY] )
-                                {
-                                hp = 1;
-                                dummy = true;
-                                }
-                            }
+                        instance_activate_object(obj_battleCursor);
+                        
+                        //set menu exit delay to prevent unwanted view scrolling
+                        obj_battleCursor.alarm[3] = 10;
+                        obj_battleCursor.menuExitDelay = true;
+                        
+                        instance_activate_object(obj_miniwin);
+                        instance_activate_object(obj_topwin);
+                        instance_destroy(); 
+                        
+                       
         
                         //update standing
                         scr_updateStanding_global();
-                        scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
+                        //scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
                         //update vision
                         scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
-                        
-                        //Close deploy Window
-                        if(deployingdummy)
-                            {
-                            //reactivate dummy deploy curosr
-                            instance_activate_object(obj_deployDummyCursor);
-                            with( obj_deployDummyCursor) rounds -=1;
-                            
-                            //reactivate basic UI
-                            instance_activate_object(obj_miniwin);
-                            instance_activate_object(obj_topwin);
-                            instance_destroy();
-                            }
-                        else
-                            {
-                            instance_activate_object(obj_battleCursor);
-                                        
-                            //set menu exit delay to prevent unwanted view scrolling
-                            obj_battleCursor.alarm[3] = 10;
-                            obj_battleCursor.menuExitDelay = true;
-                                        
-                            instance_activate_object(obj_miniwin);
-                            instance_activate_object(obj_topwin);
-                            instance_destroy();
-                            }    
+                         
                         }
                     }
                 }   

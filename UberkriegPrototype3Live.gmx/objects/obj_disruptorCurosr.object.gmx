@@ -201,6 +201,8 @@ or  (   mouse_check_button_pressed(mb_left)
                                     {
                                     isDisrupted = true;
                                     state = "exhaust" ;
+                                    if( global.P_Turn.CO.COP_on ) hp -=  global.P_Turn.CO.COP_DisruptDamage;
+                                    else if ( global.P_Turn.CO.SCOP_on ) hp -=  global.P_Turn.CO.SCOP_DisruptDamage;
                                     }
                                 }
                             }

@@ -333,8 +333,13 @@ switch  (global.cursorFrame)
           <argument>
             <kind>1</kind>
             <string>///mak full screen!
-window_set_fullscreen(!window_get_fullscreen()); 
+window_set_fullscreen(!window_get_fullscreen());
 
+if( window_get_fullscreen() )
+    {
+    texture_set_interpolation(true);
+    G_smooth = true 
+    }
 
 </string>
           </argument>
