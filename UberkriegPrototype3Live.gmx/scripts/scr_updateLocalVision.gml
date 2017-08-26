@@ -66,35 +66,51 @@ for ( tempV_X= (-1)*vision_range ; tempV_X<= vision_range ; tempV_X+=1 ){ //for 
                 if scr_inBound(originV_X+tempV_X,originV_Y+tempV_Y){
                 
                     if perfectVision 
-                            {
-                                
-                                obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
-                                obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
-
+                            {    
+                            obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
+                            obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
                             }
                     //adjacent to target if target is unit
-                    else if ( (abs(tempV_X)+abs(tempV_Y))<=1 and object_is_ancestor(target.object_index,obj_unit)){
-                            obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
-                            if obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] !=0
+                    else if ( (abs(tempV_X)+abs(tempV_Y))<=1 and object_is_ancestor(target.object_index,obj_unit))
+                        {
+                        obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
+                        //if unit exsist at position
+                        if( obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] !=0)
+                            {
+                            //target is visible
                             obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
-                            //obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isHidden = false;     
                             }
-                        //regular vision for terrain
-                        //check percet vision
- 
+    
+                        }
+
+                    //terrain can hide is false    
+                    else if(obj_map.terrains[originV_X+tempV_X,originV_Y+tempV_Y].canHide = false) 
+                        {
+                        //terrain is not vosible, dark
+                        obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
+                        }
                         
-                        else if  obj_map.terrains[originV_X+tempV_X,originV_Y+tempV_Y].canHide = false {
-                             obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
+                    //check unit visibility
+                    if (obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] != 0)
+                        {
+                        //stay hidden is isHiding
+                        if( obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isHidden )
+                            {
+                            //exception for when unit occupies a propety
+                            if( object_is_ancestor(obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].object_index,obj_property))
+                                {
+                                if( obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].team = global.P_Turn.team )
+                                    {
+                                    obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
+                                    }
+                                }
+                            } 
+                        //visible is terrrtain is also visible
+                        else if (obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isVisible) 
+                            {
+                            obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
                             }
-                        //check unit visibility
-                        if (obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] != 0){
-                            //check terrain
-                            
-                            //stay hidden is isHiding
-                            if obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isHidden {}; 
-                            //visible is terrrtain is also visible
-                            else if (obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isVisible) {obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;}
-                            }
+                        }
 
                     }     
             }
