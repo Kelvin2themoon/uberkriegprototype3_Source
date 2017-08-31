@@ -40,8 +40,8 @@ else {
     obj_map.units[global.posX,global.posY] = global.acting_unit; 
     //remove from APC slot
     switch load_slot {
-        case "A" : global.acting_unit.load_A = 0; global.drop_A = false; break;
-        case "B" : global.acting_unit.load_B = 0; global.drop_B = false; break;   
+        case "A" : global.acting_unit.load_A = 0; global.drop_A = false; global.engage = false; break;
+        case "B" : global.acting_unit.load_B = 0; global.drop_B = false; global.engage = false; break;   
         }
     global.supply = false;
         
@@ -91,6 +91,7 @@ else {
     }
     
 scr_updateStanding_global();
+
 
 
 
