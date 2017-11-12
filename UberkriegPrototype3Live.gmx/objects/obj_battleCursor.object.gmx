@@ -1024,6 +1024,35 @@ if(scr_inBound(global.posX,global.posY))
         </arguments>
       </action>
     </event>
+    <event eventtype="5" enumb="120">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///COP full charge for debug
+
+with(global.P_Turn.CO)
+    {
+    if (charge &lt; (COP_Bar*star_value)+(SCOP_Bar*star_value))  charge +=10; //(COP_Bar*1000)+(SCOP_Bar*1000);
+        
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -1182,34 +1211,6 @@ if (cursor_icon == 5 ){
 
 
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="120">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///COP full charge for debug
-
-with(global.P_Turn.CO)
-    {
-    charge = (COP_Bar*1000)+(SCOP_Bar*1000);
-    }
 </string>
           </argument>
         </arguments>

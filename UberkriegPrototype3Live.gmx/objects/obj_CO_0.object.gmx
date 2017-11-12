@@ -126,6 +126,10 @@ SCOP_Push = false;
 D2D_AdvanceCapture  = false; //capture 1.5x
 SCOP_PerfectCapture = false; //victory march
 
+//Range +
+ COP_RangeMoveAgain = false;
+SCOP_RangeMoveAgain = false;
+
 //Atk &amp; mov+, cleave, smoke screen
 SCOP_Cleave = false;
 COFX_SmokeScreen    = 0     ; //defines charge

@@ -51,8 +51,8 @@ for ( i = 0 ; i &lt;= 13 ; i += 1)
     if( i &gt; 4 or i !=8 or i !=12 )
         { 
         D2D_Atk[i]   = 120;
-        COP_Atk[i]   = 140;
-        SCOP_Atk[i]  = 180;
+        COP_Atk[i]   = 130;
+        SCOP_Atk[i]  = 160;
         }
     //MoveBonuses, non infantry units only
      COP_Mov[i]   = 1

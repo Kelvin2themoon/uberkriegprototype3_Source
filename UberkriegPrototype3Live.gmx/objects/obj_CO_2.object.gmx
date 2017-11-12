@@ -44,7 +44,7 @@ SCOP_on     = false ;   //SCOP switch
 D2D_RepairCosts = 50;
 D2D_Repair = 3;
 
-COFX_APC_Repair  = 2 ;
+COFX_APC_Repair  = 1 ;
 COP_GainHP  = 3 ;
 SCOP_GainHP = 5 ;
 
@@ -52,8 +52,8 @@ SCOP_GainHP = 5 ;
 var i =1;
 for( i = 1 ; i &lt;= 13 ; i++ )
     {
-    COP_Def[i]  = 110;
-    SCOP_Def[i] = 120;
+    COP_Def[i]  = 120;
+    SCOP_Def[i] = 130;
     }
 
 </string>

@@ -36,18 +36,18 @@ name = "anti-radio" ;
 
 //COP and SCOP Varialbes
 
-COP_Bar     = 0 ;       //number of charged stars required to activate CO metre
+COP_Bar     = 3 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
-SCOP_Bar    = 7 ;
+SCOP_Bar    = 4 ;
 SCOP_on     = false ;   //SCOP switch
 
 //anti-radio
 COP_Disrupt = 1;
-SCOP_Disrupt = 2;
+SCOP_Disrupt = 3;
 
-COP_DisruptDamage = 3;
-SCOP_DisruptDamage = 5;
+COP_DisruptDamage = 0;
+SCOP_DisruptDamage = 0;
  
 </string>
           </argument>

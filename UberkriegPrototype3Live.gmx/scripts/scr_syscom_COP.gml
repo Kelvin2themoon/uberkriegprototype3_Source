@@ -18,9 +18,12 @@ with (obj_unit)
         if( global.P_Turn.CO.COP_GainHP > 0 ) 
         hp += global.P_Turn.CO.COP_GainHP ;
         if hp > 10 hp = 10;
-        //move again
+        // act again
         if (global.P_Turn.CO.COP_ActAgain and isStanding and unit_index > 4) state = "idle";
+        //indirect fire act again
+        if (global.P_Turn.CO.COP_RangeMoveAgain and (unit_index = 3 or unit_index = 8 or unit_index = 12 ) and capturing = 0) state = "idle";
         }
+        //drain HP
         if( global.P_Turn.CO.COP_RadioDrainHP > 0 )
             {
             if( team != global.P_Turn.team and global.rangeCheck[x div 24, y div 24].sprite_index = spr_rangecheck_gold)

@@ -63,10 +63,10 @@ D2D_CannotAttach = true;
 D2D_OfficerBoost = true; 
 D2D_Boarded = 180;  //officer on board
 D2D_COZone = 140;   //in  officer unit radio range
-COP_RadioDrainHP = 2;
-SCOP_RadioDrainHP = 0;
-COP_Promote = false;
-SCOP_Promote = true;
+COP_RadioDrainHP = 0;
+SCOP_RadioDrainHP = 2;
+COP_Promote = true;
+SCOP_Promote = false;
 
 
 

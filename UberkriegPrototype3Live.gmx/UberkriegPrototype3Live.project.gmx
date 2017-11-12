@@ -656,6 +656,7 @@
       <object>objects\obj_CO_9</object>
       <object>objects\obj_CO_10</object>
       <object>objects\obj_CO_11</object>
+      <object>objects\Obj_CO_12</object>
     </objects>
   </objects>
   <timelines name="timelines">

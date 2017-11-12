@@ -54,8 +54,8 @@ COFX_HiddenHP       = true ; //includes fuel and ammo
 COFX_PerfectVision  = true ;
 COFX_DeployDummy    = true ;
 
-COP_DeployDummy = 3;
-SCOP_DeployDummy = 7;
+COP_DeployDummy = 2;
+SCOP_DeployDummy = 5;
 
 //generic defence boost
 var i =1;
