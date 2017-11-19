@@ -4,6 +4,9 @@
 var damage = 0 ;
 var cleave_check = false;
 
+var atk_luck_rng = 9;
+var def_luck_rng = 9;
+
 //reset captue
 if (global.acting_unit_moved) global.acting_unit.capturing  = 0;
 
@@ -13,7 +16,7 @@ if (global.acting_unit.name = "Land Cruiser" and global.engage_type = 1 and abs(
     // damage using secondary weapon
     damage =
     (scr_damageCalculator(global.acting_unit, global.target_unit, obj_map.terrains[global.target_unit.x div 24, global.target_unit.y div 24].cover, 2)
-    + random(global.acting_unit.hp))
+    + irandom(atk_luck_rng))
     div 10
     //check if damage is over HP
     if ( damage > global.target_unit.hp ) damage = global.target_unit.hp;
@@ -46,7 +49,7 @@ else
     {    
     damage = 
     (scr_damageCalculator(global.acting_unit, global.target_unit, obj_map.terrains[global.target_unit.x div 24, global.target_unit.y div 24].cover, global.engage_type)
-    + random(global.acting_unit.hp))
+    + irandom(atk_luck_rng))
     div 10 ;
     
     //check if damage is over HP
@@ -100,7 +103,7 @@ else if (global.target_unit.dummy = false )
         //damage using secondary weapon counter attack
         damage =
         (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 2)
-        + random(global.acting_unit.hp)) div 10;
+        + irandom(def_luck_rng)) div 10;
         //check if damage > hp
         if (damage > global.acting_unit.hp) damage = global.acting_unit.hp ;
         //inflict damage
@@ -171,7 +174,7 @@ else if (global.target_unit.dummy = false )
                     //damage using secondary weapon (counter attack)
                     damage =
                     (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 2)
-                    + random(global.acting_unit.hp)) div 10;
+                    + irandom(def_luck_rng)) div 10;
                                                 
                                                 
                     //check if damage > hp
@@ -206,7 +209,7 @@ else if (global.target_unit.dummy = false )
                     //damage unsing primary weapon (counter attack)
                     damage = 
                     (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 1)
-                    + random(global.target_unit.hp)) div 10;
+                    + irandom(def_luck_rng)) div 10;
                     
                     //ammo consume
                     global.target_unit.ammo -=1;                
@@ -241,7 +244,7 @@ else if (global.target_unit.dummy = false )
                     //damage unitg primary weapon
                      damage = 
                      (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 1)
-                     + random(global.target_unit.hp)) div 10;
+                     + irandom(def_luck_rng)) div 10;
                       global.target_unit.ammo -=1;
                       
                       //check if damage > hp
@@ -275,7 +278,7 @@ else if (global.target_unit.dummy = false )
                 // damage by secondary weapon
                 damage = 
                 (scr_damageCalculator(global.target_unit, global.acting_unit,obj_map.terrains[global.acting_unit.x div 24, global.acting_unit.y div 24].cover, 2)
-                + random(global.acting_unit.hp)) div 10;
+                + irandom(def_luck_rng)) div 10;
                 
                 //check if damage > hp
                 if (damage > global.acting_unit.hp) damage = global.acting_unit.hp ;              
