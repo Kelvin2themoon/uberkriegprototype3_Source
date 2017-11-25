@@ -67,8 +67,12 @@ with obj_unit
     if (ownership = global.P_Turn.number) global.P_Turn.unit_count += 1;
     if isStanding state = "idle";
     if isDisrupted state = "exhaust";
-    if (isHidden and ownership = global.P_Turn.number) {fuel -= 5; show_debug_message("hidden fuel consum");
-    }
+    if (ownership = global.P_Turn.number) 
+        {
+        if(isHidden)fuel -= 5; show_debug_message("hidden fuel consum");
+        fuel += global.P_Turn.CO.D2D_Fuel_R[unit_index];
+        if (fuel &gt; max_fuel) fuel = max_fuel;        
+        }
     
     if ( obj_map.terrains[ x div 24, y div 24].isProperty )
         {
@@ -76,7 +80,7 @@ with obj_unit
             {
             //repair disrupt
             if (isDisrupted and ownership = global.P_Turn.number) isDisrupted = false; 
-           //HP UP
+            //HP UP
             if( hp &gt;= 10 - other.RepairAmmount and !dummy and hp &lt;10)
                 {
                 global.P_Turn.funds -= (cost div 10)*(10 -hp)*( other.RepairCostPercent/100);

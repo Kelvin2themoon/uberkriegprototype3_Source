@@ -8,7 +8,7 @@ tempV_Y = 0;
 
 radio_range = target.radio
 
-
+//adjust radio range for CO effects, units only)
 with( obj_CO_0 )
     {
     if( ownership = other.target.ownership and object_is_ancestor(other.target.object_index, obj_unit) )

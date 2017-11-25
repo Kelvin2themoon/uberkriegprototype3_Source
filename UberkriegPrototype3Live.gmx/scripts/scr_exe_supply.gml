@@ -5,13 +5,18 @@ with (global.target_unit)
     fuel = max_fuel;
     isDisrupted = false;
     if name != "A.P.C." ammo = max_ammo;
-    //special CO ability
+    //special CO ability APC Repair, assums number is 1 (for now)
     if( global.P_Turn.CO.COFX_APC_Repair > 0
     and global.target_unit.hp <10 
-    and global.target_unit.dummy = false)
+    and global.target_unit.dummy = false
+    and (global.target_unit.cost div 10) <= global.P_Turn.funds )
         {
         hp += global.P_Turn.CO.COFX_APC_Repair;
-        if hp > 10 hp = 10;
+        if (hp > 10)
+            {
+            hp = 10;
+            }
+        else global.P_Turn.funds -= (global.target_unit.cost div 10);
         }
     }
 

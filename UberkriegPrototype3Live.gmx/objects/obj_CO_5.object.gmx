@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 06: Capture+
+            <string>///CO 05: Capture+
 
 event_inherited();
 
@@ -36,7 +36,7 @@ name = "infantry+" ;
 
 //COP and SCOP Varialbes
 
-COP_Bar     = 3 ;       //number of charged stars required to activate CO metre
+COP_Bar     = 2 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
 SCOP_Bar    = 5 ;
@@ -44,20 +44,28 @@ SCOP_on     = false ;   //SCOP switch
 
 //individual unit stats
 
-for ( i = 0 ; i &lt;= 4 ; i += 1)
+for ( i = 0 ; i &lt; 4 ; i += 1)
     {
-    D2D_Atk[i]   = 130;
+    D2D_Atk[i]   = 120;
     D2D_Def[i]   = 110;
-    D2D_Mov[i]   = 0  ;
+    D2D_Mov[i]   = 1  ;
     
-    COP_Atk[i]   = 150;
-    COP_Def[i]   = 120;
-    COP_Mov[i]   = 1  ;
+    D2D_Fuel_R[i] = 1  ;
     
-    SCOP_Atk[i]  = 180;
+    COP_Atk[i]   = 50 ;
+    COP_Def[i]   = 110;
+    COP_Mov[i]   = 0  ;
+    COP_ActAgn[i]= true;
+    
+    SCOP_Atk[i]  = 190;
     SCOP_Def[i]  = 120;
-    SCOP_Mov[i]  = 2  ;
+    SCOP_Mov[i]  = 0  ;
+    SCOP_ActAgn[i]= true;
     }
+    
+    //remove attack for COP
+    COP_Rng[3] = -3;
+    
     
 for ( i = 0 ; i &lt;= 13 ; i += 1)
     {
@@ -77,8 +85,9 @@ D2D_Atk[11] = 80;
 D2D_Atk[13] = 80;
 
 //Capture ability
-D2D_AdvanceCapture  = true; //capture 1.5x
-SCOP_PerfectCapture = true; //victory march
+D2D_AdvanceCapture  = true ; //capture 1.5x
+SCOP_CapAgain       = true ; // allow capturing units to act again
+SCOP_PerfectCapture = false; //victory march
  
 </string>
           </argument>

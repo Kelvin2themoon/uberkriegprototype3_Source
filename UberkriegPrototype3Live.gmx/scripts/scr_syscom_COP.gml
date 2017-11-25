@@ -19,10 +19,12 @@ with (obj_unit)
         hp += global.P_Turn.CO.COP_GainHP ;
         if hp > 10 hp = 10;
         // act again
-        if (global.P_Turn.CO.COP_ActAgain and isStanding and unit_index > 4) state = "idle";
+        //if (global.P_Turn.CO.COP_ActAgain and isStanding and unit_index > 4) state = "idle";
         //indirect fire act again
-        if (global.P_Turn.CO.COP_RangeMoveAgain and (unit_index = 3 or unit_index = 8 or unit_index = 12 ) and capturing = 0) state = "idle";
-        }
+        //if (global.P_Turn.CO.COP_RangeMoveAgain and (unit_index = 3 or unit_index = 8 or unit_index = 12 ) and capturing = 0) state = "idle";
+        
+        //NEW!! replace act and move again with Act_Agn swith fire range to zero if not want attack, capture must be turned off manually
+        if (global.P_Turn.CO.COP_ActAgn[unit_index] and capturing = 0 and !isDisrupted and isStanding) state = "idle";
         //drain HP
         if( global.P_Turn.CO.COP_RadioDrainHP > 0 )
             {
@@ -32,6 +34,7 @@ with (obj_unit)
                 if( hp < 1 ) hp = 1;
                 }
             }
+        }
     }
     
 

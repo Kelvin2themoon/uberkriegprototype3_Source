@@ -127,6 +127,68 @@
         <sprite>sprites\spr_commandpost_clear</sprite>
       </sprites>
     </sprites>
+    <sprites name="Units">
+      <sprites name="P1">
+        <sprite>sprites\spr_LightInfantry_P1</sprite>
+        <sprite>sprites\spr_HeavyInfantry_P1</sprite>
+        <sprite>sprites\spr_LongGun_P1</sprite>
+        <sprite>sprites\spr_Officer_P1</sprite>
+        <sprite>sprites\spr_Recon_P1</sprite>
+        <sprite>sprites\spr_APC_P1</sprite>
+        <sprite>sprites\spr_LightTank_P1</sprite>
+        <sprite>sprites\spr_Artillery_P1</sprite>
+        <sprite>sprites\spr_AA_P1</sprite>
+        <sprite>sprites\spr_CovertOp_P1</sprite>
+        <sprite>sprites\spr_HeavyTank_P1</sprite>
+        <sprite>sprites\spr_Rocket_P1</sprite>
+        <sprite>sprites\spr_LandCruiser_P1</sprite>
+      </sprites>
+      <sprites name="P2">
+        <sprite>sprites\spr_LightInfantry_P2</sprite>
+        <sprite>sprites\spr_HeavyInfantry_P2</sprite>
+        <sprite>sprites\spr_LongGun_P2</sprite>
+        <sprite>sprites\spr_Officer_P2</sprite>
+        <sprite>sprites\spr_Recon_P2</sprite>
+        <sprite>sprites\spr_APC_P2</sprite>
+        <sprite>sprites\spr_LightTank_P2</sprite>
+        <sprite>sprites\spr_Artillery_P2</sprite>
+        <sprite>sprites\spr_AA_P2</sprite>
+        <sprite>sprites\spr_CovertOp_P2</sprite>
+        <sprite>sprites\spr_HeavyTank_P2</sprite>
+        <sprite>sprites\spr_Rocket_P2</sprite>
+        <sprite>sprites\spr_LandCruiser_P2</sprite>
+      </sprites>
+      <sprites name="P3">
+        <sprite>sprites\spr_LightInfantry_P3</sprite>
+        <sprite>sprites\spr_HeavyInfantry_P3</sprite>
+        <sprite>sprites\spr_LongGun_P3</sprite>
+        <sprite>sprites\spr_Officer_P3</sprite>
+        <sprite>sprites\spr_Recon_P3</sprite>
+        <sprite>sprites\spr_APC_P3</sprite>
+        <sprite>sprites\spr_LightTank_P3</sprite>
+        <sprite>sprites\spr_Artillery_P3</sprite>
+        <sprite>sprites\spr_AA_P3</sprite>
+        <sprite>sprites\spr_CovertOp_P3</sprite>
+        <sprite>sprites\spr_HeavyTank_P3</sprite>
+        <sprite>sprites\spr_Rocket_P3</sprite>
+        <sprite>sprites\spr_LandCruiser_P3</sprite>
+      </sprites>
+      <sprites name="P4">
+        <sprite>sprites\spr_LightInfantry_P4</sprite>
+        <sprite>sprites\spr_HeavyInfantry_P4</sprite>
+        <sprite>sprites\spr_LongGun_P4</sprite>
+        <sprite>sprites\spr_Officer_P4</sprite>
+        <sprite>sprites\spr_Recon_P4</sprite>
+        <sprite>sprites\spr_APC_P4</sprite>
+        <sprite>sprites\spr_LightTank_P4</sprite>
+        <sprite>sprites\spr_AA_P4</sprite>
+        <sprite>sprites\spr_Artillery_P4</sprite>
+        <sprite>sprites\spr_CovertOp_P4</sprite>
+        <sprite>sprites\spr_HeavyTank_P4</sprite>
+        <sprite>sprites\spr_Rocket_P4</sprite>
+        <sprite>sprites\spr_LandCruiser_P4</sprite>
+      </sprites>
+    </sprites>
     <sprites name="UI">
       <sprites name="Basic">
         <sprites name="Cursors">
@@ -319,68 +381,6 @@
         </sprites>
       </sprites>
       <sprite>sprites\spr_factionIcon_square</sprite>
-    </sprites>
-    <sprites name="Units">
-      <sprites name="P1">
-        <sprite>sprites\spr_LightInfantry_P1</sprite>
-        <sprite>sprites\spr_HeavyInfantry_P1</sprite>
-        <sprite>sprites\spr_LongGun_P1</sprite>
-        <sprite>sprites\spr_Officer_P1</sprite>
-        <sprite>sprites\spr_Recon_P1</sprite>
-        <sprite>sprites\spr_APC_P1</sprite>
-        <sprite>sprites\spr_LightTank_P1</sprite>
-        <sprite>sprites\spr_Artillery_P1</sprite>
-        <sprite>sprites\spr_AA_P1</sprite>
-        <sprite>sprites\spr_CovertOp_P1</sprite>
-        <sprite>sprites\spr_HeavyTank_P1</sprite>
-        <sprite>sprites\spr_Rocket_P1</sprite>
-        <sprite>sprites\spr_LandCruiser_P1</sprite>
-      </sprites>
-      <sprites name="P2">
-        <sprite>sprites\spr_LightInfantry_P2</sprite>
-        <sprite>sprites\spr_HeavyInfantry_P2</sprite>
-        <sprite>sprites\spr_LongGun_P2</sprite>
-        <sprite>sprites\spr_Officer_P2</sprite>
-        <sprite>sprites\spr_Recon_P2</sprite>
-        <sprite>sprites\spr_APC_P2</sprite>
-        <sprite>sprites\spr_LightTank_P2</sprite>
-        <sprite>sprites\spr_Artillery_P2</sprite>
-        <sprite>sprites\spr_AA_P2</sprite>
-        <sprite>sprites\spr_CovertOp_P2</sprite>
-        <sprite>sprites\spr_HeavyTank_P2</sprite>
-        <sprite>sprites\spr_Rocket_P2</sprite>
-        <sprite>sprites\spr_LandCruiser_P2</sprite>
-      </sprites>
-      <sprites name="P3">
-        <sprite>sprites\spr_LightInfantry_P3</sprite>
-        <sprite>sprites\spr_HeavyInfantry_P3</sprite>
-        <sprite>sprites\spr_LongGun_P3</sprite>
-        <sprite>sprites\spr_Officer_P3</sprite>
-        <sprite>sprites\spr_Recon_P3</sprite>
-        <sprite>sprites\spr_APC_P3</sprite>
-        <sprite>sprites\spr_LightTank_P3</sprite>
-        <sprite>sprites\spr_Artillery_P3</sprite>
-        <sprite>sprites\spr_AA_P3</sprite>
-        <sprite>sprites\spr_CovertOp_P3</sprite>
-        <sprite>sprites\spr_HeavyTank_P3</sprite>
-        <sprite>sprites\spr_Rocket_P3</sprite>
-        <sprite>sprites\spr_LandCruiser_P3</sprite>
-      </sprites>
-      <sprites name="P4">
-        <sprite>sprites\spr_LightInfantry_P4</sprite>
-        <sprite>sprites\spr_HeavyInfantry_P4</sprite>
-        <sprite>sprites\spr_LongGun_P4</sprite>
-        <sprite>sprites\spr_Officer_P4</sprite>
-        <sprite>sprites\spr_Recon_P4</sprite>
-        <sprite>sprites\spr_APC_P4</sprite>
-        <sprite>sprites\spr_LightTank_P4</sprite>
-        <sprite>sprites\spr_AA_P4</sprite>
-        <sprite>sprites\spr_Artillery_P4</sprite>
-        <sprite>sprites\spr_CovertOp_P4</sprite>
-        <sprite>sprites\spr_HeavyTank_P4</sprite>
-        <sprite>sprites\spr_Rocket_P4</sprite>
-        <sprite>sprites\spr_LandCruiser_P4</sprite>
-      </sprites>
     </sprites>
     <sprites name="Debug">
       <sprite>sprites\spr_DebugStart</sprite>

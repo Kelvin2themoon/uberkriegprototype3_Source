@@ -40,7 +40,7 @@ COP_Bar     = 3 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
 
-SCOP_Bar    = 5 ;
+SCOP_Bar    = 4 ;
 SCOP_on     = false ;   //SCOP switch
 
 //passive abilities, COP, and SCOP
@@ -48,17 +48,23 @@ D2D_Radio   = 1 ;
 COP_Radio   = 1 ;
 SCOP_Radio  = 2 ;
 
+var i = 4;
 //eagle skills
-COP_ActAgain = true;
-SCOP_ActAgain = true;
+//COP_ActAgain = true;
+//SCOP_ActAgain = true;
 
 //generic defence boost
-var i =1;
-for( i = 1 ; i &lt;= 13 ; i++ )
+var i = 5;
+for( i = 5 ; i &lt;= 13 ; i++ )
     {
     COP_Def[i]  = 110;
+    COP_Atk[i]  = 50 ;
     SCOP_Def[i] = 110;
+    
+    COP_ActAgn[i] = true;
+    SCOP_ActAgn[i] = true;
     }
+    
 
 
 

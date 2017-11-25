@@ -806,8 +806,8 @@ global.disrupt      = false;
           <argument>
             <kind>1</kind>
             <string>///animate checker times
-
 global.rangeCheckerFramIndex +=1;
+if (global.rangeCheckerFramIndex &gt; 121 ) global.rangeCheckerFramIndex =  0;
 </string>
           </argument>
         </arguments>

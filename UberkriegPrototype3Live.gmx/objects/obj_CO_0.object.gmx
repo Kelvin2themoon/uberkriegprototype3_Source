@@ -80,19 +80,27 @@ for ( i = 0 ; i &lt;= 13 ; i += 1)
     D2D_Def[i]   = 100;
     D2D_Mov[i]   = 0  ;
     D2D_Rng[i]   = 0  ;
+    D2D_Rdo[i]   = 0  ;
     D2D_Cost[i]  = global.cost[i];
+    D2D_Fuel_R[i]= 0  ; //fuel Recovery on Upkeep
     
-    COP_Atk[i]   = 100;
-    COP_Def[i]   = 100;
-    COP_Mov[i]   = 0  ;
-    COP_Rng[i]   = 0  ;
-    COP_Cost[i]  = global.cost[i];
+    COP_Atk[i]      = 100;
+    COP_Def[i]      = 110; ///generic boost to all COs
+    COP_Mov[i]      = 0  ;
+    COP_Rng[i]      = 0  ;
+    COP_Rdo[i]      = 0  ;
+    COP_MovAgn[i]   = false;
+    COP_ActAgn[i]   = false;
+    COP_Cost[i]     = global.cost[i];
     
-    SCOP_Atk[i]  = 100;
-    SCOP_Def[i]  = 100;
-    SCOP_Mov[i]  = 0  ;
-    SCOP_Rng[i]   = 0 ;
-    SCOP_Cost[i]  = global.cost[i];
+    SCOP_Atk[i]      = 100;
+    SCOP_Def[i]      = 110;//generic boost to all COs
+    SCOP_Mov[i]      = 0  ;
+    SCOP_Rng[i]      = 0 ;
+    SCOP_Rdo[i]      = 0  ;
+    SCOP_MovAgn[i]   = false;
+    SCOP_ActAgn[i]   = false;
+    SCOP_Cost[i]     = global.cost[i];
     }
  
  
@@ -125,9 +133,10 @@ SCOP_Push = false;
 //infantry+ aka capture+
 D2D_AdvanceCapture  = false; //capture 1.5x
 SCOP_PerfectCapture = false; //victory march
+SCOP_CapAgain       = false; //cap again
 
 //Range +
- COP_RangeMoveAgain = false;
+COP_RangeMoveAgain = false;
 SCOP_RangeMoveAgain = false;
 
 //Atk &amp; mov+, cleave, smoke screen

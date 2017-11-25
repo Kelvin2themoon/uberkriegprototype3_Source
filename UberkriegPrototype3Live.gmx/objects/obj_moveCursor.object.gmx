@@ -307,7 +307,7 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached
-                    if( (path_total &gt; global.acting_unit.move_points or path_total &gt; global.acting_unit.fuel) or move_out){
+                    if( (path_total &gt; global.acting_unit.move_points + global.P_Turn.CO.D2D_Mov[global.acting_unit.unit_index] or path_total &gt; global.acting_unit.fuel) or move_out){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
@@ -337,7 +337,7 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached
-                    if( (path_total &gt; global.acting_unit.move_points or path_total &gt; global.acting_unit.fuel) or move_out){
+                    if( (path_total &gt; global.acting_unit.move_points + global.P_Turn.CO.D2D_Mov[global.acting_unit.unit_index] or path_total &gt; global.acting_unit.fuel) or move_out){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
@@ -368,7 +368,7 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached
-                   if( (path_total &gt; global.acting_unit.move_points or path_total &gt; global.acting_unit.fuel) or move_out){
+                   if( (path_total &gt; global.acting_unit.move_points + global.P_Turn.CO.D2D_Mov[global.acting_unit.unit_index] or path_total &gt; global.acting_unit.fuel) or move_out){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
@@ -399,7 +399,7 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached (re calculate path)
-                    if( (path_total &gt; global.acting_unit.move_points or path_total &gt; global.acting_unit.fuel) or move_out){
+                    if( (path_total &gt; global.acting_unit.move_points + global.P_Turn.CO.D2D_Mov[global.acting_unit.unit_index] or path_total &gt; global.acting_unit.fuel) or move_out){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
@@ -657,7 +657,7 @@ if( keyboard_check_pressed( global.keyCONFIRM) )
                         global.engage = true;
                         global.engage_type = 1 ;
                         }
-                    } 
+                    }
                 }
             }
         }

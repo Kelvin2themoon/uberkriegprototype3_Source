@@ -64,8 +64,8 @@ I'm not sure if i will use this object for the actual game
             <string>///Initialize
 
 name = "Protoland";
-global.mapW = 31; // map height in terms of tiles
-global.mapH = 17;// map width in terms of tiles
+global.mapW = 50; // map height in terms of tiles
+global.mapH = 50;// map width in terms of tiles
 
 //global variables for allowing scrolling for both map editor and in-game, false if the map is too small
 global.canScroll_x = true;
