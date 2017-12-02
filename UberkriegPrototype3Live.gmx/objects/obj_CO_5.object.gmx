@@ -47,14 +47,15 @@ SCOP_on     = false ;   //SCOP switch
 for ( i = 0 ; i &lt; 4 ; i += 1)
     {
     D2D_Atk[i]   = 120;
-    D2D_Def[i]   = 110;
+    D2D_Def[i]   = 120;
     D2D_Mov[i]   = 1  ;
     
     D2D_Fuel_R[i] = 1  ;
     
-    COP_Atk[i]   = 50 ;
-    COP_Def[i]   = 110;
+    COP_Atk[i]   = 100 ;
+    COP_Def[i]   = 120;
     COP_Mov[i]   = 0  ;
+    COP_MovAgn[i]= true;//these units cannot attack until end of turn
     COP_ActAgn[i]= true;
     
     SCOP_Atk[i]  = 190;

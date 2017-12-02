@@ -45,8 +45,7 @@ ds_list_add(menu_content,"endturn");
 
 row_max = ds_list_size(menu_content) - 1 ; 
 
-//left side
-if (x &gt; view_xview+view_wview -216) x -= 192;
+
 
 
 

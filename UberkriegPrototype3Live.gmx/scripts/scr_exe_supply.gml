@@ -9,14 +9,14 @@ with (global.target_unit)
     if( global.P_Turn.CO.COFX_APC_Repair > 0
     and global.target_unit.hp <10 
     and global.target_unit.dummy = false
-    and (global.target_unit.cost div 10) <= global.P_Turn.funds )
+    and (global.target_unit.cost div 20) <= global.P_Turn.funds )
         {
         hp += global.P_Turn.CO.COFX_APC_Repair;
         if (hp > 10)
             {
             hp = 10;
             }
-        else global.P_Turn.funds -= (global.target_unit.cost div 10);
+        else global.P_Turn.funds -= (global.target_unit.cost div 20);
         }
     }
 

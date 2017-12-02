@@ -46,7 +46,7 @@ isHidden    = false; // consumes 5 fuel when true, see upkeep
 
 //unit static variables
 charge      = 10; //unit contributes to CO metre per HP
-cost        = 6000;
+cost        = 6000;//moved to master controls object
 move_type   = "Tracks"; // camps and space please
 move_points = 9;
 vision      = 2;

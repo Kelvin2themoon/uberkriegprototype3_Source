@@ -176,7 +176,7 @@ global.cost[08] =  7000 ; // Artillery
 global.cost[09] =  6000 ; //AA / IFV
 global.cost[10] =  8000 ; //Covert Op
 global.cost[11] = 15000 ; //Heavy Tank
-global.cost[12] = 16000 ; //Rocket
+global.cost[12] = 12000 ; //Rocket
 global.cost[13] = 32000 ; //Land Cuiser
 
 </string>
