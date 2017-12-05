@@ -49,6 +49,19 @@ on_path = false;
 image_speed = 0;
 image_alpha = 0.7;
 
+//initiate variables for draing radio boarder 
+//these are indexes from 4 different sprite put togethert to for the boarder graphic
+//set with update radio boarder script
+
+rb_edge     = 0;
+rb_corner   = 0;
+rb_fill_v   = 0;
+rb_fill_h   = 0;
+
+posx = x div 24;
+posy = y div 24;
+
+
 
 
 </string>
@@ -125,6 +138,12 @@ else on_path = false;
             <string>///draw Order
 
 if (sprite_index != -1) draw_self();
+
+//draw radio boarder
+draw_sprite(spr_radio_boarder_edge,     rb_edge,    x,y);
+draw_sprite(spr_radio_boarder_corner,   rb_corner,  x,y);
+draw_sprite(spr_radio_boarder_fill_v,   rb_fill_v,  x,y);
+draw_sprite(spr_radio_boarder_fill_h,   rb_fill_h,  x,y);
 
 //draw unit stats
 

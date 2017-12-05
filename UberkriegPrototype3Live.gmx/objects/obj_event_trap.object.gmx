@@ -87,6 +87,7 @@ if (step_counter = 10){
     }
 if (step_counter = 24){
     // reactivate main phaze UI
+    
     instance_activate_object(obj_battleCursor);
     with obj_battleCursor{
         x = global.acting_unit.x;

@@ -811,6 +811,10 @@ if keyboard_check_pressed(global.keyCONFIRM)
                 scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
                 //update vision
                 scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
+                //update Radio Boarder
+                scr_globalRadioCheck();
+                scr_update_radioBoarder();
+                scr_rangeCheck_reset();
 
                 
                 //Close deploy Window

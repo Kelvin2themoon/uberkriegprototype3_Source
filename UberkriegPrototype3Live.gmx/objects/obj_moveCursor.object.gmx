@@ -68,7 +68,12 @@ global.acting_unit.depth = ACTIVE_UNIT;
 global.origin =obj_map.terrains[moveOriginX,moveOriginY];
 //initiate tartget and destination
 global.target_unit = noone;
- 
+
+///update Radio Boarder
+
+scr_globalRadioCheck();
+scr_update_radioBoarder();
+
 
 //NOTE: set target unit and destination when appropriate
 
@@ -860,8 +865,10 @@ if  (keyboard_check_pressed(global.keyCANCEL))
     
     //reset standing
     scr_updateStanding_global();
-    
-    
+    //update Radio Boarder
+    scr_globalRadioCheck();
+    scr_update_radioBoarder();
+    scr_rangeCheck_reset();
     }
 </string>
           </argument>

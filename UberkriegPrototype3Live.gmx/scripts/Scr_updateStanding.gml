@@ -9,8 +9,10 @@ standteam  = standingPlayer.team;
 //create Q for checking
 standing_Q = ds_queue_create();
 
-//add commanding units and properties
-with (obj_unit)     if(team = other.standingPlayer.team and isCommander and scr_inBound(x div 24, y div 24) and isDisrupted = false) ds_queue_enqueue(other.standing_Q, obj_map.units[ x div 24, y div 24 ]);
+//check acting unit id to make check for exception
+
+//add commanding units and properties (edit, it unit is commander, make sure it is in units array)
+with (obj_unit)     if(team = other.standingPlayer.team and isCommander and scr_inBound(x div 24, y div 24) and isDisrupted = false and obj_map.units[x div 24, y div 24] !=  0)  ds_queue_enqueue(other.standing_Q, obj_map.units[ x div 24, y div 24 ]);
 with (obj_property) if(team = other.standingPlayer.team and isCommander) ds_queue_enqueue(other.standing_Q, obj_map.terrains[ x div 24, y div 24 ]);
 
 //CLEAR OFFICER ZONES

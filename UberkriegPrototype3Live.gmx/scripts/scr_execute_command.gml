@@ -44,4 +44,9 @@ scr_updateStanding_global();
 with (obj_unit) if ( !wasStanding and isStanding ) instance_create(x,y,obj_event_link);
 if !standing_unit.isStanding instance_create(standing_unit.x,standing_unit.y, obj_event_lost);
 
+//update Radio Boarder
+scr_globalRadioCheck();
+scr_update_radioBoarder();
+scr_rangeCheck_reset();
+
 

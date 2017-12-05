@@ -1072,6 +1072,10 @@ with(global.P_Turn.CO)
             <kind>1</kind>
             <string>///Debug
 
+draw_text( 12,12, string( global.rangeCheck[global.posX, global.posY].rb_edge));
+draw_text( 12,24, string( global.rangeCheck[global.posX, global.posY].rb_corner));
+
+
 //draw_text(12,48+12*2,"P2 CO Zone: " + string(global.rangeCheck[global.posX,global.posY].CO_Zone[2]));
 //draw_text(12,48+12*3,"P4 CO Zone: " + string(global.rangeCheck[global.posX,global.posY].CO_Zone[4]));
 /*
