@@ -679,7 +679,7 @@
     <constant name="UI_DEPTH_CURSOR">-66000</constant>
     <constant name="TRANS">-67000</constant>
     <constant name="UNIT_LAYRE">-2</constant>
-    <constant name="star_value">500</constant>
+    <constant name="star_value">250</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
