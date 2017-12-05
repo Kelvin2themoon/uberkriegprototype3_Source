@@ -3,6 +3,8 @@
 
 show_debug_message("Script: Execute Command");
 
+standing_unit = global.acting_unit;
+
 switch (global.action_order){
 
     case "disrupt"  :   scr_exe_disrupt();  break;
@@ -27,7 +29,19 @@ switch (global.action_order){
 //global.action_order = "wait" ;//default to wait
 
 //update radio status
+with(obj_unit)
+    {
+    if (id != other.standing_unit.id)
+        {
+        wasStanding = true;
+        if (!isStanding) wasStanding = false;
+        if (global.rangeCheck[x div 24,y div 24].sprite_index = spr_rangecheck_bluedk) wasStanding = false;
+        }
+    }
+        
 scr_updateStanding_global();
 
+with (obj_unit) if ( !wasStanding and isStanding ) instance_create(x,y,obj_event_link);
+if !standing_unit.isStanding instance_create(standing_unit.x,standing_unit.y, obj_event_lost);
 
 

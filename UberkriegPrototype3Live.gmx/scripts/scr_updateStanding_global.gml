@@ -3,6 +3,7 @@ show_debug_message("update Standing: Global");
 
 // reset all units
 with obj_unit isStanding = false ;
+
 with obj_property isStanding = false ;
 
 // create and duplicate player Q

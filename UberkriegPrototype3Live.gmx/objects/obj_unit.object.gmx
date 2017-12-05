@@ -80,6 +80,7 @@ alarm[0] = 1;
 
 //radio checking
 isStanding = false;
+wasStanding = false;//used to check if unit is linked again
 isException = false; //make exception for move check
 
 //action variables
@@ -111,6 +112,8 @@ load_B = 0;
 
 //SPECIAL: Dummy units
 dummy = false;
+
+
 
 
 
