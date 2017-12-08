@@ -535,7 +535,12 @@ global.Day = 1;
 
 //create turn change object set to start in waiting state
  instance_create(0,0,obj_starting);
- obj_starting.state = "waiting"; 
+ obj_starting.state = "waiting";
+ 
+//radio boarder for first player 
+scr_globalRadioCheck();
+scr_update_radioBoarder();
+scr_rangeCheck_reset();
  
 //vision reset and update for first player
 scr_globalVisionReset();

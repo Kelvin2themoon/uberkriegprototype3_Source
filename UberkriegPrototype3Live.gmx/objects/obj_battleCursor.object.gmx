@@ -1074,6 +1074,8 @@ with(global.P_Turn.CO)
 
 draw_text( 12,12, string( global.rangeCheck[global.posX, global.posY].rb_edge));
 draw_text( 12,24, string( global.rangeCheck[global.posX, global.posY].rb_corner));
+draw_text( 12,36, string( global.rangeCheck[global.posX, global.posY].rb_fill_v));
+draw_text( 12,48, string( global.rangeCheck[global.posX, global.posY].rb_fill_h));
 
 
 //draw_text(12,48+12*2,"P2 CO Zone: " + string(global.rangeCheck[global.posX,global.posY].CO_Zone[2]));

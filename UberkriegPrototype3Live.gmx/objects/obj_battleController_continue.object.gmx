@@ -765,7 +765,13 @@ global.Day = 1;
 
 //create turn change object set to start in waiting state
  instance_create(0,0,obj_starting);
- obj_starting.state = "waiting"; 
+ obj_starting.state = "waiting";
+ 
+//radio boarder for first player 
+scr_globalRadioCheck();
+scr_update_radioBoarder();
+scr_rangeCheck_reset();
+  
  
 //vision reset and update for first player
 scr_globalVisionReset();
@@ -1010,6 +1016,26 @@ if (global.P4_in_play)
         }
     }
 </string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
           </argument>
         </arguments>
       </action>

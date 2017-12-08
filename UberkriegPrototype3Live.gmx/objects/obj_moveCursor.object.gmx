@@ -31,6 +31,8 @@
 with obj_path_node instance_destroy();
 ds_priority_clear(global.move_order);
 
+
+
 //deactivate battle cursor
 instance_deactivate_object(obj_battleCursor);
 
@@ -69,10 +71,7 @@ global.origin =obj_map.terrains[moveOriginX,moveOriginY];
 //initiate tartget and destination
 global.target_unit = noone;
 
-///update Radio Boarder
 
-scr_globalRadioCheck();
-scr_update_radioBoarder();
 
 
 //NOTE: set target unit and destination when appropriate
@@ -207,10 +206,19 @@ if ( global.P_Turn.CO.SCOP_on ) fire_range += global.P_Turn.CO.SCOP_Rng[global.a
           <argument>
             <kind>1</kind>
             <string>///check if any unit has been lost radio contact
-
+scr_rangeCheck_reset();
 with (obj_unit) wasStanding = isStanding;
 scr_updateStanding_global();
+//update radio boarder
+scr_globalRadioCheck();
+scr_update_radioBoarder();
+scr_rangeCheck_reset();
+scr_updateLocalMove(global.acting_unit);
+
+
 global.acting_unit.isStanding= true;
+
+
 
 with (obj_unit)
     {
@@ -894,10 +902,18 @@ if  (keyboard_check_pressed(global.keyCANCEL))
             <kind>1</kind>
             <string>///Debug
 
+draw_text( 12,12, string( global.rangeCheck[global.posX, global.posY].rb_edge));
+draw_text( 12,24, string( global.rangeCheck[global.posX, global.posY].rb_corner));
+draw_text( 12,36, string( global.rangeCheck[global.posX, global.posY].rb_fill_h));
+draw_text( 12,48, string( global.rangeCheck[global.posX, global.posY].rb_fill_v));
+
 //draw_text(12,48+12*2,"P2 CO Zone: " + string(global.rangeCheck[global.posX,global.posY].CO_Zone[2]));
 //draw_text(12,48+12*3,"P4 CO Zone: " + string(global.rangeCheck[global.posX,global.posY].CO_Zone[4]));
 
 //draw_text(12, 240, string(global.acting_unit.team) + "/" + string(global.acting_unit.ownership));
+draw_text(12, 240, string(global.acting_unit.team) + ":" + string(global.acting_unit.name));
+draw_text(12, 268, string(global.acting_unit.team) + ":" + string(obj_map.units[global.posX,global.posY]));
+
 
 
 /*
