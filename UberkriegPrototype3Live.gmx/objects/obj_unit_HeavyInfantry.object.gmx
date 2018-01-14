@@ -36,7 +36,7 @@ state = "idle" //describe stat of animation
 //Unit stats
 hp      = 10;
 fuel    = 15;
-ammo    = 3; // no primary weapon
+ammo    =  3; // no primary weapon
 isDisrupted = false; //true when hit by Covert.Op disrupter
 //max fuel &amp; ammo
 max_fuel    = 15;

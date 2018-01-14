@@ -134,6 +134,7 @@ move_out = false;
 
 
 
+
 </string>
           </argument>
         </arguments>
@@ -792,7 +793,7 @@ global.unit_check = obj_map.units[global.posX,global.posY];
 
 
 radioAssistRange = global.acting_unit.radio ;
-radioAssist_sprite = spr_radioAssist_gold;
+radioAssist_sprite = spr_radioAssist_bronze;
 radio_assist_on = false;
 
 
@@ -801,7 +802,7 @@ if (scr_inBound(global.posX,global.posY))
     if (global.rangeCheck[global.posX,global.posY].sprite_index != -1 or (global.posX = moveOriginX and global.posY = moveOriginY ))
         {
         radioAssistRange = scr_getUnitRadioRange(global.acting_unit,obj_map.terrains[global.posX,global.posY]);
-        if(global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear or (global.posX = moveOriginX and global.posY = moveOriginY)) radioAssist_sprite = spr_radioAssist_gold;
+        if(global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear or (global.posX = moveOriginX and global.posY = moveOriginY)) radioAssist_sprite = spr_radioAssist_bronze;
         else radioAssist_sprite = spr_radioAssist_darkBlue;
         radio_assist_on = true;
         //check if position is occupied by a unit
@@ -812,7 +813,7 @@ if (scr_inBound(global.posX,global.posY))
             //if target unit is field officer
             if( obj_map.units[global.posX,global.posY].name = "Officer")
                 {
-                radioAssist_sprite = spr_radioAssist_gold;
+                radioAssist_sprite = spr_radioAssist_bronze;
                 }
             }
         }
@@ -901,7 +902,7 @@ if  (keyboard_check_pressed(global.keyCANCEL))
           <argument>
             <kind>1</kind>
             <string>///Debug
-
+/*
 draw_text( 12,12, string( global.rangeCheck[global.posX, global.posY].rb_edge));
 draw_text( 12,24, string( global.rangeCheck[global.posX, global.posY].rb_corner));
 draw_text( 12,36, string( global.rangeCheck[global.posX, global.posY].rb_fill_h));
@@ -949,6 +950,44 @@ draw_text(12,313, "terrain cost: " + string(scr_check_move_cost(global.acting_un
 if radio_assist_on
     {
     scr_draw_radioAssist(global.posX,global.posY,radioAssistRange,radioAssist_sprite);
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Draw Move Left
+
+if ( global.rangeCheck[global.posX,global.posY].pathority != -1 )
+    {
+    scr_draw_num( spr_num_outlined , false, path_total, x+21, y+3, 2 );    
+    //scr_draw_num( spr_num_red, true, path_total, x, y, 3 );    
+    
+    //draw_set_color(c_black);
+    //draw_text(x+1,y+1, string(path_total)); 
+    //draw_text(x+1,y+1+12, string(global.acting_unit.move_points));
+    
+    //draw_set_color(c_orange);
+    //draw_text(x,y, string(path_total)); 
+    //draw_text(x,y+12, string(global.acting_unit.move_points));
+    
+    //draw_set_color(global.c_uiWhite);
+    
     }
 </string>
           </argument>

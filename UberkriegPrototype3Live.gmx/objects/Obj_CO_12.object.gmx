@@ -31,7 +31,7 @@ event_inherited();
 
 // Initiate Parent Object and defaults
 
-index = 6 ;
+index = 12 ;
 name = "range+" 
 
 
@@ -54,49 +54,34 @@ SCOP_Atk[03]  = 150;
 SCOP_Rng[03]  = 2 ;
 
 //Artillery
-D2D_Atk[08]   = 120;
-D2D_Rng[08]   = 1  ;
-COP_Atk[08]   = 150;
-COP_Rng[08]   = 1  ;
-SCOP_Atk[08]  = 150;
-SCOP_Rng[08]  = 2 ;
+///CO 10: anti-radio+ CO
+///CO 10: anti-radio+ CO
 
-//Rocket
-D2D_Atk[12]   = 120;
-D2D_Rng[12]   = 1  ;
-COP_Atk[12]   = 150;
-COP_Rng[12]   = 1  ;
-SCOP_Atk[12]  = 150;
-SCOP_Rng[12]  = 2 ;
+event_inherited();
 
-//Land Cuiser
-D2D_Atk[13]   = 100;
-D2D_Rng[13]   = 1  ;
-COP_Atk[13]   = 100;
-COP_Rng[13]   = 1  ;
-SCOP_Atk[13]  = 100;
-SCOP_Rng[13]  = 2 ;
+// Initiate Parent Object and defaults
 
-//direct combat units Atk reduction
-D2D_Atk[01]   = 80; //infantry
-D2D_Atk[02]   = 80; //mech
-D2D_Atk[04]   = 80; //officer
-D2D_Atk[05]   = 80; //recon
-D2D_Atk[06]   = 80; //APC
-D2D_Atk[07]   = 80; //light tank
-D2D_Atk[90]   = 80; //AA
-D2D_Atk[10]   = 80; //covert op
-D2D_Atk[11]   = 80; //heavy tank
+index = 12 ;
+name = "anti-radio f" ;
 
-//generic defence boost
-var i =1;
-for( i = 1 ; i &lt;= 13 ; i++ )
-    {
-    COP_Def[i]  = 110;
-    SCOP_Def[i] = 110;
-    }
+//COP and SCOP Varialbes
 
+COP_Bar     = 3 ;       //number of charged stars required to activate CO metre
+COP_on      = false ;   //CO power switch
 
+SCOP_Bar    = 4 ;
+SCOP_on     = false ;   //SCOP switch
+
+//anti-radio
+COP_Disrupt = 1;
+SCOP_Disrupt = 2;
+
+COP_DisruptDamage = 1;
+SCOP_DisruptDamage = 2;
+
+D2D_OfficerBoost = true;
+D2D_COField      = 80; 
+ 
 </string>
           </argument>
         </arguments>

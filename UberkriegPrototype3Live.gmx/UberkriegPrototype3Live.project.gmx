@@ -203,6 +203,9 @@
           <sprite>sprites\spr_rangeAssist</sprite>
           <sprite>sprites\spr_radioAssist_darkBlue</sprite>
           <sprite>sprites\spr_cursorNumBlue</sprite>
+          <sprite>sprites\spr_radioAssist_A</sprite>
+          <sprite>sprites\spr_radioAssist_B</sprite>
+          <sprite>sprites\spr_radioAssist_bronze</sprite>
         </sprites>
         <sprites name="checks">
           <sprite>sprites\spr_rangecheck_red</sprite>
@@ -219,6 +222,7 @@
         <sprite>sprites\spr_num_red</sprite>
         <sprite>sprites\spr_num_gold</sprite>
         <sprite>sprites\spr_num_bright</sprite>
+        <sprite>sprites\spr_num_outlined</sprite>
       </sprites>
       <sprites name="MapEditor">
         <sprite>sprites\spr_grabHand</sprite>
@@ -542,6 +546,7 @@
     <font>fonts\font6</font>
     <font>fonts\font7</font>
     <font>fonts\font8</font>
+    <font>fonts\font9</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>
@@ -662,7 +667,8 @@
       <object>objects\obj_CO_9</object>
       <object>objects\obj_CO_10</object>
       <object>objects\obj_CO_11</object>
-      <object>objects\Obj_CO_12</object>
+      <object>objects\obj_CO_12</object>
+      <object>objects\obj_CO_13</object>
     </objects>
   </objects>
   <timelines name="timelines">

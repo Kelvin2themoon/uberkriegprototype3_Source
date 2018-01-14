@@ -25,42 +25,33 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 08: cost+ CO
+            <string>///CO 13: aux move CO
 
 event_inherited();
 
 // Initiate Parent Object and defaults
 
-index = 11 ;
-name = "cost+f" 
-
+index = 13 ;
+name = "aux move+ " ;
 
 //COP and SCOP Varialbes
 
-COP_Bar     = 4 ;       //number of charged stars required to activate CO metre
+COP_Bar     = 2;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
 SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
-charge = 0;
+//individual unit stats
+var i = 0
 
-var i =1;
-for( i = 1 ; i &lt;= 13 ; i++ )
+for ( i = 0 ; i &lt;= 13 ; i += 1)
     {
-    D2D_Cost[i] = global.cost[i]*(120/100);
-    D2D_Atk[i]  = 120;
-    D2D_Def[i]  = 120;
-    COP_Atk[i]  = 140;
-    COP_Def[i]  = 140;
-    SCOP_Atk[i] = 180;
-    SCOP_Def[i] = 180;
+    D2D_Mov[i]   = 1
+    COP_Mov[i]   = 1
+    SCOP_Mov[i]  = 2
     }
-    
-D2D_OfficerBoost = true;
-D2D_COField      = 80;
-
-
+ 
 </string>
           </argument>
         </arguments>

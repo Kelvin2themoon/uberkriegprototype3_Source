@@ -163,6 +163,9 @@ SCOP_Disrupt = 0;
 COP_DisruptDamage = 0;
 SCOP_DisruptDamage = 0;
 
+//Officer Debuff
+D2D_COField     = 100;
+
 
 
 

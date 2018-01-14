@@ -61,13 +61,11 @@ var extra_items = 0
 ///manage height for System menu
 if (global.acting_unit  = 0)
     {
-    if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar*1000 and global.P_Turn.CO.COP_Bar !=0 and global.P_Turn.CO.COP_on = false and global.P_Turn.CO.SCOP_on = false ) 
+    if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar* star_value and global.P_Turn.CO.COP_Bar !=0 and global.P_Turn.CO.COP_on = false and global.P_Turn.CO.SCOP_on = false ) 
     extra_items += 1;
     
-    if (global.P_Turn.CO.charge &gt;= (global.P_Turn.CO.COP_Bar*1000 + global.P_Turn.CO.SCOP_Bar*1000 )and global.P_Turn.CO.SCOP_Bar !=0 and global.P_Turn.CO.COP_on = false and global.P_Turn.CO.SCOP_on = false )  
+    if (global.P_Turn.CO.charge &gt;= (global.P_Turn.CO.COP_Bar*star_value + global.P_Turn.CO.SCOP_Bar*star_value )and global.P_Turn.CO.SCOP_Bar !=0 and global.P_Turn.CO.COP_on = false and global.P_Turn.CO.SCOP_on = false )  
     extra_items += 1;
-
-
     }
 //manage Command
 else
@@ -420,7 +418,7 @@ if ( mouse_check_button_pressed( mb_left)
           <argument>
             <kind>1</kind>
             <string>///trouble shoot
-draw_text(0,0,string(x)+" / " +string(start_x));
+//draw_text(0,0,string(x)+" / " +string(start_x));
 //draw_text(0,0, ds_list_find_value(menu_content,row));
 </string>
           </argument>

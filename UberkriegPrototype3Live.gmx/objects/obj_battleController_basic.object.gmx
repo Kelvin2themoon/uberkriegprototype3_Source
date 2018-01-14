@@ -408,7 +408,7 @@ if (global.P1_in_play){
         global.P1.CO.ownership = 1;
         //global.P1_in_play = true;
         //assign team
-        global.P1.team = 1;
+        global.P1.team = global.P1_Team
         //add cursor pose at 
         global.P1.save_cursor_pos_x = P1_x;
         global.P1.save_cursor_pos_y =P1_y;
@@ -437,7 +437,7 @@ if (global.P2_in_play){
     global.P2.CO.ownership = 2;
     //global.P2_in_play = true;
     //assign team
-    global.P2.team = 2;
+    global.P2.team = global.P2_Team;
     //add cursor pose at 
     global.P2.save_cursor_pos_x = P2_x;
     global.P2.save_cursor_pos_y = P2_y;
@@ -466,7 +466,7 @@ if(global.P3_in_play){
     global.P3.CO.ownership = 3;
     //global.P3_in_play = true;
     //assign team
-    global.P3.team = 3;
+    global.P3.team = global.P3_Team;
     //add cursor pose at
     global.P3.save_view_pos_x = view_xview[0];
     global.P3.save_view_pos_y = view_yview[0]; 
@@ -494,7 +494,7 @@ if (global.P4_in_play){
     global.P4.CO.ownership = 4;
     //global.P4_in_play = true;
     //assign team
-    global.P4.team = 4;
+    global.P4.team = global.P4_Team;
     //add cursor pose at
     global.P4.save_view_pos_x = view_xview[0];
     global.P4.save_view_pos_y = view_yview[0]; 
@@ -751,6 +751,35 @@ battleCurosrCount = 0 ;
 moveCusorCount = 0 ;
 battle_controller_count = 0;
 roomCounter = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///add player COs to an indexed array 
+
+if global.P1_in_play global.P[1] = global.P1;
+if global.P2_in_play global.P[2] = global.P2;
+if global.P3_in_play global.P[3] = global.P3;
+if global.P4_in_play global.P[4] = global.P4;
+
+
+
 </string>
           </argument>
         </arguments>

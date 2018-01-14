@@ -21,6 +21,7 @@ with (obj_property) if(team = other.standingPlayer.team and isCommander) ds_queu
 with( obj_checker_tile )
     {
     CO_Zone[other.standingPlayer.number] = false;
+    CO_Field[other.standingPlayer.number] = false;
     }
 
 //start loop
@@ -64,7 +65,13 @@ while (ds_queue_size(standing_Q) != 0 )
             if ( abs(cst_temp_x) + abs(cst_temp_y) <= broadcast_range and scr_inBound(cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y) )
                 {
                 //switch on local CO Zone
-                if( checkStandTarget.isCommander and checkStandTarget.isDisrupted = false and checkStandTarget.ownership = standingPlayer.number  ) global.rangeCheck[cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y].CO_Zone[standingPlayer.number] = true;
+                if( checkStandTarget.isCommander and checkStandTarget.isDisrupted = false and checkStandTarget.ownership = standingPlayer.number  )
+                    {
+                    
+                    global.rangeCheck[cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y].CO_Zone[standingPlayer.number] = true;
+                    global.rangeCheck[cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y].CO_Field[standingPlayer.number] = true;
+                    
+                    }
                 //check if a unit is present (must be ally and not already a commander asnd not standing)
                 if ( obj_map.units[ cst_origin_x +cst_temp_x , cst_origin_y +cst_temp_y ] != 0)
                     {

@@ -220,7 +220,7 @@
     <option_changeresolution>false</option_changeresolution>
     <option_closeesc>true</option_closeesc>
     <option_colordepth>0</option_colordepth>
-    <option_display_name>Protokrieg(v3.07G)</option_display_name>
+    <option_display_name>Protokrieg(v3.10 A)</option_display_name>
     <option_displayerrors>True</option_displayerrors>
     <option_ecma>0</option_ecma>
     <option_facebook_app_display_name></option_facebook_app_display_name>
@@ -273,7 +273,14 @@
     <option_in_app_purchase_enable>0</option_in_app_purchase_enable>
     <option_in_app_purchase_sandbox_mode>0</option_in_app_purchase_sandbox_mode>
     <option_in_app_purchase_server_url></option_in_app_purchase_server_url>
-    <option_information>Prototype(v3.09H)
+    <option_information>Prototype(v.3.09B) 
+- Radio Boarder Implemented (graphic bug present, looking into it) 
+- testing COs with field effects ( 11 &amp; 12 )
+- Mouse controle interactions  NOT UP TO DATE with new radio boardre graphics
+- team setup avaliable
+- Minor changes to unit stats
+
+Prototype(v3.09H)
 - minor UI alingment fix to syscoms
 - COP_movAgn means unit cannot engage for the rest of the turn (for CO5)
 - Rocket cost reduced to 12000 from 16000
@@ -499,15 +506,15 @@ prototype(v.3.09b)
     <option_use_fast_collision>False</option_use_fast_collision>
     <option_use_new_audio>True</option_use_new_audio>
     <option_variableerrors>False</option_variableerrors>
-    <option_version>prototype(v.3.09H)</option_version>
-    <option_version_build>8</option_version_build>
+    <option_version>prototype(v.3.10B)</option_version>
+    <option_version_build>2</option_version_build>
     <option_version_company>2theMoon</option_version_company>
     <option_version_copyright>Kelvin Tu 2017</option_version_copyright>
     <option_version_description>This is a Prototype</option_version_description>
     <option_version_major>0</option_version_major>
     <option_version_minor>3</option_version_minor>
-    <option_version_product>Uberkrieg(0.03.09H)</option_version_product>
-    <option_version_release>9</option_version_release>
+    <option_version_product>Uberkrieg(0.03.10B)</option_version_product>
+    <option_version_release>10</option_version_release>
     <option_win8_advertising_appid></option_win8_advertising_appid>
     <option_win8_advertising_enable>0</option_win8_advertising_enable>
     <option_win8_advertising_key></option_win8_advertising_key>
@@ -580,7 +587,7 @@ prototype(v.3.09b)
     <option_winUAP_wide_logo>Configs\Default\WindowsUAP\logos\WideLogo.scale-100.png</option_winUAP_wide_logo>
     <option_windowcolor>clBlack</option_windowcolor>
     <option_windows_alternate_sync_method>False</option_windows_alternate_sync_method>
-    <option_windows_build_version>8</option_windows_build_version>
+    <option_windows_build_version>2</option_windows_build_version>
     <option_windows_company_info>2theMoon</option_windows_company_info>
     <option_windows_copyright_info>Kelvin Tu 2017</option_windows_copyright_info>
     <option_windows_create_textures_on_demand>False</option_windows_create_textures_on_demand>
@@ -591,8 +598,8 @@ prototype(v.3.09b)
     <option_windows_mainor_version>3</option_windows_mainor_version>
     <option_windows_major_version>0</option_windows_major_version>
     <option_windows_nsis_file>Configs\Default\windows\RunnerInstaller.nsi</option_windows_nsis_file>
-    <option_windows_product_info>Uberkrieg(0.03.09H)</option_windows_product_info>
-    <option_windows_release_version>9</option_windows_release_version>
+    <option_windows_product_info>Uberkrieg(0.03.10B)</option_windows_product_info>
+    <option_windows_release_version>10</option_windows_release_version>
     <option_windows_runner_finished>Configs\Default\windows\Runner_finish.bmp</option_windows_runner_finished>
     <option_windows_runner_header>Configs\Default\windows\Runner_header.bmp</option_windows_runner_header>
     <option_windows_save_location>0</option_windows_save_location>

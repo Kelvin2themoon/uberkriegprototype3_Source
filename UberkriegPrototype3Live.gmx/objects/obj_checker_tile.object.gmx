@@ -37,6 +37,11 @@ CO_Zone[1] = false;
 CO_Zone[2] = false;
 CO_Zone[3] = false;
 CO_Zone[4] = false;
+//CO Zone array to be used with COFX field De-Buff
+CO_Field[1] = false;
+CO_Field[2] = false;
+CO_Field[3] = false;
+CO_Field[4] = false;
 //Drawing Variables (connections)
 north    = false;
 east     = false;
@@ -224,6 +229,29 @@ if (on_path){
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///debug
+
+//if CO_Field[global.P_Turn.number] draw_text(x,y,"F");
 </string>
           </argument>
         </arguments>

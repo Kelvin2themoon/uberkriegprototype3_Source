@@ -1035,7 +1035,13 @@ if (global.P4_in_play)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>///add player COs to an indexed array 
+
+if global.P1_in_play global.P[1] = global.P1;
+if global.P2_in_play global.P[2] = global.P2;
+if global.P3_in_play global.P[3] = global.P3;
+if global.P4_in_play global.P[4] = global.P4;
+</string>
           </argument>
         </arguments>
       </action>

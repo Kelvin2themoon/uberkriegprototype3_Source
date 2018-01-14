@@ -44,13 +44,13 @@ SCOP_on     = false ;   //SCOP switch
 
 //individual unit stats
 
-for ( i = 0 ; i &lt; 4 ; i += 1)
+for ( i = 0 ; i &lt;= 4 ; i += 1)
     {
-    D2D_Atk[i]   = 120;
-    D2D_Def[i]   = 140;
+    D2D_Atk[i]   = 130;
+    D2D_Def[i]   = 130;
     D2D_Mov[i]   = 1  ;
     
-    D2D_Fuel_R[i] = 1  ;
+    D2D_Fuel_R[i] = 2  ;
     
     COP_Atk[i]   = 100 ;
     COP_Def[i]   = 120;
@@ -75,7 +75,7 @@ for ( i = 0 ; i &lt;= 13 ; i += 1)
     }
     
 ///APC move +1
-D2D_Mov[06] = 1;
+D2D_Mov[06] = 2;
         
 //reduced power to direct combat units    
 D2D_Atk[05] = 80;

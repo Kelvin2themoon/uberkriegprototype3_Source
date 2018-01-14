@@ -1012,7 +1012,7 @@ if(scr_inBound(global.posX,global.posY))
             //switch radioAssist on
             c_radioAssist_on = true;
             //check Standing
-            if (obj_map.units[global.posX,global.posY].isStanding) c_radioAssist_sprite = spr_radioAssist_gold;
+            if (obj_map.units[global.posX,global.posY].isStanding) c_radioAssist_sprite = spr_radioAssist_bronze ;
             else c_radioAssist_sprite = spr_radioAssist_darkBlue;
             //chack range
             c_radioAssist_range = scr_getUnitRadioRange(obj_map.units[global.posX,global.posY] ,obj_map.terrains[global.posX,global.posY]);
@@ -1071,6 +1071,8 @@ with(global.P_Turn.CO)
           <argument>
             <kind>1</kind>
             <string>///Debug
+
+/*
 
 draw_text( 12,12, string( global.rangeCheck[global.posX, global.posY].rb_edge));
 draw_text( 12,24, string( global.rangeCheck[global.posX, global.posY].rb_corner));
