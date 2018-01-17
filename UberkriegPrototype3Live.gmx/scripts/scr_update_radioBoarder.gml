@@ -86,7 +86,11 @@ with (obj_checker_tile)
                 break;
                     
             case 5:
-                rb_fill_v = 15 - rb_corner;
+                rb_fill_h = 0;
+                if scr_inBound(posx -1, posy -1) if ( global.rangeCheck[posx -1 ,posy -1].sprite_index = spr_rangecheck_gold ) rb_fill_h += 1;
+                if scr_inBound(posx +1, posy -1) if ( global.rangeCheck[posx +1 ,posy -1].sprite_index = spr_rangecheck_gold ) rb_fill_h += 2;
+                if scr_inBound(posx +1, posy +1) if ( global.rangeCheck[posx +1 ,posy +1].sprite_index = spr_rangecheck_gold ) rb_fill_h += 4;
+                if scr_inBound(posx -1, posy +1) if ( global.rangeCheck[posx -1 ,posy +1].sprite_index = spr_rangecheck_gold ) rb_fill_h += 8;
                 break;
                 
             case 6:
@@ -116,7 +120,11 @@ with (obj_checker_tile)
                 break;
                 
             case 10:
-                rb_fill_h = 15 - rb_corner;
+                rb_fill_v = 0;
+                if scr_inBound(posx -1, posy -1) if ( global.rangeCheck[posx -1 ,posy -1].sprite_index = spr_rangecheck_gold ) rb_fill_v += 1;
+                if scr_inBound(posx +1, posy -1) if ( global.rangeCheck[posx +1 ,posy -1].sprite_index = spr_rangecheck_gold ) rb_fill_v += 2;
+                if scr_inBound(posx +1, posy +1) if ( global.rangeCheck[posx +1 ,posy +1].sprite_index = spr_rangecheck_gold ) rb_fill_v += 4;
+                if scr_inBound(posx -1, posy +1) if ( global.rangeCheck[posx -1 ,posy +1].sprite_index = spr_rangecheck_gold ) rb_fill_v += 8;
                 break;
                 
             case 11:
