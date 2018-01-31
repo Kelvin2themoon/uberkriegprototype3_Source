@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-70000</depth>
+  <depth>-80000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -987,6 +987,13 @@ if minimap_check_on
         if intel_pos[i] !=0
             {
             draw_sprite(spr_intel_base,intel_pos[i].number-1, view_xview+24, view_yview+16+104*(i-1));
+            //funds
+            scr_draw_num(spr_num_light,true,intel_pos[i].funds, view_xview+114,view_yview+39+104*(i-1),8);
+            //battle strength
+            scr_draw_num(spr_num_light,true,intel_pos[i].battle_strength, view_xview+114,view_yview+61+104*(i-1),8);
+            //stars
+            scr_draw_stars(view_xview+276-(intel_pos[i].CO.COP_Bar*8+intel_pos[i].CO.SCOP_Bar*12),view_yview+84+104*(i-1),intel_pos[i].CO.COP_Bar,intel_pos[i].CO.SCOP_Bar,intel_pos[i].CO.charge);
+            
             
             }
         }
@@ -1035,6 +1042,7 @@ if minimap_check_on
                     break;
                case ("HQ") :
                     draw_sprite_ext(spr_minimap_HQ,global.map.terrains[i,j].image_index,xx,yy,1,1,0,vis,1);
+                    draw_sprite(spr_minimap_property,5,xx,yy);
                     break;
                case ("City") :
                     draw_sprite_ext(spr_minimap_property,global.map.terrains[i,j].image_index,xx,yy,1,1,0,vis,1);
@@ -1047,6 +1055,7 @@ if minimap_check_on
                     break;
                case ("Command Post") :
                     draw_sprite_ext(spr_minimap_property,global.map.terrains[i,j].image_index,xx,yy,1,1,0,vis,1);
+                    draw_sprite(spr_minimap_property,5,xx,yy);
                     break;
                case ("River") :
                     draw_sprite_ext(spr_minimap_river,global.map.terrains[i,j].crossindex,xx,yy,1,1,0,vis,1);
@@ -1061,8 +1070,8 @@ if minimap_check_on
                     break;
                       
                 }
-               ///draw unit on blink
-               if(global.map.units[i,j] !=0 and global.blinking)
+            ///draw unit on blink
+            if(global.map.units[i,j] !=0 and global.blinking)
                 {
                 if(global.map.units[i,j].isVisible) 
                     {
@@ -1070,7 +1079,8 @@ if minimap_check_on
                     if(global.map.units[i,j].isCommander) draw_sprite(spr_minimap_unit,0,xx,yy);
                     }
                 }
-            
+            //draw radio boarder
+            draw_sprite(spr_minimap_radioboarder,global.rangeCheck[i,j].rb_edge,xx,yy);
             }
         }
 
