@@ -46,6 +46,8 @@ mtype_specialTires  = 6;
 mtype_tracks        = 99;
 mtype_heavyTracks   = 99;
 
+crossindex = 0;
+
 
 </string>
           </argument>

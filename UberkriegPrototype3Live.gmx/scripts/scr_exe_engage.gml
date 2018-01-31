@@ -4,8 +4,8 @@
 var damage = 0 ;
 var cleave_check = false;
 
-var atk_luck_rng = 9;
-var def_luck_rng = 9;
+var atk_luck_rng = 10;
+var def_luck_rng = 10;
 
 //reset captue
 if (global.acting_unit_moved) global.acting_unit.capturing  = 0;

@@ -101,9 +101,9 @@ with (obj_checker_tile)
                 break;
             
             case 7:
-                rb_fill_v = 9;
-                if scr_inBound(posx -1, posy -1) if ( global.rangeCheck[posx -1 ,posy -1].sprite_index != spr_rangecheck_gold ) rb_fill_v -= 1;
-                if scr_inBound(posx -1, posy +1) if ( global.rangeCheck[posx -1 ,posy +1].sprite_index != spr_rangecheck_gold ) rb_fill_v -= 8;
+                rb_fill_h = 9;
+                if scr_inBound(posx -1, posy -1) if ( global.rangeCheck[posx -1 ,posy -1].sprite_index != spr_rangecheck_gold ) rb_fill_h -= 1;
+                if scr_inBound(posx -1, posy +1) if ( global.rangeCheck[posx -1 ,posy +1].sprite_index != spr_rangecheck_gold ) rb_fill_h -= 8;
                 break;
                 
             case 8:

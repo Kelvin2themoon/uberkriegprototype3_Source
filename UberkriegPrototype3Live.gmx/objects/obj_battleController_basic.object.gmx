@@ -3,131 +3,12 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-70000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// OLD CODE
-/*
-//set cursor positions
-global.posX = 0;
-global.posY = 0;
-
-//Create and Load Map
-instance_create(0,0,obj_map);
-scr_ubermap_load("protoland.ubm");
-
-//create Cursor
-instance_create(24,24,obj_battleCursor);
-//deactivate, to reactivate when main phaze start
-instance_deactivate_object(obj_battleCursor);
-
-//create miniwin
-instance_create(24,24,obj_miniwin);
-instance_deactivate_object(obj_miniwin);
-
-//player Queue
-global.player_q = ds_queue_create();
-//create priority q to organize player order 
-global.temp_pq = ds_priority_create();
-//debug variable, keeps track of number of HQs
-global.HQnum = 0;
-
-
-//creat player objects for each Exsisting HQ into a priority Q
-with (obj_terrain_HQ){
-
-    switch (ownership){
-        case 0 :
-        break;
-        
-        case 1: // create player 1
-        global.HQnum +=1;
-        global.P1 = instance_create(0,0,obj_player); 
-        global.P1.number = 1;
-        ds_priority_add(global.temp_pq, global.P1 ,1);
-        break;
-        
-        case 2: // create player 2
-        global.HQnum +=1;
-        global.P2 = instance_create(0,0,obj_player);
-        global.P2.number = 2;
-        ds_priority_add(global.temp_pq, global.P2 ,2);
-        break; 
-        
-        case 3: // create player 3
-        global.HQnum +=1;
-        global.P3 = instance_create(0,0,obj_player);
-        global.P3.number = 3;
-        ds_priority_add(global.temp_pq, global.P3 ,3);
-        break;
-        
-        case 4: // create player 4
-        global.HQnum +=1;
-        global.P4 = instance_create(0,0,obj_player);
-        global.P4.number = 4;  
-        ds_priority_add(global.temp_pq, global.P4 ,4);
-        break;
-    
-        }
-    }
-    
-//find last player: used to detect day change
-global.last_player = ds_priority_find_max(global.temp_pq).number;
-
-    
-//convert priority Q to regular Q
-i = 0;
-for( i=0 ; i&lt;ds_priority_size(global.temp_pq)+1 ; i+=1){
-    p_priority = ds_priority_delete_min(global.temp_pq);
-    ds_queue_enqueue(global.player_q,p_priority);
-    }
-//delete temp priority Q
-ds_priority_destroy(global.temp_pq);    
-
-
-//turn phaze
-global.Phaze = "starting" //  starting -&gt; upkeep -&gt; main -&gt; end
-//player turn
-global.P_Turn = ds_queue_head(global.player_q);
-//global Day
-global.Day = 1;
-
-//create fadein
- instance_create(0,0,obj_starting);
- obj_starting.state = "waiting"; 
- 
-//vision reset and update for first player
-scr_globalVisionReset();
-scr_updateGlobalVision();
- 
-
- 
-
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -168,7 +49,7 @@ global.mode = "Basic Battle";
           <argument>
             <kind>1</kind>
             <string>///creat &amp; load map
-instance_create(0,0,obj_map);
+global.map = instance_create(0,0,obj_map);
 
 
 if   ( file_exists ("protoland.ubm")) scr_ubermap_load("protoland.ubm");
@@ -784,6 +665,81 @@ if global.P4_in_play global.P[4] = global.P4;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///CHECK BASIC INTEL DRAW POSITIONS
+
+intel_pos[1] = 0;
+intel_pos[2] = 0;
+intel_pos[3] = 0;
+intel_pos[4] = 0;
+
+var pos_check = 1;
+
+if global.P1_in_play 
+    {
+    intel_pos[pos_check] = global.P1;
+    pos_check += 1;
+    }
+    
+if global.P2_in_play 
+    {
+    intel_pos[pos_check] = global.P2;
+    pos_check += 1;
+    }
+    
+if global.P3_in_play 
+    {
+    intel_pos[pos_check] = global.P3;
+    pos_check += 1;
+    }
+    
+if global.P4_in_play 
+    {
+    intel_pos[pos_check] = global.P4;
+    }
+    
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///intel check variable
+
+minimap_check_on = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="1" enumb="0">
       <action>
@@ -869,6 +825,37 @@ temp_move_count = 0;
 with( obj_moveCursor ) other.temp_move_count +=1;
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Basic Intel Check (mini map)
+
+if keyboard_check_pressed(ord("V"))
+    {
+    //draw intel is on
+    minimap_check_on = true;
+    }
+if keyboard_check_released(ord("V"))
+    {
+    minimap_check_on = false;
+    }
 </string>
           </argument>
         </arguments>
@@ -961,6 +948,134 @@ if (global.Phaze = "Main"){
 
 
 
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw minimap intel check
+if minimap_check_on
+    {
+    draw_set_colour(global.c_uiBaseGrey );
+    draw_rectangle(view_xview,view_yview,768,432,0);
+    draw_set_colour(global.c_uiWhite );
+    
+    //drawn intel
+    
+    var i = 1;
+    
+    for ( i=1 ; i&lt;5 ; i++)
+        {
+        if intel_pos[i] !=0
+            {
+            draw_sprite(spr_intel_base,intel_pos[i].number-1, view_xview+24, view_yview+16+104*(i-1));
+            
+            }
+        }
+        
+    //Draw Minimap
+    
+    //set strting pos
+    var startx  =   view_xview+376;
+    var starty  =    view_yview+16;
+    //draw pos
+    var xx = 0;
+    var yy = 0;
+    //loop vars
+    var i = 0;
+    var j = 0;
+    //visibiilty colour mix
+    var vis = c_gray;
+    
+    for( i=0 ; i&lt;global.mapW ; i++)
+        { 
+        for( j=0 ; j&lt;global.mapH ; j++ )
+            {
+            //set draw pos
+            xx = startx+(i*8);
+            yy = starty+(j*8);
+            //check visibility
+            if global.map.terrains[i,j].isVisible vis = c_white;
+            else vis = c_gray;
+            //draw terrain
+            switch global.map.terrains[i,j].name
+                {
+                case "Sea" :
+                    draw_sprite_ext(spr_minimap_sea,0,xx,yy,1,1,0,vis,1);
+                    break; 
+                case "Plains" :
+                    draw_sprite_ext(spr_minimap_plains,0,xx,yy,1,1,0,vis,1);
+                    break;
+                case "Road" :
+                    draw_sprite_ext(spr_minimap_road,global.map.terrains[i,j].image_index,xx,yy,1,1,0,vis,1);
+                    break;
+                case "Mountain" :
+                    draw_sprite_ext(spr_minimap_mountain,0,xx,yy,1,1,0,vis,1);
+                    break;
+               case "Woods" :
+                    draw_sprite_ext(spr_minimap_woods,0,xx,yy,1,1,0,vis,1);
+                    break;
+               case ("HQ") :
+                    draw_sprite_ext(spr_minimap_HQ,global.map.terrains[i,j].image_index,xx,yy,1,1,0,vis,1);
+                    break;
+               case ("City") :
+                    draw_sprite_ext(spr_minimap_property,global.map.terrains[i,j].image_index,xx,yy,1,1,0,vis,1);
+                    break;
+               case ("Base") :
+                    draw_sprite_ext(spr_minimap_property,global.map.terrains[i,j].image_index,xx,yy,1,1,0,vis,1);
+                    break;
+               case ("Radio Tower") :
+                    draw_sprite_ext(spr_minimap_property,global.map.terrains[i,j].image_index,xx,yy,1,1,0,vis,1);
+                    break;
+               case ("Command Post") :
+                    draw_sprite_ext(spr_minimap_property,global.map.terrains[i,j].image_index,xx,yy,1,1,0,vis,1);
+                    break;
+               case ("River") :
+                    draw_sprite_ext(spr_minimap_river,global.map.terrains[i,j].crossindex,xx,yy,1,1,0,vis,1);
+                    break;
+               case ("River Bridge") :
+                    draw_sprite_ext(spr_minimap_river,global.map.terrains[i,j].crossindex,xx,yy,1,1,0,vis,1);
+                    draw_sprite_ext(spr_minimap_bridge,global.map.terrains[i,j].crossing,xx,yy,1,1,0,vis,1);
+                    break;
+               case ("Sea Bridge") :
+                    draw_sprite_ext(spr_minimap_sea,0,xx,yy,1,1,0,vis,1);
+                    draw_sprite_ext(spr_minimap_bridge,global.map.terrains[i,j].crossing,xx,yy,1,1,0,vis,1);
+                    break;
+                      
+                }
+               ///draw unit on blink
+               if(global.map.units[i,j] !=0 and global.blinking)
+                {
+                if(global.map.units[i,j].isVisible) 
+                    {
+                    draw_sprite(spr_minimap_unit,global.map.units[i,j].ownership,xx,yy);
+                    if(global.map.units[i,j].isCommander) draw_sprite(spr_minimap_unit,0,xx,yy);
+                    }
+                }
+            
+            }
+        }
+
+    }
+    
 
 </string>
           </argument>

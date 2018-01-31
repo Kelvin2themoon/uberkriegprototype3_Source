@@ -389,6 +389,24 @@
         <sprite>sprites\spr_radio_boarder_fill_v</sprite>
         <sprite>sprites\spr_radio_boarder_fill_h</sprite>
       </sprites>
+      <sprites name="Intel">
+        <sprites name="BasicIntel">
+          <sprite>sprites\spr_intel_base</sprite>
+        </sprites>
+        <sprites name="Mini Map">
+          <sprite>sprites\spr_minimap_sea</sprite>
+          <sprite>sprites\spr_minimap_plains</sprite>
+          <sprite>sprites\spr_minimap_mountain</sprite>
+          <sprite>sprites\spr_minimap_woods</sprite>
+          <sprite>sprites\spr_minimap_road</sprite>
+          <sprite>sprites\spr_minimap_bridge</sprite>
+          <sprite>sprites\spr_minimap_river</sprite>
+          <sprite>sprites\spr_minimap_HQ</sprite>
+          <sprite>sprites\spr_minimap_property</sprite>
+          <sprite>sprites\spr_minimap_unit</sprite>
+          <sprite>sprites\spr_minimap_radioboarder</sprite>
+        </sprites>
+      </sprites>
     </sprites>
     <sprites name="Debug">
       <sprite>sprites\spr_DebugStart</sprite>
@@ -422,6 +440,11 @@
     </sprites>
     <sprites name="COFX">
       <sprite>sprites\spr_smoke</sprite>
+    </sprites>
+    <sprites name="Battle animation">
+      <sprite>sprites\spr_temp_tank</sprite>
+      <sprite>sprites\spr_bg_road</sprite>
+      <sprite>sprites\spr_UItest</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -595,6 +618,10 @@
     </objects>
     <objects name="Temp">
       <object>objects\obj_temp_MainMenu</object>
+      <objects name="Battle Scene">
+        <object>objects\obj_temp_bdTank</object>
+        <object>objects\obj_battleScene_controller</object>
+      </objects>
     </objects>
     <objects name="Basic Battle ">
       <object>objects\obj_battleController_basic</object>
@@ -680,6 +707,7 @@
     <room>rooms\rm_game_Basic</room>
     <room>rooms\rExampleRoom</room>
     <room>rooms\rm_continue</room>
+    <room>rooms\rm_battleSceneTest</room>
     <room>rooms\room5</room>
     <room>rooms\room6</room>
   </rooms>

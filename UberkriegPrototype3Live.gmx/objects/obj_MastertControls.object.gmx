@@ -73,6 +73,7 @@ global.keyRIGHT     = vk_right;
 
 //Dynamic Text: set colour, font, &amp; align
 global.c_uiWhite = make_colour_rgb(200,200,200);
+global.c_uiBaseGrey = make_colour_rgb(44,41,38);
 
 draw_set_font(ft_AuroraEx);
 draw_set_colour(global.c_uiWhite);
@@ -246,7 +247,8 @@ global.Disruptor_spread = false; // disruptor propigates throught target enemy u
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>//blinking animator
+
 if global.blinking {
     global.blinking = false;
     alarm[1] = 30;
