@@ -37,6 +37,8 @@ team = 0
 funds = 0 ;
 //revenue (first turn)
 revenue = 0;
+//property count
+property_count = 0;
 //unit stats
 unit_count = 0;
 battle_strength = 0;

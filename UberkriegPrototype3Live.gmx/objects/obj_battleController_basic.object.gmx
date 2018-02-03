@@ -851,6 +851,59 @@ if keyboard_check_pressed(ord("V"))
     {
     //draw intel is on
     minimap_check_on = true;
+    //Update battle strength, unit count, and property count
+    //this is a temeprary solution and should be streamlined alog with other parts of the UI s it gets more robust
+    
+    //clear for recount
+    with obj_player
+        {
+        battle_strength  = 0;
+        unit_count      = 0;
+        property_count  = 0;
+        }
+    //unit count and battle strength
+    with obj_unit
+        {
+        switch ownership
+            {
+        
+            case 1:
+                global.P1.unit_count       += 1;
+                global.P1.battle_strength   += (global.cost[unit_index] div 10)*hp;
+                break;
+            case 2:
+                global.P2.unit_count       += 1;
+                global.P2.battle_strength   += (global.cost[unit_index] div 10)*hp;
+                break;
+            case 3:
+                global.P3.unit_count       += 1;
+                global.P3.battle_strength   += (global.cost[unit_index] div 10)*hp;
+                break;
+            case 4:
+                global.P4.unit_count       += 1;
+                global.P4.battle_strength   += (global.cost[unit_index] div 10)*hp;
+                break;
+            }
+        }
+    with obj_property if(income &gt; 0 and ownership !=0)
+        {
+        switch ownership
+            {   
+            case 1:
+                global.P1.property_count +=1;
+                break;
+            case 2:
+                global.P2.property_count +=1;
+                break;
+            case 3:
+                global.P3.property_count +=1;
+                break;
+            case 4:
+                global.P4.property_count +=1;
+                break;
+            }
+        
+        } 
     }
 if keyboard_check_released(ord("V"))
     {
@@ -971,12 +1024,13 @@ if (global.Phaze = "Main"){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///draw minimap intel check
+            <string>///draw intel and minimap check
 if minimap_check_on
     {
     draw_set_colour(global.c_uiBaseGrey );
     draw_rectangle(view_xview,view_yview,768,432,0);
-    draw_set_colour(global.c_uiWhite );
+    draw_set_color(make_color_rgb(235,218,206));
+    
     
     //drawn intel
     
@@ -986,19 +1040,24 @@ if minimap_check_on
         {
         if intel_pos[i] !=0
             {
+            //draw base image
             draw_sprite(spr_intel_base,intel_pos[i].number-1, view_xview+24, view_yview+16+104*(i-1));
+            //draw CO name, temp 'till CO prtraits are avaliable
+            draw_text(view_xview+16+16-5, view_yview+16+25-12+104*(i-1),string(intel_pos[i].CO.name));
             //funds
             scr_draw_num(spr_num_light,true,intel_pos[i].funds, view_xview+114,view_yview+39+104*(i-1),8);
             //battle strength
             scr_draw_num(spr_num_light,true,intel_pos[i].battle_strength, view_xview+114,view_yview+61+104*(i-1),8);
             //stars
             scr_draw_stars(view_xview+276-(intel_pos[i].CO.COP_Bar*8+intel_pos[i].CO.SCOP_Bar*12),view_yview+84+104*(i-1),intel_pos[i].CO.COP_Bar,intel_pos[i].CO.SCOP_Bar,intel_pos[i].CO.charge);
-            
-            
+            //unit count
+            scr_draw_num(spr_num_light,true,intel_pos[i].unit_count, view_xview+324,view_yview+39+104*(i-1),2);
+            //property count
+            scr_draw_num(spr_num_light,true,intel_pos[i].property_count, view_xview+324,view_yview+85+104*(i-1),2);
             }
         }
         
-    //Draw Minimap
+    //Draw Minimap****************************************************
     
     //set strting pos
     var startx  =   view_xview+376;
@@ -1085,6 +1144,8 @@ if minimap_check_on
         }
 
     }
+    //return to UI white
+    draw_set_colour(global.c_uiWhite );
     
 
 </string>
