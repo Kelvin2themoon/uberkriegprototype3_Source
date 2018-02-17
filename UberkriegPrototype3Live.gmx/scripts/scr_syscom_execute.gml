@@ -87,17 +87,29 @@ switch (command){
             instance_destroy();
             break;
             }
+            
+
+            
         else{
             instance_create(0,0,obj_execute_unit_orders);
             instance_destroy();
             break;
             }
+            
+    case "infiltrate" : //infiltrate
+        global.action_order = "infiltrate";
+        instance_create(0,0,obj_execute_unit_orders);
+        instance_destroy();
+        break;
+        
+        
     case "save" : //save
         scr_quick_save("quicksave.ubq");
         instance_activate_object(obj_battleCursor);
         instance_activate_object(obj_miniwin);
         instance_destroy();
         break;
+        
         
     case "endturn" : //end turn
         scr_syscom_endturn();

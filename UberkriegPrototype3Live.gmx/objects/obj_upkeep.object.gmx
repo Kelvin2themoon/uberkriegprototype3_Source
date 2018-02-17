@@ -63,7 +63,8 @@ RepairAmmount = global.P_Turn.CO.D2D_Repair;//global.P_Turn.CO.D2D_Repair;
 
 //turn units on if standing
 with obj_unit
-    { 
+    {
+    isInfiltrate = false; 
     if (ownership = global.P_Turn.number) global.P_Turn.unit_count += 1;
     if isStanding state = "idle";
     if isDisrupted state = "exhaust";
@@ -193,7 +194,18 @@ with obj_terrain
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>//set avaliable intel for new turn
+//infiltrate must happen each turn for intel
+with global.P_Turn
+    {
+    intel_P[1] = false;
+    intel_P[2] = false;
+    intel_P[3] = false;
+    intel_P[4] = false;
+    //turn own intel on
+    intel_P[number] = true;
+    } 
+</string>
           </argument>
         </arguments>
       </action>

@@ -426,6 +426,7 @@
       <sprite>sprites\spr_unitStats_Supply</sprite>
       <sprite>sprites\spr_unitStats_Vet</sprite>
       <sprite>sprites\spr_unitStats_Cap</sprite>
+      <sprite>sprites\spr_unitStats_Infiltrate</sprite>
       <sprite>sprites\spr_unitStats_Load</sprite>
       <sprite>sprites\spr_unitStats_Hide</sprite>
       <sprite>sprites\spr_unitStats_Disrupted</sprite>
@@ -542,6 +543,8 @@
       <script>scripts\scr_exe_hide.gml</script>
       <script>scripts\scr_exe_appear.gml</script>
       <script>scripts\scr_exe_disrupt.gml</script>
+      <script>scripts\scr_checkInfiltrateTargets.gml</script>
+      <script>scripts\scr_exe_infiltrate.gml</script>
     </scripts>
     <scripts name="AVIRecording">
       <script>scripts\InitRecorder.gml</script>

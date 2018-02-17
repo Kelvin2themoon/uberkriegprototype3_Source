@@ -112,6 +112,7 @@ for ( i = 0 ; i &lt;= 13 ; i += 1)
 COFX_HiddenHP       = false ;
 COFX_PerfectVision  = false ;
 COFX_DeployDummy    = false ;
+COFX_PerfectIntel   = false ;
 
 
 COP_DeployDummy = 0;

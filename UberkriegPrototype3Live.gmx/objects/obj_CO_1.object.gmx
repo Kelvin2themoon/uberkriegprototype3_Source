@@ -53,6 +53,7 @@ SCOP_Vision = 2 ;
 COFX_HiddenHP       = true ; //includes fuel and ammo
 COFX_PerfectVision  = true ;
 COFX_DeployDummy    = true ;
+COFX_PerfectIntel   = true ;
 
 COP_DeployDummy = 2;
 SCOP_DeployDummy = 5;

@@ -539,6 +539,7 @@ if( keyboard_check_pressed( global.keyCONFIRM) )
     global.disrupt      = false;
     global.wait         = true ; // wait is on by default
     
+    
     //special CO commands
     global.smoke        = false;
 
@@ -628,12 +629,17 @@ if( keyboard_check_pressed( global.keyCONFIRM) )
             {
             show_debug_message("empty check passed");
                            
-            //check if unit is covert op. and turn on appear or dissapppear
+            //check if unit is covert op. and turn on appear or dissapppear (check for infiltrate
             if (global.acting_unit.name = "Covert Op." and !global.acting_unit.dummy)
                 {
                 //check if the actiing unit is hidden
                 if (global.acting_unit.isHidden) global.appear = true;
                 else global.hide = true;
+                
+                //check for infiltrate (enemy proptery adjacent)
+                if (scr_checkInfiltrateTargets( global.posX, global.posY )) global.infiltrate = true ;
+                
+                
                 }
                 
             //check for property and turn on Capture

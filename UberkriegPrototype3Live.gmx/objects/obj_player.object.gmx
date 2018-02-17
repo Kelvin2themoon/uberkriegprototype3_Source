@@ -53,6 +53,15 @@ save_view_pos_x =   0;
 save_view_pos_y =   0;
 
 CO = noone ;
+
+//these are switches to turn intel on/off via infilreate ability (Covert op)
+//intel draw in battle controller
+intel_P[1] = false;
+intel_P[2] = false;
+intel_P[3] = false;
+intel_P[4] = false;
+
+
 </string>
           </argument>
         </arguments>

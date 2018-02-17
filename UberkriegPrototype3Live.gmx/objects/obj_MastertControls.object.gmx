@@ -72,8 +72,9 @@ global.keyLEFT      = vk_left;
 global.keyRIGHT     = vk_right;
 
 //Dynamic Text: set colour, font, &amp; align
-global.c_uiWhite = make_colour_rgb(200,200,200);
+global.c_uiWhite    = make_colour_rgb(200,200,200);
 global.c_uiBaseGrey = make_colour_rgb(44,41,38);
+global.c_uiLineGrey =  make_colour_rgb(100,100,100);
 
 draw_set_font(ft_AuroraEx);
 draw_set_colour(global.c_uiWhite);

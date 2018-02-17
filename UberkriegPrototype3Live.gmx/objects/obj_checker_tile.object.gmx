@@ -175,6 +175,7 @@ if ( obj_map.units[x div 24, y div 24] != 0)
                                 if (isHidden)               draw_sprite(spr_unitStats_Hide,0,x,y);
                                 if (!isStanding and global.blinking)    draw_sprite(spr_unitStats_Radio,3,x,y);
                                 if (isDisrupted and !global.blinking)   draw_sprite(spr_unitStats_Disrupted,0,x,y);
+                                if (isInfiltrate and global.blinking)   draw_sprite(spr_unitStats_Infiltrate,0,x,y);
                                 ///DRAW Power if power on
                                 if COP draw_sprite(spr_unitStats_Power,0,x,y);
                                 if SCOP draw_sprite(spr_unitStats_Power,1,x,y);

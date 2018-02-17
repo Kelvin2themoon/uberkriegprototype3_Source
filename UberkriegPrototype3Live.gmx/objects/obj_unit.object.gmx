@@ -113,6 +113,8 @@ load_B = 0;
 //SPECIAL: Dummy units
 dummy = false;
 
+//SPECIAL: Covert Op infiltrate
+isInfiltrate = false;
 
 
 

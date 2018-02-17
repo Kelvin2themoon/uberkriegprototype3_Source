@@ -21,7 +21,9 @@ switch (global.action_order){
     case "join"     :   scr_exe_join();     presist = false;    break;
     case "engage"   :   scr_exe_engage();   break;
     case "attach"   :   scr_exe_attach();   presist = false;    break;
-    case "wait"     :   scr_exe_wait();     break;     
+    case "wait"     :   scr_exe_wait();     break;
+    
+    case "infiltrate": scr_exe_infiltrate(); break;     
         }
         
         
