@@ -74,7 +74,7 @@ if keyboard_check_pressed( ord("4"))
             <kind>1</kind>
             <string>///team select
 
-var maxteam = 5 ;
+var maxteam = 4 ;
 
 if keyboard_check_pressed( ord("Q"))
     {

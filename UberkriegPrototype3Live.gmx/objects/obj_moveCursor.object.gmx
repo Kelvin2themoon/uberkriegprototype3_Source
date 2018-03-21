@@ -951,11 +951,23 @@ draw_text(12,313, "terrain cost: " + string(scr_check_move_cost(global.acting_un
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///draw radio assist
+            <string>/// Draw Move Left
 
-if radio_assist_on
+if ( global.rangeCheck[global.posX,global.posY].pathority != -1 )
     {
-    scr_draw_radioAssist(global.posX,global.posY,radioAssistRange,radioAssist_sprite);
+    scr_draw_num( spr_num_outlined , false, path_total, x+21, y+3, 2 );    
+    //scr_draw_num( spr_num_red, true, path_total, x, y, 3 );    
+    
+    //draw_set_color(c_black);
+    //draw_text(x+1,y+1, string(path_total)); 
+    //draw_text(x+1,y+1+12, string(global.acting_unit.move_points));
+    
+    //draw_set_color(c_orange);
+    //draw_text(x,y, string(path_total)); 
+    //draw_text(x,y+12, string(global.acting_unit.move_points));
+    
+    //draw_set_color(global.c_uiWhite);
+    
     }
 </string>
           </argument>
@@ -977,24 +989,14 @@ if radio_assist_on
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Draw Move Left
+            <string>///draw radio assist
 
-if ( global.rangeCheck[global.posX,global.posY].pathority != -1 )
+if radio_assist_on
     {
-    scr_draw_num( spr_num_outlined , false, path_total, x+21, y+3, 2 );    
-    //scr_draw_num( spr_num_red, true, path_total, x, y, 3 );    
-    
-    //draw_set_color(c_black);
-    //draw_text(x+1,y+1, string(path_total)); 
-    //draw_text(x+1,y+1+12, string(global.acting_unit.move_points));
-    
-    //draw_set_color(c_orange);
-    //draw_text(x,y, string(path_total)); 
-    //draw_text(x,y+12, string(global.acting_unit.move_points));
-    
-    //draw_set_color(global.c_uiWhite);
-    
+    scr_draw_radioAssist(global.posX,global.posY,radioAssistRange,radioAssist_sprite);
+    if (radioAssist_sprite = spr_radioAssist_darkBlue and global.cursorFrame = 2 ) draw_sprite(spr_Hazzard,0,x,y);
     }
+    
 </string>
           </argument>
         </arguments>

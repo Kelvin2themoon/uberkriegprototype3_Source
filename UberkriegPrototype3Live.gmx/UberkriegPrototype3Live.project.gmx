@@ -206,6 +206,7 @@
           <sprite>sprites\spr_radioAssist_A</sprite>
           <sprite>sprites\spr_radioAssist_B</sprite>
           <sprite>sprites\spr_radioAssist_bronze</sprite>
+          <sprite>sprites\spr_Hazzard</sprite>
         </sprites>
         <sprites name="checks">
           <sprite>sprites\spr_rangecheck_red</sprite>

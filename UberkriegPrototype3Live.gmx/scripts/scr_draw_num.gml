@@ -8,6 +8,9 @@ var drawNum_y  = argument4 //real
 
 var drawNum_limit = argument5 // limit of how many numbers can be drawn (real)
 
+//adjust for first position "1"
+if ( string_char_at(string(drawNum_number), 1) = "1" ) drawNum_x -= 5;
+
 // shorten if negative
 if drawNum_number < 0 drawNum_limit -= 1; 
 

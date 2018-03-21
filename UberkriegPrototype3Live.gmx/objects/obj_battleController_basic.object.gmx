@@ -735,6 +735,9 @@ if global.P4_in_play
             <string>///intel check variable
 
 minimap_check_on = false;
+
+
+
 </string>
           </argument>
         </arguments>
@@ -1027,7 +1030,7 @@ if (global.Phaze = "Main"){
 if ( minimap_check_on and global.Phaze = "Main" )
     {
     draw_set_colour(global.c_uiBaseGrey );
-    draw_rectangle(view_xview,view_yview,768,432,0);
+    draw_rectangle(view_xview,view_yview,view_xview+768,view_yview+432,0);
     draw_set_color(make_color_rgb(235,218,206));
     
     
@@ -1045,14 +1048,14 @@ if ( minimap_check_on and global.Phaze = "Main" )
             draw_text(view_xview+16+16-5-6, view_yview+16+25-12+104*(i-1),string(intel_pos[i].CO.name));
             
             //chech for infiltrate 
-            if ( global.P_Turn.intel_P[intel_pos[i].number] or global.P_Turn.CO.COFX_PerfectIntel)
+            if ( global.P_Turn.intel_P[intel_pos[i].number] or global.P_Turn.CO.COFX_PerfectIntel or global.P_Turn.team = intel_pos[i].team)
                 {
                 //funds
                 scr_draw_num(spr_num_light,true,intel_pos[i].funds, view_xview+114-6,view_yview+39+104*(i-1),8);
                 //battle strength
                 scr_draw_num(spr_num_light,true,intel_pos[i].battle_strength, view_xview+114-6,view_yview+61+104*(i-1),8);
                 //stars
-                scr_draw_stars(view_xview+276-(intel_pos[i].CO.COP_Bar*8+intel_pos[i].CO.SCOP_Bar*6)-12,view_yview+84+104*(i-1),intel_pos[i].CO.COP_Bar,intel_pos[i].CO.SCOP_Bar,intel_pos[i].CO.charge);
+                scr_draw_stars(view_xview+276 -6 -(intel_pos[i].CO.COP_Bar*7+intel_pos[i].CO.SCOP_Bar*13),view_yview+84+104*(i-1),intel_pos[i].CO.COP_Bar,intel_pos[i].CO.SCOP_Bar,intel_pos[i].CO.charge);
                 //unit count
                 scr_draw_num(spr_num_light,true,intel_pos[i].unit_count, view_xview+324-6,view_yview+39+104*(i-1),2);
                 //property count
@@ -1064,8 +1067,8 @@ if ( minimap_check_on and global.Phaze = "Main" )
     //Draw Minimap****************************************************
     
     //set strting pos
-    var startx  =   view_xview+343+6 + ( (400-global.mapW*8) div 2  )  ;
-    var starty  =    view_yview+16+6 + ( (400-global.mapH*8) div 2  )  ;
+    var startx  =   view_xview+343+6-1 + ( (400-global.mapW*8) div 2  )  ;
+    var starty  =    view_yview+16 + ( (400-global.mapH*8) div 2  )  ;
     //draw outline
     draw_rectangle_colour(view_xview+343+6, view_yview+16+1, view_xview+343+400, view_yview+16+400-13,global.c_uiLineGrey,global.c_uiLineGrey,global.c_uiLineGrey,global.c_uiLineGrey,true)
     //draw shadow

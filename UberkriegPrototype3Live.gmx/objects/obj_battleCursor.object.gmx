@@ -1111,6 +1111,8 @@ with(global.P_Turn.CO)
           <argument>
             <kind>1</kind>
             <string>///Debug
+
+//draw_text(24,24,string(global.P_Turn.team));
 /*
 draw_text(24,24,string(global.map.terrains[global.posX,global.posY].image_index));
 

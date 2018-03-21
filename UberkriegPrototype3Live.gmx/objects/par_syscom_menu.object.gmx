@@ -346,7 +346,7 @@ if ( mouse_check_button_pressed( mb_left)
         {
         
          
-            //if deop phaze 2 do nothing
+            //if drop phaze 2 do nothing
             if global.drop_phaze_2 {} //do nothing if drop phaze 2 
                     
             else
