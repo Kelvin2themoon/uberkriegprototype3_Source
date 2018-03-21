@@ -160,7 +160,7 @@ if ( obj_map.units[x div 24, y div 24] != 0)
         {
             with(obj_map.units[x div 24, y div 24])
                 {
-                if ( HP_hidden and ownership != global.P_Turn.number) draw_sprite( spr_unitStats_HP, 0 , x,y);
+                if ( HP_hidden and team != global.P_Turn.team) draw_sprite( spr_unitStats_HP, 0 , x,y);
                 else if (dummy) draw_sprite( spr_unitStats_HP, 10 , x, y );
                 else if (hp &lt; 10 and hp  &gt; 0)    draw_sprite( spr_unitStats_HP, hp , x,y);
                                 

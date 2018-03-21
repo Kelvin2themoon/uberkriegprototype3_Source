@@ -45,16 +45,12 @@ while (ds_queue_size(standing_Q) != 0 )
     
     
     //increase bonus range (COFX)
-    with ( standingPlayer.CO )
+    if (object_is_ancestor(checkStandTarget.object_index, obj_unit))
         {
-        if( object_is_ancestor(other.checkStandTarget.object_index, obj_unit))
-            {
-            other.broadcast_range += D2D_Radio;
-            if( COP_on ) other.broadcast_range += COP_Radio;
-            if( SCOP_on ) other.broadcast_range += SCOP_Radio;
-            //set minimum to 1
-            if( other.checkStandTarget.radio != 0 and  other.broadcast_range < 1 )  other.broadcast_range = 1;
-            }
+        broadcast_range += global.P[checkStandTarget.ownership].CO.D2D_Radio;
+        if (global.P[checkStandTarget.ownership].CO.COP_on)  broadcast_range += global.P[checkStandTarget.ownership].CO.COP_Radio;
+        if (global.P[checkStandTarget.ownership].CO.SCOP_on)  broadcast_range += global.P[checkStandTarget.ownership].SCO.COP_Radio;
+        if( checkStandTarget.radio != 0 and  broadcast_range < 1 ) broadcast_range = 1;
         }
     
     //check all co-ordinates in range of origin
