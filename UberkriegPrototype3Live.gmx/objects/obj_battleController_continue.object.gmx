@@ -25,125 +25,6 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// OLD CODE
-/*
-//set cursor positions
-global.posX = 0;
-global.posY = 0;
-
-//Create and Load Map
-instance_create(0,0,obj_map);
-scr_ubermap_load("protoland.ubm");
-
-//create Cursor
-instance_create(24,24,obj_battleCursor);
-//deactivate, to reactivate when main phaze start
-instance_deactivate_object(obj_battleCursor);
-
-//create miniwin
-instance_create(24,24,obj_miniwin);
-instance_deactivate_object(obj_miniwin);
-
-//player Queue
-global.player_q = ds_queue_create();
-//create priority q to organize player order 
-global.temp_pq = ds_priority_create();
-//debug variable, keeps track of number of HQs
-global.HQnum = 0;
-
-
-//creat player objects for each Exsisting HQ into a priority Q
-with (obj_terrain_HQ){
-
-    switch (ownership){
-        case 0 :
-        break;
-        
-        case 1: // create player 1
-        global.HQnum +=1;
-        global.P1 = instance_create(0,0,obj_player); 
-        global.P1.number = 1;
-        ds_priority_add(global.temp_pq, global.P1 ,1);
-        break;
-        
-        case 2: // create player 2
-        global.HQnum +=1;
-        global.P2 = instance_create(0,0,obj_player);
-        global.P2.number = 2;
-        ds_priority_add(global.temp_pq, global.P2 ,2);
-        break; 
-        
-        case 3: // create player 3
-        global.HQnum +=1;
-        global.P3 = instance_create(0,0,obj_player);
-        global.P3.number = 3;
-        ds_priority_add(global.temp_pq, global.P3 ,3);
-        break;
-        
-        case 4: // create player 4
-        global.HQnum +=1;
-        global.P4 = instance_create(0,0,obj_player);
-        global.P4.number = 4;  
-        ds_priority_add(global.temp_pq, global.P4 ,4);
-        break;
-    
-        }
-    }
-    
-//find last player: used to detect day change
-global.last_player = ds_priority_find_max(global.temp_pq).number;
-
-    
-//convert priority Q to regular Q
-i = 0;
-for( i=0 ; i&lt;ds_priority_size(global.temp_pq)+1 ; i+=1){
-    p_priority = ds_priority_delete_min(global.temp_pq);
-    ds_queue_enqueue(global.player_q,p_priority);
-    }
-//delete temp priority Q
-ds_priority_destroy(global.temp_pq);    
-
-
-//turn phaze
-global.Phaze = "starting" //  starting -&gt; upkeep -&gt; main -&gt; end
-//player turn
-global.P_Turn = ds_queue_head(global.player_q);
-//global Day
-global.Day = 1;
-
-//create fadein
- instance_create(0,0,obj_starting);
- obj_starting.state = "waiting"; 
- 
-//vision reset and update for first player
-scr_globalVisionReset();
-scr_updateGlobalVision();
- 
-
- 
-
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///change mode to Basic Battle
 global.mode = "Basic Battle";
 </string>
@@ -351,7 +232,8 @@ if (ini_read_real("players","P4inPlay",0) = 1)
 //P1
 if (global.P1_in_play){
         global.HQnum +=1;
-        global.P1 = instance_create(0,0,obj_player); 
+        global.P1 = instance_create(0,0,obj_player);
+        global.P[1] = global.P1; 
         global.P1.number = 1;
         global.P1.name = "COOKIELAND";
         ds_priority_add(global.temp_pq, global.P1 ,1);
@@ -392,7 +274,8 @@ if (global.P1_in_play){
 //P2
 if (global.P2_in_play){
         global.HQnum +=1;
-        global.P2 = instance_create(0,0,obj_player); 
+        global.P2 = instance_create(0,0,obj_player);
+        global.P[2] = global.P2; 
         global.P2.number = 2;
         global.P2.name = "PEPPERLAND";
         ds_priority_add(global.temp_pq, global.P2 ,2);
@@ -430,7 +313,8 @@ if (global.P2_in_play){
 //P3
 if (global.P3_in_play){
         global.HQnum +=1;
-        global.P3 = instance_create(0,0,obj_player); 
+        global.P3 = instance_create(0,0,obj_player);
+        global.P[3] = global.P3; 
         global.P3.number = 3;
         global.P3.name = "MARMALADELAND";
         ds_priority_add(global.temp_pq, global.P3 ,3);
@@ -470,7 +354,8 @@ if (global.P3_in_play){
 //P4
 if (global.P4_in_play){
         global.HQnum +=1;
-        global.P4 = instance_create(0,0,obj_player); 
+        global.P4 = instance_create(0,0,obj_player);
+        global.P[4] = global.P4; 
         global.P4.number = 4;
         global.P4.name = "PRETZELAND";
         ds_priority_add(global.temp_pq, global.P4 ,4);

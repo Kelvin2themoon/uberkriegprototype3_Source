@@ -7,6 +7,17 @@ var cleave_check = false;
 var atk_luck_rng = 10;
 var def_luck_rng = 10;
 
+//co skill was ready sfx tracker
+var cop_was_off  = true;
+var scop_was_off = true;
+
+// Uberkrieg ready SFX
+if (global.P_Turn.CO.charge >= (global.P_Turn.CO.COP_Bar*star_value + global.P_Turn.CO.SCOP_Bar*star_value )and global.P_Turn.CO.SCOP_Bar !=0) 
+var cop_was_off  = false;
+//kriegskill ready sfx
+else if (global.P_Turn.CO.charge >= global.P_Turn.CO.COP_Bar*star_value and global.P_Turn.CO.COP_Bar !=0) 
+var scop_was_off = false;
+
 //reset captue
 if (global.acting_unit_moved) global.acting_unit.capturing  = 0;
 //engage type checng efor covert op
@@ -339,6 +350,13 @@ with obj_battleCursor
     x = global.posX*24;
     y = global.posY*24;
     }
+    
+// Uberkrieg ready SFX
+if (global.P_Turn.CO.charge >= (global.P_Turn.CO.COP_Bar*star_value + global.P_Turn.CO.SCOP_Bar*star_value )and global.P_Turn.CO.SCOP_Bar !=0 and cop_was_off) 
+audio_play_sound(sfx_UberkriegCharged,1,0);
+//kriegskill ready sfx
+else if (global.P_Turn.CO.charge >= global.P_Turn.CO.COP_Bar*star_value and global.P_Turn.CO.COP_Bar !=0 and scop_was_off) 
+audio_play_sound(sfx_KriegSkillCharged,1,0);
     
         
 //nuke syscom

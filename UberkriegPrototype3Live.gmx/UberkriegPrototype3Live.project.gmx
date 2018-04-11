@@ -44,6 +44,8 @@
   </NewExtensions>
   <sounds name="sound">
     <sound>sound\sfx_TypeWritterKey_1</sound>
+    <sound>sound\sfx_UberkriegCharged</sound>
+    <sound>sound\sfx_KriegSkillCharged</sound>
   </sounds>
   <sprites name="sprites">
     <sprites name="Terrain">

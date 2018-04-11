@@ -280,7 +280,8 @@ with (obj_unit){
 //P1
 if (global.P1_in_play){
         global.HQnum +=1;
-        global.P1 = instance_create(0,0,obj_player); 
+        global.P1 = instance_create(0,0,obj_player);
+        global.P[1] = global.P1; 
         global.P1.number = 1;
         global.P1.name = "COOKIELAND";
         ds_priority_add(global.temp_pq, global.P1 ,1);
@@ -310,6 +311,7 @@ if (global.P1_in_play){
 if (global.P2_in_play){
     global.HQnum +=1;
     global.P2 = instance_create(0,0,obj_player);
+    global.P[2] = global.P2;
     global.P2.number = 2;
     global.P2.name = "PEPPERLAND";
     ds_priority_add(global.temp_pq, global.P2 ,2);
@@ -339,6 +341,7 @@ if (global.P2_in_play){
 if(global.P3_in_play){
     global.HQnum +=1;
     global.P3 = instance_create(0,0,obj_player);
+    global.P[3] = global.P3;
     global.P3.number = 3;
     global.P3.name = "MARMALADELAND";
     ds_priority_add(global.temp_pq, global.P3 ,3);
@@ -367,6 +370,7 @@ if(global.P3_in_play){
 if (global.P4_in_play){
     global.HQnum +=1;
     global.P4 = instance_create(0,0,obj_player);
+    global.P[4] = global.P4;
     global.P4.number = 4;
     global.P4.name = "PRETZELLAND";  
     ds_priority_add(global.temp_pq, global.P4 ,4);
