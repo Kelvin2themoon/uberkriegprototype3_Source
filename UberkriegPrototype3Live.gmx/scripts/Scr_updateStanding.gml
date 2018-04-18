@@ -49,7 +49,7 @@ while (ds_queue_size(standing_Q) != 0 )
         {
         broadcast_range += global.P[checkStandTarget.ownership].CO.D2D_Radio;
         if (global.P[checkStandTarget.ownership].CO.COP_on)  broadcast_range += global.P[checkStandTarget.ownership].CO.COP_Radio;
-        if (global.P[checkStandTarget.ownership].CO.SCOP_on)  broadcast_range += global.P[checkStandTarget.ownership].SCO.COP_Radio;
+        if (global.P[checkStandTarget.ownership].CO.SCOP_on)  broadcast_range += global.P[checkStandTarget.ownership].CO.SCOP_Radio;
         if( checkStandTarget.radio != 0 and  broadcast_range < 1 ) broadcast_range = 1;
         }
     

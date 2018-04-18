@@ -43,7 +43,7 @@ max_fuel    = 70;
 max_ammo    = 5;   
 
 //unit static variables
-charge      = 16 ;
+charge      = 15 ;
 cost        = global.cost[unit_index] ; // see cost array in obj_MasterControlls
 move_type   = "Tracks";
 move_points = 7;

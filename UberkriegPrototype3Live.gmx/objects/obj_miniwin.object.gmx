@@ -230,6 +230,63 @@ image_index = global.P_Turn.number - 1 ;
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+/*///intel windows
+
+if aux_on{
+    //draw unit intel
+    if global.unit_check!=0{
+        if global.unit_check.isVisible{
+            //draw base window
+            draw_sprite(spr_temp_unit_summary,0,150,110);
+            //draw unit states
+            draw_text(150+12,110+12*1,global.unit_check.display_name);
+            draw_text(150+12,110+14*2,"Ownership: P"+string(global.unit_check.ownership));
+            //draw_text(150+12,110+14*3,"Charge Value: "+string(global.unit_check.charge));
+            //draw_text(150+12,110+14*5,"Min Attack Range: "+string(global.unit_check.min_range));
+            //draw_text(150+12,110+14*6,"Max Attack Range: "+string(global.unit_check.max_range));
+            draw_text(150+12,110+14*3,"Attack Range: "+string(global.unit_check.min_range)+"~"+string(global.unit_check.max_range));
+            draw_text(150+12,110+14*4,"Max Ammo/Supplies: "+string(global.unit_check.max_ammo));
+            
+            draw_text(150+12,110+14*5,"Base Vision: "+string(global.unit_check.vision));
+            draw_text(150+12,110+14*6,"Base Radio: "+string(global.unit_check.radio));
+            
+            draw_text(150+12,110+14*7,"Move Type: "+global.unit_check.move_type);
+            draw_text(150+12,110+14*8,"Move Range: "+string(global.unit_check.move_points));
+            draw_text(150+12,110+14*9,"Max fuel: "+string(global.unit_check.move_points));
+            
+            draw_text(150+12,110+14*10,"Can Move &amp; Fire: "+string(global.unit_check.canMoveFire));
+            draw_text(150+12,110+14*11,"Can Capture: "+string(global.unit_check.canCapture));
+            draw_text(150+12,110+14*12,"Can Attach: "+string(global.unit_check.canAttach));
+            draw_text(150+12,110+14*13,"Can Supply: "+string(global.unit_check.canSupply));
+            draw_text(150+12,110+14*14,"Can Load infantry: "+string(global.unit_check.canLoadInfantry));
+            draw_text(150+12,110+14*15,"Can Hide: "+string(global.unit_check.canHide));
+            draw_text(150+12,110+14*16,"Can Disrupt: "+string(global.unit_check.canDisrupt));         
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -365,6 +422,7 @@ if (global.unit_check != 0)
           <argument>
             <kind>1</kind>
             <string>///drqaw temp aux
+
 
 if aux_on{
     if global.unit_check !=0{

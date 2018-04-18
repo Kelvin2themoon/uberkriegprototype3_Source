@@ -1002,7 +1002,12 @@ if global.P4_in_play
             <kind>1</kind>
             <string>///intel check variable
 
+///intel check and Chart on/off variable
+
 minimap_check_on = false;
+damage_chart_on = false;
+
+
 
 //set first turn intel
 
@@ -1192,6 +1197,31 @@ if keyboard_check_released(ord("V"))
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Press "A" for Damage Chart
+
+if keyboard_check_pressed(ord("A")) damage_chart_on = true;
+if keyboard_check_released(ord("A")) damage_chart_on = false;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -1249,6 +1279,59 @@ if (global.Phaze = "Main"){
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw damage chart
+if damage_chart_on {
+    // draw base
+    draw_sprite(spr_damageChartBase,0,0,0);
+    //scr_draw_num(spr_num_outlined,true,25,84,44,3);
+    //scr_draw_num(spr_num_outlined,true,25,84,44+15,3);
+    //scr_draw_num(spr_num_outlined,true,25,84,44+(15*2),3);
+    
+    //alingment
+    start_x = 84 + 22;
+    start_y = 44;
+    
+    row_height = 15;
+    col_width  = 8*6;
+    
+    //loop start 
+    
+    ix = 1;
+    iy = 1;
+    
+    for (ix = 1 ; ix &lt;=13 ; ix++){
+        for (iy = 1 ; iy &lt;=13 ; iy++){
+            //draw promary weapon damage
+            scr_draw_num(spr_num_light , false, obj_MastertControls.DMG_P[ix,iy], start_x+((ix-1)*col_width), start_y+((iy-1)*row_height*2), 3); 
+            //draw secondary weapon damage
+            scr_draw_num(spr_num_inv , false, obj_MastertControls.DMG_S[ix,iy], start_x+((ix-1)*col_width), start_y+row_height+((iy-1)*row_height*2), 3); 
+            
+        } 
+    }
+    
+    draw_sprite(spr_mousePointer, global.P_Turn.number-1, mouse_x, mouse_y);
+    
+}
 </string>
           </argument>
         </arguments>

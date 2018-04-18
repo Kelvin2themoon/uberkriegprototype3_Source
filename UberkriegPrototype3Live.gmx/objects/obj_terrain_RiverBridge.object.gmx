@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>///initiate
 event_inherited();
+index=5;
 name = "River Bridge";
 crossing=0;
 isLand = true;

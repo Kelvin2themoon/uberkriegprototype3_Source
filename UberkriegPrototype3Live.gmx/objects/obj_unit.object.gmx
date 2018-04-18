@@ -28,6 +28,7 @@
             <string>///Initialize defaults
 unit_index = 00;
 name = "Unit"
+display_name = "Unit Parent"
 state = "idle" //describe stat of animation
 image_speed = 0; //stops image
 image_index = 2; //first frame of Idle

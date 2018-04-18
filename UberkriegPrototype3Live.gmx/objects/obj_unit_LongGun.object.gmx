@@ -35,7 +35,7 @@ state = "idle" //describe stat of animation
 
 //Unit stats
 hp      = 10;
-fuel    = 15;
+fuel    = 50;
 ammo    = 3; 
 isDisrupted = false; //true when hit by Covert.Op disrupter
 //max fuel &amp; ammo
@@ -45,15 +45,11 @@ max_ammo    = 3;
 //unit static variables
 charge      = 4 ;
 cost        = global.cost[unit_index] ; // see cost array in obj_MasterControlls
-move_type   = "Heavy Boots";
-move_points = 3;
+move_type   = "Boots";
+move_points = 5;
 vision      = 2;
 radio       = 3;
 
-//weapon type
-havePrimaryWeapon   = true;
-haveSecondaryWeapon = false;
-canMoveFire         = false;
 
 //weapon type
 havePrimaryWeapon   = true;

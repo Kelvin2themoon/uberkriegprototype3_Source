@@ -28,6 +28,7 @@
             <string>///initiate
 event_inherited();
 name = "Sea Bridge"; 
+index=5;
 isSolid = true;
 
 //required fields

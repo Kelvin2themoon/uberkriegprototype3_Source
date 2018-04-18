@@ -221,6 +221,7 @@
         </sprites>
         <sprite>sprites\spr_movePath</sprite>
         <sprite>sprites\spr_num_light</sprite>
+        <sprite>sprites\spr_num_inv</sprite>
         <sprite>sprites\spr_miniFlag</sprite>
         <sprite>sprites\spr_num_red</sprite>
         <sprite>sprites\spr_num_gold</sprite>
@@ -259,6 +260,10 @@
             <sprite>sprites\spr_miniwin_HeavyTank</sprite>
             <sprite>sprites\spr_miniwin_Rocket</sprite>
             <sprite>sprites\spr_miniwin_LandCruiser</sprite>
+            <sprite>sprites\spr_miniWinunits_Green</sprite>
+            <sprite>sprites\spr_miniWinunits_Red</sprite>
+            <sprite>sprites\spr_miniWinunits_Gold</sprite>
+            <sprite>sprites\spr_miniWinunits_Blue</sprite>
           </sprites>
           <sprites name="Terrain">
             <sprite>sprites\spr_miniwin_HQ</sprite>
@@ -441,6 +446,7 @@
       <sprite>sprites\spr_temp_terrain_summary</sprite>
       <sprite>sprites\spr_temp_summary_boarder</sprite>
       <sprite>sprites\spr_tempTitle</sprite>
+      <sprite>sprites\spr_damageChartBase</sprite>
     </sprites>
     <sprites name="COFX">
       <sprite>sprites\spr_smoke</sprite>
@@ -632,8 +638,8 @@
     <objects name="Basic Battle ">
       <object>objects\obj_battleController_basic</object>
       <object>objects\obj_battleController_continue</object>
-      <object>objects\obj_battleCursor</object>
       <object>objects\template_sandboxCursor</object>
+      <object>objects\obj_battleCursor</object>
       <objects name="BasicObjects">
         <object>objects\obj_UI_deploy</object>
         <object>objects\obj_UI_deployDummy</object>
@@ -725,7 +731,7 @@
     <constant name="UI_DEPTH_CURSOR">-66000</constant>
     <constant name="TRANS">-67000</constant>
     <constant name="UNIT_LAYRE">-2</constant>
-    <constant name="star_value">250</constant>
+    <constant name="star_value">150</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
