@@ -40,7 +40,7 @@ name = "cost+"
 COP_Bar     = 4 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
-SCOP_Bar    = 3 ;
+SCOP_Bar    = 4 ;
 SCOP_on     = false ;   //SCOP switch
 
 charge = 0;
@@ -56,6 +56,8 @@ for( i = 1 ; i &lt;= 13 ; i++ )
     SCOP_Atk[i] = 180;
     SCOP_Def[i] = 180;
     }
+    
+SCOP_landCruiser = true;
     
 
     

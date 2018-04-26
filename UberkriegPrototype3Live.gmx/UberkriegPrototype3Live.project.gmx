@@ -680,6 +680,7 @@
         <object>objects\obj_deployDummyCursorCopy</object>
         <object>objects\obj_deployDummyCursor</object>
         <object>objects\obj_promote_Cursor</object>
+        <object>objects\obj_deployLandCruiserCursor</object>
         <object>objects\obj_dropCursor</object>
         <objects name="Cursor Backup">
           <object>objects\obj_Bup_moveCurosr</object>

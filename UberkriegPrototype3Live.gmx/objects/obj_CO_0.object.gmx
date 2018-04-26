@@ -167,6 +167,9 @@ SCOP_DisruptDamage = 0;
 //Officer Debuff
 D2D_COField     = 100;
 
+///Deploy Land cruiser on SCOP
+SCOP_landCruiser = false;
+
 
 
 

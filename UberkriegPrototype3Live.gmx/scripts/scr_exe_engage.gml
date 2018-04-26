@@ -8,15 +8,19 @@ var atk_luck_rng = 10;
 var def_luck_rng = 10;
 
 //co skill was ready sfx tracker
-var cop_was_off  = true;
-var scop_was_off = true;
-
-// Uberkrieg ready SFX
-if (global.P_Turn.CO.charge >= (global.P_Turn.CO.COP_Bar*star_value + global.P_Turn.CO.SCOP_Bar*star_value )and global.P_Turn.CO.SCOP_Bar !=0) 
 var cop_was_off  = false;
-//kriegskill ready sfx
-else if (global.P_Turn.CO.charge >= global.P_Turn.CO.COP_Bar*star_value and global.P_Turn.CO.COP_Bar !=0) 
 var scop_was_off = false;
+
+
+
+// kriegskill ready SFX
+if (global.P_Turn.CO.charge < global.P_Turn.CO.COP_Bar*star_value) 
+cop_was_off  = true;
+// Uberkrieg ready SFX
+if (global.P_Turn.CO.charge < (global.P_Turn.CO.COP_Bar+global.P_Turn.CO.SCOP_Bar)*star_value) 
+scop_was_off  = true;  
+
+
 
 //reset captue
 if (global.acting_unit_moved) global.acting_unit.capturing  = 0;
@@ -352,10 +356,10 @@ with obj_battleCursor
     }
     
 // Uberkrieg ready SFX
-if (global.P_Turn.CO.charge >= (global.P_Turn.CO.COP_Bar*star_value + global.P_Turn.CO.SCOP_Bar*star_value )and global.P_Turn.CO.SCOP_Bar !=0 and cop_was_off) 
+if (global.P_Turn.CO.charge >= (global.P_Turn.CO.COP_Bar*star_value + global.P_Turn.CO.SCOP_Bar*star_value )and global.P_Turn.CO.SCOP_Bar !=0 and scop_was_off) 
 audio_play_sound(sfx_UberkriegCharged,1,0);
 //kriegskill ready sfx
-else if (global.P_Turn.CO.charge >= global.P_Turn.CO.COP_Bar*star_value and global.P_Turn.CO.COP_Bar !=0 and scop_was_off) 
+else if (global.P_Turn.CO.charge >= global.P_Turn.CO.SCOP_Bar*star_value and global.P_Turn.CO.COP_Bar !=0 and cop_was_off) 
 audio_play_sound(sfx_KriegSkillCharged,1,0);
     
         

@@ -116,7 +116,7 @@ global.window_size = 1;
 //  01. L_Inf         02. H_Inf         03. L.Gun         04. Officer       05. Recon         06. APC           07. L_Tank        08. Artillery     09. Anti-air      10. Covert_Op     11. H_Tank        12. Rocket        13. Land_Cruiser / X by Y
     DMG_P[01,01]= -1; DMG_P[02,01]= -1; DMG_P[03,01]= -1; DMG_P[04,01]= -1; DMG_P[05,01]= -1; DMG_P[06,01]= -1; DMG_P[07,01]= -1; DMG_P[08,01]= -1; DMG_P[09,01]= -1; DMG_P[10,01]= -1; DMG_P[11,01]= -1; DMG_P[12,01]= -1; DMG_P[13,01]= -1; // 01. L_Inf      
     DMG_P[01,02]= -1; DMG_P[02,02]= -1; DMG_P[03,02]= -1; DMG_P[04,02]= -1; DMG_P[05,02]= 85; DMG_P[06,02]= 75; DMG_P[07,02]= 55; DMG_P[08,02]= 70; DMG_P[09,02]= 55; DMG_P[10,02]= 85; DMG_P[11,02]= 15; DMG_P[12,02]= 85; DMG_P[13,02]=  5; // 02. H_Inf    
-    DMG_P[01,03]= 65; DMG_P[02,03]= 55; DMG_P[03,03]= 65; DMG_P[04,03]= 55; DMG_P[05,03]= 45; DMG_P[06,03]= 35; DMG_P[07,03]= 25; DMG_P[08,03]= 35; DMG_P[09,03]= 25; DMG_P[10,03]= 45; DMG_P[11,03]=  5; DMG_P[12,03]= 45; DMG_P[13,03]=  3; // 03. L.Gun  
+    DMG_P[01,03]= 75; DMG_P[02,03]= 65; DMG_P[03,03]= 75; DMG_P[04,03]= 65; DMG_P[05,03]= 45; DMG_P[06,03]= 40; DMG_P[07,03]= 25; DMG_P[08,03]= 45; DMG_P[09,03]= 25; DMG_P[10,03]= 45; DMG_P[11,03]=  5; DMG_P[12,03]= 55; DMG_P[13,03]=  3; // 03. L.Gun  
     DMG_P[01,04]= -1; DMG_P[02,04]= -1; DMG_P[03,04]= -1; DMG_P[04,04]= -1; DMG_P[05,04]= -1; DMG_P[06,04]= -1; DMG_P[07,04]= -1; DMG_P[08,04]= -1; DMG_P[09,04]= -1; DMG_P[10,04]= -1; DMG_P[11,04]= -1; DMG_P[12,04]= -1; DMG_P[13,04]= -1; // 04. Officer 
     DMG_P[01,05]= -1; DMG_P[02,05]= -1; DMG_P[03,05]= -1; DMG_P[04,05]= -1; DMG_P[05,05]= -1; DMG_P[06,05]= -1; DMG_P[07,05]= -1; DMG_P[08,05]= -1; DMG_P[09,05]= -1; DMG_P[10,05]= -1; DMG_P[11,05]= -1; DMG_P[12,05]= -1; DMG_P[13,05]= -1; // 05. Recon
     DMG_P[01,06]= -1; DMG_P[02,06]= -1; DMG_P[03,06]= -1; DMG_P[04,06]= -1; DMG_P[05,06]= -1; DMG_P[06,06]= -1; DMG_P[07,06]= -1; DMG_P[08,06]= -1; DMG_P[09,06]= -1; DMG_P[10,06]= -1; DMG_P[11,06]= -1; DMG_P[12,06]= -1; DMG_P[13,06]= -1; // 06. APC
@@ -169,7 +169,7 @@ global.window_size = 1;
 global.cost[00] = 0 ; //unit Parent
 global.cost[01] =  1000 ; // Light Infantry
 global.cost[02] =  3000 ; // Heavy infantry
-global.cost[03] =  2000 ; // Long Gun
+global.cost[03] =  3000 ; // Long Gun
 global.cost[04] =  4000 ; // Officer
 global.cost[05] =  4000 ; // Recon
 global.cost[06] =  5000 ; // APC

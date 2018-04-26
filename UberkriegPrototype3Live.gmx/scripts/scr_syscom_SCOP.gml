@@ -58,6 +58,13 @@ else if( global.P_Turn.CO.SCOP_DeployDummy > 0)
     instance_create(global.posX,global.posY,obj_deployDummyCursor );
     global.P_Turn.CO.rounds = global.P_Turn.CO.SCOP_DeployDummy;
     }
+    
+//check for Deploy Land Cruiser
+else if (global.P_Turn.CO.SCOP_landCruiser)
+    {
+    instance_create(global.posX,global.posY,obj_deployLandCruiserCursor);
+    }
+
 //reactivate UI    
 else{
     instance_activate_object(obj_battleCursor);
