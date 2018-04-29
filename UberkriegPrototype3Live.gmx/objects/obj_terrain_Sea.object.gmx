@@ -89,6 +89,8 @@ Edges
 RiverEdges
 **/
 
+
+
 //visibility
 var blend;
 if isVisible blend = c_white;
@@ -102,6 +104,8 @@ if ( river_edge != 0 &amp;&amp; instance_exists(obj_terrain_River) &amp;&amp; sp
     {
     draw_sprite_ext(asset_get_index("spr_riveredge_clear_"+string(river_edge)),0,x,y,1,1,0,blend,1);
     }
+    
+if( obj_map.terrains[x div 24, y div 24].isSmoke ) draw_sprite(spr_smoke,smoke_left-1,x,y);
     
 
 </string>

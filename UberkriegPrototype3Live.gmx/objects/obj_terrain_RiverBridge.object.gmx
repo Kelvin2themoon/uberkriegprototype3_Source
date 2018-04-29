@@ -70,6 +70,9 @@ mtype_heavyTracks   = 2;
             <kind>1</kind>
             <string>draw_self();
 draw_sprite_ext(spr_bridgeRiver_clear,crossing,x,y,1,1,1,image_blend,1);
+
+//smoke
+if( obj_map.terrains[x div 24, y div 24].isSmoke ) draw_sprite(spr_smoke,smoke_left-1,x,y);
 </string>
           </argument>
         </arguments>

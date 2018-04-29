@@ -46,8 +46,8 @@ SCOP_on     = false ;   //SCOP switch
 
 for ( i = 0 ; i &lt;= 4 ; i += 1)
     {
-    D2D_Atk[i]   = 130;
-    D2D_Def[i]   = 130;
+    D2D_Atk[i]   = 120;
+    D2D_Def[i]   = 110;
     D2D_Mov[i]   = 1  ;
     
     D2D_Fuel_R[i] = 2  ;
@@ -74,16 +74,16 @@ for ( i = 0 ; i &lt;= 13 ; i += 1)
     SCOP_Def[i]  += 10;
     }
     
-///APC move +1
+///APC move +2
 D2D_Mov[06] = 2;
         
 //reduced power to direct combat units    
-D2D_Atk[05] = 80;
-D2D_Atk[07] = 80;
-D2D_Atk[09] = 80;
-D2D_Atk[10] = 80;
-D2D_Atk[11] = 80;
-D2D_Atk[13] = 80;
+D2D_Atk[05] = 90;
+D2D_Atk[07] = 90;
+D2D_Atk[09] = 90;
+D2D_Atk[10] = 90;
+D2D_Atk[11] = 90;
+D2D_Atk[13] = 90;
 
 //Capture ability
 D2D_AdvanceCapture  = true ; //capture 1.5x

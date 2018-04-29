@@ -79,6 +79,8 @@ if ( river_edge != 0 &amp;&amp; instance_exists(obj_terrain_River) &amp;&amp; sp
     }
 //draw bridge
 draw_sprite_ext(spr_bridgeSea_clear,crossing,x,y,1,1,1,image_blend,1);
+//smoke
+if( obj_map.terrains[x div 24, y div 24].isSmoke ) draw_sprite(spr_smoke,smoke_left-1,x,y);
 </string>
           </argument>
         </arguments>

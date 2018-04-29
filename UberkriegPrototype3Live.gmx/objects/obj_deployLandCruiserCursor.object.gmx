@@ -400,10 +400,9 @@ draw_self();
 //draw Mouse
 draw_sprite(spr_mousePointer,global.P_Turn.number - 1, mouse_x, mouse_y);
 //draw attach able
-if( obj_map.units[global.posX,global.posY] !=0 )
+if(object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index, obj_property ))
     {
-    if( obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number 
-    and !obj_map.units[global.posX,global.posY].isCommander
+    if( obj_map.terrains[global.posX,global.posY].ownership = global.P_Turn.number 
     and (global.cursorFrame = 2 or global.cursorFrame = 1))
         {
          draw_sprite(spr_basicCursor_Icons,3,x,y);
