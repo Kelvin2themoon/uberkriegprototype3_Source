@@ -4,11 +4,11 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
-  <parentName>obj_terrain</parentName>
+  <persistent>-1</persistent>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
+    <event eventtype="7" enumb="68">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,41 +25,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Property: Parent Object Class
+            <string>///object description
 
-event_inherited(); // inhheret trom obj_terrain
-
-name = "property";            //overite obj_terrain
-isProperty = true; 
-
-
-ownership   = 0;            // ownership 0 = neutral and player 1~4
-vision      = 0;
-radio       = 0;
-resistance  = 20;           //used to resist capture
-income      = 1000;         // added to funds each turn to owner
-isCommander     = false;
-canRepair_g     = true; //can repair ground
-canResupply_g   = true; //can supply ground
-canHide         = true;     //overide obj_terrain
-canHidesmall    = true;
-
-//attributes for graphic detection
-isLand = true;               
-
-//radio checking
-isStanding = false;
-team = 0;
-
-
-
+/*
+created if entered one of the server modes
+independent presistant object that recieves save fires and changes turns
+via contniue room!
 
 </string>
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -76,20 +52,49 @@ team = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
-if (name = "HQ") image_index = ownership; 
-else if (isVisible) image_index = ownership;
-else image_index = 0;
-
-
-
-
+            <string>///packet listening (load new turn)
+if(serverMode==0){
+    var n_id = ds_map_find_value(async_load, "id");
+        show_debug_message(string(cSocket));
+    if n_id == cSocket
+        {
+        show_debug_message("Packet received");
+        //load data here
+         var t_buffer = ds_map_find_value(async_load, "buffer"); 
+        var cmd_type = buffer_read(t_buffer, buffer_u16 );
+        var bufferSize = buffer_read(t_buffer, buffer_u32);
+       // var bufferData = buffer_read(t_buffer, buffer_string);
+        //var inst = ds_map_find_value(socket_list, sock );
+        var quick_save = "quicksave.ubq";
+        show_debug_message(string(cmd_type));
+         show_debug_message(string(buffer_get_size(t_buffer)));
+        switch (cmd_type)
+            {
+            case 100:
+                var srBuffer = buffer_create(1, buffer_grow, 1);
+                //delete exsisting save
+                if (file_exists(quick_save)) file_delete(quick_save);
+                //create and open file
+                show_debug_message("Count= " + string(bufferSize));
+                //bufferSize=1;
+                var sz;
+               //for( i=0; i&lt;bufferSize; i++){
+                sz = bufferSize;//buffer_read(t_buffer, buffer_u16)
+                show_debug_message("Sz= " + string(sz));
+                buffer_resize(srBuffer, sz);
+                buffer_copy(t_buffer, 0, sz, srBuffer, 0)
+                buffer_save(srBuffer, quick_save);
+             //  }
+                
+                scr_quick_load(quick_save);
+            break;
+            }
+        }
+    }
 </string>
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -106,8 +111,10 @@ else image_index = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
-//draw_sprite(spr_PropertyFlage,ownership,x,y);
+            <string>///start new turn
+global.autoTurn = true;
+room_goto(rm_continue);
+
 </string>
           </argument>
         </arguments>

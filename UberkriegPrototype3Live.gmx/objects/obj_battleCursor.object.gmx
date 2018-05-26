@@ -1111,6 +1111,7 @@ with(global.P_Turn.CO)
           <argument>
             <kind>1</kind>
             <string>///Debug
+draw_text(12,12,string(obj_map.units[global.posX,global.posY]));
 //draw_text(12,12,"Krieg Metre Charge: "+ string(global.P_Turn.CO.charge) + "/" + string(star_value));
 
 /*

@@ -415,6 +415,7 @@
           <sprite>sprites\spr_minimap_radioboarder</sprite>
         </sprites>
       </sprites>
+      <sprite>sprites\spr_PropertyFlage</sprite>
     </sprites>
     <sprites name="Debug">
       <sprite>sprites\spr_DebugStart</sprite>
@@ -582,6 +583,7 @@
     <font>fonts\font7</font>
     <font>fonts\font8</font>
     <font>fonts\font9</font>
+    <font>fonts\font10</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>
@@ -611,6 +613,7 @@
     </objects>
     <objects name="Controllers">
       <object>objects\obj_MastertControls</object>
+      <object>objects\obj_NetworkControls</object>
     </objects>
     <objects name="Units">
       <object>objects\obj_unit</object>
@@ -723,6 +726,7 @@
     <room>rooms\rm_battleSceneTest</room>
     <room>rooms\room5</room>
     <room>rooms\room6</room>
+    <room>rooms\rm_game_networked</room>
   </rooms>
   <constants number="8">
     <constant name="CHECK_LAYRE">-64100</constant>

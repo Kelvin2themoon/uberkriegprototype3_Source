@@ -150,19 +150,24 @@ else if (global.target_unit.dummy = false )
     // unit is adjacent   (check for regular counter attack
     else if (  abs(global.acting_unit.x - global.target_unit.x) + abs(global.acting_unit.y - global.target_unit.y) = 24)
         {
+        show_debug_message("adj check passed");
        //check for Push
         if( (global.P_Turn.CO.COP_Push and global.P_Turn.CO.COP_on) or (global.P_Turn.CO.SCOP_Push and global.P_Turn.CO.SCOP_on))
             {
+            show_debug_message("push check passed");
             //move target unit away from acting unit
             push_x = global.target_unit.x - global.acting_unit.x;
             push_y = global.target_unit.y - global.acting_unit.y;
             //check inbound
             if( scr_inBound( (global.target_unit.x + push_x) div 24, (global.target_unit.y + push_y) div 24))
                 {
+                show_debug_message("boundery check passed");
                 //check if new space is clear and terrain is valis
-                if( obj_map.units[ (global.target_unit.x + push_x) div 24 , (global.target_unit.y + push_y) div 24] =0
-                and scr_check_move_cost(global.target_unit, obj_map.terrains[ (global.target_unit.x + push_x) div 24 , (global.target_unit.y + push_y) div 24]) !=99)
+                if( obj_map.units[ (global.target_unit.x + push_x) div 24 , (global.target_unit.y + push_y) div 24] = 0
+                //and scr_check_move_cost(global.target_unit, obj_map.terrains[ (global.target_unit.x + push_x) div 24 , (global.target_unit.y + push_y) div 24]) > 99
+                )
                     {
+                    show_debug_message("new position is clear, push action completed");
                     //clear current position
                     obj_map.units[ global.target_unit.x div 24 , global.target_unit.y div 24 ] = 0 ;
                     //move target unit to new space

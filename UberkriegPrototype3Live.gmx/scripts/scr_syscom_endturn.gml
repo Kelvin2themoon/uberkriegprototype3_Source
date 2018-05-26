@@ -7,7 +7,8 @@ with global.P_Turn {
     save_view_pos_x =   view_xview[0];
     save_view_pos_y =   view_yview[0];
     }
-    
+
+global.autoTurn = false;
 
 
 instance_create(0,0,obj_starting);

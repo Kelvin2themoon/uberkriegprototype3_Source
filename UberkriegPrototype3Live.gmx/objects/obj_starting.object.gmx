@@ -50,6 +50,45 @@ image_alpha = 0; //alpha value
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///save file send
+if(serverMode==1){        
+scr_quick_save("quicksave.ubq"); 
+//Send save file to client - Chris
+var saveBuffer= buffer_load("quicksave.ubq");
+var sendBuffer = buffer_create(256, buffer_grow, 1);
+var bufferName = "netGameData"
+ //Tell client how much sprite data to expect
+buffer_write(sendBuffer, buffer_u32, buffer_get_size(saveBuffer));
+
+//Send name of object so the client knows what to save it as
+buffer_write(sendBuffer, buffer_string, bufferName);
+if(serverMode==1){
+    network_send_packet(portNum, sendBuffer, buffer_tell(sendBuffer));
+    }else{
+    network_send_packet(cSocket, sendBuffer, buffer_tell(sendBuffer));
+    }
+//end of packet send
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -139,7 +178,7 @@ switch state {
     
     case "waiting" :
         image_alpha = 1;
-        if (keyboard_check_pressed(global.keyCONFIRM) or mouse_check_button_pressed(mb_left)){
+        if ((keyboard_check_pressed(global.keyCONFIRM) or mouse_check_button_pressed(mb_left)) or global.autoTurn){
             //switch to "fad out"
             state = "fade out"
             //change phasze to "main"
