@@ -28,8 +28,8 @@
             <string>///Networking Global Variables
 
 //server mode, defalt to host server (1), client mode = 0
-global.server_mode = 1;
-
+global.serverMode = 1;
+global.turns=0;
 client_isConnected = false;
 server_isConnected = false;
 
@@ -235,8 +235,8 @@ if enteringIP global.serverAddr = keyboard_string;
           <argument>
             <kind>1</kind>
             <string>///Server Listening
-
-
+if(serverMode==1)
+{
 var n_id = ds_map_find_value(async_load, "id");         //get the id of the socket receiving the data
 if n_id == sState                                //check id to make sure it is that of the server socket
     {
@@ -251,6 +251,7 @@ if n_id == sState                                //check id to make sure it is t
         client_isConnected = true;
         }
     }
+}
 </string>
           </argument>
         </arguments>
@@ -343,6 +344,7 @@ globalvar socketlist;
 
 ipAddr = global.serverAddr;
 portNum = 15316;
+show_debug_message(ipAddr);
 if(serverMode==0){
     socketlist = ds_list_create();
     cSocket = network_create_socket(network_socket_tcp);

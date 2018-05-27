@@ -66,7 +66,9 @@ image_alpha = 0; //alpha value
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///save file send
+            <string>///save file send old
+
+/*
 if(serverMode==1){        
 scr_quick_save("quicksave.ubq"); 
 //Send save file to client - Chris
@@ -78,13 +80,59 @@ buffer_write(sendBuffer, buffer_u32, buffer_get_size(saveBuffer));
 
 //Send name of object so the client knows what to save it as
 buffer_write(sendBuffer, buffer_string, bufferName);
+}
 if(serverMode==1){
     network_send_packet(portNum, sendBuffer, buffer_tell(sendBuffer));
-    }else{
+ }else{
     network_send_packet(cSocket, sendBuffer, buffer_tell(sendBuffer));
-    }
+ }*/
 //end of packet send
-}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///save file send new
+//auto save turn
+        scr_quick_save("quicksave2.ubq"); 
+        scr_quick_save("quicksave.ubq"); 
+        //Send save file to client - Chris
+        var saveBuffer= buffer_load("quicksave.ubq");
+        var sendBuffer = buffer_create(256, buffer_grow, 1);
+         buffer_write(sendBuffer, buffer_u16, 100);
+         //Tell client how much sprite data to expect
+        buffer_write(sendBuffer, buffer_u32, buffer_get_size(saveBuffer));
+        show_debug_message("saveBuffer is " + string(buffer_get_size(saveBuffer)) + " bytes large");
+        buffer_copy(saveBuffer, 0, buffer_get_size(saveBuffer), sendBuffer, buffer_get_size(sendBuffer));
+        var packNum = ceil(buffer_get_size(sendBuffer)/1450);
+       //buffer_write(sendBuffer, buffer_string, bufferName);
+        show_debug_message("Sending save data: " + string(buffer_get_size(sendBuffer)) + " in " + string(buffer_tell(sendBuffer)) + " packets.");
+        if(global.turns&gt;0){
+            if(serverMode==1)
+                  var sent = network_send_packet(ds_list_find_value(socketlist, 0), sendBuffer, buffer_get_size(sendBuffer));
+            else
+                  var sent = network_send_packet(cSocket, sendBuffer, buffer_tell(sendBuffer));
+            show_debug_message(string(sent) + "bytes of data sent to " + string(ds_list_find_value(socketlist, 0)));
+        }
+       
+        global.turns++;
+        //end of packet send
 </string>
           </argument>
         </arguments>
