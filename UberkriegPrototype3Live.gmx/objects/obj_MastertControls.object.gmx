@@ -80,9 +80,6 @@ draw_set_font(ft_AuroraEx);
 draw_set_colour(global.c_uiWhite);
 draw_set_halign(fa_left);
 
-//create AVI recorder
-instance_create(0,0,oRecorder);
-
 global.window_size = 1;
 
 

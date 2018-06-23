@@ -555,12 +555,6 @@
       <script>scripts\scr_checkInfiltrateTargets.gml</script>
       <script>scripts\scr_exe_infiltrate.gml</script>
     </scripts>
-    <scripts name="AVIRecording">
-      <script>scripts\InitRecorder.gml</script>
-      <script>scripts\StartRecording.gml</script>
-      <script>scripts\AddFrame.gml</script>
-      <script>scripts\EndRecording.gml</script>
-    </scripts>
     <script>scripts\scr_calc_battleStrength.gml</script>
     <scripts name="Drawing">
       <script>scripts\scr_draw_num.gml</script>
@@ -688,9 +682,6 @@
         </objects>
       </objects>
     </objects>
-    <objects name="AVIRecording">
-      <object>objects\oRecorder</object>
-    </objects>
     <objects name="Map Edit acc.">
       <object>objects\obj_promote_pointer</object>
     </objects>
@@ -709,6 +700,9 @@
       <object>objects\obj_CO_11</object>
       <object>objects\obj_CO_12</object>
       <object>objects\obj_CO_13</object>
+    </objects>
+    <objects name="Networking">
+      <object>objects\obj_Networking</object>
     </objects>
   </objects>
   <timelines name="timelines">

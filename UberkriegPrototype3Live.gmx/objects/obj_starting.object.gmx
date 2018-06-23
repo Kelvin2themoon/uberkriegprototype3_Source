@@ -126,11 +126,8 @@ switch state {
         //change cursor pose to saved (to player)
         
         //auto save turn
-        scr_quick_save("quicksave.ubq"); 
+        //scr_quick_save("quicksave.ubq"); 
         
-
-        
-            
             }
         else{
             image_alpha += 0.1 ;
