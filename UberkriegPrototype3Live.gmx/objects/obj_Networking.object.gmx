@@ -61,7 +61,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.joinServer = true;
+            <string>/*
+global.joinServer = true;
 
 msg = get_string_async("Host server IP address","127.0.0.1");
 </string>
@@ -86,7 +87,8 @@ msg = get_string_async("Host server IP address","127.0.0.1");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.hostingServer = true;
+            <string>/*
+global.hostingServer = true;
 
 global.serverID = network_create_server(network_socket_tcp, 12345, 2);
 msg = -1;

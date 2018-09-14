@@ -51,7 +51,7 @@ isStanding = false;
 vision          = 0;
 radio           = 0;
 income          = 1000;         // added to funds each turn to owner
-isCommander     = false;
+isCommander     = true;
 
 
 </string>

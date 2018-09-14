@@ -39,14 +39,14 @@ fuel    = 15;
 ammo    = 3; 
 isDisrupted = false; //true when hit by Covert.Op disrupter
 //max fuel &amp; ammo
-max_fuel    = 15;
+max_fuel    = 20;
 max_ammo    = 3;   
 
 //unit static variables
 charge      = 4 ;
 cost        = global.cost[unit_index] ; // see cost array in obj_MasterControlls
-move_type   = "Heavy Boots";
-move_points = 3;
+move_type   = "Boots";
+move_points = 4;
 vision      = 2;
 radio       = 3;
 

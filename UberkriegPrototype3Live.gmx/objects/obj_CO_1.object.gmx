@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 01: Vision CO
+            <string>///CO 01: Vision CO 
 
 event_inherited();
 
@@ -55,8 +55,8 @@ COFX_PerfectVision  = true ;
 COFX_DeployDummy    = true ;
 COFX_PerfectIntel   = true ;
 
-COP_DeployDummy = 2;
-SCOP_DeployDummy = 5;
+COP_DeployDummy = 1;
+SCOP_DeployDummy = 3;
 
 //generic defence boost
 var i =1;

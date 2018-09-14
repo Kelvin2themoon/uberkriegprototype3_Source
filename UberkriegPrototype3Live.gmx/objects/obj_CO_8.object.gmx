@@ -49,12 +49,15 @@ var i =1;
 for( i = 1 ; i &lt;= 13 ; i++ )
     {
     D2D_Cost[i] = global.cost[i]*(120/100);
+    COP_Cost[i] = global.cost[i]*(120/100);
+    SCOP_Cost[i] = global.cost[i]*(120/100);
+    
     D2D_Atk[i]  = 120;
     D2D_Def[i]  = 120;
     COP_Atk[i]  = 140;
     COP_Def[i]  = 140;
-    SCOP_Atk[i] = 180;
-    SCOP_Def[i] = 180;
+    SCOP_Atk[i] = 160;
+    SCOP_Def[i] = 160;
     }
     
 SCOP_landCruiser = true;
