@@ -50,9 +50,17 @@ global.mode = "Basic Battle";
             <string>///creat &amp; load map
 global.map = instance_create(0,0,obj_map);
 
-
-if   ( file_exists ("quicksave.ubq")) scr_quick_load("quicksave.ubq");
-else scr_ubermap_load("2P_SabreRanger_v3.ubm");
+//non-networked mode
+if global.network_mode = 0{
+    if   ( file_exists ("quicksave.ubq")) scr_quick_load("quicksave.ubq");
+    else scr_ubermap_load("2P_SabreRanger_v3.ubm");
+    }
+//network play
+else{
+    if   ( file_exists ("recieved_turn.ubm")) scr_quick_load("recieved_turn.ubm");
+    else if ( file_exists ("quicksave.ubq")) scr_quick_load("quicksave.ubq");
+    else scr_ubermap_load("2P_SabreRanger_v3.ubm");
+    } 
 </string>
           </argument>
         </arguments>

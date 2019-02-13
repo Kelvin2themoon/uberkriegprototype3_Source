@@ -126,7 +126,27 @@ switch state {
         //change cursor pose to saved (to player)
         
         //auto save turn ( for continue )
-        scr_quick_save("quicksave.ubq"); 
+        scr_quick_save("quicksave.ubq");
+        //if netowrk mode is server or client************************************************************************** start of network send action
+        if global.network_mode !=0{
+            //load save to buffer
+            var b_next_turn = buffer_load("quicksave.ubq");
+            //readout
+            global.last_network_event = "file loaded in buffer, size: " + string(buffer_get_size(b_next_turn));
+            //send as server
+            if global.network_mode =1 {
+                network_send_packet(global.sSocket,b_next_turn,buffer_get_size(b_next_turn));
+                global.last_network_event = "buffer sent, size: " + string(buffer_get_size(b_next_turn));
+                buffer_delete(b_next_turn);
+                }
+            //send as client    
+            if global.network_mode =2 {
+                network_send_packet(global.cSocket,b_next_turn,buffer_get_size(b_next_turn));
+                global.last_network_event = "buffer sent, size: " + string(buffer_get_size(b_next_turn));
+                buffer_delete(b_next_turn);
+                } 
+            }
+        //******************************************************************************************************************end of network send action
         
             }
         else{
@@ -136,14 +156,29 @@ switch state {
     
     case "waiting" :
         image_alpha = 1;
-        if (keyboard_check_pressed(global.keyCONFIRM) or mouse_check_button_pressed(mb_left)){
+        if (((keyboard_check_pressed(global.keyCONFIRM) or mouse_check_button_pressed(mb_left)) and global.network_mode = 0) or (global.network_mode != 0 and global.network_turn_switch) ){
+            //switch network turn
+            global.network_turn_switch = false;
             //switch to "fad out"
             state = "fade out"
             //change phasze to "main"
             global.Phaze = "Upkeep";
             //pre-check standing
             //scr_updateStanding_global();
-            //scr_updateGlobalVision(); 
+            //scr_updateGlobalVision();
+            
+            //change BGM************************************************************************************************************************************tempBGM
+            if global.BGM_on{
+                audio_stop_sound(global.BGM);
+                audio_destroy_stream(global.BGM);
+                global.BGM = audio_create_stream(global.tempBGM[global.P_Turn.number]);
+                audio_sound_gain(global.BGM,0.5,0);
+                audio_play_sound(global.BGM,1,true);
+                }
+            //audio cue for new turn in netowrk mode
+            if ( global.network_mode !=0 and !global.BGM_on ) audio_play_sound(sfx_bark,2,false); 
+            
+             
             }
         break;
     case "fade out" :

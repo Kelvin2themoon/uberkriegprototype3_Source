@@ -227,6 +227,61 @@ global.Disruptor_spread = false; // disruptor propigates throught target enemy u
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///variable, netowrk mode
+///initite network variables
+
+global.network_mode = 0;
+/*
+0 - not networked
+1 - host (server)
+2 - client
+*/
+
+global.last_network_event = "nothing";
+//use this variable to start nest turn fter a networking event
+global.network_turn_switch = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///testing stream BGM from externa file
+test_bgm = audio_create_stream("bgm1.ogg");
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="1">
       <action>
@@ -317,6 +372,75 @@ switch  (global.cursorFrame)
             break;        
     }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="68">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// recieving saves and starting next turn
+
+//chek data type
+if ds_map_find_value(async_load, "type") = network_type_data{
+    //recive and lable buffer
+    var b_incoming = ds_map_find_value(async_load, "buffer");
+    
+    //save buffer in app data
+    if file_exists("recieved_turn.ubm")
+    file_delete("recieved_turn.ubm");
+    
+    buffer_save(b_incoming,"recieved_turn.ubm");
+    
+    //switch network turning on
+    global.network_turn_switch = true;
+    
+    //display size
+    global.last_network_event = "recieved dile size: " + string(buffer_get_size(b_incoming));
+    
+    //auto start next turn
+    room_goto(rm_continue);
+    
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///destroy audio stream to prevent memory leak
+audio_destroy_stream(test_bgm);
 </string>
           </argument>
         </arguments>

@@ -46,6 +46,7 @@
     <sound>sound\sfx_TypeWritterKey_1</sound>
     <sound>sound\sfx_UberkriegCharged</sound>
     <sound>sound\sfx_KriegSkillCharged</sound>
+    <sound>sound\sfx_bark</sound>
   </sounds>
   <sprites name="sprites">
     <sprites name="Terrain">
@@ -629,8 +630,8 @@
         <object>objects\obj_battleScene_controller</object>
       </objects>
     </objects>
+    <object>objects\obj_battleController_basic</object>
     <objects name="Basic Battle ">
-      <object>objects\obj_battleController_basic</object>
       <object>objects\obj_battleController_continue</object>
       <object>objects\template_sandboxCursor</object>
       <object>objects\obj_battleCursor</object>
@@ -700,9 +701,6 @@
       <object>objects\obj_CO_11</object>
       <object>objects\obj_CO_12</object>
       <object>objects\obj_CO_13</object>
-    </objects>
-    <objects name="Networking">
-      <object>objects\obj_Networking</object>
     </objects>
   </objects>
   <timelines name="timelines">

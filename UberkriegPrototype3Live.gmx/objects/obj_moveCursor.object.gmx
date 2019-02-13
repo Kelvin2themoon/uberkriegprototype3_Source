@@ -820,9 +820,9 @@ if (scr_inBound(global.posX,global.posY))
         if(obj_map.units[global.posX,global.posY] != 0)
             {
             //chang range to target unit
-            radioAssistRange = scr_getUnitRadioRange(obj_map.units[global.posX,global.posY],obj_map.terrains[global.posX,global.posY]);
+             if ( obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number)   radioAssistRange = scr_getUnitRadioRange(obj_map.units[global.posX,global.posY],obj_map.terrains[global.posX,global.posY]);
             //if target unit is field officer
-            if( obj_map.units[global.posX,global.posY].name = "Officer")
+            if ( obj_map.units[global.posX,global.posY].name = "Officer")
                 {
                 radioAssist_sprite = spr_radioAssist_bronze;
                 }

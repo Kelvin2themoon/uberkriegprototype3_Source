@@ -8,6 +8,71 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///initiate netorking variables, check master controles for network mode
+
+//keeps track of last network event and checks
+global.last_network_event = "nothing";
+//assign server end port
+global.sPort = 15316;
+//empty server ip used from client side, defaults to same device
+global.server_ip = "127.0.0.1";
+//entering ip in text box switch via enter
+enteringIP = false;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///temp sount settings
+
+//external bgm switch for prototype
+global.BGM_on = false;
+// bgm's
+global.tempBGM[1] = "bgm1.ogg" ;
+global.tempBGM[2] = "bgm2.ogg" ;
+global.tempBGM[3] = "bgm3.ogg" ;
+global.tempBGM[4] = "bgm4.ogg" ;
+
+global.BGM = noone;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -103,6 +168,64 @@ if keyboard_check_pressed( ord("R"))
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///enter ip address
+if enteringIP global.server_ip = keyboard_string;
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="68">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///listn for connection request from client
+
+if global.network_mode = 1{
+    //chwck connwct type
+    if ds_map_find_value(async_load, "type") = network_type_connect{
+        global.last_network_event = "conection request recieved!";
+        //get socket used and stor as server socket
+        global.sSocket = ds_map_find_value(async_load, "socket");
+        }
+    }
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -121,27 +244,165 @@ if keyboard_check_pressed( ord("R"))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>///draw stuff
+draw_self();
 
-draw_text(227,157,"Prototype (v3.11 C)");
+draw_text(227,157,"Prototype (v3.12 B)");
+draw_text(227,157+16,"2019.02.12");
 
-draw_text(227,230-16,"F1: Start Game");
-draw_text(227,230+00,"F2: Map Editor");
-draw_text(227,230+16,"F4: Load Save");
+draw_text(227,210-16,"F1: Start Game");
+draw_text(227,210+00,"F2: Map Editor");
+draw_text(227,210+16,"F4: Load Save");
 
-//draw_text(227,230+ 16*8,"F5: Host Network Game");
-//draw_text(227,230+ 16*9,"F6: Join Network Game");
-
-draw_text(227, 230 + 16*3 , "P1. Cookieland   CO : " + string(global.P1_CO));
-draw_text(227, 230 + 16*4 , "P2. Pepperland CO : " + string(global.P2_CO)); 
-draw_text(227, 230 + 16*5 , "P3. Marmalland CO : " + string(global.P3_CO)); 
-draw_text(227, 230 + 16*6 , "P4. Pretzeland CO : " + string(global.P4_CO));
+draw_text(227, 210 + 16*3 , "P1. Cookieland   CO : " + string(global.P1_CO));
+draw_text(227, 210 + 16*4 , "P2. Pepperland CO : " + string(global.P2_CO)); 
+draw_text(227, 210 + 16*5 , "P3. Marmalland CO : " + string(global.P3_CO)); 
+draw_text(227, 210 + 16*6 , "P4. Pretzeland CO : " + string(global.P4_CO));
 
 
-draw_text(400, 230 + 16*3 , "P1.Team : " + string(global.P1_Team));
-draw_text(400, 230 + 16*4 , "P2.Team : " + string(global.P2_Team)); 
-draw_text(400, 230 + 16*5 , "P3.Team : " + string(global.P3_Team)); 
-draw_text(400, 230 + 16*6 , "P4.Team : " + string(global.P4_Team));    
+draw_text(400, 210 + 16*3 , "P1.Team : " + string(global.P1_Team));
+draw_text(400, 210 + 16*4 , "P2.Team : " + string(global.P2_Team)); 
+draw_text(400, 210 + 16*5 , "P3.Team : " + string(global.P3_Team)); 
+draw_text(400, 210 + 16*6 , "P4.Team : " + string(global.P4_Team));
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw networking related stuff
+
+
+draw_text(227, 210 + 16*8 , "F5: Host Game");
+draw_text(227, 210 + 16*9 , "F6: Connect to address:");
+
+//text box server IP input
+draw_rectangle(400, 210 + 16*9 +2-4,530, 210 + 16*9 +2 + 17 -4 ,true);
+//draw inside box
+draw_text(404, 210 + 16*9, string(global.server_ip));
+//draw input line
+if (global.blinking and enteringIP)
+draw_line(404 + string_width(global.server_ip), 210 + 16*9 ,404 + string_width(global.server_ip), 210 + 16*9 +15-4);
+
+
+///draw network mode
+draw_text(227, 210 + 16*10 +4, "network mode: "+ string(global.network_mode));
+///draw last network event
+draw_text(227, 210 + 16*11 +4, global.last_network_event);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///BGM status
+if global.BGM_on draw_text(12,12,"BGM on")
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="117">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///connect to server
+
+//switch to client mode
+global.network_mode = 2;
+//create socket
+global.cSocket = network_create_socket(network_socket_tcp);
+//Connect to server (connect to same device:127.0.0.1, recieving server port 15316 
+var isConnected = network_connect(global.cSocket, global.server_ip, global.sPort);
+//change debugfidplay
+global.last_network_event = "connect request sent to server!";
+
+//check if connection worked
+if isConnected &lt; 0 {
+    global.last_network_event = "connect failed!";
+    }
+else {
+    global.last_network_event = "connect Succeeded";
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="116">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// create and set up server
+
+//create server ( type tcp, port, max 1 client) returns REAL(server id)
+global.server = network_create_server(network_socket_tcp , global.sPort, 1)
+
+//check if server worked
+if global.server &lt; 0{
+    global.last_network_event = "Failed to create server!";
+    }
+else{
+    show_debug_message("Listening on " + string(global.sPort));
+    global.last_network_event = "server created!";
+    //switch server network type
+    global.network_mode = 1;
+    }
 </string>
           </argument>
         </arguments>
@@ -241,6 +502,68 @@ room_goto(rm_MapEditor);
             <kind>1</kind>
             <string>///New Battle
 room_goto(rm_game_Basic);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="77">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///switch BGM on (dynamically load from app data)
+
+if global.BGM_on {
+    //if on switch off
+    global.BGM_on = false;
+    }
+else{
+    //swith on
+    global.BGM_on = true;
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="13">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//start IP adress input
+
+if enteringIP = false{
+    global.server_ip = "";
+    keyboard_string = "";
+    enteringIP = true;
+    }
+else enteringIP = false;
 </string>
           </argument>
         </arguments>
