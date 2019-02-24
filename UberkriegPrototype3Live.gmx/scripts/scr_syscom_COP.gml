@@ -23,8 +23,14 @@ with (obj_unit)
         //indirect fire act again
         //if (global.P_Turn.CO.COP_RangeMoveAgain and (unit_index = 3 or unit_index = 8 or unit_index = 12 ) and capturing = 0) state = "idle";
         
-        //NEW!! replace act and move again with Act_Agn swith fire range to zero if not want attack, capture must be turned off manually
+        //replace act and move again with Act_Agn swith fire range to zero if not want attack, capture must be turned off manually
         if (global.P_Turn.CO.COP_ActAgn[unit_index] and capturing = 0 and !isDisrupted) state = "idle";
+        //NEW!! (v3.12C - change movAgain to only affect exhausted units)
+          if (global.P_Turn.CO.COP_MovAgn[unit_index] and capturing = 0 and !isDisrupted and state = "exhaust" ){
+                state = "idle";
+                isMovAgn = true;
+                } 
+        
         //drain HP
         if( global.P_Turn.CO.COP_RadioDrainHP > 0 )
             {

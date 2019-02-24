@@ -58,13 +58,7 @@ COFX_PerfectIntel   = true ;
 COP_DeployDummy = 1;
 SCOP_DeployDummy = 3;
 
-//generic defence boost
-var i =1;
-for( i = 1 ; i &lt;= 13 ; i++ )
-    {
-    COP_Def[i]  = 110;
-    SCOP_Def[i] = 110;
-    }
+
 
 
 

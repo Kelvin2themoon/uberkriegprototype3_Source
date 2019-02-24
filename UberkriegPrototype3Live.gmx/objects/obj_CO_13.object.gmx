@@ -31,7 +31,7 @@ event_inherited();
 
 // Initiate Parent Object and defaults
 
-index = 13 ;
+index = 11 ;
 name = "aux move+ " ;
 
 //COP and SCOP Varialbes

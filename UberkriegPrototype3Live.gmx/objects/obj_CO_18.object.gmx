@@ -25,13 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 08: cost+ CO
+            <string>///CO 18: cost+ CO cbackup copy
 
 event_inherited();
 
 // Initiate Parent Object and defaults
 
-index = 11 ;
+index = 18 ;
 name = "cost+f" 
 
 

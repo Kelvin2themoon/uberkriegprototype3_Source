@@ -35,14 +35,7 @@ event_inherited();
 if global.capture      ds_list_add(menu_content,"capture");
 
 //special case for engage
-if  (   
-        global.engage 
-        and
-        !(global.P_Turn.CO.COP_on and global.P_Turn.CO.COP_MovAgn[global.acting_unit.unit_index])
-    )        
-    ds_list_add(menu_content,"engage");
-
-
+if ( global.engage and!global.acting_unit.isMovAgn) ds_list_add(menu_content,"engage");
 if global.join         ds_list_add(menu_content,"join");
 if global.attach       ds_list_add(menu_content,"attach");
 if global.supply       ds_list_add(menu_content,"supply");
@@ -52,7 +45,7 @@ if global.drop_B       ds_list_add(menu_content,"drop_B");
 if global.infiltrate   ds_list_add(menu_content,"infiltrate");
 if global.hide         ds_list_add(menu_content,"hide");
 if global.appear       ds_list_add(menu_content,"appear");
-if global.disrupt      ds_list_add(menu_content,"disrupt");
+if (global.disrupt and!global.acting_unit.isMovAgn) ds_list_add(menu_content,"disrupt");
 if global.wait         ds_list_add(menu_content,"wait");
 
 row_max = ds_list_size(menu_content) - 1 ; 

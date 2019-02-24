@@ -31,8 +31,6 @@
 with obj_path_node instance_destroy();
 ds_priority_clear(global.move_order);
 
-
-
 //deactivate battle cursor
 instance_deactivate_object(obj_battleCursor);
 

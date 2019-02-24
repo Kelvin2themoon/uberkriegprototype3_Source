@@ -25,14 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 06: Range+ CO (Ver.1 - Back Up)
+            <string>///CO 16: Range+ CO (Ver.1 - Back Up)
 
 event_inherited();
 
 // Initiate Parent Object and defaults
 
-index = 12 ;
-name = "range+" 
+index = 16 ;
+name = "range+ v.1" 
 
 
 //COP and SCOP Varialbes

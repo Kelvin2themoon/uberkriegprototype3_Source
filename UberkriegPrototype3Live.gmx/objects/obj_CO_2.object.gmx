@@ -52,8 +52,8 @@ SCOP_GainHP = 5 ;
 var i =1;
 for( i = 1 ; i &lt;= 13 ; i++ )
     {
-    COP_Def[i]  = 120;
-    SCOP_Def[i] = 130;
+    COP_Def[i]  = 110;
+    SCOP_Def[i] = 120;
     }
 
 </string>

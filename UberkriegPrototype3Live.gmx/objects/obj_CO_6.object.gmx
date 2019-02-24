@@ -49,20 +49,20 @@ charge = 0;
 D2D_Atk[03]   = 120;
 D2D_Rng[03]   = 1  ;
 COP_Atk[03]   = 0  ;
-COP_Rng[03]   = -4 ;
+//COP_Rng[03]   = -4 ;
 SCOP_Atk[03]  = 100;
 SCOP_Rng[03]  = 0  ;
-COP_ActAgn[03]    = true;
+COP_MovAgn[03]    = true;
 SCOP_ActAgn[03]   = true;
 
 //Artillery
 D2D_Atk[08]   = 120;
 D2D_Rng[08]   = 1  ;
 COP_Atk[08]   = 0  ;
-COP_Rng[08]   = -6 ;
+//COP_Rng[08]   = -6 ;
 SCOP_Atk[08]  = 100;
 SCOP_Rng[08]  = 0  ;
-COP_ActAgn[08]    = true;
+COP_MovAgn[08]    = true;
 SCOP_ActAgn[08]   = true;
 
 
@@ -70,20 +70,19 @@ SCOP_ActAgn[08]   = true;
 D2D_Atk[12]   = 120;
 D2D_Rng[12]   = 1  ;
 COP_Atk[12]   = 0  ;
-COP_Rng[12]   = -8 ;
+//COP_Rng[12]   = -8 ;
 SCOP_Atk[12]  = 100;
 SCOP_Rng[12]  = 0  ;
-COP_ActAgn[12]    = true;
+COP_MovAgn[12]    = true;
 SCOP_ActAgn[12]   = true;
-
 
 //Land Cuiser
 D2D_Atk[13]   = 100;
 D2D_Rng[13]   = 1  ;
-COP_Atk[13]   = 0  ;
-COP_Rng[13]   = 1  ;
-SCOP_Atk[13]  = 100;
-SCOP_Rng[13]  = 0  ;
+//COP_Atk[13]   = 0  ;
+//COP_Rng[13]   = 1  ;
+//SCOP_Atk[13]  = 100;
+//SCOP_Rng[13]  = 0  ;
 
 //direct combat units Atk reduction
 D2D_Atk[01]   = 80; //infantry
@@ -96,14 +95,6 @@ D2D_Atk[90]   = 80; //AA
 D2D_Atk[10]   = 80; //covert op
 D2D_Atk[11]   = 80; //heavy tank
 
-//generic defence boost
-var i =1;
-for( i = 1 ; i &lt;= 13 ; i++ )
-    {
-    COP_Def[i]  = 110;
-    SCOP_Def[i] = 110;
-    }
-    
 //COP_RangeMoveAgain = true;
 //SCOP_RangeMoveAgain = true;
 

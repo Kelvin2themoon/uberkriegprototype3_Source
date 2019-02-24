@@ -200,7 +200,6 @@
           <sprite>sprites\spr_greenCursor</sprite>
           <sprite>sprites\spr_redCursor</sprite>
           <sprite>sprites\spr_CruiserPlusCursor</sprite>
-          <sprite>sprites\spr_mousePointer</sprite>
           <sprite>sprites\spr_mouseViewScrole</sprite>
           <sprite>sprites\spr_radioAssist_gold</sprite>
           <sprite>sprites\spr_rangeAssist</sprite>
@@ -210,6 +209,12 @@
           <sprite>sprites\spr_radioAssist_B</sprite>
           <sprite>sprites\spr_radioAssist_bronze</sprite>
           <sprite>sprites\spr_Hazzard</sprite>
+          <sprite>sprites\sprite316</sprite>
+          <sprites name="Mouse">
+            <sprite>sprites\spr_mouseSlapper</sprite>
+            <sprite>sprites\spr_mousePointer</sprite>
+            <sprite>sprites\spr_mouseGrabber</sprite>
+          </sprites>
         </sprites>
         <sprites name="checks">
           <sprite>sprites\spr_rangecheck_red</sprite>
@@ -435,6 +440,7 @@
       <sprite>sprites\spr_unitStats_Supply</sprite>
       <sprite>sprites\spr_unitStats_Vet</sprite>
       <sprite>sprites\spr_unitStats_Cap</sprite>
+      <sprite>sprites\spr_unitStats_Move2</sprite>
       <sprite>sprites\spr_unitStats_Infiltrate</sprite>
       <sprite>sprites\spr_unitStats_Load</sprite>
       <sprite>sprites\spr_unitStats_Hide</sprite>
@@ -577,6 +583,7 @@
     <font>fonts\font7</font>
     <font>fonts\font8</font>
     <font>fonts\font9</font>
+    <font>fonts\font10</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>
@@ -642,6 +649,7 @@
         <object>objects\obj_miniwin</object>
         <object>objects\obj_player</object>
         <object>objects\obj_topwin</object>
+        <object>objects\obj_grabHand</object>
       </objects>
       <objects name="Turn Event Objects">
         <object>objects\obj_starting</object>
@@ -698,8 +706,8 @@
       <object>objects\obj_CO_8</object>
       <object>objects\obj_CO_9</object>
       <object>objects\obj_CO_10</object>
-      <object>objects\obj_CO_11</object>
-      <object>objects\obj_CO_12</object>
+      <object>objects\obj_CO_18</object>
+      <object>objects\obj_CO_16</object>
       <object>objects\obj_CO_13</object>
     </objects>
   </objects>

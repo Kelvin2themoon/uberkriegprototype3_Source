@@ -168,6 +168,7 @@ if ( obj_map.units[x div 24, y div 24] != 0)
                 if (isCommander)            draw_sprite( spr_unitStats_Radio,0,x,y);
                 if (isHidden)               draw_sprite(spr_unitStats_Hide,0,x,y);
                 if (!isStanding and global.blinking)    draw_sprite(spr_unitStats_Radio,3,x,y);
+                if (isMovAgn)                         draw_sprite(spr_unitStats_Move2,3,x,y);
                 if (isDisrupted and !global.blinking)   draw_sprite(spr_unitStats_Disrupted,0,x,y);
                 if (isInfiltrate and global.blinking)   draw_sprite(spr_unitStats_Infiltrate,0,x,y);
                 ///DRAW Power if power on
@@ -233,6 +234,9 @@ if (on_path){
             <string>///debug
 
 //if CO_Field[global.P_Turn.number] draw_text(x,y,"F");
+
+
+
 </string>
           </argument>
         </arguments>

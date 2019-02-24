@@ -109,6 +109,35 @@ c_radioAssist_sprite = -1;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Mouse Controll Variables
+mScroll_on = false;
+//mouse over
+mox = 0;
+moy = 0;
+mou = 0;
+moUnitRadioAssist_on = false;
+moUnitRadioAssist_range = 0;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="3">
       <action>
@@ -255,10 +284,12 @@ if (alarm[1] = -1 )
     {
     switch(keyboard_key)
         {
+        
+        // reset all range checks if no action
         case(vk_nokey):
             alarm[1] = 0;
             global.cursorkey_delay = global.cursorKey_startspeed ;
-            if isOnGlobalRadioCheck = false scr_rangeCheck_reset();
+            if (isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range = false) scr_rangeCheck_reset();   
             break;
         
         case vk_up :
@@ -380,8 +411,8 @@ if (alarm[1] = -1 )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///check if mouse will scroll
-
+            <string>///check if mouse will scroll commented out
+/* Removed in favor of drag and scroll
 //reset mscroll
 mscroll = 0;
 dmscroll = -1;
@@ -443,221 +474,8 @@ switch (mscroll)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Mouse Controls
-
-
-//reset can mouse deploy
-can_mouse_deploy = false;
-
-var mpx = mouse_x div 24 ;
-var mpy = mouse_y div 24 ;
- 
-
-//check for deploy
-
-if (scr_inBound(mpx,mpy))
-    {
-    if (object_is_ancestor( obj_map.terrains[mpx,mpy].object_index,obj_property))
-        { 
-        if  (   
-            obj_map.terrains[mpx,mpy].name = "Base" 
-            and obj_map.terrains[mpx,mpy].ownership = global.P_Turn.number 
-            and obj_map.terrains[mpx,mpy].isStanding
-            and obj_map.units[mpx,mpy] = 0 
-            )
-            {
-            can_mouse_deploy = true;
-            }
-        }    
-    }
-
-//left click    
-if(mouse_check_button_pressed(mb_left) and !menuExitDelay)
-    {
-    move_ready = false;
-    mousePosX = mouse_x div 24
-    mousePosY = mouse_y div 24
-    
-    if (scr_inBound(mousePosX,mousePosY))
-        {
-        //change curosr position
-        x = (mousePosX)*24;
-        y = (mousePosY)*24;
-        
-        global.posX = x div 24;
-        global.posY = y div 24;
-        
-        //juice
-        scr_cursorKey_juice(1,global.cursorKey_sfx);
-        
-        //check for ally unit
-        if(obj_map.units[global.posX,global.posY] !=0)
-            {
-            if  ( 
-                obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number 
-                and obj_map.units[global.posX,global.posY].state != "exhaust"
-                )
-                {
-                //initiate move ready
-                move_ready = true;
-                }
-            }
-        }
-        //turn off deploy icon
-        cursor_icon = -1;
-        
-        //local property radio chech if terrain i sproperty
-        if (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,obj_property))
-            {
-            scr_rangeCheck_reset();
-            scr_updateLocalRadio(obj_map.terrains[global.posX,global.posY]);
-            isOnGlobalRadioCheck = true;
-            }
-        
-        else
-            {
-            //turn on global radio check
-            scr_globalRadioCheck();
-            isOnGlobalRadioCheck = true;
-            }
-        
-        //set alarm for releas delay for deploy and syscom menus
-        alarm[2] = 10;
-        menu_ok = true;
-    }
-    
-    
-if(mouse_check_button(mb_left) and !menuExitDelay)
-    {
-    //turn off deploy icon
-    cursor_icon = -1;
-    //juice
-    if (global.posX != mpx or global.posY != mpy) scr_cursorKey_juice(1,-1); //juice 
-    
-    mousePosX = mouse_x div 24
-    mousePosY = mouse_y div 24
-  
-    if (scr_inBound(mousePosX,mousePosY) )
-        {
-        //change curosr position
-        x = (mousePosX)*24;
-        y = (mousePosY)*24;
-        
-        global.posX = x div 24;
-        global.posY = y div 24;
-        }
-    if ( mouse_check_button(mb_right) and  obj_map.units[global.posX,global.posY] !=0 and move_ready )
-        {
-        //start unit Command
-        x = (mousePosX)*24;
-        y = (mousePosY)*24;
-                        
-        global.posX = x div 24;
-        global.posY = y div 24;               
-                        
-        //move_ready_count=0;
-        //detroy redundentcies
-        instance_activate_object(obj_moveCursorMouse);
-        with(obj_moveCursorMouse) instance_destroy();
-        //create new instace
-        instance_create(x,y,obj_moveCursorMouse);
-        instance_deactivate_object(obj_battleCursor);
-        move_ready = false;
-        }
-    }
-        
-    
-if(mouse_check_button_released(mb_left))
-    {
-    isOnGlobalRadioCheck = false;
-    scr_rangeCheck_reset();
-    
-    //reset unit radio check if applicable
-    if obj_map.units[global.posX, global.posY] !=0
-    scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
-        
-    //reset move ready
-    move_ready = false;
-    move_ready_count=0;
-    }    
-    
-    
-    
-    
-//right click
-if(mouse_check_button_pressed(mb_right) and !mouse_check_button(mb_left) and !menuExitDelay)
-    {
-    mousePosX = mouse_x div 24
-    mousePosY = mouse_y div 24
-    if (scr_inBound(mousePosX,mousePosY) )
-        {
-        //move cursor
-        x = (mousePosX)*24;
-        y = (mousePosY)*24;
-        global.posX = x div 24;
-        global.posY = y div 24;
-            
-        //open deploy menu
-        if  (
-            obj_map.terrains[global.posX,global.posY].name = "Base" 
-            and obj_map.terrains[global.posX,global.posY].ownership = global.P_Turn.number 
-            and obj_map.terrains[global.posX,global.posY].isStanding
-            and obj_map.units[global.posX,global.posY] = 0
-            and mscroll = 0
-            )
-            {
-            //Open Deploy menu!
-            instance_create(0,0,obj_UI_deploy);
-            instance_deactivate_object(obj_miniwin);
-            instance_deactivate_object(obj_battleCursor);
-            instance_deactivate_object(obj_topwin);    
-            }
-        else if (obj_map.units[global.posX,global.posY] = 0)
-            {
-            //open SystemMenu
-            //check location is open
-            instance_create(x+24,y,obj_syscom_system);
-            instance_deactivate_object(obj_battleCursor);
-            }
-        else
-            {
-            //do move range check
-            checking_attack_range = true;
-            scr_attack_rance_check(obj_map.units[global.posX, global.posY]);
-            }   
-        }
-    }
-    
-if(mouse_check_button_released(mb_right))
-    {
-    checking_attack_range = false;
-    scr_rangeCheck_reset();
-    }
-
-
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Mouse Nav
+            <string>///Mouse Nav commented out
+/*
 
 //check for unit radio (radio asist)
 draw_radioAssist= false;
@@ -872,28 +690,270 @@ if ( keyboard_check_released( global.keyCONFIRM) )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///property and global radio test
+            <string>///Mouse Controls - reworking
 
-if keyboard_check_pressed(vk_space)
-    {
-    scr_rangeCheck_reset();
-    
-    //check for property
-    if object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index, obj_property)
-        {
-        scr_updateLocalRadio(obj_map.terrains[global.posX,global.posY]);
-        isOnGlobalRadioCheck = true;
+//updat mouse over for radio assist, tool tips and such 
+mox = mouse_x div 24;//ouse over X
+moy = mouse_y div 24;//mouse over Y
+
+//check for unit
+moUnitRadioAssist_on = false;
+//check if unit exsist and is visible
+if  obj_map.units[mox,moy] != 0 {
+    mou = obj_map.units[mox,moy]; //mouse over unit
+    if mou.isVisible {
+        moUnitRadioAssist_on = true;
+        moUnitRadioAssist_range = mou.radio;
+        //execute in draw
         }
-    
-    // else if no units exsist    
-    else
-        {
-        scr_globalRadioCheck();
-        isOnGlobalRadioCheck = true; 
-        } 
+    }
+
+//LEFT Button Pressed
+if (mouse_check_button_pressed(mb_left)){
+    var mpx = mouse_x div 24 ;//mpuse position X
+    var mpy = mouse_y div 24 ;//mouse position Y
+    //check in bound
+    if (scr_inBound(mpx,mpy)){
+        //move cursor
+        x = mpx*24;
+        y = mpy*24;
+        global.posX = mpx;
+        global.posY = mpy;
+        
+        //check for unit
+        if(obj_map.units[mpx,mpy] != 0 and obj_map.terrains[global.posX,global.posY].isVisible){
+            //check if own unit
+            var mTarget_unit = obj_map.units[mpx, mpy];
+            //check unit can act
+            if (mTarget_unit.ownership = global.P_Turn.number and mTarget_unit.state = "idle"){
+                //detroy redundentcies
+                instance_activate_object(obj_moveCursorMouse);
+                with(obj_moveCursorMouse) instance_destroy();
+                //create new instace
+                instance_create(x,y,obj_moveCursorMouse);
+                instance_deactivate_object(obj_battleCursor);
+                }
+            //unit cannot act, move check
+            else if (mTarget_unit.isVisible){
+                //do move range check
+                scr_updateLocalMove(mTarget_unit);
+                checking_move_range = true;
+                //start click and drag
+                mScroll_on = true;
+                //initiate scrolling Variables
+                xs = window_mouse_get_x();
+                ys = window_mouse_get_y(); 
+                }
+            }
+        //check for properties
+        else if object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index, obj_property){
+            scr_updateLocalRadio(obj_map.terrains[global.posX,global.posY]);
+            isOnGlobalRadioCheck = true;
+            mScroll_on = true;
+            //initiate scrolling Variables
+            xs = window_mouse_get_x();
+            ys = window_mouse_get_y(); 
+            }
+        //no property, no terrain, this tile is open
+        else{
+            //start click and drag
+            mScroll_on = true;
+            //initiate scrolling Variables
+            xs = window_mouse_get_x();
+            ys = window_mouse_get_y(); 
+            //turn on global radio check
+            scr_globalRadioCheck();
+            isOnGlobalRadioCheck = true;
+            }
+        }
+    }
+ 
+//LEFT Button Released     
+if (mouse_check_button_released(mb_left)){
+    //switch off scrolling
+    if mScroll_on mScroll_on = false;
+    //turn off global radio range check
+    //scr_rangeCheck_reset();
+    isOnGlobalRadioCheck = false;
+    checking_move_range = false;
     }
     
-if keyboard_check_released(vk_space)
+//right click
+if(mouse_check_button_pressed(mb_right) and !mouse_check_button(mb_left) and !menuExitDelay)
+    {
+    mousePosX = mouse_x div 24
+    mousePosY = mouse_y div 24
+    if (scr_inBound(mousePosX,mousePosY) )
+        {
+        //move cursor
+        x = (mousePosX)*24;
+        y = (mousePosY)*24;
+        global.posX = x div 24;
+        global.posY = y div 24;
+            
+        //open deploy menu
+        if  (
+            obj_map.terrains[global.posX,global.posY].name = "Base" 
+            and obj_map.terrains[global.posX,global.posY].ownership = global.P_Turn.number 
+            and obj_map.terrains[global.posX,global.posY].isStanding
+            and obj_map.units[global.posX,global.posY] = 0
+            and mscroll = 0
+            )
+            {
+            //Open Deploy menu!
+            instance_create(0,0,obj_UI_deploy);
+            instance_deactivate_object(obj_miniwin);
+            instance_deactivate_object(obj_battleCursor);
+            instance_deactivate_object(obj_topwin);    
+            }
+        else if (obj_map.units[global.posX,global.posY] = 0)
+            {
+            //open SystemMenu
+            //check location is open
+            instance_create(x+24,y,obj_syscom_system);
+            instance_deactivate_object(obj_battleCursor);
+            }
+        else if (obj_map.units[global.posX,global.posY].isVisible)
+            {
+            //do attack range check
+            checking_attack_range = true;
+            scr_attack_rance_check(obj_map.units[global.posX, global.posY]);
+            //start click and drag
+            mScroll_on = true;
+            //initiate scrolling Variables
+            xs = window_mouse_get_x();
+            ys = window_mouse_get_y(); 
+            }   
+        }
+    }
+    
+if(mouse_check_button_released(mb_right))
+    {
+    mScroll_on = false;
+    checking_attack_range = false;
+    scr_rangeCheck_reset();
+    }
+
+
+
+
+/*old code
+
+//check for deploy
+
+if (scr_inBound(mpx,mpy))
+    {
+    if (object_is_ancestor( obj_map.terrains[mpx,mpy].object_index,obj_property))
+        { 
+        if  (   
+            obj_map.terrains[mpx,mpy].name = "Base" 
+            and obj_map.terrains[mpx,mpy].ownership = global.P_Turn.number 
+            and obj_map.terrains[mpx,mpy].isStanding
+            and obj_map.units[mpx,mpy] = 0 
+            )
+            {
+            can_mouse_deploy = true;
+            }
+        }    
+    }
+
+//left click    
+if(mouse_check_button_pressed(mb_left) and !menuExitDelay)
+    {
+    move_ready = false;
+    mousePosX = mouse_x div 24
+    mousePosY = mouse_y div 24
+    
+    if (scr_inBound(mousePosX,mousePosY))
+        {
+        //change curosr position
+        x = (mousePosX)*24;
+        y = (mousePosY)*24;
+        
+        global.posX = x div 24;
+        global.posY = y div 24;
+        
+        //juice
+        scr_cursorKey_juice(1,global.cursorKey_sfx);
+        
+        //check for ally unit
+        if(obj_map.units[global.posX,global.posY] !=0)
+            {
+            if  ( 
+                obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number 
+                and obj_map.units[global.posX,global.posY].state != "exhaust"
+                )
+                {
+                //initiate move ready
+                move_ready = true;
+                }
+            }
+        }
+        //turn off deploy icon
+        cursor_icon = -1;
+        
+        //local property radio chech if terrain i sproperty
+        if (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,obj_property))
+            {
+            scr_rangeCheck_reset();
+            scr_updateLocalRadio(obj_map.terrains[global.posX,global.posY]);
+            isOnGlobalRadioCheck = true;
+            }
+        
+        else
+            {
+            //turn on global radio check
+            scr_globalRadioCheck();
+            isOnGlobalRadioCheck = true;
+            }
+        
+        //set alarm for releas delay for deploy and syscom menus
+        alarm[2] = 10;
+        menu_ok = true;
+    }
+    
+    
+if(mouse_check_button(mb_left) and !menuExitDelay)
+    {
+    //turn off deploy icon
+    cursor_icon = -1;
+    //juice
+    if (global.posX != mpx or global.posY != mpy) scr_cursorKey_juice(1,-1); //juice 
+    
+    mousePosX = mouse_x div 24
+    mousePosY = mouse_y div 24
+  
+    if (scr_inBound(mousePosX,mousePosY) )
+        {
+        //change curosr position
+        x = (mousePosX)*24;
+        y = (mousePosY)*24;
+        
+        global.posX = x div 24;
+        global.posY = y div 24;
+        }
+    if ( mouse_check_button(mb_right) and  obj_map.units[global.posX,global.posY] !=0 and move_ready )
+        {
+        //start unit Command
+        x = (mousePosX)*24;
+        y = (mousePosY)*24;
+                        
+        global.posX = x div 24;
+        global.posY = y div 24;               
+                        
+        //move_ready_count=0;
+        //detroy redundentcies
+        instance_activate_object(obj_moveCursorMouse);
+        with(obj_moveCursorMouse) instance_destroy();
+        //create new instace
+        instance_create(x,y,obj_moveCursorMouse);
+        instance_deactivate_object(obj_battleCursor);
+        move_ready = false;
+        }
+    }
+        
+    
+if(mouse_check_button_released(mb_left))
     {
     isOnGlobalRadioCheck = false;
     scr_rangeCheck_reset();
@@ -901,7 +961,110 @@ if keyboard_check_released(vk_space)
     //reset unit radio check if applicable
     if obj_map.units[global.posX, global.posY] !=0
     scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
+        
+    //reset move ready
+    move_ready = false;
+    move_ready_count=0;
+    }    
+    
+    
+    
+    
+//right click
+if(mouse_check_button_pressed(mb_right) and !mouse_check_button(mb_left) and !menuExitDelay)
+    {
+    mousePosX = mouse_x div 24
+    mousePosY = mouse_y div 24
+    if (scr_inBound(mousePosX,mousePosY) )
+        {
+        //move cursor
+        x = (mousePosX)*24;
+        y = (mousePosY)*24;
+        global.posX = x div 24;
+        global.posY = y div 24;
+            
+        //open deploy menu
+        if  (
+            obj_map.terrains[global.posX,global.posY].name = "Base" 
+            and obj_map.terrains[global.posX,global.posY].ownership = global.P_Turn.number 
+            and obj_map.terrains[global.posX,global.posY].isStanding
+            and obj_map.units[global.posX,global.posY] = 0
+            and mscroll = 0
+            )
+            {
+            //Open Deploy menu!
+            instance_create(0,0,obj_UI_deploy);
+            instance_deactivate_object(obj_miniwin);
+            instance_deactivate_object(obj_battleCursor);
+            instance_deactivate_object(obj_topwin);    
+            }
+        else if (obj_map.units[global.posX,global.posY] = 0)
+            {
+            //open SystemMenu
+            //check location is open
+            instance_create(x+24,y,obj_syscom_system);
+            instance_deactivate_object(obj_battleCursor);
+            }
+        else
+            {
+            //do move range check
+            checking_attack_range = true;
+            scr_attack_rance_check(obj_map.units[global.posX, global.posY]);
+            }   
+        }
     }
+    
+if(mouse_check_button_released(mb_right))
+    {
+    checking_attack_range = false;
+    scr_rangeCheck_reset();
+    }
+
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///mouse scrolling
+    
+    var vMod = 1;
+    if global.window_size = 2 vMod = 2;
+    if window_get_fullscreen() vMod=2.5;
+
+ if (mScroll_on){
+    if (global.canScroll_x)
+        {
+        xe= window_mouse_get_x();
+        view_xview[0] += (xs-xe) div vMod;
+        xs = xe;
+        }
+    if (global.canScroll_y)
+        {
+        ye= window_mouse_get_y();
+        view_yview[0] += (ys-ye) div vMod;
+        ys = ye;
+        }
+    }
+
+
 </string>
           </argument>
         </arguments>
@@ -958,9 +1121,11 @@ if (keyboard_check_pressed(global.keyCANCEL))
         {
         if obj_map.units[global.posX, global.posY].isVisible
             {
-            //do move range check
-            checking_attack_range = true;
-            scr_attack_rance_check(obj_map.units[global.posX, global.posY]);
+            if !obj_map.units[global.posX, global.posY].isMovAgn{
+                //do move range check
+                checking_attack_range = true;
+                scr_attack_rance_check(obj_map.units[global.posX, global.posY]);
+                }
             }
         }
     if( !checking_attack_range )fast_scroll_on = true;    
@@ -996,7 +1161,7 @@ if (keyboard_check_released(global.keyCANCEL) or mouse_check_button_released(mb_
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///curosr Radio asist check
+            <string>///Radio asist check
 
 c_radioAssist_on = false;
 c_radioAssist_sprite = -1;
@@ -1019,6 +1184,9 @@ if(scr_inBound(global.posX,global.posY))
             }
         }
     }
+    
+
+
 </string>
           </argument>
         </arguments>
@@ -1039,7 +1207,37 @@ if(scr_inBound(global.posX,global.posY))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>///property and global radio test
+
+if keyboard_check_pressed(vk_space)
+    {
+    scr_rangeCheck_reset();
+    
+    //check for property
+    if object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index, obj_property)
+        {
+        scr_updateLocalRadio(obj_map.terrains[global.posX,global.posY]);
+        isOnGlobalRadioCheck = true;
+        }
+    
+    // else if no units exsist    
+    else
+        {
+        scr_globalRadioCheck();
+        isOnGlobalRadioCheck = true; 
+        } 
+    }
+    
+if keyboard_check_released(vk_space)
+    {
+    isOnGlobalRadioCheck = false;
+    scr_rangeCheck_reset();
+    
+    //reset unit radio check if applicable
+    if obj_map.units[global.posX, global.posY] !=0
+    scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
+    }
+</string>
           </argument>
         </arguments>
       </action>
@@ -1209,25 +1407,30 @@ if (global.Phaze = "Main" and unit_selection != 0){
 
 //draw_text(12,200, string(mscroll));   
 
-if (dmscroll != -1)
-    {
-    draw_sprite(spr_mouseViewScrole, dmscroll, mouse_x, mouse_y);
-    }
-    
-else
-    {     
+
+         
     //draw deploy
     if can_mouse_deploy 
     draw_sprite(spr_basicCursor_Icons,5, (mouse_x div 24)*24, (mouse_y div 24) *24);
     
     //draw pointer
-    draw_sprite(spr_mousePointer,global.P_Turn.number - 1, mouse_x, mouse_y);
+    if mScroll_on  draw_sprite(spr_mouseGrabber,global.P_Turn.number - 1, mouse_x, mouse_y);
+    else draw_sprite(spr_mouseSlapper,global.P_Turn.number - 1, mouse_x, mouse_y);
+    
     //draw RadioAssist if over visible unit
     if(draw_radioAssist)
         {
         scr_draw_radioAssist(mouse_x div 24,mouse_y div 24,radioAssist_range,radioAssist_sprite); 
         }
-    }
+    
+  
+    //mouse radio assis units
+    if  moUnitRadioAssist_on 
+        scr_draw_radioAssist(mox,moy,moUnitRadioAssist_range,radioAssist_sprite); 
+     
+        
+    //Debug
+    //if checking_attack_range draw_text(x+12,y+12, "check is on");
     
 
 
@@ -1289,6 +1492,28 @@ if (cursor_icon == 5 ){
             <string>///load end of turn save
 room_goto(rm_continue);
 </string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="77">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
           </argument>
         </arguments>
       </action>

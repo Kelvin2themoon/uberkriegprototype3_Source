@@ -43,8 +43,10 @@ SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
 //anti-radio
+D2D_Hunter = 130;
+
 COP_Disrupt = 1;
-SCOP_Disrupt = 3;
+SCOP_Disrupt = 2;
 
 COP_DisruptDamage = 1;
 SCOP_DisruptDamage = 2;
@@ -54,8 +56,8 @@ SCOP_DisruptDamage = 2;
 var i = 1;
 for( i = 1 ; i &lt;= 13 ; i++ )
     {
-    D2D_Def[i] = 110;
-    D2D_Atk[i] = 110;
+    //D2D_Def[i] = 110;
+    //D2D_Atk[i] = 110;
     }
  
 </string>

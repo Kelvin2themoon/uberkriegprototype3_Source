@@ -56,24 +56,18 @@ for ( i = 0 ; i &lt;= 4 ; i += 1)
     COP_Def[i]   = 120;
     COP_Mov[i]   = 0  ;
     COP_MovAgn[i]= true;//these units cannot attack until end of turn
-    COP_ActAgn[i]= true;
+    //COP_ActAgn[i]= true;
     
     SCOP_Atk[i]  = 190;
     SCOP_Def[i]  = 120;
-    SCOP_Mov[i]  = 0  ;
+    //SCOP_Mov[i]  = 0  ;
     SCOP_ActAgn[i]= true;
     }
     
-    //remove attack for COP
-    COP_Rng[3] = -3;
+//remove attack for COP
+//COP_Rng[3] = -3;
     
-    
-for ( i = 0 ; i &lt;= 13 ; i += 1)
-    {
-    COP_Def[i]   += 10;
-    SCOP_Def[i]  += 10;
-    }
-    
+
 ///APC move +2
 D2D_Mov[06] = 2;
         
@@ -87,7 +81,7 @@ D2D_Atk[13] = 90;
 
 //Capture ability
 D2D_AdvanceCapture  = true ; //capture 1.5x
-SCOP_CapAgain       = true ; // allow capturing units to act again
+SCOP_CapAgain       = true ; //allow capturing units to act again
 SCOP_PerfectCapture = false; //victory march
  
 </string>

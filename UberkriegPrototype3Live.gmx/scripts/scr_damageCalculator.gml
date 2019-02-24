@@ -1,5 +1,5 @@
-dmgCalc_atk    = argument0; //unit obj
-dmgCalc_def    = argument1; //unit obj
+dmgCalc_atk    = argument0; //unit obj attacking
+dmgCalc_def    = argument1; //unit obj defending 
 dmgCalc_cov    = argument2; //int from defending terrain
 dmgCalc_type   = argument3; // int : 1 or 2
 
@@ -37,6 +37,9 @@ with( obj_CO_0)
         other.atk_CO_mod = D2D_Atk[other.dmgCalc_atk.unit_index];
         if(  COP_on ) other.atk_CO_mod =  COP_Atk[other.dmgCalc_atk.unit_index];
         if( SCOP_on ) other.atk_CO_mod = SCOP_Atk[other.dmgCalc_atk.unit_index];
+        
+        //hunter - check if defending unit is lost or disabled
+        if ( !other.dmgCalc_def.isStanding or other.dmgCalc_def.isDisrupted ) other.atk_CO_mod = other.atk_CO_mod*(D2D_Hunter/100);
         
         //check attacker is commander
         if( D2D_OfficerBoost and other.dmgCalc_atk.isCommander ) other.atk_CO_mod = other.atk_CO_mod*(D2D_Boarded/100);

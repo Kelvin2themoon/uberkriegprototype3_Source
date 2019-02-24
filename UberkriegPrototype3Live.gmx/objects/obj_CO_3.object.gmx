@@ -61,7 +61,8 @@ for( i = 5 ; i &lt;= 13 ; i++ )
     COP_Atk[i]  = 50 ;
     SCOP_Def[i] = 110;
     
-    COP_ActAgn[i] = true;
+    //COP_ActAgn[i] = true;
+    COP_MovAgn[i] = true;
     SCOP_ActAgn[i] = true;
     }
     
