@@ -82,7 +82,7 @@ if (step_counter = 10)
     image_index = 5;
     }
     
-if (step_counter = 24)
+if (step_counter = 36)
     {
     instance_destroy();
     }

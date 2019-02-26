@@ -160,7 +160,7 @@ SCOP_Promote = false;
 //anti-radio
 COP_Disrupt = 0;
 SCOP_Disrupt = 0;
-D2D_Hunter = 0; //percent damage bonus against lost or disrupted units
+D2D_Hunter = 100; //percent damage bonus against lost or disrupted units
 
 COP_DisruptDamage = 0;
 SCOP_DisruptDamage = 0;

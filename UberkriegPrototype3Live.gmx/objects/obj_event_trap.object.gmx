@@ -32,7 +32,6 @@ startpos_x = x;
 startpos_y = y;
 
 depth = UI_DEPTH_CURSOR  
-
 image_speed = 0;
 
 
@@ -85,7 +84,7 @@ if (step_counter = 10){
     y +=2;
     image_index = 5;
     }
-if (step_counter = 24){
+if (step_counter = 36){
     // reactivate main phaze UI
     
     instance_activate_object(obj_battleCursor);
@@ -96,6 +95,14 @@ if (step_counter = 24){
     //checks
     scr_updateStanding(global.P_Turn);
     scr_rangeCheck_reset();
+    
+    //resset unit highlight graphics not part of rangecheck tiles
+    with obj_unit {
+        isEngageTarget  = false;
+        isDisruptTarget = false;
+        isSupplyTarget  = false;
+        }
+        
     instance_destroy();
     }
 

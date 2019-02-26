@@ -56,7 +56,7 @@ menu_content = ds_list_create();
 //if (x &gt; view_xview+view_wview -216) x -= 192;
 
 //variable
-var extra_items = 0
+var extra_items = 3
 
 ///manage height for System menu
 if (global.acting_unit  = 0)
@@ -70,7 +70,7 @@ if (global.acting_unit  = 0)
 //manage Command
 else
     {
-    extra_items  =-3;
+    extra_items  =0;// remove from default system menu
     if global.capture      extra_items += 1;
     if global.engage       extra_items += 1;
     if global.join         extra_items += 1;
@@ -86,12 +86,13 @@ else
     if global.wait         extra_items += 1;
 
     }
+//check if menu extends below view port and adjust
+if (view_yview + view_hview &lt; y+(extra_items*24) ) //base of viewport is  highter than base of menu
+//move menue up by menu height
+y = (view_yview + view_hview) - (extra_items)*24-6;
     
-if ( y &gt; view_yview + view_hview - 24*6) y -= 24*(4-((view_yview + view_hview -y) div 24)+extra_items);
-
-
-
-
+//check top
+if (view_yview &gt; y) y = view_yview+6 
 
 
 start_y = y;

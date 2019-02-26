@@ -584,6 +584,7 @@
     <font>fonts\font8</font>
     <font>fonts\font9</font>
     <font>fonts\font10</font>
+    <font>fonts\font11</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>
@@ -637,8 +638,8 @@
         <object>objects\obj_battleScene_controller</object>
       </objects>
     </objects>
-    <object>objects\obj_battleController_basic</object>
     <objects name="Basic Battle ">
+      <object>objects\obj_battleController_basic</object>
       <object>objects\obj_battleController_continue</object>
       <object>objects\template_sandboxCursor</object>
       <object>objects\obj_battleCursor</object>
@@ -663,6 +664,7 @@
       <objects name="Unit Control">
         <object>objects\obj_moveCursor</object>
         <object>objects\obj_moveCursorMouse</object>
+        <object>objects\obj_moveCursorMouse_old</object>
         <objects name="UnitMove">
           <object>objects\obj_path_node</object>
           <object>objects\obj_execute_unit_orders</object>
@@ -681,8 +683,8 @@
         <object>objects\obj_smokeScreenCurosr</object>
         <object>objects\obj_disruptorCurosr</object>
         <object>objects\obj_deployDummyCursorCopy</object>
-        <object>objects\obj_deployDummyCursor</object>
         <object>objects\obj_promote_Cursor</object>
+        <object>objects\obj_deployDummyCursor</object>
         <object>objects\obj_deployLandCruiserCursor</object>
         <object>objects\obj_dropCursor</object>
         <objects name="Cursor Backup">

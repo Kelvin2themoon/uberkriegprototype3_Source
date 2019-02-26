@@ -189,6 +189,9 @@ fire_range = global.acting_unit.max_range
 fire_range += global.P_Turn.CO.D2D_Rng[global.acting_unit.unit_index];
 if ( global.P_Turn.CO.COP_on ) fire_range += global.P_Turn.CO.COP_Rng[global.acting_unit.unit_index];
 if ( global.P_Turn.CO.SCOP_on ) fire_range += global.P_Turn.CO.SCOP_Rng[global.acting_unit.unit_index];
+
+//minrange
+min_fire_range = global.acting_unit.min_range;
 </string>
           </argument>
         </arguments>
@@ -1024,6 +1027,10 @@ if ( global.rangeCheck[global.posX,global.posY].pathority != -1 )
 draw_self();
 
 if (fire_range &gt; 1 and global.acting_unit.ammo &gt; 0 and global.acting_unit.canMoveFire) scr_draw_radioAssist(global.posX,global.posY,fire_range,spr_rangeAssist);
+if (fire_range &gt; 1 and global.acting_unit.ammo &gt; 0 and global.indirect_assist_on ){ 
+    scr_draw_radioAssist(global.posX,global.posY,fire_range,spr_rangeAssist);
+    scr_draw_radioAssist(global.posX,global.posY,min_fire_range-1,spr_rangeAssist);
+    }
 
 
 if (obj_map.units[global.posX,global.posY] !=0 and global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear)

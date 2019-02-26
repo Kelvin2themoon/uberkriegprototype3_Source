@@ -133,6 +133,10 @@ moy = 0;
 mou = 0;
 moUnitRadioAssist_on = false;
 moUnitRadioAssist_range = 0;
+//mouse control typs drag/click
+global.mousetype2 = true;
+
+
 
 </string>
           </argument>
@@ -699,12 +703,15 @@ moy = mouse_y div 24;//mouse over Y
 //check for unit
 moUnitRadioAssist_on = false;
 //check if unit exsist and is visible
-if  obj_map.units[mox,moy] != 0 {
-    mou = obj_map.units[mox,moy]; //mouse over unit
-    if mou.isVisible {
-        moUnitRadioAssist_on = true;
-        moUnitRadioAssist_range = mou.radio;
-        //execute in draw
+//check in bound
+if scr_inBound(mox,moy){
+    if  obj_map.units[mox,moy] != 0 {
+        mou = obj_map.units[mox,moy]; //mouse over unit
+        if mou.isVisible {
+            moUnitRadioAssist_on = true;
+            moUnitRadioAssist_range = mou.radio;
+            
+            }
         }
     }
 
@@ -719,6 +726,8 @@ if (mouse_check_button_pressed(mb_left)){
         y = mpy*24;
         global.posX = mpx;
         global.posY = mpy;
+        //juice
+        scr_cursorKey_juice(1,global.cursorKey_sfx);
         
         //check for unit
         if(obj_map.units[mpx,mpy] != 0 and obj_map.terrains[global.posX,global.posY].isVisible){
@@ -824,6 +833,12 @@ if(mouse_check_button_pressed(mb_right) and !mouse_check_button(mb_left) and !me
             xs = window_mouse_get_x();
             ys = window_mouse_get_y(); 
             }   
+        }
+    else{
+    //check location is open when out of bounds
+    instance_create(x+24,y,obj_syscom_system);
+    instance_deactivate_object(obj_battleCursor);
+        
         }
     }
     
@@ -1043,11 +1058,67 @@ if(mouse_check_button_released(mb_right))
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///property and global radio test
+
+if mouse_check_button_pressed(mb_middle)
+    {
+    scr_rangeCheck_reset();
+    
+    //check for property
+    if object_is_ancestor(obj_map.terrains[mox,moy].object_index, obj_property)
+        {
+        scr_updateLocalRadio(obj_map.terrains[mox,moy]);
+        isOnGlobalRadioCheck = true;
+        global.Mouse_control_tool_tip_text="middle click to check property radio"
+        }
+    
+    // else if no units exsist    
+    else
+        {
+        scr_globalRadioCheck();
+        isOnGlobalRadioCheck = true; 
+        }
+    mScroll_on= true;
+     //initiate scrolling Variables
+     xs = window_mouse_get_x();
+     ys = window_mouse_get_y();  
+    }
+    
+if  mouse_check_button_released(mb_middle)
+    {
+    mScroll_on= false; 
+    isOnGlobalRadioCheck = false;
+    scr_rangeCheck_reset();
+    
+    //reset unit radio check if applicable
+    if obj_map.units[global.posX, global.posY] !=0
+    scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///mouse scrolling
     
     var vMod = 1;
     if global.window_size = 2 vMod = 2;
-    if window_get_fullscreen() vMod=2.5;
+    if window_get_fullscreen() vMod=(display_get_width() / view_wview[0]) ;
 
  if (mScroll_on){
     if (global.canScroll_x)
@@ -1179,14 +1250,35 @@ if(scr_inBound(global.posX,global.posY))
             //check Standing
             if (obj_map.units[global.posX,global.posY].isStanding) c_radioAssist_sprite = spr_radioAssist_bronze ;
             else c_radioAssist_sprite = spr_radioAssist_darkBlue;
-            //chack range
+            //check range
             c_radioAssist_range = scr_getUnitRadioRange(obj_map.units[global.posX,global.posY] ,obj_map.terrains[global.posX,global.posY]);
             }
         }
     }
     
+//mouse version
+m_radioAssist_on = false;
+m_radioAssist_sprite = -1;
+m_radioAssist_range = 0;
 
 
+    
+if(scr_inBound(mox,moy))
+    {
+    if(obj_map.units[mox,moy] !=0)
+        {
+        if(obj_map.units[mox,moy].isVisible)
+            {
+            //switch radioAssist on
+            m_radioAssist_on = true;
+            //check Standing
+            if (obj_map.units[mox,moy].isStanding) m_radioAssist_sprite = spr_radioAssist_bronze ;
+            else m_radioAssist_sprite = spr_radioAssist_darkBlue;
+            //check range
+            m_radioAssist_range = scr_getUnitRadioRange(obj_map.units[mox,moy] ,obj_map.terrains[mox,moy]);
+            }
+        }
+    }
 </string>
           </argument>
         </arguments>
@@ -1418,17 +1510,10 @@ if (global.Phaze = "Main" and unit_selection != 0){
     else draw_sprite(spr_mouseSlapper,global.P_Turn.number - 1, mouse_x, mouse_y);
     
     //draw RadioAssist if over visible unit
-    if(draw_radioAssist)
+    if(m_radioAssist_on)
         {
-        scr_draw_radioAssist(mouse_x div 24,mouse_y div 24,radioAssist_range,radioAssist_sprite); 
-        }
-    
-  
-    //mouse radio assis units
-    if  moUnitRadioAssist_on 
-        scr_draw_radioAssist(mox,moy,moUnitRadioAssist_range,radioAssist_sprite); 
-     
-        
+        scr_draw_radioAssist(mox,moy,m_radioAssist_range,m_radioAssist_sprite);  
+        }    
     //Debug
     //if checking_attack_range draw_text(x+12,y+12, "check is on");
     
@@ -1467,6 +1552,32 @@ if (cursor_icon == 5 ){
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///mouse control tool tips
+//draw type
+if !global.mousetype2 draw_text(mouse_x+12,mouse_y+12,"2");
+
+//check if on
+if global.Mouse_control_tool_tip_is_on draw_text(mouse_x+12,mouse_y+12,global.Mouse_control_tool_tip_text);
 </string>
           </argument>
         </arguments>
@@ -1513,7 +1624,34 @@ room_goto(rm_continue);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>///mouse type toggle
+
+global.mousetype2 = !global.mousetype2;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="76">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///indirect fire assist switch
+global.indirect_assist_on = !global.indirect_assist_on;
+</string>
           </argument>
         </arguments>
       </action>

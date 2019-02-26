@@ -223,6 +223,9 @@ G_smooth = true;
 //debug controls
 global.alt_Disrupt = false; //disruptor is indirect fire
 global.Disruptor_spread = false; // disruptor propigates throught target enemy unit radio
+
+//indirect fire range assist during move
+global.indirect_assist_on = false;
 </string>
           </argument>
         </arguments>
@@ -298,7 +301,10 @@ test_bgm = audio_create_stream("bgm1.ogg");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>///Temp- Mouse control tool tip on/off switch Var
+global.Mouse_control_tool_tip_is_on = false;
+global.Mouse_control_tool_tip_text = "left click and drag to move camera or unit"
+</string>
           </argument>
         </arguments>
       </action>

@@ -158,9 +158,96 @@ if global.P_Turn.CO.SCOP_on  path_max += global.P_Turn.CO.SCOP_Mov[global.acting
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///mouse control vars initiate
+            <string>///Initiate
+
+//destroy redundent syscom command menues
+with obj_path_node instance_destroy();
+ds_priority_clear(global.move_order);
+
+//deactivate battle cursor
+instance_deactivate_object(obj_battleCursor);
+
+
+//depth
+depth = UI_DEPTH_CURSOR;
+//stop animation
+image_speed = 0
+//set position
+global.posX = x div 24 ;
+global.posY = y div 24 ;
+
+
+//set alarm to Cursor move speed
+alarm[1] = 0;
+//view control speed - should be divisable by 24
+view_speed = 8;
+//view boarder to cursor
+view_border = 2*24;
+
+//set origin (for after curswor moves)
+moveOriginX = global.posX ;
+moveOriginY = global.posY ;
+
+
+//SET ACTIONABLE UNITS AND TERRAIN ***************************************************
+
+//acting unit
+global.acting_unit = obj_map.units[moveOriginX,moveOriginY];
+//change unit stat to "active"
+global.acting_unit.state = "active";
+//change unit depth
+global.acting_unit.depth = ACTIVE_UNIT;
+//origin
+global.origin =obj_map.terrains[moveOriginX,moveOriginY];
+//initiate tartget and destination
+global.target_unit = noone;
+ 
+
+//NOTE: set target unit and destination when appropriate
+
+//reset checker tiles
+scr_rangeCheck_reset();
+//with(obj_checker_tile){ sprite_index = -1;}
+
+
+//initiate movewstate variable
+//move_state_left=0;  (dont remember what this is for
+scr_updateLocalMove(global.acting_unit);
+
+//total path move cost variable used to trigger path re-calc
+path_total = 0;
+
+//set origin pathority
+global.rangeCheck[global.posX,global.posY].pathority = 0;
+
+//clear //clear move order Q
+ds_priority_clear(global.move_order);
+
+//create new node to move order
+new_path_node = instance_create(x,y,obj_path_node);
+new_path_node.pathority_index = path_total;
+ds_priority_add(global.move_order,new_path_node,path_total);
+
+//remove acting unit from map array
+obj_map.units[moveOriginX,moveOriginY] = 0;
+
+//initiate cambo variable
+
+isActionable = false ;
+
+//clear targetable list
+
+ds_list_clear(global.targetables);
+
+//set unit check
+global.unit_check = global.acting_unit;
+
+
+//boolean to check if move destination was out of bounds so reset on reentry can occure
+move_out = false;
 
 //mouse positions
+
 pointer_pos_x = mouse_x div 24 ;
 pointer_pos_Y = mouse_y div 24 ;
 
@@ -168,32 +255,30 @@ pointer_pos_Y = mouse_y div 24 ;
 last_pos_x = moveOriginX ;
 last_pos_y = moveOriginY ;
 
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///check Radio range for Radio Assist
-
+//radio assist
 radioAssistRange = global.acting_unit.radio ;
 radioAssist_sprite = spr_radioAssist_gold;
-radio_assist_on = true;
+radio_assist_on = false;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </string>
           </argument>
@@ -220,9 +305,6 @@ fire_range = global.acting_unit.max_range
 fire_range += global.P_Turn.CO.D2D_Rng[global.acting_unit.unit_index];
 if ( global.P_Turn.CO.COP_on ) fire_range += global.P_Turn.CO.COP_Rng[global.acting_unit.unit_index];
 if ( global.P_Turn.CO.SCOP_on ) fire_range += global.P_Turn.CO.SCOP_Rng[global.acting_unit.unit_index];
-
-//minrange
-min_fire_range = global.acting_unit.min_range;
 </string>
           </argument>
         </arguments>
@@ -243,26 +325,10 @@ min_fire_range = global.acting_unit.min_range;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///check if any unit has been lost radio contact
-scr_rangeCheck_reset();
-with (obj_unit) wasStanding = isStanding;
-scr_updateStanding_global();
-//update radio boarder
-scr_globalRadioCheck();
-scr_update_radioBoarder();
-scr_rangeCheck_reset();
-scr_updateLocalMove(global.acting_unit);
-
-
-global.acting_unit.isStanding= true;
-
-
-
-with (obj_unit)
-    {
-    if (wasStanding and !isStanding and id != global.acting_unit.id) instance_create(x,y, obj_event_lost);
-    } 
-    
+            <string>///Description
+/*
+this is an old draft of mouse move controls that I'm keeping around just incase I need to canibalize some code
+~Kelvin
 </string>
           </argument>
         </arguments>
@@ -315,11 +381,6 @@ image_index = global.cursorFrameIndex
 global.posX = x div 24 ;
 global.posY = y div 24 ;
 
-//switch Radio assis graphics
-if (global.rangeCheck[global.posX, global.posY].sprite_index = spr_rangecheck_bluedk or (global.acting_unit.x div 24 = global.posX and global.acting_unit.y div 24 = global.posY and global.acting_unit.isStanding = false) ) assis_sprite = spr_radioAssist_darkBlue ;
-else if (global.rangeCheck[global.posX, global.posY].sprite_index = spr_rangecheck_clear or (global.acting_unit.x div 24 = global.posX and global.acting_unit.y div 24 = global.posY and global.acting_unit.isStanding = true)) assis_sprite = spr_radioAssist_gold ;
-else assis_sprite = -1 ;
-
 
 </string>
           </argument>
@@ -346,13 +407,13 @@ else assis_sprite = -1 ;
 
 // check for boarders and move 
 
-if ( view_xview[0] &gt; x  and global.canScroll_x) view_xview[0] -= view_speed;
+if ( view_xview[0] &gt; x - view_border and global.canScroll_x) view_xview[0] -= view_speed;
 
-if ( view_xview[0] + view_wport[0] &lt; x +  + 24 and global.canScroll_x) view_xview[0] += view_speed;
+if ( view_xview[0] + view_wport[0] &lt; x + view_border + 24 and global.canScroll_x) view_xview[0] += view_speed;
 
-if ( view_yview[0] &gt; y  and global.canScroll_y) view_yview[0] -= view_speed;
+if ( view_yview[0] &gt; y - view_border and global.canScroll_y) view_yview[0] -= view_speed;
 
-if ( view_yview[0] + view_hport[0] &lt; y +24 and global.canScroll_y) view_yview[0] += view_speed;
+if ( view_yview[0] + view_hport[0] &lt; y + view_border+24 and global.canScroll_y) view_yview[0] += view_speed;
 
 </string>
           </argument>
@@ -374,7 +435,7 @@ if ( view_yview[0] + view_hport[0] &lt; y +24 and global.canScroll_y) view_yview
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// *Navigation by arrow keys Disabled
+            <string>/// Navigation by arrow keys (Disabled)
 
 /*
 //      check for key delay on press
@@ -422,7 +483,7 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached
-                    if( (path_total &gt; global.acting_unit.move_points + global.P_Turn.CO.D2D_Mov[global.acting_unit.unit_index] or path_total &gt; global.acting_unit.fuel) or move_out){
+                    if( (path_total &gt; global.acting_unit.move_points or path_total &gt; global.acting_unit.fuel) or move_out){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
@@ -452,7 +513,7 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached
-                    if( (path_total &gt; global.acting_unit.move_points + global.P_Turn.CO.D2D_Mov[global.acting_unit.unit_index] or path_total &gt; global.acting_unit.fuel) or move_out){
+                    if( (path_total &gt; global.acting_unit.move_points or path_total &gt; global.acting_unit.fuel) or move_out){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
@@ -483,7 +544,7 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached
-                   if( (path_total &gt; global.acting_unit.move_points + global.P_Turn.CO.D2D_Mov[global.acting_unit.unit_index] or path_total &gt; global.acting_unit.fuel) or move_out){
+                   if( (path_total &gt; global.acting_unit.move_points or path_total &gt; global.acting_unit.fuel) or move_out){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
@@ -514,7 +575,7 @@ if (alarm[1] = -1 )
                     scr_draw_move_path();
                 
                     //if max range reached (re calculate path)
-                    if( (path_total &gt; global.acting_unit.move_points + global.P_Turn.CO.D2D_Mov[global.acting_unit.unit_index] or path_total &gt; global.acting_unit.fuel) or move_out){
+                    if( (path_total &gt; global.acting_unit.move_points or path_total &gt; global.acting_unit.fuel) or move_out){
                         //destroy all nodes
                         with(obj_checker_tile) pathority = -1;
                         //creat new path
@@ -527,7 +588,6 @@ if (alarm[1] = -1 )
             //juice
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
-            
         }
         
     }
@@ -560,6 +620,8 @@ mouse_pos_y = mouse_y div 24;
 
 if (scr_inBound(mouse_pos_x,mouse_pos_y))
     {
+        
+    
         //check if position has changed
         if ( mouse_pos_x != last_pos_x  or mouse_pos_y != last_pos_y)
             {
@@ -578,9 +640,9 @@ if (scr_inBound(mouse_pos_x,mouse_pos_y))
                if   ( 
                     abs(mouse_pos_x - last_pos_x) + abs(mouse_pos_y - last_pos_y) = 1
                     and
-                    path_total + scr_check_move_cost(global.acting_unit,obj_map.terrains[mouse_pos_x,mouse_pos_y]) &lt;= global.acting_unit.move_points
+                    path_total + scr_check_move_cost(global.acting_unit,obj_map.terrains[mouse_pos_x,mouse_pos_y]) &lt; global.acting_unit.move_points
                     and  
-                    path_total + scr_check_move_cost(global.acting_unit,obj_map.terrains[mouse_pos_x,mouse_pos_y]) &lt;= global.acting_unit.fuel
+                    path_total + scr_check_move_cost(global.acting_unit,obj_map.terrains[mouse_pos_x,mouse_pos_y]) &lt; global.acting_unit.fuel
                     and
                     !move_out
                     and
@@ -663,35 +725,9 @@ if (scr_inBound(mouse_pos_x,mouse_pos_y))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///set miniwin intel
-
-global.terrain_check = obj_map.terrains[global.posX,global.posY];
-global.unit_check = obj_map.units[global.posX,global.posY];
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///set values to draw Radio Assist
-
-
+            <string>///Radio assist checks
 radioAssistRange = global.acting_unit.radio ;
-radioAssist_sprite = spr_radioAssist_bronze;
+radioAssist_sprite = spr_radioAssist_gold;
 radio_assist_on = false;
 
 
@@ -700,18 +736,18 @@ if (scr_inBound(global.posX,global.posY))
     if (global.rangeCheck[global.posX,global.posY].sprite_index != -1 or (global.posX = moveOriginX and global.posY = moveOriginY ))
         {
         radioAssistRange = scr_getUnitRadioRange(global.acting_unit,obj_map.terrains[global.posX,global.posY]);
-        if(global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear or (global.posX = moveOriginX and global.posY = moveOriginY)) radioAssist_sprite = spr_radioAssist_bronze;
+        if(global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear or (global.posX = moveOriginX and global.posY = moveOriginY)) radioAssist_sprite = spr_radioAssist_gold;
         else radioAssist_sprite = spr_radioAssist_darkBlue;
         radio_assist_on = true;
         //check if position is occupied by a unit
         if(obj_map.units[global.posX,global.posY] != 0)
             {
             //chang range to target unit
-             if ( obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number)   radioAssistRange = scr_getUnitRadioRange(obj_map.units[global.posX,global.posY],obj_map.terrains[global.posX,global.posY]);
+            radioAssistRange = scr_getUnitRadioRange(obj_map.units[global.posX,global.posY],obj_map.terrains[global.posX,global.posY]);
             //if target unit is field officer
-            if ( obj_map.units[global.posX,global.posY].name = "Officer")
+            if( obj_map.units[global.posX,global.posY].name = "Officer")
                 {
-                radioAssist_sprite = spr_radioAssist_bronze;
+                radioAssist_sprite = spr_radioAssist_gold;
                 }
             }
         }
@@ -736,163 +772,69 @@ if (scr_inBound(global.posX,global.posY))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///press "B"
-
-if  (keyboard_check_pressed(global.keyCANCEL) or mouse_check_button_pressed(mb_right) )
-    {
-    //clear move datea
-    scr_rangeCheck_reset();
-    //clear move order array
-    ds_priority_clear(global.move_order);
-    //destroy path nodes
-    with(obj_path_node) instance_destroy();
-   
-    //place active unit back in array
-    obj_map.units[global.acting_unit.x div 24,global.acting_unit.y div 24] = global.acting_unit
-    global.acting_unit.state = "idle";
-    scr_setUnitDepth(global.acting_unit);
-    
-     
-
-    //reset path Q
-    ds_priority_clear(global.move_order);
-    
-    //place acting unit back into array
- 
-    //reset global vunit command variables to default
-    global.acting_unit  = 0;    //empty
-    global.target_unit  = 0;    //empty
-    global.action_order = "wait"; //default to wait
-    
-    //reactivate main phaze YI
-    instance_activate_object(obj_battleCursor);
-    instance_activate_object(obj_miniwin);
-    //destroy move cursor
-    with (obj_moveCursorMouse){instance_destroy();}
-    
-    //reset standing
-    scr_updateStanding_global();
-    //update Radio Boarder
-    scr_globalRadioCheck();
-    scr_update_radioBoarder();
-    scr_rangeCheck_reset();
-    }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///confirm to open command menu
+            <string>///on release: confirm to open command menu
 
 
-
-global.target_unit  = obj_map.units[global.posX,global.posY];
-global.destination  = obj_map.terrains[global.posX,global.posY];
 
 //check: key press confirm
-if( (mouse_check_button_pressed(mb_left) and !global.mousetype2) or (mouse_check_button_released(mb_left) and global.mousetype2))
+if ( !mouse_check_button(mb_left)and scr_inBound(mouse_pos_x,mouse_pos_y))
     {
-    //reset actionable variables (just in case)
-    global.capture      = false;
-    global.engage       = false;
-    global.join         = false;
-    global.attach       = false;
-    global.supply       = false;
-    global.load         = false;
-    global.drop_A       = false;
-    global.drop_B       = false;
-    global.infiltrate   = false; 
-    global.hide         = false;
-    global.appear       = false;
-    global.disrupt      = false;
-    global.wait         = true ; // wait is on by default
-    
-    
-    //special CO commands
-    global.smoke        = false;
+    if (obj_map.terrains[mouse_pos_x,mouse_pos_y] != -1)
+        {
+        global.posX = mouse_pos_x;
+        global.posY = mouse_pos_y;
 
-    //destination is default empty
-    var isEmpty = true; 
+        global.target_unit  = obj_map.units[mouse_pos_x,mouse_pos_y];
+        global.destination  = obj_map.terrains[mouse_pos_x,mouse_pos_y];
     
-    //check if unit has moved: for indirect fire checks
-    if (ds_priority_size(global.move_order) &lt;2) global.acting_unit_moved = false;
-    else global.acting_unit_moved = true;
-
-    //check range
-    if(global.rangeCheck[global.posX,global.posY].move_cost = -1) 
-        { 
-        //out of range, do nothing, switch off wait
-        global.wait = false;
-        //exit move action (delet self and reactivate relevent elements)
-        //clear move datea
-    scr_rangeCheck_reset();
-    //clear move order array
-    ds_priority_clear(global.move_order);
-    //destroy path nodes
-    with(obj_path_node) instance_destroy();
-   
-    //place active unit back in array
-    obj_map.units[global.acting_unit.x div 24,global.acting_unit.y div 24] = global.acting_unit
-    global.acting_unit.state = "idle";
-    scr_setUnitDepth(global.acting_unit);
-    
-     
-
-    //reset path Q
-    ds_priority_clear(global.move_order);
-    
-    //place acting unit back into array
- 
-    //reset global vunit command variables to default
-    global.acting_unit  = 0;    //empty
-    global.target_unit  = 0;    //empty
-    global.action_order = "wait"; //default to wait
-    
-    //reactivate main phaze YI
-    instance_activate_object(obj_battleCursor);
-    instance_activate_object(obj_miniwin);
-    //destroy move cursor
-    with (obj_moveCursorMouse){instance_destroy();}
-    
-    //reset standing
-    scr_updateStanding_global();
-    //update Radio Boarder
-    scr_globalRadioCheck();
-    scr_update_radioBoarder();
-    scr_rangeCheck_reset();
         
-        } 
-    
+        
+        //reset actionable variables (just in case)
+        global.capture      = false;
+        global.engage       = false;
+        global.join         = false;
+        global.attach       = false;
+        global.supply       = false;
+        global.load         = false;
+        global.drop_A       = false;
+        global.drop_B       = false;
+        global.infiltrate   = false; 
+        global.hide         = false;
+        global.appear       = false;
+        global.disrupt      = false;
+        global.wait         = true ; // wait is on by default
+        
+        global.smoke        = false; //spacial CO command
+        
+        var isEmpty = true; // destination is default empty
+        
+        //check if unit has moved: for indirect fire checks
+        if (ds_priority_size(global.move_order) &lt;2) global.acting_unit_moved = false;
+        else global.acting_unit_moved = true;
+        
+        //check range
+        if( global.rangeCheck[global.posX,global.posY].move_cost = -1) 
+            { 
+            //out of range, do nothing, switch off wait
+            global.wait = false;
+            } 
+        
+        
     // check: destination is in range, check for appropriate commands and turn them on
     else
         {
 //******check:  a unit occupies the destination
-        if (global.target_unit != 0) 
+        if( global.target_unit != 0) 
             {
             // destination is occupied
             isEmpty = false; 
             global.wait = false; 
             
             // target is ally ( therefor is also visible ) valid ations: join, attach, load
-            if ( global.target_unit.team = global.P_Turn.team ) 
+            if( global.target_unit.team = global.P_Turn.team ) 
                 {
                 // Join: check target unit is of the same type and hp is less than 10
-                if ( global.acting_unit.name = global.target_unit.name  and global.target_unit.hp &lt; 10 and !global.acting_unit.dummy and !global.target_unit.dummy) global.join = true;
+                if ( global.acting_unit.name = global.target_unit.name  and global.target_unit.hp &lt; 10 and !global.target_unit.dummy) global.join = true;
                 //turn join off one either unit is can Load and has units loaded
                 if  (global.acting_unit.canLoadInfantry &gt; 0 ) if(global.acting_unit.load_A != 0 or global.acting_unit.load_B != 0 ) global.join = false;
                 if  (global.target_unit.canLoadInfantry &gt; 0 ) if(global.target_unit.load_A != 0 or global.target_unit.load_B != 0 ) global.join = false;
@@ -901,7 +843,6 @@ if( (mouse_check_button_pressed(mb_left) and !global.mousetype2) or (mouse_check
                 
                 //Load: check if target is APC and if acting unit is infantry
                 if( global.target_unit.canLoadInfantry
-                    and !global.target_unit.dummy
                     and ( 
                         global.acting_unit.name="Light Infantry" 
                      or global.acting_unit.name="Heavy Infantry" 
@@ -910,12 +851,12 @@ if( (mouse_check_button_pressed(mb_left) and !global.mousetype2) or (mouse_check
                   )
                     {
                     // there is room in the APC
-                    if (global.target_unit.load_A = 0 or global.target_unit.load_B = 0 and !global.target_unit.dummy) global.load = true;
+                    if ((global.target_unit.load_A = 0 or global.target_unit.load_B = 0) and !global.target_unit.dummy) global.load = true;
                     }    
                 }
             
             //target is enemy
-            else if ( global.target_unit.team != global.P_Turn.team) 
+            else if ( global.target_unit.team != global.P_Turn.team and !global.acting_unit.dummy) 
                 {
                 //debug
                 //show_debug_message("enemy unit check pass");
@@ -938,7 +879,7 @@ if( (mouse_check_button_pressed(mb_left) and !global.mousetype2) or (mouse_check
                 
                 
             //target unit is on the same team but does not belong to the currrent player ( team, but not ally )
-            else if ( global.target_unit.team = global.P_Turn.team and !global.acting_unit.dummy and !global.target_unit.dummy) 
+            else if ( global.target_unit.team = global.P_Turn.team and !global.target_unit.dummy ) 
                 {
                 //do nothing
                 //don't thing there will be dooin' of anything here, though...
@@ -949,90 +890,96 @@ if( (mouse_check_button_pressed(mb_left) and !global.mousetype2) or (mouse_check
         if ( isEmpty )
             {
             show_debug_message("empty check passed");
-                           
-            //check if unit is covert op. and turn on appear or dissapppear (check for infiltrate
-            if (global.acting_unit.name = "Covert Op." and !global.acting_unit.dummy)
+            
+            //check if unit can smoke screen
+            if( global.P_Turn.CO.COFX_SmokeScreen &gt; 0 and global.P_Turn.CO.COFX_rounds &gt; 0)
+                {
+                //cannot move and fire
+                if( global.acting_unit.canMoveFire )    global.smoke = true; 
+                else if(!global.acting_unit_moved)      global.smoke = true; 
+                }
+                
+                
+            //check if unit is covert op. and turn on appear or dissapppear
+            if (global.acting_unit.name = "Covert Op.")
                 {
                 //check if the actiing unit is hidden
                 if (global.acting_unit.isHidden) global.appear = true;
                 else global.hide = true;
-                
-                //check for infiltrate (enemy proptery adjacent)
-                if (scr_checkInfiltrateTargets( global.posX, global.posY )) global.infiltrate = true ;
-                
-                
                 }
                 
-            //check for property and turn on Capture
-            if( object_is_ancestor(obj_map.terrains[global.posX, global.posY].object_index, obj_property) 
-            and obj_map.terrains[global.posX, global.posY].ownership != global.P_Turn.number
-            and global.acting_unit.canCapture 
-            and !global.acting_unit.dummy)
-                {
-                global.capture = true ;
-                }
+        //check for property and turn on Capture
+        if( object_is_ancestor(obj_map.terrains[global.posX, global.posY].object_index, obj_property) 
+        and obj_map.terrains[global.posX, global.posY].ownership != global.P_Turn.number
+        and global.acting_unit.canCapture 
+        and !global.acting_unit.dummy)
+            {
+            global.capture = true ;
+            }
+        
+        
+        
+        //check for supply action
+        if (global.acting_unit.canSupply and !global.acting_unit.dummy)
+            {
+            // Check for adjacent ally unit for Supply action
+            if (scr_check_units_in_range(global.posX, global.posY, 1, 1, true)) global.supply = true;
+            } 
             
-            //check for supply action
-            if (global.acting_unit.canSupply and !global.acting_unit.dummy)
+        //check Load action
+        if( global.acting_unit.canLoadInfantry and !global.acting_unit.dummy)
+            {
+            // Check if units can be dropped
+            var num_units_adjacent = ds_list_size(global.targetables);
+            //check for and switch  on drap A
+            if ( global.acting_unit.load_A != 0 and num_units_adjacent &lt; 4 ) global.drop_A = true;
+            //check for and switch  on drap B
+            if ( global.acting_unit.load_B != 0 and num_units_adjacent &lt; 4 ) global.drop_B = true;
+            }
+        
+        //check for disrupt
+        if( global.acting_unit.canDisrupt and global.acting_unit.ammo &gt; 0 and !global.acting_unit.dummy)
+            {
+            // check enemy units are in range unit in range
+            if( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false) )
                 {
-                // Check for adjacent ally unit for Supply action
-                if (scr_check_units_in_range(global.posX, global.posY, 1, 1, true)) global.supply = true;
-                } 
-                
-            //check Load action
-            if( global.acting_unit.canLoadInfantry)
-                {
-                // Check if units can be dropped
-                var num_units_adjacent = ds_list_size(global.targetables);
-                //check for and switch  on drap A
-                if ( global.acting_unit.load_A != 0 and num_units_adjacent &lt; 4 ) global.drop_A = true;
-                //check for and switch  on drap B
-                if ( global.acting_unit.load_B != 0 and num_units_adjacent &lt; 4 ) global.drop_B = true;
-                }
-            
-            //check for disrupt
-            if( global.acting_unit.canDisrupt and global.acting_unit.ammo &gt; 0 and !global.acting_unit.dummy)
-                {
-                // check enemy units are in range unit in range
-                if( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, global.acting_unit.max_range, false) )
-                    {
-                    //check if can Move fire
-                    if(global.acting_unit.canMoveFire)    global.disrupt = true;
-                    //check indirect fire only
-                    else if ( !global.acting_unit_moved ) global.disrupt = true;
-                    }
-                }
-                
-            //check for secondary weapon attack type (Direct only)  Note: this will also activate primary weapon types if they are direct fire
-            if(global.acting_unit.haveSecondaryWeapon and global.acting_unit.canMoveFire  and scr_check_units_in_range(global.posX,global.posY,1,1,false)and !global.acting_unit.dummy) global.engage = true;
-            
-            //check and process primary weapons and overide engage type to primary 
-            if (global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 and !global.acting_unit.dummy)
-                {
-                //apply CO range FX
-                fire_range = global.acting_unit.max_range
-                fire_range += global.P_Turn.CO.D2D_Rng[global.acting_unit.unit_index];
-                if ( global.P_Turn.CO.COP_on ) fire_range += global.P_Turn.CO.COP_Rng[global.acting_unit.unit_index];
-                if ( global.P_Turn.CO.SCOP_on ) fire_range += global.P_Turn.CO.SCOP_Rng[global.acting_unit.unit_index];
-                
-                if( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, fire_range, false) )
-                    {
-                    //check if can Move fire
-                    if(global.acting_unit.canMoveFire)
-                        {    
-                        global.engage = true;
-                        global.engage_type = 1 ;
-                        }
-                    //check indirect fire only
-                    else if ( !global.acting_unit_moved ) 
-                        {
-                        global.engage = true;
-                        global.engage_type = 1 ;
-                        }
-                    }
+                //check if can Move fire
+                if(global.acting_unit.canMoveFire)    global.disrupt = true;
+                //check indirect fire only
+                else if ( !global.acting_unit_moved ) global.disrupt = true;
                 }
             }
+            
+        //check for secondary weapon attack type (Direct only)  Note: this will also activate primary weapon types if they are direct fire
+        if(global.acting_unit.haveSecondaryWeapon and global.acting_unit.canMoveFire  and scr_check_units_in_range(global.posX,global.posY,1,1,false)and !global.acting_unit.dummy) global.engage = true;
+        
+        //check nd process primary weapons and overide engage type to primary 
+        if (global.acting_unit.havePrimaryWeapon and global.acting_unit.ammo &gt; 0 and !global.acting_unit.dummy)
+            {
+            //apply CO range FX
+            fire_range = global.acting_unit.max_range
+            fire_range += global.P_Turn.CO.D2D_Rng[global.acting_unit.unit_index];
+            if ( global.P_Turn.CO.COP_on ) fire_range += global.P_Turn.CO.COP_Rng[global.acting_unit.unit_index];
+            if ( global.P_Turn.CO.SCOP_on ) fire_range += global.P_Turn.CO.SCOP_Rng[global.acting_unit.unit_index];
+            
+            if( scr_check_units_in_range( global.posX, global.posY, global.acting_unit.min_range, fire_range, false) )
+                {
+                //check if can Move fire
+                if(global.acting_unit.canMoveFire)
+                    {    
+                    global.engage = true;
+                    global.engage_type = 1 ;
+                    }
+                //check indirect fire only
+                else if ( !global.acting_unit_moved ) 
+                    {
+                    global.engage = true;
+                    global.engage_type = 1 ;
+                    }
+                } 
+            }
         }
+    }
     
     //if items exsist, create syscom_command
     if( global.capture   
@@ -1048,30 +995,80 @@ if( (mouse_check_button_pressed(mb_left) and !global.mousetype2) or (mouse_check
     or  global.appear       
     or  global.disrupt      
     or  global.wait
-    //Special CO commands
-    or  global.smoke)
-        {
-        //clear all checker graphics ( no sprite)
-        with(obj_checker_tile) sprite_index = -1;
-        //change sprite back at destination
-        global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
+    //special CO commands
+    or global.smoke)
+            {
+            //clear all checker graphics ( no sprite)
+            with(obj_checker_tile) sprite_index = -1;
+            //change sprite back at destination
+            global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear
+            //create command menu    
+            instance_create(x+24,y,obj_syscom_command);
+            with(obj_syscom_command) by_mouse = true; 
+            //deactivate move cursor object
+            instance_deactivate_object(obj_moveCursorMouse);
+            
+            }
     
-        //deactivate move cursor object
-        instance_deactivate_object(obj_moveCursorMouse);
-        //create command menu    
-        instance_create(x+24,y,obj_syscom_command);
-        with( obj_syscom_command ) by_mouse = true; 
+    else
+        {
+        //clear move datea
+        scr_rangeCheck_reset();
+        //clear move order array
+        ds_priority_clear(global.move_order);
+        //destroy path nodes
+        with(obj_path_node) instance_destroy();
+           
+        //place active unit back in array
+        obj_map.units[global.acting_unit.x div 24,global.acting_unit.y div 24] = global.acting_unit
+        global.acting_unit.state = "idle";
+        scr_setUnitDepth(global.acting_unit);
+            
+        //reset path Q
+        ds_priority_clear(global.move_order);
+         
+         //reset global vunit command variables to default
+         global.acting_unit  = 0;    //empty
+         global.target_unit  = 0;    //empty
+         global.action_order = "wait"; //default to wait
+            
+         //reactivate main phaze YI
+         instance_activate_object(obj_battleCursor);
+         instance_activate_object(obj_miniwin);
+         //destroy move cursor
+         with (obj_moveCursorMouse)instance_destroy(); 
         }
     }
-        
-    
+}
+            
 
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///set miniwin intel
 
-
-
+global.terrain_check = obj_map.terrains[global.posX,global.posY];
+global.unit_check = obj_map.units[global.posX,global.posY];
 </string>
           </argument>
         </arguments>
@@ -1095,19 +1092,9 @@ if( (mouse_check_button_pressed(mb_left) and !global.mousetype2) or (mouse_check
           <argument>
             <kind>1</kind>
             <string>///Debug
-/*
-draw_text( 12,12, string( global.rangeCheck[global.posX, global.posY].rb_edge));
-draw_text( 12,24, string( global.rangeCheck[global.posX, global.posY].rb_corner));
-draw_text( 12,36, string( global.rangeCheck[global.posX, global.posY].rb_fill_h));
-draw_text( 12,48, string( global.rangeCheck[global.posX, global.posY].rb_fill_v));
-
 //draw_text(12,48+12*2,"P2 CO Zone: " + string(global.rangeCheck[global.posX,global.posY].CO_Zone[2]));
 //draw_text(12,48+12*3,"P4 CO Zone: " + string(global.rangeCheck[global.posX,global.posY].CO_Zone[4]));
-
 //draw_text(12, 240, string(global.acting_unit.team) + "/" + string(global.acting_unit.ownership));
-draw_text(12, 240, string(global.acting_unit.team) + ":" + string(global.acting_unit.name));
-draw_text(12, 268, string(global.acting_unit.team) + ":" + string(obj_map.units[global.posX,global.posY]));
-
 
 
 /*
@@ -1140,6 +1127,7 @@ draw_text(12,313, "terrain cost: " + string(scr_check_move_cost(global.acting_un
             <kind>1</kind>
             <string>///draw radio assist
 
+
 if radio_assist_on
     {
     scr_draw_radioAssist(global.posX,global.posY,radioAssistRange,radioAssist_sprite);
@@ -1166,63 +1154,20 @@ if radio_assist_on
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Draw Move Left
-
-if (  path_max - path_total &gt;= 0  and path_total !=0)
-    {
-    scr_draw_num( spr_num_outlined , false, path_max - path_total, x+21, y+3, 2 );    
-    //scr_draw_num( spr_num_red, true, path_total, x, y, 3 );    
-    
-    //draw_set_color(c_black);
-    //draw_text(x+1,y+1, string(path_total)); 
-    //draw_text(x+1,y+1+12, string(global.acting_unit.move_points));
-    
-    //draw_set_color(c_orange);
-    //draw_text(x,y, string(path_total)); 
-    //draw_text(x,y+12, string(global.acting_unit.move_points));
-    
-    //draw_set_color(global.c_uiWhite);
-    
-    }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///draw self, special action cues, and radio assist
+            <string>
+///draw self
 draw_self();
-
 if (fire_range &gt; 1 and global.acting_unit.ammo &gt; 0 and global.acting_unit.canMoveFire) scr_draw_radioAssist(global.posX,global.posY,fire_range,spr_rangeAssist);
-if (fire_range &gt; 1 and global.acting_unit.ammo &gt; 0 and global.indirect_assist_on ){ 
-    scr_draw_radioAssist(global.posX,global.posY,fire_range,spr_rangeAssist);
-    scr_draw_radioAssist(global.posX,global.posY,min_fire_range-1,spr_rangeAssist);
-    }
-if (obj_map.units[global.posX,global.posY] !=0 and global.rangeCheck[global.posX,global.posY].sprite_index = spr_rangecheck_clear)
-    {
-    if ((global.cursorFrame = 2 or global.cursorFrame = 1) and obj_map.units[global.posX,global.posY].team = global.P_Turn.team )
-        {
+
+
+if (obj_map.units[global.posX,global.posY] !=0 and global.rangeCheck[global.posX,global.posY].sprite_index =spr_rangecheck_clear){
+    if ((global.cursorFrame = 2 or global.cursorFrame = 1) and obj_map.units[global.posX,global.posY].team = global.P_Turn.team ){
         //join
-        if (obj_map.units[global.posX,global.posY].hp &lt; 10 and obj_map.units[global.posX,global.posY].name = global.acting_unit.name and !global.acting_unit.dummy and global.target_unit.dummy) draw_sprite( spr_basicCursor_Icons,4,x,y); 
+        if (obj_map.units[global.posX,global.posY].hp &lt; 10 and obj_map.units[global.posX,global.posY].name = global.acting_unit.name) draw_sprite( spr_basicCursor_Icons,4,x,y); 
         //attach
-        if ( obj_map.units[global.posX,global.posY].isCommander = false and global.acting_unit.canAttach and !global.acting_unit.dummy and global.target_unit.dummy) draw_sprite(spr_basicCursor_Icons,3,x,y);
+        if ( obj_map.units[global.posX,global.posY].isCommander = false and global.acting_unit.canAttach) draw_sprite(spr_basicCursor_Icons,3,x,y);
         //Load
-        if ( obj_map.units[global.posX,global.posY].canLoadInfantry and global.target_unit.dummy)
-            {
+        if ( obj_map.units[global.posX,global.posY].name = "A.P.C."){
             if (global.acting_unit.name = "long Gun" or global.acting_unit.name = "Light Infantry" or global.acting_unit.name = "Heavy Infantry") draw_sprite( spr_basicCursor_Icons,2,x,y);
             }                
         }
@@ -1254,7 +1199,44 @@ if (obj_map.units[global.posX,global.posY] !=0 and global.rangeCheck[global.posX
 
 draw_sprite(spr_mousePointer,global.P_Turn.number - 1, mouse_x, mouse_y);
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Draw Move Left
 
+if ( global.rangeCheck[global.posX,global.posY].pathority != -1 )
+    {
+    scr_draw_num( spr_num_outlined , false, path_max - path_total, x+21, y+3, 2 );    
+    //scr_draw_num( spr_num_red, true, path_total, x, y, 3 );    
+    
+    //draw_set_color(c_black);
+    //draw_text(x+1,y+1, string(path_total)); 
+    //draw_text(x+1,y+1+12, string(global.acting_unit.move_points));
+    
+    //draw_set_color(c_orange);
+    //draw_text(x,y, string(path_total)); 
+    //draw_text(x,y+12, string(global.acting_unit.move_points));
+    
+    //draw_set_color(global.c_uiWhite);
+    
+    }
 </string>
           </argument>
         </arguments>

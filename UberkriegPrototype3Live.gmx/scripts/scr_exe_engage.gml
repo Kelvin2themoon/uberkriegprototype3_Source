@@ -427,6 +427,9 @@ audio_play_sound(sfx_KriegSkillCharged,1,0);
         
 //nuke syscom
 with par_syscom_menu instance_destroy();
+//reset checker tiles
+
+
 
 //clear active unit
 global.acting_unit = 0;

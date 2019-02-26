@@ -180,6 +180,7 @@ if ( obj_map.units[x div 24, y div 24] != 0)
                 if ( max_ammo &gt; 0 and  ammo / max_ammo &lt; 0.5 and global.blinking)
                     {
                     if (name = "A.P.C.") draw_sprite(spr_unitStats_ammofuel,2,x,y);
+                    else if (ammo = 0) draw_sprite(spr_unitStats_ammofuel,3,x,y);
                     else draw_sprite(spr_unitStats_ammofuel,0,x,y);
                     }
                     
@@ -234,6 +235,8 @@ if (on_path){
             <string>///debug
 
 //if CO_Field[global.P_Turn.number] draw_text(x,y,"F");
+//draw_text(x,y,string(move_cost));
+
 
 
 

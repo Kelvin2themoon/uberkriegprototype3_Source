@@ -193,7 +193,7 @@ if  (keyboard_check_pressed(global.keyCANCEL) and !global.drop_phaze_2 and !by_m
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///cancel
+            <string>///cancel by mouse
 if (mouse_check_button_pressed(mb_right)
 or  (keyboard_check_pressed(global.keyCANCEL) and !global.drop_phaze_2 and by_mouse) )
     {
@@ -226,6 +226,8 @@ or  (keyboard_check_pressed(global.keyCANCEL) and !global.drop_phaze_2 and by_mo
         //reactivate main phaze YI
         instance_activate_object(obj_battleCursor);
         instance_activate_object(obj_miniwin);
+        //reset satding
+        scr_updateStanding_global();
         //destroy move cursor
         with (obj_moveCursorMouse){instance_destroy();}
         //set menueExitDelay

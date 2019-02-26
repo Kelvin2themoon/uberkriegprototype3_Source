@@ -79,6 +79,28 @@ fast_scroll_on = false;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///mouse navigate variables
+mScroll_on = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="1">
       <action>
@@ -221,22 +243,22 @@ if ( view_yview[0] + view_hport[0] &lt; y + view_border+24 and global.canScroll_
             <string>///execute at target location
 //check for mouse &amp; keayboard event
 if( keyboard_check_pressed(global.keyCONFIRM)
-or  (   mouse_check_button_pressed(mb_left) 
-    and mouse_x div 24 = global.posX and mouse_y div 24 = global.posY)
-or  (   mouse_check_button_pressed(mb_right)    )           
+or  (   mouse_check_button_pressed(mb_right) 
+    and mouse_x div 24 = global.posX and mouse_y div 24 = global.posY)        
     )
     {
     //check in bound
     if (scr_inBound(global.posX,global.posY))
         {
-        if( mouse_check_button_pressed(mb_right) )
+        /*if( mouse_check_button_pressed(mb_right) )
             {
             global.posX = mouse_x div 24;
             global.posY = mouse_y div 24;
             x = global.posX*24;
             y = global.posY*24;
             scr_cursorKey_juice(1,global.cursorKey_sfx);
-            } 
+            }
+           */ 
 
         if (global.P_Turn.CO.rounds &gt; 0)
             {
@@ -375,7 +397,8 @@ if (alarm[1] = -1 )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///navigate by mouse
+            <string>///navigate by mouse commented out
+/*
 //positions to check
 var mousecheck_pos_x = mouse_x div 24 ;
 var mousecheck_pos_y = mouse_y div 24 ;
@@ -414,6 +437,90 @@ and scr_inBound(mousecheck_pos_x,mousecheck_pos_y))
     }
 
         
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///navigate by mouse- click and drag
+if (mouse_check_button_pressed(mb_left)){
+    var mpx = mouse_x div 24 ;//mpuse position X
+    var mpy = mouse_y div 24 ;//mouse position Y
+    
+    if (scr_inBound(mpx,mpy)){
+        //move cursor
+        x = mpx*24;
+        y = mpy*24;
+        global.posX = mpx;
+        global.posY = mpy;
+        //juice
+        scr_cursorKey_juice(1,global.cursorKey_sfx);
+        //initiate grabby
+        mScroll_on = true;
+        xs = window_mouse_get_x();
+        ys = window_mouse_get_y(); 
+        }
+    }
+    
+if (mouse_check_button_released(mb_left)){
+    mScroll_on = false;
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///mouse scrolling
+    
+    var vMod = 1;
+    if global.window_size = 2 vMod = 2;
+    if window_get_fullscreen() vMod=(display_get_width() / view_wview[0]) ;
+
+ if (mScroll_on){
+    if (global.canScroll_x)
+        {
+        xe= window_mouse_get_x();
+        view_xview[0] += (xs-xe) div vMod;
+        xs = xe;
+        }
+    if (global.canScroll_y)
+        {
+        ye= window_mouse_get_y();
+        view_yview[0] += (ys-ye) div vMod;
+        ys = ye;
+        }
+    }
+
 </string>
           </argument>
         </arguments>
@@ -560,8 +667,39 @@ scr_draw_radioAssist(global.posX,global.posY,c_radioAssist_range,c_radioAssist_s
 //draw curosr
 draw_self();
 //draw Mouse
-draw_sprite(spr_mousePointer,global.P_Turn.number - 1, mouse_x, mouse_y);
+//draw_sprite(spr_mousePointer,global.P_Turn.number - 1, mouse_x, mouse_y);
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw mouse
+if mScroll_on 
+    draw_sprite(spr_mouseGrabber,global.P_Turn.number-1,mouse_x,mouse_y);
+
+else if  (mouse_x &gt; x and mouse_x &lt; x+24 and mouse_y &gt; y and mouse_y &lt; y+24){
+    draw_sprite(spr_mousePointer,global.P_Turn.number-1,mouse_x,mouse_y);
+    draw_text(mouse_x +12, mouse_y+12, "Right click to deploy");
+    }
+else{
+    draw_sprite(spr_mouseSlapper,global.P_Turn.number-1,mouse_x,mouse_y);
+    }
 </string>
           </argument>
         </arguments>
