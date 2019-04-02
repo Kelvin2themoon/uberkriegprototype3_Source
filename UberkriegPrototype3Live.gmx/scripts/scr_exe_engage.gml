@@ -418,12 +418,15 @@ with obj_battleCursor
     }
     
 // Uberkrieg ready SFX
-if (global.P_Turn.CO.charge >= (global.P_Turn.CO.COP_Bar*star_value + global.P_Turn.CO.SCOP_Bar*star_value )and global.P_Turn.CO.SCOP_Bar !=0 and scop_was_off) 
-audio_play_sound(sfx_UberkriegCharged,1,0);
+if (global.P_Turn.CO.charge >= (global.P_Turn.CO.COP_Bar*star_value + global.P_Turn.CO.SCOP_Bar*star_value )and global.P_Turn.CO.SCOP_Bar !=0 and scop_was_off and global.P_Turn.CO.Uberkriegcheck){ 
+    global.P_Turn.CO.Uberkriegcheck = false;
+    audio_play_sound(sfx_UberkriegCharged,1,0);
+    }
 //kriegskill ready sfx
-else if (global.P_Turn.CO.charge >= global.P_Turn.CO.SCOP_Bar*star_value and global.P_Turn.CO.COP_Bar !=0 and cop_was_off) 
-audio_play_sound(sfx_KriegSkillCharged,1,0);
-    
+else if (global.P_Turn.CO.charge >= global.P_Turn.CO.COP_Bar*star_value and global.P_Turn.CO.COP_Bar !=0 and cop_was_off and global.P_Turn.CO.Kriegcheck){
+    audio_play_sound(sfx_KriegSkillCharged,1,0);
+    global.P_Turn.CO.Kriegcheck = false;
+    }
         
 //nuke syscom
 with par_syscom_menu instance_destroy();

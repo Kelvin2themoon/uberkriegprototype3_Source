@@ -226,11 +226,22 @@ with global.P_Turn
           <argument>
             <kind>1</kind>
             <string>/// Uberkrieg ready SFX
-if (global.P_Turn.CO.charge &gt;= (global.P_Turn.CO.COP_Bar*star_value + global.P_Turn.CO.SCOP_Bar*star_value )and global.P_Turn.CO.SCOP_Bar !=0 ) 
-audio_play_sound(sfx_UberkriegCharged,1,0);
+
+//swith_on check sound for when attack
+global.P_Turn.CO.Kriegcheck = true;
+global.P_Turn.CO.Uberkriegcheck = true;
+
+if (global.P_Turn.CO.charge &gt;= (global.P_Turn.CO.COP_Bar*star_value + global.P_Turn.CO.SCOP_Bar*star_value )and global.P_Turn.CO.SCOP_Bar !=0 ){ 
+    audio_play_sound(sfx_UberkriegCharged,1,0);
+    global.P_Turn.CO.Kriegcheck = false;
+    global.P_Turn.CO.Uberkriegcheck = false;
+    }
 //kriegskill ready sfx
-else if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar*star_value and global.P_Turn.CO.COP_Bar !=0 ) 
-audio_play_sound(sfx_KriegSkillCharged,1,0);
+else if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar*star_value and global.P_Turn.CO.COP_Bar !=0 ){ 
+    audio_play_sound(sfx_KriegSkillCharged,1,0);
+    global.P_Turn.CO.Kriegcheck = false;
+    global.P_Turn.CO.Uberkriegcheck = false;
+    }
 </string>
           </argument>
         </arguments>

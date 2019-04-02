@@ -275,7 +275,7 @@ if global.network_mode = 1{
             <string>///draw stuff
 draw_self();
 
-draw_text(227,157,"Prototype (v3.13 A)");
+draw_text(227,157,"Prototype (v3.13 E)");
 draw_text(227,157+16,"2019.02.28");
 
 draw_text(227,210-16,"F1: Start Game");
