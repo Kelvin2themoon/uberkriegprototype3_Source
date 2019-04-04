@@ -177,7 +177,7 @@ switch state {
                 audio_play_sound(global.BGM,1,true);
                 }
             //audio cue for new turn in netowrk mode
-            if ( global.network_mode !=0 and !global.BGM_on ) audio_play_sound(sfx_bark,2,false); 
+            audio_play_sound(sfx_bark,2,false); 
             
              
             }
