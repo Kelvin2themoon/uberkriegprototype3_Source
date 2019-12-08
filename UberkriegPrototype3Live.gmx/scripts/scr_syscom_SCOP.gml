@@ -36,7 +36,15 @@ with (obj_unit)
     }
 
 scr_updateStanding_global();
+
+//check for absolute vision
+if global.P_Turn.CO.SCOP_AbsoluteVision = true {
+    with obj_terrain isVisible = true;
+    with obj_unit isVisible   = true;
+    }
 scr_updateGlobalVision();
+
+
 
 //check for smoke screen
 if( global.P_Turn.CO.SCOP_SmokeScreen > 0)
@@ -52,6 +60,12 @@ else if( global.P_Turn.CO.SCOP_Disrupt > 0)
     instance_create(global.posX,global.posY,obj_disruptorCurosr);
     with(obj_disruptorCurosr) range = global.P_Turn.CO.SCOP_Disrupt
     }
+//check for deploy covert op
+else if (global.P_Turn.CO.SCOP_DeployCovertOp)
+    {
+    instance_create(global.posX,global.posY,obj_deployCovertOp );
+    }
+    
 //check for dummyDeploy
 else if( global.P_Turn.CO.SCOP_DeployDummy > 0)
     {

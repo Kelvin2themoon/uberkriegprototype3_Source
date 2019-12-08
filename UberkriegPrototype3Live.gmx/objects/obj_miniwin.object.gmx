@@ -41,7 +41,7 @@ miniwin_terrain_ownership = 0;
 miniwin_unit = spr_miniwin_LightTank;
 miniwin_unit_ownership = 0;
 
-//aux display 
+//aux display (temperary terrain and unit intel display switch)
 aux_on = false;
 
 
@@ -229,6 +229,52 @@ image_index = global.P_Turn.number - 1 ;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw calc
+
+//current player sprite index
+d_player_index = global.P_Turn.number-1;
+
+//d_load_ax = x+172;
+//d_load_ay =  y+12;
+
+
+//all unit stats are on same row
+d_units_y = y+26;
+//HP
+d_hiddenHP_x = x+78-11;
+d_HP_x = x+78;
+//Fuel
+d_fuel_x = x+123;
+//Ammo
+d_ammo_x = x+142;
+
+//Terrain data, on same row
+d_terrain_y = y+74;
+//cap
+d_cap_x = x+139;
+d_flag_x = x+144
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -320,8 +366,8 @@ if (global.unit_check != 0)
         if (global.unit_check.canLoadInfantry and global.unit_check.team = global.P_Turn.team)
             {
             //LR position switch
-            if (isLeft) draw_sprite(spr_miniwin_load_L,global.P_Turn.number-1,x,y);
-            else draw_sprite(spr_miniwin_load_R,global.P_Turn.number-1,x,y);
+            if (isLeft) draw_sprite(spr_miniwin_load_L,d_player_index,x,y);
+            else draw_sprite(spr_miniwin_load_R,d_player_index,x,y);
             //Draw loaded Units
             if (global.unit_check !=0){
                 //draw load A
@@ -372,26 +418,26 @@ if (global.unit_check != 0)
         //draw unit base
         draw_sprite(miniwin_unit,miniwin_unit_ownership,x,y);
         //draw HP
-        if (global.unit_check.HP_hidden and global.unit_check.ownership != global.P_Turn.number) draw_sprite(spr_num_light,11,x+78-11,y+26);
-        else scr_draw_num(spr_num_light,false,global.unit_check.hp,x+78,y+26,2);
+        if (global.unit_check.HP_hidden and global.unit_check.ownership != global.P_Turn.number) draw_sprite(spr_num_light,11,d_hiddenHP_x,d_units_y);
+        else scr_draw_num(spr_num_light,false,global.unit_check.hp,d_HP_x,d_units_y,2);
         //draw Fuel
-        if(global.unit_check.HP_hidden and global.unit_check.ownership != global.P_Turn.number) scr_draw_num(spr_num_light,false,100000,x+123,y+26,2);
-        else scr_draw_num(spr_num_light,false,global.unit_check.fuel,x+123,y+26,3);
+        if(global.unit_check.HP_hidden and global.unit_check.ownership != global.P_Turn.number) scr_draw_num(spr_num_light,false,100000,d_fuel_x,d_units_y,2);
+        else scr_draw_num(spr_num_light,false,global.unit_check.fuel,d_fuel_x,d_units_y,3);
         //Draw Ammo
         if( global.unit_check.ammo != -1)
             { 
-            if(global.unit_check.HP_hidden and global.unit_check.ownership != global.P_Turn.number) scr_draw_num(spr_num_light,true,100000,x+142,y+26,1);
-            else scr_draw_num(spr_num_light,true,global.unit_check.ammo,x+142,y+26,1);
+            if(global.unit_check.HP_hidden and global.unit_check.ownership != global.P_Turn.number) scr_draw_num(spr_num_light,true,100000,d_ammo_x,d_units_y,1);
+            else scr_draw_num(spr_num_light,true,global.unit_check.ammo,d_ammo_x,d_units_y,1);
             }
-        else draw_sprite(spr_num_light,10,x+142,y+26);
+        else draw_sprite(spr_num_light,10,d_ammo_x,d_units_y);
         
         //draw Terrain intel
         draw_sprite(miniwin_terrain,miniwin_terrain_ownership,x,y);
         // draw capture progress
         if( global.unit_check.capturing!= 0)
             {
-            scr_draw_num(spr_num_light,false,global.unit_check.capturing,x+139,y+74,2);
-            draw_sprite(spr_miniFlag,global.unit_check.ownership-1,x+144,y+74)
+            scr_draw_num(spr_num_light,false,global.unit_check.capturing,d_cap_x,d_terrain_y,2);
+            draw_sprite(spr_miniFlag,global.unit_check.ownership-1,d_flag_x,d_terrain_y)
             }
         }
     }

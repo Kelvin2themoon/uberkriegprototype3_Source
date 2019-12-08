@@ -785,6 +785,11 @@ if (mouse_check_button_released(mb_left)){
     //scr_rangeCheck_reset();
     isOnGlobalRadioCheck = false;
     checking_move_range = false;
+    
+    //update Radio Boarder
+    scr_globalRadioCheck();
+    scr_update_radioBoarder();
+    scr_rangeCheck_reset();
     }
     
 //right click
@@ -846,6 +851,9 @@ if(mouse_check_button_released(mb_right))
     {
     mScroll_on = false;
     checking_attack_range = false;
+    //update Radio Boarder
+    scr_globalRadioCheck();
+    scr_update_radioBoarder();
     scr_rangeCheck_reset();
     }
 
@@ -1333,6 +1341,39 @@ if keyboard_check_released(vk_space)
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw pos calculations
+
+//deploy sprite
+d_mousedeploy_x = (mouse_x div 24)*24;
+d_mousedeploy_y = (mouse_y div 24)*24;
+
+//pointer sprite index
+d_pointerSprite_index = global.P_Turn.number - 1;
+
+//tool tips pos
+d_mTooltip_x = mouse_x+12;
+d_mTooltip_y = mouse_y+12;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="5" enumb="120">
       <action>
@@ -1401,6 +1442,9 @@ with(global.P_Turn.CO)
           <argument>
             <kind>1</kind>
             <string>///Debug
+if (obj_map.units[global.posX, global.posY] !=0 )
+draw_text(12,12,string(obj_map.units[global.posX,global.posY].COP));
+
 //draw_text(12,12,"Krieg Metre Charge: "+ string(global.P_Turn.CO.charge) + "/" + string(star_value));
 
 /*
@@ -1503,11 +1547,11 @@ if (global.Phaze = "Main" and unit_selection != 0){
          
     //draw deploy
     if can_mouse_deploy 
-    draw_sprite(spr_basicCursor_Icons,5, (mouse_x div 24)*24, (mouse_y div 24) *24);
+    draw_sprite(spr_basicCursor_Icons,5, d_mousedeploy_x, d_mousedeploy_y);
     
     //draw pointer
-    if mScroll_on  draw_sprite(spr_mouseGrabber,global.P_Turn.number - 1, mouse_x, mouse_y);
-    else draw_sprite(spr_mouseSlapper,global.P_Turn.number - 1, mouse_x, mouse_y);
+    if mScroll_on  draw_sprite(spr_mouseGrabber,d_pointerSprite_index, mouse_x, mouse_y);
+    else draw_sprite(spr_mouseSlapper,d_pointerSprite_index, mouse_x, mouse_y);
     
     //draw RadioAssist if over visible unit
     if(m_radioAssist_on)
@@ -1574,10 +1618,10 @@ if (cursor_icon == 5 ){
             <kind>1</kind>
             <string>///mouse control tool tips
 //draw type
-if !global.mousetype2 draw_text(mouse_x+12,mouse_y+12,"2");
+if !global.mousetype2 draw_text(d_mTooltip_x,d_mTooltip_y,"2");
 
 //check if on
-if global.Mouse_control_tool_tip_is_on draw_text(mouse_x+12,mouse_y+12,global.Mouse_control_tool_tip_text);
+if global.Mouse_control_tool_tip_is_on draw_text(d_mTooltip_x,d_mTooltip_y,global.Mouse_control_tool_tip_text);
 </string>
           </argument>
         </arguments>

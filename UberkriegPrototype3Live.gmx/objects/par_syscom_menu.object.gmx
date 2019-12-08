@@ -360,6 +360,7 @@ if ( mouse_check_button_pressed( mb_left)
                     //destroy path nodes
                     with(obj_path_node) instance_destroy();
                    
+                    
                     //place active unit back in array
                     obj_map.units[global.acting_unit.x div 24,global.acting_unit.y div 24] = global.acting_unit
                     global.acting_unit.state = "idle";

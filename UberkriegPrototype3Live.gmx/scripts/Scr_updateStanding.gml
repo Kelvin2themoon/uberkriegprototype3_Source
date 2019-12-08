@@ -104,5 +104,8 @@ while (ds_queue_size(standing_Q) != 0 )
     
 //destroy_Q
 ds_queue_destroy(standing_Q);
+
+
+
     
 

@@ -198,14 +198,12 @@ and mouse_x div 24 = global.posX and mouse_y div 24 = global.posY))
     //check in bound
     if (scr_inBound(global.posX,global.posY))
         {
-        //check over property
-        if (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,obj_property)){
-                if (obj_map.terrains[global.posX,global.posY].ownership = global.P_Turn.number){
-                //DEPLOY LAND CRUISER!!!
-                scr_setUnit(obj_unit_LandCruiser,global.posX,global.posY,global.P_Turn.number);
+        //check if terrain is visable and is empty
+        if (obj_map.terrains[global.posX,global.posY].isVisible and obj_map.units[global.posX,global.posY] = 0 ){
+                //DEPLOY COVERT OP!!!
+                scr_setUnit(obj_unit_CovertOp,global.posX,global.posY,global.P_Turn.number);
                 obj_map.units[global.posX,global.posY].team = global.P_Turn.team;
-                //set to stealth
-                obj_map.units[global.posX,global.posY].isHidden= true;
+                obj_map.units[global.posX,global.posY].isHidden = true;
                 // update visioni
                 scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
                 // update standing
@@ -219,7 +217,7 @@ and mouse_x div 24 = global.posX and mouse_y div 24 = global.posY))
                 instance_activate_object(obj_battleCursor);
                 instance_activate_object(obj_miniwin);
                 instance_destroy();  
-                }
+                
             }  
         } 
     }
@@ -509,9 +507,8 @@ if mScroll_on
 
 else if  (mouse_x &gt; x and mouse_x &lt; x+24 and mouse_y &gt; y and mouse_y &lt; y+24){
     draw_sprite(spr_mousePointer,global.P_Turn.number-1,mouse_x,mouse_y);
-    if(object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index, obj_property ))
-    {
-        if( obj_map.terrains[global.posX,global.posY].ownership = global.P_Turn.number)
+    if(obj_map.units[global.posX,global.posY] = 0 )
+        {
         draw_text(mouse_x +12, mouse_y+12, "Right click to deploy");
         }
     }
@@ -544,10 +541,9 @@ draw_self();
 //draw Mouse
 //draw_sprite(spr_mousePointer,global.P_Turn.number - 1, mouse_x, mouse_y);
 //draw attach able
-if(object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index, obj_property ))
+if(obj_map.units[global.posX,global.posY]=0)
     {
-    if( obj_map.terrains[global.posX,global.posY].ownership = global.P_Turn.number 
-    and (global.cursorFrame = 2 or global.cursorFrame = 1))
+   if(global.cursorFrame = 2 or global.cursorFrame = 1)
         {
          draw_sprite(spr_basicCursor_Icons,3,x,y);
         }

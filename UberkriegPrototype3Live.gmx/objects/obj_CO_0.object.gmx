@@ -117,6 +117,9 @@ COFX_PerfectIntel   = false ;
 
 COP_DeployDummy = 0;
 SCOP_DeployDummy = 0;
+SCOP_DeployCovertOp = false;
+SCOP_AbsoluteVision = false;
+
 
 //hp+
 COFX_APC_Repair  = 0 ;

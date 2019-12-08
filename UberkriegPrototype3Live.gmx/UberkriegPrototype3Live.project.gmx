@@ -3,7 +3,7 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="3" name="datafiles">
+  <datafiles number="4" name="datafiles">
     <datafile>
       <name>2P_SabreRanger_v3.ubm</name>
       <exists>-1</exists>
@@ -234,6 +234,7 @@
         <sprite>sprites\spr_num_gold</sprite>
         <sprite>sprites\spr_num_bright</sprite>
         <sprite>sprites\spr_num_outlined</sprite>
+        <sprite>sprites\spr_day</sprite>
       </sprites>
       <sprites name="MapEditor">
         <sprite>sprites\spr_grabHand</sprite>
@@ -470,7 +471,9 @@
       <background>background\background0</background>
     </backgrounds>
   </backgrounds>
-  <paths name="paths"/>
+  <paths name="paths">
+    <path>paths\path0</path>
+  </paths>
   <scripts name="scripts">
     <script>scripts\scr_animate_object.gml</script>
     <script>scripts\scr_inBound.gml</script>
@@ -586,6 +589,7 @@
     <font>fonts\font9</font>
     <font>fonts\font10</font>
     <font>fonts\font11</font>
+    <font>fonts\font12</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>
@@ -687,6 +691,7 @@
         <object>objects\obj_promote_Cursor</object>
         <object>objects\obj_deployDummyCursor</object>
         <object>objects\obj_deployLandCruiserCursor</object>
+        <object>objects\obj_deployCovertOp</object>
         <object>objects\obj_dropCursor</object>
         <objects name="Cursor Backup">
           <object>objects\obj_Bup_moveCurosr</object>
@@ -709,6 +714,7 @@
       <object>objects\obj_CO_8</object>
       <object>objects\obj_CO_9</object>
       <object>objects\obj_CO_10</object>
+      <object>objects\obj_CO_11</object>
       <object>objects\obj_CO_18</object>
       <object>objects\obj_CO_16</object>
       <object>objects\obj_CO_13</object>

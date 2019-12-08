@@ -37,6 +37,26 @@ isLeft = true;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -108,6 +128,81 @@ image_index = global.P_Turn.number - 1 ;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///calculate Date draw location
+
+draw_date_x = x-2;
+draw_date_y = y-4;
+draw_date_num_x = draw_date_x + 33 ;
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw calc
+
+//drawplayer names (i.e. "Cookieland")
+d_Pnames_x =x+101;
+d_Pnames_y = y+10;
+//Funds
+d_funds_x = x+101;
+d_funds_y = y+32;
+//stars
+d_stars_x = x+12;
+d_stars_y = y+45;
+
+//temp, skill ready
+d_skillready_x = x+12;
+d_skillready_y = y+60;
+
+d_skillready_y1 = d_skillready_y +(16*1);
+d_skillready_y2 = d_skillready_y +(16*2);
+d_skillready_y3 = d_skillready_y +(16*3);
+d_skillready_y4 = d_skillready_y +(16*4);
+
+//temp CO names
+d_COname_x = x+16;
+d_COname_y = y+25;
+
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -129,16 +224,12 @@ image_index = global.P_Turn.number - 1 ;
             <string>///Draw 
 draw_self();
 //name
-draw_text(x+101,y+10,global.P_Turn.name);
+draw_text(d_Pnames_x,d_Pnames_y,global.P_Turn.name);
 //funds
-
-
-
-
-if global.P_Turn.funds &lt; 0 scr_draw_num(spr_num_red, true, global.P_Turn.funds,x+101,y+32,8);
-
-
-else scr_draw_num(spr_num_light, true, global.P_Turn.funds,x+101,y+32,8);
+//draw red if under 0
+if global.P_Turn.funds &lt; 0 scr_draw_num(spr_num_red, true, global.P_Turn.funds,d_funds_x,d_funds_y,8);
+//else draw nomrally
+else scr_draw_num(spr_num_light, true, global.P_Turn.funds,d_funds_x,d_funds_y,8);
 </string>
           </argument>
         </arguments>
@@ -161,7 +252,7 @@ else scr_draw_num(spr_num_light, true, global.P_Turn.funds,x+101,y+32,8);
             <kind>1</kind>
             <string>///draw stars
 
-scr_draw_stars( x+12, y+45,global.P_Turn.CO.COP_Bar,global.P_Turn.CO.SCOP_Bar,global.P_Turn.CO.charge);
+scr_draw_stars( d_stars_x, d_stars_y,global.P_Turn.CO.COP_Bar,global.P_Turn.CO.SCOP_Bar,global.P_Turn.CO.charge);
 </string>
           </argument>
         </arguments>
@@ -186,22 +277,22 @@ scr_draw_stars( x+12, y+45,global.P_Turn.CO.COP_Bar,global.P_Turn.CO.SCOP_Bar,gl
 
 //add COP and SCOP
 if (global.P_Turn.CO.charge &gt;= (global.P_Turn.CO.COP_Bar*star_value + global.P_Turn.CO.SCOP_Bar*star_value )and global.P_Turn.CO.SCOP_Bar !=0) 
-draw_sprite(spr_ready,1, x+12, y + 60); 
+draw_sprite(spr_ready,1, d_skillready_x, d_skillready_y); 
 
 
 else if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar*star_value and global.P_Turn.CO.COP_Bar !=0) 
-draw_sprite(spr_ready,0, x+12, y + 60);
+draw_sprite(spr_ready,0, d_skillready_x, d_skillready_y);
 
 //temp markers
-if global.P1_in_play if global.P1.CO.COP_on draw_sprite(spr_ready,2,x+12, y+60+(16*1));
-if global.P2_in_play if global.P2.CO.COP_on draw_sprite(spr_ready,3,x+12, y+60+(16*2));
-if global.P3_in_play if global.P3.CO.COP_on draw_sprite(spr_ready,4,x+12, y+60+(16*3));
-if global.P4_in_play if global.P4.CO.COP_on draw_sprite(spr_ready,5,x+12, y+60+(16*4));
+if global.P1_in_play if global.P1.CO.COP_on draw_sprite(spr_ready,2,d_skillready_x, d_skillready_y1);
+if global.P2_in_play if global.P2.CO.COP_on draw_sprite(spr_ready,3,d_skillready_x, d_skillready_y2);
+if global.P3_in_play if global.P3.CO.COP_on draw_sprite(spr_ready,4,d_skillready_x, d_skillready_y3);
+if global.P4_in_play if global.P4.CO.COP_on draw_sprite(spr_ready,5,d_skillready_x, d_skillready_y4);
 
-if global.P1_in_play if global.P1.CO.SCOP_on draw_sprite(spr_ready,6,x+12, y+60+(16*1));
-if global.P2_in_play if global.P2.CO.SCOP_on draw_sprite(spr_ready,7,x+12, y+60+(16*2));
-if global.P3_in_play if global.P3.CO.SCOP_on draw_sprite(spr_ready,8,x+12, y+60+(16*3));
-if global.P4_in_play if global.P4.CO.SCOP_on draw_sprite(spr_ready,9,x+12, y+60+(16*4));
+if global.P1_in_play if global.P1.CO.SCOP_on draw_sprite(spr_ready,6,d_skillready_x, d_skillready_y1);
+if global.P2_in_play if global.P2.CO.SCOP_on draw_sprite(spr_ready,7,d_skillready_x, d_skillready_y2);
+if global.P3_in_play if global.P3.CO.SCOP_on draw_sprite(spr_ready,8,d_skillready_x, d_skillready_y3);
+if global.P4_in_play if global.P4.CO.SCOP_on draw_sprite(spr_ready,9,d_skillready_x, d_skillready_y4);
 
 
  
@@ -230,8 +321,32 @@ if global.P4_in_play if global.P4.CO.SCOP_on draw_sprite(spr_ready,9,x+12, y+60+
             <kind>1</kind>
             <string>///temp drae CO name
 draw_set_color(make_color_rgb(235,218,206));
-draw_text(x+16,y+25,global.P_Turn.CO.name);
+draw_text(d_COname_x,d_COname_y,global.P_Turn.CO.name);
 draw_set_colour(global.c_uiWhite);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw date
+
+draw_sprite(spr_day,0,draw_date_x,draw_date_y);
+scr_draw_num(spr_num_outlined,true,global.Day,draw_date_num_x ,draw_date_y,3);
 </string>
           </argument>
         </arguments>

@@ -25,51 +25,45 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 03: Radio CO
+            <string>///CO 11: Vision CO alt 
 
 event_inherited();
 
 // Initiate Parent Object and defaults
 
-index = 3 ;
-name = "radio+"
+index = 1 ;
+name = "vision+" 
+
 
 //COP and SCOP Varialbes
 
 COP_Bar     = 3 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
-
-SCOP_Bar    = 4 ;
+SCOP_Bar    = 3 ;
 SCOP_on     = false ;   //SCOP switch
 
-//passive abilities, COP, and SCOP
-D2D_Radio   = 1 ;
-COP_Radio   = 1 ;
-SCOP_Radio  = 2 ;
+charge = 0;
 
-var i = 4;
-//eagle skills
-//COP_ActAgain = true;
-//SCOP_ActAgain = true;
+//passive abilities
+D2D_Vision  = 1 ;
+COP_Vision  = 1 ;
+SCOP_Vision = 2 ;
 
-//generic defence boost
-var i = 5;
-for( i = 5 ; i &lt;= 13 ; i++ )
-    {
-    //COP_Def[i]  = 110;
-    //COP_Atk[i]  = 50 ;
-    //SCOP_Def[i] = 110;
-    
-    //COP_ActAgn[i] = true;
-    COP_MovAgn[i] = true;
-    SCOP_ActAgn[i] = true;
-    }
-    
+COFX_HiddenHP       = true ; //includes fuel and ammo
+COFX_PerfectVision  = true ;
+COFX_DeployDummy    = true ;
+COFX_PerfectIntel   = true ;
+
+COP_DeployDummy = 3;
+SCOP_DeployDummy = 3;
+SCOP_AbsoluteVision = true;
 
 
 
-    
+
+
+
 
 </string>
           </argument>

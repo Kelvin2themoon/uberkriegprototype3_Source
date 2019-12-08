@@ -539,7 +539,12 @@ if mScroll_on
 
 else if  (mouse_x &gt; x and mouse_x &lt; x+24 and mouse_y &gt; y and mouse_y &lt; y+24){
     draw_sprite(spr_mousePointer,global.P_Turn.number-1,mouse_x,mouse_y);
-    draw_text(mouse_x +12, mouse_y+12, "Right click to deploy");
+    if( obj_map.units[global.posX,global.posY] !=0 )
+    {
+        if( obj_map.units[global.posX,global.posY].ownership = global.P_Turn.number 
+        and !obj_map.units[global.posX,global.posY].isCommander)
+        draw_text(mouse_x +12, mouse_y+12, "Right click to promote");
+        }
     }
 else{
     draw_sprite(spr_mouseSlapper,global.P_Turn.number-1,mouse_x,mouse_y);

@@ -122,7 +122,53 @@ isMovAgn = false;
 
 
 
+
+
 </string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///pos variables for drawing
+
+posx = x div 24;
+posy = y div 24;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
           </argument>
         </arguments>
       </action>
@@ -194,6 +240,58 @@ switch state {
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// update Draw Calcs
+
+posx = x div 24;
+posy = y div 24;
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///adjust image alpha for visibility
+
+if isVisible    image_alpha = 1;
+else            image_alpha = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -244,9 +342,9 @@ draw_self();
 if(instance_exists(obj_terrain_SeaBridge))
 {
 
-    if ( obj_map.terrains[x div 24, y div 24].object_index == obj_terrain_SeaBridge.object_index and isVisible)
+    if ( obj_map.terrains[posx,posy].object_index == obj_terrain_SeaBridge.object_index and isVisible)
         {
-        draw_sprite(spr_bridgeSea_clear_top,obj_map.terrains[x div 24, y div 24].crossing,x,y);
+        draw_sprite(spr_bridgeSea_clear_top,obj_map.terrains[posx,posy].crossing,x,y);
         }
 }
 
@@ -254,9 +352,9 @@ if(instance_exists(obj_terrain_SeaBridge))
 
 if(instance_exists(obj_terrain_RiverBridge))
     {
-    if ( obj_map.terrains[x div 24, y div 24].object_index == obj_terrain_RiverBridge.object_index and isVisible){
+    if ( obj_map.terrains[posx,posy].object_index == obj_terrain_RiverBridge.object_index and isVisible){
         if (state = "exhaust" or state = "idle"){
-            draw_sprite(spr_bridgeRiver_clear_top,obj_map.terrains[x div 24, y div 24].crossing,x,y);
+            draw_sprite(spr_bridgeRiver_clear_top,obj_map.terrains[posx,posy].crossing,x,y);
             }
         }
     }
@@ -291,9 +389,8 @@ if (isCommander and isVisible) draw_sprite(spr_unitStats_Radio,0,x,y);
           <argument>
             <kind>1</kind>
             <string>///Visibility
+//moved to step!
 
-if isVisible    image_alpha = 1;
-else            image_alpha = 0;
 </string>
           </argument>
         </arguments>

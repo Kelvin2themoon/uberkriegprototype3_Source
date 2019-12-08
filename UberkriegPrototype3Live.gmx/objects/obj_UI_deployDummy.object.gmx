@@ -509,6 +509,11 @@ if (mouse_check_button_pressed(mb_left))
                                 hp = 1;
                                 dummy = true;
                                 HP_hidden = true;
+                                 //check for COP and SCOP
+                                if global.P_Turn.CO.COP_on obj_map.units[global.posX,global.posY].COP = true ;
+                                if global.P_Turn.CO.SCOP_on obj_map.units[global.posX,global.posY].SCOP = true ;
+                                //if unit is Covert.op, hide
+                                if unit_index = 10 isHidden = true;
                                 }
                             }
                         
@@ -517,6 +522,10 @@ if (mouse_check_button_pressed(mb_left))
                         //scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
                         //update vision
                         scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
+                        //update Radio Boarder
+                        scr_globalRadioCheck();
+                        scr_update_radioBoarder();
+                        scr_rangeCheck_reset();
                         
                         //reactivate dummy deploy curosr
                         instance_activate_object(obj_deployDummyCursor);
@@ -787,6 +796,11 @@ if keyboard_check_pressed(global.keyCONFIRM)
                     hp = 1;
                     dummy = true;
                     HP_hidden = true;
+                    //check for COP and SCOP
+                    if global.P_Turn.CO.COP_on obj_map.units[global.posX,global.posY].COP = true ;
+                    if global.P_Turn.CO.SCOP_on obj_map.units[global.posX,global.posY].SCOP = true ;
+                    //if unit is Covert.op, hide
+                    if unit_index = 10 isHidden = true;
                     }
                     
              //consume round
