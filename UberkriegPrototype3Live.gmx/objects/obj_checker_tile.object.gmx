@@ -142,6 +142,10 @@ else on_path = false;
             <kind>1</kind>
             <string>///draw Order
 
+
+
+
+//draw checker highlight
 if (sprite_index != -1) draw_self();
 
 //draw radio boarder
@@ -150,12 +154,17 @@ draw_sprite(spr_radio_boarder_corner,   rb_corner,  x,y);
 draw_sprite(spr_radio_boarder_fill_v,   rb_fill_v,  x,y);
 draw_sprite(spr_radio_boarder_fill_h,   rb_fill_h,  x,y);
 
+//check for smoke
+if  obj_map.terrains[posx,posy].isSmoke
+   draw_sprite(spr_smoke_B, obj_map.terrains[posx,posy].draw_smoke_index,x,y);
+
 //draw unit stats
 
 //find unit's CO
 
 if ( obj_map.units[posx,posy] != 0)
     {
+    
     if (obj_map.units[posx,posy].isVisible)
         {
             with(obj_map.units[other.posx,other.posy])
@@ -237,6 +246,7 @@ if (on_path){
 
 //if CO_Field[global.P_Turn.number] draw_text(x,y,"F");
 //draw_text(x,y,string(move_cost));
+//draw_text(x,y,string(pathority));
 
 
 

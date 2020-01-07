@@ -64,6 +64,7 @@ mover_ready_threshold = 3;     //mover ready after count
 
 //booleran for can deploy graphic
 can_mouse_deploy = false;
+can_mouse_hide = false;
 
 //used to id if mouse will scroll
 mscroll = 0;
@@ -471,18 +472,21 @@ switch (mscroll)
 
 //reset can mouse deploy
 can_mouse_deploy = false;
+can_mouse_hide = false;
 
 var mpx = mouse_x div 24 ;
 var mpy = mouse_y div 24 ;
- 
 
 //check for deploy
 
 if (scr_inBound(mpx,mpy))
     {
-    if (obj_map.terrains[mpx,mpy].isVisible and obj_map.units[mpx,mpy] = 0)
-        {   
-       can_mouse_deploy = true;    
+    if (obj_map.terrains[mpx,mpy].isVisible)
+        {
+        //if location is empty, clear for dummy deploy    
+        if obj_map.units[mpx,mpy] = 0 can_mouse_deploy = true;
+        //check location accupied by ally unit, ok for hide! 
+        else if obj_map.units[mpx,mpy].team = global.P_Turn.team  can_mouse_hide = true;
         }    
     }
 
@@ -594,9 +598,31 @@ if(mouse_check_button_pressed(mb_right) and !mouse_check_button(mb_left) and !me
             }
         else if (obj_map.units[global.posX,global.posY]!= 0)
             {
-            //do move range check
-            checking_attack_range = true;
-            scr_attack_rance_check(obj_map.units[global.posX, global.posY]);
+            //if unit is ally hide
+            if(obj_map.units[global.posX,global.posY].team = global.P_Turn.team and global.P_Turn.CO.rounds &gt; 0 )
+                {
+                obj_map.units[global.posX,global.posY].isHidden = true;
+                //consume round
+                global.P_Turn.CO.rounds -=1;
+                //destroy if rounds are used up
+                if global.P_Turn.CO.rounds &lt;= 0
+                    {
+                    // re-initiat UI
+                    instance_activate_object(obj_battleCursor);
+                    instance_activate_object(obj_miniwin);
+                    instance_destroy();
+                    }
+                
+                
+                }
+            
+            //range check
+            else
+                {
+                //do move range check
+                checking_attack_range = true;
+                scr_attack_rance_check(obj_map.units[global.posX, global.posY]);
+                }
             } 
         }
     }
@@ -841,9 +867,25 @@ if ( keyboard_check_pressed( global.keyCONFIRM) and menuExitDelay = false and sc
         {
         //if unit is visible
         if (obj_map.units[global.posX,global.posY].isVisible)
-            { 
+            {
+            //if unit is ally hide
+            if(obj_map.units[global.posX,global.posY].team = global.P_Turn.team and global.P_Turn.CO.rounds &gt; 0 )
+                {
+                obj_map.units[global.posX,global.posY].isHidden = true;
+                //consume round
+                global.P_Turn.CO.rounds -=1;
+                //destroy if rounds are used up
+                if global.P_Turn.CO.rounds &lt;= 0
+                    {
+                    // re-initiat UI
+                    instance_activate_object(obj_battleCursor);
+                    instance_activate_object(obj_miniwin);
+                    instance_destroy();
+                    }
+                } 
+             
             //if unit is visible do move check
-            if  (obj_map.units[global.posX,global.posY] !=0 )
+            else if  (obj_map.units[global.posX,global.posY] !=0 )
                 {           
                 //switch to enemy move range check cursor
                 scr_updateLocalMove(obj_map.units[global.posX,global.posY]);
@@ -1194,8 +1236,8 @@ if (global.Phaze = "Main" and unit_selection != 0){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw Mouse Pointer
-
+            <string>///Draw Mouse Pointer - comm out
+/*
 //draw_text(12,200, string(mscroll));   
 
 if (dmscroll != -1)
@@ -1242,6 +1284,8 @@ if mScroll_on
 
 else if  (mouse_x &gt; x and mouse_x &lt; x+24 and mouse_y &gt; y and mouse_y &lt; y+24){
     draw_sprite(spr_mousePointer,global.P_Turn.number-1,mouse_x,mouse_y);
+    //check in vision range
+    if sprite_index != spr_redCursor
     draw_text(mouse_x +12, mouse_y+12, "Right click to deploy");
     }
 else{
@@ -1280,6 +1324,29 @@ if (global.cursorFrame == 2 || global.cursorFrame == 1){
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///mouse can hide
+
+if can_mouse_hide draw_text(mouse_x+12,mouse_y+12,"Right click to hide");
 </string>
           </argument>
         </arguments>
