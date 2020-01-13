@@ -180,13 +180,13 @@ if ( obj_map.units[posx,posy] != 0)
                 if (isMovAgn)                               draw_sprite(spr_unitStats_Move2,3,x,y);
                 if (isDisrupted     and !global.blinking)   draw_sprite(spr_unitStats_Disrupted,0,x,y);
                 if (isInfiltrate    and !global.blinking)    draw_sprite(spr_unitStats_Infiltrate,0,x,y);
-                if (isHidden        and global.blinking)    draw_sprite(spr_unitStats_Hide,0,x,y);
+                //if (isHidden        and global.blinking)    draw_sprite(spr_unitStats_Hide,0,x,y);---moved to below APC 
                 ///DRAW Power if power on
                 if COP draw_sprite(spr_unitStats_Power,0,x,y);
                 if SCOP draw_sprite(spr_unitStats_Power,1,x,y);
                 //if(dummy and global.P_Turn.number = ownership) draw_sprite(spr_unitStats_Power,2,x,y);
                                 
-                //ammo and fuel
+                //ammo and fuel ( and check for APC load
                 if ( max_ammo &gt; 0 and  ammo / max_ammo &lt; 0.5 and global.blinking)
                     {
                     if (name = "A.P.C.") draw_sprite(spr_unitStats_ammofuel,2,x,y);
@@ -194,9 +194,12 @@ if ( obj_map.units[posx,posy] != 0)
                     else draw_sprite(spr_unitStats_ammofuel,0,x,y);
                     }
                     
-                    if (fuel/max_fuel &lt; 0.5 and !global.blinking) draw_sprite(spr_unitStats_ammofuel,1,x,y);
-                    if ( name = "A.P.C." and ownership = global.P_Turn.number) if ( load_A !=0 or load_B !=0 ) draw_sprite(spr_unitStats_Load,0,x,y);      
+                if (fuel/max_fuel &lt; 0.5 and !global.blinking) draw_sprite(spr_unitStats_ammofuel,1,x,y);
+                if ( name = "A.P.C." and ownership = global.P_Turn.number) if ( load_A !=0 or load_B !=0 ) draw_sprite(spr_unitStats_Load,0,x,y);
+                if (isHidden and global.blinking)    draw_sprite(spr_unitStats_Hide,0,x,y);      
                 }
+                
+                
                     
                 if (image_index != -1)
                 {

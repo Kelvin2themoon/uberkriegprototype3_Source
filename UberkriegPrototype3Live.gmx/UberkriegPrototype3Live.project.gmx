@@ -460,6 +460,7 @@
     <sprites name="COFX">
       <sprite>sprites\spr_smoke</sprite>
       <sprite>sprites\spr_smoke_B</sprite>
+      <sprite>sprites\spr_smoke_miniwin</sprite>
     </sprites>
     <sprites name="Battle animation">
       <sprite>sprites\spr_temp_tank</sprite>
@@ -643,9 +644,9 @@
         <object>objects\obj_temp_bdTank</object>
         <object>objects\obj_battleScene_controller</object>
       </objects>
-      <object>objects\obj_battleController_basic</object>
     </objects>
     <objects name="Basic Battle ">
+      <object>objects\obj_battleController_basic</object>
       <object>objects\obj_battleController_continue</object>
       <object>objects\template_sandboxCursor</object>
       <object>objects\obj_battleCursor</object>

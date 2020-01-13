@@ -356,7 +356,6 @@ draw_self();
 draw_sprite(miniwin_terrain,miniwin_terrain_ownership,x,y);
 
 
-
 //draw Unit intel
 if (global.unit_check != 0)
     {
@@ -441,6 +440,10 @@ if (global.unit_check != 0)
             }
         }
     }
+    
+//draw fog
+if global.terrain_check.isSmoke
+draw_sprite(spr_smoke_miniwin,global.terrain_check.smoke_left,x+8,y+66);
     
 
 

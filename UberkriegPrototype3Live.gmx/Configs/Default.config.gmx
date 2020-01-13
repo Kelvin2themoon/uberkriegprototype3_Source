@@ -220,7 +220,7 @@
     <option_changeresolution>false</option_changeresolution>
     <option_closeesc>true</option_closeesc>
     <option_colordepth>0</option_colordepth>
-    <option_display_name>Protokrieg v3.13.I</option_display_name>
+    <option_display_name>Protokrieg v3.12.I</option_display_name>
     <option_displayerrors>True</option_displayerrors>
     <option_ecma>0</option_ecma>
     <option_facebook_app_display_name></option_facebook_app_display_name>
@@ -278,6 +278,9 @@
 - Changes to CO 01 (Vision+)
 - COP charges can be used to Deploy Decpoys OR Hide ally unit
 - SCOP depoys Covert Operative (Hidden and redy to act)
+
+- changed smoke graphics, now in 2 parts : Back Ground and Fore Ground in sandbox
+- added smoke screen left Graphics [FOG] in Mini win 
 
 Prototype (v3.12.H)
 - attacking units with hidden HP will give damage display "???" 
@@ -570,7 +573,7 @@ prototype(v.3.09b)
     <option_version_description>This is a Prototype</option_version_description>
     <option_version_major>0</option_version_major>
     <option_version_minor>3</option_version_minor>
-    <option_version_product>protokrieg(v3.12.G)</option_version_product>
+    <option_version_product>protokrieg(v3.12.I)</option_version_product>
     <option_version_release>12</option_version_release>
     <option_win8_advertising_appid></option_win8_advertising_appid>
     <option_win8_advertising_enable>0</option_win8_advertising_enable>
@@ -655,7 +658,7 @@ prototype(v.3.09b)
     <option_windows_mainor_version>3</option_windows_mainor_version>
     <option_windows_major_version>0</option_windows_major_version>
     <option_windows_nsis_file>Configs\Default\windows\RunnerInstaller.nsi</option_windows_nsis_file>
-    <option_windows_product_info>protokrieg(v3.12.G)</option_windows_product_info>
+    <option_windows_product_info>protokrieg(v3.12.I)</option_windows_product_info>
     <option_windows_release_version>12</option_windows_release_version>
     <option_windows_runner_finished>Configs\Default\windows\Runner_finish.bmp</option_windows_runner_finished>
     <option_windows_runner_header>Configs\Default\windows\Runner_header.bmp</option_windows_runner_header>
