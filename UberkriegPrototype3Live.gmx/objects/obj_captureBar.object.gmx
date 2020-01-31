@@ -133,6 +133,7 @@ else if(capping_unit.capturing = 20){
     obj_map.terrains[global.posX, global.posY].image_index = global.P_Turn.number;
     captureComplete = true;
     scr_updateStanding_global();
+    scr_updateGlobalVision();
     alarm[0] = 20;
     
     }
