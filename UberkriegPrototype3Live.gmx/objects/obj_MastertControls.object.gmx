@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initiate
+            <string>///Initiate , key config
 
 /*
 this object coltrols global stuff:
@@ -246,18 +246,31 @@ global.indirect_assist_on = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///variable, netowrk mode
+            <string>///Network Variables
 ///initite network variables
 
-global.network_mode = 0;
 /*
+net_mode
+0 = No network
+1 = Host
+2 = Player Client
+3 = spectator Client
+4 = Server (match making and stores games...eventually)
+*/
+global.net_mode = 0;
+
+//old var
+global.network_mode = 0;
+
+/* Commed out -------------------------------------------------------------
+
 0 - not networked
 1 - host (server)
 2 - client
-*/
 
+global.network_mode = 0;
 global.last_network_event = "nothing";
-//use this variable to start nest turn fter a networking event
+//use this variable to start next turn fter a networking event
 global.network_turn_switch = true;
 </string>
           </argument>
@@ -324,7 +337,61 @@ global.Mouse_control_tool_tip_text = "left click and drag to move camera or unit
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>///Unit and Terrain type Indexes
+//used as reference for save and load
+
+//Units
+global.unit_type[ 0] = obj_unit ; //parent
+global.unit_type[ 1] = obj_unit_LightInfantry;
+global.unit_type[ 2] = obj_unit_HeavyInfantry;
+global.unit_type[ 3] = obj_unit_LongGun;
+global.unit_type[ 4] = obj_unit_Officer;
+global.unit_type[ 5] = obj_unit_Recon;
+global.unit_type[ 6] = obj_unit_APC;
+global.unit_type[ 7] = obj_unit_LightTank
+global.unit_type[ 8] = obj_unit_Artillery
+global.unit_type[ 9] = obj_unit_AA;
+global.unit_type[10] = obj_unit_CovertOp;
+global.unit_type[11] = obj_unit_HeavyTank;
+global.unit_type[12] = obj_unit_Rocket;
+global.unit_type[13] = obj_unit_LandCruiser;
+
+//Terrains
+global.terrain_type[ 0] = obj_terrain_Sea; 
+global.terrain_type[ 1] = obj_terrain_Plains;
+global.terrain_type[ 2] = obj_terrain_Road;
+global.terrain_type[ 3] = obj_terrain_Mountain;
+global.terrain_type[ 4] = obj_terrain_Woods;
+global.terrain_type[ 5] = obj_terrain_Bridge;
+
+//special bridge types
+global.terrain_type[50] = obj_terrain_SeaBridge;
+global.terrain_type[56] = obj_terrain_RiverBridge;
+
+global.terrain_type[ 6] = obj_terrain_River;
+global.terrain_type[ 9] = obj_terrain; //parent
+global.terrain_type[10] = obj_property; //parent
+global.terrain_type[11] = obj_terrain_HQ;
+global.terrain_type[12] = obj_terrain_Base;
+global.terrain_type[13] = obj_terrain_City;
+global.terrain_type[14] = obj_terrain_RadioTower;
+global.terrain_type[15] = obj_terrain_CommandPost;
+
+//COs
+global.CO_type[ 0] = obj_CO_0 ; //parent
+global.CO_type[ 1] = obj_CO_1 ; //Intel+
+global.CO_type[ 2] = obj_CO_2 ; //HP+
+global.CO_type[ 3] = obj_CO_3 ; //Radio+
+global.CO_type[ 4] = obj_CO_4 ; //Direct+
+global.CO_type[ 5] = obj_CO_5 ; //Infantry+
+global.CO_type[ 6] = obj_CO_6 ; //range+
+global.CO_type[ 7] = obj_CO_7 ; //Mov/atk+ (smoke)
+global.CO_type[ 8] = obj_CO_8 ; //cost+
+global.CO_type[ 9] = obj_CO_9 ; //Officer+
+global.CO_type[10] = obj_CO_10; //anti-radio
+
+
+</string>
           </argument>
         </arguments>
       </action>
@@ -346,7 +413,7 @@ global.Mouse_control_tool_tip_text = "left click and drag to move camera or unit
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//blinking animator
+            <string>///blinking animator
 
 if global.blinking {
     global.blinking = false;
@@ -492,6 +559,32 @@ audio_destroy_stream(test_bgm);
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///debug draw room name
+
+draw_text(12,12,room_get_name(room));
+draw_text(24,24,string(instance_count));
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="123">
       <action>
         <libid>1</libid>
@@ -509,7 +602,7 @@ audio_destroy_stream(test_bgm);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///mak full screen!
+            <string>///toggle full screen!
 window_set_fullscreen(!window_get_fullscreen());
 
 if( window_get_fullscreen() )
@@ -540,7 +633,9 @@ if( window_get_fullscreen() )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (global.window_size = 1)
+            <string>///toggle res x1 &amp; x2
+
+if (global.window_size = 1)
     {
     window_set_size( 768*2, 432*2 );
     global.window_size = 2;

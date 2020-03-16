@@ -52,14 +52,14 @@ if (file_exists(loading_map))
             //Read and adjust at each position
             posRead = string(i)+ "X" + string(j) + "Y"; //Key read variable
             player_set = ini_read_real("Terrains",posRead +"P",1);
-            setting_terrain = ini_read_real("Terrains",posRead,0);
+            setting_terrain = global.terrain_type[ini_read_real("Terrains",posRead,0)];
             scr_setTerrain(setting_terrain,i,j,player_set);
             
             //set unit
             if (ini_key_exists("Units",posRead+"P"))
                 {
                 player_set = ini_read_real("Units",posRead +"P",1);
-                setting_unit = ini_read_real("Units",posRead,1);
+                setting_unit = global.unit_type[ini_read_real("Units",posRead,1)];
                 scr_setUnit(setting_unit,i,j,player_set);
                  if (ini_read_real("Units",posRead+"C",0)=1){ 
                     obj_map.units[i,j].isCommander = true;

@@ -28,7 +28,7 @@
             <string>///initialize
 event_inherited();//inherite parent object "properties"
 
-index =  10;
+index =  13;
 name = "City";
 
 //required fields

@@ -592,6 +592,7 @@
     <font>fonts\font10</font>
     <font>fonts\font11</font>
     <font>fonts\font12</font>
+    <font>fonts\font13</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>
@@ -600,27 +601,28 @@
       <object>objects\obj_grabHand_mapEditor</object>
     </objects>
     <objects name="Terrain">
-      <object>objects\obj_terrain_Plains</object>
-      <object>objects\obj_terrain_Mountain</object>
-      <object>objects\obj_terrain_Woods</object>
-      <object>objects\obj_terrain_Road</object>
       <objects name="Parents">
         <object>objects\obj_terrain</object>
         <object>objects\obj_property</object>
       </objects>
       <object>objects\obj_terrain_Sea</object>
+      <object>objects\obj_terrain_Plains</object>
+      <object>objects\obj_terrain_Road</object>
+      <object>objects\obj_terrain_Mountain</object>
+      <object>objects\obj_terrain_Woods</object>
+      <object>objects\obj_terrain_Bridge</object>
       <object>objects\obj_terrain_River</object>
       <object>objects\obj_terrain_SeaBridge</object>
       <object>objects\obj_terrain_RiverBridge</object>
-      <object>objects\obj_terrain_Bridge</object>
       <object>objects\obj_terrain_HQ</object>
-      <object>objects\obj_terrain_City</object>
-      <object>objects\obj_terrain_CommandPost</object>
-      <object>objects\obj_terrain_RadioTower</object>
       <object>objects\obj_terrain_Base</object>
+      <object>objects\obj_terrain_City</object>
+      <object>objects\obj_terrain_RadioTower</object>
+      <object>objects\obj_terrain_CommandPost</object>
     </objects>
     <objects name="Controllers">
       <object>objects\obj_MastertControls</object>
+      <object>objects\obj_Net_Controler</object>
     </objects>
     <objects name="Units">
       <object>objects\obj_unit</object>
@@ -639,11 +641,13 @@
       <object>objects\obj_unit_LandCruiser</object>
     </objects>
     <objects name="Temp">
+      <object>objects\obj_temp_NetMenu</object>
       <object>objects\obj_temp_MainMenu</object>
       <objects name="Battle Scene">
         <object>objects\obj_temp_bdTank</object>
         <object>objects\obj_battleScene_controller</object>
       </objects>
+      <object>objects\obj_temp_hostmenu</object>
     </objects>
     <objects name="Basic Battle ">
       <object>objects\obj_battleController_basic</object>
@@ -734,6 +738,7 @@
     <room>rooms\rm_battleSceneTest</room>
     <room>rooms\room5</room>
     <room>rooms\room6</room>
+    <room>rooms\rm_net_host_config</room>
   </rooms>
   <constants number="8">
     <constant name="CHECK_LAYRE">-64100</constant>

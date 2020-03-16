@@ -5,7 +5,6 @@ then adjusts andy graphics relevent to the action
 */
 
 set_terrain_type    =  argument0; // new terrain type, no id required
-
 set_terrain_x       =  argument1;
 set_terrain_y       =  argument2;
 

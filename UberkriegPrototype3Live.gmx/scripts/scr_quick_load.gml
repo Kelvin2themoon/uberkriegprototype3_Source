@@ -52,7 +52,7 @@ if (file_exists(loading_map))
             //Read and adjust at each position
             posRead = string(i)+ "X" + string(j) + "Y"; //Key read variable
             player_set = ini_read_real("Terrains",posRead +"P",1);
-            setting_terrain = ini_read_real("Terrains",posRead,0);
+            setting_terrain = global.terrain_type[ini_read_real("Terrains",posRead,0)];
             scr_setTerrain(setting_terrain,i,j,player_set);
             //set terrain attributes
             if (ini_read_real("Terrains",posRead+"isSmoke",0)=1) 
@@ -67,7 +67,7 @@ if (file_exists(loading_map))
             if (ini_key_exists("Units",posRead+"P"))
                 {
                 player_set = ini_read_real("Units",posRead +"P",1);
-                setting_unit = ini_read_real("Units",posRead,1);
+                setting_unit = global.unit_type[ini_read_real("Units",posRead,1)];
                 scr_setUnit(setting_unit,i,j,player_set);
                 
                 //specia case, isCommander
@@ -108,7 +108,7 @@ if (file_exists(loading_map))
                             if (ini_read_real("Units",other.posRead+"loadA",0) !=0)
                                 { 
                             
-                                    load_A = instance_create(15,15,ini_read_real("Units",other.posRead+"loadA",0));
+                                    load_A = instance_create(15,15,global.unit_type[ini_read_real("Units",other.posRead+"loadA",0)]);
                                     load_A.depth = 0;
                                     load_A.ownership = ownership;
                                     load_A.team = team;
@@ -129,7 +129,7 @@ if (file_exists(loading_map))
                             if (ini_read_real("Units",other.posRead+"loadB",0) !=0)
                                 { 
                             
-                                    load_B = instance_create(15,15,ini_read_real("Units",other.posRead+"loadB",0));
+                                    load_B = instance_create(15,15,global.unit_type[ini_read_real("Units",other.posRead+"loadB",0)]);
                                     load_B.depth = 0;
                                     load_B.ownership = ownership;
                                     load_B.team = team;

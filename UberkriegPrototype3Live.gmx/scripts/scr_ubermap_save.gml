@@ -18,7 +18,7 @@ for( i = 0 ; i < global.mapW ; i += 1 )         // i is to X
         {
         //save terrain   
         posKey = string(i)+ "X" + string(j) + "Y";       
-        ini_write_real("Terrains", posKey, obj_map.terrains[i,j].object_index);
+        ini_write_real("Terrains", posKey, obj_map.terrains[i,j].index);
         //save property ownership
         if ( obj_map.terrains[i,j].isProperty )
             {
@@ -27,7 +27,7 @@ for( i = 0 ; i < global.mapW ; i += 1 )         // i is to X
         //save units
         if (obj_map.units[i,j] != 0)
             {
-            ini_write_real("Units", posKey , obj_map.units[i,j].object_index);
+            ini_write_real("Units", posKey , obj_map.units[i,j].unit_index);
             //save unit ownership
             ini_write_real("Units", posKey+"P" , obj_map.units[i,j].ownership);
             //save commander status (1 = True, 0 = False)

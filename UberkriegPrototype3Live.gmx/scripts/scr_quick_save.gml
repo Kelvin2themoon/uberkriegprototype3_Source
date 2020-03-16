@@ -147,7 +147,7 @@ for( i = 0 ; i < global.mapW ; i += 1 )         // i is to X
         {
         //save terrain   
         posKey = string(i)+ "X" + string(j) + "Y";       
-        ini_write_real("Terrains", posKey, obj_map.terrains[i,j].object_index);
+        ini_write_real("Terrains", posKey, obj_map.terrains[i,j].index);
         //save terrain visibility
         if (obj_map.terrains[i,j].isVisible) ini_write_real("Terrains",posKey+"isVisible",1);
         else ini_write_real("Terrains",posKey+"isVisible",0);
@@ -170,7 +170,7 @@ for( i = 0 ; i < global.mapW ; i += 1 )         // i is to X
             {
             with obj_map.units[i,j]
                 {
-                ini_write_real("Units", other.posKey , object_index);
+                ini_write_real("Units", other.posKey , unit_index);
                 //save unit ownership
                 ini_write_real("Units", other.posKey+"P" , ownership);
                 //save commander status (1 = True, 0 = False)
@@ -214,7 +214,7 @@ for( i = 0 ; i < global.mapW ; i += 1 )         // i is to X
                         {
                             instance_activate_object(load_A);
                         
-                            ini_write_real("Units",other.posKey+"loadA",load_A.object_index);
+                            ini_write_real("Units",other.posKey+"loadA",load_A.unit_index);
                             
                             loadA_posKey = other.posKey;
                         
@@ -240,7 +240,7 @@ for( i = 0 ; i < global.mapW ; i += 1 )         // i is to X
                         {
                             instance_activate_object(load_B);
                         
-                            ini_write_real("Units",other.posKey+"loadB",load_B.object_index);
+                            ini_write_real("Units",other.posKey+"loadB",load_B.unit_index);
                             
                             loadB_posKey = other.posKey;
                         

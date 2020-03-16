@@ -25,16 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///initiate netorking variables, check master controles for network mode
-
-//keeps track of last network event and checks
-global.last_network_event = "nothing";
-//assign server end port
-global.sPort = 15316;
-//empty server ip used from client side, defaults to same device
-global.server_ip = "127.0.0.1";
-//entering ip in text box switch via enter
-enteringIP = false;
+            <string>
 
 </string>
           </argument>
@@ -188,7 +179,7 @@ if keyboard_check_pressed( ord("R"))
           <argument>
             <kind>1</kind>
             <string>///enter ip address
-if enteringIP global.server_ip = keyboard_string;
+//if enteringIP global.server_ip = keyboard_string;
 
 
 
@@ -243,7 +234,7 @@ global.P4_CO = irandom(9)+1;
           <argument>
             <kind>1</kind>
             <string>///listn for connection request from client
-
+/*
 if global.network_mode = 1{
     //chwck connwct type
     if ds_map_find_value(async_load, "type") = network_type_connect{
@@ -317,7 +308,9 @@ draw_text(400, 210 + 16*6 , "P4.Team : " + string(global.P4_Team));
             <kind>1</kind>
             <string>///draw networking related stuff
 
+draw_text(227, 210 + 16*8 , "F5: Host Net Game");
 
+/* Commed out
 draw_text(227, 210 + 16*8 , "F5: Host Game");
 draw_text(227, 210 + 16*9 , "F6: Connect to address:");
 
@@ -379,8 +372,8 @@ if global.BGM_on draw_text(12,12,"BGM on")
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///connect to server
-
+            <string>///connect to server  COMMED OUT
+/* 
 //switch to client mode
 global.network_mode = 2;
 //create socket
@@ -419,8 +412,11 @@ else {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// create and set up server
+            <string>///  Netmode: Host
+room_goto(rm_net_host_config);
 
+/// create and set up server COMMED OUT
+/*
 //create server ( type tcp, port, max 1 client) returns REAL(server id)
 global.server = network_create_server(network_socket_tcp , global.sPort, 1)
 
