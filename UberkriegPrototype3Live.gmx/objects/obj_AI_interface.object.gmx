@@ -25,28 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Descript &amp; Global Vars
-
-/*
-this object will handle all networking and asynk vars events
-other than the ones neese to set it up
-*/
-
-//keeps track of last network event and checks
-global.last_network_event = "Waiting for input";
-
-//empty server ip used from client side, defaults to same device
-global.server_ip = "127.0.0.1";
-
-
-
-
-
+            <string>alarm[1] = 10;
 
 </string>
           </argument>
         </arguments>
       </action>
+    </event>
+    <event eventtype="2" enumb="1">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -63,31 +49,16 @@ global.server_ip = "127.0.0.1";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///initiate as client - player
+            <string>///end turn
+
+scr_syscom_endturn();
+instance_deactivate_object(obj_AI_interface);
 </string>
           </argument>
         </arguments>
       </action>
+    </event>
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -104,7 +75,19 @@ global.server_ip = "127.0.0.1";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///initiate as client - spectator
+            <string>///find bases pAI owns
+with obj_terrain_Base{
+    if ownership = global.P_Turn.number{
+        //set infantry
+        scr_setUnit(obj_unit_LightInfantry,x div 24, y div 24, global.P_Turn.number);
+        
+        }
+    }
+
+
+
+
+
 </string>
           </argument>
         </arguments>

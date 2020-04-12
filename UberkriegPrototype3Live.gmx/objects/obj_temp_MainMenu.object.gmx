@@ -25,9 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>
@@ -62,6 +60,32 @@ global.tempBGM[4] = "bgm4.ogg" ;
 
 global.BGM = noone;
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///AI switch variable
+//AI switch
+global.isAIplayer[1] = false;
+global.isAIplayer[2] = true;
+global.isAIplayer[3] = false;
+global.isAIplayer[4] = false;
 </string>
           </argument>
         </arguments>
@@ -187,6 +211,37 @@ if keyboard_check_pressed( ord("R"))
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///AI switch
+
+if keyboard_check_pressed( ord("a")) global.isAIplayer[1] = !global.isAIplayer[1];
+
+if keyboard_check_pressed( ord("s")) global.isAIplayer[2] = !global.isAIplayer[2];
+
+if keyboard_check_pressed( ord("d")) global.isAIplayer[3] = !global.isAIplayer[3];
+
+if keyboard_check_pressed( ord("f")) global.isAIplayer[4] = !global.isAIplayer[4];
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="5" enumb="32">
       <action>
@@ -266,46 +321,6 @@ if global.network_mode = 1{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///draw stuff
-draw_self();
-
-draw_text(227,157,"Prototype (v3.12.J)");
-draw_text(227,157+16,"2020.01.26");
-
-draw_text(227,210-16,"F1: Start Game");
-draw_text(227,210+00,"F2: Map Editor");
-draw_text(227,210+16,"F4: Load Save");
-
-draw_text(227, 210 + 16*3 , "P1. Cookieland   CO : " + string(global.P1_CO));
-draw_text(227, 210 + 16*4 , "P2. Pepperland CO : " + string(global.P2_CO)); 
-draw_text(227, 210 + 16*5 , "P3. Marmalland CO : " + string(global.P3_CO)); 
-draw_text(227, 210 + 16*6 , "P4. Pretzeland CO : " + string(global.P4_CO));
-
-
-draw_text(400, 210 + 16*3 , "P1.Team : " + string(global.P1_Team));
-draw_text(400, 210 + 16*4 , "P2.Team : " + string(global.P2_Team)); 
-draw_text(400, 210 + 16*5 , "P3.Team : " + string(global.P3_Team)); 
-draw_text(400, 210 + 16*6 , "P4.Team : " + string(global.P4_Team));
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///draw networking related stuff
 
 draw_text(227, 210 + 16*8 , "F5: Host Net Game");
@@ -350,6 +365,51 @@ draw_text(227, 210 + 16*11 +4, global.last_network_event);
             <string>///BGM status
 if global.BGM_on draw_text(12,12,"BGM on")
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw stuff
+draw_self();
+
+draw_text(227,157,"Prototype (v3.12.J)");
+draw_text(227,157+16,"2020.01.26");
+
+draw_text(227,210-16,"F1: Start Game");
+draw_text(227,210+00,"F2: Map Editor");
+draw_text(227,210+16,"F4: Load Save");
+
+draw_text(227, 210 + 16*3 , "P1. Cookieland   CO : " + string(global.P1_CO));
+draw_text(227, 210 + 16*4 , "P2. Pepperland CO : " + string(global.P2_CO)); 
+draw_text(227, 210 + 16*5 , "P3. Marmalland CO : " + string(global.P3_CO)); 
+draw_text(227, 210 + 16*6 , "P4. Pretzeland CO : " + string(global.P4_CO));
+
+
+draw_text(400, 210 + 16*3 , "P1.Team : " + string(global.P1_Team));
+draw_text(400, 210 + 16*4 , "P2.Team : " + string(global.P2_Team)); 
+draw_text(400, 210 + 16*5 , "P3.Team : " + string(global.P3_Team)); 
+draw_text(400, 210 + 16*6 , "P4.Team : " + string(global.P4_Team));
+
+draw_text(500, 210 + 16*3 , "P1.AI : " + string(global.isAIplayer[1]));
+draw_text(500, 210 + 16*4 , "P2.AI : " + string(global.isAIplayer[2])); 
+draw_text(500, 210 + 16*5 , "P3.AI : " + string(global.isAIplayer[3])); 
+draw_text(500, 210 + 16*6 , "P4.AI : " + string(global.isAIplayer[4]));
 </string>
           </argument>
         </arguments>

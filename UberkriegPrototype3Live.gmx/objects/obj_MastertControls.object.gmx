@@ -262,6 +262,8 @@ global.net_mode = 0;
 //old var
 global.network_mode = 0;
 
+
+
 /* Commed out -------------------------------------------------------------
 
 0 - not networked

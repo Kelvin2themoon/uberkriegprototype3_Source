@@ -596,6 +596,10 @@
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>
+    <objects name="Controllers">
+      <object>objects\obj_MastertControls</object>
+      <object>objects\obj_Net_Controler</object>
+    </objects>
     <objects name="MapEditor">
       <object>objects\obj_mapEditCursor_mouse</object>
       <object>objects\obj_grabHand_mapEditor</object>
@@ -620,10 +624,6 @@
       <object>objects\obj_terrain_RadioTower</object>
       <object>objects\obj_terrain_CommandPost</object>
     </objects>
-    <objects name="Controllers">
-      <object>objects\obj_MastertControls</object>
-      <object>objects\obj_Net_Controler</object>
-    </objects>
     <objects name="Units">
       <object>objects\obj_unit</object>
       <object>objects\obj_unit_LightInfantry</object>
@@ -641,19 +641,20 @@
       <object>objects\obj_unit_LandCruiser</object>
     </objects>
     <objects name="Temp">
-      <object>objects\obj_temp_NetMenu</object>
       <object>objects\obj_temp_MainMenu</object>
+      <object>objects\obj_temp_HostMenu</object>
+      <object>objects\obj_temp_NetMenu</object>
       <objects name="Battle Scene">
         <object>objects\obj_temp_bdTank</object>
         <object>objects\obj_battleScene_controller</object>
       </objects>
-      <object>objects\obj_temp_hostmenu</object>
     </objects>
     <objects name="Basic Battle ">
       <object>objects\obj_battleController_basic</object>
       <object>objects\obj_battleController_continue</object>
       <object>objects\template_sandboxCursor</object>
       <object>objects\obj_battleCursor</object>
+      <object>objects\obj_AI_interface</object>
       <objects name="BasicObjects">
         <object>objects\obj_UI_deploy</object>
         <object>objects\obj_UI_deployDummy</object>

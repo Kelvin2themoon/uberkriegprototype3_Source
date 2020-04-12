@@ -147,6 +147,10 @@ global.unit_check = obj_map.units[1,1];
 instance_create(24,24,obj_battleCursor);
 instance_deactivate_object(obj_battleCursor);
 
+//create &amp; deactivate AI interface
+instance_create(24,24,obj_AI_interface);
+instance_deactivate_object(obj_AI_interface);
+
 //create &amp; deactivate miniwin
 instance_create(24,24,obj_miniwin);
 instance_deactivate_object(obj_miniwin);

@@ -291,7 +291,12 @@ if ( conclude_upkeep )
 {
 
     //activate HUD
-    instance_activate_object(obj_battleCursor);
+    
+    //check for AI player
+    
+    if global.isAIplayer[global.P_Turn.number] instance_activate_object(obj_AI_interface);
+    else instance_activate_object(obj_battleCursor);
+    
     instance_activate_object(obj_miniwin);
     
     //change cursor position
