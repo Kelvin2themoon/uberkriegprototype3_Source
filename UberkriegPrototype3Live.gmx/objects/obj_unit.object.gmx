@@ -40,8 +40,12 @@ hp          = 10;
 fuel        = 90;
 ammo        =  5;
 isDisrupted = false; //true when hit by Covert.Op disrupter
-isVisible   = true;
+isVisible   = true;  // functional visability to active player
 isHidden    = false; // consumes 5 fuel when true, see upkeep
+
+isObservable = false;    //Observable localy, distict from isVisable
+//set to false as default so when it is set on off turns there is no blink into exsistance,
+
 
  
 
@@ -285,7 +289,7 @@ posy = y div 24;
             <kind>1</kind>
             <string>///adjust image alpha for visibility
 
-if isVisible    image_alpha = 1;
+if isObservable    image_alpha = 1;
 else            image_alpha = 0;
 </string>
           </argument>

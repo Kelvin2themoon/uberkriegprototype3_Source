@@ -25,26 +25,6 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///temp sount settings
 
 //stop all audio
@@ -60,32 +40,6 @@ global.tempBGM[4] = "bgm4.ogg" ;
 
 global.BGM = noone;
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///AI switch variable
-//AI switch
-global.isAIplayer[1] = false;
-global.isAIplayer[2] = true;
-global.isAIplayer[3] = false;
-global.isAIplayer[4] = false;
 </string>
           </argument>
         </arguments>
@@ -161,26 +115,50 @@ var maxteam = 4 ;
 
 if keyboard_check_pressed( ord("Q"))
     {
-    if ( global.P1_Team &lt; maxteam ) global.P1_Team += 1 ;
-    else                            global.P1_Team  = 1 ;
+    if ( global.P1_Team &lt; maxteam ) { 
+        global.P1_Team   += 1 ;
+        global.Team_P[1] += 1;
+        }
+    else{
+        global.P1_Team    = 1 ;
+        global.Team_P[1]  = 1 ;
+        }
     }
     
 if keyboard_check_pressed( ord("W"))
     {
-    if ( global.P2_Team &lt; maxteam ) global.P2_Team += 1 ;
-    else                            global.P2_Team  = 1 ;
+    if ( global.P2_Team &lt; maxteam ) { 
+        global.P2_Team   += 1 ;
+        global.Team_P[2] += 1;
+        }
+    else{
+        global.P2_Team    = 1 ;
+        global.Team_P[2]  = 1 ;
+        }
     }
     
 if keyboard_check_pressed( ord("E"))
     {
-    if ( global.P3_Team &lt; maxteam ) global.P3_Team += 1 ;
-    else                            global.P3_Team  = 1 ;
+    if ( global.P3_Team &lt; maxteam ) { 
+        global.P3_Team   += 1 ;
+        global.Team_P[3] += 1;
+        }
+    else{
+        global.P3_Team    = 1 ;
+        global.Team_P[3]  = 1 ;
+        }
     }
     
 if keyboard_check_pressed( ord("R"))
     {
-    if ( global.P4_Team &lt; maxteam ) global.P4_Team += 1 ;
-    else                            global.P4_Team  = 1 ;
+    if ( global.P4_Team &lt; maxteam ) { 
+        global.P4_Team   += 1 ;
+        global.Team_P[4] += 1;
+        }
+    else{
+        global.P4_Team    = 1 ;
+        global.Team_P[4]  = 1 ;
+        }
     }
 </string>
           </argument>
@@ -221,23 +199,25 @@ if keyboard_check_pressed( ord("R"))
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>other</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///AI switch
+            <string>///AI and view switch
 
-if keyboard_check_pressed( ord("a")) global.isAIplayer[1] = !global.isAIplayer[1];
+//AI
+if keyboard_check_pressed( ord("A")) global.isAIplayer[1] = !global.isAIplayer[1];
+if keyboard_check_pressed( ord("S")) global.isAIplayer[2] = !global.isAIplayer[2];
+if keyboard_check_pressed( ord("D")) global.isAIplayer[3] = !global.isAIplayer[3];
+if keyboard_check_pressed( ord("F")) global.isAIplayer[4] = !global.isAIplayer[4];
 
-if keyboard_check_pressed( ord("s")) global.isAIplayer[2] = !global.isAIplayer[2];
-
-if keyboard_check_pressed( ord("d")) global.isAIplayer[3] = !global.isAIplayer[3];
-
-if keyboard_check_pressed( ord("f")) global.isAIplayer[4] = !global.isAIplayer[4];
-
-
+//view
+if keyboard_check_pressed( ord("Z")) global.observe_P[1] = !global.observe_P[1];
+if keyboard_check_pressed( ord("X")) global.observe_P[2] = !global.observe_P[2];
+if keyboard_check_pressed( ord("C")) global.observe_P[3] = !global.observe_P[3];
+if keyboard_check_pressed( ord("V")) global.observe_P[4] = !global.observe_P[4];
 </string>
           </argument>
         </arguments>
@@ -362,29 +342,6 @@ draw_text(227, 210 + 16*11 +4, global.last_network_event);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///BGM status
-if global.BGM_on draw_text(12,12,"BGM on")
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///draw stuff
 draw_self();
 
@@ -410,6 +367,35 @@ draw_text(500, 210 + 16*3 , "P1.AI : " + string(global.isAIplayer[1]));
 draw_text(500, 210 + 16*4 , "P2.AI : " + string(global.isAIplayer[2])); 
 draw_text(500, 210 + 16*5 , "P3.AI : " + string(global.isAIplayer[3])); 
 draw_text(500, 210 + 16*6 , "P4.AI : " + string(global.isAIplayer[4]));
+
+draw_text(580, 210 + 16*3 , "P1.View on : " + string(global.observe_P[1]));
+draw_text(580, 210 + 16*4 , "P2.View on : " + string(global.observe_P[2])); 
+draw_text(580, 210 + 16*5 , "P3.View on : " + string(global.observe_P[3])); 
+draw_text(580, 210 + 16*6 , "P4.View on : " + string(global.observe_P[4]));
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///BGM status
+if global.BGM_on draw_text(12,12,"BGM on");
+
+
 </string>
           </argument>
         </arguments>

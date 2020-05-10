@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>alarm[1] = 10;
+            <string>//alarm[1] = 120;
 
 </string>
           </argument>
@@ -50,9 +50,13 @@
           <argument>
             <kind>1</kind>
             <string>///end turn
+instance_create(0,0,obj_starting);
+instance_deactivate_object(obj_battleCursor);
+instance_deactivate_object(obj_miniwin);
+scr_quick_save("quicksave.ubq"); 
 
-scr_syscom_endturn();
-instance_deactivate_object(obj_AI_interface);
+
+
 </string>
           </argument>
         </arguments>
@@ -76,6 +80,7 @@ instance_deactivate_object(obj_AI_interface);
           <argument>
             <kind>1</kind>
             <string>///find bases pAI owns
+/*
 with obj_terrain_Base{
     if ownership = global.P_Turn.number{
         //set infantry
@@ -88,6 +93,32 @@ with obj_terrain_Base{
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Debug
+
+draw_text(12,12, "AI is Active" );
+draw_text(12,24, "alarm 1 = " + string(alarm[1]));
 </string>
           </argument>
         </arguments>

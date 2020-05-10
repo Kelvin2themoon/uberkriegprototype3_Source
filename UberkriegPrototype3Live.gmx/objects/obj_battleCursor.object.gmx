@@ -730,7 +730,7 @@ if (mouse_check_button_pressed(mb_left)){
         scr_cursorKey_juice(1,global.cursorKey_sfx);
         
         //check for unit
-        if(obj_map.units[mpx,mpy] != 0 and obj_map.terrains[global.posX,global.posY].isVisible){
+        if(obj_map.units[mpx,mpy] != 0 and obj_map.terrains[global.posX,global.posY].isObservable){
             //check if own unit
             var mTarget_unit = obj_map.units[mpx, mpy];
             //check unit can act
@@ -743,7 +743,7 @@ if (mouse_check_button_pressed(mb_left)){
                 instance_deactivate_object(obj_battleCursor);
                 }
             //unit cannot act, move check
-            else if (mTarget_unit.isVisible){
+            else if (mTarget_unit.isObservable){
                 //do move range check
                 scr_updateLocalMove(mTarget_unit);
                 checking_move_range = true;
@@ -827,7 +827,7 @@ if(mouse_check_button_pressed(mb_right) and !mouse_check_button(mb_left) and !me
             instance_create(x+24,y,obj_syscom_system);
             instance_deactivate_object(obj_battleCursor);
             }
-        else if (obj_map.units[global.posX,global.posY].isVisible)
+        else if (obj_map.units[global.posX,global.posY].isObservable)
             {
             //do attack range check
             checking_attack_range = true;
@@ -1066,7 +1066,7 @@ if(mouse_check_button_released(mb_right))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///property and global radio test
+            <string>///property and global radio check
 
 if mouse_check_button_pressed(mb_middle)
     {
@@ -1198,7 +1198,7 @@ if (keyboard_check_pressed(global.keyCANCEL))
     //attack Range check if over unit
     if (obj_map.units[global.posX, global.posY] != 0)
         {
-        if obj_map.units[global.posX, global.posY].isVisible
+        if obj_map.units[global.posX, global.posY].isObservable
             {
             if !obj_map.units[global.posX, global.posY].isMovAgn{
                 //do move range check
@@ -1251,7 +1251,7 @@ if(scr_inBound(global.posX,global.posY))
     {
     if(obj_map.units[global.posX,global.posY] !=0)
         {
-        if(obj_map.units[global.posX,global.posY].isVisible)
+        if(obj_map.units[global.posX,global.posY].isObservable)
             {
             //switch radioAssist on
             c_radioAssist_on = true;
@@ -1275,7 +1275,7 @@ if(scr_inBound(mox,moy))
     {
     if(obj_map.units[mox,moy] !=0)
         {
-        if(obj_map.units[mox,moy].isVisible)
+        if(obj_map.units[mox,moy].isObservable)
             {
             //switch radioAssist on
             m_radioAssist_on = true;

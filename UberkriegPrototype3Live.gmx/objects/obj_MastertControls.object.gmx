@@ -198,7 +198,7 @@ global.cost[13] = 32000 ; //Land Cuiser
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///GLOBAL OPTIONS
+            <string>///GLOBAL GAME OPTIONS
 
 //Fog Of war
 global.FoW_on = true;
@@ -214,8 +214,43 @@ global.P1_Team = 1;
 global.P2_Team = 2;
 global.P3_Team = 3;
 global.P4_Team = 4;
+//duplicate
+global.Team_P[1] = 1;
+global.Team_P[2] = 2;
+global.Team_P[3] = 3;
+global.Team_P[4] = 4;
 
+//CPU player
+global.isAIplayer[1] = false;
+global.isAIplayer[2] = false;
+global.isAIplayer[3] = false;
+global.isAIplayer[4] = false;
 
+//observable players - either player at local game or for AI controll debug
+//should be automated eventually
+global.observe_P[0] = false; //neutral/non player always not observable
+global.observe_P[1] = true;
+global.observe_P[2] = true;
+global.observe_P[3] = true;
+global.observe_P[4] = true;
+
+/*
+global.P_View will replace the abouve
+it will describe the obervablility of unit and terrain
+vector 1 = acting player
+vector 2 = observed unit/terrain owner
+all true on default
+to be adjusted on start of game
+0 for neutral
+*/
+var pvi = 0;
+var pvj = 0;
+
+for ( pvi = 0 ; pvi &lt; 5; pvi++ ){
+    for ( pvj = 0 ; pvj &lt; 5; pvj++ ){
+        global.P_View[pvi,pvj] = false;
+        } 
+    }
 //graphic controls
 G_smooth = true;
 
@@ -580,8 +615,8 @@ audio_destroy_stream(test_bgm);
             <kind>1</kind>
             <string>///debug draw room name
 
-draw_text(12,12,room_get_name(room));
-draw_text(24,24,string(instance_count));
+//draw_text(12,12,room_get_name(room));
+//draw_text(24,24,string(instance_count));
 </string>
           </argument>
         </arguments>

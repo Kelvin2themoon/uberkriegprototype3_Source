@@ -48,6 +48,42 @@ global.mode = "Basic Battle";
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///change unit and terrain obervable settings
+
+//start loop to check all player combinations
+var i = 0;
+var j = 0;
+
+for ( i = 0 ; i &lt; 5 ; i++ ) { // i used to represent acting player
+    for (j = 0 ; j &lt; 5  ; j++ ){ // j to rep. target asset owner
+        if global.observe_P[i]{ // active player can be observed
+            global.P_view[i,i] = true; 
+            //check for teamates
+            if ( global.Team_P[i] = global.Team_P[j] ) global. P_View[i,j] = true; 
+            }
+        }
+    } 
+    
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///creat &amp; load map
 global.map = instance_create(0,0,obj_map);
 
@@ -138,7 +174,7 @@ global.upkeep_q = ds_queue_create();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Create HUD objects: Cursor,miniwin
+            <string>///Create HUD objects: Cursor,miniwin, AI
 
 global.terrain_check = obj_map.terrains[1,1];
 global.unit_check = obj_map.units[1,1];
@@ -148,8 +184,8 @@ instance_create(24,24,obj_battleCursor);
 instance_deactivate_object(obj_battleCursor);
 
 //create &amp; deactivate AI interface
-instance_create(24,24,obj_AI_interface);
-instance_deactivate_object(obj_AI_interface);
+global.AI = instance_create(24,24,obj_AI_interface);
+//instance_deactivate_object(global.AI);
 
 //create &amp; deactivate miniwin
 instance_create(24,24,obj_miniwin);

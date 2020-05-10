@@ -78,7 +78,7 @@ team = 0;
             <kind>1</kind>
             <string>event_inherited();
 if (name = "HQ") image_index = ownership; 
-else if (isVisible) image_index = ownership;
+else if (isObservable) image_index = ownership;
 else image_index = 0;
 
 

@@ -32,6 +32,9 @@ if scr_inBound(set_unit_x,set_unit_y)
                 with(obj_map.units[set_unit_x,set_unit_y]){instance_destroy();}
                 obj_map.units[set_unit_x,set_unit_y] = 0;
                 }
+                
+                //if mode is map editor, switch to observable automatically
+                if global.mode = "Map Edit" obj_map.units[set_unit_x,set_unit_y].isObservable = true;
 else
     {
     //do nothing

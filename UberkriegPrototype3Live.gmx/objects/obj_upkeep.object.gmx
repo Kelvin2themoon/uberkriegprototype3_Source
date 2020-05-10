@@ -246,26 +246,6 @@ else if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar*star_value and g
           </argument>
         </arguments>
       </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string></string>
-          </argument>
-        </arguments>
-      </action>
     </event>
     <event eventtype="2" enumb="0">
       <action>
@@ -286,17 +266,17 @@ else if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar*star_value and g
             <kind>1</kind>
             <string>///Event actions
 
-if ( conclude_upkeep )
-
-{
-
-    //activate HUD
+if ( conclude_upkeep ) {
+    
     
     //check for AI player
-    
-    if global.isAIplayer[global.P_Turn.number] instance_activate_object(obj_AI_interface);
+    if global.isAIplayer[global.P_Turn.number] {
+        //instance_activate_object(global.AI);
+        global.AI.alarm[1] = 60; // activate alamrm sto set AI alarm on next step, becasue AI_interface not active yet
+        }
+    //activate battle cursor (player controls)    
     else instance_activate_object(obj_battleCursor);
-    
+    //activate HUD
     instance_activate_object(obj_miniwin);
     
     //change cursor position
@@ -307,7 +287,8 @@ if ( conclude_upkeep )
     
     //change phaze
     global.Phaze = "Main"
-    
+    //clear range checks
+    scr_rangeCheck_reset();
     //destroy self
     instance_destroy();
 

@@ -206,7 +206,9 @@ and mouse_x div 24 = global.posX and mouse_y div 24 = global.posY))
                 obj_map.units[global.posX,global.posY].team = global.P_Turn.team;
                 //set to stealth
                 obj_map.units[global.posX,global.posY].isHidden= true;
-                // update visioni
+                //check observablility
+                if global.observe_P[global.P_Turn.number]  obj_map.units[global.posX, global.posY].isObservable = true;
+                // update vision
                 scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
                 // update standing
                 scr_updateStanding_global();

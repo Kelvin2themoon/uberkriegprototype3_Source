@@ -34,7 +34,8 @@ graphic_index = 0 ;     //used to save &amp; draw appropriate tile image, use in
 Cover = 0;              //for defence coverage
 inFog = true;           //for fog of war
 isProperty = false;
-isVisible = true;
+isVisible = true;       //visable to active player
+isObservable = true;    //Observable localy, distict from isVisable 
 
 //stop animation
 image_speed = 0;
@@ -120,9 +121,9 @@ draw_smoke_index = smoke_left - 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///visibility
+            <string>///visibility and smoke couhnt down
 
-if isVisible image_blend = c_white;
+if isObservable image_blend = c_white;
 else image_blend = c_gray;
 
 //smoke drawing index

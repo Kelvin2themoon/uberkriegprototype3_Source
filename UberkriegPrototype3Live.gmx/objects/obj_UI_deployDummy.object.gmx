@@ -803,8 +803,10 @@ if keyboard_check_pressed(global.keyCONFIRM)
                     if unit_index = 10 isHidden = true;
                     }
                     
-             //consume round
-             global.P_Turn.CO.rounds -=1; 
+            //consume round
+            global.P_Turn.CO.rounds -=1; 
+            //turn isobervable if acting player is observed
+            if global.observe_P[global.P_Turn.number]  obj_map.units[global.posX, global.posY].isObservable = true;
             // update visioni
             scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
             //update standing

@@ -124,7 +124,7 @@ miniwinLRcheckY = 24*global.posY;
 miniwin_terrain = asset_get_index("spr_miniwin_" + string_letters(global.terrain_check.name));
 
 // retrive terrain ownership if property
-if  (object_is_ancestor(global.terrain_check.object_index,obj_property) and (global.terrain_check.isVisible or global.terrain_check.name = "HQ")  ){ 
+if  (object_is_ancestor(global.terrain_check.object_index,obj_property) and (global.terrain_check.isObservable or global.terrain_check.name = "HQ")  ){ 
     miniwin_terrain_ownership = global.terrain_check.ownership;
     }
 else miniwin_terrain_ownership = 0;
@@ -132,7 +132,7 @@ else miniwin_terrain_ownership = 0;
 // retrieve unit info
 
 if (global.unit_check != 0){
-    if (global.unit_check.isVisible){
+    if (global.unit_check.isObservable){
         //get unit sprite index
         miniwin_unit = asset_get_index("spr_miniwin_" + string_letters(global.unit_check.name));
         
@@ -168,7 +168,7 @@ if ( global.unit_check = 0){
     }
     
 if ( global.unit_check != 0){
-     if (global.unit_check.isVisible)
+     if (global.unit_check.isObservable)
         sprite_index = asset_get_index("spr_miniwin_standard");
     }
     
@@ -359,7 +359,7 @@ draw_sprite(miniwin_terrain,miniwin_terrain_ownership,x,y);
 //draw Unit intel
 if (global.unit_check != 0)
     {
-    if (global.unit_check.isVisible)
+    if (global.unit_check.isObservable)
         {
         // switch to APC load win
         if (global.unit_check.canLoadInfantry and global.unit_check.team = global.P_Turn.team)
