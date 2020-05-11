@@ -129,19 +129,19 @@ switch state {
         //auto save turn ( for continue )
         scr_quick_save("quicksave.ubq");
         //if netowrk mode is server or client************************************************************************** start of network send action
-        if global.network_mode !=0{
+        if global.net_mode !=0{
             //load save to buffer
             var b_next_turn = buffer_load("quicksave.ubq");
             //readout
-            global.last_network_event = "file loaded in buffer, size: " + string(buffer_get_size(b_next_turn));
+            global.last_net_event = "file loaded in buffer, size: " + string(buffer_get_size(b_next_turn));
             //send as server
-            if global.network_mode =1 {
-                network_send_packet(global.sSocket,b_next_turn,buffer_get_size(b_next_turn));
+            if global.net_mode =1 {
+                network_send_packet(global.sSocket[1],b_next_turn,buffer_get_size(b_next_turn));
                 global.last_network_event = "buffer sent, size: " + string(buffer_get_size(b_next_turn));
                 buffer_delete(b_next_turn);
                 }
             //send as client    
-            if global.network_mode =2 {
+            if global.net_mode =2 {
                 network_send_packet(global.cSocket,b_next_turn,buffer_get_size(b_next_turn));
                 global.last_network_event = "buffer sent, size: " + string(buffer_get_size(b_next_turn));
                 buffer_delete(b_next_turn);

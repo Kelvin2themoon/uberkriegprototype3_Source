@@ -25,16 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//////initiate netorking variables, check master controles for network mode
-
-//keeps track of last network event and checks
-global.last_network_event = "Network options";
-//assign server end port
-global.sPort = 15316;
-//empty server ip used from client side, defaults to same device
-global.server_ip = "127.0.0.1";
-//entering ip in text box switch via enter
-enteringIP = false;
+            <string>///Networking Vars 
+///Network status readout
+global.last_network_event = "Net mode: " + string(global.net_mode) ;
 </string>
           </argument>
         </arguments>

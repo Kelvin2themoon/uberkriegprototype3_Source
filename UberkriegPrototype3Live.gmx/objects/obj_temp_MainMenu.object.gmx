@@ -44,6 +44,31 @@ global.BGM = noone;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Network status readout var
+global.last_network_event = "F5: Create Server " ;
+
+//creat client menu
+temp_ClientMenu =  instance_create(0,0,obj_temp_ClientMenu);
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -270,7 +295,7 @@ global.P4_CO = irandom(9)+1;
             <kind>1</kind>
             <string>///listn for connection request from client
 /*
-if global.network_mode = 1{
+if global.net_mode = 1{
     //chwck connwct type
     if ds_map_find_value(async_load, "type") = network_type_connect{
         global.last_network_event = "conection request recieved!";
@@ -285,47 +310,6 @@ if global.network_mode = 1{
       </action>
     </event>
     <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///draw networking related stuff
-
-draw_text(227, 210 + 16*8 , "F5: Host Net Game");
-
-/* Commed out
-draw_text(227, 210 + 16*8 , "F5: Host Game");
-draw_text(227, 210 + 16*9 , "F6: Connect to address:");
-
-//text box server IP input
-draw_rectangle(400, 210 + 16*9 +2-4,530, 210 + 16*9 +2 + 17 -4 ,true);
-//draw inside box
-draw_text(404, 210 + 16*9, string(global.server_ip));
-//draw input line
-if (global.blinking and enteringIP)
-draw_line(404 + string_width(global.server_ip), 210 + 16*9 ,404 + string_width(global.server_ip), 210 + 16*9 +15-4);
-
-
-///draw network mode
-draw_text(227, 210 + 16*10 +4, "network mode: "+ string(global.network_mode));
-///draw last network event
-draw_text(227, 210 + 16*11 +4, global.last_network_event);
-</string>
-          </argument>
-        </arguments>
-      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -392,6 +376,49 @@ draw_text(580, 210 + 16*6 , "P4.View on : " + string(global.observe_P[4]));
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///draw networking related stuff
+/*
+
+draw_text(227, 210 + 16*8 , "F5: Host Net Game");
+
+
+draw_text(227, 210 + 16*8 , "F5: Host Game");
+draw_text(227, 210 + 16*9 , "F6: Connect to address:");
+
+//text box server IP input
+draw_rectangle(400, 210 + 16*9 +2-4,530, 210 + 16*9 +2 + 17 -4 ,true);
+//draw inside box
+draw_text(404, 210 + 16*9, string(global.server_ip));
+//draw input line
+if (global.blinking and enteringIP)
+draw_line(404 + string_width(global.server_ip), 210 + 16*9 ,404 + string_width(global.server_ip), 210 + 16*9 +15-4);
+
+
+///draw network mode
+draw_text(227, 210 + 16*10 +4, "network mode: "+ string(global.network_mode));
+*/
+//draw last network event
+draw_text(227, 210 + 16*8 , global.last_network_event);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///BGM status
 if global.BGM_on draw_text(12,12,"BGM on");
 
@@ -418,9 +445,11 @@ if global.BGM_on draw_text(12,12,"BGM on");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///connect to server  COMMED OUT
-/* 
-//switch to client mode
+            <string>///connect to server  
+
+
+
+/*
 global.network_mode = 2;
 //create socket
 global.cSocket = network_create_socket(network_socket_tcp);
@@ -458,12 +487,8 @@ else {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///  Netmode: Host
-room_goto(rm_net_host_config);
-
-/// create and set up server COMMED OUT
+            <string>///create server ( type tcp, port, max 1 client) returns REAL(server id)
 /*
-//create server ( type tcp, port, max 1 client) returns REAL(server id)
 global.server = network_create_server(network_socket_tcp , global.sPort, 1)
 
 //check if server worked
@@ -476,6 +501,30 @@ else{
     //switch server network type
     global.network_mode = 1;
     }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///create temp server host menu
+HostMenu = instance_create(0,0,obj_temp_HostMenu);
+//destroy temp menu
+instance_destroy(temp_ClientMenu,false);
 </string>
           </argument>
         </arguments>
@@ -630,6 +679,7 @@ else{
           <argument>
             <kind>1</kind>
             <string>//start IP adress input
+/*
 
 if enteringIP = false{
     global.server_ip = "";

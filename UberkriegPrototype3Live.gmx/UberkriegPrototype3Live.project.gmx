@@ -643,6 +643,7 @@
     <objects name="Temp">
       <object>objects\obj_temp_MainMenu</object>
       <object>objects\obj_temp_HostMenu</object>
+      <object>objects\obj_temp_ClientMenu</object>
       <object>objects\obj_temp_NetMenu</object>
       <objects name="Battle Scene">
         <object>objects\obj_temp_bdTank</object>

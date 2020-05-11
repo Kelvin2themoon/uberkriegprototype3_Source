@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initiate , key config
+            <string>///Initiate , key config, colours
 
 /*
 this object coltrols global stuff:
@@ -74,7 +74,8 @@ global.keyRIGHT     = vk_right;
 //Dynamic Text: set colour, font, &amp; align
 global.c_uiWhite    = make_colour_rgb(200,200,200);
 global.c_uiBaseGrey = make_colour_rgb(44,41,38);
-global.c_uiLineGrey =  make_colour_rgb(100,100,100);
+global.c_uiLineGrey = make_colour_rgb(100,100,100);
+global.c_uiGold     = make_colour_rgb(218,191,112);
 
 draw_set_font(ft_AuroraEx);
 draw_set_colour(global.c_uiWhite);
@@ -208,13 +209,20 @@ global.P1_CO = 0 ;
 global.P2_CO = 0 ;
 global.P3_CO = 0 ; 
 global.P4_CO = 0 ;
+//arry duplicate
+global.CO_P[0] = 0 ;
+global.CO_P[1] = 0 ;
+global.CO_P[2] = 0 ;
+global.CO_P[3] = 0 ; 
+global.CO_P[4] = 0 ;
 
 //player teams
 global.P1_Team = 1;
 global.P2_Team = 2;
 global.P3_Team = 3;
 global.P4_Team = 4;
-//duplicate
+// array duplicate
+global.team_P[0] = 0;
 global.Team_P[1] = 1;
 global.Team_P[2] = 2;
 global.Team_P[3] = 3;
@@ -233,6 +241,11 @@ global.observe_P[1] = true;
 global.observe_P[2] = true;
 global.observe_P[3] = true;
 global.observe_P[4] = true;
+
+global.player_name[1] = "P1 closed";
+global.player_name[2] = "P2 closed";
+global.player_name[3] = "P3 closed";
+global.player_name[4] = "P4 closed";
 
 /*
 global.P_View will replace the abouve
@@ -281,9 +294,7 @@ global.indirect_assist_on = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Network Variables
-///initite network variables
-
+            <string>///Global Network Variables
 /*
 net_mode
 0 = No network
@@ -292,23 +303,22 @@ net_mode
 3 = spectator Client
 4 = Server (match making and stores games...eventually)
 */
+
 global.net_mode = 0;
+//assign default server port
+global.sPort = 15316;
+//Server side sockets ( noone = -4 , GM:S defaults)
+//coonects to 4 clients, becasue 4 players
+global.sSocket[1] = noone ;
+global.sSocket[2] = noone ;
+global.sSocket[3] = noone ;
+global.sSocket[4] = noone ;
+//client side socket, only one needed?
+global.cSocket = noone ; 
 
-//old var
-global.network_mode = 0;
 
 
 
-/* Commed out -------------------------------------------------------------
-
-0 - not networked
-1 - host (server)
-2 - client
-
-global.network_mode = 0;
-global.last_network_event = "nothing";
-//use this variable to start next turn fter a networking event
-global.network_turn_switch = true;
 </string>
           </argument>
         </arguments>
@@ -427,6 +437,44 @@ global.CO_type[ 8] = obj_CO_8 ; //cost+
 global.CO_type[ 9] = obj_CO_9 ; //Officer+
 global.CO_type[10] = obj_CO_10; //anti-radio
 
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Networkign options and global variables
+
+///Descript &amp; Global Vars
+
+//keeps track of last network event and checks
+global.last_network_event = "Waiting for input";
+
+/*  
+- Network mode -
+0 = not network
+1 = player host server
+2 = player client client    
+*/
+global.network_mode = 0;
+
+//empty server ip used from client side, defaults to same device
+global.server_ip = "127.0.0.1";
 
 </string>
           </argument>
