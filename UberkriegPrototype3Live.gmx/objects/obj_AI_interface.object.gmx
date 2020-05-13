@@ -116,7 +116,7 @@ with obj_terrain_Base{
           <argument>
             <kind>1</kind>
             <string>///Debug
-
+/*
 draw_text(12,12, "AI is Active" );
 draw_text(12,24, "alarm 1 = " + string(alarm[1]));
 </string>

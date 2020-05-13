@@ -11,16 +11,17 @@ file_name = argument0;
 //chech if script is active
 global.last_network_event = "Ran script: net_playerNumAssign"
 
-//open file and read data
-ini_open(file_name);
-var new_num = ini_read_real("num" , "num", 0)
-
-//change number
-global.Local_Player = new_num;
-
-//read out
-global.last_network_event = "assigned to slot " + string(global.Local_Player) ;
-
-
-
- 
+//check netowrkmode is client
+if global.net_mode = 2 {
+    //open file and read data
+    ini_open(file_name);
+    var new_num = ini_read_real("num" , "num", 0)
+    
+    //change number
+    global.Local_Player = new_num;
+    
+    //read out
+    global.last_network_event = "assigned to slot " + string(global.Local_Player) ;
+    
+    //switch non-local player view off
+    }

@@ -15,15 +15,19 @@
 BASIC BATTLES
 
 this rooom is where basic battles will take place.
-
 Single maching and hot seat play.
 
-
+EDIT:
+should now also accept network games
+global.net_modes
+0 - offline: hot seat (or spectator?)
+1 - host server: for now, does not play
+2 - client
 */
 
-//create  battle controller
 
-//instance_create(0,0, obj_battleController_basic);</code>
+
+instance_create(0,0, obj_battleController_basic);</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
@@ -63,9 +67,7 @@ Single maching and hot seat play.
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
   </views>
-  <instances>
-    <instance objName="obj_battleController_basic" x="0" y="0" name="inst_983F3B7C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-  </instances>
+  <instances/>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>

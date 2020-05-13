@@ -87,8 +87,13 @@ for ( i = 0 ; i &lt; 5 ; i++ ) { // i used to represent acting player
             <string>///creat &amp; load map
 global.map = instance_create(0,0,obj_map);
 
+var loading_map = "protoland.ubm" ; //default loading map
+//switch to client version if net mode 2
 
-if   ( file_exists ("protoland.ubm")) scr_ubermap_load("protoland.ubm");
+if global.net_mode = 2 loading_map = "protoland_c.ubm"
+
+
+if   (file_exists (loading_map)) scr_ubermap_load(loading_map);
 else scr_ubermap_load("2P_SabreRanger_v3.ubm");
 </string>
           </argument>
@@ -1003,6 +1008,7 @@ if keyboard_check_released(ord("A")) damage_chart_on = false;
           <argument>
             <kind>1</kind>
             <string>/// Debug
+draw_text( 12 , 12 +24 , "Current Player: " + string(global.P_Turn.number) );
 
 
 

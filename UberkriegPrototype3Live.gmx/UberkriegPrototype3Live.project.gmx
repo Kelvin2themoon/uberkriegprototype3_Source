@@ -577,6 +577,8 @@
     <scripts name="Net Scripts">
       <script>scripts\net_data_default.gml</script>
       <script>scripts\net_playerNumAssign.gml</script>
+      <script>scripts\net_map_transfer.gml</script>
+      <script>scripts\net_server_turn_ready.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -602,7 +604,16 @@
     <object>objects\obj_map</object>
     <objects name="Controllers">
       <object>objects\obj_MastertControls</object>
-      <object>objects\obj_Net_Controler</object>
+    </objects>
+    <objects name="Temp">
+      <object>objects\obj_temp_MainMenu</object>
+      <object>objects\obj_temp_HostMenu</object>
+      <object>objects\obj_temp_ClientMenu</object>
+      <object>objects\obj_temp_NetMenu</object>
+      <objects name="Battle Scene">
+        <object>objects\obj_temp_bdTank</object>
+        <object>objects\obj_battleScene_controller</object>
+      </objects>
     </objects>
     <objects name="MapEditor">
       <object>objects\obj_mapEditCursor_mouse</object>
@@ -643,16 +654,6 @@
       <object>objects\obj_unit_HeavyTank</object>
       <object>objects\obj_unit_Rocket</object>
       <object>objects\obj_unit_LandCruiser</object>
-    </objects>
-    <objects name="Temp">
-      <object>objects\obj_temp_MainMenu</object>
-      <object>objects\obj_temp_HostMenu</object>
-      <object>objects\obj_temp_ClientMenu</object>
-      <object>objects\obj_temp_NetMenu</object>
-      <objects name="Battle Scene">
-        <object>objects\obj_temp_bdTank</object>
-        <object>objects\obj_battleScene_controller</object>
-      </objects>
     </objects>
     <objects name="Basic Battle ">
       <object>objects\obj_battleController_basic</object>

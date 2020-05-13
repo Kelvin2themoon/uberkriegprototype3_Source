@@ -128,7 +128,10 @@ switch state {
         
         //auto save turn ( for continue )
         scr_quick_save("quicksave.ubq");
+        
+        //File turn pass method obsolete
         //if netowrk mode is server or client************************************************************************** start of network send action
+        /*
         if global.net_mode !=0{
             //load save to buffer
             var b_next_turn = buffer_load("quicksave.ubq");
@@ -147,6 +150,7 @@ switch state {
                 buffer_delete(b_next_turn);
                 } 
             }
+        */
         //******************************************************************************************************************end of network send action
         
             }
@@ -157,9 +161,9 @@ switch state {
     
     case "waiting" :
         image_alpha = 1;
-        if (((keyboard_check_pressed(global.keyCONFIRM) or mouse_check_button_pressed(mb_left)) and global.network_mode = 0) or (global.network_mode != 0 and global.network_turn_switch) ){
+        if ( (keyboard_check_pressed(global.keyCONFIRM) or mouse_check_button_pressed(mb_left)) or global.Local_Player = noone){
             //switch network turn
-            global.network_turn_switch = false;
+            //global.network_turn_switch = false;
             //switch to "fad out"
             state = "fade out"
             //change phasze to "main"
@@ -179,7 +183,6 @@ switch state {
             //audio cue for new turn in netowrk mode
             audio_play_sound(sfx_bark,2,false); 
             
-             
             }
         break;
     case "fade out" :
