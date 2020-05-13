@@ -164,6 +164,28 @@ if global.net_mode = 1{
             //get socket used and stor as server socket
             global.sSocket[check_socket] = ds_map_find_value(async_load, "socket");
             global.player_name[check_socket] = "P"+string(check_socket)+" Connected";
+            
+            //ping back and assign client with player number
+            
+            var file_name = "outgoing.snd";
+            
+            //delete "outgoing.snd" if exsist
+            if file_exists(file_name) file_delete(file_name)
+            //create/open file
+            var f_playerAssign = ini_open(file_name);
+            //write file instructions
+            ini_write_string("meta", "type" , "host_room_action");  //in case it is important
+            ini_write_string("scr" , "name" , "net_playerNumAssign"); // will use native function, script_execute, on client side.
+            ini_write_real(  "num" , "num" , check_socket ); // argument for net script abouve ^
+            //close file
+            ini_close();
+            
+            //load file to buffer
+            var b_playerAssign  = buffer_load(file_name);
+            //send buffer to client
+            network_send_packet(global.sSocket[check_socket],b_playerAssign,buffer_get_size(b_playerAssign));
+            //destroy buffer
+            global.last_network_event = "player assignment sent throgh socket: " + string(check_socket);
             }
         check_socket++ ;       
         }

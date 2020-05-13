@@ -574,6 +574,10 @@
       <script>scripts\scr_draw_stars.gml</script>
       <script>scripts\scr_draw_radioAssist.gml</script>
     </scripts>
+    <scripts name="Net Scripts">
+      <script>scripts\net_data_default.gml</script>
+      <script>scripts\net_playerNumAssign.gml</script>
+    </scripts>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader0.shader</shader>

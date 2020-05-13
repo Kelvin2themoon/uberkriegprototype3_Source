@@ -234,6 +234,9 @@ global.isAIplayer[2] = false;
 global.isAIplayer[3] = false;
 global.isAIplayer[4] = false;
 
+//assigned player who is playing at this computer in networked play, 0 means normal hot seat
+global.Local_Player = 0; 
+
 //observable players - either player at local game or for AI controll debug
 //should be automated eventually
 global.observe_P[0] = false; //neutral/non player always not observable
@@ -592,8 +595,8 @@ switch  (global.cursorFrame)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// recieving saves and starting next turn
-
+            <string>/// COMMED OUT recieving saves and starting next turn
+/*
 //chek data type
 if ds_map_find_value(async_load, "type") = network_type_data{
     //recive and lable buffer
@@ -614,6 +617,57 @@ if ds_map_find_value(async_load, "type") = network_type_data{
     //auto start next turn
     room_goto(rm_continue);
     
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///incomming Data type 
+/*
+recieving a .snd        (sending  file)
+saving it as a .rcv     (Recieved file)
+execute net_Script in [scr] [name]
+*/
+
+//check incomming data type
+if ds_map_find_value(async_load, "type") = network_type_data{
+    global.last_network_event = "data recieved";
+    //extract data buffer 
+    var b_incoming = ds_map_find_value(async_load, "buffer");
+    //replace exsistingfile with buffer in game data folder 
+    //(C: Users &gt; [Name] &gt; AppData &gt; UberkriegPrototype3Live )
+    var file_name = "incoming.rcv";
+    if file_exists(file_name) file_delete(file_name);
+    buffer_save(b_incoming,file_name);
+    if file_exists(file_name) global.last_network_event = "ini file recieved";
+    
+    //get script name from ini file
+    ini_open(file_name);
+    var script_name = ini_read_string( "scr", "name", "net_data_default");
+    global.last_network_event = "found script : " + script_name;
+    ini_close();
+    
+    //execute script with recieved file as argument
+    //NOTE: Script names will not resolve as assets on the HTML5 target platform due to obfuscation of the final code, 
+    //which may cause issues and should be taken into consideration when using the function. 
+    var script_index = asset_get_index(script_name);
+    script_execute( script_index , file_name );
     }
 </string>
           </argument>
