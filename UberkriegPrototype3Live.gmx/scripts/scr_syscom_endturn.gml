@@ -7,11 +7,21 @@ with global.P_Turn {
     save_view_pos_x =   view_xview[0];
     save_view_pos_y =   view_yview[0];
     }
-    
-
-
+//resolve and such
 instance_create(0,0,obj_starting);
 instance_deactivate_object(obj_battleCursor);
 instance_deactivate_object(obj_miniwin);
-scr_quick_save("quicksave.ubq"); 
-instance_destroy();
+scr_quick_save("quicksave.ubq");
+
+//send instructions to server if is active client player
+if (global.net_mode = 2){
+    if ( global.P_Turn.number = global.Local_Player){
+        var c_endturn = ds_map_create();
+        ds_map_add(c_endturn,"scr","net_c_endturn");
+        ds_map_add(c_endturn,"p_num",global.Local_Player);
+        scr_send(c_endturn,"host");
+        }
+    }
+
+//destroy self if hot seat mode, in other words scriped called by a ayscom menu, otherwise will destroy masterControls 
+if global.net_mode = 0 instance_destroy();

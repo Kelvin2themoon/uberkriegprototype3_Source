@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>///Network status readout
 global.last_network_event = "Host Menu Created" ;
-global.Local_Player = noone;
+global.Local_Player = 0; // zero is neutral, no player
 
 
 
@@ -66,6 +66,8 @@ else{
     //switch server network type
     global.net_mode = 1;
     }
+    
+
  
 </string>
           </argument>
@@ -105,6 +107,11 @@ if (file_exists("protoland.ubm") and global.net_mode = 1){
     //variable used to rotate sockets
     check_socket = 1;
     
+    global.conect_P[1] = false;
+    global.conect_P[2] = false;
+    global.conect_P[3] = false;
+    global.conect_P[4] = false;
+    
     //check terrains and units to check for HQs and commanders and their ownership
     var i = 0;
     var j = 0;
@@ -117,6 +124,7 @@ if (file_exists("protoland.ubm") and global.net_mode = 1){
                 player_num = ini_read_real("Terrains",pos+"P",1)
                 global.player_name[player_num] = "P"+string(player_num)+". open" 
                 global.sSocket[player_num] = "ready"
+                global.conect_P[player_num] = true;
                 //check index of last player
                 if player_num &gt; last_player last_player = player_num;
                 }
@@ -131,7 +139,16 @@ if (file_exists("protoland.ubm") and global.net_mode = 1){
 else {
     global.last_network_event = "map not found" ;
     }
+    
+//player readiness count
+global.number_of_players = 0;
+//count
+i = 1;
+for (i = 1 ; i &lt; 5 ; i++) {
+    if (global.sSocket[i] = "ready") global.number_of_players++ ;
+    }
 
+global.last_network_event = "Hosting: protoland.ubm for " +  string(global.number_of_players)  ; //make map name eventrually
 
 
 
@@ -151,7 +168,7 @@ else {
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>other</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
@@ -160,15 +177,17 @@ else {
             <string>///listn for connection request from client
 if global.net_mode = 1{ //server side
     //check type connect
-    if ds_map_find_value(async_load, "type") = network_type_connect{
+    if ds_map_find_value(async_load, "type") = network_type_connect {
+        global.last_network_event = "connect request recieved";    
+                
+        //creat list of nretwork indexes (stored in sSocket array), for purpose of bradcast
         
         var unconnected = true;
-        
         while (unconnected){
 
             //check socket ket on que, if not ready , go to next
             if global.sSocket[check_socket] = "ready" {
-    
+        
                 global.last_network_event = "conection request recieved!";
                 
                 //get socket used and stor as server socket
@@ -177,40 +196,110 @@ if global.net_mode = 1{ //server side
                 ds_list_add(global.client_list, check_socket);
                 
                 //ping back and assign client with player number
-                
-                var file_name = "outgoing.snd";
-                
-                //delete "outgoing.snd" if exsist
-                if file_exists(file_name) file_delete(file_name)
-                //create/open file
-                var f_playerAssign = ini_open(file_name);
-                //write file instructions
-                ini_write_string("meta", "type" , "host_room_action");  //in case it is important
-                ini_write_string("meta" , "scr" , "net_playerNumAssign"); // will use native function, script_execute, on client side.
-                ini_write_real(  "num" , "num" , check_socket ); // argument for net script abouve ^
-                //close file
-                ini_close();
-                
-                //load file to buffer
-                var b_buffer  = buffer_load(file_name);
-                //send buffer to client
-                network_send_packet(global.sSocket[check_socket],b_buffer,buffer_get_size(b_buffer));
-                //destroy buffer
-                buffer_delete(b_buffer);
-                
-                global.last_network_event = "player assignment sent throgh socket: " + string(check_socket);
+                //create ds_map with instructions and arguments ( rememebr keys need to be strings!!! )
+                var net_map = ds_map_create();
+                ds_map_add(net_map, "scr" , "net_assign_player");
+                ds_map_add(net_map , "p_num" , check_socket);  
+                //convert to JSON string
+                var net_json = json_encode(net_map);
+                //store in buffer
+                var b_out = buffer_create( string_byte_length(net_json)+1 , buffer_fixed ,  1 );
+                buffer_write( b_out , buffer_string , net_json );
+                //send to conected client
+                network_send_packet( global.sSocket[check_socket] , b_out , buffer_get_size(b_out) );
+                //destroy all relavent ds and buffers
+                ds_map_destroy(net_map);
+                buffer_delete(b_out);
+                //update readout
+                global.last_network_event = "slot assignment for P" + string(check_socket) +  " sent";     
                 unconnected = false;
-                
                 }
-            
             //increase index
-            check_socket++ ;
-            
+            check_socket++ ;            
             }
-        
+
         //check to see if all slots are fille    
-        if last_player &lt;= check_socket {
-        global.last_network_event = "player assignment sent throgh socket: " + string(check_socket);
+        if last_player &lt; check_socket {
+            global.last_network_event = "all player slots filled" ;
+            //instruct clients to start gmae
+            net_map = ds_map_create();
+            ds_map_add( net_map, "scr" , "net_start_game" );
+            //send as json string
+            scr_send( net_map , "all" ); 
+            
+            /*
+            //convert to JSON string
+                var net_json = json_encode(net_map);
+                //store in buffer
+                var b_out = buffer_create( string_byte_length(net_json)+1 , buffer_fixed ,  1 );
+                buffer_write( b_out , buffer_string , net_json );
+                //send to conected clients pulled from list
+                
+                for ( i = 0 ; i &lt; ds_list_size(global.client_list) ; i++){
+                    network_send_packet( global.sSocket[ds_list_find_value(global.client_list,i)] , b_out , buffer_get_size(b_out) );
+                    }
+                */
+            }   
+        }
+    }   
+            /*Commed OUT
+           
+            //Covert "protoland.ubm" to JASON string + instructions
+            
+            //create ds map
+            var send_map = ds_map_create();
+            //add script
+            ds_map_add(send_map,"scr","net_map_transfer");
+            //open protoland file
+            ini_open("protoland.ubm");
+            //map dimentions
+            var map_x = ini_read_real("Meta","Height",18);
+            var map_y = ini_read_real("Meta","Width",32);
+            
+            //initiate variable
+            var ini_pos = noone;// (x,y) position
+            var type = 0;       // unit or terain type
+            var owner = 0;      // ownership
+            
+            for ( i = 0 ; i &lt;= map_x ; i++ ){
+                for ( i = 0 ; i &lt;= map_y ; i++ ){
+                    //add elements to DS_map
+                    ini_pos = string(i)+"X" + string(j) + "Y" ; 
+                    
+                    //read terrain
+                    owner = ini_read_real("Terrains",ini_pos+"P",0); //owner, default = neutral
+                    type  = ini_read_real("errains", ini_pos,1); //terrain index, defult = plains
+                    //add to map
+                    ds_map_add( send_map , "T" + ini_pos , type );  // terrain type
+                    ds_map_add( send_map , "P" + ini_pos , owner ); // terrain owner
+                    
+                    //read unit
+                    if(ini_key_exists("Unit", ini_pos)){
+                        owner = ini_read_real("Units",ini_pos+"P",1);   //commander, defult = P1
+                        type = ini_read_real("Units",ini_pos,1);        //unit type, default = light infantry
+                        //add to map    
+                        ds_map_add( send_map , "U" + ini_pos , type );  // unit type
+                        ds_map_add( send_map , "C" + ini_pos , owner );  // commander
+                        }  
+                    }
+                }
+            //close ini file
+            ini_close();
+                
+           //save as string (JSON)
+           var JSON_map = json_encode(send_map);
+           //write to buffer
+           var outgoing = buffer_create( string_byte_length(JSON_map)+1 , buffer_fixed, 1);
+           buffer_write( outgoing, buffer_string, JSON_map);
+           //delete buffer
+           buffer_delete(outgoing);
+           //delete ds_map
+           ds_map_destroy(send_map);
+              
+            
+            
+            
+            /* COMMED OUT
             //copy a map file and add script to it, save as outgoing.snd
             file_copy("protoland.ubm", "outgoing.snd");
             ini_open("outgoing.snd");
@@ -218,9 +307,10 @@ if global.net_mode = 1{ //server side
             ini_write_string("meta","scr","net_map_transfer");
             ini_close();
             
+            
             b_buffer = buffer_load("outgoing.snd");
             
-            //sent to all clients
+            //sent map to all clients
             var i = 0;
             for ( i = 0 ; i &lt; ds_list_size(global.client_list)  ; i++ ){
                 network_send_packet(global.sSocket[ ds_list_find_value(global.client_list,i) ], b_buffer,buffer_get_size(b_buffer));
@@ -263,6 +353,26 @@ draw_text(100, 210 + 16*4 , string(global.player_name[2]));
 draw_text(100, 210 + 16*5 , string(global.player_name[3]));
 draw_text(100, 210 + 16*6 , string(global.player_name[4]));
 </string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
           </argument>
         </arguments>
       </action>

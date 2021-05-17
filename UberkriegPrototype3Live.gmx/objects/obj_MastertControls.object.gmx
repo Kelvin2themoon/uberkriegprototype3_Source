@@ -320,6 +320,18 @@ global.sSocket[4] = noone ;
 global.cSocket = noone ; 
 //list of clients
 global.client_list = ds_list_create();
+global.conect_P[1] = false;
+global.conect_P[2] = false;
+global.conect_P[3] = false;
+global.conect_P[4] = false;
+
+
+global.sender = 0
+
+//script to be passed into scripts on reciving data
+global.net_data_map = "script not found";
+
+
 
 
 
@@ -481,6 +493,12 @@ global.network_mode = 0;
 //empty server ip used from client side, defaults to same device
 global.server_ip = "127.0.0.1";
 
+//check player readiness for next event
+global.P_ready[1] = false;
+global.P_ready[2] = false;
+global.P_ready[3] = false;
+global.P_ready[4] = false;
+
 </string>
           </argument>
         </arguments>
@@ -640,12 +658,15 @@ if ds_map_find_value(async_load, "type") = network_type_data{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///incomming Data type 
+            <string>///COMMED OUT incomming Data type, sav as ini file and run included script
 /*
 recieving a .snd        (sending  file)
 saving it as a .rcv     (Recieved file)
 execute net_Script in [scr] [name]
 */
+
+/*
+
 
 //check incomming data type
 if ds_map_find_value(async_load, "type") = network_type_data{
@@ -670,6 +691,52 @@ if ds_map_find_value(async_load, "type") = network_type_data{
     //which may cause issues and should be taken into consideration when using the function. 
     var script_index = asset_get_index(script_name);
     script_execute( script_index , file_name );
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Reciving JSON string
+
+//check incoming data type
+if ds_map_find_value( async_load , "type" ) = network_type_data {
+    global.last_network_event = "data recieved";
+    //extract buffer datta
+    var b_in = ds_map_find_value( async_load , "buffer" );
+    var data_in = buffer_read( b_in , buffer_string );
+    //read string
+    global.last_network_event = data_in;
+    //convert string to ds map
+    global.net_data_map = json_decode( data_in );
+    //read and display script instructions
+    global.last_network_event = ds_map_find_value( global.net_data_map , "scr" );
+    // run script from map
+    script_execute( asset_get_index( ds_map_find_value(global.net_data_map , "scr") ) );
+    ds_map_destroy( global.net_data_map );
+    
+    /*
+    //convert to ds map
+    var net_map = json_decode( buff_read );
+    //read "scr" key and execute as script
+    var net_scr =  ds_map_read( net_map , "scr" );
+    global.last_network_event = "hey" + net_scr ;
+    */
     }
 </string>
           </argument>
@@ -744,6 +811,33 @@ audio_destroy_stream(test_bgm);
             <string>///debug: read and display global.Local_player
 
 draw_text( 12 , 12 , "Local Player: " + string(global.Local_Player) );
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw client list
+var i = 0;
+for ( i = 0 ; i &lt; ds_list_size(global.client_list) ; i++){
+    draw_text(12 +i*24 ,400,string( ds_list_find_value(global.client_list,i)));
+    draw_text(19+i*24,400, string(global.conect_P[i+1]));
+    }
 
 </string>
           </argument>

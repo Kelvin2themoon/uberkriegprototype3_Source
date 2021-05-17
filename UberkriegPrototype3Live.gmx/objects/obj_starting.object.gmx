@@ -70,12 +70,6 @@ image_alpha = 0; //alpha value
           <argument>
             <kind>1</kind>
             <string>/// fading and key check
-
-
-
-
-
-
 switch state {
     case "fade in" :
         if (image_alpha &gt; 1) {
@@ -122,38 +116,20 @@ switch state {
             scr_updateGlobalVision();
             //update boarder for new turn
             scr_globalRadioCheck();
-            scr_update_radioBoarder();   
+            scr_update_radioBoarder();
           
-        //change cursor pose to saved (to player)
-        
-        //auto save turn ( for continue )
-        scr_quick_save("quicksave.ubq");
-        
-        //File turn pass method obsolete
-        //if netowrk mode is server or client************************************************************************** start of network send action
-        /*
-        if global.net_mode !=0{
-            //load save to buffer
-            var b_next_turn = buffer_load("quicksave.ubq");
-            //readout
-            global.last_net_event = "file loaded in buffer, size: " + string(buffer_get_size(b_next_turn));
-            //send as server
-            if global.net_mode =1 {
-                network_send_packet(global.sSocket[1],b_next_turn,buffer_get_size(b_next_turn));
-                global.last_network_event = "buffer sent, size: " + string(buffer_get_size(b_next_turn));
-                buffer_delete(b_next_turn);
-                }
-            //send as client    
-            if global.net_mode =2 {
-                network_send_packet(global.cSocket,b_next_turn,buffer_get_size(b_next_turn));
-                global.last_network_event = "buffer sent, size: " + string(buffer_get_size(b_next_turn));
-                buffer_delete(b_next_turn);
-                } 
+            //confirm turn end
+            if global.net_mode = 2{
+                var confirm_turn_ended = ds_map_create();
+                ds_map_add( confirm_turn_ended,"scr","net_confirm_turn_end");
+                ds_map_add(confirm_turn_ended,"p_num",global.Local_Player);
+                scr_send(confirm_turn_ended,"host");
+                }  
+            //change cursor pose to saved (to player)
+            //auto save turn ( for continue )
+            scr_quick_save("quicksave.ubq");
             }
-        */
-        //******************************************************************************************************************end of network send action
-        
-            }
+            
         else{
             image_alpha += 0.1 ;
             }
@@ -161,7 +137,9 @@ switch state {
     
     case "waiting" :
         image_alpha = 1;
-        if ( (keyboard_check_pressed(global.keyCONFIRM) or mouse_check_button_pressed(mb_left)) or global.Local_Player = noone){
+        if ( (((keyboard_check_pressed(global.keyCONFIRM) or mouse_check_button_pressed(mb_left)) or global.Local_Player = noone) and global.net_mode = 0 )
+        //always start automatically if server
+        or global.net_mode = 1 ){
             //switch network turn
             //global.network_turn_switch = false;
             //switch to "fad out"

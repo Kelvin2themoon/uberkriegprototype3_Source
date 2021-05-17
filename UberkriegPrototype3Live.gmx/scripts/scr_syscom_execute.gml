@@ -113,6 +113,7 @@ switch (command){
         
     case "endturn" : //end turn
         scr_syscom_endturn();
+        if (global.net_mode = 0 or (global.net_mode = 2 and global.P_Turn.number = global.Local_Player)) 
         instance_destroy();
         break;
         

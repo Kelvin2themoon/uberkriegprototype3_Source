@@ -216,7 +216,7 @@ instance_create(24,24,obj_topwin);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Create player Q &amp; turning : set P1-Day1 VARs
+            <string>///Create player Q &amp; turning : set P1-Day1 VARs (assign socket!!)
 
 //player Queue
 global.player_q = ds_queue_create();
@@ -330,6 +330,8 @@ if (global.P1_in_play){
         global.P1.number = 1;
         global.P1.name = "COOKIELAND";
         ds_priority_add(global.temp_pq, global.P1 ,1);
+        //assign server [p]layer socket if host
+        if global.net_mode = 1 global.P[1].pSocket = global.sSocket[1];
         //create CO 
         global.P1.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.P1_CO)));
         global.P1.CO.ownership = 1;
@@ -360,6 +362,8 @@ if (global.P2_in_play){
     global.P2.number = 2;
     global.P2.name = "PEPPERLAND";
     ds_priority_add(global.temp_pq, global.P2 ,2);
+    //assign server [p]layer socket if host
+    if global.net_mode = 1 global.P[2].pSocket = global.sSocket[2];
     //create CO 
     global.P2.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.P2_CO)));
     global.P2.CO.ownership = 2;
@@ -390,6 +394,8 @@ if(global.P3_in_play){
     global.P3.number = 3;
     global.P3.name = "MARMALADELAND";
     ds_priority_add(global.temp_pq, global.P3 ,3);
+    //assign server [p]layer socket if host
+    if global.net_mode = 1 global.P[3].pSocket = global.sSocket[3];
     //create CO 
     global.P3.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.P3_CO)));
     global.P3.CO.ownership = 3;
@@ -419,6 +425,8 @@ if (global.P4_in_play){
     global.P4.number = 4;
     global.P4.name = "PRETZELLAND";  
     ds_priority_add(global.temp_pq, global.P4 ,4);
+    //assign server [p]layer socket if host
+    if global.net_mode = 1 global.P[4].pSocket = global.sSocket[4];
     //create CO 
     global.P4.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.P4_CO)));
     global.P4.CO.ownership = 4;
@@ -791,6 +799,36 @@ damage_chart_on = false;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///tell host client is ready
+
+if (global.net_mode = 2){
+    ///tell host to start game
+    map_c_ready = ds_map_create();
+    ds_map_add( map_c_ready , "scr" , "net_c_ready" );
+    ds_map_add( map_c_ready , "p_num" , global.Local_Player );
+    scr_send( map_c_ready  , "host" );
+    }    
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="1" enumb="0">
       <action>
@@ -1008,7 +1046,8 @@ if keyboard_check_released(ord("A")) damage_chart_on = false;
           <argument>
             <kind>1</kind>
             <string>/// Debug
-draw_text( 12 , 12 +24 , "Current Player: " + string(global.P_Turn.number) );
+draw_text( 12 , 12 +12   , "Current Player: " + string(global.P_Turn.number) );
+draw_text( 12 , 12 +12*2 , "Net: " + string(global.last_network_event) );
 
 
 
@@ -1021,23 +1060,15 @@ display_set_gui_size(768, 432);
 if (global.Phaze = "Waiting"){   
 
     draw_sprite(spr_factionIcon_square, global.P_Turn.number-1,12,24)
-    
     draw_text(36,32, "DAY: " + string(global.Day));
-    
     draw_text(12,48, "P" + string(global.P_Turn.name) + ": Press CONFIRM [Z] to start turn" );
-    
     draw_text(12,84, "CONTROLS:" );
     draw_text(12,84+16, "Z - Confirm" );
     draw_text(12,84+16*2, "X - Cancel" );
     draw_text(12,84+16*3, "C - unit/terrain info (not up to date)");
     draw_text(12,84+16*4, "SPACE - Radio Checks");
-    
     draw_text(12,84+16*6, "A - Damage Chart" );
-    draw_text(12,84+16*7, "V - Minimap &amp; Player intel" );
-    
-    
-    
-    
+    draw_text(12,84+16*7, "V - Minimap &amp; Player intel" );    
     }
 
 /*

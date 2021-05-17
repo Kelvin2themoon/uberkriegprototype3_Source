@@ -575,10 +575,22 @@
       <script>scripts\scr_draw_radioAssist.gml</script>
     </scripts>
     <scripts name="Net Scripts">
-      <script>scripts\net_data_default.gml</script>
-      <script>scripts\net_playerNumAssign.gml</script>
-      <script>scripts\net_map_transfer.gml</script>
-      <script>scripts\net_server_turn_ready.gml</script>
+      <scripts name="shortcuts">
+        <script>scripts\scr_send.gml</script>
+        <script>scripts\scr_clear_player_ready.gml</script>
+        <script>scripts\scr_all_players_ready.gml</script>
+      </scripts>
+      <scripts name="Turning">
+        <script>scripts\net_assign_player.gml</script>
+        <script>scripts\net_start_game.gml</script>
+        <script>scripts\net_c_ready.gml</script>
+        <script>scripts\net_start_turn.gml</script>
+        <script>scripts\net_c_turn_ready.gml</script>
+        <script>scripts\net_start_controls.gml</script>
+        <script>scripts\net_c_endturn.gml</script>
+        <script>scripts\net_h_endturn.gml</script>
+        <script>scripts\net_confirm_turn_end.gml</script>
+      </scripts>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -599,6 +611,8 @@
     <font>fonts\font11</font>
     <font>fonts\font12</font>
     <font>fonts\font13</font>
+    <font>fonts\font14</font>
+    <font>fonts\font15</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>
@@ -740,11 +754,10 @@
     <room>rooms\rm_debugStart</room>
     <room>rooms\rm_MapEditor</room>
     <room>rooms\rm_game_Basic</room>
+    <room>rooms\room8</room>
     <room>rooms\rExampleRoom</room>
     <room>rooms\rm_continue</room>
     <room>rooms\rm_battleSceneTest</room>
-    <room>rooms\room5</room>
-    <room>rooms\room6</room>
     <room>rooms\rm_net_host_config</room>
   </rooms>
   <constants number="8">
