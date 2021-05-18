@@ -291,61 +291,26 @@ if ( conclude_upkeep ) {
             
         //server action
         else if (global.net_mode =1 and global.Local_Player = 0 ){
-        
                 var map_start_turn = ds_map_create();
+                scr_rangeCheck_reset();
                 ds_map_add(map_start_turn,"scr","net_start_turn");
                 scr_send(map_start_turn,"all");                                        
-                //scr_clear_player_ready();
-                //global.P_ready[global.Local_Player] = true;
-            /*
-            //send signal to all clients that the next turn is ready to accept player actions
-            if file_exists("outgoing.snd") file_delete("outgoing.snd");
-            //wtite to ini file
-            ini_open("outgoing.snd");
-            ini_write_string("meta","scr","net_server_turn_ready");
-            ini_close();
-            
-            var b_buffer = buffer_load("outgoing.snd");
-            var i = 0;
-            for ( i = 0 ; i &lt; ds_list_size(global.client_list)  ; i++ ){
-                network_send_packet(global.sSocket[ ds_list_find_value(global.client_list,i) ], b_buffer,buffer_get_size(b_buffer));
                 }
-            buffer_delete(b_buffer);
+            
+        else if ( global.net_mode = 2 ) { //net mode is client      
+            //change phaze
+            global.Phaze = "Main"
+            //clear range checks
             scr_rangeCheck_reset();
-            */
+            //client turn ready - tell host clients ready and to initiate controls once all clients are ready
+            net_turn_ready = ds_map_create();
+            ds_map_add( net_turn_ready , "scr" , "net_c_turn_ready" );
+            ds_map_add( net_turn_ready , "p_num" , global.Local_Player );
+            scr_send( net_turn_ready , "host" )
+            //destroy self
+            instance_destroy();
             }
-            
-            
-        else if ( global.net_mode = 2 ) { //net mode is client
-            
-            
-            //P turn matches local player
-        /*
-            if ( global.P_Turn.number = global.Local_Player ) {
-                instance_activate_object(obj_battleCursor);
-                //activate HUD
-                instance_activate_object(obj_miniwin);
-                //change cursor position
-                with obj_battleCursor{
-                    x = global.P_Turn.save_cursor_pos_x;
-                    y = global.P_Turn.save_cursor_pos_y;
-                }
-            }
-        */
-            
-    //change phaze
-    global.Phaze = "Main"
-    //clear range checks
-    scr_rangeCheck_reset();
-    //client turn ready - tell host clients ready and to initiate controls once all clients are ready
-    net_turn_ready = ds_map_create();
-    ds_map_add( net_turn_ready , "scr" , "net_c_turn_ready" );
-    ds_map_add( net_turn_ready , "p_num" , global.Local_Player );
-    scr_send( net_turn_ready , "host" )
-    //destroy self
-    instance_destroy();
-    }
-}
+        }
 
 
 

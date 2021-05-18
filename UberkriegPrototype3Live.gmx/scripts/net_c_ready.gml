@@ -1,7 +1,7 @@
 // clients are ready
 var n = ds_map_find_value( global.net_data_map , "p_num" )
 
-global.last_network_event = "player ready" + string( n );
+global.last_network_event = "player ready to start" + string( n );
 //pleayer ready
 global.player_name[n] = "P" + string(n)+" Ready";
 global.P_ready[n] = true; 

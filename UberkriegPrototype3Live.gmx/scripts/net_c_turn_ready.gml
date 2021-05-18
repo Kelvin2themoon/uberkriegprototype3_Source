@@ -11,5 +11,7 @@ if scr_all_players_ready(){
     ds_map_add(start_controls,"scr","net_start_controls");
     scr_send(start_controls,"acting");
     scr_clear_player_ready();
-    } 
+    }
+
+ 
 

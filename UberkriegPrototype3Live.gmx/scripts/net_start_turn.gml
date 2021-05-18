@@ -1,8 +1,7 @@
 with obj_starting state = "fade out"
 
-//change phasze to "main"
+//change phasze to "upkeep"
 global.Phaze = "Upkeep";
-            
 //change BGM************************************************************************************************************************************tempBGM
 if global.BGM_on{
     audio_stop_sound(global.BGM);

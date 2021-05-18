@@ -21,7 +21,7 @@ with( obj_CO_0 )
         }
     }
             
-//make self visible   
+//extend radio range on moutains  
 if ( obj_map.terrains[originV_X,originV_Y].object_index = obj_terrain_Mountain and target.radio != 0) radio_range +=2;
 
 

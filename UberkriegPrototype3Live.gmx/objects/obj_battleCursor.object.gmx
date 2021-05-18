@@ -160,7 +160,7 @@ global.mousetype2 = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//return menuExitDelay = false
+            <string>///return menuExitDelay = false
 menuExitDelay = false;
 
 
