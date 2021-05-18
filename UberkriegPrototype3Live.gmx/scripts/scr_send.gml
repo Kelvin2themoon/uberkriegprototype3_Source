@@ -38,7 +38,7 @@ switch( scr_snd_to ){
             break;
     //send to all client players
     case "relay"  : // send to off turn players
-        vari = 0
+        var i = 0
         for ( i = 0 ; i < ds_list_size(global.client_list) ; i++){
             if (global.P_Turn.number != ds_list_find_value( global.client_list,i))  network_send_packet(global.sSocket[ds_list_find_value( global.client_list,i)], b_out , buffer_get_size(b_out) );
             }

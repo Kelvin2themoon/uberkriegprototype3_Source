@@ -89,12 +89,11 @@ global.map = instance_create(0,0,obj_map);
 
 var loading_map = "protoland.ubm" ; //default loading map
 //switch to client version if net mode 2
+if global.net_mode = 2 loading_map = "protoland.ubm";
 
-if global.net_mode = 2 loading_map = "protoland_c.ubm"
 
-
-if   (file_exists (loading_map)) scr_ubermap_load(loading_map);
-else scr_ubermap_load("2P_SabreRanger_v3.ubm");
+if(file_exists (loading_map)) scr_ubermap_load(loading_map);
+//else scr_ubermap_load("2P_SabreRanger_v3.ubm");
 </string>
           </argument>
         </arguments>

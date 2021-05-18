@@ -645,7 +645,18 @@ if keyboard_check_pressed(global.keyCONFIRM)
                     //set unit's worth
                     obj_map.units[global.posX,global.posY].cost = worth[1]
                     unit_has_deployed = true;
-                    }
+                    
+                    //network deploy unit
+                
+                    if global.net_mode = 2{
+                        global.last_network_event = "deploy sent";
+                        //us script to generate ds_map
+                        var u = 1;//unit index
+                        var cmap = scr_deploy_map_create(u,price[u]);
+                        scr_send(cmap,"host");
+                        }
+
+                    }   
                     break;
             
             case 1: //Heavy Infantry (mechanized Infnatry)
@@ -829,8 +840,12 @@ if keyboard_check_pressed(global.keyCONFIRM)
 
                 
                 //Close deploy Window
-                instance_activate_object(obj_battleCursor);
-                instance_activate_object(obj_miniwin);
+                if (global.net_mode = 0){ // only restart curosr and mini win if local play
+                    // to be reactive via net script when all clients synced
+                    instance_activate_object(obj_battleCursor);
+                    instance_activate_object(obj_miniwin);
+                    }
+                
                 instance_activate_object(obj_topwin);
                 instance_destroy();
                 }

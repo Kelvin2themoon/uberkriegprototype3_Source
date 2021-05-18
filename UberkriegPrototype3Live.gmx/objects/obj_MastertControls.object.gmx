@@ -164,7 +164,7 @@ global.window_size = 1;
             <kind>1</kind>
             <string>///Unit Cost Array using unit index
 
-global.cost[00] =     0 ; //unit Parent
+global.cost[00] =     0 ; // Parent
 global.cost[01] =  1000 ; // Light Infantry
 global.cost[02] =  3000 ; // Heavy infantry
 global.cost[03] =  3000 ; // Long Gun
@@ -173,11 +173,11 @@ global.cost[05] =  4000 ; // Recon
 global.cost[06] =  5000 ; // APC
 global.cost[07] =  7000 ; // Light Tank 
 global.cost[08] =  7000 ; // Artillery
-global.cost[09] =  6000 ; //AA / IFV
-global.cost[10] =  8000 ; //Covert Op
-global.cost[11] = 15000 ; //Heavy Tank
-global.cost[12] = 12000 ; //Rocket
-global.cost[13] = 32000 ; //Land Cuiser
+global.cost[09] =  6000 ; // AA / IFV
+global.cost[10] =  8000 ; // Covert Op
+global.cost[11] = 15000 ; // Heavy Tank
+global.cost[12] = 12000 ; // Rocket
+global.cost[13] = 32000 ; // Land Cuiser
 
 </string>
           </argument>

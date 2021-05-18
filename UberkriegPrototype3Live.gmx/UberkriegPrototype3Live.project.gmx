@@ -577,6 +577,7 @@
     <scripts name="Net Scripts">
       <scripts name="shortcuts">
         <script>scripts\scr_send.gml</script>
+        <script>scripts\scr_relay.gml</script>
         <script>scripts\scr_clear_player_ready.gml</script>
         <script>scripts\scr_all_players_ready.gml</script>
       </scripts>
@@ -590,6 +591,10 @@
         <script>scripts\net_c_endturn.gml</script>
         <script>scripts\net_h_endturn.gml</script>
         <script>scripts\net_confirm_turn_end.gml</script>
+      </scripts>
+      <scripts name="Unit depoly">
+        <script>scripts\scr_deploy_map_create.gml</script>
+        <script>scripts\cnet_deploy.gml</script>
       </scripts>
     </scripts>
   </scripts>
