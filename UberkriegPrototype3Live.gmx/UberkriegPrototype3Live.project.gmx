@@ -477,11 +477,15 @@
     <path>paths\path0</path>
   </paths>
   <scripts name="scripts">
-    <script>scripts\scr_animate_object.gml</script>
-    <script>scripts\scr_inBound.gml</script>
-    <script>scripts\scr_setTerrain.gml</script>
-    <script>scripts\scr_cursorKey_juice.gml</script>
-    <script>scripts\scr_setUnit.gml</script>
+    <scripts name="Setters">
+      <script>scripts\scr_setUnit.gml</script>
+      <script>scripts\scr_setTerrain.gml</script>
+    </scripts>
+    <scripts name="Maths">
+      <script>scripts\scr_calc_battleStrength.gml</script>
+      <script>scripts\scr_inBound.gml</script>
+      <script>scripts\scr_calc_revenue.gml</script>
+    </scripts>
     <scripts name="MapEditor">
       <scripts name="TerainGraphicHandlers">
         <script>scripts\scr_switchTerrainGraphics.gml</script>
@@ -508,6 +512,7 @@
     <scripts name="UnitHandlers">
       <script>scripts\scr_unit_destroy.gml</script>
       <script>scripts\scr_unit_change_sprite.gml</script>
+      <script>scripts\scr_setUnitDepth.gml</script>
     </scripts>
     <scripts name="FileHandlers">
       <script>scripts\scr_quick_load.gml</script>
@@ -548,8 +553,6 @@
       </scripts>
       <script>scripts\scr_attack_rance_check.gml</script>
     </scripts>
-    <script>scripts\scr_calc_revenue.gml</script>
-    <script>scripts\scr_setUnitDepth.gml</script>
     <scripts name="Unit Commands">
       <script>scripts\scr_execute_command.gml</script>
       <script>scripts\scr_exe_wait.gml</script>
@@ -567,12 +570,16 @@
       <script>scripts\scr_exe_disrupt.gml</script>
       <script>scripts\scr_checkInfiltrateTargets.gml</script>
       <script>scripts\scr_exe_infiltrate.gml</script>
+      <script>scripts\scr_exe_test.gml</script>
     </scripts>
-    <script>scripts\scr_calc_battleStrength.gml</script>
-    <scripts name="Drawing">
-      <script>scripts\scr_draw_num.gml</script>
-      <script>scripts\scr_draw_stars.gml</script>
-      <script>scripts\scr_draw_radioAssist.gml</script>
+    <scripts name="Audio &amp; Visuals">
+      <script>scripts\scr_cursorKey_juice.gml</script>
+      <script>scripts\scr_animate_object.gml</script>
+      <scripts name="Drawing">
+        <script>scripts\scr_draw_num.gml</script>
+        <script>scripts\scr_draw_stars.gml</script>
+        <script>scripts\scr_draw_radioAssist.gml</script>
+      </scripts>
     </scripts>
     <scripts name="Net Scripts">
       <scripts name="shortcuts">
@@ -588,14 +595,16 @@
         <script>scripts\net_start_turn.gml</script>
         <script>scripts\net_c_turn_ready.gml</script>
         <script>scripts\net_start_controls.gml</script>
-        <script>scripts\net_c_endturn.gml</script>
         <script>scripts\net_h_endturn.gml</script>
+        <script>scripts\net_c_endturn.gml</script>
         <script>scripts\net_confirm_turn_end.gml</script>
       </scripts>
       <scripts name="Unit depoly">
         <script>scripts\scr_deploy_map_create.gml</script>
+        <script>scripts\scr_add_deploy_to_map.gml</script>
         <script>scripts\cnet_deploy.gml</script>
       </scripts>
+      <script>scripts\net_ucom.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">

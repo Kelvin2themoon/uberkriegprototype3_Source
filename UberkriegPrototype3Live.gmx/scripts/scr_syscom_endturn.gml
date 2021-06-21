@@ -16,10 +16,10 @@ scr_quick_save("quicksave.ubq");
 //send instructions to server if is active client player
 if (global.net_mode = 2){
     if ( global.P_Turn.number = global.Local_Player){
-        var c_endturn = ds_map_create();
-        ds_map_add(c_endturn,"scr","net_c_endturn");
-        ds_map_add(c_endturn,"p_num",global.Local_Player);
-        scr_send(c_endturn,"host");
+        ds_map_clear(global.map_out);
+        ds_map_add(global.map_out,"scr","net_c_endturn");
+        ds_map_add(global.map_out,"p_num",global.Local_Player);
+        scr_send(global.map_out,"host");
         }
     }
 

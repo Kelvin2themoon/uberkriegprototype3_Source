@@ -8,10 +8,14 @@
                    
                      // reactivate main phaze UI
                     instance_activate_object(obj_miniwin);
-                    instance_activate_object(obj_battleCursor);
-                    with obj_battleCursor{
-                        x = global.posX*24;
-                        y = global.posY*24;
+                    
+                    
+                    if(global.net_mode=0){
+                        instance_activate_object(obj_battleCursor);
+                        with obj_battleCursor{
+                            x = global.posX*24;
+                            y = global.posY*24;
+                            }
                         }
                     
                     global.acting_unit.state =  "exhaust";
@@ -25,3 +29,12 @@
                     
                     //clear active unit
                     global.acting_unit = 0;
+                    
+                    //if host restart client controls
+                    if global.net_mode = 1 {
+                        ds_map_clear(global.map_out);
+                        ds_map_add(global.map_out,"scr","net_start_controls");
+                        scr_send(global.map_out,"acting");
+                        }
+                    
+                    

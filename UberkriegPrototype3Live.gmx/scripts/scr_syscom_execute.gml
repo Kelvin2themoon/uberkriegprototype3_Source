@@ -1,9 +1,9 @@
 // this script is activated when a menu item is selected from syscom menu, 
 //actual execution of unit action after move: see unit Command -> scr_execute_command
 show_debug_message("Script: syscom select");
-
 command = argument0; //string
-
+global.last_network_event = "call scr_syscom_execute";
+show_debug_message("called scr_syscom_execute");
 switch (command){
 
     case "disrupt" :
@@ -80,21 +80,22 @@ switch (command){
         break;
         
     case "wait":
+        global.last_network_event = "switch to 'wait' order";
         global.action_order = "wait";
+        
         //check for drop phaze 2
         if (global.drop_phaze_2){
             scr_exe_wait();
             instance_destroy();
             break;
             }
-            
-
-            
-        else{
+        //not drop phaze 2, execute as normal
+        else {
             instance_create(0,0,obj_execute_unit_orders);
             instance_destroy();
             break;
             }
+
             
     case "infiltrate" : //infiltrate
         global.action_order = "infiltrate";
@@ -126,6 +127,11 @@ switch (command){
         scr_syscom_SCOP();
         instance_destroy();
         break;
+    case "test" : //testing
+        instance_activate_object(obj_battleCursor);
+        instance_destroy();
+        break;
+        
     }
     
 

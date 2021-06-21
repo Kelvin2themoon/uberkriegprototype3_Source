@@ -1,5 +1,7 @@
 var scr_map_out = argument0; // ds_map to send out
 var scr_snd_to  = argument1; // "host" "all" "acting" "relay"
+//var destroy_map = argument2; // true/false - if map gets destoryed or not, false for u_com sends
+
 
 //convert map to JSON-string
 var j_out =  json_encode(scr_map_out);
@@ -47,4 +49,4 @@ switch( scr_snd_to ){
     
 //clean up
 buffer_delete( b_out );
-ds_map_destroy( scr_map_out );
+//ds_map_destroy( scr_map_out );

@@ -178,43 +178,6 @@ global.upkeep_q = ds_queue_create();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Create HUD objects: Cursor,miniwin, AI
-
-global.terrain_check = obj_map.terrains[1,1];
-global.unit_check = obj_map.units[1,1];
-
-//create &amp; deactivate Cursor
-instance_create(24,24,obj_battleCursor);
-instance_deactivate_object(obj_battleCursor);
-
-//create &amp; deactivate AI interface
-global.AI = instance_create(24,24,obj_AI_interface);
-//instance_deactivate_object(global.AI);
-
-//create &amp; deactivate miniwin
-instance_create(24,24,obj_miniwin);
-instance_deactivate_object(obj_miniwin);
-instance_create(24,24,obj_topwin);
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Create player Q &amp; turning : set P1-Day1 VARs (assign socket!!)
 
 //player Queue
@@ -502,6 +465,43 @@ scr_updateGlobalVision();
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Create HUD objects: Cursor,miniwin, AI
+
+global.terrain_check = obj_map.terrains[1,1];
+global.unit_check = obj_map.units[1,1];
+
+//create &amp; deactivate Cursor
+instance_create(24,24,obj_battleCursor);
+instance_deactivate_object(obj_battleCursor);
+
+//create &amp; deactivate AI interface
+global.AI = instance_create(24,24,obj_AI_interface);
+//instance_deactivate_object(global.AI);
+
+//create &amp; deactivate miniwin
+instance_create(24,24,obj_miniwin);
+instance_deactivate_object(obj_miniwin);
+instance_create(24,24,obj_topwin);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///check if unit HP is hidden
 
 with (obj_CO_0)
@@ -538,7 +538,7 @@ with (obj_CO_0)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Unit control variables
+            <string>///Unit control variables (network battle control variables)
 
 //clear after each order
 global.acting_unit  = 0;
@@ -550,7 +550,7 @@ global.targetables = ds_list_create();
 global.origin = -1;
 global.destination = -1;
  
-global.move_order   = ds_priority_create();
+global.move_order   = ds_priority_create(); // a list of obj_path_nodes
 global.acting_unit_moved = true;
 global.action_order = "wait" ;//default to wait
 
@@ -579,6 +579,36 @@ global.smoke        = false;
 // extra command variables
 global.engage_type  = 1; //default to primary
 global.drop_phaze_2 = false; //true if second drop action is taking place to bypass move in execute order event
+
+//netowrk game variables
+global.net_unit_orders = ds_map_create(); // to be converted to JSON and sent over 
+ds_map_add(global.net_unit_orders,"scr","net_ucom");
+
+global.net_move_order_x = ds_list_create(); // ds lists of xy path not positions derived from global.move_order (a priority list); 
+global.net_move_order_y = ds_list_create(); // willl be nested in and sent via net_unit_orders
+global.net_damage = 0;
+//mark lists to map so they can be stored together as a JSON later. otherwise only a reference will be stored
+ds_map_add_list(global.net_unit_orders,"movex",global.net_move_order_x);
+ds_map_add_list(global.net_unit_orders,"movey",global.net_move_order_y);
+
+//copy of move priority que for client mode. used to convert into ds_list couple^
+global.net_move_order_copy = ds_priority_create(); 
+
+/* variables required
+    - acting_unit (x,y)
+    - target unit (x,y) - my need to read different for dropping (A or B?) -4 for noone?
+    - origin (x,y) - terrain tile - 'orx' &amp; 'ory'
+    - destination (x,y) - terrain tile - 'desx' &amp; 'desy'
+    - unit action - see actionable commands 
+    - damage - needs to be pre caldulated.
+    
+
+
+
+
+
+
+
 
 </string>
           </argument>
@@ -814,6 +844,35 @@ damage_chart_on = false;
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Camera controls variable initiate
+
+//view control speed - should be divisable by 24
+view_speed = 8;
+//view boarder to cursor
+view_border = 2*24;
+
+//pointer sprite index
+d_pointerSprite_index = global.P_Turn.number - 1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///tell host client is ready
 
 if (global.net_mode = 2){
@@ -1026,6 +1085,33 @@ if keyboard_check_released(ord("A")) damage_chart_on = false;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// check for boarders and move 
+
+
+if ( view_xview[0] &gt; global.posX*24 - view_border and global.canScroll_x) view_xview[0] -= view_speed;
+if ( view_xview[0] + view_wport[0] &lt; global.posX*24 + view_border + 24 and global.canScroll_x) view_xview[0] += view_speed;
+if ( view_yview[0] &gt; global.posY*24 - view_border and global.canScroll_y) view_yview[0] -= view_speed;
+if ( view_yview[0] + view_hport[0] &lt; global.posY*24 + view_border+24 and global.canScroll_y) view_yview[0] += view_speed;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -1114,6 +1200,30 @@ if (global.Phaze = "Main"){
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// debug: pos xy
+
+draw_text(400,400, "Pso: " + string(global.posX) + ", " + string(global.posY) );
+draw_text(400,412,"move order size :" + string( ds_priority_size(global.move_order)));
 </string>
           </argument>
         </arguments>

@@ -55,6 +55,7 @@ depth = PATH - global.rangeCheck[x div 24, y div 24].pathority;
             <kind>1</kind>
             <string>///Draw order
 if sprite_index != -1 draw_self();
+draw_text(x,y,"P");
 
 </string>
           </argument>

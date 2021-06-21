@@ -12,7 +12,7 @@ global.posY = posy;
 
 
 global.P_Turn.funds -= price;
-scr_setUnit(obj_unit_LightInfantry,posx,posy,owner);
+scr_setUnit(global.unit_type[unit_index],posx,posy,owner);
 global.last_network_event = "unit deployed";
 
 var unit = obj_map.units[posx,posy];
@@ -41,8 +41,12 @@ scr_globalRadioCheck();
 scr_update_radioBoarder();
 scr_rangeCheck_reset();
 
+global.posX = posx;
+global.posY = posy;
+
+
 //relay to non active clients
-if global.net_mode = 1 scr_relay();
+if global.net_mode = 1 scr_relay (global.net_data_map);
 //turn sync replay to host
 else if (global.net_mode = 2){
     var map_ready = ds_map_create();

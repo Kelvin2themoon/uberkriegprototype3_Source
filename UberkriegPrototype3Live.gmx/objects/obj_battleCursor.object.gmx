@@ -41,10 +41,12 @@ if global.mapH &lt;=18 global.canScroll_y = false;
 
 //set alarm to Cursor move speed
 alarm[1] = 0;
+
+//***Moved Comera controls to battle controller***//
 //view control speed - should be divisable by 24
-view_speed = 8;
+//view_speed = 8;
 //view boarder to cursor
-view_border = 2*24;
+//view_border = 2*24;
 
 cursor_icon = 0;
 
@@ -135,6 +137,14 @@ moUnitRadioAssist_on = false;
 moUnitRadioAssist_range = 0;
 //mouse control typs drag/click
 global.mousetype2 = true;
+
+//pointer sprite index
+d_pointerSprite_index = global.P_Turn.number - 1;
+
+//mouse version
+m_radioAssist_on = false;
+m_radioAssist_sprite = -1;
+m_radioAssist_range = 0;
 
 
 
@@ -381,6 +391,7 @@ if (alarm[1] = -1 )
             <kind>1</kind>
             <string>/// view control
 
+/* *** moved to battle controller basic
 
 // check for boarders and move 
 

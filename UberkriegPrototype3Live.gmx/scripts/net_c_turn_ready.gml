@@ -5,11 +5,11 @@ global.last_network_event = "player ready" + string( n );
 //player ready
 global.P_ready[n] = true;
 
-//whe all players ready, notify acting player client to initiate cursor controls
+//when all players ready, notify acting player client to initiate cursor controls
 if scr_all_players_ready(){
-    var start_controls = ds_map_create();
-    ds_map_add(start_controls,"scr","net_start_controls");
-    scr_send(start_controls,"acting");
+    ds_map_clear(global.map_out);
+    ds_map_add(global.map_out,"scr","net_start_controls");
+    scr_send(global.map_out,"acting");
     scr_clear_player_ready();
     }
 

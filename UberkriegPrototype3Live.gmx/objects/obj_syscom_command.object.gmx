@@ -36,6 +36,7 @@ if global.capture      ds_list_add(menu_content,"capture");
 
 //special case for engage
 if ( global.engage and!global.acting_unit.isMovAgn) ds_list_add(menu_content,"engage");
+
 if global.join         ds_list_add(menu_content,"join");
 if global.attach       ds_list_add(menu_content,"attach");
 if global.supply       ds_list_add(menu_content,"supply");
@@ -291,6 +292,10 @@ if global.acting_unit != 0{
           <argument>
             <kind>1</kind>
             <string>///troubleshoot
+
+draw_text(12,72,"select: " + ds_list_find_value(menu_content,row));
+
+
 //draw_text(0,240, "by mouse: " + string( by_mouse));
 /*
 

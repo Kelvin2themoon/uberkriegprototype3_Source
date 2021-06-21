@@ -197,18 +197,18 @@ if global.net_mode = 1{ //server side
                 
                 //ping back and assign client with player number
                 //create ds_map with instructions and arguments ( rememebr keys need to be strings!!! )
-                var net_map = ds_map_create();
-                ds_map_add(net_map, "scr" , "net_assign_player");
-                ds_map_add(net_map , "p_num" , check_socket);  
+                ds_map_clear(global.map_out);
+                ds_map_add(global.map_out, "scr" , "net_assign_player");
+                ds_map_add(global.map_out , "p_num" , check_socket);  
                 //convert to JSON string
-                var net_json = json_encode(net_map);
+                global.json_out = json_encode(global.json_out);
                 //store in buffer
-                var b_out = buffer_create( string_byte_length(net_json)+1 , buffer_fixed ,  1 );
-                buffer_write( b_out , buffer_string , net_json );
+                var b_out = buffer_create( string_byte_length(global.json_out)+1 , buffer_fixed ,  1 );
+                buffer_write( b_out , buffer_string , global.json_out );
                 //send to conected client
                 network_send_packet( global.sSocket[check_socket] , b_out , buffer_get_size(b_out) );
                 //destroy all relavent ds and buffers
-                ds_map_destroy(net_map);
+               // ds_map_destroy(global.map_out);
                 buffer_delete(b_out);
                 //update readout
                 global.last_network_event = "slot assignment for P" + string(check_socket) +  " sent";     
@@ -222,10 +222,10 @@ if global.net_mode = 1{ //server side
         if last_player &lt; check_socket {
             global.last_network_event = "all player slots filled" ;
             //instruct clients to start gmae
-            net_map = ds_map_create();
-            ds_map_add( net_map, "scr" , "net_start_game" );
+            ds_map_clear(global.map_out);
+            ds_map_add(global.map_out, "scr" , "net_start_game" );
             //send as json string
-            scr_send( net_map , "all" ); 
+            scr_send( global.map_out , "all" ); 
             
             /*
             //convert to JSON string

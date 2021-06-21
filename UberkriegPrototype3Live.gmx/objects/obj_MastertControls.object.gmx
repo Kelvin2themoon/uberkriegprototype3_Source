@@ -494,10 +494,27 @@ global.network_mode = 0;
 global.server_ip = "127.0.0.1";
 
 //check player readiness for next event
+global.Host_ready = false;
 global.P_ready[1] = false;
 global.P_ready[2] = false;
 global.P_ready[3] = false;
 global.P_ready[4] = false;
+
+//data map for netowrk data transfer, so i don'[t have to constantly make up names for local variables 
+//for unit commands -&gt; basicBattleController -&gt; unit control variables
+//note - global.net_data_map is initiated in the network event and is used to process incomming data
+global.map_out = ds_map_create();
+global.json_out = "";
+global.relay_string = "";
+
+//command que - 1st in / 1st out list of JSON strings recieved from active player
+//curretn plan is to have every one sync on turn change
+//this is to prevent huge lags between player input, waiting for other games to sync but end turn is ok caus eits a whole thing.
+global.net_com = ds_queue_create();
+//flag for if system is ready for next network input from que
+global.ready_next = true;
+
+
 
 </string>
           </argument>
@@ -592,6 +609,42 @@ switch  (global.cursorFrame)
             global.cursorFrame = 1;
             break;        
     }
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Process network inputs from Queue
+if ( global.net_mode != 0 and ds_queue_size(global.net_com) &gt; 0 and global.ready_next = true){
+    var data_string = ds_queue_dequeue(global.net_com);
+    global.relay_string = data_string;
+    global.net_data_map  = json_decode(data_string);
+    //read and display script instructions
+    global.last_network_event = ds_map_find_value( global.net_data_map , "scr" );
+    // run script from map
+    script_execute( asset_get_index( ds_map_find_value(global.net_data_map , "scr") ) );
+    }
+    
+    
+
 
 </string>
           </argument>
@@ -722,6 +775,10 @@ if ds_map_find_value( async_load , "type" ) = network_type_data {
     var data_in = buffer_read( b_in , buffer_string );
     //read string
     global.last_network_event = data_in;
+    //add sting to queue
+    ds_queue_enqueue(global.net_com,data_in);
+    //scr_relay();
+    /* ******************************Commed out, JSON string will be saved to a que and deconded as we go
     //convert string to ds map
     global.net_data_map = json_decode( data_in );
     //read and display script instructions
@@ -730,7 +787,7 @@ if ds_map_find_value( async_load , "type" ) = network_type_data {
     script_execute( asset_get_index( ds_map_find_value(global.net_data_map , "scr") ) );
     ds_map_destroy( global.net_data_map );
     
-    /*
+    
     //convert to ds map
     var net_map = json_decode( buff_read );
     //read "scr" key and execute as script

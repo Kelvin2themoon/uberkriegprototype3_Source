@@ -5,7 +5,6 @@ global.last_network_event = "player ready to start" + string( n );
 //pleayer ready
 global.player_name[n] = "P" + string(n)+" Ready";
 global.P_ready[n] = true; 
-
 if scr_all_players_ready() room_goto(rm_game_Basic);
 
 /*

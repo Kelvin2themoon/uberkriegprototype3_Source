@@ -10,15 +10,16 @@ global.last_network_event ="P"+ string(n) +  " initiated end turn";
 
 //reset okayer ready
 scr_clear_player_ready();
+global.Host_ready = true;
 //set acting player to ready
 global.P_ready[n] = true;
 
 
 //relay orders to other players - wait for confirm befor starting next turn
 if (n = global.P_Turn.number){
-    var h_endturn = ds_map_create();
-    ds_map_add(h_endturn,"scr","net_h_endturn");
-    scr_send(h_endturn,"relay");
+    ds_map_clear(global.map_out);
+    ds_map_add(global.map_out,"scr","net_h_endturn");
+    scr_send(global.map_out,"relay");
     }
 //replay as non acting player, tall host to initiate end turn
 

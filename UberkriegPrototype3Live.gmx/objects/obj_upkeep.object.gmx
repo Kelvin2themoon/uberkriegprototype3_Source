@@ -291,10 +291,10 @@ if ( conclude_upkeep ) {
             
         //server action
         else if (global.net_mode =1 and global.Local_Player = 0 ){
-                var map_start_turn = ds_map_create();
+                ds_map_clear(global.map_out);
                 scr_rangeCheck_reset();
-                ds_map_add(map_start_turn,"scr","net_start_turn");
-                scr_send(map_start_turn,"all");                                        
+                ds_map_add(global.map_out,"scr","net_start_turn");
+                scr_send(global.map_out,"all");                                        
                 }
             
         else if ( global.net_mode = 2 ) { //net mode is client      
@@ -303,10 +303,10 @@ if ( conclude_upkeep ) {
             //clear range checks
             scr_rangeCheck_reset();
             //client turn ready - tell host clients ready and to initiate controls once all clients are ready
-            net_turn_ready = ds_map_create();
-            ds_map_add( net_turn_ready , "scr" , "net_c_turn_ready" );
-            ds_map_add( net_turn_ready , "p_num" , global.Local_Player );
-            scr_send( net_turn_ready , "host" )
+            ds_map_clear(global.map_out);
+            ds_map_add( global.map_out , "scr" , "net_c_turn_ready" );
+            ds_map_add( global.map_out , "p_num" , global.Local_Player );
+            scr_send( global.map_out , "host" )
             //destroy self
             instance_destroy();
             }
