@@ -3,6 +3,8 @@ global.ready_next = false;
 
 //acting unit
 global.acting_unit = obj_map.units[ds_map_find_value(global.net_data_map,"act_ux"),ds_map_find_value(global.net_data_map,"act_uy")];
+//remove target unit from map arry
+obj_map.units[ds_map_find_value(global.net_data_map,"act_ux"),ds_map_find_value(global.net_data_map,"act_uy")] = 0;
 //target unit if exsist
 if (ds_map_find_value(global.net_data_map,"tar_ux") != noone){
     global.target_unit = obj_map.units[ds_map_find_value(global.net_data_map,"tar_ux"),ds_map_find_value(global.net_data_map,"tar_uy")];
@@ -11,6 +13,30 @@ if (ds_map_find_value(global.net_data_map,"tar_ux") != noone){
     //remove unit from unit grid
     obj_map.units[global.acting_unit.x div 24,global.acting_unit.y div 24] = 0;
     }
+
+///update radio boarder without acting unit****************************
+scr_rangeCheck_reset();
+with obj_unit {
+    wasStanding = isStanding;
+    isStanding = false;
+    }
+///check if any unit has been lost radio contact
+scr_rangeCheck_reset();
+with (obj_unit) wasStanding = isStanding;
+scr_updateStanding_global();
+//update radio boarder
+scr_globalRadioCheck();
+scr_update_radioBoarder();
+scr_rangeCheck_reset();
+scr_updateLocalMove(global.acting_unit);
+
+global.acting_unit.isStanding= true;
+
+with (obj_unit){
+    if (wasStanding and !isStanding and id != global.acting_unit.id) instance_create(x,y, obj_event_lost);
+    } 
+     
+
 //unit action
 global.action_order = ds_map_find_value(global.net_data_map,"com");
 //convert move path from list to priority queue
@@ -30,6 +56,11 @@ for( i=0 ; i<ds_list_size(list_mx) ; i++){
     tnode = instance_create(tx,ty,obj_path_node);
     ds_priority_add(global.move_order,tnode,i);
     }
+
+//check if unit has moved: for indirect fire and capture checks
+if (ds_priority_size(global.move_order) <2) global.acting_unit_moved = false;
+else global.acting_unit_moved = true;
+
 //reframe camera
 var first_pos = ds_priority_find_min(global.move_order);
 var last_pos  = ds_priority_find_max(global.move_order);
@@ -59,10 +90,6 @@ else if (global.net_mode = 2){
     }
 */
     
-
-
-
-
 
 
 

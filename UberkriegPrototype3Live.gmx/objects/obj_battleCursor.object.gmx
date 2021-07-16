@@ -1433,7 +1433,12 @@ with(global.P_Turn.CO)
           <argument>
             <kind>1</kind>
             <string>///Debug
-//if (obj_map.units[global.posX, global.posY] !=0 )
+
+
+
+if (obj_map.units[global.posX, global.posY] !=0 ){
+    draw_text(x,y,string(obj_map.units[global.posX,global.posY].depth));
+    }
 //draw_text(12,12,string(obj_map.units[global.posX,global.posY].COP));
 
 //draw_text(12,12,"Krieg Metre Charge: "+ string(global.P_Turn.CO.charge) + "/" + string(star_value));

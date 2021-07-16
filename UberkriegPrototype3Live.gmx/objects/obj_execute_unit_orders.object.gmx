@@ -113,11 +113,10 @@ moveward = "north";
             moveward = "south";
             break;
         }
-global.last_network_event = "OOO";
-        
 global.acting_unit.state = moveward;
+global.acting_unit.depth = ACTIVE_UNIT;
 
-global.last_network_event = "PPP";
+
 </string>
           </argument>
         </arguments>
@@ -144,6 +143,10 @@ global.last_network_event = "PPP";
 
 //reached destination
 if (global.acting_unit.x = destination.x and global.acting_unit.y = destination.y and ds_priority_size(global.move_order) = 0  ){
+    //Trigger Camera
+    global.posX = destination.x div 24;
+    global.posY = destination.y div 24;
+    
     //finish move and execute action order 
     scr_execute_command();
     
@@ -152,14 +155,7 @@ if (global.acting_unit.x = destination.x and global.acting_unit.y = destination.
         isDisruptTarget = false;
         isSupplyTarget  = false;
         }
-     //send global.net_unit_orders as acting client player
-     if(global.net_mode = 2 and global.P_Turn.number = global.Local_Player){
-        //store cursor position
-        global.P_Turn.save_cursor_pos_x = destination.x;
-        global.P_Turn.save_cursor_pos_y = destination.y;
-        //relay orders through host
-        scr_send(global.net_unit_orders,"host");
-        }
+
      with(obj_path_node) instance_destroy();
     //destroy redundent move cursors, if the exsist?
     with (obj_moveCursor){ instance_destroy();}
@@ -185,7 +181,7 @@ if( global.acting_unit.x = move_to.x and global.acting_unit.y = move_to.y){
     global.acting_unit.fuel -= scr_check_move_cost(global.acting_unit, obj_map.terrains[move_to.x div 24, move_to.y div 24]);
     //set new co-ordinates
     move_from = move_to;
-    if (ds_priority_size(global.move_order) &gt; 0){ //**************************************************Problem, unidendifyable data artucture!!?!?!
+    if (ds_priority_size(global.move_order) &gt; 0){
         move_to = ds_priority_delete_min(global.move_order);
         //Trigger Camera
         global.posX = move_to.x div 24;
@@ -228,14 +224,19 @@ if( global.acting_unit.x = move_to.x and global.acting_unit.y = move_to.y){
     if ( obj_map.units[ move_to.x div 24, move_to.y div 24] != 0){
         show_debug_message("pass unit occupes this space");
         
+        
         if(obj_map.units[ move_to.x div 24, move_to.y div 24].team != global.P_Turn.team){
             show_debug_message("this is an enemy unit");
+            
         
             //deactivate drop targets if action is drop A or B
             if (global.action_order = "drop_A" or global.action_order = "drop_B"){
                 instance_deactivate_object(global.target_unit);
-                global.target_unit = 0; 
+                global.target_unit = 0;
+                 
                 }
+            //send ucom
+            scr_send_ucom();
             
             //set unit to map arry
             obj_map.units[move_from.x div 24,move_from.y div 24] = global.acting_unit;
@@ -249,6 +250,7 @@ if( global.acting_unit.x = move_to.x and global.acting_unit.y = move_to.y){
             //reset capturing
             global.acting_unit.capturing = 0;
             
+          
             //update Radio Boarder
             scr_globalRadioCheck();
             scr_update_radioBoarder();
@@ -260,6 +262,8 @@ if( global.acting_unit.x = move_to.x and global.acting_unit.y = move_to.y){
             with(obj_path_node) instance_destroy();
             //destroy redundent move cursors, if the exsist?
             with (obj_moveCursor) instance_destroy();
+            
+           
 
             //destroy this event
             instance_destroy();
@@ -302,6 +306,8 @@ if( global.acting_unit.x = move_to.x and global.acting_unit.y = move_to.y){
           <argument>
             <kind>1</kind>
             <string>///debug
+
+draw_text(12,120,string(global.acting_unit.depth));
 
 
 </string>

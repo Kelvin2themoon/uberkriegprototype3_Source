@@ -65,7 +65,7 @@ global.acting_unit.state = "active";
 //change unit depth
 global.acting_unit.depth = ACTIVE_UNIT;
 //origin
-global.origin =obj_map.terrains[moveOriginX,moveOriginY];
+global.origin = obj_map.terrains[moveOriginX,moveOriginY];
 //initiate tartget and destination
 global.target_unit = noone;
 
@@ -558,12 +558,10 @@ if (alarm[1] = -1 )
 mouse_pos_x = mouse_x div 24;
 mouse_pos_y = mouse_y div 24;
 
-if (scr_inBound(mouse_pos_x,mouse_pos_y))
-    {
+if (scr_inBound(mouse_pos_x,mouse_pos_y)){
         //check if position has changed
-        if ( mouse_pos_x != last_pos_x  or mouse_pos_y != last_pos_y)
-            {
-            
+        if ( mouse_pos_x != last_pos_x  or mouse_pos_y != last_pos_y){
+
                 //update new co-ordinates
                 global.posX = mouse_pos_x;
                 global.posY = mouse_pos_y;
@@ -575,19 +573,11 @@ if (scr_inBound(mouse_pos_x,mouse_pos_y))
                 scr_cursorKey_juice(1,global.cursorKey_sfx);
                 
                //if new positioni is adjacent and move points are sufficient
-               if   ( 
-                    abs(mouse_pos_x - last_pos_x) + abs(mouse_pos_y - last_pos_y) = 1
-                    and
-                    path_total + scr_check_move_cost(global.acting_unit,obj_map.terrains[mouse_pos_x,mouse_pos_y]) &lt;= global.acting_unit.move_points
-                    and  
-                    path_total + scr_check_move_cost(global.acting_unit,obj_map.terrains[mouse_pos_x,mouse_pos_y]) &lt;= global.acting_unit.fuel
-                    and
-                    !move_out
-                    and
-                    global.rangeCheck[mouse_pos_x,mouse_pos_y].move_cost != -1
-                    
-                    )
-                        {
+               if   (   abs(mouse_pos_x - last_pos_x) + abs(mouse_pos_y - last_pos_y) = 1
+                        and path_total + scr_check_move_cost(global.acting_unit,obj_map.terrains[mouse_pos_x,mouse_pos_y]) &lt;= global.acting_unit.move_points
+                        and path_total + scr_check_move_cost(global.acting_unit,obj_map.terrains[mouse_pos_x,mouse_pos_y]) &lt;= global.acting_unit.fuel
+                        and !move_out
+                        and global.rangeCheck[mouse_pos_x,mouse_pos_y].move_cost != -1){
                         
                             //increase path cost
                             path_total += scr_check_move_cost(global.acting_unit,obj_map.terrains[mouse_pos_x,mouse_pos_y]);
@@ -600,48 +590,30 @@ if (scr_inBound(mouse_pos_x,mouse_pos_y))
                             //update last positions
                             last_pos_x = mouse_pos_x;
                             last_pos_y = mouse_pos_y;
-                            
-                        
-                        
-                        }
+                            }
                         
                 // position is not adjacent but within valid move range
-                else if ( global.rangeCheck[mouse_pos_x,mouse_pos_y].move_cost != -1)
-                    {
-                    
-                        //switch back in
-                        move_out = false
-                        //auto-detect path
-                        scr_find_path( global.rangeCheck[mouse_pos_x,mouse_pos_y]);
-                        
-                        //update last positions
-                        last_pos_x = mouse_pos_x;
-                        last_pos_y = mouse_pos_y;
-                    
-                    
+                else if ( global.rangeCheck[mouse_pos_x,mouse_pos_y].move_cost != -1){ 
+                    //switch back in
+                    move_out = false
+                    //auto-detect path
+                    scr_find_path( global.rangeCheck[mouse_pos_x,mouse_pos_y]);
+                    //update last positions
+                    last_pos_x = mouse_pos_x;
+                    last_pos_y = mouse_pos_y;
                     }
                     
-                else if ( global.rangeCheck[mouse_pos_x,mouse_pos_y].move_cost = -1)
-                    {
-                        
-                        //reset paths
-                        with(obj_path_node) instance_destroy();
-                        //switch on out of bounds
-                        move_out = true;
-                        
-                        //update last positions
-                        last_pos_x = mouse_pos_x;
-                        last_pos_y = mouse_pos_y;
-                        
-                            
-                    
+                //out of move range
+                else if ( global.rangeCheck[mouse_pos_x,mouse_pos_y].move_cost = -1){
+                    //reset paths
+                    with(obj_path_node) instance_destroy();
+                    //switch on out of bounds
+                    move_out = true;
+                    //update last positions
+                    last_pos_x = mouse_pos_x;
+                    last_pos_y = mouse_pos_y;
                     }
-                
-                
-            
-            
             }
-
     }
 </string>
           </argument>
@@ -882,15 +854,13 @@ if( (mouse_check_button_pressed(mb_left) and !global.mousetype2) or (mouse_check
     else
         {
 //******check:  a unit occupies the destination
-        if (global.target_unit != 0) 
-            {
+        if (global.target_unit != 0) {
             // destination is occupied
             isEmpty = false; 
             global.wait = false; 
             
             // target is ally ( therefor is also visible ) valid ations: join, attach, load
-            if ( global.target_unit.team = global.P_Turn.team ) 
-                {
+            if ( global.target_unit.team = global.P_Turn.team ) {
                 // Join: check target unit is of the same type and hp is less than 10
                 if ( global.acting_unit.name = global.target_unit.name  and global.target_unit.hp &lt; 10 and !global.acting_unit.dummy and !global.target_unit.dummy) global.join = true;
                 //turn join off one either unit is can Load and has units loaded
@@ -1061,6 +1031,47 @@ if( (mouse_check_button_pressed(mb_left) and !global.mousetype2) or (mouse_check
         //create command menu    
         instance_create(x+24,y,obj_syscom_command);
         with( obj_syscom_command ) by_mouse = true; 
+        }
+    //no item exsist, reset
+    else {
+        global.wait = false;
+        //exit move action (delet self and reactivate relevent elements)
+        //clear move datea
+        scr_rangeCheck_reset();
+        //clear move order array
+        ds_priority_clear(global.move_order);
+        //destroy path nodes
+        with(obj_path_node) instance_destroy();
+       
+        //place active unit back in array
+        obj_map.units[global.acting_unit.x div 24,global.acting_unit.y div 24] = global.acting_unit
+        global.acting_unit.state = "idle";
+        scr_setUnitDepth(global.acting_unit);
+        
+         
+    
+        //reset path Q
+        ds_priority_clear(global.move_order);
+        
+        //place acting unit back into array
+     
+        //reset global vunit command variables to default
+        global.acting_unit  = 0;    //empty
+        global.target_unit  = 0;    //empty
+        global.action_order = "wait"; //default to wait
+        
+        //reactivate main phaze YI
+        instance_activate_object(obj_battleCursor);
+        instance_activate_object(obj_miniwin);
+        //destroy move cursor
+        with (obj_moveCursorMouse){instance_destroy();}
+        
+        //reset standing
+        scr_updateStanding_global();
+        //update Radio Boarder
+        scr_globalRadioCheck();
+        scr_update_radioBoarder();
+        scr_rangeCheck_reset();
         }
     }
         

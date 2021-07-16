@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-80000</depth>
+  <depth>-90000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -1133,8 +1133,9 @@ if ( view_yview[0] + view_hport[0] &lt; global.posY*24 + view_border+24 and glob
             <string>/// Debug
 draw_text( 12 , 12 +12   , "Current Player: " + string(global.P_Turn.number) );
 draw_text( 12 , 12 +12*2 , "Net: " + string(global.last_network_event) );
+draw_text( 12 , 12 +12*3 , "phaze: " + string(global.Phaze) );
 
-
+/*
 
 //draw_text(12,12,"MOVE CURSOR COUNT: " + string(temp_move_count));
 
@@ -1222,8 +1223,8 @@ if (global.Phaze = "Main"){
             <kind>1</kind>
             <string>/// debug: pos xy
 
-draw_text(400,400, "Pso: " + string(global.posX) + ", " + string(global.posY) );
-draw_text(400,412,"move order size :" + string( ds_priority_size(global.move_order)));
+//draw_text(400,400, "Pso: " + string(global.posX) + ", " + string(global.posY) );
+//draw_text(400,412,"move order size :" + string( ds_priority_size(global.move_order)));
 </string>
           </argument>
         </arguments>

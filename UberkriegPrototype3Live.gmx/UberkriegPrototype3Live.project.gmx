@@ -560,7 +560,6 @@
       <script>scripts\scr_exe_attach.gml</script>
       <script>scripts\scr_check_units_in_range.gml</script>
       <script>scripts\scr_damageCalculator.gml</script>
-      <script>scripts\scr_exe_engage.gml</script>
       <script>scripts\scr_exe_capture.gml</script>
       <script>scripts\scr_exe_supply.gml</script>
       <script>scripts\scr_exe_load.gml</script>
@@ -571,6 +570,11 @@
       <script>scripts\scr_checkInfiltrateTargets.gml</script>
       <script>scripts\scr_exe_infiltrate.gml</script>
       <script>scripts\scr_exe_test.gml</script>
+      <script>scripts\scr_exe_control_restart.gml</script>
+      <script>scripts\scr_exe_engage.gml</script>
+      <scripts name="archives">
+        <script>scripts\scr_exe_engage_v1.gml</script>
+      </scripts>
     </scripts>
     <scripts name="Audio &amp; Visuals">
       <script>scripts\scr_cursorKey_juice.gml</script>
@@ -605,6 +609,7 @@
         <script>scripts\cnet_deploy.gml</script>
       </scripts>
       <script>scripts\net_ucom.gml</script>
+      <script>scripts\scr_send_ucom.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -627,6 +632,7 @@
     <font>fonts\font13</font>
     <font>fonts\font14</font>
     <font>fonts\font15</font>
+    <font>fonts\font16</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>
@@ -712,8 +718,8 @@
         <object>objects\obj_moveCursorMouse</object>
         <object>objects\obj_moveCursorMouse_old</object>
         <objects name="UnitMove">
-          <object>objects\obj_path_node</object>
           <object>objects\obj_execute_unit_orders</object>
+          <object>objects\obj_path_node</object>
           <object>objects\obj_event_trap</object>
           <object>objects\obj_event_link</object>
           <object>objects\obj_event_lost</object>

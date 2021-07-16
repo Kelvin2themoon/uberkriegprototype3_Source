@@ -25,8 +25,9 @@ switch (global.action_order){
     
     case "infiltrate": scr_exe_infiltrate(); break;     
         }
-        
-        
+//send unit command as client player        
+scr_send_ucom();
+//save cursor location
 //reset global order variables
 //global.acting_unit  = 0;
 //global.target_unit  = 0;
@@ -34,6 +35,7 @@ switch (global.action_order){
 //global.action_order = "wait" ;//default to wait
 
 //update radio status
+
 
 if (global.acting_unit != 0)
     {

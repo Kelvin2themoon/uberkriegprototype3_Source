@@ -310,6 +310,7 @@ if ( conclude_upkeep ) {
             //destroy self
             instance_destroy();
             }
+        global.Phaze = "Main"
         }
 
 

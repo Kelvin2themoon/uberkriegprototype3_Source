@@ -24,13 +24,7 @@ with (global.target_unit)
 obj_map.units[global.posX,global.posY] = global.acting_unit; 
 
 //activate UI
-instance_activate_object(obj_miniwin);
-instance_activate_object(obj_battleCursor);
-with obj_battleCursor
-    {
-    x = global.posX*24;
-    y = global.posY*24;
-    }
+scr_exe_control_restart();
 
 //set active unit state
 global.acting_unit.state =  "exhaust";

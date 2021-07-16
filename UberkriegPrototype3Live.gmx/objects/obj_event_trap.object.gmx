@@ -35,6 +35,8 @@ depth = UI_DEPTH_CURSOR
 image_speed = 0;
 
 
+
+
 /*
  // reactivate main phaze UI
 instance_activate_object(obj_miniwin);
@@ -86,11 +88,12 @@ if (step_counter = 10){
     }
 if (step_counter = 36){
     // reactivate main phaze UI
-    
-    instance_activate_object(obj_battleCursor);
-    with obj_battleCursor{
-        x = global.acting_unit.x;
-        y = global.acting_unit.y;
+    if (global.net_mode = 0 or global.Local_Player = global.P_Turn.number){
+        instance_activate_object(obj_battleCursor);
+        with obj_battleCursor{
+            x = global.acting_unit.x;
+            y = global.acting_unit.y;
+            }
         }
     //checks
     scr_updateStanding(global.P_Turn);
@@ -103,7 +106,9 @@ if (step_counter = 36){
         isSupplyTarget  = false;
         }
     //purge acting unit
-    global.acting_unit = 0;    
+    global.acting_unit = 0;
+    //ready for next action (netowrk mode)   
+    global.ready_next = true; 
     instance_destroy();
     }
 

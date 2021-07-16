@@ -27,12 +27,8 @@ else {
 instance_deactivate_object(global.acting_unit);
 
 // reactivate main phaze UI
-instance_activate_object(obj_miniwin);
-instance_activate_object(obj_battleCursor);
-with obj_battleCursor{
-    x = global.posX*24;
-    y = global.posY*24;
-    }
+ // reactivate main phaze UI
+scr_exe_control_restart();
 instance_destroy();
 //nuke syscom
 with obj_syscom_command instance_destroy();
