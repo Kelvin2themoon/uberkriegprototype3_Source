@@ -191,19 +191,14 @@ if ( view_yview[0] + view_hport[0] &lt; y + view_border+24 and global.canScroll_
             <kind>1</kind>
             <string>///execute at target location
 //check for mouse &amp; keayboard event
-if( keyboard_check_pressed(global.keyCONFIRM)
-or  (   mouse_check_button_pressed(mb_right) 
-and mouse_x div 24 = global.posX and mouse_y div 24 = global.posY))
-    {
+if( keyboard_check_pressed(global.keyCONFIRM) or (mouse_check_button_pressed(mb_right) and mouse_x div 24 = global.posX and mouse_y div 24 = global.posY)){
     //check in bound
-    if (scr_inBound(global.posX,global.posY))
-        {
+    if (scr_inBound(global.posX,global.posY)){
         //check if terrain is visable and is empty
         if (obj_map.terrains[global.posX,global.posY].isVisible and obj_map.units[global.posX,global.posY] = 0 ){
                 //DEPLOY COVERT OP!!!
                 scr_setUnit(obj_unit_CovertOp,global.posX,global.posY,global.P_Turn.number);
                 obj_map.units[global.posX,global.posY].team = global.P_Turn.team;
-                obj_map.units[global.posX,global.posY].isHidden = true;
                 obj_map.units[global.posX,global.posY].isHidden= true;
                 //check observablility
                 if global.observe_P[global.P_Turn.number]  obj_map.units[global.posX, global.posY].isObservable = true;
@@ -215,7 +210,15 @@ and mouse_x div 24 = global.posX and mouse_y div 24 = global.posY))
                 scr_globalRadioCheck();
                 scr_update_radioBoarder();
                 scr_rangeCheck_reset();
-                
+
+                //network mode
+                if global.net_mode = 2 {
+                    ds_map_clear(global.map_out);
+                    ds_map_add(global.map_out,"scr","net_deploy_covert_op");
+                    ds_map_add(global.map_out,"x",global.posX);
+                    ds_map_add(global.map_out,"y",global.posY);
+                    scr_send(global.map_out,"host");
+                    }
                 // re-initiat UI
                 instance_activate_object(obj_battleCursor);
                 instance_activate_object(obj_miniwin);

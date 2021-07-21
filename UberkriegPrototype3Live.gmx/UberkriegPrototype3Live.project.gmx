@@ -555,11 +555,11 @@
     </scripts>
     <scripts name="Unit Commands">
       <script>scripts\scr_execute_command.gml</script>
+      <script>scripts\scr_check_units_in_range.gml</script>
+      <script>scripts\scr_damageCalculator.gml</script>
       <script>scripts\scr_exe_wait.gml</script>
       <script>scripts\scr_exe_join.gml</script>
       <script>scripts\scr_exe_attach.gml</script>
-      <script>scripts\scr_check_units_in_range.gml</script>
-      <script>scripts\scr_damageCalculator.gml</script>
       <script>scripts\scr_exe_capture.gml</script>
       <script>scripts\scr_exe_supply.gml</script>
       <script>scripts\scr_exe_load.gml</script>
@@ -570,8 +570,8 @@
       <script>scripts\scr_checkInfiltrateTargets.gml</script>
       <script>scripts\scr_exe_infiltrate.gml</script>
       <script>scripts\scr_exe_test.gml</script>
-      <script>scripts\scr_exe_control_restart.gml</script>
       <script>scripts\scr_exe_engage.gml</script>
+      <script>scripts\scr_exe_control_restart.gml</script>
       <scripts name="archives">
         <script>scripts\scr_exe_engage_v1.gml</script>
       </scripts>
@@ -584,6 +584,7 @@
         <script>scripts\scr_draw_stars.gml</script>
         <script>scripts\scr_draw_radioAssist.gml</script>
       </scripts>
+      <script>scripts\scr_camera_reframe.gml</script>
     </scripts>
     <scripts name="Net Scripts">
       <scripts name="shortcuts">
@@ -591,6 +592,8 @@
         <script>scripts\scr_relay.gml</script>
         <script>scripts\scr_clear_player_ready.gml</script>
         <script>scripts\scr_all_players_ready.gml</script>
+        <script>scripts\scr_is_net_reciever.gml</script>
+        <script>scripts\scr_is_net_sender.gml</script>
       </scripts>
       <scripts name="Turning">
         <script>scripts\net_assign_player.gml</script>
@@ -610,6 +613,15 @@
       </scripts>
       <script>scripts\net_ucom.gml</script>
       <script>scripts\scr_send_ucom.gml</script>
+      <scripts name="COP &amp; SCOP">
+        <script>scripts\net_cop_on.gml</script>
+        <script>scripts\net_scop_on.gml</script>
+        <script>scripts\net_hide.gml</script>
+        <script>scripts\net_dummy.gml</script>
+        <script>scripts\net_deploy_covert_op.gml</script>
+        <script>scripts\net_deploy_land_cruiser.gml</script>
+      </scripts>
+      <script>scripts\net_dp2.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -732,19 +744,22 @@
           <object>objects\obj_captureBar</object>
         </objects>
         <object>objects\obj_supplyCursor</object>
+        <object>objects\obj_dropCursor</object>
         <object>objects\obj_smokeScreenCurosr</object>
         <object>objects\obj_disruptorCurosr</object>
-        <object>objects\obj_deployDummyCursorCopy</object>
         <object>objects\obj_promote_Cursor</object>
-        <object>objects\obj_deployDummyCursor</object>
-        <object>objects\obj_deployLandCruiserCursor</object>
-        <object>objects\obj_deployCovertOp</object>
-        <object>objects\obj_dropCursor</object>
         <objects name="Cursor Backup">
           <object>objects\obj_Bup_moveCurosr</object>
           <object>objects\obj_Bup_moveCursorMouse</object>
         </objects>
+        <objects name="COFX Cursors">
+          <object>objects\obj_deployDummyCursor</object>
+          <object>objects\obj_deployCovertOp</object>
+          <object>objects\obj_deployDummyCursorCopy</object>
+          <object>objects\obj_deployLandCruiserCursor</object>
+        </objects>
       </objects>
+      <object>objects\obj_radio_update_event</object>
     </objects>
     <objects name="Map Edit acc.">
       <object>objects\obj_promote_pointer</object>

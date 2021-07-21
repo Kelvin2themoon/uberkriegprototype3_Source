@@ -70,9 +70,13 @@ if(global.net_mode=2){
     else{
         ds_map_replace(global.net_unit_orders,"tar_ux",noone); //target unit pos x
         ds_map_replace(global.net_unit_orders,"tar_uy",noone); //target unit pos y
+        //add drop zone x,y
         }
     //action
     ds_map_replace(global.net_unit_orders,"com",global.action_order);
+    //drop_destination
+    ds_map_replace(global.net_unit_orders,"drop_x",global.destination.x div 24);
+    ds_map_replace(global.net_unit_orders,"drop_y",global.destination.y div 24);
     }
 
 //check move size

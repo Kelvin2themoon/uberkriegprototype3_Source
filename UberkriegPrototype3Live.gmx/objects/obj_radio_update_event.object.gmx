@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>obj_CO_0</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,37 +25,36 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///CO 02: HP+
-event_inherited();
-
-// Initiate Parent Object and defaults
-index = 2 ;
-name = "hp+" ;
-
-//COP and SCOP Varialbes
-
-COP_Bar     = 3 ;       //number of charged stars required to activate CO metre
-COP_on      = false ;   //CO power switch
-
-SCOP_Bar    = 3 ;
-SCOP_on     = false ;   //SCOP switch
-
-//passive abilities
-D2D_RepairCosts = 50;
-D2D_Repair = 3;
-
-COFX_APC_Repair  = 1 ;
-COP_GainHP  = 2 ;
-SCOP_GainHP = 5 ;
-
-//generic defence boost
-var i =1;
-for( i = 1 ; i &lt;= 13 ; i++ )
-    {
-    COP_Def[i]  = 110;
-    SCOP_Def[i] = 120;
-    }
-
+            <string>//set alarm
+alarm[0] = 1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//update radio boarder
+scr_updateStanding_global();
+scr_globalRadioCheck();
+scr_update_radioBoarder();
+scr_rangeCheck_reset();
+instance_destroy();
 </string>
           </argument>
         </arguments>

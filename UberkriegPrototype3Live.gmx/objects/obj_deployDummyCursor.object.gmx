@@ -479,10 +479,8 @@ var mpy = mouse_y div 24 ;
 
 //check for deploy
 
-if (scr_inBound(mpx,mpy))
-    {
-    if (obj_map.terrains[mpx,mpy].isVisible)
-        {
+if (scr_inBound(mpx,mpy)){
+    if (obj_map.terrains[mpx,mpy].isVisible){
         //if location is empty, clear for dummy deploy    
         if obj_map.units[mpx,mpy] = 0 can_mouse_deploy = true;
         //check location accupied by ally unit, ok for hide! 
@@ -491,14 +489,11 @@ if (scr_inBound(mpx,mpy))
     }
 
 //left click    
-if(mouse_check_button_pressed(mb_left) and !menuExitDelay)
-    {
+if(mouse_check_button_pressed(mb_left) and !menuExitDelay){
     move_ready = false;
     mousePosX = mouse_x div 24
     mousePosY = mouse_y div 24
-    
-    if (scr_inBound(mousePosX,mousePosY))
-        {
+    if (scr_inBound(mousePosX,mousePosY)){
         //change curosr position
         x = (mousePosX)*24;
         y = (mousePosY)*24;
@@ -508,55 +503,43 @@ if(mouse_check_button_pressed(mb_left) and !menuExitDelay)
         //juice
         scr_cursorKey_juice(1,global.cursorKey_sfx);
         }
-        
         //turn off deploy icon
         cursor_icon = -1;
-        
         //local property radio chech if terrain i sproperty
-        if (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,obj_property))
-            {
+        if (object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index,obj_property)){
             scr_rangeCheck_reset();
             scr_updateLocalRadio(obj_map.terrains[global.posX,global.posY]);
             isOnGlobalRadioCheck = true;
             }
-        
-        else
-            {
+        else{
             //turn on global radio check
             scr_globalRadioCheck();
             isOnGlobalRadioCheck = true;
             }
-        
         //set alarm for releas delay for deploy and syscom menus
         alarm[2] = 10;
         menu_ok = true;
     }
     
     
-if(mouse_check_button(mb_left) and !menuExitDelay)
-    {
+if(mouse_check_button(mb_left) and !menuExitDelay){
     //turn off deploy icon
     cursor_icon = -1;
     //juice
     if (global.posX != mpx or global.posY != mpy) scr_cursorKey_juice(1,-1); //juice 
-    
     mousePosX = mouse_x div 24
     mousePosY = mouse_y div 24
-  
-    if (scr_inBound(mousePosX,mousePosY) )
-        {
+    if (scr_inBound(mousePosX,mousePosY) ){
         //change curosr position
         x = (mousePosX)*24;
         y = (mousePosY)*24;
-        
         global.posX = x div 24;
         global.posY = y div 24;
         }
     }
         
     
-if(mouse_check_button_released(mb_left))
-    {
+if(mouse_check_button_released(mb_left)){
     isOnGlobalRadioCheck = false;
     scr_rangeCheck_reset();
     //reset unit radio check if applicable
@@ -571,12 +554,10 @@ if(mouse_check_button_released(mb_left))
     
     
 //right click
-if(mouse_check_button_pressed(mb_right) and !mouse_check_button(mb_left) and !menuExitDelay)
-    {
+if(mouse_check_button_pressed(mb_right) and !mouse_check_button(mb_left) and !menuExitDelay){
     mousePosX = mouse_x div 24
     mousePosY = mouse_y div 24
-    if (scr_inBound(mousePosX,mousePosY) )
-        {
+    if (scr_inBound(mousePosX,mousePosY) ){
         //move cursor
         x = (mousePosX)*24;
         y = (mousePosY)*24;
@@ -584,41 +565,36 @@ if(mouse_check_button_pressed(mb_right) and !mouse_check_button(mb_left) and !me
         global.posY = y div 24;
             
         //open deploy menu
-        if  (
-            obj_map.terrains[global.posX,global.posY].isVisible
-            and obj_map.units[global.posX,global.posY] = 0
-            and mscroll = 0
-            )
-            {
+        if  (obj_map.terrains[global.posX,global.posY].isVisible and obj_map.units[global.posX,global.posY] = 0and mscroll = 0){
             //Open Deploy menu!
             instance_create(0,0,obj_UI_deployDummy);
             instance_deactivate_object(obj_miniwin);
             instance_deactivate_object(obj_deployDummyCursor);
             instance_deactivate_object(obj_topwin);    
             }
-        else if (obj_map.units[global.posX,global.posY]!= 0)
-            {
+        else if (obj_map.units[global.posX,global.posY]!= 0){
             //if unit is ally hide
-            if(obj_map.units[global.posX,global.posY].team = global.P_Turn.team and global.P_Turn.CO.rounds &gt; 0 )
-                {
+            if(obj_map.units[global.posX,global.posY].team = global.P_Turn.team and obj_map.units[global.posX,global.posY].isHidden = false and global.P_Turn.CO.rounds &gt; 0 ){
                 obj_map.units[global.posX,global.posY].isHidden = true;
                 //consume round
                 global.P_Turn.CO.rounds -=1;
+                 if ( global.net_mode = 2){
+                    ds_map_clear(global.map_out);
+                    ds_map_add(global.map_out,"scr","net_hide");
+                    ds_map_add(global.map_out,"x",global.posX);
+                    ds_map_add(global.map_out,"y",global.posY);
+                    scr_send(global.map_out,"host");
+                    }
                 //destroy if rounds are used up
-                if global.P_Turn.CO.rounds &lt;= 0
-                    {
+                if global.P_Turn.CO.rounds &lt;= 0{
                     // re-initiat UI
                     instance_activate_object(obj_battleCursor);
                     instance_activate_object(obj_miniwin);
                     instance_destroy();
                     }
-                
-                
                 }
-            
             //range check
-            else
-                {
+            else{
                 //do move range check
                 checking_attack_range = true;
                 scr_attack_rance_check(obj_map.units[global.posX, global.posY]);
@@ -626,9 +602,7 @@ if(mouse_check_button_pressed(mb_right) and !mouse_check_button(mb_left) and !me
             } 
         }
     }
-    
-if(mouse_check_button_released(mb_right))
-    {
+if(mouse_check_button_released(mb_right)){
     checking_attack_range = false;
     scr_rangeCheck_reset();
     }
@@ -854,8 +828,7 @@ if (obj_map.terrains[global.posX,global.posY].isVisible and obj_map.units[global
 if ( keyboard_check_pressed( global.keyCONFIRM) and menuExitDelay = false and scr_inBound(global.posX,global.posY))
     {
     //check if terrain is open and visible
-    if ( obj_map.units[global.posX,global.posY] = 0 and obj_map.terrains[global.posX,global.posY].isVisible )
-        {
+    if ( obj_map.units[global.posX,global.posY] = 0 and obj_map.terrains[global.posX,global.posY].isVisible ){
         //Open Deploy dummy menu!
         instance_create(0,0,obj_UI_deployDummy);
         instance_deactivate_object(obj_miniwin);
@@ -863,47 +836,44 @@ if ( keyboard_check_pressed( global.keyCONFIRM) and menuExitDelay = false and sc
         instance_deactivate_object(obj_topwin);
         }
     //else unit exsist
-    else 
-        {
+    else {
         //if unit is visible
-        if (obj_map.units[global.posX,global.posY].isVisible)
-            {
+        if (obj_map.units[global.posX,global.posY].isVisible){
             //if unit is ally hide
-            if(obj_map.units[global.posX,global.posY].team = global.P_Turn.team and global.P_Turn.CO.rounds &gt; 0 )
-                {
+            if(obj_map.units[global.posX,global.posY].team = global.P_Turn.team and obj_map.units[global.posX,global.posY].isHidden = false and global.P_Turn.CO.rounds &gt; 0 ){
                 obj_map.units[global.posX,global.posY].isHidden = true;
                 //consume round
                 global.P_Turn.CO.rounds -=1;
+                //if network mode
+                if ( global.net_mode = 2){
+                    ds_map_clear(global.map_out);
+                    ds_map_add(global.map_out,"scr","net_hide");
+                    ds_map_add(global.map_out,"x",global.posX);
+                    ds_map_add(global.map_out,"y",global.posY);
+                    scr_send(global.map_out,"host");
+                    }
                 //destroy if rounds are used up
-                if global.P_Turn.CO.rounds &lt;= 0
-                    {
+                if global.P_Turn.CO.rounds &lt;= 0 {
                     // re-initiat UI
                     instance_activate_object(obj_battleCursor);
                     instance_activate_object(obj_miniwin);
                     instance_destroy();
                     }
                 } 
-             
             //if unit is visible do move check
-            else if  (obj_map.units[global.posX,global.posY] !=0 )
-                {           
+            else if  (obj_map.units[global.posX,global.posY] !=0 ){           
                 //switch to enemy move range check cursor
                 scr_updateLocalMove(obj_map.units[global.posX,global.posY]);
                 checking_move_range = true;
                 }
             }
-            
         //unit is not visible
-        else
-            {
+        else{
             //do nothing
             }
         }
     }
-    
-    
-if ( keyboard_check_released( global.keyCONFIRM) )
-    {
+if ( keyboard_check_released( global.keyCONFIRM) ){
     scr_rangeCheck_reset();
     checking_move_range = false;
     //reset unit radio check if applicable
@@ -1127,8 +1097,7 @@ if (global.P_Turn.CO.rounds &lt;= 0 )
           <argument>
             <kind>1</kind>
             <string>///stop sprite if area is not visible
-if( !obj_map.terrains[global.posX,global.posY].isVisible )
-    { 
+if( !obj_map.terrains[global.posX,global.posY].isVisible ){ 
     image_index = 3;
     sprite_index = spr_redCursor;
     }
