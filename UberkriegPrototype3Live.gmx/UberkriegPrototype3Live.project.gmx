@@ -541,6 +541,9 @@
         <script>scripts\scr_updateGlobalVision.gml</script>
         <script>scripts\scr_globalVisionReset.gml</script>
         <script>scripts\scr_updateLocalVision.gml</script>
+        <scripts name="archives">
+          <script>scripts\scr_updateLocalVison_01.gml</script>
+        </scripts>
       </scripts>
       <scripts name="Radio">
         <script>scripts\scr_updateLocalRadio.gml</script>
@@ -590,10 +593,12 @@
       <scripts name="shortcuts">
         <script>scripts\scr_send.gml</script>
         <script>scripts\scr_relay.gml</script>
-        <script>scripts\scr_clear_player_ready.gml</script>
         <script>scripts\scr_all_players_ready.gml</script>
         <script>scripts\scr_is_net_reciever.gml</script>
         <script>scripts\scr_is_net_sender.gml</script>
+        <script>scripts\scr_add_ubm_to_ds_map.gml</script>
+        <script>scripts\scr_save_ds_map_to_ini.gml</script>
+        <script>scripts\scr_clear_player_ready.gml</script>
       </scripts>
       <scripts name="Turning">
         <script>scripts\net_assign_player.gml</script>
@@ -620,6 +625,9 @@
         <script>scripts\net_dummy.gml</script>
         <script>scripts\net_deploy_covert_op.gml</script>
         <script>scripts\net_deploy_land_cruiser.gml</script>
+        <script>scripts\net_promote.gml</script>
+        <script>scripts\net_cofx_disrupt.gml</script>
+        <script>scripts\net_cofx_smkoe.gml</script>
       </scripts>
       <script>scripts\net_dp2.gml</script>
     </scripts>
@@ -746,8 +754,6 @@
         <object>objects\obj_supplyCursor</object>
         <object>objects\obj_dropCursor</object>
         <object>objects\obj_smokeScreenCurosr</object>
-        <object>objects\obj_disruptorCurosr</object>
-        <object>objects\obj_promote_Cursor</object>
         <objects name="Cursor Backup">
           <object>objects\obj_Bup_moveCurosr</object>
           <object>objects\obj_Bup_moveCursorMouse</object>
@@ -757,6 +763,8 @@
           <object>objects\obj_deployCovertOp</object>
           <object>objects\obj_deployDummyCursorCopy</object>
           <object>objects\obj_deployLandCruiserCursor</object>
+          <object>objects\obj_promote_Cursor</object>
+          <object>objects\obj_disruptorCurosr</object>
         </objects>
       </objects>
       <object>objects\obj_radio_update_event</object>

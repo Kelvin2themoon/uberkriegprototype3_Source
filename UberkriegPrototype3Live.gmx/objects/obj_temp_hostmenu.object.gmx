@@ -224,105 +224,19 @@ if global.net_mode = 1{ //server side
             //instruct clients to start gmae
             ds_map_clear(global.map_out);
             ds_map_add(global.map_out, "scr" , "net_start_game" );
+            //add CO index
+            ds_map_add(global.map_out, "P1CO" , global.P1_CO );
+            ds_map_add(global.map_out, "P2CO" , global.P2_CO );
+            ds_map_add(global.map_out, "P3CO" , global.P3_CO );
+            ds_map_add(global.map_out, "P4CO" , global.P4_CO );
+            //add "protoland.ubm" map file to map_out
+            scr_add_ubm_to_ds_map("protoland.ubm",global.map_out);
             //send as json string
             scr_send( global.map_out , "all" ); 
-            
-            /*
-            //convert to JSON string
-                var net_json = json_encode(net_map);
-                //store in buffer
-                var b_out = buffer_create( string_byte_length(net_json)+1 , buffer_fixed ,  1 );
-                buffer_write( b_out , buffer_string , net_json );
-                //send to conected clients pulled from list
-                
-                for ( i = 0 ; i &lt; ds_list_size(global.client_list) ; i++){
-                    network_send_packet( global.sSocket[ds_list_find_value(global.client_list,i)] , b_out , buffer_get_size(b_out) );
-                    }
-                */
             }   
         }
     }   
-            /*Commed OUT
            
-            //Covert "protoland.ubm" to JASON string + instructions
-            
-            //create ds map
-            var send_map = ds_map_create();
-            //add script
-            ds_map_add(send_map,"scr","net_map_transfer");
-            //open protoland file
-            ini_open("protoland.ubm");
-            //map dimentions
-            var map_x = ini_read_real("Meta","Height",18);
-            var map_y = ini_read_real("Meta","Width",32);
-            
-            //initiate variable
-            var ini_pos = noone;// (x,y) position
-            var type = 0;       // unit or terain type
-            var owner = 0;      // ownership
-            
-            for ( i = 0 ; i &lt;= map_x ; i++ ){
-                for ( i = 0 ; i &lt;= map_y ; i++ ){
-                    //add elements to DS_map
-                    ini_pos = string(i)+"X" + string(j) + "Y" ; 
-                    
-                    //read terrain
-                    owner = ini_read_real("Terrains",ini_pos+"P",0); //owner, default = neutral
-                    type  = ini_read_real("errains", ini_pos,1); //terrain index, defult = plains
-                    //add to map
-                    ds_map_add( send_map , "T" + ini_pos , type );  // terrain type
-                    ds_map_add( send_map , "P" + ini_pos , owner ); // terrain owner
-                    
-                    //read unit
-                    if(ini_key_exists("Unit", ini_pos)){
-                        owner = ini_read_real("Units",ini_pos+"P",1);   //commander, defult = P1
-                        type = ini_read_real("Units",ini_pos,1);        //unit type, default = light infantry
-                        //add to map    
-                        ds_map_add( send_map , "U" + ini_pos , type );  // unit type
-                        ds_map_add( send_map , "C" + ini_pos , owner );  // commander
-                        }  
-                    }
-                }
-            //close ini file
-            ini_close();
-                
-           //save as string (JSON)
-           var JSON_map = json_encode(send_map);
-           //write to buffer
-           var outgoing = buffer_create( string_byte_length(JSON_map)+1 , buffer_fixed, 1);
-           buffer_write( outgoing, buffer_string, JSON_map);
-           //delete buffer
-           buffer_delete(outgoing);
-           //delete ds_map
-           ds_map_destroy(send_map);
-              
-            
-            
-            
-            /* COMMED OUT
-            //copy a map file and add script to it, save as outgoing.snd
-            file_copy("protoland.ubm", "outgoing.snd");
-            ini_open("outgoing.snd");
-            ini_write_string("meta","type","host_room_action");
-            ini_write_string("meta","scr","net_map_transfer");
-            ini_close();
-            
-            
-            b_buffer = buffer_load("outgoing.snd");
-            
-            //sent map to all clients
-            var i = 0;
-            for ( i = 0 ; i &lt; ds_list_size(global.client_list)  ; i++ ){
-                network_send_packet(global.sSocket[ ds_list_find_value(global.client_list,i) ], b_buffer,buffer_get_size(b_buffer));
-                }
-                buffer_delete(b_buffer);
-                
-            //start gmae
-            room_goto(rm_game_Basic); 
-            }    
-        }
-    }
-    
 
 </string>
           </argument>

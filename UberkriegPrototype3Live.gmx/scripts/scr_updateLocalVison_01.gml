@@ -1,89 +1,107 @@
 target = argument0; //target unit or property
 
-//set observer
-var observer = 0;
-if (global.net_mode = 0 or global.net_mode = 1 ) observer = global.P_Turn.number;
-else if (global.net_mode = 2) {
-    observer = global.Local_Player;
-    }
-//check if unit has moved in or out of fog
-target.isObservable = obj_map.terrains[target.x div 24, target.y div 24].isObservable;  
+
+originV_X = target.x div 24;
+originV_Y = target.y div 24;
+
+tempV_X = 0;
+tempV_X = 0;
+
+//make self visible (game mechanics)
+if target.team = global.P_Turn.team target.isVisible = true;
 
 
-//target position
-var originV_X = target.x div 24;
-var originV_Y = target.y div 24;
-//variables for for loops
-var tempV_X = 0;
-var tempV_X = 0;
-
-//check if target is observable ( global.P_View adjusted on obj_basicBattle create
-var can_see = global.P_View[observer,target.ownership] ;
-    
-if can_see { 
-    target.isVisible  = true;
-    target.isObservable = true;
-    }
-
- 
-//vision range and COFX variables
 var vision_range = target.vision
 var vision_bonus = 0
 perfectVision = false;
 
-// adjust for COFX
-if (target.ownership !=0){
-    vision_bonus = global.P[target.ownership].CO.D2D_Vision;
-    if global.P[target.ownership].CO.COP_on vision_bonus += owner.CO.COP_Vision ;
-    if global.P[target.ownership].CO.SCOP_on vision_bonus += owner.CO.SCOP_Vision ;
-    vision_range += vision_bonus;
-    if ( global.P[target.ownership].CO.COFX_PerfectVision and ( global.P[target.ownership].CO.COP_on or  global.P[target.ownership].CO.SCOP_on) ) perfectVision = true;
-    } 
+//
+var can_see = global.P_View[global.P_Turn.number,target.ownership] ;
+
+//make self observable if view permits
+if can_see target.isObservable = true;
+
+//check for Co ability
+if (target.ownership !=0)
+        {
+        var owner = 0;
+        switch target.ownership {
+                case 1 : if(global.P1_in_play) owner = global.P1; break;
+                case 2 : if(global.P2_in_play) owner = global.P2; break;    
+                case 3 : if(global.P3_in_play) owner = global.P3; break;
+                case 4 : if(global.P4_in_play) owner = global.P4; break;
+                }
+            
+            if(owner !=0){
+                vision_bonus = owner.CO.D2D_Vision ;
+                if owner.CO.COP_on  vision_bonus += owner.CO.COP_Vision ;
+                if owner.CO.SCOP_on  vision_bonus += owner.CO.SCOP_Vision ;
+                 
+                vision_range += vision_bonus;
+                
+                if (owner.CO.COFX_PerfectVision and (owner.CO.COP_on or owner.CO.SCOP_on) ) perfectVision = true;
+                }        
+        }
 
 
-//uncrease visoini range over mountains
+//start of loops
 if ( obj_map.terrains[originV_X,originV_Y].object_index = obj_terrain_Mountain) vision_range += (target.vision div 2);
-//if target is out of radio contact, reduce vision range to minumum
-if (target.isStanding = false){
+if (target.isStanding = false)
+    {
     if object_is_ancestor(target.object_index,obj_unit) vision_range = 1;
     else vision_range = 0;
     }
 
-//start loop
+//check if target is visable via game mechanics
 for ( tempV_X= (-1)*vision_range ; tempV_X<= vision_range ; tempV_X+=1 ){ //for each possible value of X in range
     for ( tempV_Y= (-1)*vision_range ; tempV_Y<= vision_range ; tempV_Y+=1 ){ //for each possible value of Y in range
         if ( (abs(tempV_X) + abs(tempV_Y))<= vision_range){ //if x + y is less than max range
-            if (global.P_Turn.team = target.team){
-                if scr_inBound(originV_X+tempV_X,originV_Y+tempV_Y){                    
+            if (target.team = global.P_Turn.team){
+            
+                if scr_inBound(originV_X+tempV_X,originV_Y+tempV_Y)
+                    {
+                    
+
+                    
                     // perfect vision, see all units w/in vision range
-                    if perfectVision {    
+                    if perfectVision 
+                            {    
                             //visablility
                             obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
                             obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
-                            }                    
+                            }
+                    
                     //if checking adjacent tile and acting target is unit
-                    else if ( (abs(tempV_X)+abs(tempV_Y))<=1 and object_is_ancestor(target.object_index,obj_unit)){
+                    else if ( (abs(tempV_X)+abs(tempV_Y))<=1 and object_is_ancestor(target.object_index,obj_unit))
+                        {
                         //adjust for terrain
                         obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
                         
                         //if unit exsist at position
-                        if( obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] !=0){
+                        if( obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] !=0)
+                            {
                             //target is visible
                             obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
                             }
                         }
                     //terrain cannot hide unit, aka. standard case senerio
-                    else if(obj_map.terrains[originV_X+tempV_X,originV_Y+tempV_Y].canHide = false) {
+                    else if(obj_map.terrains[originV_X+tempV_X,originV_Y+tempV_Y].canHide = false) 
+                        {
                         //terrain cannot hide unit
                         obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
                         }
+                        
                     //check unit in regular case senerio
-                    if (obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] != 0){
+                    if (obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] != 0)
+                        {
                         //stay hidden is isHiding
-                        if( obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isHidden ){
+                        if( obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isHidden )
+                            {
                             //exception for when unit occupies a propety
-                            if( object_is_ancestor(obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].object_index,obj_property)){
-                                if( obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].team = global.P_Turn.team ){
+                            if( object_is_ancestor(obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].object_index,obj_property))
+                                {
+                                if( obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].team = global.P_Turn.team )
+                                    {
                                     obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isVisible = true;
                                     }
                                 }
@@ -105,45 +123,55 @@ for ( tempV_X= (-1)*vision_range ; tempV_X<= vision_range ; tempV_X+=1 ){ //for 
     for ( tempV_Y= (-1)*vision_range ; tempV_Y<= vision_range ; tempV_Y+=1 ){ //for each possible value of Y in range
         if ( (abs(tempV_X) + abs(tempV_Y))<= vision_range){ //if x + y is less than max range
             if (can_see){
+            
                 if scr_inBound(originV_X+tempV_X,originV_Y+tempV_Y)
                     {
                     // perfect vision, see all units w/in vision range
-                    if perfectVision{    
+                    if perfectVision 
+                            {    
                             //visablility
                             obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isObservable = true;
                             obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isObservable = true;
                             }
                     
                     //if checking adjacent tile and acting target is unit
-                    else if ( (abs(tempV_X)+abs(tempV_Y))<=1 and object_is_ancestor(target.object_index,obj_unit)){
+                    else if ( (abs(tempV_X)+abs(tempV_Y))<=1 and object_is_ancestor(target.object_index,obj_unit))
+                        {
                         //adjust for terrain
                         obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isObservable = true;
+                        
                         //if unit exsist at position
-                        if( obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] !=0){
+                        if( obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] !=0)
+                            {
                             //target is visible
                             obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isObservable = true;
                             }
                         }
-                        
                     //terrain cannot hide unit, aka. standard case senerio
-                    else if(obj_map.terrains[originV_X+tempV_X,originV_Y+tempV_Y].canHide = false) {
+                    else if(obj_map.terrains[originV_X+tempV_X,originV_Y+tempV_Y].canHide = false) 
+                        {
                         //terrain cannot hide unit
                         obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isObservable = true;
                         }
                         
                     //check unit in regular case senerio
-                    if (obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] != 0){
+                    if (obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] != 0)
+                        {
                         //stay hidden is isHiding
-                        if( obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isHidden ){
+                        if( obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isHidden )
+                            {
                             //exception for when unit occupies a propety
-                            if( object_is_ancestor(obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].object_index,obj_property)){
-                                if( obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].team = global.P_Turn.team ){
+                            if( object_is_ancestor(obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].object_index,obj_property))
+                                {
+                                if( obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].team = global.P_Turn.team )
+                                    {
                                     obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isObservable = true;
                                     }
                                 }
                             } 
                         //visible if terrrtain is also visible
-                        else if (obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isObservable) {
+                        else if (obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isObservable) 
+                            {
                             obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isObservable = true;
                             }
                         }

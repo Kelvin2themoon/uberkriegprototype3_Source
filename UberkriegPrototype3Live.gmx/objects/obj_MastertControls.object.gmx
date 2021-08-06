@@ -201,9 +201,6 @@ global.cost[13] = 32000 ; // Land Cuiser
             <kind>1</kind>
             <string>///GLOBAL GAME OPTIONS
 
-//Fog Of war
-global.FoW_on = true;
-
 //player COs
 global.P1_CO = 0 ;
 global.P2_CO = 0 ;
@@ -222,7 +219,7 @@ global.P2_Team = 2;
 global.P3_Team = 3;
 global.P4_Team = 4;
 // array duplicate
-global.team_P[0] = 0;
+global.Team_P[0] = 0;
 global.Team_P[1] = 1;
 global.Team_P[2] = 2;
 global.Team_P[3] = 3;
@@ -237,36 +234,15 @@ global.isAIplayer[4] = false;
 //assigned player who is playing at this computer in networked play, 0 means normal hot seat, -4 or nooone as spectator or server controls, no game inputs
 global.Local_Player = 0; 
 
-//observable players - either player at local game or for AI controll debug
-//should be automated eventually
-global.observe_P[0] = false; //neutral/non player always not observable
-global.observe_P[1] = true;
-global.observe_P[2] = true;
-global.observe_P[3] = true;
-global.observe_P[4] = true;
 
+ 
 global.player_name[1] = "P1 closed";
 global.player_name[2] = "P2 closed";
 global.player_name[3] = "P3 closed";
 global.player_name[4] = "P4 closed";
 
-/*
-global.P_View will replace the abouve
-it will describe the obervablility of unit and terrain
-vector 1 = acting player
-vector 2 = observed unit/terrain owner
-all true on default
-to be adjusted on start of game
-0 for neutral
-*/
-var pvi = 0;
-var pvj = 0;
 
-for ( pvi = 0 ; pvi &lt; 5; pvi++ ){
-    for ( pvj = 0 ; pvj &lt; 5; pvj++ ){
-        global.P_View[pvi,pvj] = false;
-        } 
-    }
+    
 //graphic controls
 G_smooth = true;
 
@@ -277,6 +253,67 @@ global.Disruptor_spread = false; // disruptor propigates throught target enemy u
 
 //indirect fire range assist during move
 global.indirect_assist_on = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///FOG &amp; Vison Variables
+
+
+//Fog Of war
+global.FoW_on = true;
+//fog type
+global.local_fog_type = "Standard";// "Sandard", "Limited", "Disabled"  
+
+//FOG array
+
+global.fow[0] = "Standard"; // local hotseat or server
+global.fow[1] = "Standard"; // Standard - FOW on 
+global.fow[2] = "Standard"; // Limited  - albe to see enemy on off turns  
+global.fow[3] = "Standard"; // Disabled - no fog of war
+global.fow[4] = "Standard"; // 
+
+//observable players - either player at local game or for AI controll debug
+//should be automated eventually
+global.observe_P[0] = false; //neutral/non player always not observable
+global.observe_P[1] = true;
+global.observe_P[2] = true;
+global.observe_P[3] = true;
+global.observe_P[4] = true;
+
+/*
+global.P_View will replace the abouve
+it will describe the obervablility of unit and terrain
+vector 1 = acting player
+vector 2 = observed unit/terrain owner
+all true on default
+to be adjusted on start of game
+0 for neutral
+*/
+var pvi = 0; // observer
+var pvj = 0; // subject
+
+for ( pvi = 0 ; pvi &lt; 5; pvi++ ){
+    for ( pvj = 0 ; pvj &lt; 5; pvj++ ){
+        global.P_View[pvi,pvj] = false;
+        } 
+    }
 </string>
           </argument>
         </arguments>

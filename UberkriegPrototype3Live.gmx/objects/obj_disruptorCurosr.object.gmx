@@ -215,45 +215,42 @@ if ( view_yview[0] + view_hport[0] &lt; y + view_border+24 and global.canScroll_
             <kind>1</kind>
             <string>///execute at target location
 //check for mouse &amp; keayboard event
-if( keyboard_check_pressed(global.keyCONFIRM)
-or  (   mouse_check_button_pressed(mb_right) 
-    and mouse_x div 24 = global.posX and mouse_y div 24 = global.posY))
-    {
+if( keyboard_check_pressed(global.keyCONFIRM) or (mouse_check_button_pressed(mb_right) and mouse_x div 24 = global.posX and mouse_y div 24 = global.posY)){
     //check in bound
-    if (scr_inBound(global.posX,global.posY))
-        {
-        if (rounds &gt; 0)
-            {
+    if (scr_inBound(global.posX,global.posY)){
+        if (rounds &gt; 0){
             //make the smokes
             var ix = -range;
             var iy = -range;
             rounds -= 1;
             
             //makes the loops
-            for( ix = -range ; ix &lt;= range ; ix++)
-                {
-                for(iy = -range ; iy &lt;= range ; iy++)
-                    {
-                    if( abs(ix) + abs(iy) &lt;= range)
-                        {
+            for( ix = -range ; ix &lt;= range ; ix++){
+                for(iy = -range ; iy &lt;= range ; iy++){
+                    if( abs(ix) + abs(iy) &lt;= range){
                         //check inbound then set to terrain isSmoke on
-                        if( scr_inBound(global.posX+ix,global.posY+iy) )
-                            {
+                        if( scr_inBound(global.posX+ix,global.posY+iy) ){
                             //check for unit
-                            if( obj_map.units[global.posX+ix,global.posY+iy] != 0 ) 
-                                {
-                                with(obj_map.units[global.posX+ix,global.posY+iy])
-                                    {
+                            if( obj_map.units[global.posX+ix,global.posY+iy] != 0 ) {
+                                with(obj_map.units[global.posX+ix,global.posY+iy]){
                                     isDisrupted = true;
                                     state = "exhaust" ;
                                     if( global.P_Turn.CO.COP_on ) hp -=  global.P_Turn.CO.COP_DisruptDamage;
                                     else if ( global.P_Turn.CO.SCOP_on ) hp -=  global.P_Turn.CO.SCOP_DisruptDamage;
-                                    }
+                                    }    
                                 }
                             }
                         }
                     }
                 }
+            }
+        //netowrk mode
+        if global.net_mode = 2{
+            ds_map_clear(global.map_out);
+            ds_map_add(global.map_out,"scr","net_cofx_disrupt");
+            ds_map_add(global.map_out,"x",global.posX);
+            ds_map_add(global.map_out,"y",global.posY);
+            scr_send(global.map_out,"host");
             }
         //Re-initiate UI
         if (rounds &lt;=0 )
