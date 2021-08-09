@@ -33,6 +33,7 @@ if global.P_Turn.CO.SCOP_on unit.SCOP = true ;
 
 //update standing
 scr_updateStanding_global();
+if(unit.isObservable)
 scr_updateLocalRadio(unit);
 //update vision
 scr_updateLocalVision(unit);

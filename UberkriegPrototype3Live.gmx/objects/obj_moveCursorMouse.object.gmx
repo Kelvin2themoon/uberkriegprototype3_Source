@@ -574,7 +574,7 @@ if (scr_inBound(mouse_pos_x,mouse_pos_y)){
                 
                //if new positioni is adjacent and move points are sufficient
                if   (   abs(mouse_pos_x - last_pos_x) + abs(mouse_pos_y - last_pos_y) = 1
-                        and path_total + scr_check_move_cost(global.acting_unit,obj_map.terrains[mouse_pos_x,mouse_pos_y]) &lt;= global.acting_unit.move_points
+                        and path_total + scr_check_move_cost(global.acting_unit,obj_map.terrains[mouse_pos_x,mouse_pos_y]) &lt;= path_max
                         and path_total + scr_check_move_cost(global.acting_unit,obj_map.terrains[mouse_pos_x,mouse_pos_y]) &lt;= global.acting_unit.fuel
                         and !move_out
                         and global.rangeCheck[mouse_pos_x,mouse_pos_y].move_cost != -1){

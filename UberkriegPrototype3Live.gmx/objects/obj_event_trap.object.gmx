@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//initiate
+            <string>///initiate
 step_counter = 0;
 animate_state = "start";
 startpos_x = x;
@@ -33,10 +33,6 @@ startpos_y = y;
 
 depth = UI_DEPTH_CURSOR  
 image_speed = 0;
-
-
-
-
 /*
  // reactivate main phaze UI
 instance_activate_object(obj_miniwin);
@@ -111,8 +107,6 @@ if (step_counter = 36){
     global.ready_next = true; 
     instance_destroy();
     }
-
-
 step_counter+=1;
 
 

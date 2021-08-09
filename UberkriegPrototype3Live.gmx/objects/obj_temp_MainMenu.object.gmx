@@ -25,41 +25,6 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///temp sount settings
-
-//stop all audio
-audio_stop_all();
-
-//external bgm switch for prototype
-global.BGM_on = false;
-// bgm's
-global.tempBGM[1] = "bgm1.ogg" ;
-global.tempBGM[2] = "bgm2.ogg" ;
-global.tempBGM[3] = "bgm3.ogg" ;
-global.tempBGM[4] = "bgm4.ogg" ;
-
-global.BGM = noone;
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Network status readout var
 global.last_network_event = "F5: Create Server " ;
 //creat client menu
@@ -86,6 +51,41 @@ temp_ClientMenu =  instance_create(0,0,obj_temp_ClientMenu);
             <kind>1</kind>
             <string>///Host ready
 global.Host_ready = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///temp sount settings
+
+//stop all audio
+audio_stop_all();
+
+//external bgm switch for prototype
+global.BGM_on = false;
+// bgm's
+global.tempBGM[1] = "bgm1.ogg" ;
+global.tempBGM[2] = "bgm2.ogg" ;
+global.tempBGM[3] = "bgm3.ogg" ;
+global.tempBGM[4] = "bgm4.ogg" ;
+
+global.BGM = noone;
+
 </string>
           </argument>
         </arguments>
@@ -385,10 +385,10 @@ draw_text(227, 210 + 16*5 , "P3. Marmalland CO : " + string(global.P3_CO));
 draw_text(227, 210 + 16*6 , "P4. Pretzeland CO : " + string(global.P4_CO));
 
 
-draw_text(400, 210 + 16*3 , "P1.Team : " + string(global.P1_Team));
-draw_text(400, 210 + 16*4 , "P2.Team : " + string(global.P2_Team)); 
-draw_text(400, 210 + 16*5 , "P3.Team : " + string(global.P3_Team)); 
-draw_text(400, 210 + 16*6 , "P4.Team : " + string(global.P4_Team));
+draw_text(400, 210 + 16*3 , "P1.Team : " + string(global.Team_P[1]));
+draw_text(400, 210 + 16*4 , "P2.Team : " + string(global.Team_P[2])); 
+draw_text(400, 210 + 16*5 , "P3.Team : " + string(global.Team_P[3])); 
+draw_text(400, 210 + 16*6 , "P4.Team : " + string(global.Team_P[4]));
 
 draw_text(500, 210 + 16*3 , "P1.AI : " + string(global.isAIplayer[1]));
 draw_text(500, 210 + 16*4 , "P2.AI : " + string(global.isAIplayer[2])); 

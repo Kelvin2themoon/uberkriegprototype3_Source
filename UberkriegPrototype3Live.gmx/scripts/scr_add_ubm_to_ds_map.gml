@@ -7,8 +7,8 @@ var scr_map = argument1;   //ds_map to write to
 ini_open(ini_map);
 
 //meta data
-var map_w = ini_read_real("Meta", "Height", 5); //x
-var map_h = ini_read_real("Meta", "Width",  5); //y
+var map_h = ini_read_real("Meta", "Height", 5); //x
+var map_w = ini_read_real("Meta", "Width",  5); //y
 
 ds_map_replace(scr_map,"map_w",map_w);
 ds_map_replace(scr_map,"map_h",map_h); // this typo will haunt me forever

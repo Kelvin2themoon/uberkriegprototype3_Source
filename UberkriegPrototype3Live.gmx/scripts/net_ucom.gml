@@ -62,11 +62,12 @@ if (ds_priority_size(global.move_order) <2) global.acting_unit_moved = false;
 else global.acting_unit_moved = true;
 
 //reframe camera
-var first_pos = ds_priority_find_min(global.move_order);
-var last_pos  = ds_priority_find_max(global.move_order);
 
-scr_camera_reframe(first_pos,last_pos);
-
+if global.acting_unit.isObservable{
+    var first_pos = ds_priority_find_min(global.move_order);
+    var last_pos  = ds_priority_find_max(global.move_order);
+    scr_camera_reframe(first_pos,last_pos);
+}
 instance_create(0,0,obj_execute_unit_orders);
 
 //relay to non active clients

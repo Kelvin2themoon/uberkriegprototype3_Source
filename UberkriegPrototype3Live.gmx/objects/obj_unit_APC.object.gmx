@@ -103,6 +103,7 @@ load_B = 0;
             <string>///draw load graphic
 event_inherited(); //from parent "unit"
 
+/* load icon moved to checker tiles
 if global.mode = "Basic Battle" {
     if ( ownership = global.P_Turn.number and ( load_A !=0 or load_B !=0 ) ){
         draw_sprite(spr_unitStats_Load,0,x,y);

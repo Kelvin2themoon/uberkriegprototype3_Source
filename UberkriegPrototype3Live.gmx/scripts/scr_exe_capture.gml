@@ -1,8 +1,11 @@
 //reset captue
+var cap_bar = noone;
 
-if (global.acting_unit.x-view_xview[0] < 768-(168+24) )  instance_create(global.acting_unit.x+36,global.acting_unit.y,obj_captureBar);
-else instance_create(global.acting_unit.x-168,global.acting_unit.y,obj_captureBar);
-
+cap_bar = instance_create(global.acting_unit.x-168,global.acting_unit.y,obj_captureBar);
+//no draw if unit is hidden
+//cap_bar.image_alpha = 0;
+// move camera incase cap is out of bounds
+if (global.acting_unit.x-view_xview[0] < 768-(168+24) )  cap_bar.x = global.acting_unit.x+36;
 //obj_map.units[destination.x div 24,destination.y div 24] = global.acting_unit;
 obj_map.units[global.posX,global.posY] = global.acting_unit; 
 

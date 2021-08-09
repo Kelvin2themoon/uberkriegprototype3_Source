@@ -1,6 +1,6 @@
 var observer = 0;
 
-if (global.net_mode = 0 or global.net_mode = 0) observer = global.P_Turn.number;
+if (global.net_mode = 0 or global.net_mode = 1) observer = global.P_Turn.number;
 else if global.net_mode = 2 observer = global.Local_Player;
 
 if global.fow[observer] = "Disabled" {

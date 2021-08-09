@@ -20,9 +20,11 @@ if (obj_map.units[global.destination.x div 24,global.destination.y div 24] !=0){
     //re-deactivate target unit
     instance_deactivate_object(global.target_unit);
     //trap
-    instance_create(global.destination.x,global.destination.y,obj_event_trap);
+    var itsatrap = instance_create(global.destination.x,global.destination.y,obj_event_trap);
+    if(!global.P_View[global.P_Turn.number,obj_map.units[global.destination.x div 24,global.destination.y div 24].ownership]){
+        itsatrap.image_alpha = 0;
+        }
     //wait
-    
     //place acting unit in map array
     obj_map.units[global.posX,global.posY] = global.acting_unit; 
     //reset acting unit state
@@ -50,21 +52,15 @@ else {
         
     //set acting unit to map array for radio stacding check
     obj_map.units[global.posX,global.posY] = global.acting_unit; 
-    
     scr_updateLocalVision(global.target_unit);
-    
     //reset depth
     scr_setUnitDepth(global.target_unit);
-    
-    
     //remove from APC slot
     switch load_slot {
         case "A" : global.acting_unit.load_A = 0; global.drop_A = false; global.engage = false; break;
         case "B" : global.acting_unit.load_B = 0; global.drop_B = false; global.engage = false; break;   
         }
     global.supply = false;
-        
-        
     //open new syscom command if drop target is still avaliable
     if(global.acting_unit.load_A !=0 and (global.net_mode = 0 or global.P_Turn.number = global.Local_Player)){
         show_debug_message("can drop A");
@@ -74,7 +70,6 @@ else {
         instance_create(global.acting_unit.x+24,global.acting_unit.y,obj_syscom_command);
         scr_updateLocalVision(global.target_unit);
         global.drop_phaze_2 = true;
-
         }
     else if (global.acting_unit.load_B !=0 and (global.net_mode = 0 or global.P_Turn.number = global.Local_Player)){
     show_debug_message("can drop B");
@@ -85,7 +80,6 @@ else {
         scr_updateLocalVision(global.target_unit);
         global.drop_phaze_2 = true;
         }
-        
     else{
         if(global.acting_unit.load_A !=0 or global.acting_unit.load_B !=0) global.drop_phaze_2 = true;
         //wait
@@ -104,7 +98,6 @@ else {
         instance_create(0,0,obj_radio_update_event);
         }
     }
-    
 scr_updateStanding_global();
 scr_globalRadioCheck();
 scr_update_radioBoarder();

@@ -588,6 +588,7 @@
         <script>scripts\scr_draw_radioAssist.gml</script>
       </scripts>
       <script>scripts\scr_camera_reframe.gml</script>
+      <script>scripts\scr_camera_follow.gml</script>
     </scripts>
     <scripts name="Net Scripts">
       <scripts name="shortcuts">

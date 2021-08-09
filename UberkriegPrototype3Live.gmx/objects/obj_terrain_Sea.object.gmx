@@ -93,7 +93,7 @@ RiverEdges
 
 //visibility
 var blend;
-if isVisible blend = c_white;
+if isObservable blend = c_white;
 else blend = c_gray;
 
 draw_self();

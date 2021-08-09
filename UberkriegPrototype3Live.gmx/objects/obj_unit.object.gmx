@@ -342,6 +342,7 @@ if(instance_exists(obj_terrain_RiverBridge))
             }
         }
     }
+/*
 if global.mode = "Basic Battle"{    
 ///Draw is Lost isrupt
 if (!isStanding and global.blinking and isVisible) draw_sprite(spr_unitStats_Radio,3,x,y);
@@ -351,7 +352,7 @@ if (isDisrupted and isVisible){
     }
 }
     
-if (isCommander and isVisible) draw_sprite(spr_unitStats_Radio,0,x,y);
+//if (isCommander and isVisible) draw_sprite(spr_unitStats_Radio,0,x,y);
 </string>
           </argument>
         </arguments>

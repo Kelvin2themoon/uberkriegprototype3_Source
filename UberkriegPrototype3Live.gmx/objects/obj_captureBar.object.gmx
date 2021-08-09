@@ -168,9 +168,10 @@ else{
           <argument>
             <kind>1</kind>
             <string>///Draw order
-
+if global.acting_unit.isObservable{
 draw_self();
 draw_sprite(spr_capturebar_frame,global.P_Turn.number-1,x,y);
+}
 </string>
           </argument>
         </arguments>

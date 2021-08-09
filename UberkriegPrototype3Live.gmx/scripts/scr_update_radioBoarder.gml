@@ -6,27 +6,20 @@ then clear tiles in the same step
 
 // for all clear tiles (-1) check for adjacent gold tiles and assign index
 
-with (obj_checker_tile)
-    {
-    
+with (obj_checker_tile){
     //reset boarder index
     rb_edge     = 0;
     rb_corner   = 0;
     rb_fill_v   = 0;
     rb_fill_h   = 0;
-    
     //check all clear tiles
-    if (sprite_index = -1 or sprite_index = spr_rangecheck_bluedk )
-        {
-        
+    if (sprite_index = -1 or sprite_index = spr_rangecheck_bluedk ){
         //edges
         if( scr_inBound(posx +0 ,posy -1)) if ( global.rangeCheck[posx +0 ,posy -1].sprite_index = spr_rangecheck_gold ) rb_edge +=1;  //noth
         if( scr_inBound(posx +1 ,posy +0)) if ( global.rangeCheck[posx +1 ,posy +0].sprite_index = spr_rangecheck_gold ) rb_edge +=2;  //east
         if( scr_inBound(posx +0 ,posy +1)) if ( global.rangeCheck[posx +0 ,posy +1].sprite_index = spr_rangecheck_gold ) rb_edge +=4;  //south
         if( scr_inBound(posx -1 ,posy +0)) if ( global.rangeCheck[posx -1 ,posy +0].sprite_index = spr_rangecheck_gold ) rb_edge +=8;  //west
-        
         //corners account for conflict and exceptions
-        
         //North-West
         if( scr_inBound(posx -1 ,posy -1)) 
             if ( global.rangeCheck[posx -1 ,posy -1].sprite_index = spr_rangecheck_gold 

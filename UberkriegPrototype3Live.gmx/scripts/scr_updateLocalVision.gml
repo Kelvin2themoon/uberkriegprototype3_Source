@@ -1,11 +1,9 @@
 target = argument0; //target unit or property
 
 //set observer
-var observer = 0;
-if (global.net_mode = 0 or global.net_mode = 1 ) observer = global.P_Turn.number;
-else if (global.net_mode = 2) {
-    observer = global.Local_Player;
-    }
+var observer = global.P_Turn.number;
+var owner = global.P[target.ownership];
+
 //check if unit has moved in or out of fog
 target.isObservable = obj_map.terrains[target.x div 24, target.y div 24].isObservable;  
 
@@ -42,7 +40,7 @@ if (target.ownership !=0){
 
 
 //uncrease visoini range over mountains
-if ( obj_map.terrains[originV_X,originV_Y].object_index = obj_terrain_Mountain) vision_range += (target.vision div 2);
+if ( obj_map.terrains[originV_X,originV_Y].object_index = obj_terrain_Mountain) vision_range += 1;
 //if target is out of radio contact, reduce vision range to minumum
 if (target.isStanding = false){
     if object_is_ancestor(target.object_index,obj_unit) vision_range = 1;

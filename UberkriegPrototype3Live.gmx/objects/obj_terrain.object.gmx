@@ -151,7 +151,7 @@ draw_smoke_index = smoke_left - 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Draw self then Smoke
+            <string>///Draw self then Smoke
 draw_self();
 if( obj_map.terrains[posx,posy].isSmoke ) draw_sprite(spr_smoke,draw_smoke_index,x,y);
 </string>
