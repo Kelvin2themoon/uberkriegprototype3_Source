@@ -10,6 +10,8 @@ var owner = obj_map.terrains[posx,posy].ownership; // from base
 global.posX = posx;
 global.posY = posy;
 
+//setup for re link
+//with(obj_unit) WasStanding = isStanding;
 
 global.P_Turn.funds -= price;
 scr_setUnit(global.unit_type[unit_index],posx,posy,owner);
@@ -41,6 +43,14 @@ scr_updateLocalVision(unit);
 scr_globalRadioCheck();
 scr_update_radioBoarder();
 scr_rangeCheck_reset();
+
+//check for link
+unit.wasStanding = true;
+unit.isStanding   = true;
+with(obj_unit){ 
+    if(!wasStanding and isStanding and isObservable) instance_create(x,y,obj_event_link);
+    wasStanding = isStanding
+    }     
 
 global.posX = posx;
 global.posY = posy;

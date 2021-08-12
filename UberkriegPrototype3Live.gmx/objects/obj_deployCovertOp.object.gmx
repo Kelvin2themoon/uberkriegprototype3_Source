@@ -198,10 +198,13 @@ if( keyboard_check_pressed(global.keyCONFIRM) or (mouse_check_button_pressed(mb_
         if (obj_map.terrains[global.posX,global.posY].isVisible and obj_map.units[global.posX,global.posY] = 0 ){
                 //DEPLOY COVERT OP!!!
                 scr_setUnit(obj_unit_CovertOp,global.posX,global.posY,global.P_Turn.number);
-                obj_map.units[global.posX,global.posY].team = global.P_Turn.team;
-                obj_map.units[global.posX,global.posY].isHidden= true;
+                var deployed_unit =  obj_map.units[global.posX,global.posY];
+                deployed_unit.team = global.P_Turn.team;
+                deployed_unit.isHidden= true;
+                //deployed_unit.isObservable = global.P_View[global.P_Turn.number,deployed_unit.ownership]
+                //deployed_unit.isObservable = true;
                 //check observablility
-                if global.observe_P[global.P_Turn.number]  obj_map.units[global.posX, global.posY].isObservable = true;
+                //if global.observe_P[global.P_Turn.number]  obj_map.units[global.posX, global.posY].isObservable = true;
                 // update visioni
                 scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
                 // update standing

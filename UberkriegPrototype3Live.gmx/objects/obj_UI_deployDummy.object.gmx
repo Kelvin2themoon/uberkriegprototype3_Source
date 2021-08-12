@@ -473,7 +473,11 @@ if (mouse_check_button_pressed(mb_left)){
                                 if global.P_Turn.CO.COP_on obj_map.units[global.posX,global.posY].COP = true ;
                                 if global.P_Turn.CO.SCOP_on obj_map.units[global.posX,global.posY].SCOP = true ;
                                 //if unit is Covert.op, hide
-                                if unit_index = 10 isHidden = true;
+                                //if (unit_index = 10){ 
+                                    //isHidden = true;
+                                    //is_observable = false;
+                                    //if(global.P_View[global.P_Turn.number,ownership]) isObservable = true;
+                                    //}
                                 if global.net_mode = 2 {
                                     ds_map_clear(global.map_out);
                                     ds_map_add(global.map_out,"scr","net_dummy");
@@ -496,6 +500,9 @@ if (mouse_check_button_pressed(mb_left)){
                         
                         //reactivate dummy deploy curosr
                         instance_activate_object(obj_deployDummyCursor);
+                        //set menu exit delay to prevent unwanted view scrolling
+                        obj_deployDummyCursor.alarm[3] = 10;
+                        obj_deployDummyCursor.menuExitDelay = true;
                         instance_destroy();
                         global.P_Turn.CO.rounds -=1;
                         }
@@ -729,7 +736,7 @@ if keyboard_check_pressed(global.keyCONFIRM){
                     if global.P_Turn.CO.COP_on obj_map.units[global.posX,global.posY].COP = true ;
                     if global.P_Turn.CO.SCOP_on obj_map.units[global.posX,global.posY].SCOP = true ;
                     //if unit is Covert.op, hide
-                    if unit_index = 10 isHidden = true;
+                    //if unit_index = 10 isHidden = true;
                     // network mode
                     if global.net_mode = 2{
                         ds_map_clear(global.map_out);
@@ -760,6 +767,9 @@ if keyboard_check_pressed(global.keyCONFIRM){
             //Close deploy Window
             //reactivate dummy deploy curosr
             instance_activate_object(obj_deployDummyCursor);
+            //set menu exit delay to prevent unwanted view scrolling
+            obj_deployDummyCursor.alarm[3] = 10;
+            obj_deployDummyCursor.menuExitDelay = true;
             instance_destroy();
                 }
             }

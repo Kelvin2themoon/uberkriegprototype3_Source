@@ -96,7 +96,7 @@ canDisrupt      = true;
 
 //ineret from unnit parent class
 event_inherited();
-
+/*
 //draw hidden icon
 if (isHidden and isVisible) {
     draw_sprite(spr_unitStats_Hide,0,x,y);

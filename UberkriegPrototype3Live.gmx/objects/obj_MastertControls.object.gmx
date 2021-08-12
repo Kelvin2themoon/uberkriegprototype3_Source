@@ -948,6 +948,7 @@ audio_destroy_stream(test_bgm);
           <argument>
             <kind>1</kind>
             <string>///debug: read and display global.Local_player
+/*
 
 draw_text( 12 , 12 , "Local Player: " + string(global.Local_Player) );
 
@@ -972,6 +973,7 @@ draw_text( 12 , 12 , "Local Player: " + string(global.Local_Player) );
           <argument>
             <kind>1</kind>
             <string>///draw client list
+/*
 var i = 0;
 for ( i = 0 ; i &lt; ds_list_size(global.client_list) ; i++){
     draw_text(12 +i*24 ,400,string( ds_list_find_value(global.client_list,i)));

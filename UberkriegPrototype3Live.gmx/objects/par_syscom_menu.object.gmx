@@ -59,8 +59,7 @@ menu_content = ds_list_create();
 var extra_items = 3
 
 ///manage height for System menu
-if (global.acting_unit  = 0)
-    {
+if (global.acting_unit  = 0){
     if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar* star_value and global.P_Turn.CO.COP_Bar !=0 and global.P_Turn.CO.COP_on = false and global.P_Turn.CO.SCOP_on = false ) 
     extra_items += 1;
     
@@ -68,8 +67,7 @@ if (global.acting_unit  = 0)
     extra_items += 1;
     }
 //manage Command
-else
-    {
+else{
     extra_items  =0;// remove from default system menu
     if global.capture      extra_items += 1;
     if global.engage       extra_items += 1;
@@ -84,16 +82,13 @@ else
     if global.appear       extra_items += 1;
     if global.disrupt      extra_items += 1;
     if global.wait         extra_items += 1;
-
     }
 //check if menu extends below view port and adjust
 if (view_yview + view_hview &lt; y+(extra_items*24) ) //base of viewport is  highter than base of menu
 //move menue up by menu height
-y = (view_yview + view_hview) - (extra_items)*24-6;
-    
+y = (view_yview + view_hview) - (extra_items)*24-6;    
 //check top
 if (view_yview &gt; y) y = view_yview+6 
-
 
 start_y = y;
 start_x = x;
@@ -107,7 +102,6 @@ row_size = 24;
 mouse_on = false;
 mouse_row = 0;
 mouse_item = "wait";
-
 //left side
 if (x &gt; view_xview+view_wview -216) x -= 192;
 
@@ -186,29 +180,25 @@ image_index = global.cursorFrameIndex;
             <string>///navigation
 
 //key release reset
-if (    keyboard_check_pressed(global.keyUP     ) ||
-        keyboard_check_pressed(global.keyDOWN   ) ||
-        keyboard_check_pressed(global.keyLEFT   ) ||
-        keyboard_check_pressed(global.keyDOWN   ) )
-        {
+if (keyboard_check_pressed(global.keyUP     ) ||
+    keyboard_check_pressed(global.keyDOWN   ) ||
+    keyboard_check_pressed(global.keyLEFT   ) ||
+    keyboard_check_pressed(global.keyDOWN   ) ){
         global.cursorKey_delay = global.cursorKey_startspeed ;
         }
         
-if (    keyboard_check_released(global.keyUP    ) ||
-        keyboard_check_released(global.keyDOWN  ) ||
-        keyboard_check_released(global.keyLEFT  ) ||
-        keyboard_check_released(global.keyRIGHT ) )
-        {
+if (keyboard_check_released(global.keyUP    ) ||
+    keyboard_check_released(global.keyDOWN  ) ||
+    keyboard_check_released(global.keyLEFT  ) ||
+    keyboard_check_released(global.keyRIGHT ) ){
         alarm[1] = 0;
         global.cursorKey_delay = global.cursorKey_startspeed ;
-        
         }
         
         
 if (alarm[1] = -1 )
     {
-    switch(keyboard_key)
-        {
+    switch(keyboard_key){
         case(vk_nokey):
             alarm[1] = 0;
             global.cursorkey_delay = global.cursorKey_startspeed ;

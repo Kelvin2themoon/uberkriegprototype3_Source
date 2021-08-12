@@ -5,6 +5,7 @@ obj_map.units[global.posX,global.posY] = global.acting_unit;
 
 //change hide state to true
 global.acting_unit.isHidden = false;
+global.acting_unit.isObservable = obj_map.terrains[global.posX,global.posY].isObservable;
               
 // reactivate main phaze UI
 scr_exe_control_restart();

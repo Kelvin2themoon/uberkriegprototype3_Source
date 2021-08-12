@@ -44,6 +44,7 @@ isVisible   = true;  // functional visability to active player
 isHidden    = false; // consumes 5 fuel when true, see upkeep
 
 isObservable = false;    //Observable localy, distict from isVisable
+image_alpha = 0;
 //set to false as default so when it is set on off turns there is no blink into exsistance,
 
 
@@ -397,7 +398,7 @@ if (isDisrupted and isVisible){
           <argument>
             <kind>1</kind>
             <string>///debug
-//draw_text(x+6,y,string(isStanding)+string(wasStanding));
+draw_text(x,y,string(wasStanding)+string(isStanding));
 
 </string>
           </argument>

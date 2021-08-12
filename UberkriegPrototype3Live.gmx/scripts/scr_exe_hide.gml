@@ -5,6 +5,7 @@ obj_map.units[global.posX,global.posY] = global.acting_unit;
 
 //change hide state to true
 global.acting_unit.isHidden = true; 
+global.acting_unit.isObservable = global.P_View[global.P_Turn.number,global.acting_unit.ownership]
                    
 // reactivate main phaze UI
 scr_exe_control_restart();

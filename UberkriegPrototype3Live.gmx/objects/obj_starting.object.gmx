@@ -85,8 +85,21 @@ switch state {
             //update P _turn 
             global.P_Turn = ds_queue_head(global.player_q) ;
             //reset viewport
+            
+            if(global.net_mode = 2){
+                view_xview[0] = global.P[global.Local_Player].save_view_pos_x;
+                view_yview[0] = global.P[global.Local_Player].save_view_pos_y;
+                }
+            else{
+                view_xview[0] = global.P_Turn.save_view_pos_x;
+                view_yview[0] = global.P_Turn.save_view_pos_y;
+                }
+            
+            /* view port reset old non network version
             view_xview[0] = global.P_Turn.save_view_pos_x;
             view_yview[0] = global.P_Turn.save_view_pos_y;
+            */
+            
             //chang phase
             global.Phaze = "Waiting";
  

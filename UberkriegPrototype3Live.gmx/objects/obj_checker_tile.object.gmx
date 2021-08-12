@@ -192,7 +192,7 @@ if ( obj_map.units[posx,posy] != 0){
                         else if (ammo = 0) draw_sprite(spr_unitStats_ammofuel,3,x,y);
                         else draw_sprite(spr_unitStats_ammofuel,0,x,y);
                         }
-                    }
+                    
                 
                 if (fuel/max_fuel &lt; 0.5 and !global.blinking) draw_sprite(spr_unitStats_ammofuel,1,x,y);
                 if (canLoadInfantry){
@@ -205,15 +205,18 @@ if ( obj_map.units[posx,posy] != 0){
                         }
                     }
                 
-                if (isHidden and global.blinking)    draw_sprite(spr_unitStats_Hide,0,x,y);      
+                //if (isHidden and global.blinking)    draw_sprite(spr_unitStats_Hide,0,x,y);      
                 }
+            
                             
                 if (image_index != -1){
                 //var oversprite = obj_map.units[ x div 24 , y div 24 ] ;
                 //draw_sprite(oversprite.sprite_index,oversprite.image_index,x,y);  
                     }
                     //redraw unit if on
+        }
     }
+    
         
     /*
 

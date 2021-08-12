@@ -636,30 +636,23 @@ if(mouse_check_button_released(mb_right)){
 draw_radioAssist= false;
 radioAssist_range = 0;
 //draw RadioAssist if over visible unit
-        if(scr_inBound(mpx,mpy))
-            {
-            if(obj_map.units[mpx,mpy] != 0)
-                {
-                if(obj_map.units[mpx,mpy].isVisible = true)
-                    {
+        if(scr_inBound(mpx,mpy)){
+            if(obj_map.units[mpx,mpy] != 0){
+                if(obj_map.units[mpx,mpy].isVisible = true){
                     MouseOver_unit = obj_map.units[mpx,mpy];
                     //check radio range
-                    if(MouseOver_unit.radio != 0)
-                        {
+                    if(MouseOver_unit.radio != 0){
                         radioAssist_range = MouseOver_unit.radio;
                         //check for CO effect
-                        with obj_CO_0   
-                            {
-                            if(ownership = other.MouseOver_unit.ownership)
-                                {
+                        with obj_CO_0   {
+                            if(ownership = other.MouseOver_unit.ownership){
                                 other.radioAssist_range += D2D_Radio;
                                 if COP_on  other.radioAssist_range += COP_Radio;
                                 if SCOP_on  other.radioAssist_range += SCOP_Radio;
                                 }
                             }
                         //add mountain range
-                        if(obj_map.terrains[mpx,mpy].name = "Mountain" and MouseOver_unit.radio != 0 )
-                            {
+                        if(obj_map.terrains[mpx,mpy].name = "Mountain" and MouseOver_unit.radio != 0 ){
                             radioAssist_range += 2;
                             }
                         //set graphic type
@@ -672,8 +665,7 @@ radioAssist_range = 0;
             }
 
 // this fixes attack range check somhow ?????? (I dont understand, it might bite me in the but later, please send help)            
-if(checking_attack_range)
-{
+if(checking_attack_range){
 if(obj_map.units[global.posX, global.posY] != 0)
 scr_attack_rance_check(obj_map.units[global.posX, global.posY]);
 }
@@ -825,54 +817,49 @@ if (obj_map.terrains[global.posX,global.posY].isVisible and obj_map.units[global
             <string>///Open System, deploy menu,  start unit command, enemy or idle unit move range check
 
 
-if ( keyboard_check_pressed( global.keyCONFIRM) and menuExitDelay = false and scr_inBound(global.posX,global.posY))
-    {
+if ( keyboard_check_pressed( global.keyCONFIRM) and menuExitDelay = false and scr_inBound(global.posX,global.posY)){
     //check if terrain is open and visible
-    if ( obj_map.units[global.posX,global.posY] = 0 and obj_map.terrains[global.posX,global.posY].isVisible ){
-        //Open Deploy dummy menu!
-        instance_create(0,0,obj_UI_deployDummy);
-        instance_deactivate_object(obj_miniwin);
-        instance_deactivate_object(obj_deployDummyCursor);
-        instance_deactivate_object(obj_topwin);
-        }
+    if (obj_map.units[global.posX,global.posY] = 0 and obj_map.terrains[global.posX,global.posY].isObservable){
+            //Open Deploy dummy menu!
+            instance_create(0,0,obj_UI_deployDummy);
+            instance_deactivate_object(obj_miniwin);
+            instance_deactivate_object(obj_deployDummyCursor);
+            instance_deactivate_object(obj_topwin);
+            }
     //else unit exsist
-    else {
-        //if unit is visible
-        if (obj_map.units[global.posX,global.posY].isVisible){
-            //if unit is ally hide
-            if(obj_map.units[global.posX,global.posY].team = global.P_Turn.team and obj_map.units[global.posX,global.posY].isHidden = false and global.P_Turn.CO.rounds &gt; 0 ){
-                obj_map.units[global.posX,global.posY].isHidden = true;
-                //consume round
-                global.P_Turn.CO.rounds -=1;
-                //if network mode
-                if ( global.net_mode = 2){
-                    ds_map_clear(global.map_out);
-                    ds_map_add(global.map_out,"scr","net_hide");
-                    ds_map_add(global.map_out,"x",global.posX);
-                    ds_map_add(global.map_out,"y",global.posY);
-                    scr_send(global.map_out,"host");
-                    }
-                //destroy if rounds are used up
-                if global.P_Turn.CO.rounds &lt;= 0 {
-                    // re-initiat UI
-                    instance_activate_object(obj_battleCursor);
-                    instance_activate_object(obj_miniwin);
-                    instance_destroy();
-                    }
-                } 
-            //if unit is visible do move check
-            else if  (obj_map.units[global.posX,global.posY] !=0 ){           
-                //switch to enemy move range check cursor
-                scr_updateLocalMove(obj_map.units[global.posX,global.posY]);
-                checking_move_range = true;
+    else if (obj_map.units[global.posX,global.posY] != 0){
+        var target_unit = obj_map.units[global.posX,global.posY];
+        //if unit is ally
+        if (target_unit.team = global.P_Turn.team and !target_unit.isHidden and global.P_Turn.CO.rounds &gt; 0){
+            //target is hidden
+            target_unit.isHidden = true;
+            //consume special rounds
+            global.P_Turn.CO.rounds -=1;
+            //if network mode
+            if ( global.net_mode = 2){
+                ds_map_clear(global.map_out);
+                ds_map_add(global.map_out,"scr","net_hide");
+                ds_map_add(global.map_out,"x",global.posX);
+                ds_map_add(global.map_out,"y",global.posY);
+                scr_send(global.map_out,"host");
+                }
+            //destroy if rounds are used up
+            if (global.P_Turn.CO.rounds &lt;= 0){
+                // re-initiat UI
+                instance_activate_object(obj_battleCursor);
+                instance_activate_object(obj_miniwin);
+                instance_destroy();
                 }
             }
-        //unit is not visible
-        else{
-            //do nothing
-            }
+        //if enemy unit is visible do move check
+        else if (target_unit.team != global.P_Turn.team ){           
+            //switch to enemy move range check cursor
+            scr_updateLocalMove(target_unit);
+            checking_move_range = true;
+            } 
         }
     }
+//on release
 if ( keyboard_check_released( global.keyCONFIRM) ){
     scr_rangeCheck_reset();
     checking_move_range = false;
@@ -1107,87 +1094,6 @@ else sprite_index = spr_greenCursor;
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Debug
-
-//draw_text(12,48+12*2,"P2 CO Zone: " + string(global.rangeCheck[x div 24,y div 24].CO_Zone[2]));
-/*
-draw_text(12,48+12,"X: " + string(global.posX));
-draw_text(12,48+12*2,"X: " + string(global.posY));
-
-if scr_inBound(global.posX,global.posY)
-    {
-    if (obj_map.units[global.posX, global.posY] !=0 )
-        {
-        draw_text(12,48+12*6,"Standing: " + string(obj_map.units[global.posX, global.posY].isStanding));
-        draw_text(12,48+12*7,"sprite  : " + string(c_radioAssist_sprite));
-        }
-    }
-    
-draw_text(12,48+12*9,"X: " + string(checking_attack_range));
-
-
-/*
-unit_selection      = obj_map.units[global.posX,global.posY];
-terrain_selection   = obj_map.terrains[global.posX,global.posY];
-
-if (global.Phaze = "Main" and unit_selection != 0){
-    if (unit_selection.isVisible){
-    
-        draw_text(12,120, "HP hidden?" + string( obj_map.units[global.posX,global.posY].HP_hidden));
-
-        }
-}
-//draw_text(12, 240,  string(obj_map.units[ x div 24, y div 24]));
-
-/*
-
-//Scal GUI
-display_set_gui_size(768, 432);
- 
-unit_selection      = obj_map.units[global.posX,global.posY];
-terrain_selection   = obj_map.terrains[global.posX,global.posY];
-
-if (global.Phaze = "Main" and unit_selection != 0){
-    if (unit_selection.isVisible){
-        draw_text(12,84, string_upper(unit_selection.name));
-        draw_text(12,96,"HP: " + string(unit_selection.hp)+"/10");
-        draw_text(12,108,"Fuel: " + string(unit_selection.fuel)+"/"+string(unit_selection.max_fuel));
-        draw_text(12,120,"Ammo: " + string(unit_selection.ammo)+"/"+string(unit_selection.max_ammo));
-        
-        if (unit_selection.capturing &gt; 0) draw_text(12,144,"Capture: " + string(unit_selection.capturing) +"/20");
-        
-        if (unit_selection.name = "A.P.C."){
-            if (unit_selection.load_A != 0) draw_text(12,144, "Load A: " +  string(unit_selection.load_A.name));
-            if (unit_selection.load_B != 0) draw_text(12,158, "Load B: " +  string(unit_selection.load_B.name));
-            }
-        }
-    }
-    
-   */
-   
-//  draw_text( 12,12, "[" + string(x) + "," + string(y) + "]" ); 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -1316,58 +1222,6 @@ if (global.cursorFrame == 2 || global.cursorFrame == 1){
             <string>///mouse can hide
 
 if can_mouse_hide draw_text(mouse_x+12,mouse_y+12,"Right click to hide");
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="120">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///COP full charge for debug
-
-with(global.P_Turn.CO)
-    {
-    charge = (COP_Bar*1000)+(SCOP_Bar*1000);
-    }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="115">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///load end of turn save
-room_goto(rm_continue);
 </string>
           </argument>
         </arguments>

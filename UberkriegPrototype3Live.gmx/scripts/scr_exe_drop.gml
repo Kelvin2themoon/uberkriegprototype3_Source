@@ -20,8 +20,8 @@ if (obj_map.units[global.destination.x div 24,global.destination.y div 24] !=0){
     //re-deactivate target unit
     instance_deactivate_object(global.target_unit);
     //trap
-    var itsatrap = instance_create(global.destination.x,global.destination.y,obj_event_trap);
-    if(!global.P_View[global.P_Turn.number,obj_map.units[global.destination.x div 24,global.destination.y div 24].ownership]){
+    var itsatrap = instance_create(global.acting_unit.x,global.acting_unit.y,obj_event_trap);
+    if(!global.P_View[global.P_Turn.number,global.acting_unit.ownership]){
         itsatrap.image_alpha = 0;
         }
     //wait

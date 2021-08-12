@@ -1139,6 +1139,7 @@ if keyboard_check_released(vk_space){
           <argument>
             <kind>1</kind>
             <string>/// Debug
+/*
 draw_text( 12 , 12 +12   , "Current Player: " + string(global.P_Turn.number) );
 draw_text( 12 , 12 +12*2 , "Net: " + string(global.last_network_event) );
 draw_text( 12 , 12 +12*3 , "phaze: " + string(global.Phaze) );
@@ -1237,7 +1238,7 @@ if (global.Phaze = "Main"){
             <kind>1</kind>
             <string>/// debug: pos xy
 
-//draw_text(400,400, "Pso: " + string(global.posX) + ", " + string(global.posY) );
+draw_text(400,400, "Pso: " + string(global.posX) + ", " + string(global.posY) );
 //draw_text(400,412,"move order size :" + string( ds_priority_size(global.move_order)));
 </string>
           </argument>

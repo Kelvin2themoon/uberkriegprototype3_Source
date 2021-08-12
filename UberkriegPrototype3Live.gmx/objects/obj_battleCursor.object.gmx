@@ -606,7 +606,7 @@ if (obj_map.terrains[global.posX,global.posY].name == "Base" and obj_map.units[g
             <string>///Open System, deploy menu,  start unit command, enemy or idle unit move range check
 
 
-if ( keyboard_check_pressed( global.keyCONFIRM) and menuExitDelay = false )
+if ( keyboard_check_pressed( global.keyCONFIRM) and !menuExitDelay )
     {
     //check if terrain is open
     if ( obj_map.units[global.posX,global.posY] = 0)

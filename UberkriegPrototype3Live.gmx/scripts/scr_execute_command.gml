@@ -49,11 +49,15 @@ else{
 scr_updateStanding_global();
 with (obj_unit){ 
     if (!wasStanding and  isStanding and isObservable) instance_create(x,y,obj_event_link);
-    if ( wasStanding and !isStanding and isObservable and global.net_mode != 0) instance_create(x,y,obj_event_lost);
+    if ( wasStanding and !isStanding and isObservable and global.net_mode != 0 and isObservable) instance_create(x,y,obj_event_lost);
     }
 
-if (global.acting_unit != 0) if !standing_unit.isStanding instance_create(standing_unit.x,standing_unit.y, obj_event_lost);
-
+if (global.acting_unit != 0){ 
+        if(!standing_unit.isStanding){
+            if(global.acting_unit.isObservable) instance_create(standing_unit.x,standing_unit.y, obj_event_lost);
+            standing_unit.wasStanding = false;
+        }
+    }
 
 //update Radio Boarder
 scr_globalRadioCheck();

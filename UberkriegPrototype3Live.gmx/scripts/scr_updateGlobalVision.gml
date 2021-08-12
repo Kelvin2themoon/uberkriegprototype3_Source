@@ -4,7 +4,6 @@ if (global.net_mode = 0 or global.net_mode = 1) observer = global.P_Turn.number;
 else if global.net_mode = 2 observer = global.Local_Player;
 
 if global.fow[observer] = "Disabled" {
-
     with (obj_terrain){
         isVisible = true;
         isObservable = true;
@@ -12,8 +11,8 @@ if global.fow[observer] = "Disabled" {
     with (obj_unit){
         isVisible = true;
         isObservable = true;
-         if (isHidden and global.P_Turn.team != ownership){
-            isObservable = false ;
+         if (isHidden and !global.P_View[global.P_Turn.number,ownership]){
+            isVisible = false ;
             isObservable = false;
             }
         }

@@ -222,13 +222,9 @@ scr_update_radioBoarder();
 scr_rangeCheck_reset();
 scr_updateLocalMove(global.acting_unit);
 
-
 global.acting_unit.isStanding= true;
 
-
-
-with (obj_unit)
-    {
+with (obj_unit){
     if (wasStanding and !isStanding and id != global.acting_unit.id) instance_create(x,y, obj_event_lost);
     } 
     

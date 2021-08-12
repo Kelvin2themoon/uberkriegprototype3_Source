@@ -472,7 +472,6 @@ if (mouse_check_button_pressed(mb_left)){
             }
         else{
             instance_activate_object(obj_battleCursor);
-                        
             //set menu exit delay to prevent unwanted view scrolling
             obj_battleCursor.alarm[3] = 10;
             obj_battleCursor.menuExitDelay = true;

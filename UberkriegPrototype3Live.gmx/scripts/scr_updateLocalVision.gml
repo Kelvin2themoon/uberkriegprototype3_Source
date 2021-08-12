@@ -4,9 +4,12 @@ target = argument0; //target unit or property
 var observer = global.P_Turn.number;
 var owner = global.P[target.ownership];
 
-//check if unit has moved in or out of fog
-target.isObservable = obj_map.terrains[target.x div 24, target.y div 24].isObservable;  
-
+//check if unit has moved in or out of fog, also check for is hidden
+if object_is_ancestor(target.object_index,obj_unit) {
+    if (target.isHidden) target.is_observable = global.P_View[global.P_Turn.number,target.ownership];
+    else target.isObservable = obj_map.terrains[target.x div 24, target.y div 24].isObservable;
+    }
+else target.isObservable = obj_map.terrains[target.x div 24, target.y div 24].isObservable;  
 
 //target position
 var originV_X = target.x div 24;
@@ -134,6 +137,7 @@ for ( tempV_X= (-1)*vision_range ; tempV_X<= vision_range ; tempV_X+=1 ){ //for 
                         //stay hidden is isHiding
                         if( obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isHidden ){
                             //exception for when unit occupies a propety
+                            //obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isObservable = false;
                             if( object_is_ancestor(obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].object_index,obj_property)){
                                 if( obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].team = global.P_Turn.team ){
                                     obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isObservable = true;

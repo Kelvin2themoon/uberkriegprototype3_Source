@@ -754,7 +754,6 @@
         </objects>
         <object>objects\obj_supplyCursor</object>
         <object>objects\obj_dropCursor</object>
-        <object>objects\obj_smokeScreenCurosr</object>
         <objects name="Cursor Backup">
           <object>objects\obj_Bup_moveCurosr</object>
           <object>objects\obj_Bup_moveCursorMouse</object>
@@ -766,6 +765,7 @@
           <object>objects\obj_deployLandCruiserCursor</object>
           <object>objects\obj_promote_Cursor</object>
           <object>objects\obj_disruptorCurosr</object>
+          <object>objects\obj_smokeScreenCurosr</object>
         </objects>
       </objects>
       <object>objects\obj_radio_update_event</object>

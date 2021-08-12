@@ -22,7 +22,7 @@ with obj_unit {
     }
 ///check if any unit has been lost radio contact
 scr_rangeCheck_reset();
-with (obj_unit) wasStanding = isStanding;
+//with (obj_unit) wasStanding = isStanding;
 scr_updateStanding_global();
 //update radio boarder
 scr_globalRadioCheck();
@@ -33,7 +33,7 @@ scr_updateLocalMove(global.acting_unit);
 global.acting_unit.isStanding= true;
 
 with (obj_unit){
-    if (wasStanding and !isStanding and id != global.acting_unit.id) instance_create(x,y, obj_event_lost);
+    if (wasStanding and !isStanding and id != global.acting_unit.id and global.P_View[global.P_Turn.number,ownership] and isObservable) instance_create(x,y, obj_event_lost);
     } 
      
 
