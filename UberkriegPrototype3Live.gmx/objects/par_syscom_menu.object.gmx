@@ -27,6 +27,9 @@
             <kind>1</kind>
             <string>///initiate
 
+//check type is system or command menu - switch to false for cofx or other menu types
+type_syscom = true;
+
 //create list?
 
 //depth
@@ -324,79 +327,52 @@ else mouse_on = false;
             <kind>1</kind>
             <string>///execute command (press "A" or leftclick)
 
-if ( keyboard_check_pressed( global.keyCONFIRM) )
-    {
+if (keyboard_check_pressed( global.keyCONFIRM) ){
     global.last_network_event = "syscom executed";
     //save positions
-     global.P_Turn.save_cursor_pos_x = global.posX*24;
-     global.P_Turn.save_cursor_pos_y = global.posY*24;
-    
-    
+    global.P_Turn.save_cursor_pos_x = global.posX*24;
+    global.P_Turn.save_cursor_pos_y = global.posY*24;
+    // execute on selected menu item
     scr_syscom_execute(ds_list_find_value(menu_content,row));
-    //scr_syscom_execute("wait");
     }
     
-if ( mouse_check_button_pressed( mb_left) 
-
-    )
-    {
-    if (mouse_on)
-    scr_syscom_execute(ds_list_find_value(menu_content,mouse_row));
-    
-    else
-        {
-        
-         
-            //if drop phaze 2 do nothing
-            if global.drop_phaze_2 {} //do nothing if drop phaze 2 
-                    
-            else
-                {            
-               
-                    //clear move datea
-                    scr_rangeCheck_reset();
-                    //clear move order array
-                    ds_priority_clear(global.move_order);
-                    //destroy path nodes
-                    with(obj_path_node) instance_destroy();
-                   
-                    
-                    //place active unit back in array
-                    obj_map.units[global.acting_unit.x div 24,global.acting_unit.y div 24] = global.acting_unit
-                    global.acting_unit.state = "idle";
-                    scr_setUnitDepth(global.acting_unit);
-                    
-                     
-                
-                    //reset path Q
-                    ds_priority_clear(global.move_order);
-                    
-                    //place acting unit back into array
-                 
-                    //reset global vunit command variables to default
-                    global.acting_unit  = 0;    //empty
-                    global.target_unit  = 0;    //empty
-                    global.action_order = "wait"; //default to wait
-                    
-                    //reactivate main phaze YI
-                    instance_activate_object(obj_battleCursor);
-                    instance_activate_object(obj_miniwin);
-                    //destroy move cursor
-                    with (obj_moveCursorMouse){instance_destroy();}
-                    //set menueExitDelay
-                    obj_battleCursor.menuExitDelay = true;
-                    obj_battleCursor.alarm[3] = 3;
-                    
-                
-                    //instance_activate_object(obj_battleCursor);
-                    //instance_activate_object(obj_miniwin);
-                    global.last_network_event = "syscom destroyed";
-                    instance_destroy();
-                }
-            
-                
+if (mouse_check_button_pressed(mb_left)){
+    //execute on mouse selection
+    if (mouse_on) scr_syscom_execute(ds_list_find_value(menu_content,mouse_row));
+    else if (type_syscom) {
+        //if drop phaze 2 do nothing
+        if !global.drop_phaze_2 { //do nothing if drop phaze 2                
+            //clear move datea
+            scr_rangeCheck_reset();
+            //clear move order array
+            ds_priority_clear(global.move_order);
+            //destroy path nodes
+            with(obj_path_node) instance_destroy(); 
+            //place active unit back in array
+            obj_map.units[global.acting_unit.x div 24,global.acting_unit.y div 24] = global.acting_unit
+            global.acting_unit.state = "idle";
+            scr_setUnitDepth(global.acting_unit);
+            //reset path Q
+            ds_priority_clear(global.move_order);
+            //place acting unit back into array
+            //reset global vunit command variables to default
+            global.acting_unit  = 0;    //empty
+            global.target_unit  = 0;    //empty
+            global.action_order = "wait"; //default to wait
+            //reactivate main phaze YI
+            instance_activate_object(obj_battleCursor);
+            instance_activate_object(obj_miniwin);
+            //destroy move cursor
+            with (obj_moveCursorMouse){instance_destroy();}
+            //set menueExitDelay
+            obj_battleCursor.menuExitDelay = true;
+            obj_battleCursor.alarm[3] = 3;
+            //instance_activate_object(obj_battleCursor);
+            //instance_activate_object(obj_miniwin);
+            global.last_network_event = "syscom destroyed";
+            instance_destroy();
+            } 
         }
-    
     }
 </string>
           </argument>
