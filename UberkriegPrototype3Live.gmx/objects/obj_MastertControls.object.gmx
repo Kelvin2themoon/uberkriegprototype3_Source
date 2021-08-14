@@ -56,6 +56,8 @@ global.cursorKey_topspeed     =  3;
 global.cursorKey_popFrame     =  6;
 global.cursorKey_sfx = sfx_TypeWritterKey_1 ;
 
+global.exit_delay = 6;
+
 // Key colours
 global.c_uiWhite = make_colour_rgb(250,250,250);
 

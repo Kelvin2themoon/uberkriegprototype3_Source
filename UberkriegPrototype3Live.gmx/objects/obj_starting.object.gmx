@@ -104,8 +104,7 @@ switch state {
             global.Phaze = "Waiting";
  
             //reset units and propeties
-            with(obj_unit)
-                    {
+            with(obj_unit){
                     state = "idle";
                     if ownership = global.P_Turn.number state = "exhaust";
                     image_index = 21;

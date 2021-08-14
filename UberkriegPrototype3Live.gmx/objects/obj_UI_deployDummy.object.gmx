@@ -149,7 +149,7 @@ cost_mod = 1;
 
 if  (keyboard_check_pressed(global.keyCANCEL))
     {
-    instance_activate_object(obj_deployDummyCursor);
+    instance_create(global.posX*24,global.posY*24,obj_deployDummyCursor);
     instance_destroy();
     }
 
@@ -452,7 +452,7 @@ if (mouse_check_button_pressed(mb_left)){
                     instance_activate_object(obj_deployDummyCursor);
                     
                     //set menu exit delay to prevent unwanted view scrolling
-                    obj_deployDummyCursor.alarm[3] = 10;
+                    obj_deployDummyCursor.alarm[3] = global.exit_delay;
                     obj_deployDummyCursor.menuExitDelay = true;
                     
                     //reactivate dummy deploy curosr
@@ -499,10 +499,10 @@ if (mouse_check_button_pressed(mb_left)){
                         scr_rangeCheck_reset();
                         
                         //reactivate dummy deploy curosr
-                        instance_activate_object(obj_deployDummyCursor);
-                        //set menu exit delay to prevent unwanted view scrolling
-                        obj_deployDummyCursor.alarm[3] = 10;
-                        obj_deployDummyCursor.menuExitDelay = true;
+                        var re_controls = instance_create(global.posX*24,global.posY*24,obj_deployDummyCursor);
+                        //set control delay so global pos dont 
+                        re_controls.menuExitDelay = true;
+                        re_controls.alarm[3] = global.exit_delay;
                         instance_destroy();
                         global.P_Turn.CO.rounds -=1;
                         }
@@ -521,12 +521,12 @@ if (mouse_check_button_pressed(mb_left)){
             }
         else {
             //reactivate dummy deploy curosr
-            instance_activate_object(obj_deployDummyCursor);
+            var re_controls = instance_create(global.posX*24,global.posY*24,obj_deployDummyCursor);
+            //set control delay so global pos dont 
+            re_controls.menuExitDelay = true;
+            re_controls.alarm[3] = global.exit_delay;
             instance_destroy()    
-                        
-            //set menu exit delay to prevent unwanted view scrolling
-            obj_deployDummyCursor.alarm[3] = 10;
-            obj_deployDummyCursor.menuExitDelay = true;
+
             }
         }
 </string>
@@ -554,10 +554,10 @@ if (mouse_check_button_pressed(mb_left)){
 if (mouse_check_button_pressed(mb_right))
     {
     //reactivate dummy deploy curosr
-    instance_activate_object(obj_deployDummyCursor);
-    //set menu exit delay to prevent unwanted view scrolling
-    obj_deployDummyCursor.alarm[3] = 10;
-    obj_deployDummyCursor.menuExitDelay = true;
+    var re_controls = instance_create(global.posX*24,global.posY*24,obj_deployDummyCursor);
+    //set control delay so global pos dont 
+    re_controls.menuExitDelay = true;
+    re_controls.alarm[3] = global.exit_delay;
     instance_destroy();
     }
 </string>
@@ -766,10 +766,10 @@ if keyboard_check_pressed(global.keyCONFIRM){
             
             //Close deploy Window
             //reactivate dummy deploy curosr
-            instance_activate_object(obj_deployDummyCursor);
-            //set menu exit delay to prevent unwanted view scrolling
-            obj_deployDummyCursor.alarm[3] = 10;
-            obj_deployDummyCursor.menuExitDelay = true;
+            var re_controls = instance_create(global.posX*24,global.posY*24,obj_deployDummyCursor);
+            //set control delay so global pos dont 
+            re_controls.menuExitDelay = true;
+            re_controls.alarm[3] = global.exit_delay;
             instance_destroy();
                 }
             }

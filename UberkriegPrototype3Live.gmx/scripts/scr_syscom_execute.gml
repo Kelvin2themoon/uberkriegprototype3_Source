@@ -134,10 +134,14 @@ switch (command){
     case "cofx_hide" : // from deploy_dummy cursor
         scr_cofx_hide();
         break;
-    case"cofx_decoy" :
+    case "cofx_decoy" :
         instance_create(0,0,obj_UI_deployDummy);
         instance_destroy();
         break;
+    case "cofx_covert_op" :
+        scr_deploy_covert_op();
+        break
+        
         
     }
     

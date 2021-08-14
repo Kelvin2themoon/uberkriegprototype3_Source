@@ -199,6 +199,7 @@
           <sprite>sprites\spr_basicCursor_Icons</sprite>
           <sprite>sprites\spr_greenCursor</sprite>
           <sprite>sprites\spr_redCursor</sprite>
+          <sprite>sprites\spr_out_of_bounds_Cursor</sprite>
           <sprite>sprites\spr_CruiserPlusCursor</sprite>
           <sprite>sprites\spr_mouseViewScrole</sprite>
           <sprite>sprites\spr_radioAssist_gold</sprite>
@@ -210,7 +211,7 @@
           <sprite>sprites\spr_radioAssist_bronze</sprite>
           <sprite>sprites\spr_attackAssist</sprite>
           <sprite>sprites\spr_Hazzard</sprite>
-          <sprite>sprites\sprite316</sprite>
+          <sprite>sprites\spr_blueCursor</sprite>
           <sprites name="Mouse">
             <sprite>sprites\spr_mouseSlapper</sprite>
             <sprite>sprites\spr_mousePointer</sprite>
@@ -403,6 +404,8 @@
           <sprite>sprites\spr_syscom_cofx_hide_up</sprite>
           <sprite>sprites\spr_syscom_cofx_decoy_up</sprite>
           <sprite>sprites\spr_syscom_cofx_decoy_down</sprite>
+          <sprite>sprites\spr_syscom_cofx_covert_op_up</sprite>
+          <sprite>sprites\spr_syscom_cofx_covert_op_down</sprite>
         </sprites>
       </sprites>
       <sprite>sprites\spr_factionIcon_square</sprite>
@@ -442,6 +445,7 @@
       <sprite>sprites\spr_UnitEvent_Trap</sprite>
       <sprite>sprites\spr_UnitEvent_Supply</sprite>
       <sprite>sprites\spr_UnitEvent_Repair</sprite>
+      <sprite>sprites\spr_UnitEvent_Repair_3</sprite>
     </sprites>
     <sprites name="Unit Stats">
       <sprite>sprites\spr_unitStats_HP</sprite>
@@ -534,6 +538,7 @@
       <script>scripts\scr_syscom_COP.gml</script>
       <script>scripts\scr_syscom_SCOP.gml</script>
       <script>scripts\scr_cofx_hide.gml</script>
+      <script>scripts\scr_deploy_covert_op.gml</script>
     </scripts>
     <scripts name="RangeChecks">
       <script>scripts\scr_rangeCheck_reset.gml</script>
@@ -744,6 +749,7 @@
         <objects name="COFX">
           <object>objects\obj_syscom_hide</object>
           <object>objects\obj_syscom_dummy</object>
+          <object>objects\obj_syscom_covert_op</object>
         </objects>
       </objects>
       <objects name="Unit Control">

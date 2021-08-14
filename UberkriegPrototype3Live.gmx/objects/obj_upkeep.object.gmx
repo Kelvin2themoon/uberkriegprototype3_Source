@@ -59,52 +59,43 @@ view_speed = 8;
 //hp repaired by
 RepairCostPercent = global.P_Turn.CO.D2D_RepairCosts;
 RepairAmmount = global.P_Turn.CO.D2D_Repair;//global.P_Turn.CO.D2D_Repair;
+//change graphic
+sprite_index = spr_UnitEvent_Repair_3;
 
 
 //turn units on if standing
-with obj_unit
-    {
+with obj_unit{
     isInfiltrate = false; 
     if (ownership = global.P_Turn.number) global.P_Turn.unit_count += 1;
     if isStanding state = "idle";
     if isDisrupted state = "exhaust";
-    if (ownership = global.P_Turn.number) 
-        {
+    if (ownership = global.P_Turn.number) {
         if(isHidden)fuel -= 5; show_debug_message("hidden fuel consum");
         fuel += global.P_Turn.CO.D2D_Fuel_R[unit_index];
         if (fuel &gt; max_fuel) fuel = max_fuel;        
         }
-    
-    if ( obj_map.terrains[ x div 24, y div 24].isProperty )
-        {
-        if ( obj_map.terrains[ x div 24, y div 24].canRepair_g and obj_map.terrains[ x div 24, y div 24].ownership = global.P_Turn.number and ownership = global.P_Turn.number)
-            {
+    if ( obj_map.terrains[ x div 24, y div 24].isProperty ){
+        if ( obj_map.terrains[ x div 24, y div 24].canRepair_g and obj_map.terrains[ x div 24, y div 24].ownership = global.P_Turn.number and ownership = global.P_Turn.number){
             //repair disrupt
             if (isDisrupted and ownership = global.P_Turn.number) isDisrupted = false; 
             //HP UP
-            if( hp &gt;= 10 - other.RepairAmmount and !dummy and hp &lt;10)
-                {
+            if( hp &gt;= 10 - other.RepairAmmount and !dummy and hp &lt;10){
                 global.P_Turn.funds -= (cost div 10)*(10 -hp)*( other.RepairCostPercent/100);
                 hp = 10
-                ds_queue_enqueue(global.upkeep_q, obj_map.units[x div 24, y div 24]);
+                if (obj_map.units[x div 24, y div 24].isObservable) ds_queue_enqueue(global.upkeep_q, obj_map.units[x div 24, y div 24]);
                 }
-                
-            else if ( hp &lt;= 10 -other.RepairAmmount  and !dummy and hp &lt;10)
-                {
+            else if ( hp &lt;= 10 -other.RepairAmmount  and !dummy and hp &lt;10){
                 hp +=  other.RepairAmmount;
                 global.P_Turn.funds -= (cost div 10)* other.RepairAmmount*( other.RepairCostPercent/100);
-                ds_queue_enqueue(global.upkeep_q, obj_map.units[x div 24, y div 24]);
+                if (obj_map.units[x div 24, y div 24].isObservable) ds_queue_enqueue(global.upkeep_q, obj_map.units[x div 24, y div 24]);
                 }
-                
             fuel = max_fuel;
             ammo = max_ammo;
             }
         }
     }
-    
 //start upkeep event with heead of Q
-if (ds_queue_size(global.upkeep_q) &gt; 0)
-    {
+if (ds_queue_size(global.upkeep_q) &gt; 0){
     processing = ds_queue_dequeue(global.upkeep_q);
     x = processing.x;
     y = processing.y;
@@ -273,7 +264,7 @@ if ( conclude_upkeep ) {
     
     if global.net_mode = 0 { //no network, regular hotseat play
         //check for AI player
-        if global.isAIplayer[global.P_Turn.number] {
+        if global.isAIplayer[global.P_Turn.number]{
             //instance_activate_object(global.AI);
             global.AI.alarm[1] = 60; // activate alamrm sto set AI alarm on next step, becasue AI_interface not active yet
             }
@@ -287,14 +278,16 @@ if ( conclude_upkeep ) {
                 x = global.P_Turn.save_cursor_pos_x;
                 y = global.P_Turn.save_cursor_pos_y;
                 }
+            instance_destroy();
             }
             
         //server action
-        else if (global.net_mode =1 and global.Local_Player = 0 ){
+        else if (global.net_mode = 1 and global.Local_Player = 0 ){
                 ds_map_clear(global.map_out);
                 scr_rangeCheck_reset();
                 ds_map_add(global.map_out,"scr","net_start_turn");
-                scr_send(global.map_out,"all");                                        
+                scr_send(global.map_out,"all");
+                instance_destroy();                                        
                 }
             
         else if ( global.net_mode = 2 ) { //net mode is client      

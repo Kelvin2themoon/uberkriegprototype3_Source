@@ -14,12 +14,15 @@ if ( global.net_mode = 2){
 //destroy if rounds are used up
 if (global.P_Turn.CO.rounds <= 0){
     // re-initiat UI
-    instance_activate_object(obj_battleCursor);
+    scr_exe_control_restart();
     instance_activate_object(obj_miniwin);
     instance_destroy();
     }
 else { //reactivate dummy deploy cursor
-    instance_activate_object(obj_deployDummyCursor);
+    var re_controls = instance_create(global.posX*24,global.posY*24,obj_deployDummyCursor);
+    //set control delay so global pos dont 
+    re_controls.menuExitDelay = true;
+    re_controls.alarm[3] = global.exit_delay;
     instance_destroy();
     }
 

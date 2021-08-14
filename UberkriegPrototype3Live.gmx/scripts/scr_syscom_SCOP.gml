@@ -31,9 +31,18 @@ scr_updateStanding_global();
 
 //check for absolute vision
 if global.P_Turn.CO.SCOP_AbsoluteVision = true {
-    with obj_terrain isVisible = true;
-    with obj_unit isVisible   = true;
+    if (global.net_mode = 2 ){
+        if (global.P_Turn.team = global.P[global.Local_Player].team){
+            with obj_terrain isObservable = true;
+            with obj_unit    isObservable = true;
+            }
+        }
+    else{
+        with obj_terrain isObservable   = true;
+        with obj_unit isObservable      = true;
+        }
     }
+
 scr_updateGlobalVision();
 if (global.net_mode = 0 or global.P_Turn.number = global.Local_Player){
     //check for smoke screen

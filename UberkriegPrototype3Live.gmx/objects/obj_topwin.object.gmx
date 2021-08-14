@@ -53,7 +53,32 @@ isLeft = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>///player
+display_player = 1; //defult to one
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Location: Left or Right check initiate
+topwinLRcheckX = 24*global.posX;
+topwinLRcheckY = 24*global.posY;
+</string>
           </argument>
         </arguments>
       </action>
@@ -77,10 +102,18 @@ isLeft = true;
             <kind>1</kind>
             <string>///location left or right
 
-///Location: Left or Right
-topwinLRcheckX = 24*global.posX;
-topwinLRcheckY = 24*global.posY;
-
+///if change visable, update position
+if (global.net_mode = 2 and (global.P_Turn.number != global.Local_Player)){
+    if (obj_map.terrains[global.posX,global.posY].isObservable){
+        topwinLRcheckX = 24*global.posX;
+        topwinLRcheckY = 24*global.posY;
+        }
+    }
+else{
+    topwinLRcheckX = 24*global.posX;
+    topwinLRcheckY = 24*global.posY;
+    }
+    
 if (view_xview - topwinLRcheckX &gt; - 300 and view_yview - topwinLRcheckY &gt; - 240 ){
         x =  view_xview[0] + 522;
         y =  view_yview[0] + 12;
@@ -97,7 +130,7 @@ if (view_xview - topwinLRcheckX &gt; - 300 and view_yview - topwinLRcheckY &gt; 
         x =  view_xview[0] + 12;
         y =  view_yview[0] + 12;
         }
-    
+
     else{
         x =  view_xview[0] + 522;
         y =  view_yview[0] + 12;
@@ -122,8 +155,12 @@ if (view_xview - topwinLRcheckX &gt; - 300 and view_yview - topwinLRcheckY &gt; 
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Image Index Controller
-image_index = global.P_Turn.number - 1 ;
+            <string>///player check
+//if (global.net_mode = 2) display_player = global.P[global.Local_Player];
+//else 
+display_player = global.P_Turn;
+//image index
+image_index = display_player.number - 1 ;
 </string>
           </argument>
         </arguments>
@@ -224,12 +261,30 @@ d_COname_y = y+25;
             <string>///Draw 
 draw_self();
 //name
-draw_text(d_Pnames_x,d_Pnames_y,global.P_Turn.name);
+draw_text(d_Pnames_x,d_Pnames_y,display_player.name);
 //funds
-//draw red if under 0
-if global.P_Turn.funds &lt; 0 scr_draw_num(spr_num_red, true, global.P_Turn.funds,d_funds_x,d_funds_y,8);
-//else draw nomrally
-else scr_draw_num(spr_num_light, true, global.P_Turn.funds,d_funds_x,d_funds_y,8);
+if (global.net_mode = 2){
+    if (global.P_View[global.Local_Player,global.P_Turn.number]){
+        //draw normal
+        //draw red if under 0
+        if display_player &lt; 0 scr_draw_num(spr_num_red, true, display_player.funds,d_funds_x,d_funds_y,8);
+        //else draw nomrally
+        else scr_draw_num(spr_num_light, true, display_player.funds,d_funds_x,d_funds_y,8);
+        } 
+    //hidden
+    else{
+        draw_sprite(spr_num_light,11,d_funds_x,d_funds_y);
+        draw_sprite(spr_num_light,11,d_funds_x+11,d_funds_y);
+        draw_sprite(spr_num_light,11,d_funds_x+22,d_funds_y);
+        }
+    }
+//draw normal
+else{
+    //draw red if under 0
+    if display_player &lt; 0 scr_draw_num(spr_num_red, true, display_player.funds,d_funds_x,d_funds_y,8);
+    //else draw nomrally
+    else scr_draw_num(spr_num_light, true, display_player.funds,d_funds_x,d_funds_y,8);
+    }
 </string>
           </argument>
         </arguments>
@@ -251,8 +306,12 @@ else scr_draw_num(spr_num_light, true, global.P_Turn.funds,d_funds_x,d_funds_y,8
           <argument>
             <kind>1</kind>
             <string>///draw stars
+if (global.net_mode = 2){
+    if (global.P_View[global.Local_Player,display_player.number]) scr_draw_stars( d_stars_x, d_stars_y, display_player.CO.COP_Bar, display_player.CO.SCOP_Bar, display_player.CO.charge);
+    //else scr_draw_stars( d_stars_x, d_stars_y, display_player.CO.COP_Bar, display_player.CO.SCOP_Bar, 0);
+    }
+else scr_draw_stars( d_stars_x, d_stars_y, display_player.CO.COP_Bar, display_player.CO.SCOP_Bar, display_player.CO.charge);
 
-scr_draw_stars( d_stars_x, d_stars_y,global.P_Turn.CO.COP_Bar,global.P_Turn.CO.SCOP_Bar,global.P_Turn.CO.charge);
 </string>
           </argument>
         </arguments>
@@ -276,11 +335,11 @@ scr_draw_stars( d_stars_x, d_stars_y,global.P_Turn.CO.COP_Bar,global.P_Turn.CO.S
             <string>///draw skill ready
 
 //add COP and SCOP
-if (global.P_Turn.CO.charge &gt;= (global.P_Turn.CO.COP_Bar*star_value + global.P_Turn.CO.SCOP_Bar*star_value )and global.P_Turn.CO.SCOP_Bar !=0) 
+if (display_player.CO.charge &gt;= (display_player.CO.COP_Bar*star_value + display_player.CO.SCOP_Bar*star_value )and display_player.CO.SCOP_Bar !=0) 
 draw_sprite(spr_ready,1, d_skillready_x, d_skillready_y); 
 
 
-else if (global.P_Turn.CO.charge &gt;= global.P_Turn.CO.COP_Bar*star_value and global.P_Turn.CO.COP_Bar !=0) 
+else if (display_player.CO.charge &gt;= display_player.CO.COP_Bar*star_value and display_player.CO.COP_Bar !=0) 
 draw_sprite(spr_ready,0, d_skillready_x, d_skillready_y);
 
 //temp markers
@@ -321,7 +380,7 @@ if global.P4_in_play if global.P4.CO.SCOP_on draw_sprite(spr_ready,9,d_skillread
             <kind>1</kind>
             <string>///temp drae CO name
 draw_set_color(make_color_rgb(235,218,206));
-draw_text(d_COname_x,d_COname_y,global.P_Turn.CO.name);
+draw_text(d_COname_x,d_COname_y,display_player.CO.name);
 draw_set_colour(global.c_uiWhite);
 </string>
           </argument>

@@ -32,7 +32,7 @@ event_inherited();
 type_syscom = false;
 
 ds_list_clear(menu_content);
-ds_list_add(menu_content,"cofx_decoy");
+ds_list_add(menu_content,"cofx_covert_op");
 //extra_items += 1;
 row_max = ds_list_size(menu_content) - 1 ; 
 
@@ -85,7 +85,7 @@ event_inherited();
 if (keyboard_check_pressed(global.keyCANCEL)
 or (mouse_check_button_pressed(mb_left) and !mouse_on)
 or  mouse_check_button_pressed(mb_right)){
-    var re_controls = instance_create(global.posX*24,global.posY*24,obj_deployDummyCursor);
+    var re_controls = instance_activate_object(obj_deployCovertOp);
     //set control delay so global pos dont 
     re_controls.menuExitDelay = false;
     re_controls.alarm[3] = 3;
@@ -116,7 +116,6 @@ or  mouse_check_button_pressed(mb_right)){
             <string>///event_inherited
 event_inherited();
 
-
 </string>
           </argument>
         </arguments>
@@ -137,8 +136,9 @@ event_inherited();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//draw target cursor
+            <string>///draw extra cursor
 draw_sprite(spr_blueCursor,global.cursorFrameIndex,global.posX*24,global.posY*24);
+
 </string>
           </argument>
         </arguments>
