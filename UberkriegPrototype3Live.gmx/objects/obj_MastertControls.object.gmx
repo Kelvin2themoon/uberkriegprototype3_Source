@@ -587,6 +587,8 @@ global.ready_next = true;
             <string>///camera scroll variables
 global.cam_speed = 8;
 global.cam_border = 48;
+
+//cheking to see if git desktop will update
 </string>
           </argument>
         </arguments>
