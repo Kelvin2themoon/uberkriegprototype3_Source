@@ -1,4 +1,3 @@
-
 //target is hidden
 global.target_unit.isHidden = true;
 //consume special rounds

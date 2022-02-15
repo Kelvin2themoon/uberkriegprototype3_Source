@@ -3,7 +3,24 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="4" name="datafiles">
+  <datafiles number="5" name="datafiles">
+    <datafile>
+      <name>Pretzel Enclave.ubm</name>
+      <exists>-1</exists>
+      <size>47620</size>
+      <exportAction>2</exportAction>
+      <exportDir></exportDir>
+      <overwrite>0</overwrite>
+      <freeData>-1</freeData>
+      <removeEnd>0</removeEnd>
+      <store>0</store>
+      <ConfigOptions>
+        <Config name="Default">
+          <CopyToMask>9223372036854775807</CopyToMask>
+        </Config>
+      </ConfigOptions>
+      <filename>Pretzel Enclave.ubm</filename>
+    </datafile>
     <datafile>
       <name>2P_SabreRanger_v3.ubm</name>
       <exists>-1</exists>
@@ -196,6 +213,7 @@
       <sprites name="Basic">
         <sprites name="Cursors">
           <sprite>sprites\spr_basicCursor</sprite>
+          <sprite>sprites\spr_moveCurosr</sprite>
           <sprite>sprites\spr_basicCursor_Icons</sprite>
           <sprite>sprites\spr_greenCursor</sprite>
           <sprite>sprites\spr_redCursor</sprite>
@@ -211,13 +229,17 @@
           <sprite>sprites\spr_radioAssist_bronze</sprite>
           <sprite>sprites\spr_attackAssist</sprite>
           <sprite>sprites\spr_Hazzard</sprite>
+          <sprite>sprites\spr_caution</sprite>
           <sprite>sprites\spr_blueCursor</sprite>
+          <sprite>sprites\spr_purpleCursor</sprite>
+          <sprite>sprites\spr_goldCursor</sprite>
           <sprites name="Mouse">
             <sprite>sprites\spr_mouseSlapper</sprite>
             <sprite>sprites\spr_mousePointer</sprite>
             <sprite>sprites\spr_mouseGrabber</sprite>
           </sprites>
           <sprite>sprites\spr_cofx_charge</sprite>
+          <sprite>sprites\spr_x</sprite>
         </sprites>
         <sprites name="checks">
           <sprite>sprites\spr_rangecheck_red</sprite>
@@ -237,6 +259,8 @@
         <sprite>sprites\spr_num_bright</sprite>
         <sprite>sprites\spr_num_outlined</sprite>
         <sprite>sprites\spr_day</sprite>
+        <sprite>sprites\spr_factionIcon_square</sprite>
+        <sprite>sprites\spr_small_move_num</sprite>
       </sprites>
       <sprites name="MapEditor">
         <sprite>sprites\spr_grabHand</sprite>
@@ -406,9 +430,16 @@
           <sprite>sprites\spr_syscom_cofx_decoy_down</sprite>
           <sprite>sprites\spr_syscom_cofx_covert_op_up</sprite>
           <sprite>sprites\spr_syscom_cofx_covert_op_down</sprite>
+          <sprite>sprites\spr_syscom_cofx_landcruiser_up</sprite>
+          <sprite>sprites\spr_syscom_cofx_landcruiser_down</sprite>
+          <sprite>sprites\spr_syscom_cofx_promote_up</sprite>
+          <sprite>sprites\spr_syscom_cofx_promote_down</sprite>
+          <sprite>sprites\spr_syscom_cofx_disrupt_up</sprite>
+          <sprite>sprites\spr_syscom_cofx_disrupt_down</sprite>
+          <sprite>sprites\spr_syscom_cofx_smoke_down</sprite>
+          <sprite>sprites\spr_syscom_cofx_smoke_up</sprite>
         </sprites>
       </sprites>
-      <sprite>sprites\spr_factionIcon_square</sprite>
       <sprites name="Radio Boarder">
         <sprite>sprites\spr_radio_boarder_edge</sprite>
         <sprite>sprites\spr_radio_boarder_corner</sprite>
@@ -431,6 +462,7 @@
           <sprite>sprites\spr_minimap_property</sprite>
           <sprite>sprites\spr_minimap_unit</sprite>
           <sprite>sprites\spr_minimap_radioboarder</sprite>
+          <sprite>sprites\spr_mini_smoke</sprite>
         </sprites>
       </sprites>
     </sprites>
@@ -472,6 +504,11 @@
       <sprite>sprites\spr_smoke</sprite>
       <sprite>sprites\spr_smoke_B</sprite>
       <sprite>sprites\spr_smoke_miniwin</sprite>
+      <sprite>sprites\spr_smoke_1</sprite>
+      <sprite>sprites\spr_smoke_2</sprite>
+      <sprite>sprites\spr_smoke_3</sprite>
+      <sprite>sprites\spr_smoke_outline</sprite>
+      <sprite>sprites\spr_smoke_num</sprite>
     </sprites>
     <sprites name="Battle animation">
       <sprite>sprites\spr_temp_tank</sprite>
@@ -539,6 +576,10 @@
       <script>scripts\scr_syscom_SCOP.gml</script>
       <script>scripts\scr_cofx_hide.gml</script>
       <script>scripts\scr_deploy_covert_op.gml</script>
+      <script>scripts\scr_deploy_landcruiser.gml</script>
+      <script>scripts\scr_promote.gml</script>
+      <script>scripts\scr_disrupt.gml</script>
+      <script>scripts\scr_smoke.gml</script>
     </scripts>
     <scripts name="RangeChecks">
       <script>scripts\scr_rangeCheck_reset.gml</script>
@@ -566,8 +607,9 @@
         <script>scripts\scr_getUnitRadioRange.gml</script>
         <script>scripts\scr_CO_Zone_reset.gml</script>
         <script>scripts\scr_update_radioBoarder.gml</script>
+        <script>scripts\scr_attack_rance_check.gml</script>
+        <script>scripts\scr_playerRadioCheck.gml</script>
       </scripts>
-      <script>scripts\scr_attack_rance_check.gml</script>
     </scripts>
     <scripts name="Unit Commands">
       <script>scripts\scr_execute_command.gml</script>
@@ -585,7 +627,6 @@
       <script>scripts\scr_exe_disrupt.gml</script>
       <script>scripts\scr_checkInfiltrateTargets.gml</script>
       <script>scripts\scr_exe_infiltrate.gml</script>
-      <script>scripts\scr_exe_test.gml</script>
       <script>scripts\scr_exe_engage.gml</script>
       <script>scripts\scr_exe_control_restart.gml</script>
       <scripts name="archives">
@@ -599,8 +640,11 @@
         <script>scripts\scr_draw_num.gml</script>
         <script>scripts\scr_draw_stars.gml</script>
         <script>scripts\scr_draw_radioAssist.gml</script>
+        <script>scripts\scr_draw_star_p.gml</script>
+        <script>scripts\script117.gml</script>
       </scripts>
       <script>scripts\scr_camera_reframe.gml</script>
+      <script>scripts\cam_bring_into_frame.gml</script>
       <script>scripts\scr_camera_follow.gml</script>
     </scripts>
     <scripts name="Net Scripts">
@@ -621,8 +665,8 @@
         <script>scripts\net_start_turn.gml</script>
         <script>scripts\net_c_turn_ready.gml</script>
         <script>scripts\net_start_controls.gml</script>
-        <script>scripts\net_h_endturn.gml</script>
         <script>scripts\net_c_endturn.gml</script>
+        <script>scripts\net_h_endturn.gml</script>
         <script>scripts\net_confirm_turn_end.gml</script>
       </scripts>
       <scripts name="Unit depoly">
@@ -645,6 +689,7 @@
       </scripts>
       <script>scripts\net_dp2.gml</script>
     </scripts>
+    <script>scripts\script118.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader0.shader</shader>
@@ -667,6 +712,8 @@
     <font>fonts\font14</font>
     <font>fonts\font15</font>
     <font>fonts\font16</font>
+    <font>fonts\font17</font>
+    <font>fonts\font18</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_map</object>
@@ -726,8 +773,8 @@
     <objects name="Basic Battle ">
       <object>objects\obj_battleController_basic</object>
       <object>objects\obj_battleController_continue</object>
-      <object>objects\template_sandboxCursor</object>
       <object>objects\obj_battleCursor</object>
+      <object>objects\template_sandboxCursor</object>
       <object>objects\obj_AI_interface</object>
       <objects name="BasicObjects">
         <object>objects\obj_UI_deploy</object>
@@ -748,8 +795,12 @@
         <object>objects\obj_syscom_command</object>
         <objects name="COFX">
           <object>objects\obj_syscom_hide</object>
+          <object>objects\obj_syscom_promote</object>
           <object>objects\obj_syscom_dummy</object>
           <object>objects\obj_syscom_covert_op</object>
+          <object>objects\obj_syscom_landcruiser</object>
+          <object>objects\obj_syscom_disrupt</object>
+          <object>objects\obj_syscom_smoke</object>
         </objects>
       </objects>
       <objects name="Unit Control">
@@ -779,11 +830,17 @@
         <objects name="COFX Cursors">
           <object>objects\obj_deployDummyCursor</object>
           <object>objects\obj_deployCovertOp</object>
-          <object>objects\obj_deployDummyCursorCopy</object>
           <object>objects\obj_deployLandCruiserCursor</object>
           <object>objects\obj_promote_Cursor</object>
           <object>objects\obj_disruptorCurosr</object>
           <object>objects\obj_smokeScreenCurosr</object>
+          <objects name="obsolete">
+            <object>objects\obj_smokeScreenCurosr_v1</object>
+            <object>objects\obj_deployLandCruiserCursor_v1</object>
+            <object>objects\obj_deployDummyCursorCopy</object>
+            <object>objects\obj_promote_Cursor_v1</object>
+            <object>objects\obj_disruptorCurosr_v1</object>
+          </objects>
         </objects>
       </objects>
       <object>objects\obj_radio_update_event</object>

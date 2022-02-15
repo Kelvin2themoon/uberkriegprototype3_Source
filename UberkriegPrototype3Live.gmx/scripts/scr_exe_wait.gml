@@ -1,5 +1,6 @@
 //obj_map.units[destination.x div 24,destination.y div 24] = global.acting_unit;
 
+
 //reset captue
 if (global.acting_unit_moved) global.acting_unit.capturing  = 0;
 
@@ -7,6 +8,8 @@ global.drop_phaze_2 = false;
 
 //place unit back in map 
 obj_map.units[global.posX,global.posY] = global.acting_unit; 
+//snap camera if out of frame
+if (global.acting_unit.isObservable) cam_bring_into_frame(global.acting_unit,48);
 
  // reactivate main phaze UI
 scr_exe_control_restart();

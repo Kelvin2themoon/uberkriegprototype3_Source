@@ -1,6 +1,8 @@
 //exe_engage v.2
 //this is aa replacement for scr_exe_engage that will accomodate network mode.
 
+//snap camera if out of frame
+if (global.target_unit.isObservable) cam_bring_into_frame(global.target_unit,48);
 
 // atttacker cop fx
 var can_cleave = false;
@@ -57,9 +59,7 @@ var def_luck        = 10;
 //engage type chang for covert op, primary reserved for that disable ability
 if (global.acting_unit.name = "Covert Op.") global.engage_type = 2;
 
-// locla calulation - hot seat or acting client
-if ( global.net_mode = 0 or (global.net_mode = 2 and global.P_Turn.number = global.Local_Player)) {
-    //calulate attacker damage
+
     
     //check if units are adjacent
     if (abs( global.acting_unit.x - global.target_unit.x) +abs( global.acting_unit.y - global.target_unit.y) = 24 ) { 
@@ -69,7 +69,9 @@ if ( global.net_mode = 0 or (global.net_mode = 2 and global.P_Turn.number = glob
         //check for push
         if((global.P_Turn.CO.COP_Push and global.P_Turn.CO.COP_on) or (global.P_Turn.CO.SCOP_Push and global.P_Turn.CO.SCOP_on)) push_check = true;
         }
-        
+// locla calulation - hot seat or acting client
+if ( global.net_mode = 0 or (global.net_mode = 2 and global.P_Turn.number = global.Local_Player)) {
+     
     //calulate attacker damage
     atk_damage = (scr_damageCalculator(global.acting_unit, global.target_unit, obj_map.terrains[global.target_unit.x div 24, global.target_unit.y div 24].cover, global.engage_type)+ irandom(atk_luck)) div 10 ;
     
@@ -135,9 +137,20 @@ else {
     //adjust unit HPs
     global.target_unit.hp -= atk_damage;
     global.acting_unit.hp -= def_damage;
+    
     //check if unit destroyed
     if (global.target_unit.hp <= 0) def_destroyed = true;
     if (global.acting_unit.hp <= 0) atk_destroyed = true;
+    //check if units are adjacent
+    if (abs( global.acting_unit.x - global.target_unit.x) +abs( global.acting_unit.y - global.target_unit.y) = 24 ) { 
+        are_adj = true;
+        //land cruiser secondary fire exception
+        if (global.acting_unit.name = "Land Cruiser")  global.engage_type = 2;
+        //check for push
+        if((global.P_Turn.CO.COP_Push and global.P_Turn.CO.COP_on) or (global.P_Turn.CO.SCOP_Push and global.P_Turn.CO.SCOP_on)) push_check = true;
+        }
+    
+    
     }
 
     
@@ -188,7 +201,6 @@ with(global.P[global.target_unit.ownership]) {
 
 
 //COFX - push and cleave
-
 //push
 if (are_adj and ((global.P_Turn.CO.COP_Push and global.P_Turn.CO.COP_on)or(global.P_Turn.CO.SCOP_Push and global.P_Turn.CO.SCOP_on))) {
     //check push displacement
@@ -206,8 +218,10 @@ if (are_adj and ((global.P_Turn.CO.COP_Push and global.P_Turn.CO.COP_on)or(globa
             global.target_unit.y = global.target_unit.y + push_y;
             //enter into new position
             obj_map.units[global.target_unit.x div 24,global.target_unit.y div 24] = global.target_unit; 
-            ///set depth
+            //set depth
             scr_setUnitDepth(global.target_unit);
+            //camera check
+            cam_bring_into_frame(global.target_unit,48);
             }
         }
     }

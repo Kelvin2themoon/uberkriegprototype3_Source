@@ -1,5 +1,8 @@
 //check for infiltrate targets, adjacent enemy properties
 
+//snap camera if out of frame
+if (global.acting_unit.isObservable) cam_bring_into_frame(global.acting_unit,48);
+
 var xx  = argument0;     
 var yy  = argument1;
 

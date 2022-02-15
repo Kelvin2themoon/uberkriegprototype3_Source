@@ -56,16 +56,18 @@ global.Local_Player = 0; // zero is neutral, no player
 //create server ( type tcp, port, max 1 client) returns REAL(server id)
 global.server = network_create_server(network_socket_tcp , global.sPort, 4);
 
-//check if server worked
-if global.server &lt; 0{
-    global.last_network_event = "Failed to create server!";
-    }
-else{
-    show_debug_message("Listening on " + string(global.sPort));
-    global.last_network_event = "Host server created!   " + string(global.server);
-    //switch server network type
-    global.net_mode = 1;
-    }
+
+// check port avaliability
+while (global.server &lt; 0 and global.server &gt; 65535){
+    global.sPort++;
+    global.server = network_create_server(network_socket_tcp , global.sPort, 4);
+    }    
+
+show_debug_message("Listening on " + string(global.sPort));
+global.last_network_event = "Host server created!   " + string(global.server);
+//switch server network type
+global.net_mode = 1;
+
     
 
  
@@ -95,9 +97,12 @@ else{
 
 last_player = 0;
 
+
+//if file_exists("protoland.ubm") map_for_net = "protoland.ubm";
+
 //map file exsist and net mode = 1 (hose server mode)
 if (file_exists("protoland.ubm") and global.net_mode = 1){
-    global.last_network_event = "Hosting: protoland.ubm"  ; //make map name eventrually
+    global.last_network_event = "Hosting: " + "protoland.ubm mazinger"  ; //make map name eventrually
     ini_open("protoland.ubm") //load map
     
     //get map height and width
@@ -135,20 +140,21 @@ if (file_exists("protoland.ubm") and global.net_mode = 1){
     
     //close file
     ini_close();
+    //player readiness count
+    global.number_of_players = 0;
+    //count
+    i = 1;
+    for (i = 1 ; i &lt; 5 ; i++) {
+        if (global.sSocket[i] = "ready") global.number_of_players++ ;
+        }
+    
+    global.last_network_event = "Hosting: protoland.ubm for " +  string(global.number_of_players)  ; //make map name eventrually
     }
 else {
     global.last_network_event = "map not found" ;
     }
     
-//player readiness count
-global.number_of_players = 0;
-//count
-i = 1;
-for (i = 1 ; i &lt; 5 ; i++) {
-    if (global.sSocket[i] = "ready") global.number_of_players++ ;
-    }
 
-global.last_network_event = "Hosting: protoland.ubm for " +  string(global.number_of_players)  ; //make map name eventrually
 
 
 
@@ -213,6 +219,8 @@ if global.net_mode = 1{ //server side
                 //update readout
                 global.last_network_event = "slot assignment for P" + string(check_socket) +  " sent";     
                 unconnected = false;
+                
+                
                 }
             //increase index
             check_socket++ ;            
@@ -262,10 +270,10 @@ if global.net_mode = 1{ //server side
             <kind>1</kind>
             <string>/// draw open player slots
 
-draw_text(100, 210 + 16*3 , string(global.player_name[1]));
-draw_text(100, 210 + 16*4 , string(global.player_name[2]));
-draw_text(100, 210 + 16*5 , string(global.player_name[3]));
-draw_text(100, 210 + 16*6 , string(global.player_name[4]));
+draw_text(140, 210 + 16*3 , string(global.player_name[1]));
+draw_text(140, 210 + 16*4 , string(global.player_name[2]));
+draw_text(140, 210 + 16*5 , string(global.player_name[3]));
+draw_text(140, 210 + 16*6 , string(global.player_name[4]));
 </string>
           </argument>
         </arguments>

@@ -39,7 +39,7 @@ name = "atk/move+" ;
 COP_Bar     = 2 ;       //number of charged stars required to activate CO metre
 COP_on      = false ;   //CO power switch
 
-SCOP_Bar    = 4 ;
+SCOP_Bar    = 6 ;
 SCOP_on     = false ;   //SCOP switch
 
 //individual unit stats
@@ -67,9 +67,8 @@ for ( i = 0 ; i &lt;= 13 ; i += 1)
 //COFX: Cleave
 //SCOP_Cleave = true;
 COFX_SmokeScreen    = 3    ; //defines charge
-
 COP_SmokeScreen    = 3    ; //defines charge
-SCOP_SmokeScreen    = 3    ; //defines charge
+//SCOP_SmokeScreen    = 3    ; //defines charge
 SCOP_Cleave = true;
  
 </string>

@@ -14,6 +14,9 @@ global.acting_unit.alarm[0] =  1;
 //reset depth
 scr_setUnitDepth(global.acting_unit);
                     
+//snap camera if out of frame
+if (global.acting_unit.isObservable) cam_bring_into_frame(global.acting_unit,48);
+
 //nuke syscom
 with par_syscom_menu instance_destroy();
 //clear active unit

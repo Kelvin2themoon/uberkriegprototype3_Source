@@ -8,6 +8,10 @@ global.posY = pos_y;
 var smoke_range = 0;
 if global.P_Turn.CO.COP_on var smoke_range = global.P_Turn.CO.COP_SmokeScreen;
 else if global.P_Turn.CO.SCOP_on var smoke_range = global.P_Turn.CO.SCOP_SmokeScreen;
+//snap camera
+cam_bring_into_frame(obj_map.terrains[pos_x,pos_y],(smoke_range+1)*24)
+
+
 
 //makes the loops
             for( ix = -smoke_range ; ix <= smoke_range ; ix++){

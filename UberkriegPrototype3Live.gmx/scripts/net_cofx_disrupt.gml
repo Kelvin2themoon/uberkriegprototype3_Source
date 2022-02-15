@@ -4,10 +4,15 @@ var pos_y = ds_map_find_value(global.net_data_map,"y");
 global.posX = pos_x;
 global.posY = pos_y;
 
+
+
 //retireve range
 var range = 0;
 if global.P_Turn.CO.COP_on var range = global.P_Turn.CO.COP_Disrupt;
 else if global.P_Turn.CO.SCOP_on var range = global.P_Turn.CO.SCOP_Disrupt;
+
+//snap camera
+cam_bring_into_frame(obj_map.terrains[pos_x,pos_y],(range+1)*24)
 
 //makes the loops
             for( ix = -range ; ix <= range ; ix++){

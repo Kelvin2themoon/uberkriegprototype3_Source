@@ -86,16 +86,18 @@ else{
     if global.disrupt      extra_items += 1;
     if global.wait         extra_items += 1;
     }
-//check if menu extends below view port and adjust
-if (view_yview + view_hview &lt; y+(extra_items*24) ) //base of viewport is  highter than base of menu
-//move menue up by menu height
-y = (view_yview + view_hview) - (extra_items)*24-6;    
+//check if menu extends below view port and adjust //base of viewport is  highter than base of menu
+if (view_yview + view_hview &lt; y+(extra_items*24) ) y = (view_yview + view_hview) - (extra_items)*24-6;    
 //check top
 if (view_yview &gt; y) y = view_yview+6 
 
 start_y = y;
 start_x = x;
-if (x &gt; view_xview+view_wview -216) start_x -= 192;
+adjoob = false; //adjusted for out of bounds
+if (x &gt; view_xview+view_wview -216){
+    start_x -= 192;
+    adjoob = true;
+    }
 
 row = 0
 row_max = 0;

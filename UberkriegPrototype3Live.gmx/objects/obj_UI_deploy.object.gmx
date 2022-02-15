@@ -431,6 +431,8 @@ if (mouse_check_button_pressed(mb_left)){
                         scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
                         //exshaust deployed unit
                         obj_map.units[global.posX,global.posY].state = "exhaust" ;
+                        //update local standing
+                        obj_map.units[global.posX,global.posY].wasStanding = "true" ;
                         //check for COP and SCOP
                         if global.P_Turn.CO.COP_on obj_map.units[global.posX,global.posY].COP = true ;
                         if global.P_Turn.CO.SCOP_on obj_map.units[global.posX,global.posY].SCOP = true ;
@@ -590,6 +592,8 @@ if keyboard_check_pressed(global.keyCONFIRM)
                 //update standing
                 scr_updateStanding_global();
                 scr_updateLocalRadio(obj_map.units[global.posX,global.posY]);
+                //update local standing
+                obj_map.units[global.posX,global.posY].wasStanding = "true" ;
                 //update vision
                 scr_updateLocalVision(obj_map.units[global.posX,global.posY]);
                 //update Radio Boarder

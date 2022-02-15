@@ -1,3 +1,6 @@
+//snap camera if out of frame
+if (global.acting_unit.isObservable) cam_bring_into_frame(global.acting_unit,48);
+
 //reset captue
 var cap_bar = noone;
 

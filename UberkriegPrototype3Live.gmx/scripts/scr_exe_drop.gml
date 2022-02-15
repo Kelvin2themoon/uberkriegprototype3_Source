@@ -103,6 +103,9 @@ scr_globalRadioCheck();
 scr_update_radioBoarder();
 scr_rangeCheck_reset();
 
+//snap camera if out of frame
+if (global.target_unit.isObservable) cam_bring_into_frame(global.target_unit,48);
+
 
 
 

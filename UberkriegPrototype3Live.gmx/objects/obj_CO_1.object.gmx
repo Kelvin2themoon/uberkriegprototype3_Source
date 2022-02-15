@@ -51,14 +51,14 @@ COP_Vision  = 1 ;
 SCOP_Vision = 2 ;
 
 COFX_HiddenHP       = true ; //includes fuel and ammo
-COFX_PerfectVision  = true ;
+COFX_PerfectVision  = true ; //activates on cop and scop
 COFX_DeployDummy    = true ;
 COFX_PerfectIntel   = true ;
 
-COP_DeployDummy = 3;
-//SCOP_DeployDummy = 3;
-SCOP_DeployCovertOp = true;
-SCOP_AbsoluteVision = true;
+COP_DeployDummy = 1;
+SCOP_DeployDummy = 3;
+//SCOP_DeployCovertOp = true;
+//SCOP_AbsoluteVision = true;
 
 
 

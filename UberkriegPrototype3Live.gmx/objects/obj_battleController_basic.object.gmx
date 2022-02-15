@@ -56,6 +56,7 @@ for ( i = 1 ; i &lt; 5 ; i += 1 ){
             if (global.fow[i] = "Standard" or global.fow[i] = "Limited"){
                 if (global.Team_P[i] = global.Team_P[j]) global.P_View[i,j] = true;
                 }
+            else if (global.fow[i] = "Disabled") global.P_View[i,j] = true;
             } 
         //oberser is global.Local_Player
         else if (global.net_mode = 2){
@@ -67,6 +68,7 @@ for ( i = 1 ; i &lt; 5 ; i += 1 ){
                 //always see active player
                 if (global.Team_P[i] = global.Team_P[j]) global.P_View[i,j] = true;
                 }
+            else if (global.fow[i] = "Disabled") global.P_View[i,j] = true;
             }
         }
     }
@@ -99,7 +101,7 @@ if global.net_mode = 2 loading_map = "netland_P"+string(global.Local_Player)+".u
 
 
 if(file_exists (loading_map)) scr_ubermap_load(loading_map);
-//else scr_ubermap_load("2P_SabreRanger_v3.ubm");
+else scr_ubermap_load("Pretzel Enclave.ubm");
 </string>
           </argument>
         </arguments>
@@ -451,6 +453,9 @@ scr_rangeCheck_reset();
 //vision reset and update for first player
 scr_globalVisionReset();
 scr_updateGlobalVision();
+
+//link, unlink check
+///with (obj_unit) wasStanding  = isStanding;
 </string>
           </argument>
         </arguments>
@@ -510,12 +515,9 @@ instance_create(24,24,obj_topwin);
             <kind>1</kind>
             <string>///check if unit HP is hidden
 
-with (obj_CO_0)
-    {
-    if (COFX_HiddenHP )
-        {
-        with (obj_unit)
-            {
+with (obj_CO_0){
+    if (COFX_HiddenHP ){
+        with (obj_unit){
             if (ownership = other.ownership) HP_hidden = true ;
             }
         }
@@ -1075,35 +1077,6 @@ if keyboard_check_released(ord("A")) damage_chart_on = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// check for boarders and move 
-/*
-
-    if ( view_xview[0] &gt; global.posX*24 - view_border and global.canScroll_x) view_xview[0] -= view_speed;
-    if ( view_xview[0] + view_wport[0] &lt; global.posX*24 + view_border + 24 and global.canScroll_x) view_xview[0] += view_speed;
-    if ( view_yview[0] &gt; global.posY*24 - view_border and global.canScroll_y) view_yview[0] -= view_speed;
-    if ( view_yview[0] + view_hport[0] &lt; global.posY*24 + view_border+24 and global.canScroll_y) view_yview[0] += view_speed;
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///property and global radio test
 
 if keyboard_check_pressed(vk_space){
@@ -1139,6 +1112,16 @@ if keyboard_check_released(vk_space){
           <argument>
             <kind>1</kind>
             <string>/// Debug
+////draw_text(12 ,12 +14*1,"Local Player: "     +string(global.Local_Player));
+//draw_text(12 ,12 +14*2,"Current Player: "   +string(global.P_Turn.number));
+//draw_text(12 ,12 +14*3,"Local FOW: "        +string(global.fow[global.Local_Player]));
+
+
+
+/*
+var count = 0
+with (obj_deployCovertOp) count++;
+draw_text(12,12,"glow: " + string(global.glow));
 /*
 draw_text( 12 , 12 +12   , "Current Player: " + string(global.P_Turn.number) );
 draw_text( 12 , 12 +12*2 , "Net: " + string(global.last_network_event) );
@@ -1156,7 +1139,7 @@ draw_text( 12 , 12 +12*11 ,"des_y: " + string(global.destination.y div 24));
 
 //Scal GUI
 display_set_gui_size(768, 432);
-
+*/
 //Player Phaze
 if (global.Phaze = "Waiting"){   
 
@@ -1237,6 +1220,7 @@ if (global.Phaze = "Main"){
           <argument>
             <kind>1</kind>
             <string>/// debug: pos xy
+/*
 
 draw_text(400,400, "Pso: " + string(global.posX) + ", " + string(global.posY) );
 //draw_text(400,412,"move order size :" + string( ds_priority_size(global.move_order)));
@@ -1263,35 +1247,38 @@ draw_text(400,400, "Pso: " + string(global.posX) + ", " + string(global.posY) );
           <argument>
             <kind>1</kind>
             <string>///draw intel and minimap check
-if ( minimap_check_on and global.Phaze = "Main" )
-    {
+if ( minimap_check_on and global.Phaze = "Main" ){
     draw_set_colour(global.c_uiBaseGrey );
     draw_rectangle(view_xview,view_yview,view_xview+768,view_yview+432,0);
     draw_set_color(make_color_rgb(235,218,206));
     
+    //determin player
+    var i_player = noone;
+    if (global.net_mode = 2) i_player = global.P[global.Local_Player];
+    else i_player = global.P_Turn;
     
     //drawn intel
-    
+    var cop_ready = false;
+    var scop_ready = false;
     var i = 1;
-    
-    for ( i=1 ; i&lt;5 ; i++)
-        {
-        if ( intel_pos[i] !=0 )
-            {
+    for ( i=1 ; i&lt;5 ; i++){
+        if ( intel_pos[i] !=0 ){
             //draw base image
             draw_sprite(spr_intel_base,intel_pos[i].number-1, view_xview+24-6, view_yview+16+104*(i-1));
             //draw CO name, temp 'till CO prtraits are avaliable
             draw_text(view_xview+16+16-5-6, view_yview+16+25-12+104*(i-1),string(intel_pos[i].CO.name));
-            
             //chech for infiltrate 
-            if ( global.P_Turn.intel_P[intel_pos[i].number] or global.P_Turn.CO.COFX_PerfectIntel or global.P_Turn.team = intel_pos[i].team)
-                {
+            if ((i_player.intel_P[intel_pos[i].number] or i_player.CO.COFX_PerfectIntel or i_player.team = intel_pos[i].team) or global.net_mode = 1 or global.fow[i_player.number] = "Disabled" ){
                 //funds
                 scr_draw_num(spr_num_light,true,intel_pos[i].funds, view_xview+114-6,view_yview+39+104*(i-1),8);
                 //battle strength
                 scr_draw_num(spr_num_light,true,intel_pos[i].battle_strength, view_xview+114-6,view_yview+61+104*(i-1),8);
                 //stars
-                scr_draw_stars(view_xview+276 -6 -(intel_pos[i].CO.COP_Bar*7+intel_pos[i].CO.SCOP_Bar*13),view_yview+84+104*(i-1),intel_pos[i].CO.COP_Bar,intel_pos[i].CO.SCOP_Bar,intel_pos[i].CO.charge);
+                cop_ready  = false;
+                scop_ready = false;
+                if (intel_pos[i].CO.charge &gt;= intel_pos[i].CO.COP_Bar*star_value )  cop_ready = true;
+                if (intel_pos[i].CO.charge &gt;= intel_pos[i].CO.SCOP_Bar*star_value) scop_ready = true;
+                scr_draw_stars(view_xview+276 -6 -(intel_pos[i].CO.COP_Bar*7+intel_pos[i].CO.SCOP_Bar*13),view_yview+84+104*(i-1),intel_pos[i].CO.COP_Bar,intel_pos[i].CO.SCOP_Bar,intel_pos[i].CO.charge,cop_ready,scop_ready);
                 //unit count
                 scr_draw_num(spr_num_light,true,intel_pos[i].unit_count, view_xview+324-6,view_yview+39+104*(i-1),2);
                 //property count
@@ -1301,7 +1288,6 @@ if ( minimap_check_on and global.Phaze = "Main" )
         }
         
     //Draw Minimap****************************************************
-    
     //set strting pos
     var startx  =   view_xview+343+6-1 + ( (400-global.mapW*8) div 2  )  ;
     var starty  =    view_yview+16 + ( (400-global.mapH*8) div 2  )  ;
@@ -1318,19 +1304,16 @@ if ( minimap_check_on and global.Phaze = "Main" )
     //visibiilty colour mix
     var vis = c_gray;
     
-    for( i=0 ; i&lt;global.mapW ; i++)
-        { 
-        for( j=0 ; j&lt;global.mapH ; j++ )
-            {
+    for( i=0 ; i&lt;global.mapW ; i++){ 
+        for( j=0 ; j&lt;global.mapH ; j++ ){
             //set draw pos
             xx = startx+(i*8);
             yy = starty+(j*8);
             //check visibility
-            if global.map.terrains[i,j].isVisible vis = c_white;
+            if global.map.terrains[i,j].isObservable vis = c_white;
             else vis = c_gray;
             //draw terrain
-            switch global.map.terrains[i,j].name
-                {
+            switch global.map.terrains[i,j].name{
                 case "Sea" :
                     draw_sprite_ext(spr_minimap_sea,0,xx,yy,1,1,0,vis,1);
                     break; 
@@ -1376,11 +1359,15 @@ if ( minimap_check_on and global.Phaze = "Main" )
                     break;
                       
                 }
+            //draw smoke screen
+            if(global.map.terrains[i,j].isSmoke){
+                var t_check = global.map.terrains[i,j];
+                draw_sprite_ext(spr_mini_smoke,t_check.smoke_left,xx,yy,1,1,0,c_white,global.glow);
+                }
+            
             ///draw unit on blink
-            if(global.map.units[i,j] !=0 and global.blinking)
-                {
-                if(global.map.units[i,j].isVisible) 
-                    {
+            if(global.map.units[i,j] !=0 and global.blinking){
+                if(global.map.units[i,j].isObservable) {
                     draw_sprite(spr_minimap_unit,global.map.units[i,j].ownership,xx,yy);
                     if(global.map.units[i,j].isCommander) draw_sprite(spr_minimap_unit,0,xx,yy);
                     }

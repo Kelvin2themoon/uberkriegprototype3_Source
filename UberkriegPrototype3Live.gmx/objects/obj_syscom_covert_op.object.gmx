@@ -85,7 +85,7 @@ event_inherited();
 if (keyboard_check_pressed(global.keyCANCEL)
 or (mouse_check_button_pressed(mb_left) and !mouse_on)
 or  mouse_check_button_pressed(mb_right)){
-    var re_controls = instance_activate_object(obj_deployCovertOp);
+    var re_controls = instance_create(global.posX,global.posY,obj_deployLandCruiserCursor);
     //set control delay so global pos dont 
     re_controls.menuExitDelay = false;
     re_controls.alarm[3] = 3;

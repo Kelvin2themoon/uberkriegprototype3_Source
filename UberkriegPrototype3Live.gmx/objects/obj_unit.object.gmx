@@ -2,7 +2,7 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -150,9 +150,9 @@ isMovAgn = false;
           <argument>
             <kind>1</kind>
             <string>///pos variables for drawing
-
 posx = x div 24;
 posy = y div 24;
+//flashing
 </string>
           </argument>
         </arguments>
@@ -270,9 +270,29 @@ posy = y div 24;
             <kind>1</kind>
             <string>///adjust image alpha for visibility
 
-if isObservable    image_alpha = 1;
-else            image_alpha = 0;
+if isObservable     image_alpha = 1;
+else                image_alpha = 0;
 </string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
           </argument>
         </arguments>
       </action>
@@ -398,8 +418,63 @@ if (isDisrupted and isVisible){
           <argument>
             <kind>1</kind>
             <string>///debug
-draw_text(x,y,string(wasStanding)+string(isStanding));
+//draw_text(x,y,string(wasStanding)+string(isStanding));
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///flash test
+
+if (global.mode != "Map Edit"){
+    if ((global.P[ownership].CO.COP_on or global.P[ownership].CO.SCOP_on) and isObservable and state != "exhaust"){
+        draw_set_blend_mode(bm_add);
+        draw_sprite_ext(sprite_index,image_index,x,y,1,1,0,c_white,global.glow);
+        draw_set_blend_mode(bm_normal);
+        }
+    }
+/*
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//map editor states
+if (global.mode = "Map Edit"){
+    if isCommander draw_sprite( spr_unitStats_Radio,0,x,y);
+    }
 </string>
           </argument>
         </arguments>

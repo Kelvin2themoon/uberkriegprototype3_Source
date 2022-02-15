@@ -55,6 +55,9 @@ with(obj_unit){
 global.posX = posx;
 global.posY = posy;
 
+if (unit.isObservable) cam_bring_into_frame(unit,48);
+unit.wasStanding = true;
+
 
 //relay to non active clients
 if global.net_mode = 1 scr_relay (global.net_data_map);

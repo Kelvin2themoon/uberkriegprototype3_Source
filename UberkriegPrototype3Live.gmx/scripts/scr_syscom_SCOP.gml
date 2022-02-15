@@ -4,12 +4,15 @@ with global.P_Turn.CO {
     //reduce power bar
     charge = 0;
     //set up for Radio HP drain
-    if(SCOP_RadioDrainHP > 0 ) scr_globalRadioCheck();
+    if(SCOP_RadioDrainHP > 0 ){ 
+        scr_rangeCheck_reset();
+        scr_playerRadioCheck();
+        }
     }
     
     
 
-        
+
 with (obj_unit){
     if ownership = global.P_Turn.number{ 
         SCOP = true;
@@ -24,9 +27,11 @@ if( global.P_Turn.CO.SCOP_RadioDrainHP > 0 ){
             hp -= global.P_Turn.CO.SCOP_RadioDrainHP;
             if( hp < 1 ) hp = 1;
             }
+        scr_rangeCheck_reset();
         }
     }
 
+    
 scr_updateStanding_global();
 
 //check for absolute vision
@@ -48,7 +53,11 @@ if (global.net_mode = 0 or global.P_Turn.number = global.Local_Player){
     //check for smoke screen
     if( global.P_Turn.CO.SCOP_SmokeScreen > 0){
         instance_create(global.posX,global.posY,obj_smokeScreenCurosr);
-        with( obj_smokeScreenCurosr ) smoke_rounds = global.P_Turn.CO.SCOP_SmokeScreen;
+        global.P_Turn.CO.COFX_rounds = global.P_Turn.CO.SCOP_SmokeScreen;
+        with( obj_smokeScreenCurosr ){ 
+            smoke_rounds = global.P_Turn.CO.SCOP_SmokeScreen;
+            range = 2; //smoke 
+            }
         }
     //check for promotion
     else if( global.P_Turn.CO.SCOP_Promote ) instance_create(global.posX,global.posY,obj_promote_Cursor);

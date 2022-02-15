@@ -25,28 +25,37 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initiate , key config, colours
-
+            <string>///Initiate, key config, colours, animation
 /*
 this object coltrols global stuff:
-
 F12: full screen
 Global cursor animation
-
 */
 
 //mode spesific thing
-
 global.mode = "Start Game";
-
 //this variable is used to animate cursors 
 global.cursorFrame = 1;
 global.cursorFrameIndex = 1;
+global.cursorAlpha = 0;
 alarm[0] = 2 ;
-
 //this cariable used to animate anything that blinks
 global.blinking = true;
 alarm[1] = 2 ;
+//waves and glow animation
+global.wave = 100;
+global.wave_max = 100;
+global.glow = global.wave/global.wave_max; 
+wave_switch = false;
+alarm[2]= 1;
+//smoke animation
+global.smoke_frame = 0; // alarm 3 , 0 ~ 5
+global.smoke_alpha = 0.5;
+alarm[3] = 6;
+//star dance
+global.star_dance = 0;
+alarm[4] = 1;
+
 
 //Key juice variables
 global.cursorKey_startspeed   = 15;
@@ -173,7 +182,7 @@ global.cost[03] =  3000 ; // Long Gun
 global.cost[04] =  4000 ; // Officer
 global.cost[05] =  4000 ; // Recon
 global.cost[06] =  5000 ; // APC
-global.cost[07] =  7000 ; // Light Tank 
+global.cost[07] =  6000 ; // Light Tank 
 global.cost[08] =  7000 ; // Artillery
 global.cost[09] =  6000 ; // AA / IFV
 global.cost[10] =  8000 ; // Covert Op
@@ -348,7 +357,7 @@ net_mode
 
 global.net_mode = 0;
 //assign default server port
-global.sPort = 15316;
+global.sPort = 15896; //15316;
 //Server side sockets ( noone = -4 , GM:S defaults)
 //coonects to 4 clients, becasue 4 players
 global.sSocket[1] = noone ;
@@ -583,6 +592,59 @@ global.cam_border = 48;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///star dance and other bouncy things
+global.star_dance += 1;
+if  (global.star_dance &gt; 5) global.star_dance = 0;
+alarm[4]=4;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///smoke frame ++
+
+global.smoke_frame +=1;
+if (global.smoke_frame = 6) global.smoke_frame = 0;
+alarm[3] = 6;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="2">
       <action>
         <libid>1</libid>
@@ -600,7 +662,30 @@ global.cam_border = 48;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>///glow and waves animation
+if (wave_switch )global.wave += 1; 
+else global.wave -= 1;
+
+if (global.wave &lt; 0){ 
+    //global.wave = global.wave_max;
+    wave_switch = true;
+    alarm[2] = 10;
+    }
+else if (global.wave &gt; global.wave_max){
+    //global.wave = 0
+    wave_switch = false;
+    alarm[2]  = 100; 
+    }
+else alarm[2] = 1;
+
+global.glow = global.wave/global.wave_max;
+//smoke alpha
+global.smoke_alpha = global.glow^(-1) //(global.glow/2) + 0.5;
+
+//restart alarm
+
+
+</string>
           </argument>
         </arguments>
       </action>
@@ -664,31 +749,37 @@ else {
 switch  (global.cursorFrame)    
     {
     case 1: global.cursorFrameIndex = 1;
+            global.cursorAlpha = 1;
             alarm[0] = 24;
             global.cursorFrame = 2;
             break;
             
     case 2: global.cursorFrameIndex = 2;
+            global.cursorAlpha = 0.5; 
             alarm[0] = 4;
             global.cursorFrame = 3;
             break;
     
     case 3: global.cursorFrameIndex = 3;
+            global.cursorAlpha = 0;
             alarm[0] = 8;
             global.cursorFrame = 4;
             break;
 
     case 4: global.cursorFrameIndex = 2;
+            global.cursorAlpha = 0.5;
             alarm[0] = 2;
             global.cursorFrame = 5;
             break;
                 
     case 5: global.cursorFrameIndex = 1;
+            global.cursorAlpha = 1;
             alarm[0] = 2;
             global.cursorFrame = 6;
             break;
             
     case 6: global.cursorFrameIndex = 0;
+            global.cursorAlpha = 1;
             alarm[0] = 2;
             global.cursorFrame = 1;
             break;        
@@ -903,6 +994,7 @@ if ds_map_find_value( async_load , "type" ) = network_type_data {
             <kind>1</kind>
             <string>///destroy audio stream to prevent memory leak
 audio_destroy_stream(test_bgm);
+
 </string>
           </argument>
         </arguments>
@@ -926,7 +1018,7 @@ audio_destroy_stream(test_bgm);
           <argument>
             <kind>1</kind>
             <string>///debug draw room name
-
+//draw_text(12,12,"Curosr Frame: "+  string(global.cursorFrameIndex));
 //draw_text(12,12,room_get_name(room));
 //draw_text(24,24,string(instance_count));
 </string>
@@ -1069,7 +1161,7 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>room_goto(rm_debugStart);
+            <string>//room_goto(rm_debugStart);
 </string>
           </argument>
         </arguments>

@@ -141,6 +141,18 @@ switch (command){
     case "cofx_covert_op" :
         scr_deploy_covert_op();
         break
+    case "cofx_landcruiser" :
+        scr_deploy_landcruiser();
+    case "cofx_promote" :
+        scr_promote();
+        break;
+    case "cofx_disrupt" :
+        show_debug_message("disrupt case passed");
+        scr_disrupt();
+        break;
+    case "cofx_smoke" :
+        scr_smoke();
+        break;
         
         
     }

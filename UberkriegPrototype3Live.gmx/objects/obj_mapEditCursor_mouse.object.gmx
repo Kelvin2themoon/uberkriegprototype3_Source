@@ -720,7 +720,9 @@ if(scr_inBound(posX,posY))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>//draw mouse
+draw_sprite(spr_mousePointer,0, mouse_x, mouse_y);
+</string>
           </argument>
         </arguments>
       </action>

@@ -3,10 +3,18 @@ target = argument0; //target unit or property
 //set observer
 var observer = global.P_Turn.number;
 var owner = global.P[target.ownership];
+var covert_exception = false;
+var temp_unit_check = 0; //for not fow covert op exceptions
 
 //check if unit has moved in or out of fog, also check for is hidden
 if object_is_ancestor(target.object_index,obj_unit) {
-    if (target.isHidden) target.is_observable = global.P_View[global.P_Turn.number,target.ownership];
+    if (target.isHidden){ 
+        if (global.net_mode = 2 and target.team != global.P[global.Local_Player].team){ 
+            target.is_observable = false;
+            covert_exception = true;
+            }
+        else target.is_observable = global.P_View[global.P_Turn.number,target.ownership];
+        }
     else target.isObservable = obj_map.terrains[target.x div 24, target.y div 24].isObservable;
     }
 else target.isObservable = obj_map.terrains[target.x div 24, target.y div 24].isObservable;  
@@ -19,8 +27,19 @@ var tempV_X = 0;
 var tempV_X = 0;
 
 //check if target is observable ( global.P_View adjusted on obj_basicBattle create
-var can_see = global.P_View[observer,target.ownership] ;
-    
+var can_see = global.P_View[observer,target.ownership];
+
+if (object_is_ancestor(target.object_index,obj_unit)){
+    if (target.isHidden){
+        if (global.net_mode = 2){
+            can_see = false;
+            if (target.ownership = global.Local_Player) can_see = true;
+            }
+        }
+    }
+ 
+ 
+       
 if can_see { 
     target.isVisible  = true;
     target.isObservable = true;
@@ -33,7 +52,7 @@ var vision_bonus = 0
 perfectVision = false;
 
 // adjust for COFX
-if (target.ownership !=0){
+if (target.ownership !=0 and object_is_ancestor(target.object_index,obj_unit)){
     vision_bonus = global.P[target.ownership].CO.D2D_Vision;
     if global.P[target.ownership].CO.COP_on vision_bonus += owner.CO.COP_Vision ;
     if global.P[target.ownership].CO.SCOP_on vision_bonus += owner.CO.SCOP_Vision ;
@@ -42,7 +61,7 @@ if (target.ownership !=0){
     } 
 
 
-//uncrease visoini range over mountains
+//uncrease visoin range over mountains
 if ( obj_map.terrains[originV_X,originV_Y].object_index = obj_terrain_Mountain) vision_range += 1;
 //if target is out of radio contact, reduce vision range to minumum
 if (target.isStanding = false){
@@ -121,8 +140,12 @@ for ( tempV_X= (-1)*vision_range ; tempV_X<= vision_range ; tempV_X+=1 ){ //for 
                         obj_map.terrains[originV_X + tempV_X, originV_Y + tempV_Y].isObservable = true;
                         //if unit exsist at position
                         if( obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y] !=0){
+                            //store unit in temp variable
+                            temp_unit_check = obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y];
+                            //check for covert exception, units and properties on the same team do not revieal their own units to enemy obervers
+                            if (global.net_mode = 2 and global.fow[global.Local_Player] = "Disabled" and  temp_unit_check.team = owner.team){} //do nothing
                             //target is visible
-                            obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isObservable = true;
+                            else obj_map.units[originV_X + tempV_X, originV_Y + tempV_Y].isObservable = true;
                             }
                         }
                         

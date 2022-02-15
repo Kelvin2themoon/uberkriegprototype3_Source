@@ -59,6 +59,8 @@ if (global.acting_unit != 0){
         }
     }
 
+//update vision
+scr_updateGlobalVision();    
 //update Radio Boarder
 scr_globalRadioCheck();
 scr_update_radioBoarder();

@@ -39,10 +39,10 @@ if ( global.engage and!global.acting_unit.isMovAgn) ds_list_add(menu_content,"en
 
 if global.join         ds_list_add(menu_content,"join");
 if global.attach       ds_list_add(menu_content,"attach");
-if global.supply       ds_list_add(menu_content,"supply");
 if global.load         ds_list_add(menu_content,"load");
 if global.drop_A       ds_list_add(menu_content,"drop_A");
 if global.drop_B       ds_list_add(menu_content,"drop_B");
+if global.supply       ds_list_add(menu_content,"supply");
 if global.infiltrate   ds_list_add(menu_content,"infiltrate");
 if global.hide         ds_list_add(menu_content,"hide");
 if global.appear       ds_list_add(menu_content,"appear");
@@ -293,7 +293,7 @@ if global.acting_unit != 0{
             <kind>1</kind>
             <string>///troubleshoot
 
-draw_text(12,72,"select: " + ds_list_find_value(menu_content,row));
+//draw_text(12,72,"select: " + ds_list_find_value(menu_content,row));
 
 
 //draw_text(0,240, "by mouse: " + string( by_mouse));

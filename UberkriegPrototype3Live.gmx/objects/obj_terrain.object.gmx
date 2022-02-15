@@ -95,8 +95,9 @@ isDisrupted = false;
             <string>///adjust drawing Variables
 posx = x div 24;
 posy = y div 24;
+//smoke
+draw_smoke_index = spr_smoke_1;
 
-draw_smoke_index = smoke_left - 1;
 
 
 </string>
@@ -122,13 +123,14 @@ draw_smoke_index = smoke_left - 1;
           <argument>
             <kind>1</kind>
             <string>///visibility and smoke couhnt down
-
 if isObservable image_blend = c_white;
 else image_blend = c_gray;
-
 //smoke drawing index
-draw_smoke_index = smoke_left - 1;
-
+//draw_smoke_index = smoke_left - 1;
+//replace frame index with sprite index
+if(isSmoke){
+    draw_smoke_index = asset_get_index("spr_smoke_"+string(smoke_left));
+    }
 </string>
           </argument>
         </arguments>
@@ -151,9 +153,35 @@ draw_smoke_index = smoke_left - 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw self then Smoke
+            <string>/// draw stuff
 draw_self();
-if( obj_map.terrains[posx,posy].isSmoke ) draw_sprite(spr_smoke,draw_smoke_index,x,y);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw smoke
+if(isSmoke and smoke_left &gt; 0){ 
+    draw_sprite_ext(draw_smoke_index,global.smoke_frame,x,y,1,1,0,c_white,global.glow);
+    draw_sprite(spr_smoke_outline,global.smoke_frame,x,y);
+    //draw_sprite(spr_smoke_num,smoke_left,x,y);
+    //draw_text(x,y,string(smoke_left));
+    }
 </string>
           </argument>
         </arguments>

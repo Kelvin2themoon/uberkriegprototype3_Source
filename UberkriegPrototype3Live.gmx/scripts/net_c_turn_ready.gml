@@ -9,7 +9,7 @@ global.P_ready[n] = true;
 if scr_all_players_ready(){
     ds_map_clear(global.map_out);
     ds_map_add(global.map_out,"scr","net_start_controls");
-    scr_send(global.map_out,"acting");
+    scr_send(global.map_out,"all");
     scr_clear_player_ready();
     }
 

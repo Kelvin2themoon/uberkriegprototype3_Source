@@ -267,6 +267,28 @@ with (obj_unit)
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// action icon
+action_icon = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="1">
       <action>
@@ -614,6 +636,37 @@ if (scr_inBound(mouse_pos_x,mouse_pos_y)){
                     last_pos_y = mouse_pos_y;
                     }
             }
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// set action icon
+///Unit action icon check
+action_icon = 0; //no icon
+var checking_unit = obj_map.units[global.posX,global.posY];
+if(checking_unit !=0 and global.acting_unit != 0){
+    if (checking_unit.ownership = global.P_Turn.number){ 
+        if (global.acting_unit.unit_index &lt; 4 and checking_unit.unit_index =  6) action_icon = 2; //APC - load
+        if (global.acting_unit.unit_index = 4 and !checking_unit.isCommander and !global.P_Turn.CO.D2D_CannotAttach) action_icon = 3;// field officer - attach
+        if (global.acting_unit.unit_index = checking_unit.unit_index and checking_unit.hp &lt; 10) action_icon = 4//join
+        }
     }
 </string>
           </argument>
@@ -1151,50 +1204,15 @@ draw_text(12,313, "terrain cost: " + string(scr_check_move_cost(global.acting_un
             <kind>1</kind>
             <string>///draw radio assist
 
-if radio_assist_on
-    {
+if radio_assist_on{
     scr_draw_radioAssist(global.posX,global.posY,radioAssistRange,radioAssist_sprite);
-    if (radioAssist_sprite = spr_radioAssist_darkBlue and global.cursorFrame = 2 ) draw_sprite(spr_Hazzard,0,x,y);
+    if (radioAssist_sprite = spr_radioAssist_darkBlue){
+        draw_sprite_ext(spr_caution,1,x,y,1,1,0,c_white,(3-global.cursorFrameIndex)/3);
+        draw_sprite(spr_caution,0,x,y);
+        }
     }
-    
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Draw Move Left
 
-if (  path_max - path_total &gt;= 0  and path_total !=0)
-    {
-    scr_draw_num( spr_num_outlined , false, path_max - path_total, x+21, y+3, 2 );    
-    //scr_draw_num( spr_num_red, true, path_total, x, y, 3 );    
     
-    //draw_set_color(c_black);
-    //draw_text(x+1,y+1, string(path_total)); 
-    //draw_text(x+1,y+1+12, string(global.acting_unit.move_points));
-    
-    //draw_set_color(c_orange);
-    //draw_text(x,y, string(path_total)); 
-    //draw_text(x,y+12, string(global.acting_unit.move_points));
-    
-    //draw_set_color(global.c_uiWhite);
-    
-    }
 </string>
           </argument>
         </arguments>
@@ -1266,6 +1284,33 @@ if (obj_map.units[global.posX,global.posY] !=0 and global.rangeCheck[global.posX
 draw_sprite(spr_mousePointer,global.P_Turn.number - 1, mouse_x, mouse_y);
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Draw Move Left
+
+if ( path_total &lt;= path_max ){
+    draw_sprite(spr_small_move_num,path_max - path_total,x+2,y+2);
+    //action icon
+    if (action_icon != 0) draw_sprite(spr_basicCursor_Icons,action_icon,x,y);   
+    }
 </string>
           </argument>
         </arguments>

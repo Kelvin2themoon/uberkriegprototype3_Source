@@ -442,8 +442,11 @@ if (global.unit_check != 0)
     }
     
 //draw fog
-if global.terrain_check.isSmoke
-draw_sprite(spr_smoke_miniwin,global.terrain_check.smoke_left,x+8,y+66);
+if global.terrain_check.isSmoke{
+    draw_sprite_ext(global.terrain_check.draw_smoke_index,global.smoke_frame,x+12,y+60,1,1,0,c_white,global.glow);
+    draw_sprite(spr_smoke_outline,global.smoke_frame,x+12,y+60);
+    //draw_sprite(spr_smoke_miniwin,global.terrain_check.smoke_left,x+8,y+66);
+    }
     
 
 

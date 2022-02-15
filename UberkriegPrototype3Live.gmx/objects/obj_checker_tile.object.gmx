@@ -140,6 +140,35 @@ else on_path = false;
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///debug
+
+//if CO_Field[global.P_Turn.number] draw_text(x,y,"F");
+//draw_text(x,y,string(move_cost));
+//draw_text(x,y,string(pathority));
+
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///draw Order
 
 
@@ -155,8 +184,8 @@ draw_sprite(spr_radio_boarder_fill_v,   rb_fill_v,  x,y);
 draw_sprite(spr_radio_boarder_fill_h,   rb_fill_h,  x,y);
 
 //check for smoke
-if  obj_map.terrains[posx,posy].isSmoke
-   draw_sprite(spr_smoke_B, obj_map.terrains[posx,posy].draw_smoke_index,x,y);
+//if  obj_map.terrains[posx,posy].isSmoke
+//   draw_sprite(spr_smoke_B, obj_map.terrains[posx,posy].draw_smoke_index,x,y);
 
 //draw unit stats
 
@@ -174,7 +203,7 @@ if ( obj_map.units[posx,posy] != 0){
                     if (capturing  &gt; 0)                         draw_sprite( spr_unitStats_Cap,0,x,y);
                     if (isCommander)                            draw_sprite( spr_unitStats_Radio,0,x,y);
                     if (isHidden)                               draw_sprite(spr_unitStats_Hide,0,x,y);
-                    if (!isStanding     and global.blinking)    draw_sprite(spr_unitStats_Radio,3,x,y);
+                    if (!isStanding     and global.blinking)    draw_sprite(spr_unitStats_Radio,4,x,y);
                     if (isMovAgn)                               draw_sprite(spr_unitStats_Move2,3,x,y);
                     if (isDisrupted     and !global.blinking)   draw_sprite(spr_unitStats_Disrupted,0,x,y);
                     if (isInfiltrate    and !global.blinking)   draw_sprite(spr_unitStats_Infiltrate,0,x,y);
@@ -182,8 +211,8 @@ if ( obj_map.units[posx,posy] != 0){
                     
                     //if (isHidden        and global.blinking)    draw_sprite(spr_unitStats_Hide,0,x,y);---moved to below APC 
                     ///DRAW Power if power on
-                    if COP draw_sprite(spr_unitStats_Power,0,x,y);
-                    if SCOP draw_sprite(spr_unitStats_Power,1,x,y);
+                    //if COP draw_sprite(spr_unitStats_Power,0,x,y);
+                    //if SCOP draw_sprite(spr_unitStats_Power,1,x,y);
                     //if(dummy and global.P_Turn.number = ownership) draw_sprite(spr_unitStats_Power,2,x,y);
                                     
                     //ammo and fuel ( and check for APC load
@@ -230,35 +259,6 @@ if (on_path){
     }
 
 //if (pathority != -1) draw_sprite(spr_movePath,arrow_index,x,y);//draw red tile temp
-
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///debug
-
-//if CO_Field[global.P_Turn.number] draw_text(x,y,"F");
-//draw_text(x,y,string(move_cost));
-//draw_text(x,y,string(pathority));
-
 
 
 

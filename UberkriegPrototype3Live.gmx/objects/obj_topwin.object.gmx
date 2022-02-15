@@ -82,6 +82,28 @@ topwinLRcheckY = 24*global.posY;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>cop_ready  = false;
+scop_ready = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -240,6 +262,34 @@ d_COname_y = y+25;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///check cop/scop
+//add COP and SCOP
+if (display_player.CO.charge &gt;= display_player.CO.COP_Bar*star_value and display_player.CO.COP_Bar !=0) cop_ready = true;
+else cop_ready = false; 
+if (display_player.CO.charge &gt;= (display_player.CO.COP_Bar*star_value + display_player.CO.SCOP_Bar*star_value )and display_player.CO.SCOP_Bar !=0) scop_ready = true;
+else scop_ready = false;
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -264,7 +314,7 @@ draw_self();
 draw_text(d_Pnames_x,d_Pnames_y,display_player.name);
 //funds
 if (global.net_mode = 2){
-    if (global.P_View[global.Local_Player,global.P_Turn.number]){
+    if (global.P_View[global.Local_Player,global.P_Turn.number] or global.P[global.Local_Player].CO.COFX_PerfectIntel){
         //draw normal
         //draw red if under 0
         if display_player &lt; 0 scr_draw_num(spr_num_red, true, display_player.funds,d_funds_x,d_funds_y,8);
@@ -307,11 +357,10 @@ else{
             <kind>1</kind>
             <string>///draw stars
 if (global.net_mode = 2){
-    if (global.P_View[global.Local_Player,display_player.number]) scr_draw_stars( d_stars_x, d_stars_y, display_player.CO.COP_Bar, display_player.CO.SCOP_Bar, display_player.CO.charge);
+    if (global.P_View[global.Local_Player,display_player.number] or global.P_Turn.CO.COFX_PerfectIntel) scr_draw_stars( d_stars_x, d_stars_y, display_player.CO.COP_Bar, display_player.CO.SCOP_Bar,display_player.CO.charge, cop_ready,scop_ready);
     //else scr_draw_stars( d_stars_x, d_stars_y, display_player.CO.COP_Bar, display_player.CO.SCOP_Bar, 0);
     }
-else scr_draw_stars( d_stars_x, d_stars_y, display_player.CO.COP_Bar, display_player.CO.SCOP_Bar, display_player.CO.charge);
-
+else scr_draw_stars( d_stars_x, d_stars_y, display_player.CO.COP_Bar, display_player.CO.SCOP_Bar, display_player.CO.charge,cop_ready,scop_ready);
 </string>
           </argument>
         </arguments>
@@ -333,11 +382,10 @@ else scr_draw_stars( d_stars_x, d_stars_y, display_player.CO.COP_Bar, display_pl
           <argument>
             <kind>1</kind>
             <string>///draw skill ready
-
+/*
 //add COP and SCOP
 if (display_player.CO.charge &gt;= (display_player.CO.COP_Bar*star_value + display_player.CO.SCOP_Bar*star_value )and display_player.CO.SCOP_Bar !=0) 
 draw_sprite(spr_ready,1, d_skillready_x, d_skillready_y); 
-
 
 else if (display_player.CO.charge &gt;= display_player.CO.COP_Bar*star_value and display_player.CO.COP_Bar !=0) 
 draw_sprite(spr_ready,0, d_skillready_x, d_skillready_y);

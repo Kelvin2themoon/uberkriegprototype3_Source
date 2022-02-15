@@ -1358,7 +1358,7 @@ if ( minimap_check_on and global.Phaze = "Main" )
                 //battle strength
                 scr_draw_num(spr_num_light,true,intel_pos[i].battle_strength, view_xview+114-6,view_yview+61+104*(i-1),8);
                 //stars
-                scr_draw_stars(view_xview+276 -6 -(intel_pos[i].CO.COP_Bar*7+intel_pos[i].CO.SCOP_Bar*13),view_yview+84+104*(i-1),intel_pos[i].CO.COP_Bar,intel_pos[i].CO.SCOP_Bar,intel_pos[i].CO.charge);
+                scr_draw_stars(view_xview+276 -6 -(intel_pos[i].CO.COP_Bar*7+intel_pos[i].CO.SCOP_Bar*13),view_yview+84+104*(i-1),intel_pos[i].CO.COP_Bar,intel_pos[i].CO.SCOP_Bar,intel_pos[i].CO.charge,intel_pos[i].CO.COP_on,intel_pos[i].CO.SCOP_on);
                 //unit count
                 scr_draw_num(spr_num_light,true,intel_pos[i].unit_count, view_xview+324-6,view_yview+39+104*(i-1),2);
                 //property count

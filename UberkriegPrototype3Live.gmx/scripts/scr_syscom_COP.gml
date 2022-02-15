@@ -45,10 +45,14 @@ if (global.net_mode = 0 or global.P_Turn.number = global.Local_Player){
         instance_create(global.posX,global.posY,obj_disruptorCurosr);
         with(obj_disruptorCurosr) range = global.P_Turn.CO.COP_Disrupt
         }
-    
+    //check for smokeeScreen
     else if( global.P_Turn.CO.COP_SmokeScreen > 0){ 
         instance_create(global.posX,global.posY,obj_smokeScreenCurosr);
-        with( obj_smokeScreenCurosr ) smoke_rounds = global.P_Turn.CO.COP_SmokeScreen;
+        global.P_Turn.CO.COFX_rounds = global.P_Turn.CO.COP_SmokeScreen;
+        with( obj_smokeScreenCurosr ){ 
+            smoke_rounds = global.P_Turn.CO.COP_SmokeScreen;
+            range = 2; //smoke 
+            }
         }
     //check for promotion
     else if( global.P_Turn.CO.COP_Promote ) instance_create(global.posX,global.posY,obj_promote_Cursor);

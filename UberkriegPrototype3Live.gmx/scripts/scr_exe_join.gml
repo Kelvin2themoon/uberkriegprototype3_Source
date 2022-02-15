@@ -1,4 +1,8 @@
 //adjust target unit HP
+
+//snap camera if out of frame
+if (global.target_unit.isObservable) cam_bring_into_frame(global.target_unit,48);
+
 hp_remainder = 0
 
 with (global.target_unit){

@@ -232,6 +232,28 @@ with (obj_unit){
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///action icon check
+action_icon = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="1">
       <action>
@@ -327,15 +349,12 @@ if (    keyboard_check_released(vk_up   ) ||
         global.cursorKey_delay = global.cursorKey_startspeed ;
         }
 // arrow key actions and juice        
-if (alarm[1] = -1 )
-    {
-    switch(keyboard_key)
-        {
+if (alarm[1] = -1 ){
+    switch(keyboard_key){
         case(vk_nokey):
             alarm[1] = 0;
             global.cursorkey_delay = global.cursorKey_startspeed ;
             break;
-        
         case vk_up :
             if ( global.posY &gt; 0 ){ 
                 y = y  - 24 ; 
@@ -343,7 +362,6 @@ if (alarm[1] = -1 )
                 newpos_y = global.posY -1;
                 path_total += scr_check_move_cost(global.acting_unit,obj_map.terrains[newpos_x,newpos_y]);
                 if global.rangeCheck[newpos_x,newpos_y].pathority = -1 moveout = true;
-                
                 //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
                     global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
@@ -352,7 +370,6 @@ if (alarm[1] = -1 )
                     new_path_node.pathority_index = path_total;
                     ds_priority_add(global.move_order,new_path_node,path_total);
                     scr_draw_move_path();
-                
                     //if max range reached
                     if( (path_total &gt; path_max or path_total &gt; global.acting_unit.fuel) or move_out){
                         //destroy all nodes
@@ -362,7 +379,7 @@ if (alarm[1] = -1 )
                         }
                      move_out = false;   
                     }
-                }
+                }     
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
@@ -372,8 +389,7 @@ if (alarm[1] = -1 )
                 newpos_x = global.posX +0;
                 newpos_y = global.posY +1;
                 path_total += scr_check_move_cost(global.acting_unit,obj_map.terrains[newpos_x,newpos_y]);
-                if global.rangeCheck[newpos_x,newpos_y].pathority = -1 moveout = true;
-               
+                if global.rangeCheck[newpos_x,newpos_y].pathority = -1 moveout = true;               
                //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
                     global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
@@ -394,17 +410,14 @@ if (alarm[1] = -1 )
                     }
                 }
             scr_cursorKey_juice(1,global.cursorKey_sfx);
-            break;
-
-        
+            break;        
         case vk_left :
             if ( global.posX &gt; 0 ){
                 x = x  - 24 ;
                 newpos_x = global.posX -1;
                 newpos_y = global.posY +0;
                 path_total += scr_check_move_cost(global.acting_unit,obj_map.terrains[newpos_x,newpos_y]);
-                if global.rangeCheck[newpos_x,newpos_y].pathority = -1 moveout = true;
-                
+                if global.rangeCheck[newpos_x,newpos_y].pathority = -1 moveout = true;         
                 //if within max-range
                 if (global.rangeCheck[newpos_x,newpos_y].move_cost != -1 ){
                     global.rangeCheck[newpos_x,newpos_y].pathority = path_total;
@@ -425,9 +438,7 @@ if (alarm[1] = -1 )
                     }
                 }
             scr_cursorKey_juice(1,global.cursorKey_sfx);
-            break;
-       
-                    
+            break;             
         case vk_right :
             if ( global.posX &lt; global.mapW - 1 ){
                 x = x  + 24 ;
@@ -458,10 +469,8 @@ if (alarm[1] = -1 )
            
             //juice
             scr_cursorKey_juice(1,global.cursorKey_sfx);
-            break;
-            
+            break;       
         }
-        
     }
 </string>
           </argument>
@@ -891,6 +900,36 @@ if  (keyboard_check_pressed(global.keyCANCEL))
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Unit action icon check
+action_icon = 0; //no icon
+var checking_unit = obj_map.units[global.posX,global.posY];
+if(checking_unit !=0 and global.acting_unit != 0){
+    if (checking_unit.ownership = global.P_Turn.number){ 
+        if (global.acting_unit.unit_index &lt; 4 and checking_unit.unit_index =  6) action_icon = 2; //APC - load
+        if (global.acting_unit.unit_index = 4 and !checking_unit.isCommander and !global.P_Turn.CO.D2D_CannotAttach ) action_icon = 3;// field officer - attach
+        if (global.acting_unit.unit_index = checking_unit.unit_index and checking_unit.hp &lt; 10) action_icon = 4//join
+        }
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -955,50 +994,14 @@ draw_text(12,313, "terrain cost: " + string(scr_check_move_cost(global.acting_un
             <kind>1</kind>
             <string>///draw radio assist
 
-if radio_assist_on
-    {
+if radio_assist_on{
     scr_draw_radioAssist(global.posX,global.posY,radioAssistRange,radioAssist_sprite);
-    if (radioAssist_sprite = spr_radioAssist_darkBlue and global.cursorFrame = 2 ) draw_sprite(spr_Hazzard,0,x,y);
+    if (radioAssist_sprite = spr_radioAssist_darkBlue){
+        draw_sprite_ext(spr_caution,1,x,y,1,1,0,c_white,((3-global.cursorFrameIndex)/3)) ;
+        draw_sprite(spr_caution,0,x,y);
+        }
     }
     
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Draw Move Left
-
-if ( global.rangeCheck[global.posX,global.posY].pathority != -1 )
-    {
-    scr_draw_num( spr_num_outlined , false, path_max - path_total, x+21, y+3, 2 );    
-    //scr_draw_num( spr_num_red, true, path_total, x, y, 3 );    
-    
-    //draw_set_color(c_black);
-    //draw_text(x+1,y+1, string(path_total)); 
-    //draw_text(x+1,y+1+12, string(global.acting_unit.move_points));
-    
-    //draw_set_color(c_orange);
-    //draw_text(x,y, string(path_total)); 
-    //draw_text(x,y+12, string(global.acting_unit.move_points));
-    
-    //draw_set_color(global.c_uiWhite);
-    
-    }
 </string>
           </argument>
         </arguments>
@@ -1067,8 +1070,35 @@ if (obj_map.units[global.posX,global.posY] !=0 and global.rangeCheck[global.posX
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>/// Draw Move Left
+
+if ( global.rangeCheck[global.posX,global.posY].pathority != -1 ){
+    draw_sprite(spr_small_move_num,path_max - path_total,x+2,y+2);
+    ///action icon
+    if (action_icon != 0) draw_sprite(spr_basicCursor_Icons,action_icon,x,y);
+    } 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///debug
-draw_text(x,y,string (global.acting_unit.depth));
+//draw_text(x,y,string (global.acting_unit.depth));
 </string>
           </argument>
         </arguments>
