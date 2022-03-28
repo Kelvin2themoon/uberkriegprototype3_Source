@@ -328,34 +328,33 @@ else assis_sprite = -1 ;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Navigation by arrow keys
-
+            <string>///navigation
 
 //      check for key delay on press
-if (    keyboard_check_pressed(vk_up   ) ||
-        keyboard_check_pressed(vk_down ) ||
-        keyboard_check_pressed(vk_left ) ||
-        keyboard_check_pressed(vk_right) )
-        {
-        global.cursorKey_delay = global.cursorKey_startspeed ;
+if (global.ip_up_pressed   ||
+    global.ip_down_pressed ||
+    global.ip_left_pressed ||
+    global.ip_right_pressed){
+        global.cursorKey_delay = global.cursorKey_startspeed;
         }
+        
 //      reset key delay on release
-if (    keyboard_check_released(vk_up   ) ||
-        keyboard_check_released(vk_down ) ||
-        keyboard_check_released(vk_left ) ||
-        keyboard_check_released(vk_right) )
-        {
+if (global.ip_up_released   ||
+    global.ip_down_released ||
+    global.ip_left_released ||
+    global.ip_right_released){
         alarm[1] = 0;
         global.cursorKey_delay = global.cursorKey_startspeed ;
         }
+        
 // arrow key actions and juice        
 if (alarm[1] = -1 ){
-    switch(keyboard_key){
-        case(vk_nokey):
+    switch(global.ip_nav){
+        case(0):
             alarm[1] = 0;
             global.cursorkey_delay = global.cursorKey_startspeed ;
             break;
-        case vk_up :
+        case 8 :
             if ( global.posY &gt; 0 ){ 
                 y = y  - 24 ; 
                 newpos_x = global.posX +0;
@@ -383,7 +382,7 @@ if (alarm[1] = -1 ){
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
-        case vk_down :
+        case 2 :
             if ( global.posY &lt; global.mapH - 1 ){
                 y = y  + 24 ;
                 newpos_x = global.posX +0;
@@ -411,7 +410,7 @@ if (alarm[1] = -1 ){
                 }
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;        
-        case vk_left :
+        case 4 :
             if ( global.posX &gt; 0 ){
                 x = x  - 24 ;
                 newpos_x = global.posX -1;
@@ -439,7 +438,7 @@ if (alarm[1] = -1 ){
                 }
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;             
-        case vk_right :
+        case 6 :
             if ( global.posX &lt; global.mapW - 1 ){
                 x = x  + 24 ;
                 newpos_x = global.posX +1;
@@ -533,7 +532,7 @@ global.target_unit  = obj_map.units[global.posX,global.posY];
 global.destination  = obj_map.terrains[global.posX,global.posY];
 
 //check: key press confirm
-if( keyboard_check_pressed( global.keyCONFIRM) )
+if( global.ip_A_pressed )
     {
     //reset actionable variables (just in case)
     global.capture      = false;
@@ -857,7 +856,7 @@ if (scr_inBound(global.posX,global.posY))
             <kind>1</kind>
             <string>///press "B"
 
-if  (keyboard_check_pressed(global.keyCANCEL))
+if  (global.ip_B_pressed)
     {
     //clear move datea
     scr_rangeCheck_reset();

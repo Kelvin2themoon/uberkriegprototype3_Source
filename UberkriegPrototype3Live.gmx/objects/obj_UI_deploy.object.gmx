@@ -213,7 +213,7 @@ global.P_Turn.save_cursor_pos_y = global.posY*24;
             <kind>1</kind>
             <string>///press "B"
 
-if  (keyboard_check_pressed(global.keyCANCEL))
+if  (global.ip_B_pressed)
     {
     instance_activate_object(obj_battleCursor);
                 
@@ -271,35 +271,33 @@ image_index = global.cursorFrameIndex ;
             <kind>1</kind>
             <string>/// Keyboard Navigation
 
-
-
-if (    keyboard_check_pressed(global.keyUP     ) ||
-        keyboard_check_pressed(global.keyDOWN   ) ||
-        keyboard_check_pressed(global.keyLEFT   ) ||
-        keyboard_check_pressed(global.keyDOWN   ) )
-        {
-        global.cursorKey_delay = global.cursorKey_startspeed ;
+//      check for key delay on press
+if (global.ip_up_pressed   ||
+    global.ip_down_pressed ||
+    global.ip_left_pressed ||
+    global.ip_right_pressed){
+        global.cursorKey_delay = global.cursorKey_startspeed;
         }
         
-if (    keyboard_check_released(global.keyUP    ) ||
-        keyboard_check_released(global.keyDOWN  ) ||
-        keyboard_check_released(global.keyLEFT  ) ||
-        keyboard_check_released(global.keyRIGHT ) )
-        {
+//      reset key delay on release
+if (global.ip_up_released   ||
+    global.ip_down_released ||
+    global.ip_left_released ||
+    global.ip_right_released){
         alarm[1] = 0;
         global.cursorKey_delay = global.cursorKey_startspeed ;
         }
         
 if (alarm[1] = -1 )
     {
-    switch(keyboard_key)
+    switch(global.ip_nav)
         {
-        case(vk_nokey):
+        case(0):
             alarm[1] = 0;
             global.cursorkey_delay = global.cursorKey_startspeed ;
             break;
         
-        case global.keyUP : //up
+        case 8 : //up
             if ( row =0) {
                 row = 6; 
                 y = start_y + (row*row_size);    
@@ -312,7 +310,7 @@ if (alarm[1] = -1 )
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
-        case global.keyDOWN : //down
+        case 2 : //down
             if ( row &lt; 6) {
                 row += 1; //row +1
                 y = start_y + (row*row_size);    
@@ -325,7 +323,7 @@ if (alarm[1] = -1 )
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
-        case global.keyLEFT : //left
+        case 4 : //left
             if (col == 0){
                 col = 1; //change col
                 x = start_x + col_size; //change location
@@ -338,7 +336,7 @@ if (alarm[1] = -1 )
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;  
                     
-        case global.keyRIGHT : //right
+        case 6 : //right
                 if (col == 0){
                     col = 1; //change col
                     x = start_x+ col_size; //change location
@@ -350,12 +348,7 @@ if (alarm[1] = -1 )
                 //juce then break   
                 scr_cursorKey_juice(1,global.cursorKey_sfx);
                 break;  
-        }
-            
-              
-          
-    
-
+            }
         }
         
     
@@ -541,7 +534,7 @@ if (mouse_check_button_pressed(mb_right))
             <string>///Deploy Action
 
 //check for key
-if keyboard_check_pressed(global.keyCONFIRM)
+if global.ip_A_pressed
     {
     var unit_id = colrow_id[col,row];
     var unit_has_deployed = false;
@@ -634,11 +627,11 @@ if keyboard_check_pressed(global.keyCONFIRM)
             <kind>1</kind>
             <string>///Temo, Display unit info
 
-if keyboard_check_pressed(global.keyAUX){
+if global.ip_X_pressed{
     display_on = true;
     }
     
-if keyboard_check_released(global.keyAUX){
+if global.ip_X_released{
     display_on = false;
     }
 </string>

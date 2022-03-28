@@ -145,32 +145,33 @@ if ( view_yview[0] + view_hport[0] &lt; y + view_border+24 and global.canScroll_
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Arrow Key Nav
+            <string>///navigation
 
-//check for key delay on press
-if (keyboard_check_pressed(vk_up   ) ||
-    keyboard_check_pressed(vk_down ) ||
-    keyboard_check_pressed(vk_left ) ||
-    keyboard_check_pressed(vk_right) ){
-    global.cursorKey_delay = global.cursorKey_startspeed ;
-    }
-//reset key delay on release
-if (keyboard_check_released(vk_up   ) ||
-    keyboard_check_released(vk_down ) ||
-    keyboard_check_released(vk_left ) ||
-    keyboard_check_released(vk_right) ){
-    alarm[1] = 0;
-    global.cursorKey_delay = global.cursorKey_startspeed ;
-    }
-    
+//      check for key delay on press
+if (global.ip_up_pressed   ||
+    global.ip_down_pressed ||
+    global.ip_left_pressed ||
+    global.ip_right_pressed){
+        global.cursorKey_delay = global.cursorKey_startspeed;
+        }
+        
+//      reset key delay on release
+if (global.ip_up_released   ||
+    global.ip_down_released ||
+    global.ip_left_released ||
+    global.ip_right_released){
+        alarm[1] = 0;
+        global.cursorKey_delay = global.cursorKey_startspeed ;
+        }
+        
 // arrow key actions and juice        
 if (alarm[1] = -1 ){
-    switch(keyboard_key){
-        case(vk_nokey):
+    switch(global.ip_nav){
+        case(0):
                 alarm[1] = 0;
                 global.cursorkey_delay = global.cursorKey_startspeed ;
             break;
-        case vk_up :
+        case 8 :
             //check valid move option
             if (scr_inBound(global.posX,global.posY - 1)){
                 global.posY -=1;
@@ -182,7 +183,7 @@ if (alarm[1] = -1 ){
                 }
             else scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
-        case vk_down :
+        case 2 :
         //check valid move option
             if (scr_inBound(global.posX,global.posY +1)){
                 global.posY +=1;
@@ -194,7 +195,7 @@ if (alarm[1] = -1 ){
                 }
             else scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
-        case vk_left :
+        case 4 :
             //check valid move option
             if (scr_inBound(global.posX-1,global.posY)){
                 global.posX -=1;
@@ -206,7 +207,7 @@ if (alarm[1] = -1 ){
                 }
             else scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;   
-        case vk_right :
+        case 6 :
             //check valid move option
             if (scr_inBound(global.posX+1,global.posY)){
                 global.posX +=1;
@@ -354,7 +355,7 @@ if  mouse_check_button_released(mb_middle){
             <string>///SPACE global radio control overide
 ///property and global radio test
 
-if keyboard_check_pressed(vk_space){
+if global.ip_Y_pressed{
     scr_rangeCheck_reset();
     //check for property
     if object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index, obj_property){
@@ -367,7 +368,7 @@ if keyboard_check_pressed(vk_space){
         isOnGlobalRadioCheck = true; 
         } 
     }
-if keyboard_check_released(vk_space){
+if global.ip_Y_released{
     isOnGlobalRadioCheck = false;
     scr_rangeCheck_reset();
     }
@@ -450,17 +451,17 @@ else if (mouse_check_button_released(mb_right) and scr_inBound(mouse_x div 24, m
             <string>///Key controls
 
 //check for mouse &amp; keayboard event
-if(keyboard_check_pressed(global.keyCONFIRM)){
+if global.ip_A_pressed{
     //check if terrain is visable and is empty
     instance_create(x+24,y,obj_syscom_smoke);
     instance_destroy();
     }
-if (keyboard_check_released(global.keyCONFIRM)){
+if global.ip_A_pressed{
     scr_rangeCheck_reset();
     }
     
 // Key - cancel
-if (keyboard_check_pressed(global.keyCANCEL)){
+if global.ip_B_pressed{
         //attack range check
         var check_unit = obj_map.units[global.posX,global.posY];
         if (check_unit !=0){
@@ -470,7 +471,7 @@ if (keyboard_check_pressed(global.keyCANCEL)){
             fScroll_on = true;
             } 
         }
-if (keyboard_check_released(global.keyCANCEL)){
+if global.ip_B_released{
     fScroll_on = false;
     scr_rangeCheck_reset();
     }

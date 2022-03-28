@@ -968,9 +968,9 @@ with( obj_moveCursor ) other.temp_move_count +=1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Basic Intel Check (mini map)
+            <string>///open Intel Check (mini map)
 
-if keyboard_check_pressed(ord("V"))
+if global.ip_start_pressed
     {
     //draw intel is on
     minimap_check_on = true;
@@ -1028,7 +1028,7 @@ if keyboard_check_pressed(ord("V"))
         
         } 
     }
-if keyboard_check_released(ord("V"))
+if global.ip_start_released
     {
     minimap_check_on = false;
     }
@@ -1052,10 +1052,10 @@ if keyboard_check_released(ord("V"))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Press "A" for Damage Chart
+            <string>///open Damage Chart
 
-if keyboard_check_pressed(ord("A")) damage_chart_on = true;
-if keyboard_check_released(ord("A")) damage_chart_on = false;
+if global.ip_select_pressed  damage_chart_on = true;
+if global.ip_select_released damage_chart_on = false;
 
 </string>
           </argument>
@@ -1079,13 +1079,13 @@ if keyboard_check_released(ord("A")) damage_chart_on = false;
             <kind>1</kind>
             <string>///property and global radio test
 
-if keyboard_check_pressed(vk_space){
+if global.ip_Y_pressed{
     scr_rangeCheck_reset();
     scr_globalRadioCheck();
     isOnGlobalRadioCheck = true; 
     }
     
-if keyboard_check_released(vk_space){
+if global.ip_Y_released{
     isOnGlobalRadioCheck = false;
     scr_rangeCheck_reset();
     }

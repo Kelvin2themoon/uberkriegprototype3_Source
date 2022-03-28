@@ -280,45 +280,38 @@ global.posY = y div 24 ;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Navigation by arrow keys //unit radio check(passive)
-
+            <string>///navigation
 
 //      check for key delay on press
-if (    keyboard_check_pressed(vk_up   ) ||
-        keyboard_check_pressed(vk_down ) ||
-        keyboard_check_pressed(vk_left ) ||
-        keyboard_check_pressed(vk_right) )
-        {
-        global.cursorKey_delay = global.cursorKey_startspeed ;
-        //reset chekertiles
+if (global.ip_up_pressed   ||
+    global.ip_down_pressed ||
+    global.ip_left_pressed ||
+    global.ip_right_pressed){
+        global.cursorKey_delay = global.cursorKey_startspeed;
         }
+        
 //      reset key delay on release
-if (    keyboard_check_released(vk_up   ) ||
-        keyboard_check_released(vk_down ) ||
-        keyboard_check_released(vk_left ) ||
-        keyboard_check_released(vk_right) )
-        {
+if (global.ip_up_released   ||
+    global.ip_down_released ||
+    global.ip_left_released ||
+    global.ip_right_released){
         alarm[1] = 0;
         global.cursorKey_delay = global.cursorKey_startspeed ;
-        //make the click in the dark
-        click = true;
-        alarm[4] = click_delay;
-        if sprite_index = spr_redCursor image_index = 2; 
         }
         
         
 // arrow key actions and juice        
 if (alarm[1] = -1 )
     {
-    switch(keyboard_key)
+    switch(global.ip_nav)
         {
-        case(vk_nokey):
+        case(0):
             alarm[1] = 0;
             global.cursorkey_delay = global.cursorKey_startspeed ;
             //if (isOnGlobalRadioCheck = false and !checking_attack_range) scr_rangeCheck_reset();
             break;
         
-        case vk_up :
+        case 8 :
             if (fast_scroll_on and global.posY &gt; 0)
                 {
                 y -= 24 ;
@@ -336,7 +329,7 @@ if (alarm[1] = -1 )
                 }
             break;
         
-        case vk_down :
+        case 2 :
             if ( global.posY &lt; global.mapH - 1  and fast_scroll_on )
                 {
                 y += 24 ;
@@ -353,7 +346,7 @@ if (alarm[1] = -1 )
                 }    
             break;
         
-        case vk_left :
+        case 4 :
             if ( global.posX &gt; 0 and fast_scroll_on )
                 {
                 x -= 24 ;
@@ -371,7 +364,7 @@ if (alarm[1] = -1 )
                 }
             break;  
                     
-        case vk_right :
+        case 6 :
             if ( global.posX &lt; global.mapW - 1 and fast_scroll_on )
                 {      
                 x += 24 ;
@@ -593,7 +586,7 @@ if  mouse_check_button_released(mb_middle)
             <string>///Open System, deploy menu,  start unit command, enemy or idle unit move range check
 
 
-if ( keyboard_check_pressed( global.keyCONFIRM) and menuExitDelay = false and scr_inBound(global.posX,global.posY)){
+if ( global.ip_A_pressed and menuExitDelay = false and scr_inBound(global.posX,global.posY)){
     //check if terrain is open and visible
     if (obj_map.units[global.posX,global.posY] = 0 and obj_map.terrains[global.posX,global.posY].isObservable){
             //open syscom decoy
@@ -620,7 +613,7 @@ if ( keyboard_check_pressed( global.keyCONFIRM) and menuExitDelay = false and sc
         }
     }
 //on release
-if ( keyboard_check_released( global.keyCONFIRM) ){
+if ( global.ip_A_released ){
     scr_rangeCheck_reset();
     checking_move_range = false;
     //reset unit radio check if applicable
@@ -689,7 +682,7 @@ if (obj_map.terrains[global.posX,global.posY].isVisible and obj_map.units[global
             <kind>1</kind>
             <string>///property and global radio test
 
-if keyboard_check_pressed(vk_space){
+if global.ip_Y_pressed{
     scr_rangeCheck_reset();
     //check for property
     if object_is_ancestor(obj_map.terrains[global.posX,global.posY].object_index, obj_property){
@@ -703,7 +696,7 @@ if keyboard_check_pressed(vk_space){
         } 
     }
     
-if keyboard_check_released(vk_space){
+if global.ip_Y_released{
     isOnGlobalRadioCheck = false;
     scr_rangeCheck_reset();
     //reset unit radio check if applicable
@@ -755,7 +748,7 @@ global.unit_check = obj_map.units[global.posX,global.posY];
           <argument>
             <kind>1</kind>
             <string>/// B - attack range and quick view move
-if (keyboard_check_pressed(global.keyCANCEL)){
+if global.ip_B_pressed{
     //attack Range check if over unit
     if (obj_map.units[global.posX, global.posY] != 0){
         if obj_map.units[global.posX, global.posY].isObservable{
@@ -769,7 +762,7 @@ if (keyboard_check_pressed(global.keyCANCEL)){
     else if( !checking_attack_range )fast_scroll_on = true;    
     }
 
-if (keyboard_check_released(global.keyCANCEL) or mouse_check_button_released(mb_right)){
+if (global.ip_B_released or mouse_check_button_released(mb_right)){
     fast_scroll_on = false;
     checking_attack_range = false;
     scr_rangeCheck_reset();
@@ -1100,7 +1093,7 @@ if (global.P_Turn.CO.rounds &lt;= 0 )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///indicat no deploy
+            <string>///indicate no deploy
 if( !obj_map.terrains[global.posX,global.posY].isVisible ) sprite_index = spr_redCursor;
 else sprite_index = spr_blueCursor;
 </string>

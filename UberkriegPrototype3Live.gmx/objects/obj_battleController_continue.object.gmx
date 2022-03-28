@@ -1087,29 +1087,6 @@ global.disrupt      = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///animate checker times
-
-global.rangeCheckerFramIndex +=1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>/// debug, count move cursors
 
 temp_move_count = 0;
@@ -1226,6 +1203,29 @@ if keyboard_check_released(ord("V"))
 if keyboard_check_pressed(ord("A")) damage_chart_on = true;
 if keyboard_check_released(ord("A")) damage_chart_on = false;
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///animate checker times
+
+global.rangeCheckerFramIndex +=1;
 </string>
           </argument>
         </arguments>

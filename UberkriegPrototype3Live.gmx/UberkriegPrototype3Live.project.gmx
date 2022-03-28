@@ -690,6 +690,7 @@
       <script>scripts\net_dp2.gml</script>
     </scripts>
     <script>scripts\script118.gml</script>
+    <script>scripts\script119.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader0.shader</shader>
@@ -778,8 +779,8 @@
       <object>objects\obj_AI_interface</object>
       <objects name="BasicObjects">
         <object>objects\obj_UI_deploy</object>
-        <object>objects\obj_UI_deployDummy</object>
         <object>objects\obj_checker_tile</object>
+        <object>objects\obj_UI_deployDummy</object>
         <object>objects\obj_miniwin</object>
         <object>objects\obj_player</object>
         <object>objects\obj_topwin</object>

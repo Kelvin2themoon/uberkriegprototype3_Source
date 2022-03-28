@@ -70,17 +70,7 @@ global.exit_delay = 6;
 // Key colours
 global.c_uiWhite = make_colour_rgb(250,250,250);
 
-//Button config
-global.keyCONFIRM   = ord("Z");
-global.keyCANCEL    = ord("X");
 
-global.keyRADIO     = vk_space;
-global.keyAUX       = ord("C");
-
-global.keyUP        = vk_up;
-global.keyDOWN      = vk_down;
-global.keyLEFT      = vk_left;
-global.keyRIGHT     = vk_right;
 
 //Dynamic Text: set colour, font, &amp; align
 global.c_uiWhite    = make_colour_rgb(200,200,200);
@@ -98,6 +88,245 @@ global.window_size = 1;
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Controller Button config *old
+/*
+//Contoller button config, defaults to Xbox360 controller
+global.GP_A = gp_face1;
+global.GP_B = gp_face2;
+global.GP_X = gp_face3;
+global.GP_Y = gp_face4;
+
+global.GP_SL = gp_shoulderl;
+global.GP_SR = gp_shoulderr;
+global.GP_TL = gp_shoulderlb;
+global.GP_TR = gp_shoulderrb;
+
+global.GP_Select = gp_select;
+global.GP_Start  = gp_start;
+
+global.Dpad_Up    = gp_padu;
+global.Dpad_Down  = gp_padd;
+global.Dpad_Left  = gp_padl;
+global.Dpad_Right = gp_padr;
+
+global.GP_Stick_L = gp_stickl; //left stick button (push in)
+global.GP_Stick_R = gp_stickr; //right stick button
+
+global.GP_Stick_LH = gp_axislh; //Left anaolog stick vertical
+global.GP_Stick_LV = gp_axislv; //left analoug stick horizontal
+global.GP_Stick_RH = gp_axisrh; 
+global.GP_Stick_RV = gp_axisrv;
+
+//Keyboard Config
+global.KB_A = ord("Z");
+global.KB_B = ord("X");
+global.KB_X = ord("A");
+global.KB_Y = ord("S");
+
+global.KB_Start  = vk_enter;
+global.KB_Select = vk_shift;
+
+global.KB_L1 = ord("D");
+global.KB_L2 = ord("F");
+global.KB_R1 = ord("C");
+global.KB_R1 = ord("V");
+*/
+
+
+//input binding
+global.keyCONFIRM   = ord("Z");
+global.keyCANCEL    = ord("X");
+
+global.keyRADIO     = vk_space;
+global.keyAUX       = ord("c");
+
+global.keyUP        = vk_up    or gp_padu;
+global.keyDOWN      = vk_down  or gp_padd;
+global.keyLEFT      = vk_left  or gp_padl;
+global.keyRIGHT     = vk_right or gp_padr;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Anaolougue stick input settings
+
+//action type
+global.Lstick_type = 1; // for nav (like arrow keys)
+global.Rstick_type = 2; // for fast move 0 fo unused
+//invert axix
+global.Lstick_invert = 1;
+global.Rstick_invert = 1;
+//switch hprizontal with Vertical axsis
+global.Lstick_switch = false;
+global.Rstick_switch = false;
+
+//set deadzone
+gamepad_set_axis_deadzone(0,0.2)
+
+//type 1 - nav
+global.snav_h = 0;
+global.snav_v = 0;
+
+global.snav_thresh = 0.5;
+
+global.snav_up_hold = false;
+global.snav_up_pressed = false;
+global.snav_up_released = false;
+
+global.snav_down_hold = false;
+global.snav_down_pressed = false;
+global.snav_down_released = false;
+
+global.snav_left_hold = false;
+global.snav_left_pressed = false;
+global.snav_left_released = false;
+
+global.snav_right_hold = false;
+global.snav_right_pressed = false;
+global.snav_right_released = false;
+
+//type 2 - map 
+global.smap_h = 0;
+global.smap_v = 0;
+global.smap_speed = 24;
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Keyboard &amp; Controller input config
+
+//game pad input config defalts, mapped to Xbox360  
+//gamepad inputs                    //keybard inputs
+global.gpi_up     = gp_padu;        global.kbi_up       = ord("W");    //always take arrow keys (check in steps)
+global.gpi_down   = gp_padd;        global.kbi_down     = ord("S"); 
+global.gpi_left   = gp_padl;        global.kbi_left     = ord("A");
+global.gpi_right  = gp_padr;        global.kbi_right    = ord("D");
+
+global.gpi_A      = gp_face1;       global.kbi_A        = ord("Z"); //always take enter key
+global.gpi_B      = gp_face2;       global.kbi_B        = ord("X"); //always take back space
+global.gpi_X      = gp_face3;       global.kbi_X        = ord("C");
+global.gpi_Y      = gp_face4;       global.kbi_Y        = vk_space;
+
+global.gpi_L1     = gp_shoulderl;   global.kbi_L1       = ord("{"); //not sure if this will work
+global.gpi_L2     = gp_shoulderlb;  global.kbi_L2       = ord("}");
+global.gpi_R1     = gp_shoulderr;   global.kbi_R1       = ord("&lt;");
+global.gpi_R2     = gp_shoulderrb;  global.kbi_R2       = ord("&gt;");
+
+global.gpi_start  = gp_start;       global.kbi_start    = ord ("V");
+global.gpi_select = gp_select;      global.kbi_select   = ord ("B");
+
+global.gpi_LSB    = gp_stickl;      global.kbi_LSB      = ord("N"); // left stick buttion
+global.gpi_RSB    = gp_stickr;      global.kbi_RSB      = ord("M"); // right stick button
+
+///Keyboard and controller Listiner
+global.ip_nav = 0; //only one nav input at once, to be stored in this variable.
+
+global.ip_up_hold     = false; //navigation
+global.ip_up_pressed  = false;
+global.ip_up_released = false;
+global.ip_down_hold     = false;
+global.ip_down_pressed  = false;
+global.ip_down_released = false;
+global.ip_left_hold     = false;
+global.ip_left_pressed  = false;
+global.ip_left_released = false;
+global.ip_right_hold     = false;
+global.ip_right_pressed  = false;
+global.ip_right_released = false;
+
+global.ip_A_hold     = false; //confirm
+global.ip_A_pressed  = false; 
+global.ip_A_released = false;
+global.ip_B_hold     = false; //cancel
+global.ip_B_pressed  = false;
+global.ip_B_released = false;
+global.ip_X_hold     = false; //intel
+global.ip_X_pressed  = false;
+global.ip_X_released = false;
+global.ip_Y_hold     = false; //Radio check
+global.ip_Y_pressed  = false;
+global.ip_Y_released = false;
+
+global.ip_L1_hold     = false; //next active unit, next page
+global.ip_L1_pressed  = false;
+global.ip_L1_released = false;
+global.ip_L2_hold     = false;
+global.ip_L2_pressed  = false;
+global.ip_L2_released = false;
+global.ip_R1_hold     = false;
+global.ip_R1_pressed  = false;
+global.ip_R1_released = false; //next enemy unit
+global.ip_R2_hold     = false;
+global.ip_R2_pressed  = false;
+global.ip_R2_released = false;
+
+global.ip_start_hold     = false; //minimap &amp; intel
+global.ip_start_pressed  = false;
+global.ip_start_released = false;
+global.ip_select_hold     = false; //damage chart?
+global.ip_select_pressed  = false;
+global.ip_select_released = false;
+
+global.ip_LSB_hold     = false; //?
+global.ip_LSB_pressed  = false;
+global.ip_LSB_released = false;
+global.ip_RSB_hold     = false; //?
+global.ip_RSB_pressed  = false; 
+global.ip_RSB_released = false;
 </string>
           </argument>
         </arguments>
@@ -827,6 +1056,234 @@ if ( global.net_mode != 0 and ds_queue_size(global.net_com) &gt; 0 and global.re
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///analogue stick inputs type 1
+
+global.snav_h = 0;
+global.snav_v = 0;
+
+if (global.Lstick_type = 1) {
+    global.snav_h = gamepad_axis_value(0,gp_axislh);
+    global.snav_v = gamepad_axis_value(0,gp_axislv);
+    }
+if (global.Rstick_type = 1) {
+    global.snav_h += gamepad_axis_value(0,gp_axisrh);
+    global.snav_v += gamepad_axis_value(0,gp_axisrv);
+    }
+
+
+//right
+if (global.snav_h &gt; global.snav_thresh){
+    if (global.snav_right_hold) global.snav_right_pressed = false;
+    else{
+        global.snav_right_pressed = true;
+        global.snav_right_hold = true;
+        }  
+    }
+else if (global.snav_right_hold){ 
+    global.snav_right_released = true;
+    global.snav_right_hold = false;
+    }
+else{  
+    global.snav_right_released = false;
+    global.snav_right_pressed = false;
+    }
+//left
+if (global.snav_h &lt; -global.snav_thresh){
+    if (global.snav_left_hold) global.snav_left_pressed = false;
+    else{
+        global.snav_left_pressed = true;
+        global.snav_left_hold = true;
+        }  
+    }
+else if (global.snav_left_hold){ 
+    global.snav_left_released = true;
+    global.snav_left_hold = false;
+    }
+else{  
+    global.snav_left_released = false;
+    global.snav_left_pressed = false;
+    }
+
+//up
+if (global.snav_v &lt; -global.snav_thresh){
+    if (global.snav_up_hold) global.snav_up_pressed = false;
+    else{
+        global.snav_up_pressed = true;
+        global.snav_up_hold = true;
+        }  
+    }
+else if (global.snav_up_hold){ 
+    global.snav_up_released = true;
+    global.snav_up_hold = false;
+    }
+else{  
+    global.snav_up_released = false;
+    global.snav_up_pressed = false;
+    }
+
+//down
+if (global.snav_v &gt; global.snav_thresh){
+    if (global.snav_down_hold) global.snav_down_pressed = false;
+    else{
+        global.snav_down_pressed = true;
+        global.snav_down_hold = true;
+        }  
+    }
+else if (global.snav_down_hold){ 
+    global.snav_down_released = true;
+    global.snav_down_hold = false;
+    }
+else{  
+    global.snav_down_released = false;
+    global.snav_down_pressed = false;
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///analougue stick inpute type 2
+
+global.smap_h = 0;
+global.smap_v = 0;
+
+if (global.Lstick_type = 2) {
+    global.smap_h = gamepad_axis_value(0,gp_axislh);
+    global.smap_v = gamepad_axis_value(0,gp_axislv);
+    }
+if (global.Rstick_type = 2) {
+    global.smap_h += gamepad_axis_value(0,gp_axisrh);
+    global.smap_v += gamepad_axis_value(0,gp_axisrv);
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Keyboard and controller Listiner
+
+//Navigation (always check for arrow keys)
+global.ip_up_pressed  =  gamepad_button_check_pressed(0,global.gpi_up) or  keyboard_check_pressed(global.kbi_up) or keyboard_check_pressed(vk_up) or global.snav_up_pressed;
+global.ip_up_released = gamepad_button_check_released(0,global.gpi_up) or keyboard_check_released(global.kbi_up) or keyboard_check_released(vk_up)or global.snav_up_released;
+if global.ip_up_pressed{  
+    global.ip_up_hold = true;
+    global.ip_nav = 8;
+    }
+if global.ip_up_released global.ip_up_hold = false;
+
+global.ip_down_pressed  =  gamepad_button_check_pressed(0,global.gpi_down) or  keyboard_check_pressed(global.kbi_down) or keyboard_check_pressed(vk_down) or global.snav_down_pressed;
+global.ip_down_released = gamepad_button_check_released(0,global.gpi_down) or keyboard_check_released(global.kbi_down) or keyboard_check_released(vk_down)or global.snav_down_released;
+if global.ip_down_pressed {  
+    global.ip_down_hold = true;
+    global.ip_nav = 2;
+    }
+if global.ip_down_released global.ip_down_hold = false;
+
+global.ip_left_pressed  =  gamepad_button_check_pressed(0,global.gpi_left) or  keyboard_check_pressed(global.kbi_left) or keyboard_check_pressed(vk_left) or global.snav_left_pressed; 
+global.ip_left_released = gamepad_button_check_released(0,global.gpi_left) or keyboard_check_released(global.kbi_left) or keyboard_check_released(vk_left) or global.snav_left_released;
+if global.ip_left_pressed {  
+    global.ip_left_hold = true;
+    global.ip_nav = 4;
+    }
+if global.ip_left_released global.ip_left_hold = false;
+
+
+global.ip_right_pressed  =  gamepad_button_check_pressed(0,global.gpi_right) or  keyboard_check_pressed(global.kbi_right) or keyboard_check_pressed(vk_right) or global.snav_right_pressed;
+global.ip_right_released = gamepad_button_check_released(0,global.gpi_right) or keyboard_check_released(global.kbi_right) or keyboard_check_released(vk_right) or global.snav_right_released;
+if global.ip_right_pressed { 
+    global.ip_right_hold = true;
+    global.ip_nav = 6;
+    }
+if global.ip_right_released global.ip_right_hold = false;
+
+
+if (!global.ip_up_hold and !global.ip_down_hold and !global.ip_left_hold and !global.ip_right_hold) global.ip_nav = 0;
+
+//FACE BUTTONS
+//Confirm ( always check for enter)
+global.ip_A_pressed  =  gamepad_button_check_pressed(0,global.gpi_A) or  keyboard_check_pressed(global.kbi_A) or keyboard_check_pressed(vk_enter);
+global.ip_A_released = gamepad_button_check_released(0,global.gpi_A) or keyboard_check_released(global.kbi_A) or keyboard_check_released(vk_enter);
+if global.ip_A_pressed  global.ip_A_hold = true;
+if global.ip_A_released global.ip_A_hold = false;
+//cancel (always check for back space)
+global.ip_B_pressed  =  gamepad_button_check_pressed(0,global.gpi_B) or  keyboard_check_pressed(global.kbi_B) or keyboard_check_pressed(vk_backspace);
+global.ip_B_released = gamepad_button_check_released(0,global.gpi_B) or keyboard_check_released(global.kbi_B) or keyboard_check_released(vk_backspace);
+if global.ip_B_pressed  global.ip_B_hold = true;
+if global.ip_B_released global.ip_B_hold = false;
+//Intel check
+global.ip_X_pressed  =  gamepad_button_check_pressed(0,global.gpi_X) or  keyboard_check_pressed(global.kbi_X);
+global.ip_X_released = gamepad_button_check_released(0,global.gpi_X) or keyboard_check_released(global.kbi_X);
+if global.ip_X_pressed  global.ip_X_hold = true;
+if global.ip_X_released global.ip_X_hold = false;
+//Radiocheck
+global.ip_Y_pressed  =  gamepad_button_check_pressed(0,global.gpi_Y) or  keyboard_check_pressed(global.kbi_Y);
+global.ip_Y_released = gamepad_button_check_released(0,global.gpi_Y) or keyboard_check_released(global.kbi_Y);
+if global.ip_Y_pressed  global.ip_Y_hold = true;
+if global.ip_Y_released global.ip_Y_hold = false;
+
+
+//START/SELECT
+//start - minimap
+global.ip_start_pressed  =  gamepad_button_check_pressed(0,global.gpi_start) or  keyboard_check_pressed(global.kbi_start);
+global.ip_start_released = gamepad_button_check_released(0,global.gpi_start) or keyboard_check_released(global.kbi_start);
+if global.ip_start_pressed  global.ip_start_hold = true;
+if global.ip_start_released global.ip_start_hold = false;
+//select - damage chart
+global.ip_select_pressed  =  gamepad_button_check_pressed(0,global.gpi_select);
+global.ip_select_released = gamepad_button_check_released(0,global.gpi_select);
+if global.ip_select_pressed  global.ip_select_hold = true;
+if global.ip_select_released global.ip_select_hold = false;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="7" enumb="68">
       <action>
@@ -1076,6 +1533,47 @@ for ( i = 0 ; i &lt; ds_list_size(global.client_list) ; i++){
     draw_text(19+i*24,400, string(global.conect_P[i+1]));
     }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Debug inputs
+draw_text(12,12,"NAV: "+string(global.ip_nav));
+
+draw_text(12,12*2,"UP:    "+string(global.ip_up_hold));
+draw_text(12,12*3,"DOWN:  "+string(global.ip_down_hold));
+draw_text(12,12*4,"left:  "+string(global.ip_left_hold));
+draw_text(12,12*5,"Right: "+string(global.ip_right_hold));
+
+draw_text(12,12*7,"Confirm: "+string(global.ip_A_hold));
+draw_text(12,12*8,"Cancel: "+string(global.ip_B_hold));
+draw_text(12,12*9,"X: "+string(global.ip_X_hold));
+draw_text(12,12*10,"Y: "+string(global.ip_Y_hold));
+
+draw_text(12,12*12,"L Stick H: "+string(global.snav_h));
+draw_text(12,12*13,"L Stick pressed: "+string(global.snav_left_pressed));
+draw_text(12,12*14,"L Stick hold: "+string(global.snav_left_hold));
+draw_text(12,12*15,"L Stick released: "+string(global.snav_left_released));
+
+draw_text(12,12*17,"R Stick H: "+string(global.smap_h));
+draw_text(12,12*18,"R Stick V: "+string(global.smap_v));
+draw_text(12,12*19,"Y View: "+string(view_yview[0]));
 </string>
           </argument>
         </arguments>

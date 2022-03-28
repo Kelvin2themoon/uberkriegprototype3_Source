@@ -261,37 +261,35 @@ image_index = global.cursorFrameIndex
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Navigation by arrow keys
-
+            <string>///navigation
 
 //      check for key delay on press
-if (    keyboard_check_pressed(vk_up   ) ||
-        keyboard_check_pressed(vk_down ) ||
-        keyboard_check_pressed(vk_left ) ||
-        keyboard_check_pressed(vk_right) )
-        {
-        global.cursorKey_delay = global.cursorKey_startspeed ;
+if (global.ip_up_pressed   ||
+    global.ip_down_pressed ||
+    global.ip_left_pressed ||
+    global.ip_right_pressed){
+        global.cursorKey_delay = global.cursorKey_startspeed;
         }
+        
 //      reset key delay on release
-if (    keyboard_check_released(vk_up   ) ||
-        keyboard_check_released(vk_down ) ||
-        keyboard_check_released(vk_left ) ||
-        keyboard_check_released(vk_right) )
-        {
+if (global.ip_up_released   ||
+    global.ip_down_released ||
+    global.ip_left_released ||
+    global.ip_right_released){
         alarm[1] = 0;
         global.cursorKey_delay = global.cursorKey_startspeed ;
         }
 // arrow key actions and juice        
 if (alarm[1] = -1 )
     {
-    switch(keyboard_key)
+    switch(global.ip_nav)
         {
-        case(vk_nokey):
+        case(0):
             alarm[1] = 0;
             global.cursorkey_delay = global.cursorKey_startspeed ;
             break;
         
-        case vk_up :
+        case 8 :
            // if ( global.posY &gt; 0 ) 
                 if (drop_zone_index = 0){
                     drop_zone_index = drop_zone_list_size -1;
@@ -305,7 +303,7 @@ if (alarm[1] = -1 )
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
-        case vk_down :
+        case 2 :
             //if ( global.posY &gt; 0 ) 
                 if (drop_zone_index = drop_zone_list_size -1){
                     drop_zone_index = 0;
@@ -319,7 +317,7 @@ if (alarm[1] = -1 )
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
-        case vk_left :
+        case 4 :
             //if ( global.posY &gt; 0 ) 
                 if (drop_zone_index = 0){
                     drop_zone_index = drop_zone_list_size -1;
@@ -333,7 +331,7 @@ if (alarm[1] = -1 )
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;  
                     
-        case vk_right :
+        case 6 :
             //if ( global.posY &gt; 0 ) 
                 if (drop_zone_index = drop_zone_list_size -1){
                     drop_zone_index = 0;
@@ -478,7 +476,7 @@ if ( view_yview[0] + view_hport[0] &lt; y + view_border+24 and global.canScroll_
             <kind>1</kind>
             <string>///confirm
 
-if keyboard_check_pressed(global.keyCONFIRM){
+if global.ip_A_pressed{
     global.destination = drop_zone;
     //change destination for netwoek modes
     //ds_map_replace(global.net_unit_orders,"des_x",drop_zone.x div 24);
@@ -536,7 +534,7 @@ global.target_unit = obj_map.units[ x div 24 , y div 24 ];
             <kind>1</kind>
             <string>/// cancel to re-activate command menu
 
-if (keyboard_check_pressed (global.keyCANCEL) or mouse_check_button_pressed(mb_right))
+if (global.ip_B_pressed or mouse_check_button_pressed(mb_right))
     {
     instance_create(x,y,obj_syscom_command);
     instance_destroy();

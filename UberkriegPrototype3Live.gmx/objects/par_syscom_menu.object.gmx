@@ -184,18 +184,19 @@ image_index = global.cursorFrameIndex;
             <kind>1</kind>
             <string>///navigation
 
-//key release reset
-if (keyboard_check_pressed(global.keyUP     ) ||
-    keyboard_check_pressed(global.keyDOWN   ) ||
-    keyboard_check_pressed(global.keyLEFT   ) ||
-    keyboard_check_pressed(global.keyDOWN   ) ){
-        global.cursorKey_delay = global.cursorKey_startspeed ;
+//      check for key delay on press
+if (global.ip_up_pressed   ||
+    global.ip_down_pressed ||
+    global.ip_left_pressed ||
+    global.ip_right_pressed){
+        global.cursorKey_delay = global.cursorKey_startspeed;
         }
         
-if (keyboard_check_released(global.keyUP    ) ||
-    keyboard_check_released(global.keyDOWN  ) ||
-    keyboard_check_released(global.keyLEFT  ) ||
-    keyboard_check_released(global.keyRIGHT ) ){
+//      reset key delay on release
+if (global.ip_up_released   ||
+    global.ip_down_released ||
+    global.ip_left_released ||
+    global.ip_right_released){
         alarm[1] = 0;
         global.cursorKey_delay = global.cursorKey_startspeed ;
         }
@@ -203,13 +204,13 @@ if (keyboard_check_released(global.keyUP    ) ||
         
 if (alarm[1] = -1 )
     {
-    switch(keyboard_key){
-        case(vk_nokey):
+    switch(global.ip_nav){
+        case(0):
             alarm[1] = 0;
             global.cursorkey_delay = global.cursorKey_startspeed ;
             break;
         
-        case global.keyUP : //up
+        case 8 : //up
             if ( row = 0) {
                 row = row_max; 
                 y = start_y + (row_max*row_size);    
@@ -222,7 +223,7 @@ if (alarm[1] = -1 )
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
-        case global.keyDOWN : //down
+        case 2 : //down
             if ( row &lt; row_max) {
                 row += 1; //row +1
                 y = start_y + (row*row_size);    
@@ -235,7 +236,7 @@ if (alarm[1] = -1 )
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
         
-        case global.keyLEFT : //left
+        case 4 : //left
             if ( row = 0) {
                 row = row_max; 
                 y = start_y + (row_max*row_size);    
@@ -248,7 +249,7 @@ if (alarm[1] = -1 )
             scr_cursorKey_juice(1,global.cursorKey_sfx);
             break;
                     
-        case global.keyRIGHT : //right
+        case 6 : //right
             if ( row &lt; row_max) {
                 row += 1; //row +1
                 y = start_y + (row*row_size);    
@@ -329,7 +330,7 @@ else mouse_on = false;
             <kind>1</kind>
             <string>///execute command (press "A" or leftclick)
 
-if (keyboard_check_pressed( global.keyCONFIRM) ){
+if global.ip_A_pressed{
     global.last_network_event = "syscom executed";
     //save positions
     global.P_Turn.save_cursor_pos_x = global.posX*24;
