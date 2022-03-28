@@ -1085,7 +1085,7 @@ if ( view_yview[0] + view_hport[0] &lt; global.posY*24 + view_border+24 and glob
             <kind>1</kind>
             <string>///stick map scroll controller
 
-if (global.canScroll_y){
+if (global.canScroll_x){
     view_xview[0] += global.smap_speed*global.smap_h;
     //stop if out of bounds
     if (view_xview[0] &lt; -48) view_xview[0] = -48;

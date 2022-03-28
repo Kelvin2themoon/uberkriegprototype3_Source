@@ -195,11 +195,11 @@ if ( global.unit_check != 0){
             <kind>1</kind>
             <string>///aux display control
 
-if keyboard_check_pressed(global.keyAUX){
+if global.ip_X_pressed{
     aux_on = true;
     depth = UI_DEPTH_CURSOR -1;
     }
-if keyboard_check_released(global.keyAUX){
+if global.ip_X_released{
     aux_on = false;
     depth = UI_DEPTH_WIN;
     }

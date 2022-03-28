@@ -845,6 +845,7 @@
         </objects>
       </objects>
       <object>objects\obj_radio_update_event</object>
+      <object>objects\obj_fading_text</object>
     </objects>
     <objects name="Map Edit acc.">
       <object>objects\obj_promote_pointer</object>

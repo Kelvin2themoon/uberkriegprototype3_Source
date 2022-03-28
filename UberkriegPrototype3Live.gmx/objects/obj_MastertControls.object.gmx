@@ -154,16 +154,16 @@ global.KB_R1 = ord("V");
 
 
 //input binding
-global.keyCONFIRM   = ord("Z");
-global.keyCANCEL    = ord("X");
+//global.keyCONFIRM   = ord("Z");
+//global.keyCANCEL    = ord("X");
 
-global.keyRADIO     = vk_space;
-global.keyAUX       = ord("c");
+//global.keyRADIO     = vk_space;
+//global.keyAUX       = ord("c");
 
-global.keyUP        = vk_up    or gp_padu;
-global.keyDOWN      = vk_down  or gp_padd;
-global.keyLEFT      = vk_left  or gp_padl;
-global.keyRIGHT     = vk_right or gp_padr;
+//global.keyUP        = vk_up    or gp_padu;
+//global.keyDOWN      = vk_down  or gp_padd;
+//global.keyLEFT      = vk_left  or gp_padl;
+//global.keyRIGHT     = vk_right or gp_padr;
 </string>
           </argument>
         </arguments>
@@ -321,12 +321,16 @@ global.ip_select_hold     = false; //damage chart?
 global.ip_select_pressed  = false;
 global.ip_select_released = false;
 
-global.ip_LSB_hold     = false; //?
+global.ip_LSB_hold     = false; //left stick disable/enable
 global.ip_LSB_pressed  = false;
 global.ip_LSB_released = false;
-global.ip_RSB_hold     = false; //?
+global.ip_RSB_hold     = false; //right stick disable/enable
 global.ip_RSB_pressed  = false; 
 global.ip_RSB_released = false;
+
+//Special commands, L/R tick conrols enable/disable
+global.ip_LS_on = true;
+global.ip_RS_on = true;
 </string>
           </argument>
         </arguments>
@@ -1077,11 +1081,11 @@ if ( global.net_mode != 0 and ds_queue_size(global.net_com) &gt; 0 and global.re
 global.snav_h = 0;
 global.snav_v = 0;
 
-if (global.Lstick_type = 1) {
+if (global.Lstick_type = 1 and global.ip_LS_on) {
     global.snav_h = gamepad_axis_value(0,gp_axislh);
     global.snav_v = gamepad_axis_value(0,gp_axislv);
     }
-if (global.Rstick_type = 1) {
+if (global.Rstick_type = 1 and global.ip_RS_on) {
     global.snav_h += gamepad_axis_value(0,gp_axisrh);
     global.snav_v += gamepad_axis_value(0,gp_axisrv);
     }
@@ -1178,11 +1182,11 @@ else{
 global.smap_h = 0;
 global.smap_v = 0;
 
-if (global.Lstick_type = 2) {
+if (global.Lstick_type = 2 and global.ip_LS_on) {
     global.smap_h = gamepad_axis_value(0,gp_axislh);
     global.smap_v = gamepad_axis_value(0,gp_axislv);
     }
-if (global.Rstick_type = 2) {
+if (global.Rstick_type = 2 and global.ip_RS_on ) {
     global.smap_h += gamepad_axis_value(0,gp_axisrh);
     global.smap_v += gamepad_axis_value(0,gp_axisrv);
     }
@@ -1280,6 +1284,53 @@ global.ip_select_released = gamepad_button_check_released(0,global.gpi_select);
 if global.ip_select_pressed  global.ip_select_hold = true;
 if global.ip_select_released global.ip_select_hold = false;
 
+// L stick Buttons (enable/disable)
+global.ip_LSB_pressed  =  gamepad_button_check_pressed(0,global.gpi_LSB);
+global.ip_LSB_released = gamepad_button_check_released(0,global.gpi_LSB);
+if global.ip_LSB_pressed  global.ip_LSB_hold = true;
+if global.ip_LSB_released global.ip_LSB_hold = false;
+// r stick Buttons (enable/disable)
+global.ip_RSB_pressed  =  gamepad_button_check_pressed(0,global.gpi_RSB);
+global.ip_RSB_released = gamepad_button_check_released(0,global.gpi_RSB);
+if global.ip_RSB_pressed  global.ip_RSB_hold = true;
+if global.ip_RSB_released global.ip_RSB_hold = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///L/R stick enable/disable
+
+if global.ip_LSB_pressed {
+    global.ip_LS_on = !global.ip_LS_on;
+    var msg_event = instance_create(0,0,obj_fading_text);
+    if global.ip_LS_on msg_event.msg = "Left stick enabled";
+    else msg_event.msg = "Left stick disabled";
+    }
+
+if global.ip_RSB_pressed { 
+    global.ip_RS_on = !global.ip_RS_on;
+    var msg_event = instance_create(0,0,obj_fading_text);
+    if global.ip_RS_on msg_event.msg = "Right stick enabled";
+    else msg_event.msg = "Right stick disabled"; 
+    }
+
+ 
 </string>
           </argument>
         </arguments>
@@ -1554,26 +1605,26 @@ for ( i = 0 ; i &lt; ds_list_size(global.client_list) ; i++){
           <argument>
             <kind>1</kind>
             <string>///Debug inputs
-draw_text(12,12,"NAV: "+string(global.ip_nav));
+draw_text(12,12*4,"NAV: "+string(global.ip_nav));
 
-draw_text(12,12*2,"UP:    "+string(global.ip_up_hold));
-draw_text(12,12*3,"DOWN:  "+string(global.ip_down_hold));
-draw_text(12,12*4,"left:  "+string(global.ip_left_hold));
-draw_text(12,12*5,"Right: "+string(global.ip_right_hold));
+draw_text(12,12*6,"UP:    "+string(global.ip_up_hold));
+draw_text(12,12*7,"DOWN:  "+string(global.ip_down_hold));
+draw_text(12,12*8,"left:  "+string(global.ip_left_hold));
+draw_text(12,12*9,"Right: "+string(global.ip_right_hold));
 
-draw_text(12,12*7,"Confirm: "+string(global.ip_A_hold));
-draw_text(12,12*8,"Cancel: "+string(global.ip_B_hold));
-draw_text(12,12*9,"X: "+string(global.ip_X_hold));
-draw_text(12,12*10,"Y: "+string(global.ip_Y_hold));
+draw_text(12,12*11,"Confirm: "+string(global.ip_A_hold));
+draw_text(12,12*12,"Cancel: "+string(global.ip_B_hold));
+draw_text(12,12*13,"X: "+string(global.ip_X_hold));
+draw_text(12,12*14,"Y: "+string(global.ip_Y_hold));
 
-draw_text(12,12*12,"L Stick H: "+string(global.snav_h));
-draw_text(12,12*13,"L Stick pressed: "+string(global.snav_left_pressed));
-draw_text(12,12*14,"L Stick hold: "+string(global.snav_left_hold));
-draw_text(12,12*15,"L Stick released: "+string(global.snav_left_released));
+draw_text(12,12*16,"L Stick H: "+string(global.snav_h));
+draw_text(12,12*17,"L Stick pressed: "+string(global.snav_left_pressed));
+draw_text(12,12*18,"L Stick hold: "+string(global.snav_left_hold));
+draw_text(12,12*19,"L Stick released: "+string(global.snav_left_released));
 
-draw_text(12,12*17,"R Stick H: "+string(global.smap_h));
-draw_text(12,12*18,"R Stick V: "+string(global.smap_v));
-draw_text(12,12*19,"Y View: "+string(view_yview[0]));
+draw_text(12,12*21,"R Stick H: "+string(global.smap_h));
+draw_text(12,12*22,"R Stick V: "+string(global.smap_v));
+draw_text(12,12*23,"Y View: "+string(view_yview[0]));
 </string>
           </argument>
         </arguments>
