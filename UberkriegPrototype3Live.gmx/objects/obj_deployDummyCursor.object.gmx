@@ -656,7 +656,7 @@ if (obj_map.terrains[global.posX,global.posY].isVisible and obj_map.units[global
     else cursor_icon = -1;
         
     //Open Deploy menu!
-    if (keyboard_check_pressed(global.keyCONFIRM) and obj_map.units[global.posX,global.posY] =0){
+    if (global.ip_A_pressed and obj_map.units[global.posX,global.posY] =0){
         cursor_icon = -1;
         }
     }

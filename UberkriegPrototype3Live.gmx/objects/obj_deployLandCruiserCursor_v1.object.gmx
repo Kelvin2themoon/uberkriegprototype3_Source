@@ -191,7 +191,7 @@ if ( view_yview[0] + view_hport[0] &lt; y + view_border+24 and global.canScroll_
             <kind>1</kind>
             <string>///execute at target location
 //check for mouse &amp; keayboard event
-if( keyboard_check_pressed(global.keyCONFIRM)
+if( global.ip_A_pressed
 or  (   mouse_check_button_pressed(mb_right) 
 and mouse_x div 24 = global.posX and mouse_y div 24 = global.posY)){
     //check in bound

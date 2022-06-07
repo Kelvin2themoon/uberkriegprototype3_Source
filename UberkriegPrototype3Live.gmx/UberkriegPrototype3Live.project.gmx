@@ -465,11 +465,19 @@
           <sprite>sprites\spr_mini_smoke</sprite>
         </sprites>
       </sprites>
+      <sprites name="main_menu">
+        <sprites name="Vs setup">
+          <sprite>sprites\spr_player_select_bg</sprite>
+          <sprite>sprites\spr_co_select</sprite>
+          <sprite>sprites\spr_com_switch</sprite>
+          <sprite>sprites\spr_button_next</sprite>
+          <sprite>sprites\spr_team_flag</sprite>
+        </sprites>
+      </sprites>
     </sprites>
     <sprites name="Debug">
       <sprite>sprites\spr_DebugStart</sprite>
     </sprites>
-    <sprite>sprites\sprite2</sprite>
     <sprites name="Unit Event">
       <sprite>sprites\spr_UnitEvent_Disrupt</sprite>
       <sprite>sprites\spr_unitEvent_Lost</sprite>
@@ -515,6 +523,19 @@
       <sprite>sprites\spr_bg_road</sprite>
       <sprite>sprites\spr_UItest</sprite>
     </sprites>
+    <sprites name="Main Menu">
+      <sprite>sprites\spr_title</sprite>
+      <sprite>sprites\spr_map_select_base</sprite>
+      <sprites name="File Nav UI">
+        <sprite>sprites\spr_next_button</sprite>
+        <sprite>sprites\spr_scroll_arrows</sprite>
+        <sprite>sprites\spr_page_arrows</sprite>
+        <sprite>sprites\spr_list_cursor_left</sprite>
+        <sprite>sprites\spr_list_cursor_right</sprite>
+        <sprite>sprites\spr_list_arrows</sprite>
+        <sprite>sprites\spr_back_button</sprite>
+      </sprites>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Holders">
@@ -533,6 +554,7 @@
       <script>scripts\scr_calc_battleStrength.gml</script>
       <script>scripts\scr_inBound.gml</script>
       <script>scripts\scr_calc_revenue.gml</script>
+      <script>scripts\scr_map_select_count.gml</script>
     </scripts>
     <scripts name="MapEditor">
       <scripts name="TerainGraphicHandlers">
@@ -567,6 +589,7 @@
       <script>scripts\scr_ubermap_save.gml</script>
       <script>scripts\scr_quick_save.gml</script>
       <script>scripts\scr_ubermap_load.gml</script>
+      <script>scripts\scr_minimap_load.gml</script>
       <script>scripts\scr_update_upkeep_stats.gml</script>
     </scripts>
     <scripts name="Syscom">
@@ -689,8 +712,6 @@
       </scripts>
       <script>scripts\net_dp2.gml</script>
     </scripts>
-    <script>scripts\script118.gml</script>
-    <script>scripts\script119.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader0.shader</shader>
@@ -720,6 +741,10 @@
     <object>objects\obj_map</object>
     <objects name="Controllers">
       <object>objects\obj_MastertControls</object>
+    </objects>
+    <objects name="MainMenu">
+      <object>objects\obj_title_screen</object>
+      <object>objects\obj_map_select</object>
     </objects>
     <objects name="Temp">
       <object>objects\obj_temp_MainMenu</object>
@@ -872,6 +897,8 @@
     <timeline>timelines\isDisrupt</timeline>
   </timelines>
   <rooms name="rooms">
+    <room>rooms\rm_load</room>
+    <room>rooms\rm_Title_Screen</room>
     <room>rooms\rm_debugStart</room>
     <room>rooms\rm_MapEditor</room>
     <room>rooms\rm_game_Basic</room>
@@ -880,6 +907,7 @@
     <room>rooms\rm_continue</room>
     <room>rooms\rm_battleSceneTest</room>
     <room>rooms\rm_net_host_config</room>
+    <room>rooms\rm_map_select</room>
   </rooms>
   <constants number="8">
     <constant name="CHECK_LAYRE">-64100</constant>

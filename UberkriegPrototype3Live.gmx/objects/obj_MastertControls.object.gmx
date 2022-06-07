@@ -477,13 +477,14 @@ global.isAIplayer[4] = false;
 
 //assigned player who is playing at this computer in networked play, 0 means normal hot seat, -4 or nooone as spectator or server controls, no game inputs
 global.Local_Player = 0; 
-
-
- 
 global.player_name[1] = "P1 closed";
 global.player_name[2] = "P2 closed";
 global.player_name[3] = "P3 closed";
 global.player_name[4] = "P4 closed";
+
+
+//MAP SELECTION
+global.map_select = "protoland.ubm";
 
 
     
@@ -946,11 +947,11 @@ global.smoke_alpha = global.glow^(-1) //(global.glow/2) + 0.5;
 
 if global.blinking {
     global.blinking = false;
-    alarm[1] = 30;
+    alarm[1] = 20;
     }
 else {
     global.blinking = true;
-    alarm[1] = 30;
+    alarm[1] = 20;
     }
 </string>
           </argument>
@@ -1210,6 +1211,43 @@ if (global.Rstick_type = 2 and global.ip_RS_on ) {
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///L/R stick enable/disable
+
+if global.ip_LSB_pressed {
+    global.ip_LS_on = !global.ip_LS_on;
+    var msg_event = instance_create(0,0,obj_fading_text);
+    if global.ip_LS_on msg_event.msg = "Left stick enabled";
+    else msg_event.msg = "Left stick disabled";
+    }
+
+if global.ip_RSB_pressed { 
+    global.ip_RS_on = !global.ip_RS_on;
+    var msg_event = instance_create(0,0,obj_fading_text);
+    if global.ip_RS_on msg_event.msg = "Right stick enabled";
+    else msg_event.msg = "Right stick disabled"; 
+    }
+
+ 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Keyboard and controller Listiner
 
 //Navigation (always check for arrow keys)
@@ -1294,43 +1332,6 @@ global.ip_RSB_pressed  =  gamepad_button_check_pressed(0,global.gpi_RSB);
 global.ip_RSB_released = gamepad_button_check_released(0,global.gpi_RSB);
 if global.ip_RSB_pressed  global.ip_RSB_hold = true;
 if global.ip_RSB_released global.ip_RSB_hold = false;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///L/R stick enable/disable
-
-if global.ip_LSB_pressed {
-    global.ip_LS_on = !global.ip_LS_on;
-    var msg_event = instance_create(0,0,obj_fading_text);
-    if global.ip_LS_on msg_event.msg = "Left stick enabled";
-    else msg_event.msg = "Left stick disabled";
-    }
-
-if global.ip_RSB_pressed { 
-    global.ip_RS_on = !global.ip_RS_on;
-    var msg_event = instance_create(0,0,obj_fading_text);
-    if global.ip_RS_on msg_event.msg = "Right stick enabled";
-    else msg_event.msg = "Right stick disabled"; 
-    }
-
- 
 </string>
           </argument>
         </arguments>
@@ -1485,6 +1486,28 @@ if ds_map_find_value( async_load , "type" ) = network_type_data {
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="3">
       <action>
         <libid>1</libid>
@@ -1510,6 +1533,29 @@ audio_destroy_stream(test_bgm);
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//instance_create(0,0,self);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -1527,84 +1573,9 @@ audio_destroy_stream(test_bgm);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///debug draw room name
-//draw_text(12,12,"Curosr Frame: "+  string(global.cursorFrameIndex));
-//draw_text(12,12,room_get_name(room));
-//draw_text(24,24,string(instance_count));
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///debug: read and display global.Local_player
-/*
-
-draw_text( 12 , 12 , "Local Player: " + string(global.Local_Player) );
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///draw client list
-/*
-var i = 0;
-for ( i = 0 ; i &lt; ds_list_size(global.client_list) ; i++){
-    draw_text(12 +i*24 ,400,string( ds_list_find_value(global.client_list,i)));
-    draw_text(19+i*24,400, string(global.conect_P[i+1]));
-    }
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Debug inputs
+draw_text(24,2, "frame delay: " + string(global.cursorFrameIndex)) 
+/*
 draw_text(12,12*4,"NAV: "+string(global.ip_nav));
 
 draw_text(12,12*6,"UP:    "+string(global.ip_up_hold));

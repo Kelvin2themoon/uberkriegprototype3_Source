@@ -797,11 +797,11 @@ if global.ip_A_pressed{
             <kind>1</kind>
             <string>///Temo, Display unit info
 
-if keyboard_check_pressed(global.keyAUX){
+if global.ip_X_pressed{
     display_on = true;
     }
     
-if keyboard_check_released(global.keyAUX){
+if global.ip_X_released{
     display_on = false;
     }
 </string>

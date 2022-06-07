@@ -5,7 +5,6 @@ var drawNum_isFlushLeft = argument1 //boolean
 var drawNum_number      = argument2 //the number to be drawn
 var drawNum_x   = argument3 //real
 var drawNum_y  = argument4 //real
-
 var drawNum_limit = argument5 // limit of how many numbers can be drawn (real)
 
 //adjust for first position "1"

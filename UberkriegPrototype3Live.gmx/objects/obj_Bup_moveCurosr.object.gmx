@@ -452,7 +452,7 @@ global.target_unit  = obj_map.units[global.posX,global.posY];
 global.destination  = obj_map.terrains[global.posX,global.posY];
 
 //check: key press confirm
-if ( keyboard_check_pressed( global.keyCONFIRM) )
+if ( global.ip_A_pressed )
     {
     //reset actionable variables (just in case)
     global.capture      = false;
