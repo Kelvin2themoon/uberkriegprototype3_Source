@@ -95,9 +95,10 @@ for ( i = 1 ; i &lt; 5 ; i += 1 ){
             <string>///creat &amp; load map
 global.map = instance_create(0,0,obj_map);
 
-var loading_map = "protoland.ubm" ; //default loading map
+var loading_map = global.map_select ; //default loading map
 //switch to client version if net mode 2
 if global.net_mode = 2 loading_map = "netland_P"+string(global.Local_Player)+".ubm";
+if global.net_mode = 1 loading_map = "protoland.ubm";
 
 
 if(file_exists (loading_map)) scr_ubermap_load(loading_map);
@@ -303,11 +304,13 @@ if (global.P1_in_play){
         //assign server [p]layer socket if host
         if global.net_mode = 1 global.P[1].pSocket = global.sSocket[1];
         //create CO 
-        global.P1.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.P1_CO)));
+        global.P1.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.CO_P[1])));
         global.P1.CO.ownership = 1;
         //global.P1_in_play = true;
         //assign team
-        global.P1.team = global.Team_P[1]; 
+        global.P1.team = global.Team_P[1];
+        //funds
+        global.P[1].funds = global.funds; 
         //add cursor pose at 
         global.P1.save_cursor_pos_x = P1_x;
         global.P1.save_cursor_pos_y =P1_y;
@@ -335,11 +338,13 @@ if (global.P2_in_play){
     //assign server [p]layer socket if host
     if global.net_mode = 1 global.P[2].pSocket = global.sSocket[2];
     //create CO 
-    global.P2.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.P2_CO)));
+    global.P2.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.CO_P[2])));
     global.P2.CO.ownership = 2;
     //global.P2_in_play = true;
     //assign team
     global.P2.team = global.Team_P[2];
+    //funds
+    global.P[2].funds = global.funds; 
     //add cursor pose at 
     global.P2.save_cursor_pos_x = P2_x;
     global.P2.save_cursor_pos_y = P2_y;
@@ -367,11 +372,13 @@ if(global.P3_in_play){
     //assign server [p]layer socket if host
     if global.net_mode = 1 global.P[3].pSocket = global.sSocket[3];
     //create CO 
-    global.P3.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.P3_CO)));
+    global.P3.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.CO_P[3])));
     global.P3.CO.ownership = 3;
     //global.P3_in_play = true;
     //assign team
     global.P3.team = global.Team_P[3];
+    //funds
+    global.P[3].funds = global.funds; 
     //add cursor pose at
     global.P3.save_view_pos_x = view_xview[0];
     global.P3.save_view_pos_y = view_yview[0]; 
@@ -398,11 +405,13 @@ if (global.P4_in_play){
     //assign server [p]layer socket if host
     if global.net_mode = 1 global.P[4].pSocket = global.sSocket[4];
     //create CO 
-    global.P4.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.P4_CO)));
+    global.P4.CO = instance_create(0,0, asset_get_index( "obj_CO_"+ string(global.CO_P[4])));
     global.P4.CO.ownership = 4;
     //global.P4_in_play = true;
     //assign team
     global.P4.team = global.Team_P[4];
+    //funds
+    global.P[4].funds = global.funds; 
     //add cursor pose at
     global.P4.save_view_pos_x = view_xview[0];
     global.P4.save_view_pos_y = view_yview[0]; 

@@ -32,6 +32,8 @@ F12: full screen
 Global cursor animation
 */
 
+depth = UI_DEPTH_CURSOR;
+
 //mode spesific thing
 global.mode = "Start Game";
 //this variable is used to animate cursors 
@@ -452,10 +454,10 @@ global.P3_CO = 0 ;
 global.P4_CO = 0 ;
 //arry duplicate
 global.CO_P[0] = 0 ;
-global.CO_P[1] = 0 ;
-global.CO_P[2] = 0 ;
-global.CO_P[3] = 0 ; 
-global.CO_P[4] = 0 ;
+global.CO_P[1] = 1 ;
+global.CO_P[2] = 4 ;
+global.CO_P[3] = 6 ; 
+global.CO_P[4] = 8 ;
 
 //player teams
 global.P1_Team = 1;
@@ -823,6 +825,105 @@ global.cam_speed = 8;
 global.cam_border = 48;
 
 //cheking to see if git desktop will update
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Setup Variables
+
+var i=1;
+for (i=1;i&lt;5;i++){
+    //player options
+    global.inplay_P[i] = false;
+    global.team_P[i]   = i;
+    global.co_P[i]     = i;   
+    global.p_slot[i]      =i; //player slot assignment, defaults 
+    }
+//terms
+//global.set_fog     = "standard";
+//global.set_radio   = true;
+global.funds   = 0;
+global.income  = 1000;
+global.turns   = 0; // 0 = disabled, incriments of 15?
+global.capture = 0; // 0 = disabled
+global.cap_max =  0; // maximum properties on map 
+//hidden stats
+global.player_count = 0;
+
+//save vs.map selections positions
+global.vs_map_dir_index =  0;
+global.vs_maps_index    =  0;
+global.vs_map_win_pos   = -1;
+global.vs_map_cur_pos   =  1;
+
+//save vs. setup positions
+
+//temp music setup
+///temp sount settings
+
+//stop all audio
+audio_stop_all();
+
+//external bgm switch for prototype
+global.BGM_on = false;
+// bgm's
+global.tempBGM[1] = "bgm1.ogg" ;
+global.tempBGM[2] = "bgm2.ogg" ;
+global.tempBGM[3] = "bgm3.ogg" ;
+global.tempBGM[4] = "bgm4.ogg" ;
+//set bgm to none
+global.BGM = noone;
+
+//terms - radio
+global.radio = true;
+
+
+
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///mouse graphic controls
+global.m_type = spr_mouseSlapper;
+global.m_frame = 0;
+global.m_over = 0; //mouse over index specified by local controls
+//global moouse active?
+global.m_gactive = true; //turn on to use global mouse controls becase some old code uses their own mouse
 </string>
           </argument>
         </arguments>
@@ -1574,7 +1675,7 @@ audio_destroy_stream(test_bgm);
           <argument>
             <kind>1</kind>
             <string>///Debug inputs
-draw_text(24,2, "frame delay: " + string(global.cursorFrameIndex)) 
+//draw_text(24,2, "frame delay: " + string(global.cursorFrameIndex)) 
 /*
 draw_text(12,12*4,"NAV: "+string(global.ip_nav));
 
@@ -1596,6 +1697,29 @@ draw_text(12,12*19,"L Stick released: "+string(global.snav_left_released));
 draw_text(12,12*21,"R Stick H: "+string(global.smap_h));
 draw_text(12,12*22,"R Stick V: "+string(global.smap_v));
 draw_text(12,12*23,"Y View: "+string(view_yview[0]));
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if global.m_gactive draw_sprite(global.m_type, global.m_frame, mouse_x,mouse_y);
 </string>
           </argument>
         </arguments>

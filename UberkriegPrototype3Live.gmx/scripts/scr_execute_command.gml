@@ -46,7 +46,9 @@ else{
         if (global.rangeCheck[x div 24,y div 24].sprite_index = spr_rangecheck_bluedk) wasStanding = false;
         }
     }
-scr_updateStanding_global();
+if global.radio scr_updateStanding_global();
+else with(obj_unit) isStanding = true;
+
 with (obj_unit){ 
     if (!wasStanding and  isStanding and isObservable) instance_create(x,y,obj_event_link);
     if ( wasStanding and !isStanding and isObservable and global.net_mode != 0 and isObservable) instance_create(x,y,obj_event_lost);

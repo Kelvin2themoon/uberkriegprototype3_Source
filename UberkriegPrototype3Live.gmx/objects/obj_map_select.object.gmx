@@ -28,6 +28,8 @@
             <string>///set game mode to edit mode
 //so units can be drawn w/out player objects 
 global.mode = "Map Edit";
+//deacrvate global mouse controls (becasue local controls are implimented)
+global.m_gactive = false;
 </string>
           </argument>
         </arguments>
@@ -56,14 +58,14 @@ depth = UI_DEPTH_WIN;
 map_dir = ds_list_create();
 ds_list_add(map_dir,file_find_first(working_directory+"maps/*",fa_directory));
 dir_select = file_find_next();
-dir_index = 0; // used for nav
+dir_index = global.vs_map_dir_index; // used for nav
 
 while(dir_select !=""){
     ds_list_add(map_dir,dir_select);
     dir_select = file_find_next();
     }
 //set dir to first item
-dir_select = ds_list_find_value(map_dir,0);
+dir_select = ds_list_find_value(map_dir,dir_index);
 
 //initiate list of maps for each folder
 map_lists = array_create(ds_list_size(map_dir));
@@ -84,9 +86,9 @@ for ( i=0 ; i&lt;ds_list_size(map_dir) ; i++){
 file_find_close();
 
 
-//crate list of maps***********************************************************
-maps = map_lists[0];
-maps_index = 0;
+//create list of maps***********************************************************
+maps = map_lists[dir_index];
+maps_index = global.vs_maps_index;
 
 //initiate map data
 cout_HQs    = 0; // index = 11
@@ -96,7 +98,7 @@ count_city  = 0; //13
 count_tower = 0; //14
 count_unit  = 0;
 
-global.map_select =  ds_list_find_value(map_lists[0],0) ;
+global.map_select =  ds_list_find_value(map_lists[dir_index],maps_index) ;
 
 global.map = instance_create(0,0,obj_map);
 
@@ -108,7 +110,9 @@ if ( ds_list_size(map_lists[0]) &gt; 0 ){
         isObservable = true;
         other.count_unit +=1;
         }
+    global.cap_max = 0;
     with obj_property {
+        global.cap_max++;
         switch index {
             case 11 :
                 other.cout_HQs +=1;
@@ -176,10 +180,10 @@ folder_posx = 60;
 folder_posy = 77;
 
 //window position relative to list
-win_pos = -1; //defaults a ttop of list, dispolays at position index one
+win_pos = global.vs_map_win_pos; //defaults a ttop of list, dispolays at position index one
 win_size = 7; // from 0~6, first and last are drawn dark
 //cursor position
-cur_pos = 1; //0~6 in this case  
+cur_pos = global.vs_map_cur_pos; //0~6 in this case  
 
 
 //initiate window and cursor position saves for each folder
@@ -347,174 +351,6 @@ m_over = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///map list key nav
-
-/// Navigation Ver.2 now with game pad controls
-
-//      check for key delay on press
-if (global.ip_up_pressed   ||
-    global.ip_down_pressed ||
-    global.ip_left_pressed ||
-    global.ip_right_pressed){
-        global.cursorKey_delay = global.cursorKey_startspeed;
-        }
-        
-//      reset key delay on release
-if (global.ip_up_released   ||
-    global.ip_down_released ||
-    global.ip_left_released ||
-    global.ip_right_released){
-        alarm[1] = 0;
-        global.cursorKey_delay = global.cursorKey_startspeed ;
-        }
-
-if (alarm[1] = -1 ){
-//button hover over
-page_next_frame = 3;
-page_last_frame = 0;
-b_next_frame    = 0;
-b_back_frame    = 0;
-
-     switch(global.ip_nav){
-        //reset
-        case 0 :
-            alarm[1] = 0;
-            global.cursorkey_delay = global.cursorKey_startspeed ;
-            //if (isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range = false) scr_rangeCheck_reset();   
-            break;
-        case 2 : //down
-            maps_index ++;
-            if (maps_index &gt; ds_list_size(maps)-1) maps_index = ds_list_size(maps)-1; //keep at end of list
-            else{
-                global.map_select = ds_list_find_value(maps,maps_index);
-                scr_ubermap_load("maps/"+dir_select+"/"+ ds_list_find_value(maps,maps_index));
-                scr_map_select_count();
-                }
-            //move cursor position
-            if (cur_pos &lt; 5 and win_pos+cur_pos &lt; ds_list_size(maps)-1 ) cur_pos++;
-            else if (maps_index-win_pos &gt; 5){ 
-                win_pos+=1;
-                //update bar pos
-                bar_pos = (barh/ds_list_size(maps))*(win_pos+1);
-                }
-            //juice
-            scr_cursorKey_juice(1,global.cursorKey_sfx);
-            break;
-        case 8 :
-            maps_index --;
-            //loop around if at end
-            if (maps_index &lt; 0 ) maps_index = 0;
-            else {
-                global.map_select = ds_list_find_value(maps,maps_index);
-                scr_ubermap_load("maps/"+dir_select+"/"+ ds_list_find_value(maps,maps_index));
-                scr_map_select_count();
-                }
-            //move cursor position
-            if (cur_pos &gt; 1) cur_pos--;
-            else if (maps_index-win_pos &lt; 1){ 
-                win_pos-=1;
-                //update bar pos
-                bar_pos = (barh/ds_list_size(maps))*(win_pos+1);
-                }
-            scr_cursorKey_juice(1,global.cursorKey_sfx);
-            break;
-        case 6 : // next page
-            //save window and cursor positions
-            sav_cur[dir_index] = cur_pos;
-            sav_win[dir_index] = win_pos;
-            sav_ind[dir_index] = maps_index;
-            //index increment
-            dir_index ++;
-            //loop around if at end
-            if (dir_index &gt; ds_list_size(map_dir)-1) dir_index = 0;
-            dir_select = ds_list_find_value(map_dir,dir_index);
-            cur_pos = sav_cur[dir_index];
-            win_pos = sav_win[dir_index];
-            maps_index = sav_ind[dir_index];
-            //laod new list
-            maps = map_lists[dir_index];
-            //check scroll bar changes
-            if (ds_list_size(maps) &gt; 5) bar_ratio = 5/ds_list_size(maps);
-            else bar_ratio = 1;
-            //update bar pos
-            bar_pos = (barh/ds_list_size(maps))*(win_pos+1);
-            //load map
-            global.map_select = ds_list_find_value(maps,0);
-            if(ds_list_size(maps)&gt;0) scr_ubermap_load("maps/"+dir_select+"/"+ ds_list_find_value(maps,maps_index))
-            scr_map_select_count();
-            //juice
-            page_next_frame = 5;
-            scr_cursorKey_juice(1,global.cursorKey_sfx);
-            break;
-        case 4 : // last page
-            //save window and cursor positions
-            sav_cur[dir_index] = cur_pos;
-            sav_win[dir_index] = win_pos;
-            sav_ind[dir_index] = maps_index;
-            //index increment
-            dir_index --;
-            //loop around if at end
-            if (dir_index &lt; 0) dir_index = ds_list_size(map_dir)-1;
-            dir_select = ds_list_find_value(map_dir,dir_index);
-            cur_pos = sav_cur[dir_index];
-            win_pos = sav_win[dir_index];
-            maps_index = sav_ind[dir_index];
-            //laod new list
-            maps = map_lists[dir_index];
-            //check scroll bar changes
-            if (ds_list_size(maps) &gt; 5) bar_ratio = 5/ds_list_size(maps);
-            else bar_ratio = 1;
-            //update bar pos
-            bar_pos = (barh/ds_list_size(maps))*(win_pos+1);
-            //load map
-            global.map_select = ds_list_find_value(maps,0);
-            if(ds_list_size(maps)&gt;0) scr_ubermap_load("maps/"+dir_select+"/"+ ds_list_find_value(maps,maps_index))
-            scr_map_select_count();
-            //juice
-            page_last_frame = 2;
-            scr_cursorKey_juice(1,global.cursorKey_sfx);
-            break;
-        }
-    }
-
-/*
-//dir nav
-
-if (global.ip_right_pressed){
-    dir_index ++;
-    //loop around if at end
-    if (dir_index &gt; ds_list_size(map_dir)-1) dir_index = 0;
-    }
-if (global.ip_left_pressed){
-    dir_index --;
-    //loop around if at end
-    if (dir_index &lt; 0) dir_index = ds_list_size(map_dir)-1;
-    }    
-dir_select = ds_list_find_value(map_dir,dir_index);
-
-    
-    
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>/// check mouse over
 //initiate mouse_on
 mouse_on = false;
@@ -541,24 +377,6 @@ else{
     }
 
 
-switch (m_over){
-    case 6 : // next page
-        page_next_frame = 4;
-        if mouse_check_button(mb_left) page_next_frame = 5;
-        break;
-    case 7 : // las tage
-         page_last_frame = 1;
-         if mouse_check_button(mb_left) page_last_frame = 2;
-         break;
-    case 10 : // NEXT
-        b_next_frame = 1;
-        if mouse_check_button(mb_left) b_next_frame = 2;
-        break;
-    case 11:
-        b_back_frame = 1;
-        if mouse_check_button(mb_left) b_back_frame = 2;
-        break;
-    }
 
 
 </string>
@@ -775,12 +593,260 @@ if (mouse_check_button_pressed(mb_left) ){
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///map list key nav
+
+/// Navigation Ver.2 now with game pad controls
+
+//      check for key delay on press
+if (global.ip_up_pressed   ||
+    global.ip_down_pressed ||
+    global.ip_left_pressed ||
+    global.ip_right_pressed){
+        global.cursorKey_delay = global.cursorKey_startspeed;
+        }
+        
+//      reset key delay on release
+if (global.ip_up_released   ||
+    global.ip_down_released ||
+    global.ip_left_released ||
+    global.ip_right_released){
+        alarm[1] = 0;
+        global.cursorKey_delay = global.cursorKey_startspeed ;
+        }
+
+if (alarm[1] = -1 ){
+    //button hover over
+    page_next_frame = 3;
+    page_last_frame = 0;
+
+
+     switch(global.ip_nav){
+        //reset
+        case 0 :
+            alarm[1] = 0;
+            global.cursorkey_delay = global.cursorKey_startspeed ;
+            //if (isOnGlobalRadioCheck = false and checking_attack_range = false and checking_move_range = false) scr_rangeCheck_reset();   
+            break;
+        case 2 : //down
+            maps_index ++;
+            if (maps_index &gt; ds_list_size(maps)-1) maps_index = ds_list_size(maps)-1; //keep at end of list
+            else{
+                global.map_select = ds_list_find_value(maps,maps_index);
+                scr_ubermap_load("maps/"+dir_select+"/"+ ds_list_find_value(maps,maps_index));
+                scr_map_select_count();
+                }
+            //move cursor position
+            if (cur_pos &lt; 5 and win_pos+cur_pos &lt; ds_list_size(maps)-1 ) cur_pos++;
+            else if (maps_index-win_pos &gt; 5){ 
+                win_pos+=1;
+                //update bar pos
+                bar_pos = (barh/ds_list_size(maps))*(win_pos+1);
+                }
+            //juice
+            scr_cursorKey_juice(1,global.cursorKey_sfx);
+            break;
+        case 8 :
+            maps_index --;
+            //loop around if at end
+            if (maps_index &lt; 0 ) maps_index = 0;
+            else {
+                global.map_select = ds_list_find_value(maps,maps_index);
+                scr_ubermap_load("maps/"+dir_select+"/"+ ds_list_find_value(maps,maps_index));
+                scr_map_select_count();
+                }
+            //move cursor position
+            if (cur_pos &gt; 1) cur_pos--;
+            else if (maps_index-win_pos &lt; 1){ 
+                win_pos-=1;
+                //update bar pos
+                bar_pos = (barh/ds_list_size(maps))*(win_pos+1);
+                }
+            scr_cursorKey_juice(1,global.cursorKey_sfx);
+            break;
+        case 6 : // next page
+            //save window and cursor positions
+            sav_cur[dir_index] = cur_pos;
+            sav_win[dir_index] = win_pos;
+            sav_ind[dir_index] = maps_index;
+            //index increment
+            dir_index ++;
+            //loop around if at end
+            if (dir_index &gt; ds_list_size(map_dir)-1) dir_index = 0;
+            dir_select = ds_list_find_value(map_dir,dir_index);
+            cur_pos = sav_cur[dir_index];
+            win_pos = sav_win[dir_index];
+            maps_index = sav_ind[dir_index];
+            //laod new list
+            maps = map_lists[dir_index];
+            //check scroll bar changes
+            if (ds_list_size(maps) &gt; 5) bar_ratio = 5/ds_list_size(maps);
+            else bar_ratio = 1;
+            //update bar pos
+            bar_pos = (barh/ds_list_size(maps))*(win_pos+1);
+            //load map
+            global.map_select = ds_list_find_value(maps,0);
+            if(ds_list_size(maps)&gt;0) scr_ubermap_load("maps/"+dir_select+"/"+ ds_list_find_value(maps,maps_index))
+            scr_map_select_count();
+            //juice
+            page_next_frame = 5;
+            scr_cursorKey_juice(1,global.cursorKey_sfx);
+            break;
+        case 4 : // last page
+            //save window and cursor positions
+            sav_cur[dir_index] = cur_pos;
+            sav_win[dir_index] = win_pos;
+            sav_ind[dir_index] = maps_index;
+            //index increment
+            dir_index --;
+            //loop around if at end
+            if (dir_index &lt; 0) dir_index = ds_list_size(map_dir)-1;
+            dir_select = ds_list_find_value(map_dir,dir_index);
+            cur_pos = sav_cur[dir_index];
+            win_pos = sav_win[dir_index];
+            maps_index = sav_ind[dir_index];
+            //laod new list
+            maps = map_lists[dir_index];
+            //check scroll bar changes
+            if (ds_list_size(maps) &gt; 5) bar_ratio = 5/ds_list_size(maps);
+            else bar_ratio = 1;
+            //update bar pos
+            bar_pos = (barh/ds_list_size(maps))*(win_pos+1);
+            //load map
+            global.map_select = ds_list_find_value(maps,0);
+            if(ds_list_size(maps)&gt;0) scr_ubermap_load("maps/"+dir_select+"/"+ ds_list_find_value(maps,maps_index))
+            scr_map_select_count();
+            //juice
+            page_last_frame = 2;
+            scr_cursorKey_juice(1,global.cursorKey_sfx);
+            break;
+        }
+    }
+
+/*
+//dir nav
+
+if (global.ip_right_pressed){
+    dir_index ++;
+    //loop around if at end
+    if (dir_index &gt; ds_list_size(map_dir)-1) dir_index = 0;
+    }
+if (global.ip_left_pressed){
+    dir_index --;
+    //loop around if at end
+    if (dir_index &lt; 0) dir_index = ds_list_size(map_dir)-1;
+    }    
+dir_select = ds_list_find_value(map_dir,dir_index);
+
+    
+    
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>/// Next &amp; back
 
+//Back
 if (global.ip_B_pressed or (m_over=11 and mouse_check_button_pressed(mb_left)) or mouse_check_button_pressed(mb_right)){ 
+    //save cursor and win positions
+    global.vs_map_dir_index = dir_index;
+    global.vs_maps_index    = maps_index;
+    global.vs_map_win_pos   = win_pos;
+    global.vs_map_cur_pos   = cur_pos; 
+    //??? i gorget what this does
     b_back_frame = 2;
+    //destroy map lists for each map folder
+    var i=0;
+    for (i=0;i&lt;ds_list_size(map_dir);i++){
+        ds_list_destroy(map_lists[i]);
+        }
+    //desoty maps dir
+    ds_list_destroy(map_dir);
     room_goto(rm_Title_Screen);
     }
+    
+    
+//Next
+if (global.ip_A_pressed or (m_over=10 and mouse_check_button_pressed(mb_left))){
+    //save cursor and win positions
+    global.vs_map_dir_index = dir_index;
+    global.vs_maps_index    = maps_index;
+    global.vs_map_win_pos   = win_pos;
+    global.vs_map_cur_pos   = cur_pos; 
+    //save ,ap file path name 
+    global.map_select = "maps/"+dir_select+"/"+global.map_select;
+      var i=0;
+    for (i=0;i&lt;ds_list_size(map_dir);i++){
+        ds_list_destroy(map_lists[i]);
+        }
+    //desoty maps dir
+    ds_list_destroy(map_dir);
+    room_goto(rm_setup);
+    }
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///mouse over graphic switch
+switch (m_over){
+    case 0 :
+        //button hover over
+        //page_next_frame = 3;
+        //page_last_frame = 0;
+        b_next_frame    = 0;
+        b_back_frame    = 0;
+        break;
+    case 6 : // next page
+        page_next_frame = 4;
+        if mouse_check_button(mb_left) page_next_frame = 5;
+        break;
+    case 7 : // las tage
+         page_last_frame = 1;
+         if mouse_check_button(mb_left) page_last_frame = 2;
+         break;
+    case 10 : // NEXT
+        b_next_frame = 1;
+        if mouse_check_button(mb_left) b_next_frame = 2;
+        break;
+    case 11:
+        b_back_frame = 1;
+        if mouse_check_button(mb_left) b_back_frame = 2;
+        break;
+    }
+
 </string>
           </argument>
         </arguments>
@@ -1083,7 +1149,7 @@ if (ds_list_size(maps)&gt;0){
             <string>/// DRAW MOUSE
 draw_sprite(mouse_type,0, mouse_x, mouse_y);
 //debug
-draw_text(mouse_x+24,mouse_y+24,string(m_over));
+draw_text(mouse_x+24,mouse_y+24,string(b_back_frame));
 </string>
           </argument>
         </arguments>

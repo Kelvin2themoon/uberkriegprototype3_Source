@@ -470,8 +470,37 @@
           <sprite>sprites\spr_player_select_bg</sprite>
           <sprite>sprites\spr_co_select</sprite>
           <sprite>sprites\spr_com_switch</sprite>
-          <sprite>sprites\spr_button_next</sprite>
+          <sprite>sprites\spr_team_bit</sprite>
           <sprite>sprites\spr_team_flag</sprite>
+          <sprite>sprites\spr_setup_bg</sprite>
+          <sprite>sprites\spr_terms</sprite>
+          <sprite>sprites\spr_terms_select</sprite>
+          <sprites name="tabs">
+            <sprite>sprites\spr_tab_cos</sprite>
+            <sprite>sprites\spr_tab_terms</sprite>
+            <sprite>sprites\spr_tab_teams</sprite>
+            <sprite>sprites\spr_tab_cpu</sprite>
+          </sprites>
+          <sprites name="cursors">
+            <sprite>sprites\spr_scursor_cos</sprite>
+            <sprite>sprites\spr_scursor_terms</sprite>
+            <sprite>sprites\spr_scursor_teams</sprite>
+            <sprite>sprites\spr_scursors_cpu</sprite>
+          </sprites>
+          <sprite>sprites\spr_terms_txt</sprite>
+        </sprites>
+        <sprites name="map select">
+          <sprite>sprites\spr_map_select_base</sprite>
+          <sprite>sprites\spr_title</sprite>
+        </sprites>
+        <sprites name="File Nav UI">
+          <sprite>sprites\spr_next_button</sprite>
+          <sprite>sprites\spr_scroll_arrows</sprite>
+          <sprite>sprites\spr_page_arrows</sprite>
+          <sprite>sprites\spr_list_cursor_left</sprite>
+          <sprite>sprites\spr_list_cursor_right</sprite>
+          <sprite>sprites\spr_list_arrows</sprite>
+          <sprite>sprites\spr_back_button</sprite>
         </sprites>
       </sprites>
     </sprites>
@@ -522,19 +551,6 @@
       <sprite>sprites\spr_temp_tank</sprite>
       <sprite>sprites\spr_bg_road</sprite>
       <sprite>sprites\spr_UItest</sprite>
-    </sprites>
-    <sprites name="Main Menu">
-      <sprite>sprites\spr_title</sprite>
-      <sprite>sprites\spr_map_select_base</sprite>
-      <sprites name="File Nav UI">
-        <sprite>sprites\spr_next_button</sprite>
-        <sprite>sprites\spr_scroll_arrows</sprite>
-        <sprite>sprites\spr_page_arrows</sprite>
-        <sprite>sprites\spr_list_cursor_left</sprite>
-        <sprite>sprites\spr_list_cursor_right</sprite>
-        <sprite>sprites\spr_list_arrows</sprite>
-        <sprite>sprites\spr_back_button</sprite>
-      </sprites>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -657,8 +673,6 @@
       </scripts>
     </scripts>
     <scripts name="Audio &amp; Visuals">
-      <script>scripts\scr_cursorKey_juice.gml</script>
-      <script>scripts\scr_animate_object.gml</script>
       <scripts name="Drawing">
         <script>scripts\scr_draw_num.gml</script>
         <script>scripts\scr_draw_stars.gml</script>
@@ -666,6 +680,8 @@
         <script>scripts\scr_draw_star_p.gml</script>
         <script>scripts\script117.gml</script>
       </scripts>
+      <script>scripts\scr_cursorKey_juice.gml</script>
+      <script>scripts\scr_animate_object.gml</script>
       <script>scripts\scr_camera_reframe.gml</script>
       <script>scripts\cam_bring_into_frame.gml</script>
       <script>scripts\scr_camera_follow.gml</script>
@@ -745,6 +761,12 @@
     <objects name="MainMenu">
       <object>objects\obj_title_screen</object>
       <object>objects\obj_map_select</object>
+      <objects name="set_up">
+        <object>objects\obj_setup</object>
+        <object>objects\obj_co_select</object>
+        <object>objects\obj_team_select</object>
+        <object>objects\obj_terms_select</object>
+      </objects>
     </objects>
     <objects name="Temp">
       <object>objects\obj_temp_MainMenu</object>
@@ -908,6 +930,7 @@
     <room>rooms\rm_battleSceneTest</room>
     <room>rooms\rm_net_host_config</room>
     <room>rooms\rm_map_select</room>
+    <room>rooms\rm_setup</room>
   </rooms>
   <constants number="8">
     <constant name="CHECK_LAYRE">-64100</constant>

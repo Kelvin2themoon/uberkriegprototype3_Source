@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///Confirm to continue
-if (global.ip_A_pressed) room_goto(rm_map_select);
+if (global.ip_A_pressed or mouse_check_button_pressed(mb_left)) room_goto(rm_map_select);
 </string>
           </argument>
         </arguments>
@@ -66,6 +66,8 @@ draw_text(149,244+14*1,"F2: NEW MENU");
 
 draw_text(149,244+14*1,"F2: NEW MENU");
 
+//music test
+if global.BGM_on draw_text(24,24,"Test BGM stream On");
 
 </string>
           </argument>
@@ -137,6 +139,38 @@ room_goto(rm_map_select);
 room_goto(rm_debugStart);
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="77">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///switch BGM on (dynamically load from app data)
+
+if global.BGM_on {
+    //if on switch off
+    global.BGM_on = false;
+    }
+else{
+    //swith on
+    global.BGM_on = true;
+    }
 </string>
           </argument>
         </arguments>
