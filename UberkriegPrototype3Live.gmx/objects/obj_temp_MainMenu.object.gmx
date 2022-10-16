@@ -25,7 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Network status readout var
+            <string>with obj_MastertControls instance_destroy();
+instance_create(0,0,obj_MastertControls);
+
+///Network status readout var
 global.last_network_event = "F5: Create Server " ;
 //creat client menu
 temp_ClientMenu =  instance_create(0,0,obj_temp_ClientMenu);

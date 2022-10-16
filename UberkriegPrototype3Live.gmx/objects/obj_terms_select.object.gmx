@@ -26,32 +26,42 @@
           <argument>
             <kind>1</kind>
             <string>///Initiate
-
+depth = -1;
 state = 0;
 /*  0 - enter
     1 - active
     2 - return - to team selection
 */
-c_pos  = 0;
-/*  0 - FOG
-    1 - Radio
-    2 - Funds
-    3 - Income
-    4 - Turns
-    5 - Capture
-*/
-fog_sprite_index    = 2;
-radio_sprite_index  = 0;
-
 if global.capture&gt;global.cap_max global.capture = global.cap_max; 
-
-
 x = 167;
 y = 239+255;
 breaky = 239+80;
 speedy = 64; 
-
 alarm[1] = 1;
+
+c_pos  = 1;
+/*  1 - FOG
+    2 - Radio
+    3 - Funds
+    4 - Income
+    5 - Turns
+    6 - Capture
+*/
+
+var i=1;
+for(i=1;i&lt;=6;i++){
+    tab_frame[i,1]=0;
+    tab_frame[i,2]=5;
+    }
+
+b_start_frame   = 0;
+b_default_frame = 0; 
+fog_sprite_index    = 2;
+radio_sprite_index  = 0;
+
+
+
+
 
 
 
@@ -212,7 +222,7 @@ if (state=1){
         global.ip_down_released ||
         global.ip_left_released ||
         global.ip_right_released){
-            alarm[1] = 0;
+            alarm[5] = 0;
             global.cursorKey_delay = global.cursorKey_startspeed ;
             }
     
@@ -220,26 +230,37 @@ if (state=1){
     //**IMPORTANT** using alarm 5 for cursor animation                
     
     // arrow key actions and juice        
-    if (alarm[1] = -1 ){
+    if (alarm[5] = -1 ){
         switch(global.ip_nav){
             // reset all range checks if no action
             case(0):
-                alarm[1] = 0;
+                alarm[5] = 0;
+                //reset tab rames
+                b_default_frame =0;
+                var i=1;
+                for (i=1;i&lt;=6;i++){
+                    tab_frame[i,1] =0;
+                    tab_frame[i,2] =5;   
+                    }
+                tab_frame[c_pos,1] = 2;
+                tab_frame[c_pos,2] = 7;
+                //animation timer reset
                 global.cursorkey_delay = global.cursorKey_startspeed ;   
                 break;
             //down
             case 2 :
+                tab_frame[c_pos,2] = 9;
                 switch c_pos {
-                    case 0 : //fog of war
+                    case 1 : //fog of war
                         fog_sprite_index--;
                         if (fog_sprite_index&lt;2) fog_sprite_index = 4;
                         break;
-                    case 1 : //Radio
+                    case 2 : //Radio
                         //Radio Select Off for now, unimplimented
                         //radio_sprite_index++;
                         //if (radio_sprite_index&gt;1) radio_sprite_index = 0;
                         break;
-                    case 2 : //funds
+                    case 3 : //funds
                         global.funds -= 500;
                         if global.funds&lt;0 global.funds=0;
                         if (global.funds&gt;199999) fund_x =381;
@@ -252,7 +273,7 @@ if (state=1){
                         else if (global.funds&gt;99) fund_x = 361;
                         else fund_x = 353; 
                         break;
-                    case 3 : //income (per property
+                    case 4 : //income (per property
                         global.income -=100;
                         if global.income&lt;0 global.income=0;
                         if (global.funds&gt;199999) income_x =381;
@@ -265,28 +286,29 @@ if (state=1){
                         else if (global.income&gt;99) income_x = 361;
                         else income_x = 353;
                         break;
-                    case 4 : //turns
+                    case 5 : //turns
                         if(global.turns&gt;0)global.turns--;
                         break;
-                    case 5 : //cap
+                    case 6 : //cap
                         if(global.capture&gt;0) global.capture--;
                         break
                     }
-                scr_cursorKey_juice(1,global.cursorKey_sfx);
+                scr_cursorKey_juice(5,global.cursorKey_sfx);
                 break;
             //up
             case 8 :
+                tab_frame[c_pos,1] = 4;
                 switch c_pos {
-                    case 0 : //fog of war
+                    case 1 : //fog of war
                         fog_sprite_index++;
                         if (fog_sprite_index&gt;4) fog_sprite_index = 2;
                         break;
-                    case 1 : //Radio
+                    case 2 : //Radio
                         //Radio Select Off for now, unimplimented
                         //radio_sprite_index++;
                         //if (radio_sprite_index&gt;1) radio_sprite_index = 0;
                         break;
-                    case 2 : //funds
+                    case 3 : //funds
                         global.funds += 500;
                         if (global.funds&gt;199999) fund_x =381;
                         else if (global.funds&gt;99999) fund_x = 379;
@@ -299,7 +321,7 @@ if (state=1){
                         else fund_x = 353;
                         
                         break;
-                    case 3 : //income (per property
+                    case 4 : //income (per property
                         global.income +=100;
                         if (global.funds&gt;199999) income_x =381;
                         else if (global.income&gt;99999) income_x = 379;
@@ -311,26 +333,40 @@ if (state=1){
                         else if (global.income&gt;99) income_x = 361;
                         else income_x = 353;
                         break;
-                    case 4 : //turns
+                    case 5 : //turns
                         if(global.turns&lt;99)global.turns++;
                         break;
-                    case 5 : //cap
+                    case 6 : //cap
                         if(global.capture&lt;global.cap_max) global.capture++;
                         break
                     }
-                scr_cursorKey_juice(1,global.cursorKey_sfx);
+                scr_cursorKey_juice(5,global.cursorKey_sfx);
                 break;
             //right
             case 6 :
+                //clear heighlight
+                tab_frame[c_pos,1] = 0;
+                tab_frame[c_pos,2] = 5;
+                //do action
                 c_pos++;
-                if (c_pos&gt;5) c_pos=0; 
-                scr_cursorKey_juice(1,global.cursorKey_sfx);
+                if (c_pos&gt;6) c_pos=1;
+                //check for key active position
+                tab_frame[c_pos,1] = 2;
+                tab_frame[c_pos,2] = 7;   
+                scr_cursorKey_juice(5,global.cursorKey_sfx);
                 break;  
             //left
             case 4 :
+                //clear heighlight
+                tab_frame[c_pos,1] = 0;
+                tab_frame[c_pos,2] = 5;
+                //do action
                 c_pos--;
-                if (c_pos&lt;0) c_pos=5; 
-                scr_cursorKey_juice(1,global.cursorKey_sfx);
+                if (c_pos&lt;1) c_pos=6;
+                //check for key active position
+                tab_frame[c_pos,1] = 2;
+                tab_frame[c_pos,2] = 7;   
+                scr_cursorKey_juice(5,global.cursorKey_sfx);
                 break;
             }
         }
@@ -355,8 +391,198 @@ if (state=1){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///press B
-if global.ip_B_pressed{
+            <string>///mouse over check
+global.m_over   =0;
+b_start_frame   =0;
+//if (b_default_frame !=2) b_default_frame =0;
+
+if (state=1){
+    if (mouse_x&gt;696 and mouse_x&lt;743 and mouse_y&gt;396 and mouse_y&lt;419) global.m_over = 1; // back
+    else if (mouse_x&gt;341 and mouse_x&lt;341+90 and mouse_y&gt;336 and mouse_y&lt;336+40){ 
+        global.m_over = 2; // back
+        b_start_frame = 1;
+        }
+    else if ( mouse_x&gt;692 and mouse_x&gt;24 and mouse_x&lt;692+52 and mouse_y&lt;24+24){
+        global.m_over = 3;
+        if (b_default_frame !=2) b_default_frame = 1;
+        }
+    //tabs
+    var i=0;
+    for (i=1;i&lt;=6;i++){     
+        if (mouse_x&gt;173+72*(i-1) and  mouse_x&lt;173+72*(i-1)+62){
+            if (mouse_y&gt;217 and mouse_y&lt;217+18){
+                global.m_over = i*10+1;
+                if (tab_frame[i,1] &lt;4) tab_frame[i,1] += 1;  
+                }
+            else if (mouse_y&gt;293 and mouse_y&lt;293+18){
+                global.m_over = i*10+2;
+                if (tab_frame[i,2] &lt;9) tab_frame[i,2] += 1;  
+                }
+            }
+        }
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///mouse control action
+if (state=1){
+    if mouse_check_button_pressed(mb_left) global.cursorKey_delay = global.cursorKey_startspeed;
+    if mouse_check_button_released(mb_left){
+        alarm[5] = 0;
+        global.cursorKey_delay = global.cursorKey_startspeed;
+        }
+    
+    if (mouse_check_button_pressed(mb_left)){
+    if(global.m_over=3){
+        b_default_frame=2;
+        scr_cursorKey_juice(5,global.cursorKey_sfx);
+        fog_sprite_index    = 2;
+        radio_sprite_index  = 0;
+        global.funds   = 0;
+        global.income  = 1000;
+        global.turns   = 0; // 0 = disabled, incriments of 15?
+        global.capture = 0; // 0 = disabled
+        }
+        //tab controls
+        if(global.m_over&gt;9){
+            c_pos = global.m_over div 10;
+            scr_cursorKey_juice(5,global.cursorKey_sfx);
+            if (global.m_over - c_pos*10 = 1){
+                 tab_frame[c_pos,1] = 4;
+                switch c_pos {
+                    case 1 : //fog of war
+                        fog_sprite_index++;
+                        if (fog_sprite_index&gt;4) fog_sprite_index = 2;
+                        break;
+                    case 2 : //Radio
+                        //Radio Select Off for now, unimplimented
+                        //radio_sprite_index++;
+                        //if (radio_sprite_index&gt;1) radio_sprite_index = 0;
+                        break;
+                    case 3 : //funds
+                        global.funds += 500;
+                        if (global.funds&gt;199999) fund_x =381;
+                        else if (global.funds&gt;99999) fund_x = 379;
+                        else if (global.funds&gt;19999) fund_x = 376;
+                        else if (global.funds&gt;9999) fund_x = 373;
+                        else if (global.funds&gt;1999) fund_x = 370;
+                        else if (global.funds&gt;999) fund_x = 367;
+                        else if (global.funds&gt;199) fund_x = 364;
+                        else if (global.funds&gt;99) fund_x = 361;
+                        else fund_x = 353;
+                        
+                        break;
+                    case 4 : //income (per property
+                        global.income +=100;
+                        if (global.funds&gt;199999) income_x =381;
+                        else if (global.income&gt;99999) income_x = 379;
+                        else if (global.income&gt;19999) income_x = 376;
+                        else if (global.income&gt;9999) income_x = 373;
+                        else if (global.income&gt;1999) income_x = 370;
+                        else if (global.income&gt;999) income_x = 366;
+                        else if (global.income&gt;199) income_x = 364;
+                        else if (global.income&gt;99) income_x = 361;
+                        else income_x = 353;
+                        break;
+                    case 5 : //turns
+                        if(global.turns&lt;99)global.turns++;
+                        break;
+                    case 6 : //cap
+                        if(global.capture&lt;global.cap_max) global.capture++;
+                        break
+                    }
+                //scr_cursorKey_juice(5,global.cursorKey_sfx);
+                }
+            else if (global.m_over - c_pos*10 = 2){
+                //bottom tab
+                tab_frame[c_pos,2] = 9;
+                switch c_pos {
+                    case 1 : //fog of war
+                        fog_sprite_index--;
+                        if (fog_sprite_index&lt;2) fog_sprite_index = 4;
+                        break;
+                    case 2 : //Radio
+                        //Radio Select Off for now, unimplimented
+                        //radio_sprite_index++;
+                        //if (radio_sprite_index&gt;1) radio_sprite_index = 0;
+                        break;
+                    case 3 : //funds
+                        global.funds -= 500;
+                        if global.funds&lt;0 global.funds=0;
+                        if (global.funds&gt;199999) fund_x =381;
+                        else if (global.funds&gt;99999) fund_x = 379;
+                        else if (global.funds&gt;19999) fund_x = 376;
+                        else if (global.funds&gt;9999) fund_x = 373;
+                        else if (global.funds&gt;1999) fund_x = 370;
+                        else if (global.funds&gt;999) fund_x = 366;
+                        else if (global.funds&gt;199) fund_x = 364;
+                        else if (global.funds&gt;99) fund_x = 361;
+                        else fund_x = 353; 
+                        break;
+                    case 4 : //income (per property
+                        global.income -=100;
+                        if global.income&lt;0 global.income=0;
+                        if (global.funds&gt;199999) income_x =381;
+                        else if (global.income&gt;99999) income_x = 379;
+                        else if (global.income&gt;19999) income_x = 376;
+                        else if (global.income&gt;9999) income_x = 373;
+                        else if (global.income&gt;1999) income_x = 370;
+                        else if (global.income&gt;999) income_x = 366;
+                        else if (global.income&gt;199) income_x = 364;
+                        else if (global.income&gt;99) income_x = 361;
+                        else income_x = 353;
+                        break;
+                    case 5 : //turns
+                        if(global.turns&gt;0)global.turns--;
+                        break;
+                    case 6 : //cap
+                        if(global.capture&gt;0) global.capture--;
+                        break
+                    }
+                //scr_cursorKey_juice(5,global.cursorKey_sfx);
+                }
+            }    
+        }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Press B
+if (global.ip_B_pressed or (mouse_check_button_pressed(mb_left) and global.m_over = 1) or mouse_check_button_pressed(mb_right)){
         if (state=1){
         state = 2;
         speedy = 1;
@@ -384,7 +610,7 @@ if global.ip_B_pressed{
           <argument>
             <kind>1</kind>
             <string>///Start Battle!!
-if global.ip_A_pressed {
+if (global.ip_A_pressed or (mouse_check_button_pressed(mb_left) and global.m_over=2) ) {
     //set fog of war
     var fow_id = "";
     switch fog_sprite_index{
@@ -410,6 +636,30 @@ if global.ip_A_pressed {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///mouse pointer graphic control
+
+if (global.m_over=0) global.m_type = spr_mouseSlapper;
+else global.m_type = spr_mousePointer;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -428,7 +678,7 @@ if global.ip_A_pressed {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(2,2,string(global.cap_max));
+            <string>//draw_text(2,2,string(global.cap_max));
 </string>
           </argument>
         </arguments>
@@ -454,10 +704,10 @@ if global.ip_A_pressed {
             <string>///Draw stuff
 
 draw_self();
-draw_text(24,y,string(y));
+//draw_text(24,y,string(c_pos));
 
 if (state=1) {
-    draw_sprite(spr_scursor_terms,global.cursorFrameIndex,x+c_pos*72,y);
+    draw_sprite(spr_scursor_terms,global.cursorFrameIndex,x+(c_pos-1)*72,y);
     draw_sprite(spr_terms_txt,fog_sprite_index,168,264);
     draw_sprite(spr_terms_txt,radio_sprite_index,168+72,264);
     scr_draw_num(spr_num_light,false,global.funds,fund_x,270,6);
@@ -473,8 +723,18 @@ if (state=1) {
     else if (global.capture=1) scr_draw_num(spr_num_light,false,global.capture,501+72-6,270,4);
     else if (global.capture&lt;10) scr_draw_num(spr_num_light,false,global.capture,501+72-4,270,4);
     else scr_draw_num(spr_num_light,false,global.capture,501+72,270,4);
+    
+    var i=1;
+    for(i=1;i&lt;=6;i++){
+        draw_sprite(spr_tab_terms,tab_frame[i,1],173+72*(i-1),217);
+        draw_sprite(spr_tab_terms,tab_frame[i,2],173+72*(i-1),293);
+        }
+    draw_sprite(spr_start_button,b_start_frame,341,336);
+    draw_sprite(spr_default_button,b_default_frame,692,24);
     }
 //draw optin text
+
+//tabs
 
 
 </string>

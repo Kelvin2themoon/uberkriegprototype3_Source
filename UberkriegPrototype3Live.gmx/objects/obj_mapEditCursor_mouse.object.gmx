@@ -62,7 +62,6 @@ but we'll get to it after we have a playable version of this prototype.
           <argument>
             <kind>1</kind>
             <string>///change mode to map edit
-
 global.mode = "Map Edit";
 </string>
           </argument>

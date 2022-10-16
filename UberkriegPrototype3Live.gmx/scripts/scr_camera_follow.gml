@@ -2,7 +2,7 @@ var scr_x       = argument0; //x position, usually global.PosX
 var scr_y       = argument1; //y position, ussually global.posY
 var scr_border  = argument2; //barder buffer thickness
 var scr_speed  = argument3; //move speed in pixels per frame
-var stop        = true
+var stop        = true;
 
 
 if ( view_xview[0] > scr_x*24 - scr_border and global.canScroll_x){

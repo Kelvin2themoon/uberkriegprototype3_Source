@@ -35,7 +35,7 @@ for (tempV_X= (-1)*radio_range ; tempV_X<= radio_range ; tempV_X+=1){ //for each
                     //if is property
                     if object_is_ancestor(target.object_index,obj_property) {
                         if (target.isStanding and target.isVisible) global.rangeCheck[originV_X+tempV_X,originV_Y+tempV_Y].sprite_index = spr_rangecheck_gold;
-                        else global.rangeCheck[originV_X+tempV_X,originV_Y+tempV_Y].sprite_index = spr_rangecheck_bluedk;
+                        else if (global.rangeCheck[originV_X+tempV_X,originV_Y+tempV_Y].sprite_index != spr_rangecheck_gold) global.rangeCheck[originV_X+tempV_X,originV_Y+tempV_Y].sprite_index = spr_rangecheck_bluedk;
                         }
             }
         }    

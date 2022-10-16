@@ -1149,7 +1149,7 @@ if (ds_list_size(maps)&gt;0){
             <string>/// DRAW MOUSE
 draw_sprite(mouse_type,0, mouse_x, mouse_y);
 //debug
-draw_text(mouse_x+24,mouse_y+24,string(b_back_frame));
+//draw_text(mouse_x+24,mouse_y+24,string(b_back_frame));
 </string>
           </argument>
         </arguments>

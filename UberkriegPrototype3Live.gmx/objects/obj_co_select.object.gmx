@@ -690,6 +690,30 @@ if (global.ip_B_pressed or (mouse_check_button_pressed(mb_left) and global.m_ove
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///mouse pointer graphic control
+
+if (global.m_over=0) global.m_type = spr_mouseSlapper;
+else global.m_type = spr_mousePointer;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -749,7 +773,7 @@ if (state=1){
           <argument>
             <kind>1</kind>
             <string>///debug
-draw_text(mouse_x-24,mouse_y,string(global.m_over));
+//draw_text(mouse_x-24,mouse_y,string(global.m_over));
 
 /*
 for(i=1;i&lt;=global.player_count;i++){

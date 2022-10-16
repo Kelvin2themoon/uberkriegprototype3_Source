@@ -84,8 +84,12 @@ draw_set_font(ft_AuroraEx);
 draw_set_colour(global.c_uiWhite);
 draw_set_halign(fa_left);
 
-global.window_size = 1;
-
+window_set_size( 768*2, 432*2 );
+window_set_position(50,50);
+global.window_size = 2;
+G_smooth = false ;
+texture_set_interpolation(false);
+alarm[10] = 1;
 
 
 
@@ -263,13 +267,13 @@ global.gpi_B      = gp_face2;       global.kbi_B        = ord("X"); //always tak
 global.gpi_X      = gp_face3;       global.kbi_X        = ord("C");
 global.gpi_Y      = gp_face4;       global.kbi_Y        = vk_space;
 
-global.gpi_L1     = gp_shoulderl;   global.kbi_L1       = ord("{"); //not sure if this will work
-global.gpi_L2     = gp_shoulderlb;  global.kbi_L2       = ord("}");
-global.gpi_R1     = gp_shoulderr;   global.kbi_R1       = ord("&lt;");
-global.gpi_R2     = gp_shoulderrb;  global.kbi_R2       = ord("&gt;");
+global.gpi_LB     = gp_shoulderl;   global.kbi_LB       = ord("{"); //not sure if this will work
+global.gpi_LT     = gp_shoulderlb;  global.kbi_LT       = ord("}");
+global.gpi_RB     = gp_shoulderr;   global.kbi_RB       = ord("&lt;");
+global.gpi_RT     = gp_shoulderrb;  global.kbi_RT       = ord("&gt;");
 
 global.gpi_start  = gp_start;       global.kbi_start    = ord ("V");
-global.gpi_select = gp_select;      global.kbi_select   = ord ("B");
+global.gpi_select = gp_select;      global.kbi_select   = vk_shift;
 
 global.gpi_LSB    = gp_stickl;      global.kbi_LSB      = ord("N"); // left stick buttion
 global.gpi_RSB    = gp_stickr;      global.kbi_RSB      = ord("M"); // right stick button
@@ -303,18 +307,146 @@ global.ip_Y_hold     = false; //Radio check
 global.ip_Y_pressed  = false;
 global.ip_Y_released = false;
 
-global.ip_L1_hold     = false; //next active unit, next page
-global.ip_L1_pressed  = false;
-global.ip_L1_released = false;
-global.ip_L2_hold     = false;
-global.ip_L2_pressed  = false;
-global.ip_L2_released = false;
-global.ip_R1_hold     = false;
-global.ip_R1_pressed  = false;
-global.ip_R1_released = false; //next enemy unit
-global.ip_R2_hold     = false;
-global.ip_R2_pressed  = false;
-global.ip_R2_released = false;
+global.ip_LB_hold     = false; //next active unit, next page
+global.ip_LB_pressed  = false;
+global.ip_LB_released = false;
+global.ip_LT_hold     = false;
+global.ip_LT_pressed  = false;
+global.ip_LT_released = false;
+global.ip_RB_hold     = false;
+global.ip_RB_pressed  = false;
+global.ip_RB_released = false; //next enemy unit
+global.ip_RT_hold     = false;
+global.ip_RT_pressed  = false;
+global.ip_RT_released = false;
+
+global.ip_start_hold     = false; //minimap &amp; intel
+global.ip_start_pressed  = false;
+global.ip_start_released = false;
+global.ip_select_hold     = false; //damage chart?
+global.ip_select_pressed  = false;
+global.ip_select_released = false;
+
+global.ip_LSB_hold     = false; //left stick disable/enable
+global.ip_LSB_pressed  = false;
+global.ip_LSB_released = false;
+global.ip_RSB_hold     = false; //right stick disable/enable
+global.ip_RSB_pressed  = false; 
+global.ip_RSB_released = false;
+
+//Special commands, L/R tick conrols enable/disable
+global.ip_LS_on = true;
+global.ip_RS_on = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Map Editr Control Config
+
+//Map editor Vars
+global.des_map = noone;
+
+//map control inputs
+///Keyboard &amp; Controller input config
+
+//game pad input config defalts, mapped to Xbox360  
+//gamepad inputs                    //keybard inputs
+global.mgpi_up     = gp_padu;        global.mkbi_up       = ord("W");//NAV - always take arrow keys
+global.mgpi_down   = gp_padd;        global.mkbi_down     = ord("S"); 
+global.mgpi_left   = gp_padl;        global.mkbi_left     = ord("A");
+global.mgpi_right  = gp_padr;        global.mkbi_right    = ord("D");
+
+global.mgpi_A      = gp_face1;       global.mkbi_A        = ord("Z"); //set - always take enter key
+global.mgpi_B      = gp_face2;       global.mkbi_B        = ord("X"); //copy - always take back space
+global.mgpi_X      = gp_face3;       global.mkbi_X        = ord("C"); //delet/radiocheck
+global.mgpi_Y      = gp_face4;       global.mkbi_Y        = vk_space; //star/fill
+
+global.mgpi_L1     = gp_shoulderl;   global.mkbi_L1       = ord("{"); //list
+global.mgpi_L2     = gp_shoulderlb;  global.mkbi_L2       = ord("}"); //cast ("multigrab")
+global.mgpi_R1     = gp_shoulderr;   global.mkbi_R1       = ord("&lt;"); //switch  - terrain &amp; units
+global.mgpi_R2     = gp_shoulderrb;  global.mkbi_R2       = ord("&gt;"); //undo?? how to mipliment?
+
+global.mgpi_start  = gp_start;       global.mkbi_start    = ord ("V"); //minimap and play status
+global.mgpi_select = gp_select;      global.mkbi_select   = vk_shift; //open menu
+
+global.mgpi_LSB    = gp_stickl;      global.mkbi_LSB      = ord("N"); // left stick buttion
+global.mgpi_RSB    = gp_stickr;      global.mkbi_RSB      = ord("M"); // right stick button
+/*
+note to self - additional funtions
+
+- Move camera *mouse specific
+
+- symetry , vertical, hoeizontal, radial
+- flatten/auto 
+- crop
+- enlorge map
+
+Systems
+- save
+- load
+- set default terms
+- marks? draw studd on the map
+- exit
+*/
+
+
+///Keyboard and controller Listiner
+global.mip_nav = 0; //only one nav input at once, to be stored in this variable.
+
+global.mip_up_hold     = false; //navigation
+global.mip_up_pressed  = false;
+global.mip_up_released = false;
+global.mip_down_hold     = false;
+global.mip_down_pressed  = false;
+global.mip_down_released = false;
+global.mip_left_hold     = false;
+global.mip_left_pressed  = false;
+global.mip_left_released = false;
+global.mip_right_hold     = false;
+global.mip_right_pressed  = false;
+global.mip_right_released = false;
+
+global.mip_A_hold     = false; //confirm
+global.mip_A_pressed  = false; 
+global.mip_A_released = false;
+global.mip_B_hold     = false; //cancel
+global.mip_B_pressed  = false;
+global.mip_B_released = false;
+global.mip_X_hold     = false; //intel
+global.mip_X_pressed  = false;
+global.mip_X_released = false;
+global.mip_Y_hold     = false; //Radio check
+global.mip_Y_pressed  = false;
+global.mip_Y_released = false;
+
+global.mip_L1_hold     = false; //next active unit, next page
+global.mip_L1_pressed  = false;
+global.mip_L1_released = false;
+global.mip_L2_hold     = false;
+global.mip_L2_pressed  = false;
+global.mip_L2_released = false;
+global.mip_R1_hold     = false;
+global.mip_R1_pressed  = false;
+global.mip_R1_released = false; //next enemy unit
+global.mip_R2_hold     = false;
+global.mip_R2_pressed  = false;
+global.mip_R2_released = false;
 
 global.ip_start_hold     = false; //minimap &amp; intel
 global.ip_start_pressed  = false;
@@ -491,7 +623,7 @@ global.map_select = "protoland.ubm";
 
     
 //graphic controls
-G_smooth = true;
+//G_smooth = true;
 
 
 //debug controls
@@ -924,6 +1056,53 @@ global.m_frame = 0;
 global.m_over = 0; //mouse over index specified by local controls
 //global moouse active?
 global.m_gactive = true; //turn on to use global mouse controls becase some old code uses their own mouse
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///controller graphicflag
+global.controls_graphic_on = false;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>texture_set_interpolation(false);
+G_smooth = false; 
 </string>
           </argument>
         </arguments>
@@ -1410,6 +1589,27 @@ global.ip_Y_released = gamepad_button_check_released(0,global.gpi_Y) or keyboard
 if global.ip_Y_pressed  global.ip_Y_hold = true;
 if global.ip_Y_released global.ip_Y_hold = false;
 
+// Bummpers and Triggers
+//L-Bummper
+global.ip_LB_pressed  =  gamepad_button_check_pressed(0,global.gpi_LB) or  keyboard_check_pressed(global.kbi_LB);
+global.ip_LB_released = gamepad_button_check_released(0,global.gpi_LB) or keyboard_check_released(global.kbi_LB);
+if global.ip_LB_pressed  global.ip_LB_hold = true;
+if global.ip_LB_released global.ip_LB_hold = false;
+//L-Trigger
+global.ip_LT_pressed  =  gamepad_button_check_pressed(0,global.gpi_LT) or  keyboard_check_pressed(global.kbi_LT);
+global.ip_LT_released = gamepad_button_check_released(0,global.gpi_LT) or keyboard_check_released(global.kbi_LT);
+if global.ip_LT_pressed  global.ip_LT_hold = true;
+if global.ip_LT_released global.ip_LT_hold = false;
+//R-Bummper
+global.ip_RB_pressed  =  gamepad_button_check_pressed(0,global.gpi_RB) or  keyboard_check_pressed(global.kbi_RB);
+global.ip_RB_released = gamepad_button_check_released(0,global.gpi_RB) or keyboard_check_released(global.kbi_RB);
+if global.ip_RB_pressed  global.ip_RB_hold = true;
+if global.ip_RB_released global.ip_RB_hold = false;
+//R-Trigger
+global.ip_RT_pressed  =  gamepad_button_check_pressed(0,global.gpi_RT) or  keyboard_check_pressed(global.kbi_RT);
+global.ip_RT_released = gamepad_button_check_released(0,global.gpi_RT) or keyboard_check_released(global.kbi_RT);
+if global.ip_RT_pressed  global.ip_RT_hold = true;
+if global.ip_RT_released global.ip_RT_hold = false;
 
 //START/SELECT
 //start - minimap
@@ -1418,8 +1618,8 @@ global.ip_start_released = gamepad_button_check_released(0,global.gpi_start) or 
 if global.ip_start_pressed  global.ip_start_hold = true;
 if global.ip_start_released global.ip_start_hold = false;
 //select - damage chart
-global.ip_select_pressed  =  gamepad_button_check_pressed(0,global.gpi_select);
-global.ip_select_released = gamepad_button_check_released(0,global.gpi_select);
+global.ip_select_pressed  =  gamepad_button_check_pressed(0,global.gpi_select) or keyboard_check_pressed(global.kbi_select);
+global.ip_select_released = gamepad_button_check_released(0,global.gpi_select)or keyboard_check_released(global.kbi_select);
 if global.ip_select_pressed  global.ip_select_hold = true;
 if global.ip_select_released global.ip_select_hold = false;
 
@@ -1433,6 +1633,136 @@ global.ip_RSB_pressed  =  gamepad_button_check_pressed(0,global.gpi_RSB);
 global.ip_RSB_released = gamepad_button_check_released(0,global.gpi_RSB);
 if global.ip_RSB_pressed  global.ip_RSB_hold = true;
 if global.ip_RSB_released global.ip_RSB_hold = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///map editor control listners
+
+///Keyboard and controller Listiner
+
+//Navigation (always check for arrow keys)
+global.mip_up_pressed  =  gamepad_button_check_pressed(0,global.mgpi_up) or  keyboard_check_pressed(global.mkbi_up) or keyboard_check_pressed(vk_up) or global.snav_up_pressed;
+global.mip_up_released = gamepad_button_check_released(0,global.mgpi_up) or keyboard_check_released(global.mkbi_up) or keyboard_check_released(vk_up)or global.snav_up_released;
+if global.mip_up_pressed{  
+    global.mip_up_hold = true;
+    global.mip_nav = 8;
+    }
+if global.mip_up_released global.mip_up_hold = false;
+
+global.mip_down_pressed  =  gamepad_button_check_pressed(0,global.mgpi_down) or  keyboard_check_pressed(global.mkbi_down) or keyboard_check_pressed(vk_down) or global.snav_down_pressed;
+global.mip_down_released = gamepad_button_check_released(0,global.mgpi_down) or keyboard_check_released(global.mkbi_down) or keyboard_check_released(vk_down)or global.snav_down_released;
+if global.mip_down_pressed {  
+    global.mip_down_hold = true;
+    global.mip_nav = 2;
+    }
+if global.mip_down_released global.mip_down_hold = false;
+
+global.mip_left_pressed  =  gamepad_button_check_pressed(0,global.mgpi_left) or  keyboard_check_pressed(global.mkbi_left) or keyboard_check_pressed(vk_left) or global.snav_left_pressed; 
+global.mip_left_released = gamepad_button_check_released(0,global.mgpi_left) or keyboard_check_released(global.mkbi_left) or keyboard_check_released(vk_left) or global.snav_left_released;
+if global.mip_left_pressed {  
+    global.mip_left_hold = true;
+    global.mip_nav = 4;
+    }
+if global.mip_left_released global.mip_left_hold = false;
+
+
+global.mip_right_pressed  =  gamepad_button_check_pressed(0,global.mgpi_right) or  keyboard_check_pressed(global.mkbi_right) or keyboard_check_pressed(vk_right) or global.snav_right_pressed;
+global.mip_right_released = gamepad_button_check_released(0,global.mgpi_right) or keyboard_check_released(global.mkbi_right) or keyboard_check_released(vk_right) or global.snav_right_released;
+if global.mip_right_pressed { 
+    global.mip_right_hold = true;
+    global.mip_nav = 6;
+    }
+if global.mip_right_released global.mip_right_hold = false;
+
+
+if (!global.mip_up_hold and !global.mip_down_hold and !global.mip_left_hold and !global.mip_right_hold) global.mip_nav = 0;
+
+//FACE BUTTONS
+//Set
+global.mip_A_pressed  =  gamepad_button_check_pressed(0,global.mgpi_A) or  keyboard_check_pressed(global.mkbi_A) or keyboard_check_pressed(vk_enter);
+global.mip_A_released = gamepad_button_check_released(0,global.mgpi_A) or keyboard_check_released(global.mkbi_A) or keyboard_check_released(vk_enter);
+if global.mip_A_pressed  global.mip_A_hold = true;
+if global.mip_A_released global.mip_A_hold = false;
+//Copy
+global.mip_B_pressed  =  gamepad_button_check_pressed(0,global.mgpi_B) or  keyboard_check_pressed(global.mkbi_B) or keyboard_check_pressed(vk_backspace);
+global.mip_B_released = gamepad_button_check_released(0,global.mgpi_B) or keyboard_check_released(global.mkbi_B) or keyboard_check_released(vk_backspace);
+if global.mip_B_pressed  global.mip_B_hold = true;
+if global.mip_B_released global.mip_B_hold = false;
+//delet/radio check
+global.mip_X_pressed  =  gamepad_button_check_pressed(0,global.mgpi_X) or  keyboard_check_pressed(global.mkbi_X);
+global.mip_X_released = gamepad_button_check_released(0,global.mgpi_X) or keyboard_check_released(global.mkbi_X);
+if global.mip_X_pressed  global.mip_X_hold = true;
+if global.mip_X_released global.mip_X_hold = false;
+//star/fill
+global.mip_Y_pressed  =  gamepad_button_check_pressed(0,global.mgpi_Y) or  keyboard_check_pressed(global.mkbi_Y);
+global.mip_Y_released = gamepad_button_check_released(0,global.mgpi_Y) or keyboard_check_released(global.mkbi_Y);
+if global.mip_Y_pressed  global.mip_Y_hold = true;
+if global.mip_Y_released global.mip_Y_hold = false;
+
+
+//START/SELECT
+//start - minimap
+global.mip_start_pressed  =  gamepad_button_check_pressed(0,global.mgpi_start) or  keyboard_check_pressed(global.mkbi_start);
+global.mip_start_released = gamepad_button_check_released(0,global.mgpi_start) or keyboard_check_released(global.mkbi_start);
+if global.mip_start_pressed  global.mip_start_hold = true;
+if global.mip_start_released global.mip_start_hold = false;
+//select - open menu
+global.mip_select_pressed  =  gamepad_button_check_pressed(0,global.mgpi_select) or keyboard_check_pressed(global.mkbi_select);
+global.mip_select_released = gamepad_button_check_released(0,global.mgpi_select)or keyboard_check_released(global.mkbi_select);
+if global.mip_select_pressed  global.mip_select_hold = true;
+if global.mip_select_released global.mip_select_hold = false;
+
+// L stick Buttons (enable/disable)
+global.mip_LSB_pressed  =  gamepad_button_check_pressed(0,global.mgpi_LSB);
+global.mip_LSB_released = gamepad_button_check_released(0,global.mgpi_LSB);
+if global.mip_LSB_pressed  global.mip_LSB_hold = true;
+if global.mip_LSB_released global.mip_LSB_hold = false;
+// r stick Buttons (enable/disable)
+global.mip_RSB_pressed  =  gamepad_button_check_pressed(0,global.gpi_RSB);
+global.mip_RSB_released = gamepad_button_check_released(0,global.gpi_RSB);
+if global.mip_RSB_pressed  global.mip_RSB_hold = true;
+if global.mip_RSB_released global.mip_RSB_hold = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Shift to see controler graphic
+
+if keyboard_check(vk_tab) global.controls_graphic_on = true;
+else global.controls_graphic_on = false;
 </string>
           </argument>
         </arguments>
@@ -1587,28 +1917,6 @@ if ds_map_find_value( async_load , "type" ) = network_type_data {
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="4">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string></string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="7" enumb="3">
       <action>
         <libid>1</libid>
@@ -1674,7 +1982,15 @@ audio_destroy_stream(test_bgm);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Debug inputs
+            <string>///controlls
+if global.controls_graphic_on draw_sprite(spr_controls,0,0,0,);
+//count = 0;
+
+//with obj_MastertControls other.count++;
+//draw_text(12,12,string(count));
+
+
+///Debug inputs
 //draw_text(24,2, "frame delay: " + string(global.cursorFrameIndex)) 
 /*
 draw_text(12,12*4,"NAV: "+string(global.ip_nav));
@@ -1719,7 +2035,9 @@ draw_text(12,12*23,"Y View: "+string(view_yview[0]));
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if global.m_gactive draw_sprite(global.m_type, global.m_frame, mouse_x,mouse_y);
+            <string>///draw mouse
+if global.m_gactive draw_sprite(global.m_type, global.m_frame, mouse_x,mouse_y);
+
 </string>
           </argument>
         </arguments>
@@ -1748,8 +2066,12 @@ window_set_fullscreen(!window_get_fullscreen());
 if( window_get_fullscreen() )
     {
     texture_set_interpolation(true);
-    G_smooth = true 
+    G_smooth = true; 
     }
+    else{
+        texture_set_interpolation(false);
+        G_smooth = false; 
+        }
 
 </string>
           </argument>

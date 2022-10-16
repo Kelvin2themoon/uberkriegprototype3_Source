@@ -58,13 +58,19 @@ draw_self();
 
 //version and such
 draw_set_colour(global.c_uiWhite);
-draw_text(149,172+6,"Ver.4.01.A");
+draw_text(149,172+6,"Protokrieg Ver.4.01.B - UI Demo ");
 
 // Temp menu items
-draw_text(149,244+14*0,"F1: OLD MENU");
-draw_text(149,244+14*1,"F2: NEW MENU");
+draw_text(149,244+14*0,"Press [Z] , Left click, or 'A' (on an Xbox controller) to start");
+draw_text(149,244+14*1,"Press TAB for contols");
 
-draw_text(149,244+14*1,"F2: NEW MENU");
+draw_text(149,244+14*3,"F1: Old Menu (for LAN games)");
+draw_text(149,244+14*4,"F2: Map editor");
+
+
+
+
+//draw_text(149,244+14*1,"F2: NEW MENU");
 
 //music test
 if global.BGM_on draw_text(24,24,"Test BGM stream On");
@@ -91,29 +97,9 @@ if global.BGM_on draw_text(24,24,"Test BGM stream On");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// go to map select
-room_goto(rm_map_select);
+            <string>/// go to map editor
+room_goto(rm_map_editor_v2);
 </string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string></string>
           </argument>
         </arguments>
       </action>
@@ -161,8 +147,9 @@ room_goto(rm_debugStart);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///switch BGM on (dynamically load from app data)
-
+            <string>///DISABLED  - switch BGM 
+//(dynamically load from app data)
+/*
 if global.BGM_on {
     //if on switch off
     global.BGM_on = false;

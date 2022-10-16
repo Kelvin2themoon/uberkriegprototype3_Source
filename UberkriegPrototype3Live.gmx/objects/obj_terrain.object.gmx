@@ -71,7 +71,8 @@ smoke_left = 0;//number of turns smokescreen lasts
 //variable that keeps standing check not crash
 isDisrupted = false;
 
- 
+//checker for map editor fill function
+q = true;
 </string>
           </argument>
         </arguments>

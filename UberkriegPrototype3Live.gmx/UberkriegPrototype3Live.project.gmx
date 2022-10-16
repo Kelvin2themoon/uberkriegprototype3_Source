@@ -3,7 +3,7 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="5" name="datafiles">
+  <datafiles number="12" name="datafiles">
     <datafile>
       <name>Pretzel Enclave.ubm</name>
       <exists>-1</exists>
@@ -21,40 +21,114 @@
       </ConfigOptions>
       <filename>Pretzel Enclave.ubm</filename>
     </datafile>
-    <datafile>
-      <name>2P_SabreRanger_v3.ubm</name>
-      <exists>-1</exists>
-      <size>29811</size>
-      <exportAction>2</exportAction>
-      <exportDir></exportDir>
-      <overwrite>0</overwrite>
-      <freeData>-1</freeData>
-      <removeEnd>0</removeEnd>
-      <store>0</store>
-      <ConfigOptions>
-        <Config name="Default">
-          <CopyToMask>615727263486190</CopyToMask>
-        </Config>
-      </ConfigOptions>
-      <filename>2P_SabreRanger_v3.ubm</filename>
-    </datafile>
-    <datafile>
-      <name>1P_ThreeByFive_v1.ubm</name>
-      <exists>-1</exists>
-      <size>10400</size>
-      <exportAction>2</exportAction>
-      <exportDir></exportDir>
-      <overwrite>0</overwrite>
-      <freeData>-1</freeData>
-      <removeEnd>0</removeEnd>
-      <store>0</store>
-      <ConfigOptions>
-        <Config name="Default">
-          <CopyToMask>9223372036854775807</CopyToMask>
-        </Config>
-      </ConfigOptions>
-      <filename>1P_ThreeByFive_v1.ubm</filename>
-    </datafile>
+    <datafiles number="12" name="Maps">
+      <datafiles number="12" name="01 - Test maps">
+        <datafile>
+          <name>Four_by_Seven_XL.ubm</name>
+          <exists>-1</exists>
+          <size>47370</size>
+          <exportAction>2</exportAction>
+          <exportDir></exportDir>
+          <overwrite>0</overwrite>
+          <freeData>-1</freeData>
+          <removeEnd>0</removeEnd>
+          <store>0</store>
+          <ConfigOptions>
+            <Config name="Default">
+              <CopyToMask>743440586</CopyToMask>
+            </Config>
+          </ConfigOptions>
+          <filename>Four_by_Seven_XL.ubm</filename>
+        </datafile>
+        <datafile>
+          <name>SwardPass2.ubm</name>
+          <exists>-1</exists>
+          <size>47175</size>
+          <exportAction>2</exportAction>
+          <exportDir></exportDir>
+          <overwrite>0</overwrite>
+          <freeData>-1</freeData>
+          <removeEnd>0</removeEnd>
+          <store>0</store>
+          <ConfigOptions>
+            <Config name="Default">
+              <CopyToMask>9223372036854775807</CopyToMask>
+            </Config>
+          </ConfigOptions>
+          <filename>SwardPass2.ubm</filename>
+        </datafile>
+      </datafiles>
+      <datafiles number="12" name="02 - Maps my friend Arin made">
+        <datafile>
+          <name>CraterCity.ubm</name>
+          <exists>-1</exists>
+          <size>47184</size>
+          <exportAction>2</exportAction>
+          <exportDir></exportDir>
+          <overwrite>0</overwrite>
+          <freeData>-1</freeData>
+          <removeEnd>0</removeEnd>
+          <store>0</store>
+          <ConfigOptions>
+            <Config name="Default">
+              <CopyToMask>9223372036854775807</CopyToMask>
+            </Config>
+          </ConfigOptions>
+          <filename>CraterCity.ubm</filename>
+        </datafile>
+        <datafile>
+          <name>Portland.ubm</name>
+          <exists>-1</exists>
+          <size>47187</size>
+          <exportAction>2</exportAction>
+          <exportDir></exportDir>
+          <overwrite>0</overwrite>
+          <freeData>-1</freeData>
+          <removeEnd>0</removeEnd>
+          <store>0</store>
+          <ConfigOptions>
+            <Config name="Default">
+              <CopyToMask>9223372036854775807</CopyToMask>
+            </Config>
+          </ConfigOptions>
+          <filename>Portland.ubm</filename>
+        </datafile>
+        <datafile>
+          <name>Pretzel Enclave.ubm</name>
+          <exists>-1</exists>
+          <size>47620</size>
+          <exportAction>2</exportAction>
+          <exportDir></exportDir>
+          <overwrite>0</overwrite>
+          <freeData>-1</freeData>
+          <removeEnd>0</removeEnd>
+          <store>0</store>
+          <ConfigOptions>
+            <Config name="Default">
+              <CopyToMask>9223372036854775807</CopyToMask>
+            </Config>
+          </ConfigOptions>
+          <filename>Pretzel Enclave.ubm</filename>
+        </datafile>
+        <datafile>
+          <name>Schildstadt.ubm</name>
+          <exists>-1</exists>
+          <size>47341</size>
+          <exportAction>2</exportAction>
+          <exportDir></exportDir>
+          <overwrite>0</overwrite>
+          <freeData>-1</freeData>
+          <removeEnd>0</removeEnd>
+          <store>0</store>
+          <ConfigOptions>
+            <Config name="Default">
+              <CopyToMask>9223372036854775807</CopyToMask>
+            </Config>
+          </ConfigOptions>
+          <filename>Schildstadt.ubm</filename>
+        </datafile>
+      </datafiles>
+    </datafiles>
   </datafiles>
   <NewExtensions>
     <extension index="0">extensions\AVI Extension</extension>
@@ -488,6 +562,7 @@
             <sprite>sprites\spr_scursors_cpu</sprite>
           </sprites>
           <sprite>sprites\spr_terms_txt</sprite>
+          <sprite>sprites\spr_default_button</sprite>
         </sprites>
         <sprites name="map select">
           <sprite>sprites\spr_map_select_base</sprite>
@@ -501,6 +576,25 @@
           <sprite>sprites\spr_list_cursor_right</sprite>
           <sprite>sprites\spr_list_arrows</sprite>
           <sprite>sprites\spr_back_button</sprite>
+          <sprite>sprites\spr_start_button</sprite>
+        </sprites>
+        <sprite>sprites\spr_controls</sprite>
+      </sprites>
+      <sprites name="map_editor">
+        <sprite>sprites\spr_me_terrain_win</sprite>
+        <sprite>sprites\spr_me_selection</sprite>
+        <sprite>sprites\spr_me_num</sprite>
+        <sprite>sprites\spr_me_player_crest</sprite>
+        <sprites name="select">
+          <sprite>sprites\spr_me_terrains</sprite>
+          <sprite>sprites\spr_me_units_green</sprite>
+          <sprite>sprites\spr_me_units_red</sprite>
+          <sprite>sprites\spr_me_units_gold</sprite>
+          <sprite>sprites\spr_me_units_blue</sprite>
+          <sprite>sprites\spr_me_props_green</sprite>
+          <sprite>sprites\spr_me_props_red</sprite>
+          <sprite>sprites\spr_me_props_gold</sprite>
+          <sprite>sprites\spr_me_props_blue</sprite>
         </sprites>
       </sprites>
     </sprites>
@@ -594,6 +688,7 @@
           <script>scripts\scr_check_land_terrain.gml</script>
         </scripts>
       </scripts>
+      <script>scripts\scr_fill.gml</script>
     </scripts>
     <scripts name="UnitHandlers">
       <script>scripts\scr_unit_destroy.gml</script>
@@ -675,6 +770,7 @@
     <scripts name="Audio &amp; Visuals">
       <scripts name="Drawing">
         <script>scripts\scr_draw_num.gml</script>
+        <script>scripts\scr_draw_num_small.gml</script>
         <script>scripts\scr_draw_stars.gml</script>
         <script>scripts\scr_draw_radioAssist.gml</script>
         <script>scripts\scr_draw_star_p.gml</script>
@@ -779,8 +875,16 @@
       </objects>
     </objects>
     <objects name="MapEditor">
-      <object>objects\obj_mapEditCursor_mouse</object>
-      <object>objects\obj_grabHand_mapEditor</object>
+      <objects name="V1">
+        <object>objects\obj_grabHand_mapEditor</object>
+        <object>objects\obj_mapEditCursor_mouse</object>
+        <objects name="Map Edit acc.">
+          <object>objects\obj_promote_pointer</object>
+        </objects>
+      </objects>
+      <object>objects\obj_map_editor_v2</object>
+      <object>objects\obj_me_cursor</object>
+      <object>objects\obj_me_sel_terrain</object>
     </objects>
     <objects name="Terrain">
       <objects name="Parents">
@@ -894,9 +998,6 @@
       <object>objects\obj_radio_update_event</object>
       <object>objects\obj_fading_text</object>
     </objects>
-    <objects name="Map Edit acc.">
-      <object>objects\obj_promote_pointer</object>
-    </objects>
     <objects name="COs">
       <object>objects\obj_CO_0</object>
       <object>objects\obj_CO_1</object>
@@ -931,6 +1032,7 @@
     <room>rooms\rm_net_host_config</room>
     <room>rooms\rm_map_select</room>
     <room>rooms\rm_setup</room>
+    <room>rooms\rm_map_editor_v2</room>
   </rooms>
   <constants number="8">
     <constant name="CHECK_LAYRE">-64100</constant>

@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>///change mode to Basic Battle
 global.mode = "Basic Battle";
+global.m_gactive = false;
 
 </string>
           </argument>
@@ -803,12 +804,15 @@ if global.P4_in_play {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///intel check and Chart on/off variable
+            <string>///Camera controls variable initiate
 
-minimap_check_on = false;
-damage_chart_on = false;
+//view control speed - should be divisable by 24
+view_speed = 8;
+//view boarder to cursor
+view_border = 2*24;
 
-
+//pointer sprite index
+d_pointerSprite_index = global.P_Turn.number - 1;
 </string>
           </argument>
         </arguments>
@@ -829,15 +833,12 @@ damage_chart_on = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Camera controls variable initiate
+            <string>///intel check and Chart on/off variable
 
-//view control speed - should be divisable by 24
-view_speed = 8;
-//view boarder to cursor
-view_border = 2*24;
+minimap_check_on = false;
+damage_chart_on = false;
 
-//pointer sprite index
-d_pointerSprite_index = global.P_Turn.number - 1;
+
 </string>
           </argument>
         </arguments>
@@ -1066,6 +1067,8 @@ if global.ip_start_released
 if global.ip_select_pressed  damage_chart_on = true;
 if global.ip_select_released damage_chart_on = false;
 
+
+
 </string>
           </argument>
         </arguments>
@@ -1150,18 +1153,18 @@ draw_text( 12 , 12 +12*11 ,"des_y: " + string(global.destination.y div 24));
 display_set_gui_size(768, 432);
 */
 //Player Phaze
-if (global.Phaze = "Waiting"){   
+if (global.Phaze = "Waiting" and !global.controls_graphic_on ){   
 
     draw_sprite(spr_factionIcon_square, global.P_Turn.number-1,12,24)
     draw_text(36,32, "DAY: " + string(global.Day));
-    draw_text(12,48, "P" + string(global.P_Turn.name) + ": Press CONFIRM [Z] to start turn" );
-    draw_text(12,84, "CONTROLS:" );
-    draw_text(12,84+16, "Z - Confirm" );
-    draw_text(12,84+16*2, "X - Cancel" );
-    draw_text(12,84+16*3, "C - unit/terrain info (not up to date)");
-    draw_text(12,84+16*4, "SPACE - Radio Checks");
-    draw_text(12,84+16*6, "A - Damage Chart" );
-    draw_text(12,84+16*7, "V - Minimap &amp; Player intel" );    
+    draw_text(12,48, "P" + string(global.P_Turn.name) + ": confirm to start" );
+    //draw_text(12,84, "CONTROLS:" );
+    draw_text(12,84+16, "Press 'Tab' for controls" );
+    //draw_text(12,84+16*2, "X - Cancel" );
+    //draw_text(12,84+16*3, "C - unit/terrain info (not up to date)");
+    //draw_text(12,84+16*4, "SPACE - Radio Checks");
+    //draw_text(12,84+16*6, "A - Damage Chart" );
+    //draw_text(12,84+16*7, "V - Minimap &amp; Player intel" );    
     }
 
 /*
